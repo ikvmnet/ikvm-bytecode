@@ -233,11 +233,6 @@ jobs:
       with:
         name: nuget
         path: dist/nuget
-    - name: Download Documentation
-      uses: actions/download-artifact@v4
-      with:
-        name: doc
-        path: dist
     - name: Create Release
       if: github.ref_type == 'tag'
       uses: ncipollo/release-action@v1
