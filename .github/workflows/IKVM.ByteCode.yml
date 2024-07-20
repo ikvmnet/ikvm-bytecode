@@ -54,23 +54,23 @@ jobs:
       run: dotnet restore IKVM.ByteCode.sln
     - name: Build
       run: |
-        dotnet msbuild /m /bl `
-          /p:Configuration="Release" `
-          /p:Platform="Any CPU" `
-          /p:Version=${env:GitVersion_FullSemVer} `
-          /p:AssemblyVersion=${env:GitVersion_AssemblySemVer} `
-          /p:InformationalVersion=${env:GitVersion_InformationalVersion} `
-          /p:FileVersion=${env:GitVersion_AssemblySemFileVer} `
-          /p:PackageVersion=${env:GitVersion_FullSemVer} `
-          /p:RepositoryUrl="${env:GITHUB_SERVER_URL}/${env:GITHUB_REPOSITORY}.git" `
-          /p:PackageProjectUrl="${env:GITHUB_SERVER_URL}/${env:GITHUB_REPOSITORY}" `
-          /p:BuildInParallel=true `
-          /p:CreateHardLinksForAdditionalFilesIfPossible=true `
-          /p:CreateHardLinksForCopyAdditionalFilesIfPossible=true `
-          /p:CreateHardLinksForCopyFilesToOutputDirectoryIfPossible=true `
-          /p:CreateHardLinksForCopyLocalIfPossible=true `
-          /p:CreateHardLinksForPublishFilesIfPossible=true `
-          /p:ContinuousIntegrationBuild=true `
+        dotnet msbuild /m /bl \
+          /p:Configuration="Release" \
+          /p:Platform="Any CPU" \
+          /p:Version=${GitVersion_FullSemVer} \
+          /p:AssemblyVersion=${GitVersion_AssemblySemVer} \
+          /p:InformationalVersion=${GitVersion_InformationalVersion} \
+          /p:FileVersion=${GitVersion_AssemblySemFileVer} \
+          /p:PackageVersion=${GitVersion_FullSemVer} \
+          /p:RepositoryUrl="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" \
+          /p:PackageProjectUrl="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" \
+          /p:BuildInParallel=true \
+          /p:CreateHardLinksForAdditionalFilesIfPossible=true \
+          /p:CreateHardLinksForCopyAdditionalFilesIfPossible=true \
+          /p:CreateHardLinksForCopyFilesToOutputDirectoryIfPossible=true \
+          /p:CreateHardLinksForCopyLocalIfPossible=true \
+          /p:CreateHardLinksForPublishFilesIfPossible=true \
+          /p:ContinuousIntegrationBuild=true \
           IKVM.ByteCode.dist.msbuildproj
     - name: Upload MSBuild Log
       if: ${{ always() }}
