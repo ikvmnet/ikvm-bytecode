@@ -1,0 +1,265 @@
+name: IKVM.ByteCode
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+    - develop
+  pull_request:
+    branches:
+    - main
+    - develop
+  release:
+    types:
+    - created
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout Source
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Setup .NET 6.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 6.0.x
+    - name: Setup .NET 7.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 7.0.x
+    - name: Setup .NET 8.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v1
+      with:
+        versionSpec: 5.x
+    - name: Execute GitVersion
+      uses: gittools/actions/gitversion/execute@v1
+      with:
+        useConfigFile: true
+        configFilePath: GitVersion.yml
+    - name: Add NuGet Source (GitHub)
+      shell: pwsh
+      run: dotnet nuget add source --username USERNAME --password $env:GITHUB_TOKEN --store-password-in-clear-text --name ikvm $env:GITHUB_REPOS
+      env:
+        GITHUB_REPOS: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: NuGet Restore
+      run: dotnet restore IKVM.ByteCode.sln
+    - name: Build
+      run: |
+        dotnet msbuild /m /bl `
+          /p:Configuration="Release" `
+          /p:Platform="Any CPU" `
+          /p:Version=${env:GitVersion_FullSemVer} `
+          /p:AssemblyVersion=${env:GitVersion_AssemblySemVer} `
+          /p:InformationalVersion=${env:GitVersion_InformationalVersion} `
+          /p:FileVersion=${env:GitVersion_AssemblySemFileVer} `
+          /p:PackageVersion=${env:GitVersion_FullSemVer} `
+          /p:RepositoryUrl="${env:GITHUB_SERVER_URL}/${env:GITHUB_REPOSITORY}.git" `
+          /p:PackageProjectUrl="${env:GITHUB_SERVER_URL}/${env:GITHUB_REPOSITORY}" `
+          /p:BuildInParallel=true `
+          /p:CreateHardLinksForAdditionalFilesIfPossible=true `
+          /p:CreateHardLinksForCopyAdditionalFilesIfPossible=true `
+          /p:CreateHardLinksForCopyFilesToOutputDirectoryIfPossible=true `
+          /p:CreateHardLinksForCopyLocalIfPossible=true `
+          /p:CreateHardLinksForPublishFilesIfPossible=true `
+          /p:ContinuousIntegrationBuild=true `
+          IKVM.ByteCode.dist.msbuildproj
+    - name: Upload MSBuild Log
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: msbuild.binlog
+        path: msbuild.binlog
+    - name: Upload NuGet Packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget
+        path: dist/nuget
+    - name: Package Tests
+      run: tar czvf C:\tests.tar.gz tests
+      working-directory: dist
+    - name: Upload Tests
+      uses: actions/upload-artifact@v4
+      with:
+        name: tests
+        path: C:\tests.tar.gz
+  test:
+    strategy:
+      matrix:
+        run:
+        - IKVM.ByteCode.Tests
+        sys:
+        - win-x64
+        - linux-x64
+        - osx-x64
+        - osx-arm64
+        tfm:
+        - net472
+        - net6.0
+        - net7.0
+        - net8.0
+    name: Test (${{ matrix.run }}:${{ matrix.tfm }}:${{ matrix.sys }})
+    timeout-minutes: 240
+    needs:
+    - build
+    runs-on: ${{ fromJSON('{"win-x64":["windows-2022"],"linux-x64":["ubuntu-22.04"],"osx-x64":["macos-12"],"osx-arm64":["macos-14"]}')[matrix.sys] }}
+    steps:
+    - name: Setup .NET 6.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 6.0.x
+    - name: Setup .NET 7.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 7.0.x
+    - name: Setup .NET 8.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Add NuGet Source (GitHub)
+      shell: pwsh
+      run: dotnet nuget add source --username USERNAME --password $env:GITHUB_TOKEN --store-password-in-clear-text --name ikvm $env:GITHUB_REPOS
+      env:
+        GITHUB_REPOS: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Get Test Name
+      uses: actions/github-script@v7
+      id: test-name
+      env:
+        MATRIX_RUN: '${{ matrix.run }}'
+      with:
+        script: |
+          const run = process.env.MATRIX_RUN;
+          const tst = run.split('?')[0];
+          return tst;
+        result-encoding: string
+    - name: Download Tests
+      uses: actions/download-artifact@v4
+      with:
+        name: tests
+    - name: Restore Tests
+      run: tar xzvf tests.tar.gz
+    - name: Execute Tests
+      timeout-minutes: 240
+      shell: pwsh
+      run: |
+        # assign powershell variables
+        $run = "${{ matrix.run }}"
+        $tfm = "${{ matrix.tfm }}"
+        $sys = "${{ matrix.sys }}"
+
+        # suite name can contain filter expression after ?
+        $split = $run.IndexOf("?")
+        if ($split -gt -1) {
+            $tst = $run.Substring(0, $split)
+            $qry = $run.Substring($split + 1)
+        } else {
+            $tst = $run
+        }
+
+        # scan and process test assemblies
+        $tests = $(gi .\tests\$tst\$tfm\*.Tests.dll)
+        if ($tests) {
+            $argl = @(
+                "-f", $tfm,
+                "--blame",
+                "--blame-crash",
+                "--blame-hang",
+                "--blame-hang-timeout", "30m",
+                "-v:diag",
+                "--results-directory", "TestResults",
+                "--logger:console;verbosity=diag",
+                "--logger:trx",
+                "--collect", "Code Coverage"
+            )
+            
+            $runsettings = $(gi .\tests\$tst\$tfm\*.runsettings)
+            if ($runsettings) {
+                $argl += "--settings:$runsettings"
+            }
+
+            if ($qry -ne "" -and $qry -ne $null) {
+                $argl += @("--filter", $qry)
+                Add-Content $env:GITHUB_ENV "`nRET=TestResults--$tst-$qry--$tfm--$sys"
+            } else {
+                Add-Content $env:GITHUB_ENV "`nRET=TestResults--$tst--$tfm--$sys"
+            }
+            
+            dotnet test @argl $tests[0].FullName
+        }
+    - name: Archive Test Results
+      if: always() && startsWith(env.RET, 'TestResults--')
+      run: tar czvf TestResults.tar.gz TestResults
+      working-directory: ${{ env.WORKPATH }}
+    - name: Upload Test Results
+      if: always() && startsWith(env.RET, 'TestResults--')
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.RET }}
+        path: TestResults.tar.gz
+  release:
+    name: Release
+    if: github.event_name != 'pull_request'
+    needs:
+    - test
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout Source
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Setup .NET 7.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 7.0.x
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v1
+      with:
+        versionSpec: 5.x
+    - name: Execute GitVersion
+      id: GitVersion
+      uses: gittools/actions/gitversion/execute@v1
+      with:
+        useConfigFile: true
+    - name: Download NuGet Packages
+      uses: actions/download-artifact@v4
+      with:
+        name: nuget
+        path: dist/nuget
+    - name: Download Documentation
+      uses: actions/download-artifact@v4
+      with:
+        name: doc
+        path: dist
+    - name: Create Release
+      if: github.ref_type == 'tag'
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.GitVersion.outputs.semVer }}
+        allowUpdates: true
+        omitBodyDuringUpdate: true
+        artifacts: dist/nuget/*.nupkg,dist/nuget/*.snupkg
+        makeLatest: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push NuGet (GitHub)
+      if: github.event_name != 'pull_request'
+      shell: pwsh
+      run: dotnet nuget push dist/nuget/*.nupkg --source $env:GITHUB_REPOS --api-key $env:GITHUB_TOKEN --skip-duplicate
+      env:
+        GITHUB_REPOS: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Push NuGet
+      if: github.ref_type == 'tag'
+      shell: pwsh
+      run: dotnet nuget push dist/nuget/*.nupkg --source $env:NUGET_REPOS --api-key $env:NUGET_TOKEN --skip-duplicate
+      env:
+        NUGET_REPOS: https://api.nuget.org/v3/index.json
+        NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
