@@ -177,8 +177,7 @@ jobs:
                 "-v:diag",
                 "--results-directory", "TestResults",
                 "--logger:console;verbosity=diag",
-                "--logger:trx",
-                "--collect", "Code Coverage"
+                "--logger:trx"
             )
             
             $runsettings = $(gi .\tests\$tst\$tfm\*.runsettings)
