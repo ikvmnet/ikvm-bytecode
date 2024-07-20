@@ -84,13 +84,13 @@ jobs:
         name: nuget
         path: dist/nuget
     - name: Package Tests
-      run: tar czvf C:\tests.tar.gz tests
+      run: tar czvf /tmp/tests.tar.gz tests
       working-directory: dist
     - name: Upload Tests
       uses: actions/upload-artifact@v4
       with:
         name: tests
-        path: C:\tests.tar.gz
+        path: /tmp/tests.tar.gz
   test:
     strategy:
       matrix:
