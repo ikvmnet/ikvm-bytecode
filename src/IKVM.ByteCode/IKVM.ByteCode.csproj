@@ -7,9 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Writing\**" />
-      <EmbeddedResource Remove="Writing\**" />
-      <None Remove="Writing\**" />
+        <Compile Remove="Writing\**" />
+        <EmbeddedResource Remove="Writing\**" />
+        <None Remove="Writing\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\LICENSE" Pack="true" PackagePath="." />
+        <None Include="..\..\README.md" Pack="true" PackagePath="." />
     </ItemGroup>
 
     <ItemGroup>
