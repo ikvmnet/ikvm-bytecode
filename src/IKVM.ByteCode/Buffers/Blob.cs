@@ -4,14 +4,27 @@ namespace IKVM.ByteCode.Buffers
 {
 
     /// <summary>
-    /// Represents a range within a <see cref="BlobBuilder"/>.
+    /// Represents a single blob.
     /// </summary>
-    public readonly record struct Blob(byte[] Buffer, int Start, int Length)
+    /// <param name="Buffer"></param>
+    /// <param name="Offset"></param>
+    /// <param name="Length"></param>
+    public readonly record struct Blob(byte[] Buffer, int Offset, int Length)
     {
 
-        public bool IsDefault => Buffer == null;
+        /// <summary>
+        /// Returns <c>true</c> if this is a default instance.
+        /// </summary>
+        public readonly bool IsDefault => Buffer == null;
 
-        public ArraySegment<byte> GetBytes() => new ArraySegment<byte>(Buffer, Start, Length);
+        /// <summary>
+        /// Gets the underlying array segment.
+        /// </summary>
+        /// <returns></returns>
+        public readonly ArraySegment<byte> GetBytes() => new(Buffer, Offset, Length);
+
+        /// <inheritdoc />
+        public readonly override int GetHashCode() => BlobHash.GetFNVHashCode(GetBytes());
 
     }
 

@@ -18,16 +18,16 @@ namespace IKVM.ByteCode.Writing
         readonly ClassConstantHandle _thisClass;
         readonly ClassConstantHandle _superClass;
 
-        readonly BlobBuilder _interfaces = new();
+        readonly BlobBuilder _interfaces;
         ushort _interfaceCount = 0;
 
-        readonly BlobBuilder _fields = new();
+        readonly BlobBuilder _fields;
         ushort _fieldCount = 0;
 
-        readonly BlobBuilder _methods = new();
+        readonly BlobBuilder _methods;
         ushort _methodCount = 0;
 
-        readonly BlobBuilder _attributes = new();
+        readonly AttributeBuilder _attributes;
 
         /// <summary>
         /// Initializes a new instance.
@@ -50,11 +50,22 @@ namespace IKVM.ByteCode.Writing
             _version = version;
             _accessFlags = accessFlags;
 
-            // create new constant builder and allocate constants
+            // create new builders
             _constants = new ConstantBuilder(version);
-            _thisClass = _constants.AddClassConstant(_constants.AddUtf8Constant(thisClass));
-            _superClass = _constants.AddClassConstant(_constants.AddUtf8Constant(superClass));
+            _interfaces = new BlobBuilder();
+            _fields = new BlobBuilder();
+            _methods = new BlobBuilder();
+            _attributes = new AttributeBuilder(_constants);
+
+            // allocate constants
+            _thisClass = _constants.AddClassConstant(thisClass);
+            _superClass = _constants.AddClassConstant(superClass);
         }
+
+        /// <summary>
+        /// Gets the constants of the class.
+        /// </summary>
+        public ConstantBuilder Constants => _constants;
 
         /// <summary>
         /// Adds a new interface to the class.
@@ -69,6 +80,16 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Adds a new interface to the class.
+        /// </summary>
+        /// <param name="clazz"></param>
+        /// <returns></returns>
+        public InterfaceHandle AddInterface(string clazz)
+        {
+            return AddInterface(Constants.GetOrAddClassConstant(Constants.GetOrAddUtf8Constant(clazz)));
+        }
+
+        /// <summary>
         /// Adds a new field to the class.
         /// </summary>
         /// <param name="accessFlags"></param>
@@ -76,14 +97,30 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public FieldHandle AddField(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, BlobBuilder attributes)
+        public FieldHandle AddField(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeBuilder attributes)
         {
+            if (attributes is null)
+                throw new ArgumentNullException(nameof(attributes));
+
             var w = new ClassFormatWriter(_fields.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2((ushort)accessFlags);
             w.TryWriteU2(name.Value);
             w.TryWriteU2(descriptor.Value);
-            _fields.LinkSuffix(attributes);
+            attributes.Serialize(_fields);
             return new(_fieldCount++);
+        }
+        
+        /// <summary>
+        /// Adds a new field to the class.
+        /// </summary>
+        /// <param name="accessFlags"></param>
+        /// <param name="name"></param>
+        /// <param name="descriptor"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        public FieldHandle AddField(AccessFlag accessFlags, string name, string descriptor, AttributeBuilder attributes)
+        {
+            return AddField(accessFlags, Constants.GetOrAddUtf8Constant(name), Constants.GetOrAddUtf8Constant(descriptor), attributes);
         }
 
         /// <summary>
@@ -94,14 +131,123 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public MethodHandle AddMethod(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, BlobBuilder attributes)
+        public MethodHandle AddMethod(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeBuilder attributes)
         {
+            if (attributes is null)
+                throw new ArgumentNullException(nameof(attributes));
+
             var w = new ClassFormatWriter(_methods.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2((ushort)accessFlags);
             w.TryWriteU2(name.Value);
             w.TryWriteU2(descriptor.Value);
-            _methods.LinkSuffix(attributes);
+            attributes.Serialize(_methods);
             return new(_methodCount++);
+        }
+
+        /// <summary>
+        /// Adds a new method to the class.
+        /// </summary>
+        /// <param name="accessFlags"></param>
+        /// <param name="name"></param>
+        /// <param name="descriptor"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        public MethodHandle AddMethod(AccessFlag accessFlags, string name, string descriptor, AttributeBuilder attributes)
+        {
+            return AddMethod(accessFlags, Constants.GetOrAddUtf8Constant(name), Constants.GetOrAddUtf8Constant(descriptor), attributes);
+        }
+
+        /// <summary>
+        /// Serializes the class to the specified blob builder.
+        /// </summary>
+        /// <param name="builder"></param>
+        public void Serialize(BlobBuilder builder)
+        {
+            if (builder is null)
+                throw new ArgumentNullException(nameof(builder));
+
+            SerializeHeader(builder);
+            SerializeConstants(builder);
+            SerializeBody(builder);
+            SerializeInterfaces(builder);
+            SerializeFields(builder);
+            SerializeMethods(builder);
+            SerializeAttributes(builder);
+        }
+
+        /// <summary>
+        /// Serializes the header.
+        /// </summary>
+        /// <param name="builder"></param>
+        void SerializeHeader(BlobBuilder builder)
+        {
+            var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U4 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU4(ClassRecord.MAGIC);
+            w.TryWriteU2(_version.Minor);
+            w.TryWriteU2(_version.Major);
+        }
+
+        /// <summary>
+        /// Serializes the constants.
+        /// </summary>
+        /// <param name="builder"></param>
+        void SerializeConstants(BlobBuilder builder)
+        {
+            _constants.Serialize(builder);
+        }
+
+        /// <summary>
+        /// Serializes the body of the class.
+        /// </summary>
+        /// <param name="builder"></param>
+        void SerializeBody(BlobBuilder builder)
+        {
+            var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU2((ushort)_accessFlags);
+            w.TryWriteU2(_thisClass.Value);
+            w.TryWriteU2(_superClass.Value);
+        }
+
+        /// <summary>
+        /// Serializes the interfaces.
+        /// </summary>
+        /// <param name="builder"></param>
+        void SerializeInterfaces(BlobBuilder builder)
+        {
+            var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU2(_interfaceCount);
+            builder.LinkSuffix(_interfaces);
+        }
+
+        /// <summary>
+        /// Serializes the fields.
+        /// </summary>
+        /// <param name="builder"></param>
+        void SerializeFields(BlobBuilder builder)
+        {
+            var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU2(_fieldCount);
+            builder.LinkSuffix(_fields);
+        }
+
+        /// <summary>
+        /// Serializes the methods.
+        /// </summary>
+        /// <param name="builder"></param>
+        void SerializeMethods(BlobBuilder builder)
+        {
+            var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU2(_methodCount);
+            builder.LinkSuffix(_methods);
+        }
+
+        /// <summary>
+        /// Serializes the attributes.
+        /// </summary>
+        /// <param name="builder"></param>
+        void SerializeAttributes(BlobBuilder builder)
+        {
+            _attributes.Serialize(builder);
         }
 
     }

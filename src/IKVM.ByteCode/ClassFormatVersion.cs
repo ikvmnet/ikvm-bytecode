@@ -8,10 +8,10 @@ namespace IKVM.ByteCode
     /// </summary>
     /// <param name="Major"></param>
     /// <param name="Minor"></param>
-    public record struct ClassFormatVersion(int Major, int Minor) : IComparable<ClassFormatVersion>
+    public record struct ClassFormatVersion(ushort Major, ushort Minor) : IComparable<ClassFormatVersion>
     {
 
-        public static implicit operator ClassFormatVersion(int major)
+        public static implicit operator ClassFormatVersion(ushort major)
         {
             return new ClassFormatVersion(major, 0);
         }

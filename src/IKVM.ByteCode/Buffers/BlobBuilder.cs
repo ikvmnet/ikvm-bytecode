@@ -193,24 +193,24 @@ namespace IKVM.ByteCode.Buffers
         protected internal int ChunkCapacity => _buffer.Length;
 
         // internal for testing
-        internal Chunks GetChunks()
+        internal BlobBuilderEnumerable GetChunks()
         {
             if (!IsHead)
                 throw new InvalidOperationException("Builder already linked.");
 
-            return new Chunks(this);
+            return new BlobBuilderEnumerable(this);
         }
 
         /// <summary>
         /// Returns a sequence of all blobs that represent the content of the builder.
         /// </summary>
         /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
-        public Blobs GetBlobs()
+        public BlobEnumerable GetBlobs()
         {
             if (IsHead == false)
                 throw new InvalidOperationException("Builder already linked.");
 
-            return new Blobs(this);
+            return new BlobEnumerable(this);
         }
 
         /// <summary>

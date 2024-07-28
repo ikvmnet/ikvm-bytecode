@@ -4,7 +4,7 @@
     internal record struct ClassRecord(ushort MinorVersion, ushort MajorVersion, ConstantRecord[] Constants, AccessFlag AccessFlags, ClassConstantHandle ThisClass, ClassConstantHandle SuperClass, InterfaceRecord[] Interfaces, FieldRecord[] Fields, MethodRecord[] Methods, AttributeInfoRecord[] Attributes)
     {
 
-        const uint MAGIC = 0xCAFEBABE;
+        public const uint MAGIC = 0xCAFEBABE;
 
         /// <summary>
         /// Attempts to read a class record starting at the current position.

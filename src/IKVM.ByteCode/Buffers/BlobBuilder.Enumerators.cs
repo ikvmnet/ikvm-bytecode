@@ -14,7 +14,7 @@ namespace IKVM.ByteCode.Buffers
     public partial class BlobBuilder
     {
 
-        public struct Chunks : IEnumerable<BlobBuilder>, IEnumerator<BlobBuilder>, IEnumerator
+        public struct BlobBuilderEnumerable : IEnumerable<BlobBuilder>, IEnumerator<BlobBuilder>, IEnumerator
         {
 
             readonly BlobBuilder _head;
@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Buffers
             /// Initializes a new instance.
             /// </summary>
             /// <param name="builder"></param>
-            internal Chunks(BlobBuilder builder)
+            internal BlobBuilderEnumerable(BlobBuilder builder)
             {
                 Debug.Assert(builder.IsHead);
 
@@ -69,7 +69,7 @@ namespace IKVM.ByteCode.Buffers
             readonly void IDisposable.Dispose() { }
 
             /// <inheritdoc />
-            public Chunks GetEnumerator() => this;
+            public BlobBuilderEnumerable GetEnumerator() => this;
 
             /// <inheritdoc />
             IEnumerator<BlobBuilder> IEnumerable<BlobBuilder>.GetEnumerator() => GetEnumerator();
@@ -79,18 +79,18 @@ namespace IKVM.ByteCode.Buffers
 
         }
 
-        public struct Blobs : IEnumerable<Blob>, IEnumerator<Blob>, IEnumerator
+        public struct BlobEnumerable : IEnumerable<Blob>, IEnumerator<Blob>, IEnumerator
         {
 
-            Chunks _chunks;
+            BlobBuilderEnumerable enumerable;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="builder"></param>
-            internal Blobs(BlobBuilder builder)
+            internal BlobEnumerable(BlobBuilder builder)
             {
-                _chunks = new Chunks(builder);
+                enumerable = new BlobBuilderEnumerable(builder);
             }
 
             /// <inheritdoc />
@@ -100,25 +100,25 @@ namespace IKVM.ByteCode.Buffers
             {
                 get
                 {
-                    var current = _chunks.Current;
+                    var current = enumerable.Current;
                     if (current != null)
                         return new Blob(current._buffer, 0, current.Length);
                     else
-                        return default(Blob);
+                        return default;
                 }
             }
 
             /// <inheritdoc />
-            public bool MoveNext() => _chunks.MoveNext();
+            public bool MoveNext() => enumerable.MoveNext();
 
             /// <inheritdoc />
-            public void Reset() => _chunks.Reset();
+            public void Reset() => enumerable.Reset();
 
             /// <inheritdoc />
             void IDisposable.Dispose() { }
 
             /// <inheritdoc />
-            public Blobs GetEnumerator() => this;
+            public BlobEnumerable GetEnumerator() => this;
 
             /// <inheritdoc />
             IEnumerator<Blob> IEnumerable<Blob>.GetEnumerator() => GetEnumerator();
