@@ -75,6 +75,22 @@ namespace IKVM.ByteCode.Buffers
 
 #endif
 
+        /// <summary>
+        /// Converts the specified single-precision floating point number to an integer.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe uint SingleToUInt32Bits(float value) => *((uint*)&value);
+
+        /// <summary>
+        /// Converts the specified double-precision floating point number to an integer.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static unsafe ulong DoubleToUInt64Bits(double value) => *((ulong*)&value);
+
     }
 
 }

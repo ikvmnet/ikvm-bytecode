@@ -1,6 +1,6 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct RecordAttributeComponentRecord(ushort NameIndex, ushort DescriptorIndex, AttributeInfoRecord[] Attributes);
+    internal record struct RecordAttributeComponentRecord(Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, AttributeInfoRecord[] Attributes);
 
 }

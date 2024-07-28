@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record NestHostAttributeRecord(ushort HostClassIndex) : AttributeRecord
+    internal sealed record NestHostAttributeRecord(ClassConstantHandle HostClass) : AttributeRecord
     {
 
         public static bool TryReadNestHostAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)
@@ -11,7 +11,7 @@
             if (reader.TryReadU2(out ushort hostClassIndex) == false)
                 return false;
 
-            attribute = new NestHostAttributeRecord(hostClassIndex);
+            attribute = new NestHostAttributeRecord(new ClassConstantHandle(hostClassIndex));
             return true;
         }
 

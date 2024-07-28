@@ -39,7 +39,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         protected override string GetName(int index, FieldRecord record)
         {
-            return DeclaringClass.Constants.Get<Utf8ConstantReader>(record.NameIndex).Value;
+            return DeclaringClass.Constants.Get<Utf8ConstantReader>(record.Name.Value).Value;
         }
 
     }

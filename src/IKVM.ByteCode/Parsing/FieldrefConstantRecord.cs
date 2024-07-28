@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record FieldrefConstantRecord(ushort ClassIndex, ushort NameAndTypeIndex) : RefConstantRecord(ClassIndex, NameAndTypeIndex)
+    internal sealed record FieldrefConstantRecord(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType) : RefConstantRecord(Class, NameAndType)
     {
 
         /// <summary>
@@ -19,7 +19,7 @@
             if (reader.TryReadU2(out ushort nameAndTypeIndex) == false)
                 return false;
 
-            constant = new FieldrefConstantRecord(classIndex, nameAndTypeIndex);
+            constant = new FieldrefConstantRecord(new(classIndex), new(nameAndTypeIndex));
             return true;
         }
 

@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct InterfaceRecord(ushort ClassIndex)
+    internal readonly record struct InterfaceRecord(ClassConstantHandle Class)
     {
 
         /// <summary>
@@ -16,7 +16,7 @@
             if (reader.TryReadU2(out ushort classIndex) == false)
                 return false;
 
-            iface = new InterfaceRecord(classIndex);
+            iface = new InterfaceRecord(new(classIndex));
             return true;
         }
 

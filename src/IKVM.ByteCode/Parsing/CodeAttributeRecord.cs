@@ -38,7 +38,7 @@ namespace IKVM.ByteCode.Parsing
                 if (reader.TryReadU2(out ushort catchTypeIndex) == false)
                     return false;
 
-                exceptionTable[i] = new ExceptionHandlerRecord(startOffset, endOffset, handlerOffset, catchTypeIndex);
+                exceptionTable[i] = new ExceptionHandlerRecord(startOffset, endOffset, handlerOffset, new(catchTypeIndex));
             }
 
             if (ClassRecord.TryReadAttributes(ref reader, out var attributes) == false)

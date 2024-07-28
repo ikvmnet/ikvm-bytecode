@@ -21,7 +21,7 @@
                 if (ClassRecord.TryReadAttributes(ref reader, out var attributes) == false)
                     return false;
 
-                components[i] = new RecordAttributeComponentRecord(nameIndex, descriptorIndex, attributes);
+                components[i] = new RecordAttributeComponentRecord(new(nameIndex), new(descriptorIndex), attributes);
             }
 
             attribute = new RecordAttributeRecord(components);

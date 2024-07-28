@@ -4,7 +4,7 @@ namespace IKVM.ByteCode
 {
 
     [Flags]
-    internal enum AccessFlag : ushort
+    public enum AccessFlag : ushort
     {
 
         ACC_PUBLIC = 0x0001,

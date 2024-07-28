@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct MethodRecord(AccessFlag AccessFlags, ushort NameIndex, ushort DescriptorIndex, AttributeInfoRecord[] Attributes)
+    internal record struct MethodRecord(AccessFlag AccessFlags, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, AttributeInfoRecord[] Attributes)
     {
 
         /// <summary>
@@ -22,7 +22,7 @@
             if (ClassRecord.TryReadAttributes(ref reader, out var attributes) == false)
                 return false;
 
-            method = new MethodRecord((AccessFlag)accessFlags, nameIndex, descriptorIndex, attributes);
+            method = new MethodRecord((AccessFlag)accessFlags, new(nameIndex), new(descriptorIndex), attributes);
             return true;
         }
 

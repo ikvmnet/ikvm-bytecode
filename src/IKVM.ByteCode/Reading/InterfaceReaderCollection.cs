@@ -38,7 +38,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         protected override string GetName(int index, InterfaceRecord record)
         {
-            return DeclaringClass.Constants.Get<ClassConstantReader>(record.ClassIndex).Name.Value;
+            return DeclaringClass.Constants.Get<ClassConstantReader>(record.Class.Value).Name.Value;
         }
 
     }

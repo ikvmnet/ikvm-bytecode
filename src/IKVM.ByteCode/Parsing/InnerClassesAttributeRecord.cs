@@ -23,7 +23,7 @@
                 if (reader.TryReadU2(out ushort innerClassAccessFlags) == false)
                     return false;
 
-                items[i] = new InnerClassesAttributeItemRecord(innerClassInfoIndex, outerClassInfoIndex, innerNameIndex, (AccessFlag)innerClassAccessFlags);
+                items[i] = new InnerClassesAttributeItemRecord(new(innerClassInfoIndex), new(outerClassInfoIndex), new(innerNameIndex), (AccessFlag)innerClassAccessFlags);
             }
 
             attribute = new InnerClassesAttributeRecord(items);

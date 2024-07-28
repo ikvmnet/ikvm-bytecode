@@ -19,7 +19,7 @@
                 if (reader.TryReadU2(out ushort accessFlags) == false)
                     return false;
 
-                arguments[i] = new MethodParametersAttributeParameterRecord(nameIndex, (AccessFlag)accessFlags);
+                arguments[i] = new MethodParametersAttributeParameterRecord(new(nameIndex), (AccessFlag)accessFlags);
             }
 
             attribute = new MethodParametersAttributeRecord(arguments);

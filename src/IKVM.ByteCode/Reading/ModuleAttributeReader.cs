@@ -26,12 +26,12 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the module name.
         /// </summary>
-        public ModuleConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<ModuleConstantReader>(Record.NameIndex));
+        public ModuleConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<ModuleConstantReader>(Record.Name.Value));
 
         /// <summary>
         /// Gets the module version.
         /// </summary>
-        public Utf8ConstantReader Version => LazyGet(ref version, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.VersionIndex));
+        public Utf8ConstantReader Version => LazyGet(ref version, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Version.Value));
 
     }
 

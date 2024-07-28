@@ -6,13 +6,9 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>Library for reading Java class files.</Description>
+        <WarningsAsErrors>HI,BOB,CS1001</WarningsAsErrors>
+        <NoWarn>HI1,BOB1,CS0001,NU1234</NoWarn>
     </PropertyGroup>
-
-    <ItemGroup>
-        <Compile Remove="Writing\**" />
-        <EmbeddedResource Remove="Writing\**" />
-        <None Remove="Writing\**" />
-    </ItemGroup>
 
     <ItemGroup>
         <None Include="..\..\LICENSE" Pack="true" PackagePath="." />
@@ -31,6 +27,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+        <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
         <PackageReference Include="System.IO.Pipelines" Version="6.0.3" />
         <PackageReference Include="System.Memory" Version="4.5.5" />
     </ItemGroup>

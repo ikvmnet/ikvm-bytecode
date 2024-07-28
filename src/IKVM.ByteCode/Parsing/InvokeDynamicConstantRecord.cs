@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record InvokeDynamicConstantRecord(ushort BootstrapMethodAttributeIndex, ushort NameAndTypeIndex) : ConstantRecord
+    internal sealed record InvokeDynamicConstantRecord(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType) : ConstantRecord
     {
 
         /// <summary>
@@ -19,7 +19,7 @@
             if (reader.TryReadU2(out ushort nameAndTypeIndex) == false)
                 return false;
 
-            constant = new InvokeDynamicConstantRecord(bootstrapMethodAttrIndex, nameAndTypeIndex);
+            constant = new InvokeDynamicConstantRecord(bootstrapMethodAttrIndex, new(nameAndTypeIndex));
             return true;
         }
 

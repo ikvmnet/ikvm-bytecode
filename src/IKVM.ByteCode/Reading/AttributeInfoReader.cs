@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the attribute.
         /// </summary>
-        public Utf8ConstantReader Name => name ??= DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.NameIndex);
+        public Utf8ConstantReader Name => name ??= DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name.Value);
 
         /// <summary>
         /// Gets the data of the attribute.

@@ -10,6 +10,10 @@ namespace IKVM.ByteCode.Parsing
     internal ref struct ClassFormatWriter
     {
 
+        public const int U1 = 1;
+        public const int U2 = 2;
+        public const int U4 = 4;
+
         Span<byte> span;
         Span<byte> next;
         long size = 0;

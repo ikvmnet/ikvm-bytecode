@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record NestMembersAttributeRecord(ushort[] ClassIndexes) : AttributeRecord
+    internal sealed record NestMembersAttributeRecord(ClassConstantHandle[] ClassIndexes) : AttributeRecord
     {
 
         public static bool TryReadNestMembersAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)
@@ -11,13 +11,13 @@
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var classes = new ushort[count];
+            var classes = new ClassConstantHandle[count];
             for (int i = 0; i < count; i++)
             {
                 if (reader.TryReadU2(out ushort classIndex) == false)
                     return false;
 
-                classes[i] = classIndex;
+                classes[i] = new (classIndex);
             }
 
             attribute = new NestMembersAttributeRecord(classes);

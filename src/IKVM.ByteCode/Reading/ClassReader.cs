@@ -275,12 +275,12 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the class.
         /// </summary>
-        public ClassConstantReader This => LazyGet(ref @this, () => Constants.Get<ClassConstantReader>(Record.ThisClassIndex));
+        public ClassConstantReader This => LazyGet(ref @this, () => Constants.Get<ClassConstantReader>(Record.ThisClass.Value));
 
         /// <summary>
         /// Gets the name of the super class.
         /// </summary>
-        public ClassConstantReader Super => LazyGet(ref super, () => Constants.Get<ClassConstantReader>(Record.SuperClassIndex));
+        public ClassConstantReader Super => LazyGet(ref super, () => Constants.Get<ClassConstantReader>(Record.SuperClass.Value));
 
         /// <summary>
         /// Gets the set of the interfaces implemented by this class.

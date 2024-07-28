@@ -31,12 +31,12 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the method.
         /// </summary>
-        public override Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.NameIndex));
+        public override Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name.Value));
 
         /// <summary>
         /// Gets the descriptor of the method.
         /// </summary>
-        public override Utf8ConstantReader Descriptor => LazyGet(ref descriptor, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.DescriptorIndex));
+        public override Utf8ConstantReader Descriptor => LazyGet(ref descriptor, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Descriptor.Value));
 
         /// <summary>
         /// Gets the attributes of the method.

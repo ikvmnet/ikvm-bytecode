@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct TypeAnnotationRecord(TypeAnnotationTargetType TargetType, TypeAnnotationTargetRecord Target, TypePathRecord TargetPath, ushort TypeIndex, params ElementValuePairRecord[] Elements)
+    internal record struct TypeAnnotationRecord(TypeAnnotationTargetType TargetType, TypeAnnotationTargetRecord Target, TypePathRecord TargetPath, Utf8ConstantHandle Type, params ElementValuePairRecord[] Elements)
     {
 
         public static bool TryReadTypeAnnotation(ref ClassFormatReader reader, out TypeAnnotationRecord annotation)
@@ -24,7 +24,7 @@
                 if (ElementValuePairRecord.TryRead(ref reader, out elements[i]) == false)
                     return false;
 
-            annotation = new TypeAnnotationRecord((TypeAnnotationTargetType)targetType, target, targetPath, typeIndex, elements);
+            annotation = new TypeAnnotationRecord((TypeAnnotationTargetType)targetType, target, targetPath, new(typeIndex), elements);
             return true;
         }
 
@@ -87,7 +87,7 @@
                 return false;
             if (TargetPath.TryWrite(ref writer) == false)
                 return false;
-            if (writer.TryWriteU2(TypeIndex) == false)
+            if (writer.TryWriteU2(Type.Value) == false)
                 return false;
             if (writer.TryWriteU2((ushort)Elements.Length) == false)
                 return false;

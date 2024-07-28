@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record ModuleAttributeRecord(ushort NameIndex, ModuleFlag Flags, ushort VersionIndex, ModuleAttributeRequiresRecord[] Requires, ModuleAttributeExportsRecord[] Exports, ModuleAttributeOpensRecord[] Opens, ushort[] Uses, ModuleAttributeProvidesRecord[] Provides) : AttributeRecord
+    internal sealed record ModuleAttributeRecord(ModuleConstantHandle Name, ModuleFlag Flags, Utf8ConstantHandle Version, ModuleAttributeRequiresRecord[] Requires, ModuleAttributeExportsRecord[] Exports, ModuleAttributeOpensRecord[] Opens, ushort[] Uses, ModuleAttributeProvidesRecord[] Provides) : AttributeRecord
     {
 
         public static bool TryReadModuleAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)
@@ -119,7 +119,7 @@
                 provides[i] = new ModuleAttributeProvidesRecord(providesIndex, providesModules);
             }
 
-            attribute = new ModuleAttributeRecord(moduleNameIndex, (ModuleFlag)moduleFlags, moduleVersionIndex, requires, exports, opens, uses, provides);
+            attribute = new ModuleAttributeRecord(new(moduleNameIndex), (ModuleFlag)moduleFlags, new(moduleVersionIndex), requires, exports, opens, uses, provides);
             return true;
         }
 

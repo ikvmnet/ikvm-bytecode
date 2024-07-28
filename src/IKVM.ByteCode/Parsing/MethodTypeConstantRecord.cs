@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record MethodTypeConstantRecord(ushort DescriptorIndex) : ConstantRecord
+    internal sealed record MethodTypeConstantRecord(Utf8ConstantHandle Descriptor) : ConstantRecord
     {
 
         /// <summary>
@@ -18,7 +18,7 @@
             if (reader.TryReadU2(out ushort descriptorIndex) == false)
                 return false;
 
-            constant = new MethodTypeConstantRecord(descriptorIndex);
+            constant = new MethodTypeConstantRecord(new Utf8ConstantHandle(descriptorIndex));
             return true;
         }
 

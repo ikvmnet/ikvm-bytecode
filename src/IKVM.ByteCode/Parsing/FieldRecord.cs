@@ -1,7 +1,9 @@
-﻿namespace IKVM.ByteCode.Parsing
+﻿using System.Security.Claims;
+
+namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct FieldRecord(AccessFlag AccessFlags, ushort NameIndex, ushort DescriptorIndex, AttributeInfoRecord[] Attributes)
+    internal readonly record struct FieldRecord(AccessFlag AccessFlags, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, AttributeInfoRecord[] Attributes)
     {
 
         /// <summary>
@@ -22,7 +24,7 @@
             if (ClassRecord.TryReadAttributes(ref reader, out var attributes) == false)
                 return false;
 
-            field = new FieldRecord((AccessFlag)accessFlags, nameIndex, descriptorIndex, attributes);
+            field = new FieldRecord((AccessFlag)accessFlags, new(nameIndex), new(descriptorIndex), attributes);
             return true;
         }
 

@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct AttributeInfoRecord(ushort NameIndex, byte[] Data)
+    internal record struct AttributeInfoRecord(Utf8ConstantHandle Name, byte[] Data)
     {
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Parsing
             var infoBuffer = new byte[info.Length];
             info.CopyTo(infoBuffer);
 
-            attribute = new AttributeInfoRecord(nameIndex, infoBuffer);
+            attribute = new AttributeInfoRecord(new(nameIndex), infoBuffer);
             return true;
         }
 

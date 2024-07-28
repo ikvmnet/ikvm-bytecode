@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct AnnotationRecord(ushort TypeIndex, ElementValuePairRecord[] Elements)
+    internal record struct AnnotationRecord(Utf8ConstantHandle Type, ElementValuePairRecord[] Elements)
     {
 
         public static bool TryReadAnnotation(ref ClassFormatReader reader, out AnnotationRecord annotation)
@@ -22,7 +22,7 @@
                 elements[i] = element;
             }
 
-            annotation = new AnnotationRecord(typeIndex, elements);
+            annotation = new AnnotationRecord(new (typeIndex), elements);
             return true;
         }
 
@@ -45,7 +45,7 @@
         /// <returns></returns>
         public bool TryWrite(ref ClassFormatWriter writer)
         {
-            if (writer.TryWriteU2(TypeIndex) == false)
+            if (writer.TryWriteU2(Type.Value) == false)
                 return false;
             if (writer.TryWriteU2((ushort)Elements.Length) == false)
                 return false;

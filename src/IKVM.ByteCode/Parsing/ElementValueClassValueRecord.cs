@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record ElementValueClassValueRecord(ushort ClassIndex) : ElementValueValueRecord
+    internal sealed record ElementValueClassValueRecord(Utf8ConstantHandle Class) : ElementValueValueRecord
     {
 
         public static bool TryRead(ref ClassFormatReader reader, out ElementValueValueRecord value)
@@ -11,7 +11,7 @@
             if (reader.TryReadU2(out ushort classInfoIndex) == false)
                 return false;
 
-            value = new ElementValueClassValueRecord(classInfoIndex);
+            value = new ElementValueClassValueRecord(new Utf8ConstantHandle(classInfoIndex));
             return true;
         }
 
@@ -29,7 +29,7 @@
         /// <returns></returns>
         public override bool TryWrite(ref ClassFormatWriter writer)
         {
-            if (writer.TryWriteU2(ClassIndex) == false)
+            if (writer.TryWriteU2(Class.Value) == false)
                 return false;
 
             return true;

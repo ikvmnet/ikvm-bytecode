@@ -25,7 +25,7 @@
                 if (reader.TryReadU2(out ushort index) == false)
                     return false;
 
-                items[i] = new LocalVariableTypeTableAttributeItemRecord(codeOffset, codeLength, nameIndex, signatureIndex, index);
+                items[i] = new LocalVariableTypeTableAttributeItemRecord(codeOffset, codeLength, new(nameIndex), new(signatureIndex), index);
             }
 
             attribute = new LocalVariableTypeTableAttributeRecord(items);
