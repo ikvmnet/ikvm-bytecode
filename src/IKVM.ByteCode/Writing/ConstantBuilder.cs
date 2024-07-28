@@ -13,7 +13,7 @@ namespace IKVM.ByteCode.Writing
 
         readonly MUTF8Encoding _mutf8;
         readonly BlobBuilder _builder = new();
-        ushort _count = 0;
+        ushort _next = 1;
 
         readonly Dictionary<string, Utf8ConstantHandle> _utf8cache = new();
 
@@ -27,6 +27,11 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Gets the number of constants currently added.
+        /// </summary>
+        public int Count => _next - 1;
+
+        /// <summary>
         /// Adds a new UTF8 constant value.
         /// </summary>
         /// <param name="value"></param>
@@ -38,7 +43,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantTag.Utf8);
             w.TryWriteU2((ushort)value.Length);
             _builder.WriteBytes(value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -71,7 +76,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U4).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Integer);
             w.TryWriteU4((uint)value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -88,7 +93,7 @@ namespace IKVM.ByteCode.Writing
 #else
             w.TryWriteU4(BitConverter.SingleToUInt32Bits(value));
 #endif
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -103,8 +108,8 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU4((uint)(value >> 32));
             w.TryWriteU4(unchecked((uint)value));
 
-            var n = _count;
-            _count += 2;
+            var n = _next;
+            _next += 2;
             return new(n);
         }
 
@@ -121,8 +126,8 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU4((uint)(v >> 32));
             w.TryWriteU4(unchecked((uint)v));
 
-            var n = _count;
-            _count += 2;
+            var n = _next;
+            _next += 2;
             return new(n);
         }
 
@@ -136,7 +141,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Class);
             w.TryWriteU2(name.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -149,7 +154,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.String);
             w.TryWriteU2(name.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -164,7 +169,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantTag.Fieldref);
             w.TryWriteU2(clazz.Value);
             w.TryWriteU2(nameAndType.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -179,7 +184,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantTag.Methodref);
             w.TryWriteU2(clazz.Value);
             w.TryWriteU2(nameAndType.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -194,7 +199,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantTag.InterfaceMethodref);
             w.TryWriteU2(clazz.Value);
             w.TryWriteU2(nameAndType.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -209,7 +214,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantTag.NameAndType);
             w.TryWriteU2(name.Value);
             w.TryWriteU2(type.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -224,7 +229,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantTag.MethodHandle);
             w.TryWriteU1((byte)kind);
             w.TryWriteU2(reference.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -237,7 +242,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.MethodType);
             w.TryWriteU2(type.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -252,7 +257,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantTag.Dynamic);
             w.TryWriteU2(bootstrapMethodAttrIndex);
             w.TryWriteU2(nameAndType.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -267,7 +272,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantTag.InvokeDynamic);
             w.TryWriteU2(bootstrapMethodAttrIndex);
             w.TryWriteU2(nameAndType.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -280,7 +285,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Module);
             w.TryWriteU2(name.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -293,7 +298,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Package);
             w.TryWriteU2(name.Value);
-            return new(_count++);
+            return new(_next++);
         }
 
         /// <summary>
@@ -303,7 +308,7 @@ namespace IKVM.ByteCode.Writing
         public void Serialize(BlobBuilder builder)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(_count);
+            w.TryWriteU2((ushort)Count);
             builder.LinkSuffix(_builder);
         }
 

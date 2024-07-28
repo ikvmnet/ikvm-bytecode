@@ -20,7 +20,7 @@ namespace IKVM.ByteCode.Tests.Parsing
                 TypeAnnotationTargetType.Field,
                 new TypeAnnotationEmptyTargetRecord(),
                 new TypePathRecord(new TypePathItemRecord(TypePathKind.ArrayType, 0)),
-                1,
+                new Utf8ConstantHandle(1),
                 new ElementValuePairRecord(2, new ElementValueRecord(ElementValueTag.Integer, new ElementValueConstantValueRecord(3))));
 
             var b1 = new byte[a.GetSize()];
