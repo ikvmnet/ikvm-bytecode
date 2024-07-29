@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Parsing;
 using IKVM.ByteCode.Reading;
 using IKVM.ByteCode.Writing;
 
@@ -18,8 +17,8 @@ namespace IKVM.ByteCode.Tests.Writing
         public void CanBuildSimpleClass()
         {
             var b = new ClassBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "TestClass", "java/lang/Object");
-            var f = b.AddField(AccessFlag.ACC_PUBLIC, "_field", "Z", new AttributeBuilder(b));
-            var m = b.AddMethod(AccessFlag.ACC_PUBLIC, "method", "()Z", new AttributeBuilder(b));
+            var f = b.AddField(AccessFlag.ACC_PUBLIC, "_field", "Z");
+            var m = b.AddMethod(AccessFlag.ACC_PUBLIC, "method", "()Z");
 
             var z = new BlobBuilder();
             b.Serialize(z);

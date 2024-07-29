@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Writing
         readonly BlobBuilder _methods;
         ushort _methodCount = 0;
 
-        readonly AttributeBuilder _attributes;
+        readonly AttributeTableBuilder _attributes;
 
         /// <summary>
         /// Initializes a new instance.
@@ -36,6 +36,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="accessFlags"></param>
         /// <param name="thisClass"></param>
         /// <param name="superClass"></param>
+        /// <attributes></attributes>
         public ClassBuilder(ClassFormatVersion version, AccessFlag accessFlags, string thisClass, string superClass)
         {
             if (version.Major < 0)
@@ -55,7 +56,7 @@ namespace IKVM.ByteCode.Writing
             _interfaces = new BlobBuilder();
             _fields = new BlobBuilder();
             _methods = new BlobBuilder();
-            _attributes = new AttributeBuilder(_constants);
+            _attributes = new AttributeTableBuilder(_constants);
 
             // allocate constants
             _thisClass = _constants.AddClassConstant(thisClass);
@@ -97,11 +98,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public FieldHandle AddField(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeBuilder attributes)
+        public FieldHandle AddField(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeTableBuilder attributes = null)
         {
-            if (attributes is null)
-                throw new ArgumentNullException(nameof(attributes));
-
+            attributes ??= new AttributeTableBuilder(Constants);
             var w = new ClassFormatWriter(_fields.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2((ushort)accessFlags);
             w.TryWriteU2(name.Value);
@@ -109,7 +108,7 @@ namespace IKVM.ByteCode.Writing
             attributes.Serialize(_fields);
             return new(_fieldCount++);
         }
-        
+
         /// <summary>
         /// Adds a new field to the class.
         /// </summary>
@@ -118,8 +117,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public FieldHandle AddField(AccessFlag accessFlags, string name, string descriptor, AttributeBuilder attributes)
+        public FieldHandle AddField(AccessFlag accessFlags, string name, string descriptor, AttributeTableBuilder attributes = null)
         {
+            attributes ??= new AttributeTableBuilder(Constants);
             return AddField(accessFlags, Constants.GetOrAddUtf8Constant(name), Constants.GetOrAddUtf8Constant(descriptor), attributes);
         }
 
@@ -131,11 +131,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public MethodHandle AddMethod(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeBuilder attributes)
+        public MethodHandle AddMethod(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeTableBuilder attributes = null)
         {
-            if (attributes is null)
-                throw new ArgumentNullException(nameof(attributes));
-
+            attributes ??= new AttributeTableBuilder(Constants);
             var w = new ClassFormatWriter(_methods.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2((ushort)accessFlags);
             w.TryWriteU2(name.Value);
@@ -152,10 +150,16 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public MethodHandle AddMethod(AccessFlag accessFlags, string name, string descriptor, AttributeBuilder attributes)
+        public MethodHandle AddMethod(AccessFlag accessFlags, string name, string descriptor, AttributeTableBuilder attributes = null)
         {
+            attributes ??= new AttributeTableBuilder(Constants);
             return AddMethod(accessFlags, Constants.GetOrAddUtf8Constant(name), Constants.GetOrAddUtf8Constant(descriptor), attributes);
         }
+
+        /// <summary>
+        /// Gets the attributes to be added to the class.
+        /// </summary>
+        public AttributeTableBuilder Attributes => _attributes;
 
         /// <summary>
         /// Serializes the class to the specified blob builder.

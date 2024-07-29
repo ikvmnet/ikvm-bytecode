@@ -7,32 +7,62 @@ namespace IKVM.ByteCode.Writing
 {
 
     /// <summary>
-    /// Provides the capability to write a set of attributes.
+    /// Provides an API for assembling a JVM attribute table.
     /// </summary>
-    public class AttributeBuilder
+    public class AttributeTableBuilder
     {
 
         readonly ConstantBuilder _constants;
-        readonly BlobBuilder _builder = new();
-        ushort _count = 0;
+        BlobBuilder _builder;
+        Blob _countBlob;
+        int _count = 0;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="constants"></param>
-        public AttributeBuilder(ConstantBuilder constants)
+        public AttributeTableBuilder(ConstantBuilder constants)
         {
             _constants = constants ?? throw new ArgumentNullException(nameof(constants));
         }
 
         /// <summary>
-        /// Initializes a new instance.
+        /// Gets the builder.
         /// </summary>
-        /// <param name="clazz"></param>
-        public AttributeBuilder(ClassBuilder clazz) :
-            this(clazz.Constants)
-        {
+        BlobBuilder Builder => GetBuilder();
 
+        /// <summary>
+        /// Gets the builder.
+        /// </summary>
+        /// <returns></returns>
+        BlobBuilder GetBuilder()
+        {
+            if (_builder == null)
+            {
+                _builder = new BlobBuilder();
+                _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
+                WriteCount(_count);
+            }
+
+            return _builder;
+        }
+
+        /// <summary>
+        /// Writes the count value.
+        /// </summary>
+        /// <param name="value"></param>
+        void WriteCount(int value)
+        {
+            GetBuilder();
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2((ushort)value);
+        }
+
+        /// <summary>
+        /// Increments the counter.
+        /// </summary>
+        void IncrementCount()
+        {
+            WriteCount(++_count);
         }
 
         /// <summary>
@@ -44,11 +74,11 @@ namespace IKVM.ByteCode.Writing
         {
             if (data != null && data.Count > 0)
             {
-                var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
+                var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
                 w.TryWriteU2(name.Value);
                 w.TryWriteU2((ushort)data.Count);
-                _builder.LinkSuffix(data);
-                _count++;
+                Builder.LinkSuffix(data);
+                IncrementCount();
             }
             else
             {
@@ -75,11 +105,11 @@ namespace IKVM.ByteCode.Writing
         {
             if (data.Length > 0)
             {
-                var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
+                var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
                 w.TryWriteU2(name.Value);
                 w.TryWriteU2((ushort)data.Length);
-                _builder.WriteBytes(data);
-                _count++;
+                Builder.WriteBytes(data);
+                IncrementCount();
             }
             else
             {
@@ -103,10 +133,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="name"></param>
         public void AddAttribute(Utf8ConstantHandle name)
         {
-            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
+            var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(name.Value);
             w.TryWriteU2(0);
-            _count++;
+            IncrementCount();
         }
 
         /// <summary>
@@ -131,40 +161,125 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(int value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value));
+        }
+
+        /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(short value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value));
+        }
+
+        /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(char value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value));
+        }
+
+        /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(byte value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value));
+        }
+
+        /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(bool value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value ? 1 : 0));
+        }
+
+        /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(float value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddFloatConstant(value));
+        }
+
+        /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(long value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddLongConstant(value));
+        }
+
+        /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(double value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddDoubleConstant(value));
+        }
+
+        /// <summary>
+        /// Adds a new ConstantValue attribute with the specified integer.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddConstantValueAttribute(string value)
+        {
+            AddConstantValueAttribute(_constants.GetOrAddStringConstant(value));
+        }
+
+        /// <summary>
         /// Adds a new Code attribute.
         /// </summary>
         /// <param name="maxStack"></param>
         /// <param name="maxLocals"></param>
         /// <param name="code"></param>
-        /// <param name="exceptionsTable"></param>
+        /// <param name="exceptions"></param>
         /// <param name="attributes"></param>
-        public void AddCodeAttribute(ushort maxStack, ushort maxLocals, BlobBuilder code, BlobBuilder exceptionsTable, BlobBuilder attributes)
+        public void AddCodeAttribute(ushort maxStack, ushort maxLocals, BlobBuilder code, in ExceptionTableBuilder exceptions, in AttributeTableBuilder attributes)
         {
             var b = new BlobBuilder();
-            var w = new ClassFormatEncoder(b);
-            w.WriteU2(maxStack);
-            w.WriteU2(maxLocals);
-            w.WriteU4((uint)code.Count);
+            var w = new ClassFormatWriter(b.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
+            w.TryWriteU2(maxStack);
+            w.TryWriteU2(maxLocals);
+            w.TryWriteU4((uint)code.Count);
             b.LinkSuffix(code);
-            b.LinkSuffix(exceptionsTable);
-            b.LinkSuffix(attributes);
+            exceptions.Serialize(b);
+            attributes.Serialize(b);
             AddAttribute("Code", b);
         }
 
         /// <summary>
         /// Adds a new StackMapTable attribute.
         /// </summary>
-        public void AddStackMapTableAttribute(BlobBuilder stackMapTable)
+        public void AddStackMapTableAttribute(in StackMapTableBuilder stackMapTable)
         {
-            AddAttribute("StackMapTable", stackMapTable);
+            var b = new BlobBuilder();
+            stackMapTable.Serialize(b);
+            AddAttribute("StackMapTable", b);
         }
 
         /// <summary>
         /// Adds a new Exceptions attribute.
         /// </summary>
-        public void AddExceptionsAttribute(BlobBuilder exceptions)
+        public void AddExceptionsAttribute(in ClassConstantTableBuilder exceptions)
         {
-            AddAttribute("Exceptions", exceptions);
+            var b = new BlobBuilder();
+            exceptions.Serialize(b);
+            AddAttribute("Exceptions", b);
         }
 
         /// <summary>
@@ -252,9 +367,11 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a new LineNumberTable attribute.
         /// </summary>
-        public void AddLineNumberTableAttribute(BlobBuilder lineNumberTable)
+        public void AddLineNumberTableAttribute(in LineNumberTableBuilder lineNumbers)
         {
-            AddAttribute("LineNumberTable", lineNumberTable);
+            var b = new BlobBuilder();
+            lineNumbers.Serialize(b);
+            AddAttribute("LineNumberTable", b);
         }
 
         /// <summary>
@@ -285,17 +402,21 @@ namespace IKVM.ByteCode.Writing
         /// Adds a new RuntimeVisibleAnnotations attribute.
         /// </summary>
         /// <param name="annotations"></param>
-        public void AddRuntimeVisibleAnnotationsAttribute(BlobBuilder annotations)
+        public void AddRuntimeVisibleAnnotationsAttribute(in AnnotationTableBuilder annotations)
         {
-            AddAttribute("RuntimeVisibleAnnotations", annotations);
+            var b = new BlobBuilder();
+            annotations.Serialize(b);
+            AddAttribute("RuntimeVisibleAnnotations", b);
         }
 
         /// <summary>
         /// Adds a new RuntimeInvisibleAnnotations attribute.
         /// </summary>
-        public void AddRuntimeInvisibleAnnotationsAttribute(BlobBuilder annotations)
+        public void AddRuntimeInvisibleAnnotationsAttribute(in AnnotationTableBuilder annotations)
         {
-            AddAttribute("RuntimeInvisibleAnnotations", annotations);
+            var b = new BlobBuilder();
+            annotations.Serialize(b);
+            AddAttribute("RuntimeInvisibleAnnotations", b);
         }
 
         /// <summary>
@@ -420,9 +541,11 @@ namespace IKVM.ByteCode.Writing
         /// Adds a new PermittedSubclasses attribute.
         /// </summary>
         /// <param name="classes"></param>
-        public void AddPermittedSubclassesAttribute(BlobBuilder classes)
+        public void AddPermittedSubclassesAttribute(ClassConstantTableBuilder classes)
         {
-            AddAttribute("PermittedSubclasses", classes);
+            var b = new BlobBuilder();
+            classes.Serialize(b);
+            AddAttribute("PermittedSubclasses", b);
         }
 
         /// <summary>
@@ -431,9 +554,13 @@ namespace IKVM.ByteCode.Writing
         /// <param name="builder"></param>
         public void Serialize(BlobBuilder builder)
         {
-            var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(_count);
-            builder.LinkSuffix(_builder);
+            if (builder is null)
+                throw new ArgumentNullException(nameof(builder));
+
+            if (_builder != null)
+                builder.LinkSuffix(_builder);
+            else
+                new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes()).TryWriteU2(0);
         }
 
     }

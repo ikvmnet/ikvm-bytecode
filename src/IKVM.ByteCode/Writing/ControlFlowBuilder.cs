@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Writing
 {
 
-    public class SourceFileAttributeBuilder
+    public readonly struct ControlFlowBuilder
     {
 
 
