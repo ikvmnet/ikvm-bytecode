@@ -32,7 +32,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the arguments bound to the method reference.
         /// </summary>
-        public IReadOnlyList<IConstantReader> Arguments => LazyGet(ref arguments, () => new DelegateLazyReaderList<IConstantReader, ushort>(DeclaringClass, Record.Arguments, (_, index) => DeclaringClass.Constants[index]));
+        public IReadOnlyList<IConstantReader> Arguments => LazyGet(ref arguments, () => new DelegateLazyReaderList<IConstantReader, ConstantHandle>(DeclaringClass, Record.Arguments, (_, handle) => DeclaringClass.Constants[handle]));
 
     }
 
