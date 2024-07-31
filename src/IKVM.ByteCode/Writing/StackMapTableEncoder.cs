@@ -7,28 +7,25 @@ namespace IKVM.ByteCode.Writing
 {
 
     /// <summary>
-    /// Provides support in building a frame table structure for the StackMapTable attribute.
+    /// Encodes a stack map table structure.
     /// </summary>
-    public class StackMapTableBuilder
+    public struct StackMapTableEncoder
     {
 
-        readonly ConstantBuilder _constants;
-        BlobBuilder _builder;
-        int _count = 0;
+        readonly BlobBuilder _builder;
+        readonly Blob _countBlob;
+        ushort _count;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="constants"></param>
-        public StackMapTableBuilder(ConstantBuilder constants)
+        /// <param name="builder"></param>
+        public StackMapTableEncoder(BlobBuilder builder)
         {
-            _constants = constants ?? throw new ArgumentNullException(nameof(constants));
+            _builder = builder ?? throw new ArgumentNullException(nameof(builder));
+            _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
+            _count = 0;
         }
-
-        /// <summary>
-        /// Gets the builder.
-        /// </summary>
-        BlobBuilder Builder => _builder ??= new BlobBuilder();
 
         /// <summary>
         /// Validates the given frame type value.
@@ -49,79 +46,77 @@ namespace IKVM.ByteCode.Writing
         /// Adds a Same Frame.
         /// </summary>
         /// <param name="frameType"></param>
-        public void AddSameFrame(byte frameType)
+        public StackMapTableEncoder AddSameFrame(byte frameType)
         {
             ValidateFrameType(frameType, 0, 63, nameof(frameType), "SAME");
-            var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1(frameType);
-            _count++;
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
         }
 
         /// <summary>
         /// Adds a Same Locals 1 Stack Item Frame.
         /// </summary>
         /// <param name="frameType"></param>
-        public void AddSameLocalsOneStackItemFrame(byte frameType)
+        public StackMapTableEncoder AddSameLocalsOneStackItemFrame(byte frameType)
         {
             ValidateFrameType(frameType, 64, 127, nameof(frameType), "SAME_LOCALS_1_STACK_ITEM");
             throw new NotImplementedException();
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
         }
 
         /// <summary>
         /// Adds a Same Locals 1 Stack Item Frame Extended.
         /// </summary>
-        public void AddSameLocalsOneStackItemFrameExtended()
+        public StackMapTableEncoder AddSameLocalsOneStackItemFrameExtended()
         {
             throw new NotImplementedException();
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
         }
 
         /// <summary>
         /// Adds a Chop Frame.
         /// </summary>
-        public void AddChopFrame(byte frameType)
+        public StackMapTableEncoder AddChopFrame(byte frameType)
         {
             ValidateFrameType(frameType, 248, 250, nameof(frameType), "CHOP");
             throw new NotImplementedException();
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
         }
 
         /// <summary>
         /// Adds a Same Frame Extended.
         /// </summary>
-        public void AddSameFrameExtended()
+        public StackMapTableEncoder AddSameFrameExtended()
         {
             throw new NotImplementedException();
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
         }
 
         /// <summary>
         /// Adds an Append Frame.
         /// </summary>
-        public void AddAppendFrame(byte frameType)
+        public StackMapTableEncoder AddAppendFrame(byte frameType)
         {
             ValidateFrameType(frameType, 252, 254, nameof(frameType), "APPEND");
             throw new NotImplementedException();
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
         }
 
         /// <summary>
         /// Adds a Full Frame.
         /// </summary>
-        public void AddFullFrame()
+        public StackMapTableEncoder AddFullFrame()
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Serializes the stack map table.
-        /// </summary>
-        /// <param name="builder"></param>
-        public void Serialize(BlobBuilder builder)
-        {
-            if (builder is null)
-                throw new ArgumentNullException(nameof(builder));
-
-            var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2((ushort)_count);
-            if (_builder != null)
-                builder.LinkSuffix(_builder);
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
         }
 
     }

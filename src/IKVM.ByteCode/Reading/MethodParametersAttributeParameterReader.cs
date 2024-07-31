@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class MethodParametersAttributeParameterReader : ReaderBase<MethodParametersAttributeParameterRecord>
+    public sealed class MethodParametersAttributeParameterReader : ReaderBase<MethodParametersAttributeParameterRecord>
     {
 
         Utf8ConstantReader name;
@@ -14,7 +14,7 @@ namespace IKVM.ByteCode.Reading
         /// Initializes a new instance.
         /// </summary>
         /// <param name="record"></param>
-        public MethodParametersAttributeParameterReader(ClassReader declaringClass, MethodParametersAttributeParameterRecord record) :
+        internal MethodParametersAttributeParameterReader(ClassReader declaringClass, MethodParametersAttributeParameterRecord record) :
             base(declaringClass, record)
         {
 
@@ -23,7 +23,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the parameters.
         /// </summary>
-        public Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name.Value));
+        public Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name));
 
         /// <summary>
         /// Gets the access flags of the parameter.

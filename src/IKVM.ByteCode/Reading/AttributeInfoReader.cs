@@ -5,7 +5,7 @@ using IKVM.ByteCode.Parsing;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class AttributeInfoReader : ReaderBase<AttributeInfoRecord>
+    public sealed class AttributeInfoReader : ReaderBase<AttributeInfoRecord>
     {
 
         Utf8ConstantReader name;
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the attribute.
         /// </summary>
-        public Utf8ConstantReader Name => name ??= DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name.Value);
+        public Utf8ConstantReader Name => name ??= DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name);
 
         /// <summary>
         /// Gets the data of the attribute.

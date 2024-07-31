@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal readonly record struct InterfaceRecord(ClassConstantHandle Class)
+    public readonly record struct InterfaceRecord(ClassConstantHandle Class)
     {
 
         /// <summary>

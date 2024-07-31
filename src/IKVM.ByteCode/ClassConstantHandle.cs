@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode
 {
 
-    public readonly record struct ClassConstantHandle(ushort Value)
+    public readonly record struct ClassConstantHandle(ushort Index)
     {
 
         /// <summary>
@@ -11,28 +11,28 @@
 
         public static explicit operator ClassConstantHandle(Handle handle)
         {
-            return new ClassConstantHandle(handle.Value);
+            return new ClassConstantHandle(handle.Index);
         }
 
         public static implicit operator Handle(ClassConstantHandle handle)
         {
-            return new Handle(handle.Value);
+            return new Handle(handle.Index);
         }
 
         public static explicit operator ClassConstantHandle(ConstantHandle handle)
         {
-            return new ClassConstantHandle(handle.Value);
+            return new ClassConstantHandle(handle.Index);
         }
 
         public static implicit operator ConstantHandle(ClassConstantHandle handle)
         {
-            return new ConstantHandle(handle.Value);
+            return new ConstantHandle(handle.Index);
         }
 
         /// <summary>
         /// Gets whether or not this represents the nil instance.
         /// </summary>
-        public readonly bool IsNil => Value == 0;
+        public readonly bool IsNil => Index == 0;
 
     }
 

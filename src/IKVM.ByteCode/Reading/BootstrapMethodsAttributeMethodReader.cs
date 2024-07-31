@@ -7,7 +7,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class BootstrapMethodsAttributeMethodReader : ReaderBase<BootstrapMethodsAttributeMethodRecord>
+    public sealed class BootstrapMethodsAttributeMethodReader : ReaderBase<BootstrapMethodsAttributeMethodRecord>
     {
 
         MethodrefConstantReader methodref;
@@ -18,7 +18,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public BootstrapMethodsAttributeMethodReader(ClassReader declaringClass, BootstrapMethodsAttributeMethodRecord record) :
+        internal BootstrapMethodsAttributeMethodReader(ClassReader declaringClass, BootstrapMethodsAttributeMethodRecord record) :
             base(declaringClass, record)
         {
 
@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the method being referenced.
         /// </summary>
-        public MethodrefConstantReader Methodref => LazyGet(ref methodref, () => DeclaringClass.Constants.Get<MethodrefConstantReader>(Record.Methodref.Value));
+        public MethodrefConstantReader Methodref => LazyGet(ref methodref, () => DeclaringClass.Constants.Get<MethodrefConstantReader>(Record.Methodref));
 
         /// <summary>
         /// Gets the arguments bound to the method reference.

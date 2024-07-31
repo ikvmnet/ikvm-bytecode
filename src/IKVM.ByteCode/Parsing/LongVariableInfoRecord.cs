@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record LongVariableInfoRecord : VerificationTypeInfoRecord
+    public sealed record LongVariableInfoRecord : VerificationTypeInfoRecord
     {
 
         public static bool TryRead(ref ClassFormatReader reader, out VerificationTypeInfoRecord record)

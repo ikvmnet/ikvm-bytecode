@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record SameLocalsOneExtendedStackMapFrameRecord(byte FrameType, ushort OffsetDelta, VerificationTypeInfoRecord Stack) : StackMapFrameRecord(FrameType)
+    public sealed record SameLocalsOneExtendedStackMapFrameRecord(byte FrameType, ushort OffsetDelta, VerificationTypeInfoRecord Stack) : StackMapFrameRecord(FrameType)
     {
 
         public static bool TryReadSameLocalsOneStackItemExtendedStackMapFrame(ref ClassFormatReader reader, byte tag, out StackMapFrameRecord frame)

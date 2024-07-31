@@ -70,19 +70,20 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <param name="data"></param>
-        public void AddAttribute(Utf8ConstantHandle name, BlobBuilder data)
+        public AttributeTableBuilder Attribute(Utf8ConstantHandle name, BlobBuilder data)
         {
             if (data != null && data.Count > 0)
             {
                 var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-                w.TryWriteU2(name.Value);
+                w.TryWriteU2(name.Index);
                 w.TryWriteU2((ushort)data.Count);
                 Builder.LinkSuffix(data);
                 IncrementCount();
+                return this;
             }
             else
             {
-                AddAttribute(name);
+                return Attribute(name);
             }
         }
 
@@ -91,9 +92,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <param name="data"></param>
-        public void AddAttribute(string name, BlobBuilder data)
+        public AttributeTableBuilder Attribute(string name, BlobBuilder data)
         {
-            AddAttribute(_constants.GetOrAddUtf8Constant(name), data);
+            return Attribute(_constants.GetOrAddUtf8Constant(name), data);
         }
 
         /// <summary>
@@ -101,19 +102,20 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <param name="data"></param>
-        public void AddAttribute(Utf8ConstantHandle name, ReadOnlySpan<byte> data)
+        public AttributeTableBuilder Attribute(Utf8ConstantHandle name, ReadOnlySpan<byte> data)
         {
             if (data.Length > 0)
             {
                 var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-                w.TryWriteU2(name.Value);
+                w.TryWriteU2(name.Index);
                 w.TryWriteU2((ushort)data.Length);
                 Builder.WriteBytes(data);
                 IncrementCount();
+                return this;
             }
             else
             {
-                AddAttribute(name);
+                return Attribute(name);
             }
         }
 
@@ -122,123 +124,124 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <param name="data"></param>
-        public void AddAttribute(string name, ReadOnlySpan<byte> data)
+        public AttributeTableBuilder Attribute(string name, ReadOnlySpan<byte> data)
         {
-            AddAttribute(_constants.GetOrAddUtf8Constant(name), data);
+            return Attribute(_constants.GetOrAddUtf8Constant(name), data);
         }
 
         /// <summary>
         /// Adds a new attribute to the attribute set.
         /// </summary>
         /// <param name="name"></param>
-        public void AddAttribute(Utf8ConstantHandle name)
+        public AttributeTableBuilder Attribute(Utf8ConstantHandle name)
         {
             var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(name.Value);
+            w.TryWriteU2(name.Index);
             w.TryWriteU2(0);
             IncrementCount();
+            return this;
         }
 
         /// <summary>
         /// Adds a new attribute to the attribute set.
         /// </summary>
         /// <param name="name"></param>
-        public void AddAttribute(string name)
+        public AttributeTableBuilder Attribute(string name)
         {
-            AddAttribute(_constants.GetOrAddUtf8Constant(name));
+            return Attribute(_constants.GetOrAddUtf8Constant(name));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(ConstantHandle value)
+        public AttributeTableBuilder ConstantValue(ConstantHandle value)
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.TryWriteU2(value.Value);
-            AddAttribute("ConstantValue", b);
+            w.TryWriteU2(value.Index);
+            return Attribute("ConstantValue", b);
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(int value)
+        public AttributeTableBuilder ConstantValue(int value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value));
+            return ConstantValue(_constants.GetOrAddIntegerConstant(value));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(short value)
+        public AttributeTableBuilder ConstantValue(short value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value));
+            return ConstantValue(_constants.GetOrAddIntegerConstant(value));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(char value)
+        public AttributeTableBuilder ConstantValue(char value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value));
+            return ConstantValue(_constants.GetOrAddIntegerConstant(value));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(byte value)
+        public AttributeTableBuilder ConstantValue(byte value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value));
+            return ConstantValue(_constants.GetOrAddIntegerConstant(value));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(bool value)
+        public AttributeTableBuilder ConstantValue(bool value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddIntegerConstant(value ? 1 : 0));
+            return ConstantValue(_constants.GetOrAddIntegerConstant(value ? 1 : 0));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(float value)
+        public AttributeTableBuilder ConstantValue(float value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddFloatConstant(value));
+            return ConstantValue(_constants.GetOrAddFloatConstant(value));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(long value)
+        public AttributeTableBuilder ConstantValue(long value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddLongConstant(value));
+            return ConstantValue(_constants.GetOrAddLongConstant(value));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(double value)
+        public AttributeTableBuilder ConstantValue(double value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddDoubleConstant(value));
+            return ConstantValue(_constants.GetOrAddDoubleConstant(value));
         }
 
         /// <summary>
         /// Adds a new ConstantValue attribute with the specified integer.
         /// </summary>
         /// <param name="value"></param>
-        public void AddConstantValueAttribute(string value)
+        public AttributeTableBuilder ConstantValue(string value)
         {
-            AddConstantValueAttribute(_constants.GetOrAddStringConstant(value));
+            return ConstantValue(_constants.GetOrAddStringConstant(value));
         }
 
         /// <summary>
@@ -249,7 +252,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="code"></param>
         /// <param name="exceptions"></param>
         /// <param name="attributes"></param>
-        public void AddCodeAttribute(ushort maxStack, ushort maxLocals, BlobBuilder code, in ExceptionTableBuilder exceptions, in AttributeTableBuilder attributes)
+        public AttributeTableBuilder Code(ushort maxStack, ushort maxLocals, BlobBuilder code, Action<ExceptionTableEncoder> exceptions, AttributeTableBuilder attributes)
         {
             var b = new BlobBuilder();
             var w = new ClassFormatWriter(b.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
@@ -257,38 +260,38 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU2(maxLocals);
             w.TryWriteU4((uint)code.Count);
             b.LinkSuffix(code);
-            exceptions.Serialize(b);
+            exceptions(new ExceptionTableEncoder(b));
             attributes.Serialize(b);
-            AddAttribute("Code", b);
+            return Attribute("Code", b);
         }
 
         /// <summary>
         /// Adds a new StackMapTable attribute.
         /// </summary>
-        public void AddStackMapTableAttribute(in StackMapTableBuilder stackMapTable)
+        public AttributeTableBuilder StackMapTable(Action<StackMapTableEncoder> stackMapTable)
         {
             var b = new BlobBuilder();
-            stackMapTable.Serialize(b);
-            AddAttribute("StackMapTable", b);
+            stackMapTable(new StackMapTableEncoder(b));
+            return Attribute("StackMapTable", b);
         }
 
         /// <summary>
         /// Adds a new Exceptions attribute.
         /// </summary>
-        public void AddExceptionsAttribute(in ClassConstantTableBuilder exceptions)
+        public AttributeTableBuilder Exceptions(Action<ClassConstantTableEncoder> exceptions)
         {
             var b = new BlobBuilder();
-            exceptions.Serialize(b);
-            AddAttribute("Exceptions", b);
+            exceptions(new ClassConstantTableEncoder(b));
+            return Attribute("Exceptions", b);
         }
 
         /// <summary>
         /// Adds a new InnerClasses attribute.
         /// </summary>
         /// <param name="classes"></param>
-        public void AddInnerClassesAttribute(BlobBuilder classes)
+        public AttributeTableBuilder InnerClasses(BlobBuilder classes)
         {
-            AddAttribute("InnerClasses", classes);
+            return Attribute("InnerClasses", classes);
         }
 
         /// <summary>
@@ -296,256 +299,290 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="clazz"></param>
         /// <param name="method"></param>
-        public void AddEnclosingMethodAttribute(ClassConstantHandle clazz, NameAndTypeConstantHandle method)
+        public AttributeTableBuilder EnclosingMethod(ClassConstantHandle clazz, NameAndTypeConstantHandle method)
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2 + ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.TryWriteU2(clazz.Value);
-            w.TryWriteU2(method.Value);
-            AddAttribute("EnclosingMethod", b);
+            w.TryWriteU2(clazz.Index);
+            w.TryWriteU2(method.Index);
+            return Attribute("EnclosingMethod", b);
         }
 
         /// <summary>
         /// Adds a new Synthetic attribute.
         /// </summary>
-        public void AddSyntheticAttribute()
+        public AttributeTableBuilder Synthetic()
         {
-            AddAttribute("Synthetic");
+            return Attribute("Synthetic");
         }
 
         /// <summary>
         /// Adds a new Signature attribute.
         /// </summary>
         /// <param name="signature"></param>
-        public void AddSignatureAttribute(Utf8ConstantHandle signature)
+        public AttributeTableBuilder Signature(Utf8ConstantHandle signature)
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.TryWriteU2(signature.Value);
-            AddAttribute("Signature", b);
+            w.TryWriteU2(signature.Index);
+            return Attribute("Signature", b);
         }
 
         /// <summary>
         /// Adds a new Signature attribute.
         /// </summary>
         /// <param name="signature"></param>
-        public void AddSignatureAttribute(string signature)
+        public AttributeTableBuilder Signature(string signature)
         {
-            AddSignatureAttribute(_constants.GetOrAddUtf8Constant(signature));
+            return Signature(_constants.GetOrAddUtf8Constant(signature));
         }
 
         /// <summary>
         /// Adds a new SourceFile attribute.
         /// </summary>
         /// <param name="sourceFile"></param>
-        public void AddSourceFileAttribute(Utf8ConstantHandle sourceFile)
+        public AttributeTableBuilder SourceFile(Utf8ConstantHandle sourceFile)
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.TryWriteU2(sourceFile.Value);
-            AddAttribute("SourceFile", b);
+            w.TryWriteU2(sourceFile.Index);
+            return Attribute("SourceFile", b);
         }
 
         /// <summary>
         /// Adds a new SourceFile attribute.
         /// </summary>
         /// <param name="sourceFile"></param>
-        public void AddSourceFileAttribute(string sourceFile)
+        public AttributeTableBuilder SourceFile(string sourceFile)
         {
-            AddSourceFileAttribute(_constants.GetOrAddUtf8Constant(sourceFile));
+            return SourceFile(_constants.GetOrAddUtf8Constant(sourceFile));
         }
 
         /// <summary>
         /// Adds a new SourceDebugExtension attribute.
         /// </summary>
         /// <param name="debugExtension"></param>
-        public void AddSourceDebugExtensionAttribute(BlobBuilder debugExtension)
+        public AttributeTableBuilder SourceDebugExtension(BlobBuilder debugExtension)
         {
-            AddAttribute("SourceDebugExtension", debugExtension);
+            return Attribute("SourceDebugExtension", debugExtension);
         }
 
         /// <summary>
         /// Adds a new LineNumberTable attribute.
         /// </summary>
-        public void AddLineNumberTableAttribute(in LineNumberTableBuilder lineNumbers)
+        public AttributeTableBuilder LineNumberTable(Action<LineNumberTableEncoder> lineNumbers)
         {
             var b = new BlobBuilder();
-            lineNumbers.Serialize(b);
-            AddAttribute("LineNumberTable", b);
+            lineNumbers(new LineNumberTableEncoder(b));
+            return Attribute("LineNumberTable", b);
         }
 
         /// <summary>
         /// Adds a new LocalVariableTable attribute.
         /// </summary>
-        public void AddLocalVariableTableAttribute(BlobBuilder localVariableTable)
+        public AttributeTableBuilder LocalVariableTable(Action<LocalVariableTableEncoder> localVars)
         {
-            AddAttribute("LocalVariableTable", localVariableTable);
+            var b = new BlobBuilder();
+            localVars(new LocalVariableTableEncoder(b));
+            return Attribute("LocalVariableTable", b);
         }
 
         /// <summary>
         /// Adds a new LocalVariableTypeTable attribute.
         /// </summary>
-        public void AddLocalVariableTypeTableAttribute(BlobBuilder localVariableTypeTable)
+        public AttributeTableBuilder LocalVariableTypeTable(Action<LocalVariableTypeTableEncoder> localVarTypes)
         {
-            AddAttribute("LocalVariableTypeTable", localVariableTypeTable);
+            var b = new BlobBuilder();
+            localVarTypes(new LocalVariableTypeTableEncoder(b));
+            return Attribute("LocalVariableTypeTable", b);
         }
 
         /// <summary>
         /// Adds a new Deprecated attribute.
         /// </summary>
-        public void AddDeprecatedAttribute()
+        public AttributeTableBuilder Deprecated()
         {
-            AddAttribute("Deprecated");
+            return Attribute("Deprecated");
         }
 
         /// <summary>
         /// Adds a new RuntimeVisibleAnnotations attribute.
         /// </summary>
         /// <param name="annotations"></param>
-        public void AddRuntimeVisibleAnnotationsAttribute(in AnnotationTableBuilder annotations)
+        public AttributeTableBuilder RuntimeVisibleAnnotations(Action<AnnotationTableEncoder> annotations)
         {
             var b = new BlobBuilder();
-            annotations.Serialize(b);
-            AddAttribute("RuntimeVisibleAnnotations", b);
+            annotations(new AnnotationTableEncoder(b));
+            return Attribute("RuntimeVisibleAnnotations", b);
         }
 
         /// <summary>
         /// Adds a new RuntimeInvisibleAnnotations attribute.
         /// </summary>
-        public void AddRuntimeInvisibleAnnotationsAttribute(in AnnotationTableBuilder annotations)
+        public AttributeTableBuilder RuntimeInvisibleAnnotations(Action<AnnotationTableEncoder> annotations)
         {
             var b = new BlobBuilder();
-            annotations.Serialize(b);
-            AddAttribute("RuntimeInvisibleAnnotations", b);
+            annotations(new AnnotationTableEncoder(b));
+            return Attribute("RuntimeInvisibleAnnotations", b);
         }
 
         /// <summary>
         /// Adds a new RuntimeVisibleParameterAnnotations attribute.
         /// </summary>
-        public void AddRuntimeVisibleParameterAnnotationsAttribute(BlobBuilder parameterAnnotations)
+        public AttributeTableBuilder RuntimeVisibleParameterAnnotations(Action<ParameterAnnotationTableEncoder> parameterAnnotations)
         {
-            AddAttribute("RuntimeVisibleParameterAnnotations", parameterAnnotations);
+            var b = new BlobBuilder();
+            parameterAnnotations(new ParameterAnnotationTableEncoder(b));
+            return Attribute("RuntimeVisibleParameterAnnotations", b);
         }
 
         /// <summary>
         /// Adds a new RuntimeInvisibleParameterAnnotations attribute.
         /// </summary>
-        public void AddRuntimeInvisibleParametersAnnotationsAttribute(BlobBuilder parameterAnnotations)
+        public AttributeTableBuilder RuntimeInvisibleParametersAnnotations(Action<ParameterAnnotationTableEncoder> parameterAnnotations)
         {
-            AddAttribute("RuntimeInvisibleParameterAnnotations", parameterAnnotations);
+            var b = new BlobBuilder();
+            parameterAnnotations(new ParameterAnnotationTableEncoder(b));
+            return Attribute("RuntimeInvisibleParameterAnnotations", b);
         }
 
         /// <summary>
         /// Adds a new RuntimeVisibleTypeAnnotations attribute.
         /// </summary>
         /// <param name="typeAnnotations"></param>
-        public void AddRuntimeVisibleTypeAnnotationsAttribute(BlobBuilder typeAnnotations)
+        public AttributeTableBuilder RuntimeVisibleTypeAnnotations(Action<TypeAnnotationTableEncoder> typeAnnotations)
         {
-            AddAttribute("RuntimeVisibleTypeAnnotations", typeAnnotations);
+            var b = new BlobBuilder();
+            typeAnnotations(new TypeAnnotationTableEncoder(b));
+            return Attribute("RuntimeVisibleTypeAnnotations", b);
         }
 
         /// <summary>
         /// Adds a new RuntimeInvisibleTypeAnnotations attribute.
         /// </summary>
         /// <param name="typeAnnotations"></param>
-        public void AddRuntimeInvisibleTypeAnnotationsAttribute(BlobBuilder typeAnnotations)
+        public AttributeTableBuilder RuntimeInvisibleTypeAnnotations(Action<TypeAnnotationTableEncoder> typeAnnotations)
         {
-            AddAttribute("RuntimeInvisibleTypeAnnotations", typeAnnotations);
+            var b = new BlobBuilder();
+            typeAnnotations(new TypeAnnotationTableEncoder(b));
+            return Attribute("RuntimeInvisibleTypeAnnotations", b);
         }
 
         /// <summary>
         /// Adds a new AnnotationDefault attribute.
         /// </summary>
         /// <param name="defaultValue"></param>
-        public void AddAnnotationDefaultAttribute(BlobBuilder defaultValue)
+        public AttributeTableBuilder AnnotationDefault(Action<ElementValueEncoder> defaultValue)
         {
-            AddAttribute("AnnotationDefault", defaultValue);
+            var b = new BlobBuilder();
+            defaultValue(new ElementValueEncoder(b));
+            return Attribute("AnnotationDefault", b);
         }
 
         /// <summary>
         /// Adds a new BootstrapMethods attribute.
         /// </summary>
         /// <param name="bootstrapMethods"></param>
-        public void AddBootstrapMethodsAttribute(BlobBuilder bootstrapMethods)
+        public AttributeTableBuilder BootstrapMethods(Action<BootstrapMethodsTableEncoder> bootstrapMethods)
         {
-            AddAttribute("BootstrapMethods", bootstrapMethods);
+            var b = new BlobBuilder();
+            bootstrapMethods(new BootstrapMethodsTableEncoder(b));
+            return Attribute("BootstrapMethods", b);
         }
 
         /// <summary>
         /// Adds a new MethodParameters attribute.
         /// </summary>
-        public void AddMethodParametersAttribute(BlobBuilder methodParameters)
+        public AttributeTableBuilder MethodParameters(Action<MethodParametersTableEncoder> parameters)
         {
-            AddAttribute("MethodParameters", methodParameters);
+            var b = new BlobBuilder();
+            parameters(new MethodParametersTableEncoder(b));
+            return Attribute("MethodParameters", b);
         }
 
         /// <summary>
         /// Adds a new Module attribute.
         /// </summary>
         /// <param name="module"></param>
-        public void AddModuleAttribute(BlobBuilder module)
+        public AttributeTableBuilder Module(ModuleConstantHandle name, ModuleFlag flags, Utf8ConstantHandle version, Action<ModuleRequiresTableEncoder> requires, Action<ModuleExportsTableEncoder> exports, Action<ModuleOpensTableEncoder> opens, Action<ClassConstantTableEncoder> uses, Action<ModuleProvidesTableEncoder> provides)
         {
-            AddAttribute("Module", module);
+            var b = new BlobBuilder();
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU2(name.Index);
+            w.TryWriteU2((ushort)flags);
+            w.TryWriteU2(version.Index);
+            requires(new ModuleRequiresTableEncoder(b));
+            exports(new ModuleExportsTableEncoder(b));
+            opens(new ModuleOpensTableEncoder(b));
+            uses(new ClassConstantTableEncoder(b));
+            provides(new ModuleProvidesTableEncoder(b));
+            return Attribute("Module", b);
         }
 
         /// <summary>
         /// Adds a new ModulePackages attribute.
         /// </summary>
-        public void AddModulePackagesAttribute(BlobBuilder modulePackages)
+        public AttributeTableBuilder ModulePackages(Action<PackageConstantTableEncoder> packages)
         {
-            AddAttribute("ModulePackages", modulePackages);
+            var b = new BlobBuilder();
+            packages(new PackageConstantTableEncoder(b));
+            return Attribute("ModulePackages", b);
         }
 
         /// <summary>
         /// Adds a new ModuleMainClass attribute.
         /// </summary>
         /// <param name="mainClass"></param>
-        public void AddModuleMainClassAttribute(ClassConstantHandle mainClass)
+        public AttributeTableBuilder ModuleMainClass(ClassConstantHandle mainClass)
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.TryWriteU2(mainClass.Value);
-            AddAttribute("ModuleMainClass", b);
+            w.TryWriteU2(mainClass.Index);
+            return Attribute("ModuleMainClass", b);
         }
 
         /// <summary>
         /// Adds a new NestHost attribute.
         /// </summary>
         /// <param name="hostClass"></param>
-        public void AddNestHostAttribute(ClassConstantHandle hostClass)
+        public AttributeTableBuilder NestHost(ClassConstantHandle hostClass)
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.TryWriteU2(hostClass.Value);
-            AddAttribute("NestHost", b);
+            w.TryWriteU2(hostClass.Index);
+            return Attribute("NestHost", b);
         }
 
         /// <summary>
         /// Adds a new NestMembers attribute.
         /// </summary>
         /// <param name="classes"></param>
-        public void AddNestMembersAttribute(BlobBuilder classes)
+        public AttributeTableBuilder NestMembers(Action<ClassConstantTableEncoder> classes)
         {
-            AddAttribute("NestMembers", classes);
+            var b = new BlobBuilder();
+            classes(new ClassConstantTableEncoder(b));
+            return Attribute("NestMembers", b);
         }
 
         /// <summary>
         /// Adds a new Record attribute.
         /// </summary>
-        public void AddRecordAttribute(BlobBuilder components)
+        public AttributeTableBuilder Record(Action<RecordComponentTableEncoder> components)
         {
-            AddAttribute("Record", components);
+            var b = new BlobBuilder();
+            components(new RecordComponentTableEncoder(b));
+            return Attribute("Record", b);
         }
 
         /// <summary>
         /// Adds a new PermittedSubclasses attribute.
         /// </summary>
         /// <param name="classes"></param>
-        public void AddPermittedSubclassesAttribute(ClassConstantTableBuilder classes)
+        public AttributeTableBuilder PermittedSubclasses(Action<ClassConstantTableEncoder> classes)
         {
             var b = new BlobBuilder();
-            classes.Serialize(b);
-            AddAttribute("PermittedSubclasses", b);
+            classes(new ClassConstantTableEncoder(b));
+            return Attribute("PermittedSubclasses", b);
         }
 
         /// <summary>

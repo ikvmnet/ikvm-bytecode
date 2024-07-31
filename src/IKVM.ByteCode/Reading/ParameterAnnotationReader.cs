@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class ParameterAnnotationReader : ReaderBase<ParameterAnnotationRecord>
+    public sealed class ParameterAnnotationReader : ReaderBase<ParameterAnnotationRecord>
     {
 
         AnnotationReaderCollection annotations;
@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public ParameterAnnotationReader(ClassReader declaringClass, ParameterAnnotationRecord record) :
+        internal ParameterAnnotationReader(ClassReader declaringClass, ParameterAnnotationRecord record) :
             base(declaringClass, record)
         {
 

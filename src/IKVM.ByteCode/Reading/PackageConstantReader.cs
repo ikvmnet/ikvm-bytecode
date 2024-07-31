@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class PackageConstantReader : ConstantReader<PackageConstantRecord>
+    public sealed class PackageConstantReader : ConstantReader<PackageConstantRecord>
     {
 
         Utf8ConstantReader name;
@@ -15,8 +15,8 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="owner"></param>
         /// <param name="record"></param>
-        public PackageConstantReader(ClassReader owner, ushort index, PackageConstantRecord record) :
-            base(owner, index, record)
+        internal PackageConstantReader(ClassReader owner, PackageConstantHandle handle, PackageConstantRecord record) :
+            base(owner, handle, record)
         {
 
         }
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gest the name of this package.
         /// </summary>
-        public Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name.Value));
+        public Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name));
 
     }
 

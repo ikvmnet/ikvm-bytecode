@@ -1,4 +1,5 @@
 ﻿using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Writing;
 
 namespace IKVM.ByteCode.Reading
 {
@@ -6,36 +7,36 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Provides static methods for reading constants.
     /// </summary>
-    internal static class ConstantReader
+    public static class ConstantReader
     {
 
         /// <summary>
         /// Initializes a <see cref="IConstantReader"/> from a <see cref="ConstantRecord"/>.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
-        internal static IConstantReader Read(ClassReader declaringClass, ushort index, ConstantRecord record) => record switch
+        internal static IConstantReader Read(ClassReader declaringClass, ConstantHandle handle, ConstantRecord record) => record switch
         {
-            Utf8ConstantRecord c => new Utf8ConstantReader(declaringClass, index, c),
-            IntegerConstantRecord c => new IntegerConstantReader(declaringClass, index, c),
-            FloatConstantRecord c => new FloatConstantReader(declaringClass, index, c),
-            LongConstantRecord c => new LongConstantReader(declaringClass, index, c),
-            DoubleConstantRecord c => new DoubleConstantReader(declaringClass, index, c),
-            ClassConstantRecord c => new ClassConstantReader(declaringClass, index, c),
-            StringConstantRecord c => new StringConstantReader(declaringClass, index, c),
-            FieldrefConstantRecord c => new FieldrefConstantReader(declaringClass, index, c),
-            MethodrefConstantRecord c => new MethodrefConstantReader(declaringClass, index, c),
-            InterfaceMethodrefConstantRecord c => new InterfaceMethodrefConstantReader(declaringClass, index, c),
-            NameAndTypeConstantRecord c => new NameAndTypeConstantReader(declaringClass, index, c),
-            MethodHandleConstantRecord c => new MethodHandleConstantReader(declaringClass, index, c),
-            MethodTypeConstantRecord c => new MethodTypeConstantReader(declaringClass, index, c),
-            DynamicConstantRecord c => new DynamicConstantReader(declaringClass, index, c),
-            InvokeDynamicConstantRecord c => new InvokeDynamicConstantReader(declaringClass, index, c),
-            ModuleConstantRecord c => new ModuleConstantReader(declaringClass, index, c),
-            PackageConstantRecord c => new PackageConstantReader(declaringClass, index, c),
+            Utf8ConstantRecord c => new Utf8ConstantReader(declaringClass, (Utf8ConstantHandle)handle, c),
+            IntegerConstantRecord c => new IntegerConstantReader(declaringClass, (IntegerConstantHandle)handle, c),
+            FloatConstantRecord c => new FloatConstantReader(declaringClass, (FloatConstantHandle)handle, c),
+            LongConstantRecord c => new LongConstantReader(declaringClass, (LongConstantHandle)handle, c),
+            DoubleConstantRecord c => new DoubleConstantReader(declaringClass, (DoubleConstantHandle)handle, c),
+            ClassConstantRecord c => new ClassConstantReader(declaringClass, (ClassConstantHandle)handle, c),
+            StringConstantRecord c => new StringConstantReader(declaringClass, (StringConstantHandle)handle, c),
+            FieldrefConstantRecord c => new FieldrefConstantReader(declaringClass, (FieldrefConstantHandle)handle, c),
+            MethodrefConstantRecord c => new MethodrefConstantReader(declaringClass, (MethodrefConstantHandle)handle, c),
+            InterfaceMethodrefConstantRecord c => new InterfaceMethodrefConstantReader(declaringClass, (InterfaceMethodrefConstantHandle)handle, c),
+            NameAndTypeConstantRecord c => new NameAndTypeConstantReader(declaringClass, (NameAndTypeConstantHandle)handle, c),
+            MethodHandleConstantRecord c => new MethodHandleConstantReader(declaringClass, (MethodHandleConstantHandle)handle, c),
+            MethodTypeConstantRecord c => new MethodTypeConstantReader(declaringClass, (MethodTypeConstantHandle)handle, c),
+            DynamicConstantRecord c => new DynamicConstantReader(declaringClass, (DynamicConstantHandle)handle, c),
+            InvokeDynamicConstantRecord c => new InvokeDynamicConstantReader(declaringClass, (InvokeDynamicConstantHandle)handle, c),
+            ModuleConstantRecord c => new ModuleConstantReader(declaringClass, (ModuleConstantHandle)handle, c),
+            PackageConstantRecord c => new PackageConstantReader(declaringClass, (PackageConstantHandle)handle, c),
             _ => throw new ByteCodeException($"Invalid constant type: {record.GetType().Name}"),
         };
 
@@ -45,28 +46,28 @@ namespace IKVM.ByteCode.Reading
     /// Base type for constant readers.
     /// </summary>
     /// <typeparam name="TRecord"></typeparam>
-    internal abstract class ConstantReader<TRecord> : ReaderBase<TRecord>, IConstantReader<TRecord>
+    public abstract class ConstantReader<TRecord> : ReaderBase<TRecord>, IConstantReader<TRecord>
         where TRecord : ConstantRecord
     {
 
-        readonly ushort index;
+        readonly ConstantHandle handle;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        protected ConstantReader(ClassReader declaringClass, ushort index, TRecord record) :
+        internal protected ConstantReader(ClassReader declaringClass, ConstantHandle handle, TRecord record) :
             base(declaringClass, record)
         {
-            this.index = index;
+            this.handle = handle;
         }
 
         /// <summary>
         /// Gets the index of the constant.
         /// </summary>
-        public ushort Index => index;
+        public ConstantHandle Handle => handle;
 
         /// <summary>
         /// Returns <c>true</c> if the constant is considered loadable according to the JVM specification.

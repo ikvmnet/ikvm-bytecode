@@ -9,7 +9,7 @@ namespace IKVM.ByteCode.Writing
     /// <summary>
     /// Encodes instructions.
     /// </summary>
-    public readonly struct InstructionEncoder
+    readonly struct InstructionEncoder
     {
 
         readonly BlobBuilder _code;

@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record ModuleMainClassAttributeRecord(ClassConstantHandle MainClassIndex) : AttributeRecord
+    public sealed record ModuleMainClassAttributeRecord(ClassConstantHandle MainClassIndex) : AttributeRecord
     {
 
         public static bool TryReadModuleMainClassAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)

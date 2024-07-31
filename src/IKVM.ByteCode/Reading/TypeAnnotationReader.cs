@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class TypeAnnotationReader : ReaderBase<TypeAnnotationRecord>
+    public sealed class TypeAnnotationReader : ReaderBase<TypeAnnotationRecord>
     {
 
         Utf8ConstantReader type;
@@ -16,7 +16,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public TypeAnnotationReader(ClassReader declaringClass, TypeAnnotationRecord record) :
+        internal TypeAnnotationReader(ClassReader declaringClass, TypeAnnotationRecord record) :
             base(declaringClass, record)
         {
 
@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the type of the annotation.
         /// </summary>
-        public Utf8ConstantReader Type => LazyGet(ref type, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Type.Value));
+        public Utf8ConstantReader Type => LazyGet(ref type, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Type));
 
         /// <summary>
         /// Gets the element values of the annotation.

@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record StringConstantRecord(Utf8ConstantHandle Value) : ConstantRecord
+    public sealed record StringConstantRecord(Utf8ConstantHandle Value) : ConstantRecord
     {
 
         /// <summary>

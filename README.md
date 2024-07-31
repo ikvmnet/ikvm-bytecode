@@ -7,8 +7,7 @@ The project is organized into three related sections.
 ## IKVM.ByteCode.Parsing
 
 Contains Record structures and classes that represent the raw values that might appear in a Java class file. These
-types are not blittable, but do contain a TryRead method and TryWrite method, targeting a ClassFormatReader and
-ClassFormatWriter respectively.
+types are not blittable, but do contain a TryRead method, targeting a ClassFormatReader.
 
 ## IVKM.ByteCode.Reading
 

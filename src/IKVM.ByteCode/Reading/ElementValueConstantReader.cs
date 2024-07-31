@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public ElementValueConstantReader(ClassReader declaringClass, ElementValueRecord record) :
+        internal ElementValueConstantReader(ClassReader declaringClass, ElementValueRecord record) :
             base(declaringClass, record)
         {
 
@@ -38,15 +38,15 @@ namespace IKVM.ByteCode.Reading
         /// <exception cref="ByteCodeException"></exception>
         IConstantReader ResolveValue() => Record.Tag switch
         {
-            ElementValueTag.Byte => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Index),
-            ElementValueTag.Char => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Index),
-            ElementValueTag.Double => DeclaringClass.Constants.Get<DoubleConstantReader>(ValueRecord.Index),
-            ElementValueTag.Float => DeclaringClass.Constants.Get<FloatConstantReader>(ValueRecord.Index),
-            ElementValueTag.Integer => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Index),
-            ElementValueTag.Long => DeclaringClass.Constants.Get<LongConstantReader>(ValueRecord.Index),
-            ElementValueTag.Short => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Index),
-            ElementValueTag.Boolean => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Index),
-            ElementValueTag.String => DeclaringClass.Constants.Get<Utf8ConstantReader>(ValueRecord.Index),
+            ElementValueTag.Byte => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Handle),
+            ElementValueTag.Char => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Handle),
+            ElementValueTag.Double => DeclaringClass.Constants.Get<DoubleConstantReader>(ValueRecord.Handle),
+            ElementValueTag.Float => DeclaringClass.Constants.Get<FloatConstantReader>(ValueRecord.Handle),
+            ElementValueTag.Integer => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Handle),
+            ElementValueTag.Long => DeclaringClass.Constants.Get<LongConstantReader>(ValueRecord.Handle),
+            ElementValueTag.Short => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Handle),
+            ElementValueTag.Boolean => DeclaringClass.Constants.Get<IntegerConstantReader>(ValueRecord.Handle),
+            ElementValueTag.String => DeclaringClass.Constants.Get<Utf8ConstantReader>(ValueRecord.Handle),
             _ => throw new ByteCodeException($"Unknown element value constant tag '{Record.Tag}'.")
         };
 

@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record SameExtendedStackMapFrameRecord(byte Tag, ushort OffsetDelta) : StackMapFrameRecord(Tag)
+    public sealed record SameExtendedStackMapFrameRecord(byte Tag, ushort OffsetDelta) : StackMapFrameRecord(Tag)
     {
 
         public static bool TryReadSameExtendedStackMapFrame(ref ClassFormatReader reader, byte tag, out StackMapFrameRecord frame)

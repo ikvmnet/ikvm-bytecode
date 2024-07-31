@@ -5,7 +5,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record FloatConstantRecord(float Value) : ConstantRecord
+    public sealed record FloatConstantRecord(float Value) : ConstantRecord
     {
 
         /// <summary>

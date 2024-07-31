@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class PermittedSubclassesAttributeReader : AttributeReader<PermittedSubclassesAttributeRecord>
+    public sealed class PermittedSubclassesAttributeReader : AttributeReader<PermittedSubclassesAttributeRecord>
     {
 
         /// <summary>
@@ -12,7 +12,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="info"></param>
         /// <param name="data"></param>
-        public PermittedSubclassesAttributeReader(ClassReader declaringClass, AttributeInfoReader info, PermittedSubclassesAttributeRecord data) :
+        internal PermittedSubclassesAttributeReader(ClassReader declaringClass, AttributeInfoReader info, PermittedSubclassesAttributeRecord data) :
             base(declaringClass, info, data)
         {
 

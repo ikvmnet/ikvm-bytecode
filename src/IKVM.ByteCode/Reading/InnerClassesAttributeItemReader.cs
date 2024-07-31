@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class InnerClassesAttributeItemReader : ReaderBase<InnerClassesAttributeItemRecord>
+    public sealed class InnerClassesAttributeItemReader : ReaderBase<InnerClassesAttributeItemRecord>
     {
 
         ClassConstantReader innerClass;
@@ -17,7 +17,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public InnerClassesAttributeItemReader(ClassReader declaringClass, InnerClassesAttributeItemRecord record) :
+        internal InnerClassesAttributeItemReader(ClassReader declaringClass, InnerClassesAttributeItemRecord record) :
             base(declaringClass, record)
         {
 
@@ -26,17 +26,17 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the inner class.
         /// </summary>
-        public ClassConstantReader InnerClass => LazyGet(ref innerClass, () => DeclaringClass.Constants.Get<ClassConstantReader>(Record.InnerClass.Value));
+        public ClassConstantReader InnerClass => LazyGet(ref innerClass, () => DeclaringClass.Constants.Get<ClassConstantReader>(Record.InnerClass));
 
         /// <summary>
         /// Gets the name of the outer class.
         /// </summary>
-        public ClassConstantReader OuterClass => LazyGet(ref outerClass, () => DeclaringClass.Constants.Get<ClassConstantReader>(Record.OuterClass.Value));
+        public ClassConstantReader OuterClass => LazyGet(ref outerClass, () => DeclaringClass.Constants.Get<ClassConstantReader>(Record.OuterClass));
 
         /// <summary>
         /// Gets the inner name.
         /// </summary>
-        public Utf8ConstantReader InnerName => LazyGet(ref innerName, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.InnerName.Value));
+        public Utf8ConstantReader InnerName => LazyGet(ref innerName, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.InnerName));
 
         /// <summary>
         /// Gets the access flags of the inner class.

@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record UnknownAttributeRecord(byte[] Data) : AttributeRecord
+    public sealed record UnknownAttributeRecord(byte[] Data) : AttributeRecord
     {
 
         public static bool TryReadCustomAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)

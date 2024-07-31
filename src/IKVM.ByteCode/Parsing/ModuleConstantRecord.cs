@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record ModuleConstantRecord(ushort NameIndex) : ConstantRecord
+    public sealed record ModuleConstantRecord(Utf8ConstantHandle Name) : ConstantRecord
     {
 
         /// <summary>
@@ -18,7 +18,7 @@
             if (reader.TryReadU2(out ushort nameIndex) == false)
                 return false;
 
-            constant = new ModuleConstantRecord(nameIndex);
+            constant = new ModuleConstantRecord(new Utf8ConstantHandle(nameIndex));
             return true;
         }
 

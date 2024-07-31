@@ -43,9 +43,7 @@ namespace IKVM.ByteCode.Buffers
             public bool MoveNext()
             {
                 if (_currentOpt == _head)
-                {
                     return false;
-                }
 
                 if (_currentOpt == _head._nextOrPrevious)
                 {

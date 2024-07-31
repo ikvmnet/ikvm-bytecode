@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class InterfaceReader : ReaderBase<InterfaceRecord>
+    public sealed class InterfaceReader : ReaderBase<InterfaceRecord>
     {
 
         ClassConstantReader clazz;
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the interface.
         /// </summary>
-        public ClassConstantReader Class => LazyGet(ref clazz, () => DeclaringClass.Constants.Get<ClassConstantReader>(Record.Class.Value));
+        public ClassConstantReader Class => LazyGet(ref clazz, () => DeclaringClass.Constants.Get<ClassConstantReader>(Record.Class));
 
     }
 

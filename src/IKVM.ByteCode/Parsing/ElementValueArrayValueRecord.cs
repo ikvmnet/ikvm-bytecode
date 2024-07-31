@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record ElementValueArrayValueRecord(ElementValueRecord[] Values) : ElementValueValueRecord
+    public sealed record ElementValueArrayValueRecord(ElementValueRecord[] Values) : ElementValueValueRecord
     {
 
         public static bool TryRead(ref ClassFormatReader reader, out ElementValueValueRecord value)
@@ -21,29 +21,6 @@
             }
 
             value = new ElementValueArrayValueRecord(values);
-            return true;
-        }
-
-        public override int GetSize()
-        {
-            var size = 0;
-            size += sizeof(ushort);
-
-            foreach (var value in Values)
-                size += value.GetSize();
-
-            return size;
-        }
-
-        public override bool TryWrite(ref ClassFormatWriter writer)
-        {
-            if (writer.TryWriteU2((ushort)Values.Length) == false)
-                return false;
-
-            foreach (var value in Values)
-                if (value.TryWrite(ref writer) == false)
-                    return false;
-
             return true;
         }
 

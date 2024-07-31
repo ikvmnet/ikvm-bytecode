@@ -6,7 +6,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Lazy init collection of method data.
     /// </summary>
-    internal sealed class InterfaceReaderCollection : LazyNamedReaderDictionary<InterfaceReader, InterfaceRecord>
+    public sealed class InterfaceReaderCollection : LazyNamedReaderDictionary<InterfaceReader, InterfaceRecord>
     {
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         protected override string GetName(int index, InterfaceRecord record)
         {
-            return DeclaringClass.Constants.Get<ClassConstantReader>(record.Class.Value).Name.Value;
+            return DeclaringClass.Constants.Get<ClassConstantReader>(record.Class).Name.Value;
         }
 
     }

@@ -5,7 +5,7 @@ using IKVM.ByteCode.Parsing;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal abstract class AttributeReader : ReaderBase
+    public abstract class AttributeReader : ReaderBase
     {
 
         readonly AttributeInfoReader info;
@@ -36,7 +36,7 @@ namespace IKVM.ByteCode.Reading
 
     }
 
-    internal abstract class AttributeReader<TRecord> : AttributeReader
+    public abstract class AttributeReader<TRecord> : AttributeReader
         where TRecord : AttributeRecord
     {
 
@@ -48,7 +48,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="info"></param>
         /// <param name="record"></param>
-        internal AttributeReader(ClassReader declaringClass, AttributeInfoReader info, TRecord record) :
+        internal protected AttributeReader(ClassReader declaringClass, AttributeInfoReader info, TRecord record) :
             base(declaringClass, info, record)
         {
             this.record = record ?? throw new ArgumentNullException(nameof(record));

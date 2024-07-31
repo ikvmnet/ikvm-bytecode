@@ -16,15 +16,15 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public ElementValueEnumConstantReader(ClassReader declaringClass, ElementValueRecord record) :
+        internal ElementValueEnumConstantReader(ClassReader declaringClass, ElementValueRecord record) :
             base(declaringClass, record)
         {
 
         }
 
-        public Utf8ConstantReader TypeName => LazyGet(ref typeName, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(ValueRecord.TypeNameIndex));
+        public Utf8ConstantReader TypeName => LazyGet(ref typeName, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(ValueRecord.TypeName));
 
-        public Utf8ConstantReader ConstantName => LazyGet(ref constantName, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(ValueRecord.ConstantNameIndex));
+        public Utf8ConstantReader ConstantName => LazyGet(ref constantName, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(ValueRecord.ConstantName));
 
     }
 

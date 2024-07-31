@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct ElementValueRecord(ElementValueTag Tag, ElementValueValueRecord Value)
+    public record struct ElementValueRecord(ElementValueTag Tag, ElementValueValueRecord Value)
     {
 
         public static bool TryRead(ref ClassFormatReader reader, out ElementValueRecord record)
@@ -34,30 +34,6 @@
             ElementValueTag.Array => ElementValueArrayValueRecord.TryRead(ref reader, out value),
             _ => throw new ByteCodeException($"Invalid element value tag: '{(char)tag}'."),
         };
-
-        public int GetSize()
-        {
-            var size = 0;
-            size += sizeof(byte);
-            size += Value.GetSize();
-            return size;
-        }
-
-        /// <summary>
-        /// Attempts to write the record to the given <see cref="ClassFormatWriter"/>.
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <returns></returns>
-        public bool TryWrite(ref ClassFormatWriter writer)
-        {
-            if (writer.TryWriteU1((byte)Tag) == false)
-                return false;
-
-            if (Value.TryWrite(ref writer) == false)
-                return false;
-
-            return true;
-        }
 
     }
 

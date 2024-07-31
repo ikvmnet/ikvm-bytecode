@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode
 {
 
-    public readonly record struct Handle(ushort Value)
+    public readonly record struct Handle(ushort Index)
     {
 
 

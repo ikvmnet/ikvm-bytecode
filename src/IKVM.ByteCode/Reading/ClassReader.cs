@@ -17,7 +17,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Provides stateful operations for reading a class file.
     /// </summary>
-    internal sealed class ClassReader : ReaderBase<ClassRecord>
+    public sealed class ClassReader : ReaderBase<ClassRecord>
     {
 
         const int MIN_CLASS_SIZE = 30;
@@ -275,12 +275,12 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the class.
         /// </summary>
-        public ClassConstantReader This => LazyGet(ref @this, () => Constants.Get<ClassConstantReader>(Record.ThisClass.Value));
+        public ClassConstantReader This => LazyGet(ref @this, () => Constants.Get<ClassConstantReader>(Record.ThisClass));
 
         /// <summary>
         /// Gets the name of the super class.
         /// </summary>
-        public ClassConstantReader Super => LazyGet(ref super, () => Constants.Get<ClassConstantReader>(Record.SuperClass.Value));
+        public ClassConstantReader Super => LazyGet(ref super, () => Constants.Get<ClassConstantReader>(Record.SuperClass));
 
         /// <summary>
         /// Gets the set of the interfaces implemented by this class.

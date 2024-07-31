@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal class SignatureAttributeReader : AttributeReader<SignatureAttributeRecord>
+    public class SignatureAttributeReader : AttributeReader<SignatureAttributeRecord>
     {
 
         string value;
@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the signature value.
         /// </summary>
-        public string Value => LazyGet(ref value, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Signature.Value).Value);
+        public string Value => LazyGet(ref value, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Signature).Value);
 
     }
 

@@ -12,7 +12,7 @@ namespace IKVM.ByteCode.Reading
     /// </summary>
     /// <typeparam name="TReader"></typeparam>
     /// <typeparam name="TRecord"></typeparam>
-    internal abstract class LazyReaderList<TReader, TRecord> : IReadOnlyList<TReader>
+    public abstract class LazyReaderList<TReader, TRecord> : IReadOnlyList<TReader>
         where TReader : class
     {
 
@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="records"></param>
-        public LazyReaderList(ClassReader declaringClass, TRecord[] records, uint minIndex = 0)
+        internal LazyReaderList(ClassReader declaringClass, TRecord[] records, uint minIndex = 0)
         {
             this.declaringClass = declaringClass ?? throw new ArgumentNullException(nameof(declaringClass));
             this.records = records ?? throw new ArgumentNullException(nameof(records));
@@ -73,6 +73,13 @@ namespace IKVM.ByteCode.Reading
         /// Gets the class that declared this list.
         /// </summary>
         public ClassReader DeclaringClass => declaringClass;
+
+        /// <summary>
+        /// Gets the reader at the specified index.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public TReader this[ConstantHandle handle] => ResolveReader(handle.Index);
 
         /// <summary>
         /// Gets the reader at the specified index.

@@ -9,7 +9,7 @@ namespace IKVM.ByteCode.Reading
     /// Base type for a ref constant reader.
     /// </summary>
     /// <typeparam name="TRecord"></typeparam>
-    internal abstract class RefConstantReader<TRecord> : ConstantReader<TRecord>, IRefConstantReader
+    public abstract class RefConstantReader<TRecord> : ConstantReader<TRecord>, IRefConstantReader
         where TRecord : RefConstantRecord
     {
 
@@ -20,10 +20,10 @@ namespace IKVM.ByteCode.Reading
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public RefConstantReader(ClassReader declaringClass, ushort index, TRecord record) :
-            base(declaringClass, index, record)
+        internal RefConstantReader(ClassReader declaringClass, RefConstantHandle handle, TRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }
@@ -36,12 +36,12 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the class name of the reference.
         /// </summary>
-        public ClassConstantReader Class => LazyGet(ref clazz, () => DeclaringClass.Constants.Get<ClassConstantReader>(Record.Class.Value));
+        public ClassConstantReader Class => LazyGet(ref clazz, () => DeclaringClass.Constants.Get<ClassConstantReader>(Record.Class));
 
         /// <summary>
         /// Gets the name and type of the reference.
         /// </summary>
-        public NameAndTypeConstantReader NameAndType => LazyGet(ref name, () => DeclaringClass.Constants.Get<NameAndTypeConstantReader>(Record.NameAndType.Value));
+        public NameAndTypeConstantReader NameAndType => LazyGet(ref name, () => DeclaringClass.Constants.Get<NameAndTypeConstantReader>(Record.NameAndType));
 
     }
 

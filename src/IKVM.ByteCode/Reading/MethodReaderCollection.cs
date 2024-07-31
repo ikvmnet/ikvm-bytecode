@@ -9,7 +9,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Lazy init collection of methods.
     /// </summary>
-    internal sealed class MethodReaderCollection : LazyNamedReaderDictionary<MethodReader, MethodRecord>
+    public sealed class MethodReaderCollection : LazyNamedReaderDictionary<MethodReader, MethodRecord>
     {
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         protected override string GetName(int index, MethodRecord record)
         {
-            return DeclaringClass.Constants.Get<Utf8ConstantReader>(record.Name.Value).Value;
+            return DeclaringClass.Constants.Get<Utf8ConstantReader>(record.Name).Value;
         }
 
     }

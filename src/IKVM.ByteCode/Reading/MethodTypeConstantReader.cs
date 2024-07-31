@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class MethodTypeConstantReader : ConstantReader<MethodTypeConstantRecord>
+    public sealed class MethodTypeConstantReader : ConstantReader<MethodTypeConstantRecord>
     {
 
         Utf8ConstantReader type;
@@ -14,10 +14,10 @@ namespace IKVM.ByteCode.Reading
         /// Initializes a new instance.
         /// </summary>
         /// <param name="owner"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public MethodTypeConstantReader(ClassReader owner, ushort index, MethodTypeConstantRecord record) :
-            base(owner, index, record)
+        internal MethodTypeConstantReader(ClassReader owner, MethodTypeConstantHandle handle, MethodTypeConstantRecord record) :
+            base(owner, handle, record)
         {
 
         }
@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the type of this MethodType constant.
         /// </summary>
-        public Utf8ConstantReader Type => LazyGet(ref type, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Descriptor.Value));
+        public Utf8ConstantReader Type => LazyGet(ref type, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Descriptor));
 
         /// <summary>
         /// Returns <c>true</c> if this constant is loadable.

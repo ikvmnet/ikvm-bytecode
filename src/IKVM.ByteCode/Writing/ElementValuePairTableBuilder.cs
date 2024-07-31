@@ -6,50 +6,41 @@ using IKVM.ByteCode.Parsing;
 namespace IKVM.ByteCode.Writing
 {
 
-    public class ElementValuePairTableBuilder
+    /// <summary>
+    /// Encodes an 'element_value_pair_table' structure.
+    /// </summary>
+    public struct ElementValuePairTableEncoder
     {
 
-        readonly ConstantBuilder _constants;
-        BlobBuilder _builder;
-        int _count = 0;
+        readonly BlobBuilder _builder;
+        readonly Blob _countBlob;
+        ushort _count;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="constants"></param>
-        public ElementValuePairTableBuilder(ConstantBuilder constants)
+        public ElementValuePairTableEncoder(BlobBuilder builder)
         {
-            _constants = constants ?? throw new ArgumentNullException(nameof(constants));
+            _builder = builder ?? throw new ArgumentNullException(nameof(builder));
+            _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
+            _count = 0;
         }
-
-        /// <summary>
-        /// Gets the builder.
-        /// </summary>
-        BlobBuilder Builder => _builder ??= new BlobBuilder();
 
         /// <summary>
         /// Adds an element value pair.
         /// </summary>
-        public void Add(Utf8ConstantHandle name, BlobBuilder value)
+        /// <param name="elementName"></param>
+        /// <param name="elementValue"></param>
+        public void Element(Utf8ConstantHandle elementName, Action<ElementValueEncoder> elementValue)
         {
-            var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(name.Value);
-            Builder.LinkSuffix(value);
-        }
+            if (elementValue is null)
+                throw new ArgumentNullException(nameof(elementValue));
 
-        /// <summary>
-        /// Serializes the exception table.
-        /// </summary>
-        /// <param name="builder"></param>
-        public void Serialize(BlobBuilder builder)
-        {
-            if (builder is null)
-                throw new ArgumentNullException(nameof(builder));
-
-            var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2((ushort)_count);
-            if (_builder != null)
-                builder.LinkSuffix(_builder);
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU2(elementName.Index);
+            elementValue(new ElementValueEncoder(_builder));
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
         }
 
     }

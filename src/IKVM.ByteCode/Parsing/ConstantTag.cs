@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal enum ConstantTag : byte
+    public enum ConstantTag : byte
     {
 
         Utf8 = 1,

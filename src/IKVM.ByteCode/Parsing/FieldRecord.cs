@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Parsing
 {
 
-    internal readonly record struct FieldRecord(AccessFlag AccessFlags, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, AttributeInfoRecord[] Attributes)
+    public readonly record struct FieldRecord(AccessFlag AccessFlags, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, AttributeInfoRecord[] Attributes)
     {
 
         /// <summary>

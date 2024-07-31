@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record LongConstantRecord(long Value) : ConstantRecord
+    public sealed record LongConstantRecord(long Value) : ConstantRecord
     {
 
         /// <summary>

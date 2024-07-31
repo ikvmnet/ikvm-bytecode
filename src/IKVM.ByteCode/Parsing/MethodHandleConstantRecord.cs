@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record MethodHandleConstantRecord(ReferenceKind Kind, RefConstantHandle Index) : ConstantRecord
+    public sealed record MethodHandleConstantRecord(ReferenceKind Kind, RefConstantHandle Reference) : ConstantRecord
     {
 
         /// <summary>
@@ -15,12 +15,12 @@
             constant = null;
             skip = 0;
 
-            if (reader.TryReadU1(out byte kind) == false)
+            if (reader.TryReadU1(out byte referenceKind) == false)
                 return false;
-            if (reader.TryReadU2(out ushort index) == false)
+            if (reader.TryReadU2(out ushort referenceIndex) == false)
                 return false;
 
-            constant = new MethodHandleConstantRecord((ReferenceKind)kind, new(index));
+            constant = new MethodHandleConstantRecord((ReferenceKind)referenceKind, new(referenceIndex));
             return true;
         }
 

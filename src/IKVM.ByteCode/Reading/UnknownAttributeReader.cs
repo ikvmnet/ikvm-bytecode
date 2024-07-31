@@ -12,7 +12,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="info"></param>
         /// <param name="data"></param>
-        public UnknownAttributeReader(ClassReader declaringClass, AttributeInfoReader info, UnknownAttributeRecord data) :
+        internal UnknownAttributeReader(ClassReader declaringClass, AttributeInfoReader info, UnknownAttributeRecord data) :
             base(declaringClass, info, data)
         {
 

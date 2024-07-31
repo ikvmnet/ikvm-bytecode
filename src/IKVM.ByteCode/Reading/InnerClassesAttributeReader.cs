@@ -7,7 +7,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class InnerClassesAttributeReader : AttributeReader<InnerClassesAttributeRecord>
+    public sealed class InnerClassesAttributeReader : AttributeReader<InnerClassesAttributeRecord>
     {
 
         IReadOnlyList<InnerClassesAttributeItemReader> items;
@@ -18,7 +18,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="info"></param>
         /// <param name="record"></param>
-        public InnerClassesAttributeReader(ClassReader declaringClass, AttributeInfoReader info, InnerClassesAttributeRecord record) :
+        internal InnerClassesAttributeReader(ClassReader declaringClass, AttributeInfoReader info, InnerClassesAttributeRecord record) :
             base(declaringClass, info, record)
         {
 

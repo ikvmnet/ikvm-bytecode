@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class ClassConstantReader : ConstantReader<ClassConstantRecord>
+    public sealed class ClassConstantReader : ConstantReader<ClassConstantRecord>
     {
 
         Utf8ConstantReader name;
@@ -14,10 +14,10 @@ namespace IKVM.ByteCode.Reading
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public ClassConstantReader(ClassReader declaringClass, ushort index, ClassConstantRecord record) :
-            base(declaringClass, index, record)
+        internal ClassConstantReader(ClassReader declaringClass, ClassConstantHandle handle, ClassConstantRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }
@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the class.
         /// </summary>
-        public Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name.Value));
+        public Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name));
 
         /// <summary>
         /// Returns whether or not this constant is loadable.

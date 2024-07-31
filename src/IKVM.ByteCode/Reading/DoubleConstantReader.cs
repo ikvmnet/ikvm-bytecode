@@ -3,17 +3,17 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class DoubleConstantReader : ConstantReader<DoubleConstantRecord>
+    public sealed class DoubleConstantReader : ConstantReader<DoubleConstantRecord>
     {
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public DoubleConstantReader(ClassReader declaringClass, ushort index, DoubleConstantRecord record) :
-            base(declaringClass, index, record)
+        internal DoubleConstantReader(ClassReader declaringClass, DoubleConstantHandle handle, DoubleConstantRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }

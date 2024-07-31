@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public ElementValueClassReader(ClassReader declaringClass, ElementValueRecord record) :
+        internal ElementValueClassReader(ClassReader declaringClass, ElementValueRecord record) :
             base(declaringClass, record)
         {
 
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the class included with this element value.
         /// </summary>
-        public Utf8ConstantReader Class => LazyGet(ref clazz, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(ValueRecord.Class.Value));
+        public Utf8ConstantReader Class => LazyGet(ref clazz, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(ValueRecord.Class));
 
     }
 

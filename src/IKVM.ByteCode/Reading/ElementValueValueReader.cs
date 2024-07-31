@@ -5,7 +5,7 @@ using IKVM.ByteCode.Parsing;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal abstract class ElementValueReader : ReaderBase<ElementValueRecord>
+    public abstract class ElementValueReader : ReaderBase<ElementValueRecord>
     {
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        protected ElementValueReader(ClassReader declaringClass, ElementValueRecord record) :
+        internal ElementValueReader(ClassReader declaringClass, ElementValueRecord record) :
             base(declaringClass, record)
         {
 
@@ -38,7 +38,7 @@ namespace IKVM.ByteCode.Reading
 
     }
 
-    internal abstract class ElementValueReader<TValueRecord> : ElementValueReader
+    public abstract class ElementValueReader<TValueRecord> : ElementValueReader
         where TValueRecord : ElementValueValueRecord
     {
 
@@ -48,7 +48,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected ElementValueReader(ClassReader declaringClass, ElementValueRecord record) :
+        internal ElementValueReader(ClassReader declaringClass, ElementValueRecord record) :
             base(declaringClass, record)
         {
 

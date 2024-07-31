@@ -1,17 +1,17 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record ConstantValueAttributeRecord(ushort ValueIndex) : AttributeRecord
+    public sealed record ConstantValueAttributeRecord(ConstantHandle Handle) : AttributeRecord
     {
 
         public static bool TryReadConstantValueAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)
         {
             attribute = null;
 
-            if (reader.TryReadU2(out ushort valueIndex) == false)
+            if (reader.TryReadU2(out ushort handleIndex) == false)
                 return false;
 
-            attribute = new ConstantValueAttributeRecord(valueIndex);
+            attribute = new ConstantValueAttributeRecord(new ConstantHandle(handleIndex));
             return true;
         }
 

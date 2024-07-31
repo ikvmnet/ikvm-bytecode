@@ -6,7 +6,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class Utf8ConstantReader : ConstantReader<Utf8ConstantRecord>
+    public sealed class Utf8ConstantReader : ConstantReader<Utf8ConstantRecord>
     {
 
         string value;
@@ -15,10 +15,10 @@ namespace IKVM.ByteCode.Reading
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public Utf8ConstantReader(ClassReader declaringClass, ushort index, Utf8ConstantRecord record) :
-            base(declaringClass, index, record)
+        internal Utf8ConstantReader(ClassReader declaringClass, Utf8ConstantHandle handle, Utf8ConstantRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }

@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record DynamicConstantRecord(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType) : ConstantRecord
+    public sealed record DynamicConstantRecord(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType) : ConstantRecord
     {
 
         /// <summary>

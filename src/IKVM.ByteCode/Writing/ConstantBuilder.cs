@@ -201,7 +201,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Class);
-            w.TryWriteU2(name.Value);
+            w.TryWriteU2(name.Index);
             return _classCache[name] = new(_next++);
         }
 
@@ -244,7 +244,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.String);
-            w.TryWriteU2(name.Value);
+            w.TryWriteU2(name.Index);
             return new(_next++);
         }
 
@@ -288,8 +288,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Fieldref);
-            w.TryWriteU2(clazz.Value);
-            w.TryWriteU2(nameAndType.Value);
+            w.TryWriteU2(clazz.Index);
+            w.TryWriteU2(nameAndType.Index);
             return _fieldrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
@@ -326,8 +326,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Methodref);
-            w.TryWriteU2(clazz.Value);
-            w.TryWriteU2(nameAndType.Value);
+            w.TryWriteU2(clazz.Index);
+            w.TryWriteU2(nameAndType.Index);
             return _methodrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
@@ -364,8 +364,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.InterfaceMethodref);
-            w.TryWriteU2(clazz.Value);
-            w.TryWriteU2(nameAndType.Value);
+            w.TryWriteU2(clazz.Index);
+            w.TryWriteU2(nameAndType.Index);
             return _interfaceMethodrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
@@ -402,8 +402,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.NameAndType);
-            w.TryWriteU2(name.Value);
-            w.TryWriteU2(type.Value);
+            w.TryWriteU2(name.Index);
+            w.TryWriteU2(type.Index);
             return _nameAndTypeCache[(name, type)] = new NameAndTypeConstantHandle(_next++);
         }
 
@@ -440,7 +440,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.MethodHandle);
             w.TryWriteU1((byte)kind);
-            w.TryWriteU2(reference.Value);
+            w.TryWriteU2(reference.Index);
             return new(_next++);
         }
 
@@ -453,7 +453,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.MethodType);
-            w.TryWriteU2(type.Value);
+            w.TryWriteU2(type.Index);
             return _methodTypeCache[type] = new(_next++);
         }
 
@@ -478,7 +478,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Dynamic);
             w.TryWriteU2(bootstrapMethodAttrIndex);
-            w.TryWriteU2(nameAndType.Value);
+            w.TryWriteU2(nameAndType.Index);
             return new(_next++);
         }
 
@@ -493,7 +493,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.InvokeDynamic);
             w.TryWriteU2(bootstrapMethodAttrIndex);
-            w.TryWriteU2(nameAndType.Value);
+            w.TryWriteU2(nameAndType.Index);
             return new(_next++);
         }
 
@@ -506,7 +506,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Module);
-            w.TryWriteU2(name.Value);
+            w.TryWriteU2(name.Index);
             return new(_next++);
         }
 
@@ -529,7 +529,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantTag.Package);
-            w.TryWriteU2(name.Value);
+            w.TryWriteU2(name.Index);
             return new(_next++);
         }
 

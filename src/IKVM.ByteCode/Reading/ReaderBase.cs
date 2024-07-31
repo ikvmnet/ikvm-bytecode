@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace IKVM.ByteCode.Reading
 {
@@ -7,7 +6,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Base class for a reader.
     /// </summary>
-    internal abstract class ReaderBase
+    public abstract class ReaderBase
     {
 
         readonly ClassReader declaringClass;
@@ -17,7 +16,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected ReaderBase(ClassReader declaringClass)
+        internal ReaderBase(ClassReader declaringClass)
         {
             this.declaringClass = declaringClass ?? (this is ClassReader self ? self : throw new ArgumentNullException(nameof(declaringClass)));
         }
@@ -33,7 +32,7 @@ namespace IKVM.ByteCode.Reading
     /// Base class for a reader of a specific record type.
     /// </summary>
     /// <typeparam name="TRecord"></typeparam>
-    internal abstract class ReaderBase<TRecord> : ReaderBase
+    public abstract class ReaderBase<TRecord> : ReaderBase
     {
 
         readonly TRecord record;
@@ -44,7 +43,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public ReaderBase(ClassReader declaringClass, TRecord record) :
+        internal ReaderBase(ClassReader declaringClass, TRecord record) :
             base(declaringClass)
         {
             this.record = record;

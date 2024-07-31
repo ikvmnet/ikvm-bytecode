@@ -100,6 +100,10 @@ namespace IKVM.ByteCode.Buffers
             // nop
         }
 
+        /// <summary>
+        /// Clears the builder.
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
         public void Clear()
         {
             if (IsHead == false)
@@ -118,13 +122,9 @@ namespace IKVM.ByteCode.Buffers
             }
 
             // free all chunks except for the current one
-            foreach (BlobBuilder chunk in GetChunks())
-            {
+            foreach (var chunk in GetChunks())
                 if (chunk != this)
-                {
                     chunk.ClearAndFreeChunk();
-                }
-            }
 
             ClearChunk();
         }
@@ -189,13 +189,11 @@ namespace IKVM.ByteCode.Buffers
 
         protected int FreeBytes => _buffer.Length - Length;
 
-        // internal for testing
         protected internal int ChunkCapacity => _buffer.Length;
 
-        // internal for testing
         internal BlobBuilderEnumerable GetChunks()
         {
-            if (!IsHead)
+            if (IsHead == false)
                 throw new InvalidOperationException("Builder already linked.");
 
             return new BlobBuilderEnumerable(this);
@@ -228,7 +226,7 @@ namespace IKVM.ByteCode.Buffers
             if (other == null)
                 return false;
 
-            if (!other.IsHead)
+            if (other.IsHead == false)
                 throw new InvalidOperationException("Builder already linked.");
 
             if (Count != other.Count)
@@ -236,11 +234,11 @@ namespace IKVM.ByteCode.Buffers
 
             var leftEnumerator = GetChunks();
             var rightEnumerator = other.GetChunks();
-            int leftStart = 0;
-            int rightStart = 0;
+            var leftStart = 0;
+            var rightStart = 0;
 
-            bool leftContinues = leftEnumerator.MoveNext();
-            bool rightContinues = rightEnumerator.MoveNext();
+            var leftContinues = leftEnumerator.MoveNext();
+            var rightContinues = rightEnumerator.MoveNext();
 
             while (leftContinues && rightContinues)
             {
@@ -250,7 +248,7 @@ namespace IKVM.ByteCode.Buffers
                 var right = rightEnumerator.Current;
 
                 int minLength = Math.Min(left.Length - leftStart, right.Length - rightStart);
-                if (!left._buffer.AsSpan(leftStart, minLength).SequenceEqual(right._buffer.AsSpan(rightStart, minLength)))
+                if (left._buffer.AsSpan(leftStart, minLength).SequenceEqual(right._buffer.AsSpan(rightStart, minLength)) == false)
                     return false;
 
                 leftStart += minLength;
@@ -274,12 +272,18 @@ namespace IKVM.ByteCode.Buffers
             return leftContinues == rightContinues;
         }
 
+        /// <summary>
+        /// Returns the written bytes as a single array.
+        /// </summary>
         /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
         public byte[] ToArray()
         {
             return ToArray(0, Count);
         }
 
+        /// <summary>
+        /// Returns the written bytes for the specified range as a single array.
+        /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
         /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
         public byte[] ToArray(int start, int byteCount)
@@ -318,17 +322,23 @@ namespace IKVM.ByteCode.Buffers
             return result;
         }
 
+        /// <summary>
+        /// Returns the written bytes as an <see cref="ImmutableArray{byte}"/>.
+        /// </summary>
         /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
         public ImmutableArray<byte> ToImmutableArray()
         {
             return ToImmutableArray(0, Count);
         }
 
+        /// <summary>
+        /// Returns the written bytes within the given range as an <see cref="ImmutableArray{byte}"/>.
+        /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
         /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
         public ImmutableArray<byte> ToImmutableArray(int start, int byteCount)
         {
-            byte[]? array = ToArray(start, byteCount);
+            var array = ToArray(start, byteCount);
             return ImmutableCollectionsMarshal.AsImmutableArray(array);
         }
 
@@ -413,6 +423,9 @@ namespace IKVM.ByteCode.Buffers
             CheckInvariants();
         }
 
+        /// <summary>
+        /// Links the given <paramref name="suffix"/> to the end of this <see cref="BlobBuilder"/>.
+        /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="suffix"/> is null.</exception>
         /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
         public void LinkSuffix(BlobBuilder suffix)
@@ -494,7 +507,7 @@ namespace IKVM.ByteCode.Buffers
 
             // May happen only if the derived class attempts to write to a builder that is not last,
             // or if a builder prepended to another one is not discarded.
-            if (!IsHead)
+            if (IsHead == false)
                 throw new InvalidOperationException("Builder already linked.");
 
             var newChunk = AllocateChunk(Math.Max(newLength, MinChunkSize));
@@ -517,8 +530,7 @@ namespace IKVM.ByteCode.Buffers
 
                 if (last == this)
                 {
-                    // single chunk in the chain
-                    _nextOrPrevious = newChunk;
+                    _nextOrPrevious = newChunk; // single chunk in the chain
                 }
                 else
                 {
@@ -549,8 +561,7 @@ namespace IKVM.ByteCode.Buffers
             if (byteCount < 0)
                 throw new ArgumentOutOfRangeException(nameof(byteCount));
 
-            int start = ReserveBytesImpl(byteCount);
-            return new Blob(_buffer, start, byteCount);
+            return new Blob(_buffer, ReserveBytesImpl(byteCount), byteCount);
         }
 
         /// <summary>
@@ -732,6 +743,9 @@ namespace IKVM.ByteCode.Buffers
             WriteBytes(buffer.AsSpan());
         }
 
+        /// <summary>
+        /// Writes the bytes from the specified range of the immutable array.
+        /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the <paramref name="buffer"/>.</exception>
         /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>

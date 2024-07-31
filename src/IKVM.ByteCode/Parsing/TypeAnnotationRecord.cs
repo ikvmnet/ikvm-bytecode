@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal record struct TypeAnnotationRecord(TypeAnnotationTargetType TargetType, TypeAnnotationTargetRecord Target, TypePathRecord TargetPath, Utf8ConstantHandle Type, params ElementValuePairRecord[] Elements)
+    public record struct TypeAnnotationRecord(TypeAnnotationTargetType TargetType, TypeAnnotationTargetRecord Target, TypePathRecord TargetPath, Utf8ConstantHandle Type, params ElementValuePairRecord[] Elements)
     {
 
         public static bool TryReadTypeAnnotation(ref ClassFormatReader reader, out TypeAnnotationRecord annotation)
@@ -30,74 +30,30 @@
 
         public static bool TryReadTarget(ref ClassFormatReader reader, TypeAnnotationTargetType targetType, out TypeAnnotationTargetRecord targetInfo) => targetType switch
         {
-            TypeAnnotationTargetType.ClassTypeParameter => TypeAnnotationParameterTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.MethodTypeParameter => TypeAnnotationParameterTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.ClassExtends => TypeAnnotationSuperTypeTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.ClassTypeParameterBound => TypeAnnotationParameterBoundTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.MethodTypeParameterBound => TypeAnnotationParameterBoundTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.Field => TypeAnnotationEmptyTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.MethodReturn => TypeAnnotationEmptyTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.MethodReceiver => TypeAnnotationEmptyTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.MethodFormalParameter => TypeAnnotationFormalParameterTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.Throws => TypeAnnotationThrowsTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.LocalVariable => TypeAnnotationLocalVarTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.ResourceVariable => TypeAnnotationLocalVarTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.ExceptionParameter => TypeAnnotationCatchTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.InstanceOf => TypeAnnotationOffsetTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.New => TypeAnnotationOffsetTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.ConstructorReference => TypeAnnotationOffsetTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.MethodReference => TypeAnnotationOffsetTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.Cast => TypeAnnotationTypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.ConstructorInvocationTypeArgument => TypeAnnotationTypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.MethodInvocationTypeArgument => TypeAnnotationTypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.ConstructorReferenceTypeArgument => TypeAnnotationTypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
-            TypeAnnotationTargetType.MethodReferenceTypeArgument => TypeAnnotationTypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.ClassTypeParameter => TypeParameterTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.MethodTypeParameter => TypeParameterTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.ClassExtends => SuperTypeTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.ClassTypeParameterBound => TypeParameterBoundTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.MethodTypeParameterBound => TypeParameterBoundTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.Field => EmptyTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.MethodReturn => EmptyTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.MethodReceiver => EmptyTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.MethodFormalParameter => FormalParameterTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.Throws => ThrowsTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.LocalVariable => LocalVariableTargetTableRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.ResourceVariable => LocalVariableTargetTableRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.ExceptionParameter => CatchTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.InstanceOf => OffsetTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.New => OffsetTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.ConstructorReference => OffsetTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.MethodReference => OffsetTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.Cast => TypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.ConstructorInvocationTypeArgument => TypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.MethodInvocationTypeArgument => TypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.ConstructorReferenceTypeArgument => TypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
+            TypeAnnotationTargetType.MethodReferenceTypeArgument => TypeArgumentTargetRecord.TryRead(ref reader, out targetInfo),
             _ => throw new ByteCodeException($"Invalid type annotation target type: '0x{targetType:X}'."),
         };
-
-        /// <summary>
-        /// Gets the number of bytes required to write the record.
-        /// </summary>
-        /// <returns></returns>
-        public int GetSize()
-        {
-            var size = 0;
-            size += sizeof(byte);
-            size += Target.GetSize();
-            size += TargetPath.GetSize();
-            size += sizeof(ushort);
-            size += sizeof(ushort);
-
-            for (int i = 0; i < Elements.Length; i++)
-                size += Elements[i].GetSize();
-
-            return size;
-        }
-
-        /// <summary>
-        /// Attempts to write the record to the given <see cref="ClassFormatWriter"/>.
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <returns></returns>
-        public bool TryWrite(ref ClassFormatWriter writer)
-        {
-            if (writer.TryWriteU1((byte)TargetType) == false)
-                return false;
-            if (Target.TryWrite(ref writer) == false)
-                return false;
-            if (TargetPath.TryWrite(ref writer) == false)
-                return false;
-            if (writer.TryWriteU2(Type.Value) == false)
-                return false;
-            if (writer.TryWriteU2((ushort)Elements.Length) == false)
-                return false;
-
-            foreach (var record in Elements)
-                if (record.TryWrite(ref writer) == false)
-                    return false;
-
-            return true;
-        }
 
     }
 

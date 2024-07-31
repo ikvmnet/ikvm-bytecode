@@ -6,7 +6,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Interface supported by all of the readers for Ref constants.
     /// </summary>
-    internal interface IRefConstantReader : IConstantReader<RefConstantRecord>
+    public interface IRefConstantReader : IConstantReader<RefConstantRecord>
     {
 
         /// <summary>

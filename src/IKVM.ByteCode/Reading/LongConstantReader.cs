@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class LongConstantReader : ConstantReader<LongConstantRecord>
+    public sealed class LongConstantReader : ConstantReader<LongConstantRecord>
     {
 
 
@@ -11,10 +11,10 @@ namespace IKVM.ByteCode.Reading
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public LongConstantReader(ClassReader declaringClass, ushort index, LongConstantRecord record) :
-            base(declaringClass, index, record)
+        internal LongConstantReader(ClassReader declaringClass, LongConstantHandle handle, LongConstantRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }

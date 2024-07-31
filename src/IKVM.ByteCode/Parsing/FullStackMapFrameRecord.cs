@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record FullStackMapFrameRecord(byte Tag, ushort OffsetDelta, VerificationTypeInfoRecord[] Locals, VerificationTypeInfoRecord[] Stack) : StackMapFrameRecord(Tag)
+    public sealed record FullStackMapFrameRecord(byte Tag, ushort OffsetDelta, VerificationTypeInfoRecord[] Locals, VerificationTypeInfoRecord[] Stack) : StackMapFrameRecord(Tag)
     {
 
         public static bool TryReadFullStackMapFrame(ref ClassFormatReader reader, byte tag, out StackMapFrameRecord frame)

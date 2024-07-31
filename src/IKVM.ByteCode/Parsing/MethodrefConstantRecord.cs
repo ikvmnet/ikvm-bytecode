@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record MethodrefConstantRecord(ClassConstantHandle ClassIndex, NameAndTypeConstantHandle NameAndTypeIndex) : RefConstantRecord(ClassIndex, NameAndTypeIndex)
+    public sealed record MethodrefConstantRecord(ClassConstantHandle ClassIndex, NameAndTypeConstantHandle NameAndTypeIndex) : RefConstantRecord(ClassIndex, NameAndTypeIndex)
     {
 
         /// <summary>

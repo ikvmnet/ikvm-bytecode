@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class ModuleAttributeReader : AttributeReader<ModuleAttributeRecord>
+    public sealed class ModuleAttributeReader : AttributeReader<ModuleAttributeRecord>
     {
 
         ModuleConstantReader name;
@@ -17,7 +17,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="info"></param>
         /// <param name="data"></param>
-        public ModuleAttributeReader(ClassReader declaringClass, AttributeInfoReader info, ModuleAttributeRecord data) :
+        internal ModuleAttributeReader(ClassReader declaringClass, AttributeInfoReader info, ModuleAttributeRecord data) :
             base(declaringClass, info, data)
         {
 
@@ -26,12 +26,12 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the module name.
         /// </summary>
-        public ModuleConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<ModuleConstantReader>(Record.Name.Value));
+        public ModuleConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<ModuleConstantReader>(Record.Name));
 
         /// <summary>
         /// Gets the module version.
         /// </summary>
-        public Utf8ConstantReader Version => LazyGet(ref version, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Version.Value));
+        public Utf8ConstantReader Version => LazyGet(ref version, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Version));
 
     }
 

@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
-using IKVM.ByteCode.Parsing;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IKVM.ByteCode.Reading.Tests

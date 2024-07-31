@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record FieldrefConstantRecord(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType) : RefConstantRecord(Class, NameAndType)
+    public sealed record FieldrefConstantRecord(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType) : RefConstantRecord(Class, NameAndType)
     {
 
         /// <summary>

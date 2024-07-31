@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class RecordAttributeReader : AttributeReader<RecordAttributeRecord>
+    public sealed class RecordAttributeReader : AttributeReader<RecordAttributeRecord>
     {
 
         /// <summary>
@@ -12,7 +12,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="info"></param>
         /// <param name="data"></param>
-        public RecordAttributeReader(ClassReader declaringClass, AttributeInfoReader info, RecordAttributeRecord data) :
+        internal RecordAttributeReader(ClassReader declaringClass, AttributeInfoReader info, RecordAttributeRecord data) :
             base(declaringClass, info, data)
         {
 

@@ -8,7 +8,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Lazy init collection of element value data.
     /// </summary>
-    internal sealed class ElementValueKeyReaderCollection : LazyNamedReaderDictionary<ElementValueReader, ElementValuePairRecord>
+    public sealed class ElementValueKeyReaderCollection : LazyNamedReaderDictionary<ElementValueReader, ElementValuePairRecord>
     {
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         protected override string GetName(int index, ElementValuePairRecord record)
         {
-            return DeclaringClass.Constants.Get<Utf8ConstantReader>(record.NameIndex).Value;
+            return DeclaringClass.Constants.Get<Utf8ConstantReader>(record.Name).Value;
         }
 
         /// <summary>

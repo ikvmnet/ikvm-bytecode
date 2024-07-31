@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class MethodHandleConstantReader : ConstantReader<MethodHandleConstantRecord>
+    public sealed class MethodHandleConstantReader : ConstantReader<MethodHandleConstantRecord>
     {
 
         IRefConstantReader reference;
@@ -14,10 +14,10 @@ namespace IKVM.ByteCode.Reading
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public MethodHandleConstantReader(ClassReader declaringClass, ushort index, MethodHandleConstantRecord record) :
-            base(declaringClass, index, record)
+        internal MethodHandleConstantReader(ClassReader declaringClass, MethodHandleConstantHandle handle, MethodHandleConstantRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }
@@ -30,7 +30,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the constant refered to by this MethodHandle.
         /// </summary>
-        public IRefConstantReader Reference => LazyGet(ref reference, () => DeclaringClass.Constants.Get<IRefConstantReader>(Record.Index.Value));
+        public IRefConstantReader Reference => LazyGet(ref reference, () => DeclaringClass.Constants.Get<IRefConstantReader>(Record.Reference));
 
         /// <summary>
         /// Returns <c>true</c> if this constant type is loadable.

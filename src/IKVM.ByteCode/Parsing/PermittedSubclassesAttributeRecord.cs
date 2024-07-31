@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal sealed record PermittedSubclassesAttributeRecord(ClassConstantHandle[] ClassIndexes) : AttributeRecord
+    public sealed record PermittedSubclassesAttributeRecord(ClassConstantHandle[] ClassIndexes) : AttributeRecord
     {
 
         public static bool TryReadPermittedSubclassesAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)

@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal record SignatureAttributeRecord(Utf8ConstantHandle Signature) : AttributeRecord
+    public record SignatureAttributeRecord(Utf8ConstantHandle Signature) : AttributeRecord
     {
 
         public static bool TryReadSignatureAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)

@@ -6,13 +6,13 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Interface supported by all of the constant readers.
     /// </summary>
-    internal interface IConstantReader
+    public interface IConstantReader
     {
 
         /// <summary>
         /// Gets the index of this constant.
         /// </summary>
-        ushort Index { get; }
+        ConstantHandle Handle { get; }
 
         /// <summary>
         /// Returns <c>true</c> if this constant is loadable.
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Interface supported by all of the constant readers.
     /// </summary>
-    internal interface IConstantReader<out TRecord> : IConstantReader
+    public interface IConstantReader<out TRecord> : IConstantReader
         where TRecord : ConstantRecord
     {
 

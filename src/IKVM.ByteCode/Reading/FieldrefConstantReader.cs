@@ -3,17 +3,17 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    internal class FieldrefConstantReader : RefConstantReader<FieldrefConstantRecord>
+    public class FieldrefConstantReader : RefConstantReader<FieldrefConstantRecord>
     {
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public FieldrefConstantReader(ClassReader declaringClass, ushort index, FieldrefConstantRecord record) :
-            base(declaringClass, index, record)
+        internal FieldrefConstantReader(ClassReader declaringClass, FieldrefConstantHandle handle, FieldrefConstantRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }

@@ -6,7 +6,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Lazy init collection of fields.
     /// </summary>
-    internal sealed class FieldReaderCollection : LazyNamedReaderDictionary<FieldReader, FieldRecord>
+    public sealed class FieldReaderCollection : LazyNamedReaderDictionary<FieldReader, FieldRecord>
     {
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         protected override string GetName(int index, FieldRecord record)
         {
-            return DeclaringClass.Constants.Get<Utf8ConstantReader>(record.Name.Value).Value;
+            return DeclaringClass.Constants.Get<Utf8ConstantReader>(record.Name).Value;
         }
 
     }

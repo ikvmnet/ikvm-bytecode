@@ -1,11 +1,12 @@
 ﻿using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Writing;
 
 using static IKVM.ByteCode.Util;
 
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class InvokeDynamicConstantReader : ConstantReader<InvokeDynamicConstantRecord>
+    public sealed class InvokeDynamicConstantReader : ConstantReader<InvokeDynamicConstantRecord>
     {
 
         NameAndTypeConstantReader nameAndType;
@@ -14,10 +15,10 @@ namespace IKVM.ByteCode.Reading
         /// Initializes a new instance.
         /// </summary>
         /// <param name="owner"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public InvokeDynamicConstantReader(ClassReader owner, ushort index, InvokeDynamicConstantRecord record) :
-            base(owner, index, record)
+        internal InvokeDynamicConstantReader(ClassReader owner, InvokeDynamicConstantHandle handle, InvokeDynamicConstantRecord record) :
+            base(owner, handle, record)
         {
 
         }
@@ -30,7 +31,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the InvokeDynamic constant.
         /// </summary>
-        public NameAndTypeConstantReader NameAndType => LazyGet(ref nameAndType, () =>  DeclaringClass.Constants.Get<NameAndTypeConstantReader>(Record.NameAndType.Value));
+        public NameAndTypeConstantReader NameAndType => LazyGet(ref nameAndType, () =>  DeclaringClass.Constants.Get<NameAndTypeConstantReader>(Record.NameAndType));
 
     }
 

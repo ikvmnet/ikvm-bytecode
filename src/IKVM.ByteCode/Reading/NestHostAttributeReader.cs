@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class NestHostAttributeReader : AttributeReader<NestHostAttributeRecord>
+    public sealed class NestHostAttributeReader : AttributeReader<NestHostAttributeRecord>
     {
 
         /// <summary>
@@ -12,7 +12,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="declaringClass"></param>
         /// <param name="info"></param>
         /// <param name="data"></param>
-        public NestHostAttributeReader(ClassReader declaringClass, AttributeInfoReader info, NestHostAttributeRecord data) :
+        internal NestHostAttributeReader(ClassReader declaringClass, AttributeInfoReader info, NestHostAttributeRecord data) :
             base(declaringClass, info, data)
         {
 

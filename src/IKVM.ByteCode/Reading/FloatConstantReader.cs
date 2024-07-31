@@ -3,17 +3,17 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class FloatConstantReader : ConstantReader<FloatConstantRecord>
+    public sealed class FloatConstantReader : ConstantReader<FloatConstantRecord>
     {
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="declaringClass"></param>
-        /// <param name="index"></param>
+        /// <param name="handle"></param>
         /// <param name="record"></param>
-        public FloatConstantReader(ClassReader declaringClass, ushort index, FloatConstantRecord record) :
-            base(declaringClass, index, record)
+        internal FloatConstantReader(ClassReader declaringClass, FloatConstantHandle handle, FloatConstantRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }

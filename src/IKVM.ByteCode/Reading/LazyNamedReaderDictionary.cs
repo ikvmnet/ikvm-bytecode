@@ -12,7 +12,7 @@ namespace IKVM.ByteCode.Reading
     /// </summary>
     /// <typeparam name="TReader"></typeparam>
     /// <typeparam name="TRecord"></typeparam>
-    internal abstract class LazyNamedReaderDictionary<TReader, TRecord> : IReadOnlyDictionary<string, TReader>
+    public abstract class LazyNamedReaderDictionary<TReader, TRecord> : IReadOnlyDictionary<string, TReader>
         where TReader : class
     {
 

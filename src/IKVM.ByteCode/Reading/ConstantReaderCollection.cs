@@ -8,7 +8,7 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Lazy init collection of constants.
     /// </summary>
-    internal sealed class ConstantReaderCollection : LazyReaderList<IConstantReader, ConstantRecord>
+    public sealed class ConstantReaderCollection : LazyReaderList<IConstantReader, ConstantRecord>
     {
 
         readonly ClassReader declaringClass;
@@ -32,7 +32,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         protected override IConstantReader CreateReader(int index, ConstantRecord record)
         {
-            return record is not null ? ConstantReader.Read(declaringClass, (ushort)index, record) : null;
+            return record is not null ? ConstantReader.Read(declaringClass, new ConstantHandle((ushort)index), record) : null;
         }
 
         /// <summary>
@@ -41,10 +41,10 @@ namespace IKVM.ByteCode.Reading
         /// <typeparam name="TReader"></typeparam>
         /// <param name="index"></param>
         /// <returns></returns>
-        public TReader Get<TReader>(int index)
+        public TReader Get<TReader>(ConstantHandle index)
             where TReader : class, IConstantReader
         {
-            if (index == 0)
+            if (index.IsNil)
                 return null;
 
             try

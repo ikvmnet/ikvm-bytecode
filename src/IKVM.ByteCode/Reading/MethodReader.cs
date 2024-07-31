@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class MethodReader : FieldOrMethodReader<MethodRecord>
+    public sealed class MethodReader : FieldOrMethodReader<MethodRecord>
     {
 
         Utf8ConstantReader name;
@@ -31,12 +31,12 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the name of the method.
         /// </summary>
-        public override Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name.Value));
+        public override Utf8ConstantReader Name => LazyGet(ref name, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Name));
 
         /// <summary>
         /// Gets the descriptor of the method.
         /// </summary>
-        public override Utf8ConstantReader Descriptor => LazyGet(ref descriptor, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Descriptor.Value));
+        public override Utf8ConstantReader Descriptor => LazyGet(ref descriptor, () => DeclaringClass.Constants.Get<Utf8ConstantReader>(Record.Descriptor));
 
         /// <summary>
         /// Gets the attributes of the method.

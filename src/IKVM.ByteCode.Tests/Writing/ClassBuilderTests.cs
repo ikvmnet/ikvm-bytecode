@@ -37,6 +37,12 @@ namespace IKVM.ByteCode.Tests.Writing
             cls.Methods[0].Descriptor.Value.Should().Be("()Z");
         }
 
+        public void Foo()
+        {
+            var p = new ConstantBuilder(new ClassFormatVersion(53, 0));
+            var a = new AttributeTableBuilder(p);
+        }
+
     }
 
 }

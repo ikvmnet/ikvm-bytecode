@@ -7,10 +7,10 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class ExceptionsAttributeReader : AttributeReader<ExceptionsAttributeRecord>
+    public sealed class ExceptionsAttributeReader : AttributeReader<ExceptionsAttributeRecord>
     {
 
-        DelegateLazyReaderList<ClassConstantReader, ushort> exceptions;
+        DelegateLazyReaderList<ClassConstantReader, ClassConstantHandle> exceptions;
 
         /// <summary>
         /// Initializes a new instance.
@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the names of the exceptions.
         /// </summary>
-        public IReadOnlyList<ClassConstantReader> Exceptions => LazyGet(ref exceptions, () => new DelegateLazyReaderList<ClassConstantReader, ushort>(DeclaringClass, Record.ExceptionsIndexes, (_, index) => DeclaringClass.Constants.Get<ClassConstantReader>(index)));
+        public IReadOnlyList<ClassConstantReader> Exceptions => LazyGet(ref exceptions, () => new DelegateLazyReaderList<ClassConstantReader, ClassConstantHandle>(DeclaringClass, Record.Exceptions, (_, handle) => DeclaringClass.Constants.Get<ClassConstantReader>(handle)));
 
     }
 

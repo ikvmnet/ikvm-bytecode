@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class ElementValueAnnotationReader : ElementValueReader<ElementValueAnnotationValueRecord>
+    public sealed class ElementValueAnnotationReader : ElementValueReader<ElementValueAnnotationValueRecord>
     {
 
         AnnotationReader annotation;
@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public ElementValueAnnotationReader(ClassReader declaringClass, ElementValueRecord record) :
+        internal ElementValueAnnotationReader(ClassReader declaringClass, ElementValueRecord record) :
             base(declaringClass, record)
         {
 

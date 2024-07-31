@@ -5,7 +5,7 @@ using static IKVM.ByteCode.Util;
 namespace IKVM.ByteCode.Reading
 {
 
-    internal sealed class DynamicConstantReader : ConstantReader<DynamicConstantRecord>
+    public sealed class DynamicConstantReader : ConstantReader<DynamicConstantRecord>
     {
 
         NameAndTypeConstantReader nameAndType;
@@ -15,15 +15,15 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="declaringClass"></param>
         /// <param name="record"></param>
-        public DynamicConstantReader(ClassReader declaringClass, ushort index,  DynamicConstantRecord record) :
-            base(declaringClass, index, record)
+        internal DynamicConstantReader(ClassReader declaringClass, DynamicConstantHandle handle, DynamicConstantRecord record) :
+            base(declaringClass, handle, record)
         {
 
         }
 
         public ushort BootstrapMethodAttributeIndex => Record.BootstrapMethodAttributeIndex;
 
-        public NameAndTypeConstantReader NameAndType => LazyGet(ref nameAndType, () => DeclaringClass.Constants.Get<NameAndTypeConstantReader>(Record.NameAndType.Value));
+        public NameAndTypeConstantReader NameAndType => LazyGet(ref nameAndType, () => DeclaringClass.Constants.Get<NameAndTypeConstantReader>(Record.NameAndType));
 
         public override bool IsLoadable => DeclaringClass.Version >= new ClassFormatVersion(55, 0);
 

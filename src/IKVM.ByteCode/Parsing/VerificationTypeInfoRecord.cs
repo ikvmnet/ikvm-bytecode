@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    internal abstract record VerificationTypeInfoRecord
+    public abstract record VerificationTypeInfoRecord
     {
 
         public static bool TryReadVerificationTypeInfo(ref ClassFormatReader reader, out VerificationTypeInfoRecord record)
