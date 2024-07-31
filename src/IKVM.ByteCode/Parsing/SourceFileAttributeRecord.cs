@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    public record SourceFileAttributeRecord(Utf8ConstantHandle SourceFileIndex) : AttributeRecord
+    public record SourceFileAttributeRecord(Utf8ConstantHandle SourceFile) : AttributeRecord
     {
 
         public static bool TryReadSourceFileAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)

@@ -22,6 +22,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new StringConstantHandle Handle => (StringConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the value of the string constant. Result may not actually be a string object as overrides can apply.
         /// </summary>

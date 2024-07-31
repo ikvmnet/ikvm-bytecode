@@ -23,6 +23,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new NameAndTypeConstantHandle Handle => (NameAndTypeConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the name of this name and type constant.
         /// </summary>

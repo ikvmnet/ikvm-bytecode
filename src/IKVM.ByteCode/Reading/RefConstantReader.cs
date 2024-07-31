@@ -28,6 +28,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new RefConstantHandle Handle => (RefConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the underlying record.
         /// </summary>

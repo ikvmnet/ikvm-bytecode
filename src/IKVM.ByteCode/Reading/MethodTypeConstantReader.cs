@@ -22,6 +22,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new MethodTypeConstantHandle Handle => (MethodTypeConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the type of this MethodType constant.
         /// </summary>

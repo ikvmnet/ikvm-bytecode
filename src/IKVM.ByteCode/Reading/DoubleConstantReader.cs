@@ -18,6 +18,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new DoubleConstantHandle Handle => (DoubleConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the value of the constant.
         /// </summary>

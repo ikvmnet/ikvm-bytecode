@@ -22,6 +22,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new ClassConstantHandle Handle => (ClassConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the name of the class.
         /// </summary>

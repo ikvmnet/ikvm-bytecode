@@ -21,6 +21,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new DynamicConstantHandle Handle => (DynamicConstantHandle)base.Handle;
+
         public ushort BootstrapMethodAttributeIndex => Record.BootstrapMethodAttributeIndex;
 
         public NameAndTypeConstantReader NameAndType => LazyGet(ref nameAndType, () => DeclaringClass.Constants.Get<NameAndTypeConstantReader>(Record.NameAndType));

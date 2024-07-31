@@ -23,6 +23,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new Utf8ConstantHandle Handle => (Utf8ConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the value of the constant. Result is interned.
         /// </summary>

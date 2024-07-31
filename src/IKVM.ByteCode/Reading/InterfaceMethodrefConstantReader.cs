@@ -18,6 +18,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new InterfaceMethodrefConstantHandle Handle => (InterfaceMethodrefConstantHandle)base.Handle;
+
     }
 
 }

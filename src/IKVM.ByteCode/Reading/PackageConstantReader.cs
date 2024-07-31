@@ -21,6 +21,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new PackageConstantHandle Handle => (PackageConstantHandle)base.Handle;
+
         /// <summary>
         /// Gest the name of this package.
         /// </summary>

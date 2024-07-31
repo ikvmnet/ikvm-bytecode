@@ -22,6 +22,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new ModuleConstantHandle Handle => (ModuleConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the name of this module.
         /// </summary>

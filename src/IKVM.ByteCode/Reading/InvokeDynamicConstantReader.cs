@@ -23,6 +23,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new InvokeDynamicConstantHandle Handle => (InvokeDynamicConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the index into the BootstrapMethod table that is referenced by this constant.
         /// </summary>

@@ -19,6 +19,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new LongConstantHandle Handle => (LongConstantHandle)base.Handle;
+
         /// <summary>
         /// Gets the value of the constant.
         /// </summary>

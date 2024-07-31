@@ -18,6 +18,9 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <inheritdoc />
+        public new FieldrefConstantHandle Handle => (FieldrefConstantHandle)base.Handle;
+
     }
 
 }
