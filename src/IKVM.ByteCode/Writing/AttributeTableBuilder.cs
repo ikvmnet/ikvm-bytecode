@@ -289,9 +289,11 @@ namespace IKVM.ByteCode.Writing
         /// Adds a new InnerClasses attribute.
         /// </summary>
         /// <param name="classes"></param>
-        public AttributeTableBuilder InnerClasses(BlobBuilder classes)
+        public AttributeTableBuilder InnerClasses(Action<InnerClassesTableEncoder> classes)
         {
-            return Attribute("InnerClasses", classes);
+            var b = new BlobBuilder();
+            classes(new InnerClassesTableEncoder(b));
+            return Attribute("InnerClasses", b);
         }
 
         /// <summary>
