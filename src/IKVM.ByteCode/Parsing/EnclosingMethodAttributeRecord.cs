@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    public sealed record EnclosingMethodAttributeRecord(ushort ClassIndex, ushort MethodIndex) : AttributeRecord
+    public sealed record EnclosingMethodAttributeRecord(ClassConstantHandle Class, NameAndTypeConstantHandle Method) : AttributeRecord
     {
 
         public static bool TryReadEnclosingMethodAttribute(ref ClassFormatReader reader, out AttributeRecord attribute)
@@ -13,7 +13,7 @@
             if (reader.TryReadU2(out ushort methodIndex) == false)
                 return false;
 
-            attribute = new EnclosingMethodAttributeRecord(classIndex, methodIndex);
+            attribute = new EnclosingMethodAttributeRecord(new(classIndex), new(methodIndex));
             return true;
         }
 
