@@ -59,10 +59,12 @@ namespace IKVM.ByteCode.Writing
         /// Adds a Same Locals 1 Stack Item Frame.
         /// </summary>
         /// <param name="frameType"></param>
-        public StackMapTableEncoder AddSameLocalsOneStackItemFrame(byte frameType)
+        public StackMapTableEncoder AddSameLocalsOneStackItemFrame(byte frameType, Action<VerificationTypeInfoEncoder> stack)
         {
             ValidateFrameType(frameType, 64, 127, nameof(frameType), "SAME_LOCALS_1_STACK_ITEM");
-            throw new NotImplementedException();
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
+            w.TryWriteU1(frameType);
+            stack(new VerificationTypeInfoEncoder(_builder, 1));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }
@@ -70,9 +72,12 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a Same Locals 1 Stack Item Frame Extended.
         /// </summary>
-        public StackMapTableEncoder AddSameLocalsOneStackItemFrameExtended()
+        public StackMapTableEncoder AddSameLocalsOneStackItemFrameExtended(ushort offsetDelta, Action<VerificationTypeInfoEncoder> stack)
         {
-            throw new NotImplementedException();
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU1(247);
+            w.TryWriteU2(offsetDelta);
+            stack(new VerificationTypeInfoEncoder(_builder, 1));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }
@@ -80,10 +85,12 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a Chop Frame.
         /// </summary>
-        public StackMapTableEncoder AddChopFrame(byte frameType)
+        public StackMapTableEncoder AddChopFrame(byte frameType, ushort offsetDelta)
         {
             ValidateFrameType(frameType, 248, 250, nameof(frameType), "CHOP");
-            throw new NotImplementedException();
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU1(247);
+            w.TryWriteU2(offsetDelta);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }
@@ -91,9 +98,11 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a Same Frame Extended.
         /// </summary>
-        public StackMapTableEncoder AddSameFrameExtended()
+        public StackMapTableEncoder AddSameFrameExtended(ushort offsetDelta)
         {
-            throw new NotImplementedException();
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU1(251);
+            w.TryWriteU2(offsetDelta);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }
@@ -101,10 +110,13 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds an Append Frame.
         /// </summary>
-        public StackMapTableEncoder AddAppendFrame(byte frameType)
+        public StackMapTableEncoder AddAppendFrame(byte frameType, ushort offsetDelta, Action<VerificationTypeInfoEncoder> locals)
         {
             ValidateFrameType(frameType, 252, 254, nameof(frameType), "APPEND");
-            throw new NotImplementedException();
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU1(frameType);
+            w.TryWriteU2(offsetDelta);
+            locals(new VerificationTypeInfoEncoder(_builder, (ushort)(frameType - 251)));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }
@@ -112,9 +124,13 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a Full Frame.
         /// </summary>
-        public StackMapTableEncoder AddFullFrame()
+        public StackMapTableEncoder AddFullFrame(ushort offsetDelta, Action<VerificationTypeInfoEncoder> locals, Action<VerificationTypeInfoEncoder> stack)
         {
-            throw new NotImplementedException();
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
+            w.TryWriteU1(255);
+            w.TryWriteU2(offsetDelta);
+            locals(new VerificationTypeInfoEncoder(_builder));
+            stack(new VerificationTypeInfoEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }

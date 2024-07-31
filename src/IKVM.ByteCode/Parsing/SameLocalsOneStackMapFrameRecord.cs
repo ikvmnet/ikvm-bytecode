@@ -8,10 +8,10 @@
         {
             frame = null;
 
-            if (VerificationTypeInfoRecord.TryReadVerificationTypeInfo(ref reader, out var verificationTypeInfo) == false)
+            if (VerificationTypeInfoRecord.TryReadVerificationTypeInfo(ref reader, out var stack) == false)
                 return false;
 
-            frame = new SameLocalsOneStackMapFrameRecord(tag, verificationTypeInfo);
+            frame = new SameLocalsOneStackMapFrameRecord(tag, stack);
             return true;
         }
 
