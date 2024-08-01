@@ -1,6 +1,6 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    public record struct MethodParametersAttributeParameterRecord(Utf8ConstantHandle Name, AccessFlag AccessFlags);
+    public readonly record struct MethodParametersAttributeParameterRecord(Utf8ConstantHandle Name, AccessFlag AccessFlags);
 
 }

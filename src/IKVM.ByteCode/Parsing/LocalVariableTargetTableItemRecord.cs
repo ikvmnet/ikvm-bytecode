@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    public record struct LocalVariableTargetTableItemRecord(ushort Offset, ushort Length, ushort Index)
+    public readonly record struct LocalVariableTargetTableItemRecord(ushort Offset, ushort Length, ushort Index)
     {
 
         public static bool TryRead(ref ClassFormatReader reader, out LocalVariableTargetTableItemRecord record)

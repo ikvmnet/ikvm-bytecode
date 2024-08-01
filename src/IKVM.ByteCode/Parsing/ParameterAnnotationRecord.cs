@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    public record struct ParameterAnnotationRecord(AnnotationRecord[] Annotations)
+    public readonly record struct ParameterAnnotationRecord(AnnotationRecord[] Annotations)
     {
 
         public static bool TryReadParameterAnnotation(ref ClassFormatReader reader, out ParameterAnnotationRecord record)

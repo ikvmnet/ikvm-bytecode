@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    public record struct TypePathItemRecord(TypePathKind Kind, byte ArgumentIndex)
+    public readonly record struct TypePathItemRecord(TypePathKind Kind, byte ArgumentIndex)
     {
 
         public static bool TryRead(ref ClassFormatReader reader, out TypePathItemRecord record)
