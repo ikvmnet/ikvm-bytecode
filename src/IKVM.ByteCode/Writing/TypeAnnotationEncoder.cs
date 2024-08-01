@@ -51,7 +51,7 @@ namespace IKVM.ByteCode.Writing
                     ThrowsTarget(record.TargetType, target.ThrowsTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
                     break;
                 case LocalVariableTargetTableRecord target:
-                    LocalVarTarget(record.TargetType, e => e.Encode(target), record.Type, e => e.Encode(record.Elements));
+                    LocalVarTarget(record.TargetType, e => e.Encode(target), e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
                     break;
                 case CatchTargetRecord target:
                     CatchTarget(record.TargetType, target.ExceptionTableIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
@@ -133,7 +133,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        void SuperTypeTarget(TypeAnnotationTargetType targetType, byte superTypeIndex, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        void SuperTypeTarget(TypeAnnotationTargetType targetType, ushort superTypeIndex, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
             if (_count > 0)
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");

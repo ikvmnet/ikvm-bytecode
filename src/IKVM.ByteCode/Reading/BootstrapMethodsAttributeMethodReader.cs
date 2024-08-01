@@ -10,7 +10,7 @@ namespace IKVM.ByteCode.Reading
     public sealed class BootstrapMethodsAttributeMethodReader : ReaderBase<BootstrapMethodsAttributeMethodRecord>
     {
 
-        MethodHandleConstantReader methodref;
+        MethodHandleConstantReader method;
         IReadOnlyList<IConstantReader> arguments;
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the method being referenced.
         /// </summary>
-        public MethodHandleConstantReader Method => LazyGet(ref methodref, () => DeclaringClass.Constants.Get<MethodrefConstantReader>(Record.MethodRef));
+        public MethodHandleConstantReader Method => LazyGet(ref method, () => DeclaringClass.Constants.Get<MethodHandleConstantReader>(Record.Method));
 
         /// <summary>
         /// Gets the arguments bound to the method reference.

@@ -25,6 +25,25 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Encodes an existing local variable target table record.
+        /// </summary>
+        /// <param name="table"></param>
+        public void Encode(LocalVariableTargetTableRecord table)
+        {
+            foreach (var i in table.Items)
+                Encode(i);
+        }
+
+        /// <summary>
+        /// Encodes an existing local variable target.
+        /// </summary>
+        /// <param name="target"></param>
+        public void Encode(LocalVariableTargetTableItemRecord target)
+        {
+            LocalVar(target.Start, target.Length, target.Index);
+        }
+
+        /// <summary>
         /// Adds a new local variable.
         /// </summary>
         public LocalVariableTargetTableEncoder LocalVar(ushort start, ushort length, ushort index)
@@ -36,7 +55,6 @@ namespace IKVM.ByteCode.Writing
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }
-
     }
 
 }
