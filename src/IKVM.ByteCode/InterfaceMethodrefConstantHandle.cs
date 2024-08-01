@@ -34,6 +34,16 @@
             return new RefConstantHandle(handle.Index);
         }
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
+        public static readonly InterfaceMethodrefConstantHandle Nil = new(0);
+
+        /// <summary>
+        /// Gets whether or not this represents the nil instance.
+        /// </summary>
+        public readonly bool IsNil => Index == 0;
+
     }
 
 }

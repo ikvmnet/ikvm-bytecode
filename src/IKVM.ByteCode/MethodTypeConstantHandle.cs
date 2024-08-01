@@ -24,6 +24,16 @@
             return new ConstantHandle(handle.Index);
         }
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
+        public static readonly MethodTypeConstantHandle Nil = new(0);
+
+        /// <summary>
+        /// Gets whether or not this represents the nil instance.
+        /// </summary>
+        public readonly bool IsNil => Index == 0;
+
     }
 
 }
