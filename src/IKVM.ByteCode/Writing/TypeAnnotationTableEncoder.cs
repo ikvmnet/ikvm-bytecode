@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Parsing;
@@ -36,6 +37,20 @@ namespace IKVM.ByteCode.Writing
             annotation(new TypeAnnotationEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
+        }
+
+        /// <summary>
+        /// Adds an annotation.
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public TypeAnnotationTableEncoder Add(TypeAnnotationRecord record)
+        {
+            return Add(encoder => Add(encoder, record));
+        }
+
+        static void Add(TypeAnnotationEncoder encoder, TypeAnnotationRecord record)
+        {
         }
 
     }

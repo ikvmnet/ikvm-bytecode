@@ -22,6 +22,15 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Encodes an existing annotation.
+        /// </summary>
+        /// <param name="annotation"></param>
+        public void Encode(AnnotationRecord annotation)
+        {
+            Encode(annotation.Type, e => e.Encode(annotation.Elements));
+        }
+
+        /// <summary>
         /// Encodes a new element_value_pair.
         /// </summary>
         /// <param name="elementValuePairs"></param>
@@ -32,7 +41,6 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU2(type.Index);
             elementValuePairs(new ElementValuePairTableEncoder(_builder));
         }
-
     }
 
 }

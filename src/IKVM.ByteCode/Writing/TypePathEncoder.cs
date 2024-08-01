@@ -25,9 +25,42 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Encodes an existing type path.
+        /// </summary>
+        /// <param name="targetPath"></param>
+        public void Encode(TypePathRecord targetPath)
+        {
+            foreach (var i in targetPath.Path)
+                Encode(i);
+        }
+
+        /// <summary>
+        /// Encodes an existing type path item.
+        /// </summary>
+        /// <param name="item"></param>
+        public void Encode(TypePathItemRecord item)
+        {
+            switch (item.Kind)
+            {
+                case TypePathKind.Array:
+                    Array();
+                    break;
+                case TypePathKind.InnerType:
+                    InnerType();
+                    break;
+                case TypePathKind.Wildcard:
+                    Wildcard();
+                    break;
+                case TypePathKind.TypeArgument:
+                    TypeArgument(item.ArgumentIndex);
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Annotation is deeper in an array type.
         /// </summary>
-        public void ArrayElement()
+        public void Array()
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1(0);
@@ -49,7 +82,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Annotation is on the bound of a wildcard type argument of a parameterized type.
         /// </summary>
-        public void WildcardBound()
+        public void Wildcard()
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1(2);
@@ -67,7 +100,6 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1(index);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);
         }
-
     }
 
 }

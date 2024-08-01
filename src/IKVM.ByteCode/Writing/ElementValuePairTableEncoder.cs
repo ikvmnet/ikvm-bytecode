@@ -28,6 +28,17 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Encodes an existing set of elements.
+        /// </summary>
+        /// <param name="elements"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void Encode(ReadOnlySpan<ElementValuePairRecord> elements)
+        {
+            foreach (var i in elements)
+                Element(i.Name, e => e.Encode(i.Value));
+        }
+
+        /// <summary>
         /// Adds an element value pair.
         /// </summary>
         /// <param name="elementName"></param>

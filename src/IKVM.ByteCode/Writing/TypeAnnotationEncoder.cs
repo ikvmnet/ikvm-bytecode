@@ -25,6 +25,49 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Encodes an existing record.
+        /// </summary>
+        /// <param name="record"></param>
+        public void Encode(TypeAnnotationRecord record)
+        {
+            switch (record.Target)
+            {
+                case TypeParameterTargetRecord target:
+                    TypeParameterTarget(record.TargetType, target.ParameterIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case SuperTypeTargetRecord target:
+                    SuperTypeTarget(record.TargetType, target.SuperTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case TypeParameterBoundTargetRecord target:
+                    TypeParameterBoundTarget(record.TargetType, target.ParameterIndex, target.BoundIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case EmptyTargetRecord target:
+                    EmptyTarget(record.TargetType, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case FormalParameterTargetRecord target:
+                    FormalParameterTarget(record.TargetType, target.ParameterIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case ThrowsTargetRecord target:
+                    ThrowsTarget(record.TargetType, target.ThrowsTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case LocalVariableTargetTableRecord target:
+                    LocalVarTarget(record.TargetType, e => e.Encode(target), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case CatchTargetRecord target:
+                    CatchTarget(record.TargetType, target.ExceptionTableIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case OffsetTargetRecord target:
+                    OffsetTarget(record.TargetType, target.Offset, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                case TypeArgumentTargetRecord target:
+                    TypeArgumentTarget(record.TargetType, target.Offset, target.TypeArgumentIndex, e => e.Encode(record.TargetPath), record.Type, e => e.Encode(record.Elements));
+                    break;
+                default:
+                    throw new InvalidOperationException("Invalid type annotation.");
+            }
+        }
+
+        /// <summary>
         /// Encodes the footer of the structure.
         /// </summary>
         /// <param name="targetPath"></param>

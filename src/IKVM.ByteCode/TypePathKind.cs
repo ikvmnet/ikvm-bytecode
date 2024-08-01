@@ -4,10 +4,10 @@
     public enum TypePathKind : byte
     {
 
-        ArrayType = 0,
-        NestedType = 1,
-        ParameterizedWildcardTypeArgument = 2,
-        ParameterizedType = 3,
+        Array = 0,
+        InnerType = 1,
+        Wildcard = 2,
+        TypeArgument = 3,
 
     }
 

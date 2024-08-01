@@ -25,6 +25,56 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Encodes an existing element value.
+        /// </summary>
+        /// <param name="value"></param>
+        public void Encode(ElementValueRecord value)
+        {
+            switch (value.Tag)
+            {
+                case ElementValueTag.Byte:
+                    Byte((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.Char:
+                    Char((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.Integer:
+                    Int((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.Short:
+                    Short((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.Boolean:
+                    Boolean((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.Double:
+                    Double((DoubleConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.Float:
+                    Float((FloatConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.Long:
+                    Long((LongConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.String:
+                    String((Utf8ConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    break;
+                case ElementValueTag.Enum:
+                    Enum(((ElementValueEnumConstantValueRecord)value.Value).TypeName, ((ElementValueEnumConstantValueRecord)value.Value).ConstantName);
+                    break;
+                case ElementValueTag.Class:
+                    Class(((ElementValueClassValueRecord)value.Value).Class);
+                    break;
+                case ElementValueTag.Annotation:
+                    Annotation(e => e.Encode(((ElementValueAnnotationValueRecord)value.Value).Annotation));
+                    break;
+                case ElementValueTag.Array:
+                    Array(e => e.Encode(((ElementValueArrayValueRecord)value.Value).Values));
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Constant of the primitive type byte as the value of this element-value pair.
         /// </summary>
         /// <param name="constantValue"></param>
@@ -210,17 +260,16 @@ namespace IKVM.ByteCode.Writing
         /// Denotes an array as the value of this element-value pair.
         /// </summary>
         /// <param name="arrayValue"></param>
-        public void Array(Action<ElementValuePairTableEncoder> arrayValue)
+        public void Array(Action<ElementValueTableEncoder> arrayValue)
         {
             if (_count > 0)
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1((byte)ElementValueTag.Array);
-            arrayValue(new ElementValuePairTableEncoder(_builder));
+            arrayValue(new ElementValueTableEncoder(_builder));
             _count++;
         }
-
     }
 
 }
