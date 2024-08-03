@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Parsing;
@@ -25,6 +26,42 @@ namespace IKVM.ByteCode.Writing
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _countBlob = _builder.ReserveBytes(ClassFormatWriter.U1);
             _count = 0;
+        }
+
+        /// <summary>
+        /// Adds an existing method parameter.
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public MethodParametersTableEncoder Add(MethodParametersAttributeParameterRecord record)
+        {
+            return Parameter(record.Name, record.AccessFlags);
+        }
+
+        /// <summary>
+        /// Adds many existing method parameters.
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
+        public MethodParametersTableEncoder AddMany(ReadOnlySpan<MethodParametersAttributeParameterRecord> records)
+        {
+            foreach (var i in records)
+                Add(i);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds many existing method parameters.
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
+        public MethodParametersTableEncoder AddMany(IEnumerable<MethodParametersAttributeParameterRecord> records)
+        {
+            foreach (var i in records)
+                Add(i);
+
+            return this;
         }
 
         /// <summary>

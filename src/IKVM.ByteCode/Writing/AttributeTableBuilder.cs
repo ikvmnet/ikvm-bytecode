@@ -254,6 +254,13 @@ namespace IKVM.ByteCode.Writing
         /// <param name="attributes"></param>
         public AttributeTableBuilder Code(ushort maxStack, ushort maxLocals, BlobBuilder code, Action<ExceptionTableEncoder> exceptions, AttributeTableBuilder attributes)
         {
+            if (code is null)
+                throw new ArgumentNullException(nameof(code));
+            if (exceptions is null)
+                throw new ArgumentNullException(nameof(exceptions));
+            if (attributes is null)
+                throw new ArgumentNullException(nameof(attributes));
+
             var b = new BlobBuilder();
             var w = new ClassFormatWriter(b.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
             w.TryWriteU2(maxStack);
@@ -270,6 +277,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder StackMapTable(Action<StackMapTableEncoder> stackMapTable)
         {
+            if (stackMapTable is null)
+                throw new ArgumentNullException(nameof(stackMapTable));
+
             var b = new BlobBuilder();
             stackMapTable(new StackMapTableEncoder(b));
             return Attribute("StackMapTable", b);
@@ -280,6 +290,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder Exceptions(Action<ClassConstantTableEncoder> exceptions)
         {
+            if (exceptions is null)
+                throw new ArgumentNullException(nameof(exceptions));
+
             var b = new BlobBuilder();
             exceptions(new ClassConstantTableEncoder(b));
             return Attribute("Exceptions", b);
@@ -291,6 +304,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="classes"></param>
         public AttributeTableBuilder InnerClasses(Action<InnerClassesTableEncoder> classes)
         {
+            if (classes is null)
+                throw new ArgumentNullException(nameof(classes));
+
             var b = new BlobBuilder();
             classes(new InnerClassesTableEncoder(b));
             return Attribute("InnerClasses", b);
@@ -336,6 +352,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="signature"></param>
         public AttributeTableBuilder Signature(string signature)
         {
+            if (signature is null)
+                throw new ArgumentNullException(nameof(signature));
+
             return Signature(_constants.GetOrAddUtf8Constant(signature));
         }
 
@@ -357,6 +376,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="sourceFile"></param>
         public AttributeTableBuilder SourceFile(string sourceFile)
         {
+            if (sourceFile is null)
+                throw new ArgumentNullException(nameof(sourceFile));
+
             return SourceFile(_constants.GetOrAddUtf8Constant(sourceFile));
         }
 
@@ -374,6 +396,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder LineNumberTable(Action<LineNumberTableEncoder> lineNumbers)
         {
+            if (lineNumbers is null)
+                throw new ArgumentNullException(nameof(lineNumbers));
+
             var b = new BlobBuilder();
             lineNumbers(new LineNumberTableEncoder(b));
             return Attribute("LineNumberTable", b);
@@ -384,6 +409,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder LocalVariableTable(Action<LocalVariableTableEncoder> localVars)
         {
+            if (localVars is null)
+                throw new ArgumentNullException(nameof(localVars));
+
             var b = new BlobBuilder();
             localVars(new LocalVariableTableEncoder(b));
             return Attribute("LocalVariableTable", b);
@@ -394,6 +422,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder LocalVariableTypeTable(Action<LocalVariableTypeTableEncoder> localVarTypes)
         {
+            if (localVarTypes is null)
+                throw new ArgumentNullException(nameof(localVarTypes));
+
             var b = new BlobBuilder();
             localVarTypes(new LocalVariableTypeTableEncoder(b));
             return Attribute("LocalVariableTypeTable", b);
@@ -413,6 +444,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="annotations"></param>
         public AttributeTableBuilder RuntimeVisibleAnnotations(Action<AnnotationTableEncoder> annotations)
         {
+            if (annotations is null)
+                throw new ArgumentNullException(nameof(annotations));
+
             var b = new BlobBuilder();
             annotations(new AnnotationTableEncoder(b));
             return Attribute("RuntimeVisibleAnnotations", b);
@@ -423,6 +457,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder RuntimeInvisibleAnnotations(Action<AnnotationTableEncoder> annotations)
         {
+            if (annotations is null)
+                throw new ArgumentNullException(nameof(annotations));
+
             var b = new BlobBuilder();
             annotations(new AnnotationTableEncoder(b));
             return Attribute("RuntimeInvisibleAnnotations", b);
@@ -433,6 +470,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder RuntimeVisibleParameterAnnotations(Action<ParameterAnnotationTableEncoder> parameterAnnotations)
         {
+            if (parameterAnnotations is null)
+                throw new ArgumentNullException(nameof(parameterAnnotations));
+
             var b = new BlobBuilder();
             parameterAnnotations(new ParameterAnnotationTableEncoder(b));
             return Attribute("RuntimeVisibleParameterAnnotations", b);
@@ -443,6 +483,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder RuntimeInvisibleParametersAnnotations(Action<ParameterAnnotationTableEncoder> parameterAnnotations)
         {
+            if (parameterAnnotations is null)
+                throw new ArgumentNullException(nameof(parameterAnnotations));
+
             var b = new BlobBuilder();
             parameterAnnotations(new ParameterAnnotationTableEncoder(b));
             return Attribute("RuntimeInvisibleParameterAnnotations", b);
@@ -454,6 +497,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="typeAnnotations"></param>
         public AttributeTableBuilder RuntimeVisibleTypeAnnotations(Action<TypeAnnotationTableEncoder> typeAnnotations)
         {
+            if (typeAnnotations is null)
+                throw new ArgumentNullException(nameof(typeAnnotations));
+
             var b = new BlobBuilder();
             typeAnnotations(new TypeAnnotationTableEncoder(b));
             return Attribute("RuntimeVisibleTypeAnnotations", b);
@@ -465,6 +511,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="typeAnnotations"></param>
         public AttributeTableBuilder RuntimeInvisibleTypeAnnotations(Action<TypeAnnotationTableEncoder> typeAnnotations)
         {
+            if (typeAnnotations is null)
+                throw new ArgumentNullException(nameof(typeAnnotations));
+
             var b = new BlobBuilder();
             typeAnnotations(new TypeAnnotationTableEncoder(b));
             return Attribute("RuntimeInvisibleTypeAnnotations", b);
@@ -476,6 +525,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="defaultValue"></param>
         public AttributeTableBuilder AnnotationDefault(Action<ElementValueEncoder> defaultValue)
         {
+            if (defaultValue is null)
+                throw new ArgumentNullException(nameof(defaultValue));
+
             var b = new BlobBuilder();
             defaultValue(new ElementValueEncoder(b));
             return Attribute("AnnotationDefault", b);
@@ -487,6 +539,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="bootstrapMethods"></param>
         public AttributeTableBuilder BootstrapMethods(Action<BootstrapMethodsTableEncoder> bootstrapMethods)
         {
+            if (bootstrapMethods is null)
+                throw new ArgumentNullException(nameof(bootstrapMethods));
+
             var b = new BlobBuilder();
             bootstrapMethods(new BootstrapMethodsTableEncoder(b));
             return Attribute("BootstrapMethods", b);
@@ -497,6 +552,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder MethodParameters(Action<MethodParametersTableEncoder> parameters)
         {
+            if (parameters is null)
+                throw new ArgumentNullException(nameof(parameters));
+
             var b = new BlobBuilder();
             parameters(new MethodParametersTableEncoder(b));
             return Attribute("MethodParameters", b);
@@ -505,9 +563,29 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a new Module attribute.
         /// </summary>
-        /// <param name="module"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <param name="version"></param>
+        /// <param name="requires"></param>
+        /// <param name="exports"></param>
+        /// <param name="opens"></param>
+        /// <param name="uses"></param>
+        /// <param name="provides"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public AttributeTableBuilder Module(ModuleConstantHandle name, ModuleFlag flags, Utf8ConstantHandle version, Action<ModuleRequiresTableEncoder> requires, Action<ModuleExportsTableEncoder> exports, Action<ModuleOpensTableEncoder> opens, Action<ClassConstantTableEncoder> uses, Action<ModuleProvidesTableEncoder> provides)
         {
+            if (requires is null)
+                throw new ArgumentNullException(nameof(requires));
+            if (exports is null)
+                throw new ArgumentNullException(nameof(exports));
+            if (opens is null)
+                throw new ArgumentNullException(nameof(opens));
+            if (uses is null)
+                throw new ArgumentNullException(nameof(uses));
+            if (provides is null)
+                throw new ArgumentNullException(nameof(provides));
+
             var b = new BlobBuilder();
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(name.Index);

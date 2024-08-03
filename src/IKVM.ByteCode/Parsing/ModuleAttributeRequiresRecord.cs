@@ -1,6 +1,6 @@
 ﻿namespace IKVM.ByteCode.Parsing
 {
 
-    public readonly record struct ModuleAttributeRequiresRecord(ushort Index, ModuleRequiresFlag Flag, ushort VersionIndex);
+    public readonly record struct ModuleAttributeRequiresRecord(ModuleConstantHandle Module, ModuleRequiresFlag Flag, Utf8ConstantHandle Version);
 
 }
