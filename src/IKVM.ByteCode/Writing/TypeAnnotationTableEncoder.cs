@@ -31,9 +31,9 @@ namespace IKVM.ByteCode.Writing
         /// Encodes an existing annotation.
         /// </summary>
         /// <param name="record"></param>
-        public void Encode(TypeAnnotationRecord record)
+        public TypeAnnotationTableEncoder Encode(TypeAnnotationRecord record)
         {
-            Annotation(e => e.Encode(record));
+            return Annotation(e => e.Encode(record));
         }
 
         /// <summary>
@@ -42,6 +42,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="annotation"></param>
         public TypeAnnotationTableEncoder Annotation(Action<TypeAnnotationEncoder> annotation)
         {
+            if (annotation is null)
+                throw new ArgumentNullException(nameof(annotation));
+
             annotation(new TypeAnnotationEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;

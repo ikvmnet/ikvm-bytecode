@@ -33,13 +33,23 @@ namespace IKVM.ByteCode.Writing
         /// <param name="methodRef"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public BootstrapMethodsTableEncoder BootstrapMethod(MethodHandleConstantHandle methodRef, Action<BootstrapArgumentsTableEncoder> arguments)
+        public BootstrapMethodsTableEncoder Add(MethodHandleConstantHandle methodRef, Action<BootstrapArgumentsTableEncoder> arguments)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(methodRef.Index);
             arguments(new BootstrapArgumentsTableEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
+        }
+
+        /// <summary>
+        /// Adds an existing bootstrap method.
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public BootstrapMethodsTableEncoder Add(BootstrapMethodsAttributeMethodRecord record)
+        {
+            return Add(record.Method, e => e.Add(record.Arguments.AsSpan()));
         }
 
     }

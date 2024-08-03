@@ -28,77 +28,76 @@ namespace IKVM.ByteCode.Writing
         /// Encodes an existing type path.
         /// </summary>
         /// <param name="targetPath"></param>
-        public void Encode(TypePathRecord targetPath)
+        public TypePathEncoder Encode(TypePathRecord targetPath)
         {
             foreach (var i in targetPath.Path)
                 Encode(i);
+
+            return this;
         }
 
         /// <summary>
         /// Encodes an existing type path item.
         /// </summary>
         /// <param name="item"></param>
-        public void Encode(TypePathItemRecord item)
+        public TypePathEncoder Encode(TypePathItemRecord item)
         {
-            switch (item.Kind)
+            return item.Kind switch
             {
-                case TypePathKind.Array:
-                    Array();
-                    break;
-                case TypePathKind.InnerType:
-                    InnerType();
-                    break;
-                case TypePathKind.Wildcard:
-                    Wildcard();
-                    break;
-                case TypePathKind.TypeArgument:
-                    TypeArgument(item.ArgumentIndex);
-                    break;
-            }
+                TypePathKind.Array => Array(),
+                TypePathKind.InnerType => InnerType(),
+                TypePathKind.Wildcard => Wildcard(),
+                TypePathKind.TypeArgument => TypeArgument(item.ArgumentIndex),
+                _ => throw new ArgumentException("Invalid path kind.", nameof(item)),
+            };
         }
 
         /// <summary>
         /// Annotation is deeper in an array type.
         /// </summary>
-        public void Array()
+        public TypePathEncoder Array()
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1(0);
             w.TryWriteU1(0);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);
+            return this;
         }
 
         /// <summary>
         /// Annotation is deeper in a nested type.
         /// </summary>
-        public void InnerType()
+        public TypePathEncoder InnerType()
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1(1);
             w.TryWriteU1(0);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);
+            return this;
         }
 
         /// <summary>
         /// Annotation is on the bound of a wildcard type argument of a parameterized type.
         /// </summary>
-        public void Wildcard()
+        public TypePathEncoder Wildcard()
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1(2);
             w.TryWriteU1(0);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);
+            return this;
         }
 
         /// <summary>
         /// Annotation is on the bound of a wildcard type argument of a parameterized type.
         /// </summary>
-        public void TypeArgument(byte index)
+        public TypePathEncoder TypeArgument(byte index)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1(3);
             w.TryWriteU1(index);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);
+            return this;
         }
     }
 

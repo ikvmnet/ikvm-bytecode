@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Parsing;
@@ -25,22 +26,36 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Encodes an existing local variable target table record.
-        /// </summary>
-        /// <param name="table"></param>
-        public void Encode(LocalVariableTargetTableRecord table)
-        {
-            foreach (var i in table.Items)
-                Encode(i);
-        }
-
-        /// <summary>
         /// Encodes an existing local variable target.
         /// </summary>
         /// <param name="target"></param>
-        public void Encode(LocalVariableTargetTableItemRecord target)
+        public LocalVariableTargetTableEncoder Add(LocalVariableTargetTableItemRecord target)
         {
-            LocalVar(target.Start, target.Length, target.Index);
+            return LocalVar(target.Start, target.Length, target.Index);
+        }
+
+        /// <summary>
+        /// Adds many existing local variable targets.
+        /// </summary>
+        /// <param name="records"></param>
+        public LocalVariableTargetTableEncoder AddMany(ReadOnlySpan<LocalVariableTargetTableItemRecord> records)
+        {
+            foreach (var i in records)
+                Add(i);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds many existing local variable targets.
+        /// </summary>
+        /// <param name="records"></param>
+        public LocalVariableTargetTableEncoder AddMany(IEnumerable<LocalVariableTargetTableItemRecord> records)
+        {
+            foreach (var i in records)
+                Add(i);
+
+            return this;
         }
 
         /// <summary>

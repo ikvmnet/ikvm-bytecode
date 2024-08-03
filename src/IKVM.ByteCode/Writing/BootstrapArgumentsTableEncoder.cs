@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Parsing;
@@ -32,11 +33,37 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="argument"></param>
         /// <returns></returns>
-        public BootstrapArgumentsTableEncoder Argument(ConstantHandle argument)
+        public BootstrapArgumentsTableEncoder Add(ConstantHandle argument)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(argument.Index);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds multiple bootstrap method arguments.
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        public BootstrapArgumentsTableEncoder Add(ReadOnlySpan<ConstantHandle> arguments)
+        {
+            foreach (var i in arguments)
+                Add(i);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds multiple bootstrap method arguments.
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        public BootstrapArgumentsTableEncoder Add(IEnumerable<ConstantHandle> arguments)
+        {
+            foreach (var i in arguments)
+                Add(i);
+
             return this;
         }
 

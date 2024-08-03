@@ -39,7 +39,7 @@ namespace IKVM.ByteCode.Writing
                     Char((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
                     break;
                 case ElementValueTag.Integer:
-                    Int((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
+                    Integer((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
                     break;
                 case ElementValueTag.Short:
                     Short((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
@@ -69,7 +69,7 @@ namespace IKVM.ByteCode.Writing
                     Annotation(e => e.Encode(((ElementValueAnnotationValueRecord)value.Value).Annotation));
                     break;
                 case ElementValueTag.Array:
-                    Array(e => e.Encode(((ElementValueArrayValueRecord)value.Value).Values));
+                    Array(e => e.AddMany(((ElementValueArrayValueRecord)value.Value).Values));
                     break;
             }
         }
@@ -138,7 +138,7 @@ namespace IKVM.ByteCode.Writing
         /// Constant of the primitive type int as the value of this element-value pair.
         /// </summary>
         /// <param name="constantValue"></param>
-        public void Int(IntegerConstantHandle constantValue)
+        public void Integer(IntegerConstantHandle constantValue)
         {
             if (_count > 0)
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
@@ -270,6 +270,7 @@ namespace IKVM.ByteCode.Writing
             arrayValue(new ElementValueTableEncoder(_builder));
             _count++;
         }
+
     }
 
 }

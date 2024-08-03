@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Parsing;
@@ -22,6 +23,42 @@ namespace IKVM.ByteCode.Writing
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
             _count = 0;
+        }
+
+        /// <summary>
+        /// Adds an existing local variable.
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public LocalVariableTableEncoder Add(LocalVariableTableAttributeItemRecord record)
+        {
+            return LocalVar(record.CodeOffset, record.CodeLength, record.Name, record.Descriptor, record.Index);
+        }
+
+        /// <summary>
+        /// Adds many existing local variables.
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
+        public LocalVariableTableEncoder AddMany(ReadOnlySpan<LocalVariableTableAttributeItemRecord> records)
+        {
+            foreach (var i in records)
+                Add(i);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds many existing local variables.
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
+        public LocalVariableTableEncoder AddMany(IEnumerable<LocalVariableTableAttributeItemRecord> records)
+        {
+            foreach (var i in records)
+                Add(i);
+
+            return this;
         }
 
         /// <summary>

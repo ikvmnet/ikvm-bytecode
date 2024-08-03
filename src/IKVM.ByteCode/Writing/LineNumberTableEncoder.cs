@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Parsing;
@@ -25,6 +26,42 @@ namespace IKVM.ByteCode.Writing
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
             _count = 0;
+        }
+
+        /// <summary>
+        /// Adds an existing line number.
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
+        public LineNumberTableEncoder Add(LineNumberTableAttributeItemRecord record)
+        {
+            return LineNumber(record.CodeOffset, record.LineNumber);
+        }
+
+        /// <summary>
+        /// Adds an existing line number.
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
+        public LineNumberTableEncoder AddMany(ReadOnlySpan<LineNumberTableAttributeItemRecord> records)
+        {
+            foreach (var i in records)
+                Add(i);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds an existing line number.
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
+        public LineNumberTableEncoder AddMany(IEnumerable<LineNumberTableAttributeItemRecord> records)
+        {
+            foreach (var i in records)
+                Add(i);
+
+            return this;
         }
 
         /// <summary>

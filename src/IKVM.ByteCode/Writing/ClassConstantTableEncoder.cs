@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Parsing;
@@ -36,6 +37,32 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(clazz.Index);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds multiple classes to the table.
+        /// </summary>
+        /// <param name="classes"></param>
+        /// <returns></returns>
+        public ClassConstantTableEncoder AddMany(ReadOnlySpan<ClassConstantHandle> classes)
+        {
+            foreach (var i in classes)
+                Add(i);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds multiple classes to the table.
+        /// </summary>
+        /// <param name="classes"></param>
+        /// <returns></returns>
+        public ClassConstantTableEncoder AddMany(IEnumerable<ClassConstantHandle> classes)
+        {
+            foreach (var i in classes)
+                Add(i);
+
             return this;
         }
 
