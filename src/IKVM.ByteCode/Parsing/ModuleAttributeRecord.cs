@@ -28,7 +28,7 @@
                 if (reader.TryReadU2(out ushort requiresVersionIndex) == false)
                     return false;
 
-                requires[i] = new ModuleAttributeRequiresRecord(requiresIndex, (ModuleRequiresFlag)requiresFlags, requiresVersionIndex);
+                requires[i] = new ModuleAttributeRequiresRecord(new(requiresIndex), (ModuleRequiresFlag)requiresFlags, new(requiresVersionIndex));
             }
 
             if (reader.TryReadU2(out ushort exportsCount) == false)
@@ -45,16 +45,16 @@
                 if (reader.TryReadU2(out ushort exportsModuleCount) == false)
                     return false;
 
-                var exportsModules = new ushort[exportsModuleCount];
+                var exportsModules = new ModuleConstantHandle[exportsModuleCount];
                 for (int j = 0; j < exportsModuleCount; j++)
                 {
                     if (reader.TryReadU2(out ushort exportsToModuleIndex) == false)
                         return false;
 
-                    exportsModules[j] = exportsToModuleIndex;
+                    exportsModules[j] = new(exportsToModuleIndex);
                 }
 
-                exports[i] = new ModuleAttributeExportsRecord(exportsIndex, (ModuleExportsFlag)exportsFlags, exportsModules);
+                exports[i] = new ModuleAttributeExportsRecord(new(exportsIndex), (ModuleExportsFlag)exportsFlags, exportsModules);
             }
 
             if (reader.TryReadU2(out ushort opensCount) == false)
@@ -71,16 +71,16 @@
                 if (reader.TryReadU2(out ushort opensModulesCount) == false)
                     return false;
 
-                var opensModules = new ushort[opensModulesCount];
+                var opensModules = new ModuleConstantHandle[opensModulesCount];
                 for (int j = 0; j < opensModulesCount; j++)
                 {
                     if (reader.TryReadU2(out ushort opensModuleIndex) == false)
                         return false;
 
-                    opensModules[j] = opensModuleIndex;
+                    opensModules[j] = new(opensModuleIndex);
                 }
 
-                opens[i] = new ModuleAttributeOpensRecord(opensIndex, (ModuleOpensFlag)opensFlags, opensModules);
+                opens[i] = new ModuleAttributeOpensRecord(new(opensIndex), (ModuleOpensFlag)opensFlags, opensModules);
             }
 
             if (reader.TryReadU2(out ushort usesCount) == false)
@@ -107,16 +107,16 @@
                 if (reader.TryReadU2(out ushort providesModulesCount) == false)
                     return false;
 
-                var providesModules = new ushort[providesModulesCount];
+                var providesModules = new ClassConstantHandle[providesModulesCount];
                 for (int j = 0; j < providesModulesCount; j++)
                 {
                     if (reader.TryReadU2(out ushort providesModuleIndex) == false)
                         return false;
 
-                    providesModules[j] = providesModuleIndex;
+                    providesModules[j] = new(providesModuleIndex);
                 }
 
-                provides[i] = new ModuleAttributeProvidesRecord(providesIndex, providesModules);
+                provides[i] = new ModuleAttributeProvidesRecord(new(providesIndex), providesModules);
             }
 
             attribute = new ModuleAttributeRecord(new(moduleNameIndex), (ModuleFlag)moduleFlags, new(moduleVersionIndex), requires, exports, opens, uses, provides);

@@ -42,7 +42,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="annotation"></param>
         public void Encode(AnnotationRecord annotation)
         {
-            Encode(annotation.Type, e => e.AddMany(annotation.Elements));
+            Encode(annotation.Type, e => e.AddMany(annotation.Elements.AsSpan()));
         }
 
         /// <summary>

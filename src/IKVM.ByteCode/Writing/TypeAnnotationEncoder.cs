@@ -33,34 +33,34 @@ namespace IKVM.ByteCode.Writing
             switch (record.Target)
             {
                 case TypeParameterTargetRecord target:
-                    TypeParameterTarget(record.TargetType, target.ParameterIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    TypeParameterTarget(record.TargetType, target.ParameterIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case SuperTypeTargetRecord target:
-                    SuperTypeTarget(record.TargetType, target.SuperTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    SuperTypeTarget(record.TargetType, target.SuperTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case TypeParameterBoundTargetRecord target:
-                    TypeParameterBoundTarget(record.TargetType, target.ParameterIndex, target.BoundIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    TypeParameterBoundTarget(record.TargetType, target.ParameterIndex, target.BoundIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case EmptyTargetRecord target:
-                    EmptyTarget(record.TargetType, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    EmptyTarget(record.TargetType, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case FormalParameterTargetRecord target:
-                    FormalParameterTarget(record.TargetType, target.ParameterIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    FormalParameterTarget(record.TargetType, target.ParameterIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case ThrowsTargetRecord target:
-                    ThrowsTarget(record.TargetType, target.ThrowsTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    ThrowsTarget(record.TargetType, target.ThrowsTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case LocalVariableTargetTableRecord target:
-                    LocalVarTarget(record.TargetType, e => e.AddMany(target), e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    LocalVarTarget(record.TargetType, e => e.AddMany(target.Items.AsSpan()), e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case CatchTargetRecord target:
-                    CatchTarget(record.TargetType, target.ExceptionTableIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    CatchTarget(record.TargetType, target.ExceptionTableIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case OffsetTargetRecord target:
-                    OffsetTarget(record.TargetType, target.Offset, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    OffsetTarget(record.TargetType, target.Offset, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 case TypeArgumentTargetRecord target:
-                    TypeArgumentTarget(record.TargetType, target.Offset, target.TypeArgumentIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements));
+                    TypeArgumentTarget(record.TargetType, target.Offset, target.TypeArgumentIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
                     break;
                 default:
                     throw new InvalidOperationException("Invalid type annotation.");

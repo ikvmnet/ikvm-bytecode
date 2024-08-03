@@ -69,7 +69,7 @@ namespace IKVM.ByteCode.Writing
                     Annotation(e => e.Encode(((ElementValueAnnotationValueRecord)value.Value).Annotation));
                     break;
                 case ElementValueTag.Array:
-                    Array(e => e.AddMany(((ElementValueArrayValueRecord)value.Value).Values));
+                    Array(e => e.AddMany(((ElementValueArrayValueRecord)value.Value).Values.AsSpan()));
                     break;
             }
         }
