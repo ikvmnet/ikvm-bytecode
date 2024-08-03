@@ -12,21 +12,22 @@ namespace IKVM.ByteCode.Writing
     readonly struct InstructionEncoder
     {
 
-        readonly BlobBuilder _code;
-        readonly ControlFlowBuilder? _control;
+        readonly BlobBuilder _builder;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="code"></param>
         /// <param name="control"></param>
-        public InstructionEncoder(BlobBuilder code, ControlFlowBuilder? control = null)
+        public InstructionEncoder(BlobBuilder code)
         {
-            _code = code ?? throw new ArgumentNullException(nameof(code));
-            _control = control;
+            _builder = code ?? throw new ArgumentNullException(nameof(code));
         }
 
-        public int Offset => _code.Count;
+        /// <summary>
+        /// Gets the offset of the next instruction inserted.
+        /// </summary>
+        public int Offset => _builder.Count;
 
         /// <summary>
         /// Encodes the specified op-code.
@@ -34,8 +35,17 @@ namespace IKVM.ByteCode.Writing
         /// <param name="code"></param>
         public void OpCode(OpCode code)
         {
-            var w = new ClassFormatWriter(_code.ReserveBytes(ClassFormatWriter.U1).GetBytes());
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1((byte)code);
+        }
+
+        /// <summary>
+        /// Aligns the current position of the writer on <paramref name="alignment"/> boundary.
+        /// </summary>
+        /// <param name="alignment"></param>
+        public void Align(int alignment)
+        {
+            _builder.Align(alignment);
         }
 
         /// <summary>
@@ -44,7 +54,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public void UInt8(byte value)
         {
-            var w = new ClassFormatWriter(_code.ReserveBytes(ClassFormatWriter.U1).GetBytes());
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
             w.TryWriteU1(value);
         }
 
@@ -54,7 +64,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public void UInt16(ushort value)
         {
-            var w = new ClassFormatWriter(_code.ReserveBytes(ClassFormatWriter.U2).GetBytes());
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(value);
         }
 
@@ -64,7 +74,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public void UInt32(uint value)
         {
-            var w = new ClassFormatWriter(_code.ReserveBytes(ClassFormatWriter.U4).GetBytes());
+            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U4).GetBytes());
             w.TryWriteU4(value);
         }
 
