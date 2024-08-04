@@ -12,7 +12,7 @@ namespace IKVM.ByteCode
         /// <param name="opcode"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        public static int GetBranchOperandSize(this OpCode opcode)
+        public static byte GetBranchOperandSize(this OpCode opcode)
         {
             switch (opcode)
             {

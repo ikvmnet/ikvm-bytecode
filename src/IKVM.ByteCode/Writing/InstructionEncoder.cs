@@ -17,7 +17,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="Region"></param>
         /// <param name="Offset"></param>
-        readonly record struct FixupData(Blob Region, int Offset);
+        readonly record struct FixupData(Blob Region, ushort Offset);
 
         /// <summary>
         /// Describes a recorded label and optionally it's absolute value.
@@ -102,23 +102,33 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="_builder"></param>
-        public InstructionEncoder(BlobBuilder _builder)
+        /// <param name="builder"></param>
+        public InstructionEncoder(BlobBuilder builder)
         {
-            this._builder = _builder ?? throw new ArgumentNullException(nameof(_builder));
+            _builder = builder ?? throw new ArgumentNullException(nameof(builder));
+
+            // JVM limits code size to 65535
+            if (_builder.Count >= 65535)
+                throw new InvalidOperationException("Maximum size of code buffer (65535) reached.");
         }
 
         /// <summary>
         /// Gets the offset of the next instruction inserted.
         /// </summary>
-        public int Offset => _builder.Count;
+        public ushort Offset => checked((ushort)_builder.Count);
 
         /// <summary>
         /// Reserves the specified number of bytes in the builder.
         /// </summary>
         /// <param name="byteCount"></param>
         /// <returns></returns>
-        internal Blob ReserveBytes(int byteCount) => _builder.ReserveBytes(byteCount);
+        internal Blob ReserveBytes(ushort byteCount)
+        {
+            if (_builder.Count + byteCount > ushort.MaxValue)
+                throw new InvalidOperationException("Maximum size of code buffer (65535) reached.");
+
+            return _builder.ReserveBytes(byteCount);
+        }
 
         /// <summary>
         /// Defines a label that can later be used to mark and refer to a location in the instruction stream.
@@ -147,25 +157,25 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Associates specified label with the current bytecode positon, returning the program offset of the label.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="label"></param>
         /// <param name="offset"></param>
-        public InstructionEncoder MarkLabel(LabelHandle handle, out int offset)
+        public InstructionEncoder MarkLabel(LabelHandle label, out int offset)
         {
-            ref var label = ref _labels[handle.Id];
-            if (label.Value != -1)
-                throw new InvalidOperationException($"Label {handle.Id} has already been marked.");
+            ref var l = ref _labels[label.Id];
+            if (l.Value != -1)
+                throw new InvalidOperationException($"Label {label.Id} has already been marked.");
 
             // apply new value to label
             offset = Offset;
-            label.Value = offset;
+            l.Value = offset;
 
             // apply any outstanding fixups for the label
-            for (int index = 0; index < label.FixupCount; index++)
-                ApplyFixup(ref label, ref LabelInfo.GetFixup(ref label, index));
+            for (int index = 0; index < l.FixupCount; index++)
+                ApplyFixup(ref l, ref LabelInfo.GetFixup(ref l, index));
 
             // reset label fixups
-            label.FixupCount = 0;
-            label.Fixups = null;
+            l.FixupCount = 0;
+            l.Fixups = null;
 
             return this;
         }
@@ -173,10 +183,25 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Associates specified label with the current bytecode positon.
         /// </summary>
-        /// <param name="handle"></param>
-        public InstructionEncoder MarkLabel(LabelHandle handle)
+        /// <param name="label"></param>
+        public InstructionEncoder MarkLabel(LabelHandle label)
         {
-            return MarkLabel(handle, out _);
+            return MarkLabel(label, out _);
+        }
+
+        /// <summary>
+        /// Gets the absolute offset of a label.
+        /// </summary>
+        /// <param name="label"></param>
+        /// <returns></returns>
+        public ushort GetLabelOffset(LabelHandle label)
+        {
+            ref var l = ref _labels[label.Id];
+            var v = l.Value;
+            if (v == -1)
+                throw new InvalidOperationException($"Label {l.Id} has not been marked.");
+
+            return (ushort)v;
         }
 
         /// <summary>
@@ -185,15 +210,13 @@ namespace IKVM.ByteCode.Writing
         /// <param name="label"></param>
         /// <param name="size"></param>
         /// <param name="offset"></param>
-        public InstructionEncoder Label(LabelHandle label, int size, int offset)
+        public InstructionEncoder Label(LabelHandle label, byte size, ushort offset)
         {
             if (size is not 2 and not 4)
                 throw new ArgumentException("Label output size can only be 2 or 4 bytes.");
-            if (offset < 0)
-                throw new ArgumentOutOfRangeException("Absolute offset of label position must be positive integer.");
 
             ref var l = ref _labels[label.Id];
-            var d = new FixupData(_builder.ReserveBytes(size), offset);
+            var d = new FixupData(ReserveBytes(size), offset);
             if (l.Value == -1)
                 l.AddFixup(d);
             else
@@ -207,7 +230,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="label"></param>
         /// <param name="size"></param>
-        public InstructionEncoder Label(LabelHandle label, int size)
+        public InstructionEncoder Label(LabelHandle label, byte size)
         {
             return Label(label, size, Offset);
         }
@@ -218,20 +241,20 @@ namespace IKVM.ByteCode.Writing
         /// <param name="fixup"></param>
         void ApplyFixup(ref LabelInfo label, ref FixupData fixup)
         {
-            var value = label.Value;
-            if (value == -1)
+            var v = label.Value;
+            if (v == -1)
                 throw new InvalidOperationException($"Label {label.Id} has not been marked.");
 
-            var offset = value - fixup.Offset;
+            var o = v - fixup.Offset;
             if (fixup.Region.Length == 2)
             {
-                if (offset < short.MinValue || offset > short.MaxValue)
+                if (o < short.MinValue || o > short.MaxValue)
                     throw new InvalidOperationException($"Label {label.Id} out of range for instruction operand size.");
 
-                BinaryPrimitives.WriteInt16BigEndian(fixup.Region.GetBytes(), (short)offset);
+                BinaryPrimitives.WriteInt16BigEndian(fixup.Region.GetBytes(), (short)o);
             }
             else
-                BinaryPrimitives.WriteInt32BigEndian(fixup.Region.GetBytes(), offset);
+                BinaryPrimitives.WriteInt32BigEndian(fixup.Region.GetBytes(), o);
         }
 
         /// <summary>
@@ -312,7 +335,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         internal void WriteInt16(short value)
         {
-            BinaryPrimitives.WriteInt16BigEndian(_builder.ReserveBytes(sizeof(short)).GetBytes(), value);
+            BinaryPrimitives.WriteInt16BigEndian(ReserveBytes(sizeof(short)).GetBytes(), value);
         }
 
         /// <summary>
@@ -321,7 +344,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         internal void WriteInt32(int value)
         {
-            BinaryPrimitives.WriteInt32BigEndian(_builder.ReserveBytes(sizeof(int)).GetBytes(), value);
+            BinaryPrimitives.WriteInt32BigEndian(ReserveBytes(sizeof(int)).GetBytes(), value);
         }
 
         /// <summary>
@@ -330,7 +353,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         internal void WriteByte(byte value)
         {
-            _builder.WriteBytes(value, 1);
+            ReserveBytes(sizeof(byte)).GetBytes().AsSpan()[0] = value;
         }
 
         /// <summary>
@@ -339,7 +362,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         internal void WriteUInt16(ushort value)
         {
-            BinaryPrimitives.WriteUInt16BigEndian(_builder.ReserveBytes(sizeof(ushort)).GetBytes(), value);
+            BinaryPrimitives.WriteUInt16BigEndian(ReserveBytes(sizeof(ushort)).GetBytes(), value);
         }
 
         /// <summary>
@@ -348,7 +371,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         internal void WriteUInt32(uint value)
         {
-            BinaryPrimitives.WriteUInt32BigEndian(_builder.ReserveBytes(sizeof(uint)).GetBytes(), value);
+            BinaryPrimitives.WriteUInt32BigEndian(ReserveBytes(sizeof(uint)).GetBytes(), value);
         }
 
         /// <summary>
@@ -756,7 +779,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="defaultLabel"></param>
         /// <param name="low"></param>
-        /// <param name="table"></param>
+        /// <param name="encode"></param>
         public InstructionEncoder TableSwitch(LabelHandle defaultLabel, int low, Action<TableSwitchInstructionEncoder> encode)
         {
             if (encode is null)
