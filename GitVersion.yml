@@ -1,5 +1,4 @@
 mode: ContinuousDeployment
-next-version: 8.10.0
 assembly-file-versioning-format: '{Major}.{Minor}.{Patch}.{WeightedPreReleaseNumber ?? 0}'
 major-version-bump-message: '\+semver:\s?(major)'
 minor-version-bump-message: '\+semver:\s?(minor)'
