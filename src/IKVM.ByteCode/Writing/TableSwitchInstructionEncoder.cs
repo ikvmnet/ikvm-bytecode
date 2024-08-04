@@ -13,7 +13,7 @@ namespace IKVM.ByteCode.Writing
     {
 
         readonly InstructionEncoder _encoder;
-        readonly int _offset;
+        readonly ushort _offset;
         readonly int _low;
         readonly Blob _highBlob;
         int _high;
@@ -40,8 +40,8 @@ namespace IKVM.ByteCode.Writing
             encoder.WriteInt32(_low);
 
             // reserve space for high value and start at low
-            _high = low - 1;
-            _highBlob = encoder.ReserveBytes(4);
+            _high = _low - 1;
+            _highBlob = _encoder.ReserveBytes(4);
             BinaryPrimitives.WriteInt32BigEndian(_highBlob.GetBytes(), _high);
         }
 

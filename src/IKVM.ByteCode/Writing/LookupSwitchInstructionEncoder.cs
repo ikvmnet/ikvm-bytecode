@@ -13,7 +13,7 @@ namespace IKVM.ByteCode.Writing
     {
 
         readonly InstructionEncoder _encoder;
-        readonly int _offset;
+        readonly ushort _offset;
         readonly Blob _npairsBlob;
         int _npairs;
         long _lastKey = long.MinValue;
