@@ -37,21 +37,12 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Encodes an existing annotation.
-        /// </summary>
-        /// <param name="annotation"></param>
-        public void Encode(AnnotationRecord annotation)
-        {
-            Encode(annotation.Type, e => e.AddMany(annotation.Elements.AsSpan()));
-        }
-
-        /// <summary>
         /// Encodes a new annotation.
         /// </summary>
         /// <param name="type"></param>
         /// <param name="elementValuePairs"></param>
         /// <returns></returns>
-        public void Encode(Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValuePairs)
+        public void Annotation(Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValuePairs)
         {
             if (_count > 0)
                 throw new InvalidOperationException("Only a single annotation can be encoded by this encoder.");

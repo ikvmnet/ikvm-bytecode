@@ -25,56 +25,6 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Encodes an existing element value.
-        /// </summary>
-        /// <param name="value"></param>
-        public void Encode(ElementValueRecord value)
-        {
-            switch (value.Tag)
-            {
-                case ElementValueTag.Byte:
-                    Byte((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.Char:
-                    Char((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.Integer:
-                    Integer((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.Short:
-                    Short((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.Boolean:
-                    Boolean((IntegerConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.Double:
-                    Double((DoubleConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.Float:
-                    Float((FloatConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.Long:
-                    Long((LongConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.String:
-                    String((Utf8ConstantHandle)((ElementValueConstantValueRecord)value.Value).Handle);
-                    break;
-                case ElementValueTag.Enum:
-                    Enum(((ElementValueEnumConstantValueRecord)value.Value).TypeName, ((ElementValueEnumConstantValueRecord)value.Value).ConstantName);
-                    break;
-                case ElementValueTag.Class:
-                    Class(((ElementValueClassValueRecord)value.Value).Class);
-                    break;
-                case ElementValueTag.Annotation:
-                    Annotation(e => e.Encode(((ElementValueAnnotationValueRecord)value.Value).Annotation));
-                    break;
-                case ElementValueTag.Array:
-                    Array(e => e.AddMany(((ElementValueArrayValueRecord)value.Value).Values.AsSpan()));
-                    break;
-            }
-        }
-
-        /// <summary>
         /// Constant of the primitive type byte as the value of this element-value pair.
         /// </summary>
         /// <param name="constantValue"></param>

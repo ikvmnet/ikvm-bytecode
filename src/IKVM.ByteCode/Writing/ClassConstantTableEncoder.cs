@@ -32,7 +32,7 @@ namespace IKVM.ByteCode.Writing
         /// Adds a class to the table.
         /// </summary>
         /// <param name="clazz"></param>
-        public ClassConstantTableEncoder Add(ClassConstantHandle clazz)
+        public ClassConstantTableEncoder Class(ClassConstantHandle clazz)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(clazz.Index);
@@ -45,10 +45,10 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="classes"></param>
         /// <returns></returns>
-        public ClassConstantTableEncoder AddMany(ReadOnlySpan<ClassConstantHandle> classes)
+        public ClassConstantTableEncoder Classes(ReadOnlySpan<ClassConstantHandle> classes)
         {
             foreach (var i in classes)
-                Add(i);
+                Class(i);
 
             return this;
         }
@@ -58,10 +58,10 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="classes"></param>
         /// <returns></returns>
-        public ClassConstantTableEncoder AddMany(IEnumerable<ClassConstantHandle> classes)
+        public ClassConstantTableEncoder Classes(IEnumerable<ClassConstantHandle> classes)
         {
             foreach (var i in classes)
-                Add(i);
+                Class(i);
 
             return this;
         }

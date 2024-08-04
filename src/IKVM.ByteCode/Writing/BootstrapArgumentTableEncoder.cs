@@ -10,7 +10,7 @@ namespace IKVM.ByteCode.Writing
     /// <summary>
     /// Encodes a 'bootstrap_arguments' structure.
     /// </summary>
-    public struct BootstrapArgumentsTableEncoder
+    public struct BootstrapArgumentTableEncoder
     {
 
         readonly BlobBuilder _builder;
@@ -21,7 +21,7 @@ namespace IKVM.ByteCode.Writing
         /// Initializes a new instance.
         /// </summary>
         /// <param name="builder"></param>
-        public BootstrapArgumentsTableEncoder(BlobBuilder builder)
+        public BootstrapArgumentTableEncoder(BlobBuilder builder)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
@@ -33,7 +33,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="argument"></param>
         /// <returns></returns>
-        public BootstrapArgumentsTableEncoder Add(ConstantHandle argument)
+        public BootstrapArgumentTableEncoder Argument(ConstantHandle argument)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(argument.Index);
@@ -46,10 +46,10 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public BootstrapArgumentsTableEncoder Add(ReadOnlySpan<ConstantHandle> arguments)
+        public BootstrapArgumentTableEncoder Arguments(ReadOnlySpan<ConstantHandle> arguments)
         {
             foreach (var i in arguments)
-                Add(i);
+                Argument(i);
 
             return this;
         }
@@ -59,10 +59,10 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public BootstrapArgumentsTableEncoder Add(IEnumerable<ConstantHandle> arguments)
+        public BootstrapArgumentTableEncoder Arguments(IEnumerable<ConstantHandle> arguments)
         {
             foreach (var i in arguments)
-                Add(i);
+                Argument(i);
 
             return this;
         }

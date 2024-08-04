@@ -28,7 +28,7 @@ namespace IKVM.ByteCode.Writing
         /// Adds an annotation.
         /// </summary>
         /// <param name="annotations"></param>
-        public ParameterAnnotationTableEncoder Add(Action<AnnotationTableEncoder> annotations)
+        public ParameterAnnotationTableEncoder ParameterAnnotation(Action<AnnotationTableEncoder> annotations)
         {
             annotations(new AnnotationTableEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);

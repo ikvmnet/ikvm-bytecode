@@ -32,7 +32,7 @@ namespace IKVM.ByteCode.Writing
         /// Adds an element value pair.
         /// </summary>
         /// <param name="value"></param>
-        public ElementValueTableEncoder Add(Action<ElementValueEncoder> value)
+        public ElementValueTableEncoder ElementValue(Action<ElementValueEncoder> value)
         {
             if (value is null)
                 throw new ArgumentNullException(nameof(value));
@@ -43,36 +43,12 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Encodes an existing set of elements.
-        /// </summary>
-        /// <param name="elements"></param>
-        public ElementValueTableEncoder AddMany(ReadOnlySpan<ElementValueRecord> elements)
-        {
-            foreach (var i in elements)
-                Add(e => e.Encode(i));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes an existing set of elements.
-        /// </summary>
-        /// <param name="elements"></param>
-        public ElementValueTableEncoder AddMany(IEnumerable<ElementValueRecord> elements)
-        {
-            foreach (var i in elements)
-                Add(e => e.Encode(i));
-
-            return this;
-        }
-
-        /// <summary>
         /// Constant of the primitive type byte as the value of this element-value pair.
         /// </summary>
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder Byte(IntegerConstantHandle constantValue)
         {
-            return Add(e => e.Byte(constantValue));
+            return ElementValue(e => e.Byte(constantValue));
         }
 
         /// <summary>
@@ -81,7 +57,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder Char(IntegerConstantHandle constantValue)
         {
-            return Add(e => e.Char(constantValue));
+            return ElementValue(e => e.Char(constantValue));
         }
 
         /// <summary>
@@ -90,7 +66,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder Double(DoubleConstantHandle constantValue)
         {
-            return Add(e => e.Double(constantValue));
+            return ElementValue(e => e.Double(constantValue));
         }
 
         /// <summary>
@@ -99,7 +75,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder Float(FloatConstantHandle constantValue)
         {
-            return Add(e => e.Float(constantValue));
+            return ElementValue(e => e.Float(constantValue));
         }
 
         /// <summary>
@@ -108,7 +84,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder Integer(IntegerConstantHandle constantValue)
         {
-            return Add(e => e.Integer(constantValue));
+            return ElementValue(e => e.Integer(constantValue));
         }
 
         /// <summary>
@@ -117,7 +93,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder Long(LongConstantHandle constantValue)
         {
-            return Add(e => e.Long(constantValue));
+            return ElementValue(e => e.Long(constantValue));
         }
 
         /// <summary>
@@ -126,7 +102,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder Short(IntegerConstantHandle constantValue)
         {
-            return Add(e => e.Short(constantValue));
+            return ElementValue(e => e.Short(constantValue));
         }
 
         /// <summary>
@@ -135,7 +111,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder Boolean(IntegerConstantHandle constantValue)
         {
-            return Add(e => e.Boolean(constantValue));
+            return ElementValue(e => e.Boolean(constantValue));
         }
 
         /// <summary>
@@ -144,7 +120,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constantValue"></param>
         public ElementValueTableEncoder String(Utf8ConstantHandle constantValue)
         {
-            return Add(e => e.String(constantValue));
+            return ElementValue(e => e.String(constantValue));
         }
 
         /// <summary>
@@ -154,7 +130,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="constName"></param>
         public ElementValueTableEncoder Enum(Utf8ConstantHandle typeName, Utf8ConstantHandle constName)
         {
-            return Add(e => e.Enum(typeName, constName));
+            return ElementValue(e => e.Enum(typeName, constName));
         }
 
         /// <summary>
@@ -163,7 +139,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="classInfo"></param>
         public ElementValueTableEncoder Class(Utf8ConstantHandle classInfo)
         {
-            return Add(e => e.Class(classInfo));
+            return ElementValue(e => e.Class(classInfo));
         }
 
         /// <summary>
@@ -172,7 +148,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="annotationValue"></param>
         public ElementValueTableEncoder Annotation(Action<AnnotationEncoder> annotationValue)
         {
-            return Add(e => e.Annotation(annotationValue));
+            return ElementValue(e => e.Annotation(annotationValue));
         }
 
     }

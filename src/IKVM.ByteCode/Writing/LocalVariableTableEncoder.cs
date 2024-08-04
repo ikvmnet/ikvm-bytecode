@@ -26,45 +26,9 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Adds an existing local variable.
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public LocalVariableTableEncoder Add(LocalVariableTableAttributeItemRecord record)
-        {
-            return LocalVar(record.CodeOffset, record.CodeLength, record.Name, record.Descriptor, record.Index);
-        }
-
-        /// <summary>
-        /// Adds many existing local variables.
-        /// </summary>
-        /// <param name="records"></param>
-        /// <returns></returns>
-        public LocalVariableTableEncoder AddMany(ReadOnlySpan<LocalVariableTableAttributeItemRecord> records)
-        {
-            foreach (var i in records)
-                Add(i);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Adds many existing local variables.
-        /// </summary>
-        /// <param name="records"></param>
-        /// <returns></returns>
-        public LocalVariableTableEncoder AddMany(IEnumerable<LocalVariableTableAttributeItemRecord> records)
-        {
-            foreach (var i in records)
-                Add(i);
-
-            return this;
-        }
-
-        /// <summary>
         /// Adds a new local variable.
         /// </summary>
-        public LocalVariableTableEncoder LocalVar(ushort start, ushort length, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, ushort index)
+        public LocalVariableTableEncoder LocalVariable(ushort start, ushort length, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, ushort index)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(start);

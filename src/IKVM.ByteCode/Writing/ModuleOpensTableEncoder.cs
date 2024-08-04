@@ -26,52 +26,13 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Adds an existing module open record.
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public ModuleOpensTableEncoder Add(ModuleAttributeOpensRecord record)
-        {
-            return Opens(record.Package, record.Flags, e => e.AddMany(record.Modules.AsSpan()));
-        }
-
-        /// <summary>
-        /// Adds many existing module open record.
-        /// </summary>
-        /// <param name="records"></param>
-        /// <returns></returns>
-        public ModuleOpensTableEncoder AddMany(ReadOnlySpan<ModuleAttributeOpensRecord> records)
-        {
-            foreach (var i in records)
-                Add(i);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Adds many existing module open record.
-        /// </summary>
-        /// <param name="records"></param>
-        /// <returns></returns>
-        public ModuleOpensTableEncoder AddMany(IEnumerable<ModuleAttributeOpensRecord> records)
-        {
-            if (records is null)
-                throw new ArgumentNullException(nameof(records));
-
-            foreach (var i in records)
-                Add(i);
-
-            return this;
-        }
-
-        /// <summary>
         /// Adds a new module open record.
         /// </summary>
         /// <param name="package"></param>
         /// <param name="flags"></param>
         /// <param name="to"></param>
         /// <returns></returns>
-        public ModuleOpensTableEncoder Opens(PackageConstantHandle package, ModuleOpensFlag flags, Action<ModuleTableEncoder> to)
+        public ModuleOpensTableEncoder ModuleOpens(PackageConstantHandle package, ModuleOpensFlag flags, Action<ModuleTableEncoder> to)
         {
             if (to is null)
                 throw new ArgumentNullException(nameof(to));

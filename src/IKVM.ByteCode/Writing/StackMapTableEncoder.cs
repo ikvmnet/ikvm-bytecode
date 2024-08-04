@@ -46,7 +46,7 @@ namespace IKVM.ByteCode.Writing
         /// Adds a Same Frame.
         /// </summary>
         /// <param name="frameType"></param>
-        public StackMapTableEncoder AddSameFrame(byte frameType)
+        public StackMapTableEncoder SameFrame(byte frameType)
         {
             ValidateFrameType(frameType, 0, 63, nameof(frameType), "SAME");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
@@ -59,7 +59,7 @@ namespace IKVM.ByteCode.Writing
         /// Adds a Same Locals 1 Stack Item Frame.
         /// </summary>
         /// <param name="frameType"></param>
-        public StackMapTableEncoder AddSameLocalsOneStackItemFrame(byte frameType, Action<VerificationTypeInfoEncoder> stack)
+        public StackMapTableEncoder SameLocalsOneStackItemFrame(byte frameType, Action<VerificationTypeInfoEncoder> stack)
         {
             ValidateFrameType(frameType, 64, 127, nameof(frameType), "SAME_LOCALS_1_STACK_ITEM");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
@@ -72,7 +72,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a Same Locals 1 Stack Item Frame Extended.
         /// </summary>
-        public StackMapTableEncoder AddSameLocalsOneStackItemFrameExtended(ushort offsetDelta, Action<VerificationTypeInfoEncoder> stack)
+        public StackMapTableEncoder SameLocalsOneStackItemFrameExtended(ushort offsetDelta, Action<VerificationTypeInfoEncoder> stack)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1(247);
@@ -85,7 +85,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a Chop Frame.
         /// </summary>
-        public StackMapTableEncoder AddChopFrame(byte frameType, ushort offsetDelta)
+        public StackMapTableEncoder ChopFrame(byte frameType, ushort offsetDelta)
         {
             ValidateFrameType(frameType, 248, 250, nameof(frameType), "CHOP");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
@@ -98,7 +98,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a Same Frame Extended.
         /// </summary>
-        public StackMapTableEncoder AddSameFrameExtended(ushort offsetDelta)
+        public StackMapTableEncoder SameFrameExtended(ushort offsetDelta)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1(251);
@@ -110,7 +110,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds an Append Frame.
         /// </summary>
-        public StackMapTableEncoder AddAppendFrame(byte frameType, ushort offsetDelta, Action<VerificationTypeInfoEncoder> locals)
+        public StackMapTableEncoder AppendFrame(byte frameType, ushort offsetDelta, Action<VerificationTypeInfoEncoder> locals)
         {
             ValidateFrameType(frameType, 252, 254, nameof(frameType), "APPEND");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
@@ -124,7 +124,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a Full Frame.
         /// </summary>
-        public StackMapTableEncoder AddFullFrame(ushort offsetDelta, Action<VerificationTypeInfoEncoder> locals, Action<VerificationTypeInfoEncoder> stack)
+        public StackMapTableEncoder FullFrame(ushort offsetDelta, Action<VerificationTypeInfoEncoder> locals, Action<VerificationTypeInfoEncoder> stack)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1(255);

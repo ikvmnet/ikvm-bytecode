@@ -8,37 +8,38 @@ namespace IKVM.ByteCode.Writing
 {
 
     /// <summary>
-    /// Encodes a line number table.
+    /// Encoes a method parameters structure.
     /// </summary>
-    public struct LineNumberTableEncoder
+    public struct MethodParameterTableEncoder
     {
 
         readonly BlobBuilder _builder;
         readonly Blob _countBlob;
-        ushort _count;
+        byte _count;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="builder"></param>
-        public LineNumberTableEncoder(BlobBuilder builder)
+        public MethodParameterTableEncoder(BlobBuilder builder)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
-            _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
+            _countBlob = _builder.ReserveBytes(ClassFormatWriter.U1);
             _count = 0;
         }
 
         /// <summary>
-        /// Adds a new line number at the specified byte code offset.
+        /// Adds a parameter.
         /// </summary>
-        /// <param name="start"></param>
-        /// <param name="lineNumber"></param>
-        public LineNumberTableEncoder LineNumber(ushort start, ushort lineNumber)
+        /// <param name="name"></param>
+        /// <param name="accessFlags"></param>
+        /// <returns></returns>
+        public MethodParameterTableEncoder MethodParameter(Utf8ConstantHandle name, AccessFlag accessFlags)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(start);
-            w.TryWriteU2(lineNumber);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.TryWriteU2(name.Index);
+            w.TryWriteU2((ushort)accessFlags);
+            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);
             return this;
         }
 

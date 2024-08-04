@@ -29,39 +29,6 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Encodes an existing set of elements.
-        /// </summary>
-        /// <param name="element"></param>
-        public ElementValuePairTableEncoder Add(ElementValuePairRecord element)
-        {
-            return Element(element.Name, e => e.Encode(element.Value));
-        }
-
-        /// <summary>
-        /// Encodes an existing set of elements.
-        /// </summary>
-        /// <param name="elements"></param>
-        public ElementValuePairTableEncoder AddMany(ReadOnlySpan<ElementValuePairRecord> elements)
-        {
-            foreach (var i in elements)
-                Add(i);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes an existing set of elements.
-        /// </summary>
-        /// <param name="elements"></param>
-        public ElementValuePairTableEncoder AddMany(IEnumerable<ElementValuePairRecord> elements)
-        {
-            foreach (var i in elements)
-                Add(i);
-
-            return this;
-        }
-
-        /// <summary>
         /// Adds an element value pair.
         /// </summary>
         /// <param name="elementName"></param>

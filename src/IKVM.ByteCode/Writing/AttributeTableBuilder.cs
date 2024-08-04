@@ -302,13 +302,13 @@ namespace IKVM.ByteCode.Writing
         /// Adds a new InnerClasses attribute.
         /// </summary>
         /// <param name="classes"></param>
-        public AttributeTableBuilder InnerClasses(Action<InnerClassesTableEncoder> classes)
+        public AttributeTableBuilder InnerClasses(Action<InnerClassTableEncoder> classes)
         {
             if (classes is null)
                 throw new ArgumentNullException(nameof(classes));
 
             var b = new BlobBuilder();
-            classes(new InnerClassesTableEncoder(b));
+            classes(new InnerClassTableEncoder(b));
             return Attribute("InnerClasses", b);
         }
 
@@ -537,26 +537,26 @@ namespace IKVM.ByteCode.Writing
         /// Adds a new BootstrapMethods attribute.
         /// </summary>
         /// <param name="bootstrapMethods"></param>
-        public AttributeTableBuilder BootstrapMethods(Action<BootstrapMethodsTableEncoder> bootstrapMethods)
+        public AttributeTableBuilder BootstrapMethods(Action<BootstrapMethodTableEncoder> bootstrapMethods)
         {
             if (bootstrapMethods is null)
                 throw new ArgumentNullException(nameof(bootstrapMethods));
 
             var b = new BlobBuilder();
-            bootstrapMethods(new BootstrapMethodsTableEncoder(b));
+            bootstrapMethods(new BootstrapMethodTableEncoder(b));
             return Attribute("BootstrapMethods", b);
         }
 
         /// <summary>
         /// Adds a new MethodParameters attribute.
         /// </summary>
-        public AttributeTableBuilder MethodParameters(Action<MethodParametersTableEncoder> parameters)
+        public AttributeTableBuilder MethodParameters(Action<MethodParameterTableEncoder> parameters)
         {
             if (parameters is null)
                 throw new ArgumentNullException(nameof(parameters));
 
             var b = new BlobBuilder();
-            parameters(new MethodParametersTableEncoder(b));
+            parameters(new MethodParameterTableEncoder(b));
             return Attribute("MethodParameters", b);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Parsing;
@@ -22,49 +23,6 @@ namespace IKVM.ByteCode.Writing
         public TypeAnnotationEncoder(BlobBuilder builder)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
-        }
-
-        /// <summary>
-        /// Encodes an existing record.
-        /// </summary>
-        /// <param name="record"></param>
-        public void Encode(TypeAnnotationRecord record)
-        {
-            switch (record.Target)
-            {
-                case TypeParameterTargetRecord target:
-                    TypeParameterTarget(record.TargetType, target.ParameterIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case SuperTypeTargetRecord target:
-                    SuperTypeTarget(record.TargetType, target.SuperTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case TypeParameterBoundTargetRecord target:
-                    TypeParameterBoundTarget(record.TargetType, target.ParameterIndex, target.BoundIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case EmptyTargetRecord target:
-                    EmptyTarget(record.TargetType, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case FormalParameterTargetRecord target:
-                    FormalParameterTarget(record.TargetType, target.ParameterIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case ThrowsTargetRecord target:
-                    ThrowsTarget(record.TargetType, target.ThrowsTypeIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case LocalVariableTargetTableRecord target:
-                    LocalVarTarget(record.TargetType, e => e.AddMany(target.Items.AsSpan()), e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case CatchTargetRecord target:
-                    CatchTarget(record.TargetType, target.ExceptionTableIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case OffsetTargetRecord target:
-                    OffsetTarget(record.TargetType, target.Offset, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                case TypeArgumentTargetRecord target:
-                    TypeArgumentTarget(record.TargetType, target.Offset, target.TypeArgumentIndex, e => e.Encode(record.TargetPath), record.Type, e => e.AddMany(record.Elements.AsSpan()));
-                    break;
-                default:
-                    throw new InvalidOperationException("Invalid type annotation.");
-            }
         }
 
         /// <summary>
@@ -308,7 +266,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        public void MethodFormalParameter(ushort throwsTypeIndex, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        public void Throws(ushort throwsTypeIndex, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
             ThrowsTarget(TypeAnnotationTargetType.Throws, throwsTypeIndex, targetPath, type, elementValues);
         }

@@ -9,7 +9,7 @@ namespace IKVM.ByteCode.Writing
     /// <summary>
     /// Encodes a 'bootstrap_methods' structure.
     /// </summary>
-    public struct BootstrapMethodsTableEncoder
+    public struct BootstrapMethodTableEncoder
     {
 
         readonly BlobBuilder _builder;
@@ -20,7 +20,7 @@ namespace IKVM.ByteCode.Writing
         /// Initializes a new instance.
         /// </summary>
         /// <param name="builder"></param>
-        public BootstrapMethodsTableEncoder(BlobBuilder builder)
+        public BootstrapMethodTableEncoder(BlobBuilder builder)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
@@ -33,23 +33,13 @@ namespace IKVM.ByteCode.Writing
         /// <param name="methodRef"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public BootstrapMethodsTableEncoder Add(MethodHandleConstantHandle methodRef, Action<BootstrapArgumentsTableEncoder> arguments)
+        public BootstrapMethodTableEncoder Method(MethodHandleConstantHandle methodRef, Action<BootstrapArgumentTableEncoder> arguments)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(methodRef.Index);
-            arguments(new BootstrapArgumentsTableEncoder(_builder));
+            arguments(new BootstrapArgumentTableEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
-        }
-
-        /// <summary>
-        /// Adds an existing bootstrap method.
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        public BootstrapMethodsTableEncoder Add(BootstrapMethodsAttributeMethodRecord record)
-        {
-            return Add(record.Method, e => e.Add(record.Arguments.AsSpan()));
         }
 
     }

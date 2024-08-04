@@ -30,10 +30,10 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="modules"></param>
         /// <returns></returns>
-        public ModuleTableEncoder AddMany(ReadOnlySpan<ModuleConstantHandle> modules)
+        public ModuleTableEncoder Modules(ReadOnlySpan<ModuleConstantHandle> modules)
         {
             foreach (var i in modules)
-                Add(i);
+                Module(i);
 
             return this;
         }
@@ -43,10 +43,10 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="modules"></param>
         /// <returns></returns>
-        public ModuleTableEncoder AddMany(IEnumerable<ModuleConstantHandle> modules)
+        public ModuleTableEncoder Modules(IEnumerable<ModuleConstantHandle> modules)
         {
             foreach (var i in modules)
-                Add(i);
+                Module(i);
 
             return this;
         }
@@ -56,7 +56,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="module"></param>
         /// <returns></returns>
-        public ModuleTableEncoder Add(ModuleConstantHandle module)
+        public ModuleTableEncoder Module(ModuleConstantHandle module)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(module.Index);

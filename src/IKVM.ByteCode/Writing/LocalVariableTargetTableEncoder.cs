@@ -26,42 +26,9 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Encodes an existing local variable target.
-        /// </summary>
-        /// <param name="target"></param>
-        public LocalVariableTargetTableEncoder Add(LocalVariableTargetTableItemRecord target)
-        {
-            return LocalVar(target.Start, target.Length, target.Index);
-        }
-
-        /// <summary>
-        /// Adds many existing local variable targets.
-        /// </summary>
-        /// <param name="records"></param>
-        public LocalVariableTargetTableEncoder AddMany(ReadOnlySpan<LocalVariableTargetTableItemRecord> records)
-        {
-            foreach (var i in records)
-                Add(i);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Adds many existing local variable targets.
-        /// </summary>
-        /// <param name="records"></param>
-        public LocalVariableTargetTableEncoder AddMany(IEnumerable<LocalVariableTargetTableItemRecord> records)
-        {
-            foreach (var i in records)
-                Add(i);
-
-            return this;
-        }
-
-        /// <summary>
         /// Adds a new local variable.
         /// </summary>
-        public LocalVariableTargetTableEncoder LocalVar(ushort start, ushort length, ushort index)
+        public LocalVariableTargetTableEncoder LocalVariableTarget(ushort start, ushort length, ushort index)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(start);

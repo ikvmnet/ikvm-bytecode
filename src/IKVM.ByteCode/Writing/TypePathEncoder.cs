@@ -25,34 +25,6 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
-        /// Encodes an existing type path.
-        /// </summary>
-        /// <param name="targetPath"></param>
-        public TypePathEncoder Encode(TypePathRecord targetPath)
-        {
-            foreach (var i in targetPath.Path)
-                Encode(i);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes an existing type path item.
-        /// </summary>
-        /// <param name="item"></param>
-        public TypePathEncoder Encode(TypePathItemRecord item)
-        {
-            return item.Kind switch
-            {
-                TypePathKind.Array => Array(),
-                TypePathKind.InnerType => InnerType(),
-                TypePathKind.Wildcard => Wildcard(),
-                TypePathKind.TypeArgument => TypeArgument(item.ArgumentIndex),
-                _ => throw new ArgumentException("Invalid path kind.", nameof(item)),
-            };
-        }
-
-        /// <summary>
         /// Annotation is deeper in an array type.
         /// </summary>
         public TypePathEncoder Array()

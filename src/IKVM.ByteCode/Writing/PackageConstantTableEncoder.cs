@@ -31,7 +31,7 @@ namespace IKVM.ByteCode.Writing
         /// Adds a package to the table.
         /// </summary>
         /// <param name="package"></param>
-        public PackageConstantTableEncoder Add(PackageConstantHandle package)
+        public PackageConstantTableEncoder PackageConstant(PackageConstantHandle package)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(package.Index);
