@@ -3,8 +3,6 @@ using System.Buffers;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.CompilerServices;
 
-using Microsoft.Win32.SafeHandles;
-
 namespace IKVM.ByteCode.Buffers
 {
 
