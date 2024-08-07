@@ -86,7 +86,7 @@ namespace IKVM.ByteCode.Reading.Tests
                 c.Methods.Should().OnlyHaveUniqueItems();
 
                 foreach (var iface in c.Interfaces)
-                    c.Constants.GetClassName(iface.Class).Should().NotBeNull();
+                    c.GetClassName(iface.Class).Should().NotBeNull();
 
                 foreach (var field in c.Fields)
                 {
