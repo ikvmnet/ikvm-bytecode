@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Reading.Tests
         public async Task ShouldThrowOnEmptyStream()
         {
             var stream = new MemoryStream();
-            await ClassFile.ReadAsync(stream);
+            using var clazz = await ClassFile.ReadAsync(stream);
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace IKVM.ByteCode.Reading.Tests
         public async Task ShouldThrowOnSmallStream()
         {
             var stream = new MemoryStream(new byte[10]);
-            await ClassFile.ReadAsync(stream);
+            using var clazz = await ClassFile.ReadAsync(stream);
         }
 
         [TestMethod]
@@ -38,13 +38,13 @@ namespace IKVM.ByteCode.Reading.Tests
         public async Task ShouldThrowOnBadStream()
         {
             var stream = new MemoryStream(new byte[35]);
-            await ClassFile.ReadAsync(stream);
+            using var clazz = await ClassFile.ReadAsync(stream);
         }
 
         [TestMethod]
         public void CanLoadClass()
         {
-            var clazz = ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ClassReaderTests).Assembly.Location), "0.class"));
+            using var clazz = ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ClassReaderTests).Assembly.Location), "0.class"));
             clazz.Should().NotBeNull();
 
             foreach (var m in clazz.Methods)
@@ -71,7 +71,7 @@ namespace IKVM.ByteCode.Reading.Tests
 
             foreach (var i in l)
             {
-                var c = ClassFile.Read(i);
+                using var c = ClassFile.Read(i);
                 c.This.Should().NotBeNull();
                 c.Constants.ToList();
 
