@@ -29,8 +29,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dist-nuget", "src\dist-nuge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dist-tests", "src\dist-tests\dist-tests.csproj", "{0661B88F-362C-4693-B7E3-DE4AD939DC68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asdasdasdasd", "asdasdasdasd\asdasdasdasd.csproj", "{A89BA55C-E478-434E-B1C3-816F625C2EDE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,10 +51,6 @@ Global
 		{0661B88F-362C-4693-B7E3-DE4AD939DC68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0661B88F-362C-4693-B7E3-DE4AD939DC68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0661B88F-362C-4693-B7E3-DE4AD939DC68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A89BA55C-E478-434E-B1C3-816F625C2EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A89BA55C-E478-434E-B1C3-816F625C2EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A89BA55C-E478-434E-B1C3-816F625C2EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A89BA55C-E478-434E-B1C3-816F625C2EDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
