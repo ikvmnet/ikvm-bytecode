@@ -168,7 +168,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        public void LocalVarTarget(Action<LocalVariableTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        public void LocalVarTarget(Action<LocalVarTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
             TypeAnnotation(encoder => encoder.LocalVarTarget(localVars, targetPath, type, elementValues));
         }
@@ -180,7 +180,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        public void ResourceVariable(Action<LocalVariableTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        public void ResourceVariable(Action<LocalVarTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
             TypeAnnotation(encoder => encoder.ResourceVariable(localVars, targetPath, type, elementValues));
         }

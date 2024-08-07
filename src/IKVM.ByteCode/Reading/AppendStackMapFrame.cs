@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct AppendStackMapFrame(byte FrameType, ushort OffsetDelta, ReadOnlyMemory<VerificationTypeInfo> Locals)
+    public readonly record struct AppendStackMapFrame(byte FrameType, ushort OffsetDelta, VerificationTypeInfoTable Locals)
     {
 
         /// <summary>
@@ -42,7 +40,7 @@ namespace IKVM.ByteCode.Reading
                 locals[i] = local;
             }
 
-            frame = new AppendStackMapFrame(frameType, offsetDelta, locals);
+            frame = new AppendStackMapFrame(frameType, offsetDelta, new(locals));
             return true;
         }
 

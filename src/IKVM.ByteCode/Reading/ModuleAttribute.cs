@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct ModuleAttribute(ModuleConstantHandle Name, ModuleFlag Flags, Utf8ConstantHandle Version, ReadOnlyMemory<ModuleAttributeRequires> Requires, ReadOnlyMemory<ModuleAttributeExports> Exports, ReadOnlyMemory<ModuleAttributeOpens> Opens, ReadOnlyMemory<ClassConstantHandle> Uses, ReadOnlyMemory<ModuleAttributeProvides> Provides, bool IsNotNil = true)
+    public readonly record struct ModuleAttribute(ModuleConstantHandle Name, ModuleFlag Flags, Utf8ConstantHandle Version, ModuleRequiresTable Requires, ModuleExportsTable Exports, ModuleOpensTable Opens, ClassConstantHandleTable Uses, ModuleProvidesTable Provides, bool IsNotNil = true)
     {
 
         public static ModuleAttribute Nil => default;
@@ -22,7 +20,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort requiresCount) == false)
                 return false;
 
-            var requires = new ModuleAttributeRequires[requiresCount];
+            var requires = requiresCount == 0 ? [] : new ModuleRequires[requiresCount];
             for (int i = 0; i < requiresCount; i++)
             {
                 if (reader.TryReadU2(out ushort requiresIndex) == false)
@@ -32,13 +30,13 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort requiresVersionIndex) == false)
                     return false;
 
-                requires[i] = new ModuleAttributeRequires(new(requiresIndex), (ModuleRequiresFlag)requiresFlags, new(requiresVersionIndex));
+                requires[i] = new ModuleRequires(new(requiresIndex), (ModuleRequiresFlag)requiresFlags, new(requiresVersionIndex));
             }
 
             if (reader.TryReadU2(out ushort exportsCount) == false)
                 return false;
 
-            var exports = new ModuleAttributeExports[exportsCount];
+            var exports = new ModuleExports[exportsCount];
             for (int i = 0; i < exportsCount; i++)
             {
                 if (reader.TryReadU2(out ushort exportsIndex) == false)
@@ -49,7 +47,7 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort exportsModuleCount) == false)
                     return false;
 
-                var exportsModules = new ModuleConstantHandle[exportsModuleCount];
+                var exportsModules = exportsModuleCount == 0 ? [] : new ModuleConstantHandle[exportsModuleCount];
                 for (int j = 0; j < exportsModuleCount; j++)
                 {
                     if (reader.TryReadU2(out ushort exportsToModuleIndex) == false)
@@ -58,13 +56,13 @@ namespace IKVM.ByteCode.Reading
                     exportsModules[j] = new(exportsToModuleIndex);
                 }
 
-                exports[i] = new ModuleAttributeExports(new(exportsIndex), (ModuleExportsFlag)exportsFlags, exportsModules);
+                exports[i] = new ModuleExports(new(exportsIndex), (ModuleExportsFlag)exportsFlags, new(exportsModules));
             }
 
             if (reader.TryReadU2(out ushort opensCount) == false)
                 return false;
 
-            var opens = new ModuleAttributeOpens[opensCount];
+            var opens = opensCount == 0 ? [] : new ModuleOpens[opensCount];
             for (int i = 0; i < opensCount; i++)
             {
                 if (reader.TryReadU2(out ushort opensIndex) == false)
@@ -75,7 +73,7 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort opensModulesCount) == false)
                     return false;
 
-                var opensModules = new ModuleConstantHandle[opensModulesCount];
+                var opensModules = opensModulesCount == 0 ? [] : new ModuleConstantHandle[opensModulesCount];
                 for (int j = 0; j < opensModulesCount; j++)
                 {
                     if (reader.TryReadU2(out ushort opensModuleIndex) == false)
@@ -84,13 +82,13 @@ namespace IKVM.ByteCode.Reading
                     opensModules[j] = new(opensModuleIndex);
                 }
 
-                opens[i] = new ModuleAttributeOpens(new(opensIndex), (ModuleOpensFlag)opensFlags, opensModules);
+                opens[i] = new ModuleOpens(new(opensIndex), (ModuleOpensFlag)opensFlags, new(opensModules));
             }
 
             if (reader.TryReadU2(out ushort usesCount) == false)
                 return false;
 
-            var uses = new ClassConstantHandle[usesCount];
+            var uses = usesCount == 0 ? [] : new ClassConstantHandle[usesCount];
             for (int i = 0; i < usesCount; i++)
             {
                 if (reader.TryReadU2(out ushort usesIndex) == false)
@@ -102,7 +100,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort providesCount) == false)
                 return false;
 
-            var provides = new ModuleAttributeProvides[providesCount];
+            var provides = providesCount == 0 ? [] : new ModuleProvides[providesCount];
             for (int i = 0; i < providesCount; i++)
             {
                 if (reader.TryReadU2(out ushort providesIndex) == false)
@@ -111,7 +109,7 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort providesModulesCount) == false)
                     return false;
 
-                var providesModules = new ClassConstantHandle[providesModulesCount];
+                var providesModules = providesModulesCount == 0 ? [] : new ClassConstantHandle[providesModulesCount];
                 for (int j = 0; j < providesModulesCount; j++)
                 {
                     if (reader.TryReadU2(out ushort providesModuleIndex) == false)
@@ -120,10 +118,10 @@ namespace IKVM.ByteCode.Reading
                     providesModules[j] = new(providesModuleIndex);
                 }
 
-                provides[i] = new ModuleAttributeProvides(new(providesIndex), providesModules);
+                provides[i] = new ModuleProvides(new(providesIndex), new(providesModules));
             }
 
-            attribute = new ModuleAttribute(new(moduleNameIndex), (ModuleFlag)moduleFlags, new(moduleVersionIndex), requires, exports, opens, uses, provides);
+            attribute = new ModuleAttribute(new(moduleNameIndex), (ModuleFlag)moduleFlags, new(moduleVersionIndex), new(requires), new(exports), new(opens), new(uses), new(provides));
             return true;
         }
 

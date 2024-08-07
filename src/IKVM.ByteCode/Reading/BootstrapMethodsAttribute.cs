@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct BootstrapMethodsAttribute(ReadOnlyMemory<BootstrapMethodsAttributeMethod> Methods, bool IsNotNil = true)
+    public readonly record struct BootstrapMethodsAttribute(BootstrapMethodTable Methods, bool IsNotNil = true)
     {
 
         public static BootstrapMethodsAttribute Nil => default;
@@ -15,16 +15,16 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var methods = new BootstrapMethodsAttributeMethod[count];
+            var methods = count == 0 ? [] : new BootstrapMethod[count];
             for (int i = 0; i < count; i++)
             {
-                if (BootstrapMethodsAttributeMethod.TryRead(ref reader, out var method) == false)
+                if (BootstrapMethod.TryRead(ref reader, out var method) == false)
                     return false;
 
                 methods[i] = method;
             }
 
-            attribute = new BootstrapMethodsAttribute(methods);
+            attribute = new BootstrapMethodsAttribute(new(methods));
             return true;
         }
 

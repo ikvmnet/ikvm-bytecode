@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct NestMembersAttribute(ReadOnlyMemory<ClassConstantHandle> ClassIndexes, bool IsNotNil = true)
+    public readonly record struct NestMembersAttribute(ClassConstantHandleTable Classes, bool IsNotNil = true)
     {
 
         public static NestMembersAttribute Nil => default;
@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var classes = new ClassConstantHandle[count];
+            var classes = count == 0 ? [] : new ClassConstantHandle[count];
             for (int i = 0; i < count; i++)
             {
                 if (reader.TryReadU2(out ushort classIndex) == false)
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
                 classes[i] = new(classIndex);
             }
 
-            attribute = new NestMembersAttribute(classes);
+            attribute = new NestMembersAttribute(new(classes));
             return true;
         }
 

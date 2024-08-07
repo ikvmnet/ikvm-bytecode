@@ -1,11 +1,55 @@
 ﻿using System;
 using System.Buffers;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LocalVarTarget(ReadOnlyMemory<LocalVarTargetItem> Items)
+    public readonly record struct LocalVarTarget : IReadOnlyList<LocalVarTargetItem>
     {
+
+        public struct Enumerator : IEnumerator<LocalVarTargetItem>
+        {
+
+            readonly LocalVarTargetItem[] _items;
+            int _index;
+
+            /// <summary>
+            /// Initializes a new instance.
+            /// </summary>
+            /// <param name="items"></param>
+            internal Enumerator(LocalVarTargetItem[] items)
+            {
+                _items = items;
+                _index = -1;
+            }
+
+            /// <inheritdoc />
+            public readonly LocalVarTargetItem Current => _items[_index];
+
+            /// <inheritdoc />
+            public bool MoveNext()
+            {
+                return ++_index < _items.Length;
+            }
+
+            /// <inheritdoc />
+            public void Reset()
+            {
+                _index = -1;
+            }
+
+            /// <inheritdoc />
+            public readonly void Dispose()
+            {
+
+            }
+
+            /// <inheritdoc />
+            readonly object IEnumerator.Current => Current;
+
+        }
 
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
@@ -49,7 +93,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort length) == false)
                 return false;
 
-            var items = new LocalVarTargetItem[length];
+            var items = length == 0 ? [] : new LocalVarTargetItem[length];
             for (int i = 0; i < length; i++)
                 if (LocalVarTargetItem.TryRead(ref reader, out items[i]) == false)
                     return false;
@@ -57,6 +101,47 @@ namespace IKVM.ByteCode.Reading
             target = new LocalVarTarget(items);
             return true;
         }
+
+        readonly LocalVarTargetItem[] _items;
+
+        /// <summary>
+        /// Initializes a new instance.
+        /// </summary>
+        /// <param name="items"></param>
+        internal LocalVarTarget(LocalVarTargetItem[] items)
+        {
+            _items = items ?? throw new ArgumentNullException(nameof(items));
+        }
+
+        /// <summary>
+        /// Gets a reference to the local var target at the given index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public readonly LocalVarTargetItem this[int index] => GetItem(index);
+
+        /// <summary>
+        /// Gets the local var target at the given index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        readonly LocalVarTargetItem GetItem(int index) => _items[index];
+
+        /// <summary>
+        /// Gets the number of local local var targets.
+        /// </summary>
+        public readonly int Count => _items.Length;
+
+        /// <summary>
+        /// Gets an enumerator over the local var targets.
+        /// </summary>
+        public readonly Enumerator GetEnumerator() => new Enumerator(_items);
+
+        /// <inheritdoc />
+        readonly IEnumerator<LocalVarTargetItem> IEnumerable<LocalVarTargetItem>.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     }
 

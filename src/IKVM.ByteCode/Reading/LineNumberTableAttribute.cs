@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LineNumberTableAttribute(ReadOnlyMemory<LineNumberTableAttributeItem> Items, bool IsNotNil = true)
+    public readonly record struct LineNumberTableAttribute(LineNumberTable Table, bool IsNotNil = true)
     {
 
         public static LineNumberTableAttribute Nil => default;
@@ -15,7 +13,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort itemCount) == false)
                 return false;
 
-            var items = new LineNumberTableAttributeItem[itemCount];
+            var items = itemCount == 0 ? [] : new LineNumber[itemCount];
             for (int i = 0; i < itemCount; i++)
             {
                 if (reader.TryReadU2(out ushort codeOffset) == false)
@@ -23,10 +21,10 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort lineNumber) == false)
                     return false;
 
-                items[i] = new LineNumberTableAttributeItem(codeOffset, lineNumber);
+                items[i] = new LineNumber(codeOffset, lineNumber);
             }
 
-            attribute = new LineNumberTableAttribute(items);
+            attribute = new LineNumberTableAttribute(new(items));
             return true;
         }
 

@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LocalVariableTableAttribute(ReadOnlyMemory<LocalVariableTableAttributeItem> Items, bool IsNotNil = true)
+    public readonly record struct LocalVariableTableAttribute(LocalVariableTable Table, bool IsNotNil = true)
     {
 
         public static LocalVariableTableAttribute Nil => default;
@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort length) == false)
                 return false;
 
-            var items = new LocalVariableTableAttributeItem[length];
+            var items = length == 0 ? [] : new LocalVariable[length];
             for (int i = 0; i < length; i++)
             {
                 if (reader.TryReadU2(out ushort codeOffset) == false)
@@ -29,10 +29,10 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort index) == false)
                     return false;
 
-                items[i] = new LocalVariableTableAttributeItem(codeOffset, codeLength, new(nameIndex), new(descriptorIndex), index);
+                items[i] = new LocalVariable(codeOffset, codeLength, new(nameIndex), new(descriptorIndex), index);
             }
 
-            attribute = new LocalVariableTableAttribute(items);
+            attribute = new LocalVariableTableAttribute(new(items));
             return true;
         }
 

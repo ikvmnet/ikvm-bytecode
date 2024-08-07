@@ -1,40 +1,36 @@
-﻿#pragma warning disable 0282
-
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace IKVM.ByteCode.Reading
 {
 
-    /// <summary>
-    /// Table of attribute data.
-    /// </summary>
-    public partial class AttributeTable : IReadOnlyList<Attribute>
+    public readonly struct VerificationTypeInfoTable : IReadOnlyList<VerificationTypeInfo>
     {
 
-        public struct Enumerator : IEnumerator<Attribute>
+        public struct Enumerator : IEnumerator<VerificationTypeInfo>
         {
 
-            readonly AttributeTable _attributes;
+            readonly VerificationTypeInfo[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="methods"></param>
-            internal Enumerator(AttributeTable methods)
+            /// <param name="items"></param>
+            internal Enumerator(VerificationTypeInfo[] items)
             {
-                _attributes = methods;
+                _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly Attribute Current => _attributes[_index];
+            public readonly VerificationTypeInfo Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
             {
-                return ++_index < _attributes.Count;
+                return ++_index < _items.Length;
             }
 
             /// <inheritdoc />
@@ -54,48 +50,49 @@ namespace IKVM.ByteCode.Reading
 
         }
 
-        readonly Attribute[] _attributes;
+        readonly VerificationTypeInfo[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="constants"></param>
-        /// <param name="attributes"></param>
-        internal AttributeTable(Attribute[] attributes)
+        /// <param name="items"></param>
+        internal VerificationTypeInfoTable(VerificationTypeInfo[] items)
         {
-            _attributes = attributes;
+            _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
         /// <summary>
-        /// Gets a reference to the attribute at the given index.
+        /// Gets a reference to the type info at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public Attribute this[int index] => GetAttribute(index);
+        public VerificationTypeInfo this[int index] => GetItem(index);
 
         /// <summary>
-        /// Gets the attribute at the given index.
+        /// Gets the type info at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        Attribute GetAttribute(int index) => _attributes[index];
+        VerificationTypeInfo GetItem(int index) => _items[index];
 
         /// <summary>
-        /// Gets the number of fields.
+        /// Gets the number of type infos.
         /// </summary>
-        public int Count => _attributes.Length;
+        public int Count => _items.Length;
 
         /// <summary>
-        /// Gets an enumerator over the fields.
+        /// Gets an enumerator over the type infos.
         /// </summary>
-        public Enumerator GetEnumerator() => new Enumerator(this);
+        public Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
-        IEnumerator<Attribute> IEnumerable<Attribute>.GetEnumerator() => GetEnumerator();
+        IEnumerator<VerificationTypeInfo> IEnumerable<VerificationTypeInfo>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     }
+
+
 
 }

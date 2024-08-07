@@ -279,14 +279,14 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        void LocalVarTarget(TypeAnnotationTargetType targetType, Action<LocalVariableTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        void LocalVarTarget(TypeAnnotationTargetType targetType, Action<LocalVarTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
             if (_count > 0)
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
             w1.TryWriteU1((byte)targetType);
-            localVars(new LocalVariableTargetTableEncoder(_builder));
+            localVars(new LocalVarTargetTableEncoder(_builder));
             Footer(targetPath, type, elementValues);
         }
 
@@ -297,7 +297,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        public void LocalVarTarget(Action<LocalVariableTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        public void LocalVarTarget(Action<LocalVarTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
             LocalVarTarget(TypeAnnotationTargetType.LocalVariable, localVars, targetPath, type, elementValues);
         }
@@ -309,7 +309,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        public void ResourceVariable(Action<LocalVariableTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        public void ResourceVariable(Action<LocalVarTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
             LocalVarTarget(TypeAnnotationTargetType.ResourceVariable, localVars, targetPath, type, elementValues);
         }

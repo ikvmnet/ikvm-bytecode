@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct ModulePackagesAttribute(ReadOnlyMemory<PackageConstantHandle> Packages, bool IsNotNil = true)
+    public readonly record struct ModulePackagesAttribute(PackageConstantHandleTable Packages, bool IsNotNil = true)
     {
 
         public static ModulePackagesAttribute Nil => default;
@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var packages = new PackageConstantHandle[count];
+            var packages = count == 0 ? [] : new PackageConstantHandle[count];
             for (int i = 0; i < count; i++)
             {
                 if (reader.TryReadU2(out ushort packageIndex) == false)
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
                 packages[i] = new(packageIndex);
             }
 
-            attribute = new ModulePackagesAttribute(packages);
+            attribute = new ModulePackagesAttribute(new(packages));
             return true;
         }
 

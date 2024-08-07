@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct ParameterAnnotation(ReadOnlyMemory<Annotation> Annotations)
+    public readonly record struct ParameterAnnotation(AnnotationTable Annotations)
     {
 
         public static bool TryRead(ref ClassFormatReader reader, out ParameterAnnotation record)
@@ -13,7 +11,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var annotations = new Annotation[count];
+            var annotations = count == 0 ? [] : new Annotation[count];
             for (int i = 0; i < count; i++)
             {
                 if (Annotation.TryRead(ref reader, out var annotation) == false)
@@ -22,7 +20,7 @@ namespace IKVM.ByteCode.Reading
                 annotations[i] = annotation;
             }
 
-            record = new ParameterAnnotation(annotations);
+            record = new ParameterAnnotation(new(annotations));
             return true;
         }
 

@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct BootstrapMethodsAttributeMethod(MethodHandleConstantHandle Method, ReadOnlyMemory<ConstantHandle> Arguments)
+    public readonly record struct BootstrapMethod(MethodHandleConstantHandle Method, ConstantHandleTable Arguments)
     {
 
-        public static bool TryRead(ref ClassFormatReader reader, out BootstrapMethodsAttributeMethod method)
+        public static bool TryRead(ref ClassFormatReader reader, out BootstrapMethod method)
         {
             method = default;
 
@@ -15,7 +13,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort argumentCount) == false)
                 return false;
 
-            var arguments = new ConstantHandle[argumentCount];
+            var arguments = argumentCount == 0 ? [] : new ConstantHandle[argumentCount];
             for (int i = 0; i < argumentCount; i++)
             {
                 if (reader.TryReadU2(out ushort argumentIndex) == false)
@@ -24,7 +22,7 @@ namespace IKVM.ByteCode.Reading
                 arguments[i] = new(ConstantKind.Unknown, argumentIndex);
             }
 
-            method = new BootstrapMethodsAttributeMethod(new(methodIndex), arguments);
+            method = new BootstrapMethod(new(methodIndex), new(arguments));
             return true;
         }
 

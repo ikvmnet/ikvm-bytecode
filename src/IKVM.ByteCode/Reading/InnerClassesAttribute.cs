@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct InnerClassesAttribute(ReadOnlyMemory<InnerClassesAttributeItem> Items, bool IsNotNil = true)
+    public readonly record struct InnerClassesAttribute(InnerClassTable Table, bool IsNotNil = true)
     {
 
         public static InnerClassesAttribute Nil => default;
@@ -15,7 +13,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var items = new InnerClassesAttributeItem[count];
+            var table = count == 0 ? [] : new InnerClass[count];
             for (int i = 0; i < count; i++)
             {
                 if (reader.TryReadU2(out ushort innerClassInfoIndex) == false)
@@ -27,10 +25,10 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort innerClassAccessFlags) == false)
                     return false;
 
-                items[i] = new InnerClassesAttributeItem(new(innerClassInfoIndex), new(outerClassInfoIndex), new(innerNameIndex), (AccessFlag)innerClassAccessFlags);
+                table[i] = new InnerClass(new(innerClassInfoIndex), new(outerClassInfoIndex), new(innerNameIndex), (AccessFlag)innerClassAccessFlags);
             }
 
-            attribute = new InnerClassesAttribute(items);
+            attribute = new InnerClassesAttribute(new(table));
             return true;
         }
 

@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct FullStackMapFrame(byte FrameType, ushort OffsetDelta, ReadOnlyMemory<VerificationTypeInfo> Locals, ReadOnlyMemory<VerificationTypeInfo> Stack)
+    public readonly record struct FullStackMapFrame(byte FrameType, ushort OffsetDelta, VerificationTypeInfoTable Locals, VerificationTypeInfoTable Stack)
     {
 
         /// <summary>
@@ -46,7 +44,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort localsCount) == false)
                 return false;
 
-            var locals = new VerificationTypeInfo[localsCount];
+            var locals = localsCount == 0 ? [] : new VerificationTypeInfo[localsCount];
             for (int i = 0; i < localsCount; i++)
                 if (VerificationTypeInfo.TryRead(ref reader, out locals[i]) == false)
                     return false;
@@ -54,12 +52,12 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort stackCount) == false)
                 return false;
 
-            var stack = new VerificationTypeInfo[stackCount];
+            var stack = stackCount == 0 ? [] : new VerificationTypeInfo[stackCount];
             for (int i = 0; i < stackCount; i++)
                 if (VerificationTypeInfo.TryRead(ref reader, out stack[i]) == false)
                     return false;
 
-            frame = new FullStackMapFrame(tag, offsetDelta, locals, stack);
+            frame = new FullStackMapFrame(tag, offsetDelta, new(locals), new(stack));
             return true;
         }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Reading;
@@ -7,7 +6,7 @@ using IKVM.ByteCode.Reading;
 namespace IKVM.ByteCode.Writing
 {
 
-    public struct LocalVariableTargetTableEncoder
+    public struct LocalVarTargetTableEncoder
     {
 
         readonly BlobBuilder _builder;
@@ -18,7 +17,7 @@ namespace IKVM.ByteCode.Writing
         /// Initializes a new instance.
         /// </summary>
         /// <param name="builder"></param>
-        public LocalVariableTargetTableEncoder(BlobBuilder builder)
+        public LocalVarTargetTableEncoder(BlobBuilder builder)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
@@ -28,7 +27,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a new local variable.
         /// </summary>
-        public LocalVariableTargetTableEncoder LocalVariableTarget(ushort start, ushort length, ushort index)
+        public LocalVarTargetTableEncoder LocalVar(ushort start, ushort length, ushort index)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(start);

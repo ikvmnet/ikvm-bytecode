@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct MethodParametersAttribute(ReadOnlyMemory<MethodParametersAttributeParameter> Parameters, bool IsNotNil = true)
+    public readonly record struct MethodParametersAttribute(MethodParameterTable Table, bool IsNotNil = true)
     {
 
         public static MethodParametersAttribute Nil => default;
@@ -15,7 +13,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU1(out byte count) == false)
                 return false;
 
-            var arguments = new MethodParametersAttributeParameter[count];
+            var arguments = count == 0 ? [] : new MethodParameter[count];
             for (int i = 0; i < count; i++)
             {
                 if (reader.TryReadU2(out ushort nameIndex) == false)
@@ -23,10 +21,10 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort accessFlags) == false)
                     return false;
 
-                arguments[i] = new MethodParametersAttributeParameter(new(nameIndex), (AccessFlag)accessFlags);
+                arguments[i] = new MethodParameter(new(nameIndex), (AccessFlag)accessFlags);
             }
 
-            attribute = new MethodParametersAttribute(arguments);
+            attribute = new MethodParametersAttribute(new(arguments));
             return true;
         }
 

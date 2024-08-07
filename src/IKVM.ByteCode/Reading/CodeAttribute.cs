@@ -1,10 +1,9 @@
-﻿using System;
-using System.Buffers;
+﻿using System.Buffers;
 
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct CodeAttribute(ushort MaxStack, ushort MaxLocals, ReadOnlyMemory<byte> Code, ReadOnlyMemory<ExceptionHandler> ExceptionTable, AttributeTable Attributes, bool IsNotNil = true)
+    public readonly record struct CodeAttribute(ushort MaxStack, ushort MaxLocals, ReadOnlySequence<byte> Code, ExceptionHandlerTable ExceptionTable, AttributeTable Attributes, bool IsNotNil = true)
     {
 
         public static CodeAttribute Nil => default;
@@ -22,13 +21,10 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadMany(codeLength, out ReadOnlySequence<byte> code) == false)
                 return false;
 
-            var codeBuffer = new byte[code.Length];
-            code.CopyTo(codeBuffer);
-
             if (reader.TryReadU2(out ushort exceptionTableLength) == false)
                 return false;
 
-            var exceptionTable = new ExceptionHandler[exceptionTableLength];
+            var exceptionTable = exceptionTableLength == 0 ? [] : new ExceptionHandler[exceptionTableLength];
             for (int i = 0; i < exceptionTableLength; i++)
             {
                 if (reader.TryReadU2(out ushort startOffset) == false)
@@ -46,7 +42,7 @@ namespace IKVM.ByteCode.Reading
             if (ClassFile.TryReadAttributeTable(ref reader, out var attributes) == false)
                 return false;
 
-            attribute = new CodeAttribute(maxStack, maxLocals, codeBuffer, exceptionTable, attributes);
+            attribute = new CodeAttribute(maxStack, maxLocals, code, new(exceptionTable), attributes);
             return true;
         }
 

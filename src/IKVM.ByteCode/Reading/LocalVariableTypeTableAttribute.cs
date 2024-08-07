@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LocalVariableTypeTableAttribute(ReadOnlyMemory<LocalVariableTypeTableAttributeItem> Items, bool IsNotNil = true)
+    public readonly record struct LocalVariableTypeTableAttribute(LocalVariableTypeTable Table, bool IsNotNil = true)
     {
 
         public static LocalVariableTypeTableAttribute Nil => default;
@@ -15,7 +13,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort length) == false)
                 return false;
 
-            var items = new LocalVariableTypeTableAttributeItem[length];
+            var items = length == 0 ? [] : new LocalVariableType[length];
             for (int i = 0; i < length; i++)
             {
                 if (reader.TryReadU2(out ushort codeOffset) == false)
@@ -29,10 +27,10 @@ namespace IKVM.ByteCode.Reading
                 if (reader.TryReadU2(out ushort index) == false)
                     return false;
 
-                items[i] = new LocalVariableTypeTableAttributeItem(codeOffset, codeLength, new(nameIndex), new(signatureIndex), index);
+                items[i] = new LocalVariableType(codeOffset, codeLength, new(nameIndex), new(signatureIndex), index);
             }
 
-            attribute = new LocalVariableTypeTableAttribute(items);
+            attribute = new LocalVariableTypeTableAttribute(new(items));
             return true;
         }
 

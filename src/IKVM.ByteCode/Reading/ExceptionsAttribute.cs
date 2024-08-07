@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct ExceptionsAttribute(ReadOnlyMemory<ClassConstantHandle> Exceptions, bool IsNotNil = true)
+    public readonly record struct ExceptionsAttribute(ClassConstantHandleTable Exceptions, bool IsNotNil = true)
     {
 
         public static ExceptionsAttribute Nil => default;
@@ -15,7 +13,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var entries = new ClassConstantHandle[count];
+            var entries = count == 0 ? [] : new ClassConstantHandle[count];
             for (int i = 0; i < count; i++)
             {
                 if (reader.TryReadU2(out ushort index) == false)
@@ -24,7 +22,7 @@ namespace IKVM.ByteCode.Reading
                 entries[i] = new(index);
             }
 
-            attribute = new ExceptionsAttribute(entries);
+            attribute = new ExceptionsAttribute(new(entries));
             return true;
         }
 
