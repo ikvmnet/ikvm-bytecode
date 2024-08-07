@@ -14,15 +14,6 @@ namespace IKVM.ByteCode.Reading
     /// <summary>
     /// Represents a class file.
     /// </summary>
-    /// <param name="Version"></param>
-    /// <param name="Constants"></param>
-    /// <param name="AccessFlags"></param>
-    /// <param name="This"></param>
-    /// <param name="Super"></param>
-    /// <param name="Interfaces"></param>
-    /// <param name="Fields"></param>
-    /// <param name="Methods"></param>
-    /// <param name="Attributes"></param>
     public sealed class ClassFile : IDisposable
     {
 
@@ -211,7 +202,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         internal static bool TryReadConstantTable(ClassFormatVersion version, ref ClassFormatReader reader, out ConstantTable constants)
         {
-            constants = null;
+            constants = default;
 
             if (TryReadConstants(ref reader, out var data) == false)
                 return false;
@@ -567,7 +558,7 @@ namespace IKVM.ByteCode.Reading
         internal ClassFile(ClassFormatVersion version, ConstantTable constants, AccessFlag accessFlags, ClassConstantHandle @this, ClassConstantHandle super, InterfaceTable interfaces, FieldTable fields, MethodTable methods, AttributeTable attributes, IMemoryOwner<byte> owner)
         {
             _version = version;
-            _constants = constants ?? throw new ArgumentNullException(nameof(constants));
+            _constants = constants;
             _accessFlags = accessFlags;
             _this = @this;
             _super = super;
@@ -627,6 +618,290 @@ namespace IKVM.ByteCode.Reading
         /// Unique magic of a Java class file.
         /// </summary>
         public const uint MAGIC = 0xCAFEBABE;
+
+        /// <summary>
+        /// Discovers the kind of the specified constant handle.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public ConstantKind GetKind(ConstantHandle handle)
+        {
+            return _constants.GetKind(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Utf8Constant"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ByteCodeException"></exception>
+        public Utf8Constant GetUtf8(Utf8ConstantHandle handle)
+        {
+            return _constants.GetUtf8(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Utf8Constant"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ByteCodeException"></exception>
+        public string GetUtf8Value(Utf8ConstantHandle handle)
+        {
+            return GetUtf8(handle).Value;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="IntegerConstant"/> value refered to by the <see cref="IntegerConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public IntegerConstant GetInteger(IntegerConstantHandle handle)
+        {
+            return _constants.GetInteger(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="IntegerConstant"/> value refered to by the <see cref="IntegerConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public int GetIntegerValue(IntegerConstantHandle handle)
+        {
+            return GetInteger(handle).Value;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="FloatConstant"/> value refered to by the <see cref="FloatConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public FloatConstant GetFloat(FloatConstantHandle handle)
+        {
+            return _constants.GetFloat(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="FloatConstant"/> value refered to by the <see cref="FloatConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public float GetFloatValue(FloatConstantHandle handle)
+        {
+            return GetFloat(handle).Value;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="LongConstant"/> value refered to by the <see cref="LongConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public LongConstant GetLong(LongConstantHandle handle)
+        {
+            return _constants.GetLong(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="LongConstant"/> value refered to by the <see cref="LongConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public long GetLongValue(LongConstantHandle handle)
+        {
+            return GetLong(handle).Value;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="DoubleConstant"/> value refered to by the <see cref="DoubleConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public DoubleConstant GetDouble(DoubleConstantHandle handle)
+        {
+            return _constants.GetDouble(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="DoubleConstant"/> value refered to by the <see cref="DoubleConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public double GetDoubleValue(DoubleConstantHandle handle)
+        {
+            return GetDouble(handle).Value;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="ClassConstant"/> value refered to by the <see cref="ClassConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public ClassConstant GetClass(ClassConstantHandle handle)
+        {
+            return _constants.GetClass(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="ClassConstant"/> value refered to by the <see cref="ClassConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string GetClassName(ClassConstantHandle handle)
+        {
+            return GetUtf8Value(GetClass(handle).Name);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="StringConstant"/> value refered to by the <see cref="StringConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public StringConstant GetString(StringConstantHandle handle)
+        {
+            return _constants.GetString(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="StringConstant"/> value refered to by the <see cref="StringConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string GetStringValue(StringConstantHandle handle)
+        {
+            return GetUtf8Value(GetString(handle).Value);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="FieldrefConstant"/> value refered to by the <see cref="FieldrefConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public FieldrefConstant GetFieldref(FieldrefConstantHandle handle)
+        {
+            return _constants.GetFieldref(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="MethodrefConstant"/> value refered to by the <see cref="MethodrefConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public MethodrefConstant GetMethodref(MethodrefConstantHandle handle)
+        {
+            return _constants.GetMethodref(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="InterfaceMethodrefConstant"/> value refered to by the <see cref="InterfaceMethodrefConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public InterfaceMethodrefConstant GetInterfaceMethodref(InterfaceMethodrefConstantHandle handle)
+        {
+            return _constants.GetInterfaceMethodref(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="NameAndTypeConstant"/> value refered to by the <see cref="NameAndTypeConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public NameAndTypeConstant GetNameAndType(NameAndTypeConstantHandle handle)
+        {
+            return _constants.GetNameAndType(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="MethodHandleConstant"/> value refered to by the <see cref="MethodHandleConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public MethodHandleConstant GetMethodHandle(MethodHandleConstantHandle handle)
+        {
+            return _constants.GetMethodHandle(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="MethodTypeConstant"/> value refered to by the <see cref="MethodTypeConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public MethodTypeConstant GetMethodType(MethodTypeConstantHandle handle)
+        {
+            return _constants.GetMethodType(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="MethodTypeConstant"/> value refered to by the <see cref="MethodTypeConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string GetMethodTypeDescriptor(MethodTypeConstantHandle handle)
+        {
+            return GetUtf8Value(GetMethodType(handle).Descriptor);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="DynamicConstant"/> value refered to by the <see cref="DynamicConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public DynamicConstant GetDynamic(DynamicConstantHandle handle)
+        {
+            return _constants.GetDynamic(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="InvokeDynamicConstant"/> value refered to by the <see cref="InvokeDynamicConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public InvokeDynamicConstant GetInvokeDynamic(InvokeDynamicConstantHandle handle)
+        {
+            return _constants.GetInvokeDynamic(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="ModuleConstant"/> value refered to by the <see cref="ModuleConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public ModuleConstant GetModule(ModuleConstantHandle handle)
+        {
+            return _constants.GetModule(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="ModuleConstant"/> value refered to by the <see cref="ModuleConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string GetModuleName(ModuleConstantHandle handle)
+        {
+            return GetUtf8Value(GetModule(handle).Name);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="PackageConstant"/> value refered to by the <see cref="PackageConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public PackageConstant GetPackage(PackageConstantHandle handle)
+        {
+            return _constants.GetPackage(handle);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="PackageConstant"/> value refered to by the <see cref="PackageConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string GetPackageName(PackageConstantHandle handle)
+        {
+            return GetUtf8Value(GetPackage(handle).Name);
+        }
 
         /// <summary>
         /// Disposes of the instance.

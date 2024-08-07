@@ -9,16 +9,16 @@ namespace IKVM.ByteCode.Reading
     public partial class AttributeTableReader
     {
 
-        readonly ConstantTable _constants;
+        readonly ClassFile _clazz;
         readonly AttributeTable _attributes;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="attributes"></param>
-        public AttributeTableReader(ConstantTable constants, AttributeTable attributes)
+        public AttributeTableReader(ClassFile clazz, AttributeTable attributes)
         {
-            _constants = constants ?? throw new ArgumentNullException(nameof(constants));
+            _clazz = clazz ?? throw new ArgumentNullException(nameof(clazz));
             _attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
         }
 
@@ -33,7 +33,7 @@ namespace IKVM.ByteCode.Reading
                 throw new ArgumentNullException(nameof(name));
 
             foreach (var i in _attributes)
-                if (i.Name.IsNil == false && _constants.GetUtf8Value(i.Name) == name)
+                if (i.Name.IsNil == false && _clazz.GetUtf8Value(i.Name) == name)
                     return i;
 
             return Attribute.Nil;

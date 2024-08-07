@@ -9,18 +9,18 @@ namespace IKVM.ByteCode.Reading
     public class TypeAnnotationReader : IReadOnlyDictionary<string, ElementValue>
     {
 
-        readonly ConstantTable _constants;
+        readonly ClassFile _clazz;
         readonly TypeAnnotation _annotation;
         readonly ConcurrentDictionary<string, ElementValue> _cache = new ConcurrentDictionary<string, ElementValue>();
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="constants"></param>
+        /// <param name="clazz"></param>
         /// <param name="annotation"></param>
-        public TypeAnnotationReader(ConstantTable constants, TypeAnnotation annotation)
+        public TypeAnnotationReader(ClassFile clazz, TypeAnnotation annotation)
         {
-            _constants = constants ?? throw new ArgumentNullException(nameof(constants));
+            _clazz = clazz ?? throw new ArgumentNullException(nameof(clazz));
             _annotation = annotation;
         }
 
@@ -48,7 +48,7 @@ namespace IKVM.ByteCode.Reading
                 throw new ArgumentNullException(nameof(name));
 
             foreach (var elementValuePair in _annotation)
-                if (_constants.GetUtf8Value(elementValuePair.Name) == name)
+                if (_clazz.GetUtf8Value(elementValuePair.Name) == name)
                     return elementValuePair.Value;
 
             return ElementValue.Nil;
@@ -60,7 +60,7 @@ namespace IKVM.ByteCode.Reading
             get
             {
                 foreach (var elementValuePair in _annotation)
-                    yield return _constants.GetUtf8Value(elementValuePair.Name);
+                    yield return _clazz.GetUtf8Value(elementValuePair.Name);
             }
         }
 
@@ -84,7 +84,7 @@ namespace IKVM.ByteCode.Reading
         public IEnumerator<KeyValuePair<string, ElementValue>> GetEnumerator()
         {
             foreach (var elementValuePair in _annotation)
-                yield return new KeyValuePair<string, ElementValue>(_constants.GetUtf8Value(elementValuePair.Name), elementValuePair.Value);
+                yield return new KeyValuePair<string, ElementValue>(_clazz.GetUtf8Value(elementValuePair.Name), elementValuePair.Value);
         }
 
         /// <inheritdoc />

@@ -50,7 +50,7 @@ namespace IKVM.ByteCode.Reading.Tests
             foreach (var m in clazz.Methods)
                 Console.WriteLine(m.Name);
 
-            clazz.Constants.GetUtf8(clazz.Constants.GetClass(clazz.This).Name).Value.Should().Be("0");
+            clazz.GetUtf8(clazz.GetClass(clazz.This).Name).Value.Should().Be("0");
             foreach (var i in clazz.Constants)
                 clazz.Constants[i].Kind.Should().NotBe(ConstantKind.Unknown);
             clazz.Interfaces.ToList();
@@ -59,8 +59,8 @@ namespace IKVM.ByteCode.Reading.Tests
             clazz.Methods.Should().HaveCount(2);
             clazz.Methods.ToList();
 
-            new AttributeTableReader(clazz.Constants, clazz.Methods[0].Attributes).Code.Code.Should().NotBeNull();
-            new AttributeTableReader(clazz.Constants, clazz.Methods[1].Attributes).Code.Code.Should().NotBeNull();
+            new AttributeTableReader(clazz, clazz.Methods[0].Attributes).Code.Code.Should().NotBeNull();
+            new AttributeTableReader(clazz, clazz.Methods[1].Attributes).Code.Code.Should().NotBeNull();
         }
 
         [TestMethod]
@@ -91,8 +91,8 @@ namespace IKVM.ByteCode.Reading.Tests
                 foreach (var field in c.Fields)
                 {
                     field.Should().NotBeNull();
-                    c.Constants.GetUtf8Value(field.Name).Should().NotBeNull();
-                    c.Constants.GetUtf8Value(field.Descriptor).Should().NotBeNull();
+                    c.GetUtf8Value(field.Name).Should().NotBeNull();
+                    c.GetUtf8Value(field.Descriptor).Should().NotBeNull();
                     field.Attributes.ToList();
 
                     foreach (var attribute in field.Attributes)

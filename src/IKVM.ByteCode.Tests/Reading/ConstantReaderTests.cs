@@ -44,28 +44,28 @@ namespace IKVM.ByteCode.Tests.Reading
         public void CanReadDoubleConstant()
         {
             var c = ReadClass();
-            c.Constants.Where(i => i.Kind == ConstantKind.Double).Select(i => c.Constants.GetDouble((DoubleConstantHandle)i)).Should().Contain(i => i.Value == 2212133.1d);
+            c.Constants.Where(i => i.Kind == ConstantKind.Double).Select(i => c.GetDouble((DoubleConstantHandle)i)).Should().Contain(i => i.Value == 2212133.1d);
         }
 
         [TestMethod]
         public void CanReadStringConstant()
         {
             var c = ReadClass();
-            c.Constants.Where(i => i.Kind == ConstantKind.Utf8).Select(i => c.Constants.GetUtf8Value((Utf8ConstantHandle)i)).Should().Contain(i => i == "STRING");
+            c.Constants.Where(i => i.Kind == ConstantKind.Utf8).Select(i => c.GetUtf8Value((Utf8ConstantHandle)i)).Should().Contain(i => i == "STRING");
         }
 
         [TestMethod]
         public void CanReadClassConstant()
         {
             var c = ReadClass();
-            c.Constants.Where(i => i.Kind == ConstantKind.Class).Select(i => c.Constants.GetClassName((ClassConstantHandle)i)).Should().Contain(i => i == "java/lang/Object");
+            c.Constants.Where(i => i.Kind == ConstantKind.Class).Select(i => c.GetClassName((ClassConstantHandle)i)).Should().Contain(i => i == "java/lang/Object");
         }
 
         [TestMethod]
         public void CanReadMethodrefConstant()
         {
             var c = ReadClass();
-            c.Constants.Where(i => i.Kind == ConstantKind.Methodref).Select(i => c.Constants.GetMethodref((MethodrefConstantHandle)i)).Should().Contain(i => c.Constants.GetClassName(i.Class) == "java/lang/Object" && c.Constants.GetUtf8Value(c.Constants.GetNameAndType(i.NameAndType).Name) == "<init>" && c.Constants.GetUtf8Value(c.Constants.GetNameAndType(i.NameAndType).Descriptor) == "()V");
+            c.Constants.Where(i => i.Kind == ConstantKind.Methodref).Select(i => c.GetMethodref((MethodrefConstantHandle)i)).Should().Contain(i => c.GetClassName(i.Class) == "java/lang/Object" && c.GetUtf8Value(c.Constants.GetNameAndType(i.NameAndType).Name) == "<init>" && c.GetUtf8Value(c.GetNameAndType(i.NameAndType).Descriptor) == "()V");
         }
 
     }
