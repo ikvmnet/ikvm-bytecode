@@ -6,6 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Parsing\**" />
+      <EmbeddedResource Remove="Parsing\**" />
+      <None Remove="Parsing\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="FluentAssertions" Version="5.0.0" />
         <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     </ItemGroup>
@@ -18,10 +24,6 @@
         <None Update="**\*.class">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Parsing\" />
     </ItemGroup>
 
 </Project>

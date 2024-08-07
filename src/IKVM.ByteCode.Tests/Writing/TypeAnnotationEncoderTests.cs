@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Reading;
 using IKVM.ByteCode.Writing;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

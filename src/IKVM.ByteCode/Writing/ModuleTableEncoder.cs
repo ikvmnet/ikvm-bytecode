@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Reading;
 
 namespace IKVM.ByteCode.Writing
 {

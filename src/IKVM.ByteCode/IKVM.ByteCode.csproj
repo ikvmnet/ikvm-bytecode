@@ -6,8 +6,6 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <Description>Library for reading Java class files.</Description>
-        <WarningsAsErrors>HI,BOB,CS1001</WarningsAsErrors>
-        <NoWarn>HI1,BOB1,CS0001,NU1234</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,6 +28,40 @@
         <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
         <PackageReference Include="System.IO.Pipelines" Version="8.0.0" />
         <PackageReference Include="System.Memory" Version="4.5.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="AttributeName.g.tt">
+          <LastGenOutput>AttributeName.g.cs</LastGenOutput>
+          <Generator>TextTemplatingFileGenerator</Generator>
+        </None>
+        <None Update="Reading\Attribute.g.tt">
+          <LastGenOutput>Attribute.g.cs</LastGenOutput>
+          <Generator>TextTemplatingFileGenerator</Generator>
+        </None>
+        <None Update="Reading\AttributeTableReader.g.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>AttributeTableReader.g.cs</LastGenOutput>
+        </None>
+        <Compile Update="AttributeName.g.cs">
+          <DependentUpon>AttributeName.g.tt</DependentUpon>
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Reading\Attribute.g.cs">
+          <DependentUpon>Attribute.g.tt</DependentUpon>
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Reading\AttributeTableReader.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>AttributeTableReader.g.tt</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>

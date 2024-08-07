@@ -1,0 +1,22 @@
+﻿<#@ template hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System.IO" #>
+namespace IKVM.ByteCode.Reading
+{
+
+    public static partial class AttributeName
+    {
+<#
+foreach (var i in File.ReadAllLines(Host.ResolvePath("Attribute.txt")))
+{
+    var name = i.Trim();
+#>
+
+        public static readonly string <#= name #> = nameof(<#= name #>);
+<#
+}
+#>
+
+    }
+
+}

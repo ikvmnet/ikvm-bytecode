@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Reading;
 using IKVM.ByteCode.Text;
 using IKVM.ByteCode.Writing;
 
@@ -34,10 +34,10 @@ namespace IKVM.ByteCode.Tests.Writing
             rd.TryReadU2(out var constant_pool_count).Should().BeTrue();
             constant_pool_count.Should().Be(2);
             rd.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ConstantTag.Utf8);
+            tag.Should().Be((byte)ConstantKind.Utf8);
             rd.TryReadU2(out var length).Should().BeTrue();
             length.Should().Be(4);
-            rd.TryReadManyU1(4, out var text).Should().BeTrue();
+            rd.TryReadMany(4, out var text).Should().BeTrue();
             text.Length.Should().Be(4);
 
             // contents of string should decode to TEST
@@ -62,10 +62,10 @@ namespace IKVM.ByteCode.Tests.Writing
             rd.TryReadU2(out var constant_pool_count).Should().BeTrue();
             constant_pool_count.Should().Be(2);
             rd.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ConstantTag.Utf8);
+            tag.Should().Be((byte)ConstantKind.Utf8);
             rd.TryReadU2(out var length).Should().BeTrue();
             length.Should().Be(4);
-            rd.TryReadManyU1(4, out var text).Should().BeTrue();
+            rd.TryReadMany(4, out var text).Should().BeTrue();
             text.Length.Should().Be(4);
 
             // contents of string should decode to TEST
@@ -114,10 +114,10 @@ namespace IKVM.ByteCode.Tests.Writing
             for (int i = 1; i < 2; i++)
             {
                 rd.TryReadU1(out var tag).Should().BeTrue();
-                tag.Should().Be((byte)ConstantTag.Utf8);
+                tag.Should().Be((byte)ConstantKind.Utf8);
                 rd.TryReadU2(out var length).Should().BeTrue();
                 length.Should().Be(5);
-                rd.TryReadManyU1(5, out var text).Should().BeTrue();
+                rd.TryReadMany(5, out var text).Should().BeTrue();
                 text.Length.Should().Be(5);
 
                 // contents of string should decode to TEST
@@ -143,7 +143,7 @@ namespace IKVM.ByteCode.Tests.Writing
             rd.TryReadU2(out var constant_pool_count).Should().BeTrue();
             constant_pool_count.Should().Be(2);
             rd.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ConstantTag.Integer);
+            tag.Should().Be((byte)ConstantKind.Integer);
             rd.TryReadU4(out var value).Should().BeTrue();
             value.Should().Be(65536);
         }
@@ -164,7 +164,7 @@ namespace IKVM.ByteCode.Tests.Writing
             rd.TryReadU2(out var constant_pool_count).Should().BeTrue();
             constant_pool_count.Should().Be(2);
             rd.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ConstantTag.Float);
+            tag.Should().Be((byte)ConstantKind.Float);
             rd.TryReadU4(out var value).Should().BeTrue();
             (*(float*)&value).Should().Be(float.MaxValue - 1);
         }
@@ -189,7 +189,7 @@ namespace IKVM.ByteCode.Tests.Writing
             rd.TryReadU2(out var constant_pool_count).Should().BeTrue();
             constant_pool_count.Should().Be(3);
             rd.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ConstantTag.Long);
+            tag.Should().Be((byte)ConstantKind.Long);
             rd.TryReadU4(out var hv).Should().BeTrue();
             hv.Should().Be(h);
             rd.TryReadU4(out var lv).Should().BeTrue();
@@ -216,7 +216,7 @@ namespace IKVM.ByteCode.Tests.Writing
             rd.TryReadU2(out var constant_pool_count).Should().BeTrue();
             constant_pool_count.Should().Be(3);
             rd.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ConstantTag.Double);
+            tag.Should().Be((byte)ConstantKind.Double);
             rd.TryReadU4(out var hv).Should().BeTrue();
             hv.Should().Be(h);
             rd.TryReadU4(out var lv).Should().BeTrue();

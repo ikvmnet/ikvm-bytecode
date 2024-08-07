@@ -1,7 +1,7 @@
 ﻿using System;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Reading;
 
 namespace IKVM.ByteCode.Writing
 {
@@ -30,7 +30,6 @@ namespace IKVM.ByteCode.Writing
         /// Initializes a new instance.
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="prev"></param>
         public AnnotationEncoder(BlobBuilder builder)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
@@ -44,6 +43,8 @@ namespace IKVM.ByteCode.Writing
         /// <returns></returns>
         public void Annotation(Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValuePairs)
         {
+            if (elementValuePairs is null)
+                throw new ArgumentNullException(nameof(elementValuePairs));
             if (_count > 0)
                 throw new InvalidOperationException("Only a single annotation can be encoded by this encoder.");
 

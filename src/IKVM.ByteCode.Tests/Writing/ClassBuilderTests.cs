@@ -24,17 +24,17 @@ namespace IKVM.ByteCode.Tests.Writing
             b.Serialize(z);
             var a = z.ToArray();
 
-            var cls = ClassReader.Read(a);
+            var cls = ClassFile.Read(a);
             cls.AccessFlags.Should().Be(AccessFlag.ACC_PUBLIC);
-            cls.This.Name.Value.Should().Be("TestClass");
-            cls.Super.Name.Value.Should().Be("java/lang/Object");
+            cls.Constants.GetClassName(cls.This).Should().Be("TestClass");
+            cls.Constants.GetClassName(cls.Super).Should().Be("java/lang/Object");
             cls.Fields.Should().HaveCount(1);
             cls.Fields[0].AccessFlags.Should().Be(AccessFlag.ACC_PUBLIC);
-            cls.Fields[0].Name.Value.Should().Be("_field");
-            cls.Fields[0].Descriptor.Value.Should().Be("Z");
+            cls.Constants.GetUtf8Value(cls.Fields[0].Name).Should().Be("_field");
+            cls.Constants.GetUtf8Value(cls.Fields[0].Descriptor).Should().Be("Z");
             cls.Methods.Should().HaveCount(1);
-            cls.Methods[0].Name.Value.Should().Be("method");
-            cls.Methods[0].Descriptor.Value.Should().Be("()Z");
+            cls.Constants.GetUtf8Value(cls.Methods[0].Name).Should().Be("method");
+            cls.Constants.GetUtf8Value(cls.Methods[0].Descriptor).Should().Be("()Z");
         }
 
         public void Foo()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Reading;
 using IKVM.ByteCode.Text;
 
 namespace IKVM.ByteCode.Writing
@@ -51,7 +51,7 @@ namespace IKVM.ByteCode.Writing
         public Utf8ConstantHandle AddUtf8Constant(ReadOnlyMemory<byte> value)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Utf8);
+            w.TryWriteU1((byte)ConstantKind.Utf8);
             w.TryWriteU2((ushort)value.Length);
             _builder.WriteBytes(value.Span);
             return _blobUtf8Cache[value] = new(_next++);
@@ -95,7 +95,7 @@ namespace IKVM.ByteCode.Writing
         public IntegerConstantHandle AddIntegerConstant(int value)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U4).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Integer);
+            w.TryWriteU1((byte)ConstantKind.Integer);
             w.TryWriteU4((uint)value);
             return _integerCache[value] = new(_next++);
         }
@@ -118,7 +118,7 @@ namespace IKVM.ByteCode.Writing
         public FloatConstantHandle AddFloatConstant(float value)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U4).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Float);
+            w.TryWriteU1((byte)ConstantKind.Float);
 #if NETFRAMEWORK || NETCOREAPP3_1
             w.TryWriteU4(RawBitConverter.SingleToUInt32Bits(value));
 #else
@@ -145,7 +145,7 @@ namespace IKVM.ByteCode.Writing
         public LongConstantHandle AddLongConstant(long value)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U4 + ClassFormatWriter.U4).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Long);
+            w.TryWriteU1((byte)ConstantKind.Long);
             w.TryWriteU4((uint)(value >> 32));
             w.TryWriteU4(unchecked((uint)value));
 
@@ -173,7 +173,7 @@ namespace IKVM.ByteCode.Writing
         {
             var v = RawBitConverter.DoubleToUInt64Bits(value);
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U4 + ClassFormatWriter.U4).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Double);
+            w.TryWriteU1((byte)ConstantKind.Double);
             w.TryWriteU4((uint)(v >> 32));
             w.TryWriteU4(unchecked((uint)v));
 
@@ -200,7 +200,7 @@ namespace IKVM.ByteCode.Writing
         public ClassConstantHandle AddClassConstant(Utf8ConstantHandle name)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Class);
+            w.TryWriteU1((byte)ConstantKind.Class);
             w.TryWriteU2(name.Index);
             return _classCache[name] = new(_next++);
         }
@@ -243,7 +243,7 @@ namespace IKVM.ByteCode.Writing
         public StringConstantHandle AddStringConstant(Utf8ConstantHandle name)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.String);
+            w.TryWriteU1((byte)ConstantKind.String);
             w.TryWriteU2(name.Index);
             return new(_next++);
         }
@@ -287,7 +287,7 @@ namespace IKVM.ByteCode.Writing
         public FieldrefConstantHandle AddFieldrefConstant(ClassConstantHandle clazz, NameAndTypeConstantHandle nameAndType)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Fieldref);
+            w.TryWriteU1((byte)ConstantKind.Fieldref);
             w.TryWriteU2(clazz.Index);
             w.TryWriteU2(nameAndType.Index);
             return _fieldrefCache[(clazz, nameAndType)] = new(_next++);
@@ -325,7 +325,7 @@ namespace IKVM.ByteCode.Writing
         public MethodrefConstantHandle AddMethodrefConstant(ClassConstantHandle clazz, NameAndTypeConstantHandle nameAndType)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Methodref);
+            w.TryWriteU1((byte)ConstantKind.Methodref);
             w.TryWriteU2(clazz.Index);
             w.TryWriteU2(nameAndType.Index);
             return _methodrefCache[(clazz, nameAndType)] = new(_next++);
@@ -363,7 +363,7 @@ namespace IKVM.ByteCode.Writing
         public InterfaceMethodrefConstantHandle AddInterfaceMethodrefConstant(ClassConstantHandle clazz, NameAndTypeConstantHandle nameAndType)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.InterfaceMethodref);
+            w.TryWriteU1((byte)ConstantKind.InterfaceMethodref);
             w.TryWriteU2(clazz.Index);
             w.TryWriteU2(nameAndType.Index);
             return _interfaceMethodrefCache[(clazz, nameAndType)] = new(_next++);
@@ -401,7 +401,7 @@ namespace IKVM.ByteCode.Writing
         public NameAndTypeConstantHandle AddNameAndTypeConstant(Utf8ConstantHandle name, Utf8ConstantHandle type)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.NameAndType);
+            w.TryWriteU1((byte)ConstantKind.NameAndType);
             w.TryWriteU2(name.Index);
             w.TryWriteU2(type.Index);
             return _nameAndTypeCache[(name, type)] = new NameAndTypeConstantHandle(_next++);
@@ -438,7 +438,7 @@ namespace IKVM.ByteCode.Writing
         public MethodHandleConstantHandle AddMethodHandleConstant(ReferenceKind kind, RefConstantHandle reference)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.MethodHandle);
+            w.TryWriteU1((byte)ConstantKind.MethodHandle);
             w.TryWriteU1((byte)kind);
             w.TryWriteU2(reference.Index);
             return new(_next++);
@@ -452,7 +452,7 @@ namespace IKVM.ByteCode.Writing
         public MethodTypeConstantHandle AddMethodTypeConstant(Utf8ConstantHandle type)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.MethodType);
+            w.TryWriteU1((byte)ConstantKind.MethodType);
             w.TryWriteU2(type.Index);
             return _methodTypeCache[type] = new(_next++);
         }
@@ -476,7 +476,7 @@ namespace IKVM.ByteCode.Writing
         public DynamicConstantHandle AddDynamicConstant(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Dynamic);
+            w.TryWriteU1((byte)ConstantKind.Dynamic);
             w.TryWriteU2(bootstrapMethodAttrIndex);
             w.TryWriteU2(nameAndType.Index);
             return new(_next++);
@@ -491,7 +491,7 @@ namespace IKVM.ByteCode.Writing
         public InvokeDynamicConstantHandle AddInvokeDynamicConstant(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.InvokeDynamic);
+            w.TryWriteU1((byte)ConstantKind.InvokeDynamic);
             w.TryWriteU2(bootstrapMethodAttrIndex);
             w.TryWriteU2(nameAndType.Index);
             return new(_next++);
@@ -505,7 +505,7 @@ namespace IKVM.ByteCode.Writing
         public ModuleConstantHandle AddModuleConstant(Utf8ConstantHandle name)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Module);
+            w.TryWriteU1((byte)ConstantKind.Module);
             w.TryWriteU2(name.Index);
             return new(_next++);
         }
@@ -528,7 +528,7 @@ namespace IKVM.ByteCode.Writing
         public PackageConstantHandle AddPackageConstant(Utf8ConstantHandle name)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ConstantTag.Package);
+            w.TryWriteU1((byte)ConstantKind.Package);
             w.TryWriteU2(name.Index);
             return new(_next++);
         }

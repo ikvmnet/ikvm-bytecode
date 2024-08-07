@@ -1,27 +1,24 @@
-﻿namespace IKVM.ByteCode
+﻿using System;
+
+using IKVM.ByteCode.Reading;
+
+namespace IKVM.ByteCode
 {
 
     public readonly record struct ClassConstantHandle(ushort Index)
     {
 
-        public static explicit operator ClassConstantHandle(Handle handle)
-        {
-            return new ClassConstantHandle(handle.Index);
-        }
-
-        public static implicit operator Handle(ClassConstantHandle handle)
-        {
-            return new Handle(handle.Index);
-        }
-
         public static explicit operator ClassConstantHandle(ConstantHandle handle)
         {
+            if (handle.Kind is not ConstantKind.Class and not ConstantKind.Unknown)
+                throw new InvalidCastException($"ConstantHandle of Kind {handle.Kind} cannot be cast to Class.");
+
             return new ClassConstantHandle(handle.Index);
         }
 
         public static implicit operator ConstantHandle(ClassConstantHandle handle)
         {
-            return new ConstantHandle(handle.Index);
+            return new ConstantHandle(ConstantKind.Class, handle.Index);
         }
 
         /// <summary>

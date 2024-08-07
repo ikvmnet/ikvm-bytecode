@@ -279,6 +279,17 @@ namespace IKVM.ByteCode.Buffers
             return true;
         }
 
+        /// <summary>
+        /// Tries to advance the reader over the specified number of bytes.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static bool TryAdvance(ref this SequenceReader<byte> reader, long count)
+        {
+            return reader.TryReadExact(count, out _);
+        }
+
     }
 
 }

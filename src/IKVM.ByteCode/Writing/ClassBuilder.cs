@@ -1,7 +1,7 @@
 ﻿using System;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Reading;
 
 namespace IKVM.ByteCode.Writing
 {
@@ -186,7 +186,7 @@ namespace IKVM.ByteCode.Writing
         void SerializeHeader(BlobBuilder builder)
         {
             var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U4 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU4(ClassRecord.MAGIC);
+            w.TryWriteU4(ClassFile.MAGIC);
             w.TryWriteU2(_version.Minor);
             w.TryWriteU2(_version.Major);
         }

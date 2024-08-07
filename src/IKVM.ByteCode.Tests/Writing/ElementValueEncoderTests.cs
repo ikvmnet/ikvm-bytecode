@@ -3,7 +3,7 @@
 using FluentAssertions;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Parsing;
+using IKVM.ByteCode.Reading;
 using IKVM.ByteCode.Writing;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -34,7 +34,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.Byte);
+            tag.Should().Be((byte)ElementValueKind.Byte);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
@@ -48,7 +48,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.Char);
+            tag.Should().Be((byte)ElementValueKind.Char);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
@@ -62,7 +62,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.Double);
+            tag.Should().Be((byte)ElementValueKind.Double);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
@@ -76,7 +76,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.Float);
+            tag.Should().Be((byte)ElementValueKind.Float);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
@@ -90,7 +90,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.Integer);
+            tag.Should().Be((byte)ElementValueKind.Integer);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
@@ -104,7 +104,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.Long);
+            tag.Should().Be((byte)ElementValueKind.Long);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
@@ -118,7 +118,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.Short);
+            tag.Should().Be((byte)ElementValueKind.Short);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
@@ -132,7 +132,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.Boolean);
+            tag.Should().Be((byte)ElementValueKind.Boolean);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
@@ -146,7 +146,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var r = new ClassFormatReader(builder.ToArray());
             r.TryReadU1(out var tag).Should().BeTrue();
-            tag.Should().Be((byte)ElementValueTag.String);
+            tag.Should().Be((byte)ElementValueKind.String);
             r.TryReadU2(out var constValueIndex).Should().BeTrue();
             constValueIndex.Should().Be(1);
         }
