@@ -4,7 +4,7 @@ using System.Text;
 namespace IKVM.ByteCode.Text
 {
 
-    internal class MUTF8Encoder : Encoder
+    public class MUTF8Encoder : Encoder
     {
 
         readonly MUTF8Encoding encoding;
