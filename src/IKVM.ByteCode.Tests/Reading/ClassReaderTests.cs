@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Claims;
-using System.Text.Unicode;
 using System.Threading.Tasks;
 
 using FluentAssertions;

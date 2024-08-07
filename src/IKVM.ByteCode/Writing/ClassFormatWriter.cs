@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Buffers.Binary;
 
-namespace IKVM.ByteCode.Reading
+namespace IKVM.ByteCode.Writing
 {
 
     /// <summary>
