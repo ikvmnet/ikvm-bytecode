@@ -19,7 +19,7 @@ namespace IKVM.ByteCode.Reading
         public AttributeTableReader(ClassFile clazz, AttributeTable attributes)
         {
             _clazz = clazz ?? throw new ArgumentNullException(nameof(clazz));
-            _attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
+            _attributes = attributes;
         }
 
         /// <summary>

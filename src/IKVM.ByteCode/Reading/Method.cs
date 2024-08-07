@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
             if (ClassFile.TryReadAttributeTable(ref reader, out var attributes) == false)
                 return false;
 
-            method = new Method((AccessFlag)accessFlags, new(nameIndex), new(descriptorIndex), attributes);
+            method = new Method((AccessFlag)accessFlags, new(nameIndex), new(descriptorIndex), attributes!);
             return true;
         }
 

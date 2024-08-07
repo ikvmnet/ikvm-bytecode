@@ -60,7 +60,7 @@ namespace IKVM.ByteCode.Reading
         readonly ClassFormatVersion _version;
         readonly Constant[] _items;
         readonly int _count = 0;
-        Utf8Constant[] _utf8Cache;
+        Utf8Constant[]? _utf8Cache;
 
         /// <summary>
         /// Initializes a new instance.
@@ -82,7 +82,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ref readonly Constant this[ConstantHandle handle] => ref Get(handle);
+        public readonly ref readonly Constant this[ConstantHandle handle] => ref Get(handle);
 
         /// <summary>
         /// Gets the untyped constant for the given handle.
@@ -99,7 +99,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets an enumerator over the interfaces.
         /// </summary>
-        public readonly Enumerator GetEnumerator() => new Enumerator(_items);
+        public readonly Enumerator GetEnumerator() => new(_items);
 
         /// <summary>
         /// Discovers the kind of the specified constant handle.

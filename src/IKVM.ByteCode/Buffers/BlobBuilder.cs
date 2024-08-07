@@ -149,7 +149,7 @@ namespace IKVM.ByteCode.Buffers
         void CheckInvariants()
         {
             Debug.Assert(_buffer != null);
-            Debug.Assert(Length >= 0 && Length <= _buffer.Length);
+            Debug.Assert(Length >= 0 && Length <= _buffer!.Length);
             Debug.Assert(_nextOrPrevious != null);
 
             if (IsHead)

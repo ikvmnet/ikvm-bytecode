@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="length"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
-        public static unsafe bool TryRead(byte* pointer, int length, out ClassFile clazz)
+        public static unsafe bool TryRead(byte* pointer, int length, out ClassFile? clazz)
         {
             return TryRead(new UnmanagedMemoryManager(pointer, length), out clazz);
         }
@@ -42,7 +42,7 @@ namespace IKVM.ByteCode.Reading
         /// <exception cref="ByteCodeException"></exception>
         public static unsafe ClassFile Read(byte* pointer, int length)
         {
-            return TryRead(pointer, length, out var clazz) ? clazz : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
+            return TryRead(pointer, length, out var clazz) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="path"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
-        public static unsafe bool TryRead(string path, out ClassFile clazz)
+        public static unsafe bool TryRead(string path, out ClassFile? clazz)
         {
             if (path is null)
                 throw new ArgumentNullException(nameof(path));
@@ -69,7 +69,7 @@ namespace IKVM.ByteCode.Reading
         /// <exception cref="ByteCodeException"></exception>
         public static unsafe ClassFile Read(string path)
         {
-            return TryRead(path, out var clazz) ? clazz : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
+            return TryRead(path, out var clazz) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="buffer"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
-        public static bool TryRead(IMemoryOwner<byte> owner, out ClassFile clazz)
+        public static bool TryRead(IMemoryOwner<byte> owner, out ClassFile? clazz)
         {
             return TryRead(owner.Memory, out clazz, owner);
         }
@@ -90,7 +90,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="clazz"></param>
         /// <param name="owner"></param>
         /// <returns></returns>
-        public static bool TryRead(ReadOnlyMemory<byte> buffer, out ClassFile clazz, IMemoryOwner<byte> owner = null)
+        public static bool TryRead(ReadOnlyMemory<byte> buffer, out ClassFile? clazz, IMemoryOwner<byte>? owner = null)
         {
             return TryRead(new ReadOnlySequence<byte>(buffer), out clazz, owner);
         }
@@ -102,7 +102,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="clazz"></param>
         /// <param name="owner"></param>
         /// <returns></returns>
-        public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile clazz, IMemoryOwner<byte> owner = null)
+        public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, IMemoryOwner<byte>? owner = null)
         {
             return TryRead(buffer, out clazz, out _, out _, owner);
         }
@@ -116,7 +116,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="examined"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
-        public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile clazz, out SequencePosition consumed, out SequencePosition examined, IMemoryOwner<byte> owner = null)
+        public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, out SequencePosition consumed, out SequencePosition examined, IMemoryOwner<byte>? owner = null)
         {
             consumed = buffer.Start;
 
@@ -146,9 +146,9 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         /// <exception cref="InvalidClassMagicException"></exception>
         /// <exception cref="UnsupportedClassVersionException"></exception>
-        public static bool TryRead(ref ClassFormatReader reader, out ClassFile clazz, IMemoryOwner<byte> owner = null)
+        public static bool TryRead(ref ClassFormatReader reader, out ClassFile? clazz, IMemoryOwner<byte>? owner = null)
         {
-            clazz = default;
+            clazz = null;
 
             if (reader.TryReadU4(out uint magic) == false)
                 return false;
@@ -207,7 +207,7 @@ namespace IKVM.ByteCode.Reading
             if (TryReadConstants(ref reader, out var data) == false)
                 return false;
 
-            constants = new ConstantTable(version, data);
+            constants = new ConstantTable(version, data!);
             return true;
         }
 
@@ -217,7 +217,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="constantData"></param>
         /// <returns></returns>
-        internal static bool TryReadConstants(ref ClassFormatReader reader, out Constant[] constantData)
+        internal static bool TryReadConstants(ref ClassFormatReader reader, out Constant[]? constantData)
         {
             constantData = null;
 
@@ -250,7 +250,7 @@ namespace IKVM.ByteCode.Reading
             if (TryReadInterfaces(ref reader, out var items) == false)
                 return false;
 
-            interfaces = new InterfaceTable(items);
+            interfaces = new InterfaceTable(items!);
             return true;
         }
 
@@ -260,7 +260,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="interfaces"></param>
         /// <returns></returns>
-        internal static bool TryReadInterfaces(ref ClassFormatReader reader, out Interface[] interfaces)
+        internal static bool TryReadInterfaces(ref ClassFormatReader reader, out Interface[]? interfaces)
         {
             interfaces = null;
 
@@ -292,7 +292,7 @@ namespace IKVM.ByteCode.Reading
             if (TryReadFields(ref reader, out var items) == false)
                 return false;
 
-            fields = new FieldTable(items);
+            fields = new FieldTable(items!);
             return true;
         }
 
@@ -302,7 +302,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="fields"></param>
         /// <returns></returns>
-        internal static bool TryReadFields(ref ClassFormatReader reader, out Field[] fields)
+        internal static bool TryReadFields(ref ClassFormatReader reader, out Field[]? fields)
         {
             fields = null;
 
@@ -334,7 +334,7 @@ namespace IKVM.ByteCode.Reading
             if (TryReadMethods(ref reader, out var items) == false)
                 return false;
 
-            methods = new MethodTable(items);
+            methods = new MethodTable(items!);
             return true;
         }
 
@@ -344,7 +344,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="methods"></param>
         /// <returns></returns>
-        internal static bool TryReadMethods(ref ClassFormatReader reader, out Method[] methods)
+        internal static bool TryReadMethods(ref ClassFormatReader reader, out Method[]? methods)
         {
             methods = null;
 
@@ -376,7 +376,7 @@ namespace IKVM.ByteCode.Reading
             if (TryReadAttributes(ref reader, out var items) == false)
                 return false;
 
-            attributes = new AttributeTable(items);
+            attributes = new AttributeTable(items!);
             return true;
         }
 
@@ -386,7 +386,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        internal static bool TryReadAttributes(ref ClassFormatReader reader, out Attribute[] attributes)
+        internal static bool TryReadAttributes(ref ClassFormatReader reader, out Attribute[]? attributes)
         {
             attributes = null;
 
@@ -413,7 +413,7 @@ namespace IKVM.ByteCode.Reading
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(ReadOnlyMemory<byte> buffer)
         {
-            return TryRead(buffer, out var clazz) ? clazz : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
+            return TryRead(buffer, out var clazz) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
         }
 
         /// <summary>
@@ -427,7 +427,7 @@ namespace IKVM.ByteCode.Reading
             if (owner is null)
                 throw new ArgumentNullException(nameof(owner));
 
-            return TryRead(owner.Memory, out var clazz, owner) ? clazz : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
+            return TryRead(owner.Memory, out var clazz, owner) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
         }
 
         /// <summary>
@@ -437,9 +437,9 @@ namespace IKVM.ByteCode.Reading
         /// <param name="owner"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
-        public static ClassFile Read(in ReadOnlySequence<byte> buffer, IMemoryOwner<byte> owner = null)
+        public static ClassFile Read(in ReadOnlySequence<byte> buffer, IMemoryOwner<byte>? owner = null)
         {
-            return TryRead(buffer, out var clazz, owner) ? clazz : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
+            return TryRead(buffer, out var clazz, owner) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
         }
 
         /// <summary>
@@ -520,7 +520,7 @@ namespace IKVM.ByteCode.Reading
                         // slice original buffer to report back
                         var range = result.Buffer.Slice(consumed.GetInteger(), examined.GetInteger());
                         reader.AdvanceTo(range.Start, range.End);
-                        return clazz;
+                        return clazz!;
                     }
                 }
                 catch
@@ -540,7 +540,7 @@ namespace IKVM.ByteCode.Reading
         readonly FieldTable _fields;
         readonly MethodTable _methods;
         readonly AttributeTable _attributes;
-        readonly IMemoryOwner<byte> _owner;
+        readonly IMemoryOwner<byte>? _owner;
 
         /// <summary>
         /// Initializes a new instance.
@@ -555,7 +555,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="methods"></param>
         /// <param name="attributes"></param>
         /// <param name="owner"></param>
-        internal ClassFile(ClassFormatVersion version, ConstantTable constants, AccessFlag accessFlags, ClassConstantHandle @this, ClassConstantHandle super, InterfaceTable interfaces, FieldTable fields, MethodTable methods, AttributeTable attributes, IMemoryOwner<byte> owner)
+        internal ClassFile(ClassFormatVersion version, ConstantTable constants, AccessFlag accessFlags, ClassConstantHandle @this, ClassConstantHandle super, InterfaceTable interfaces, FieldTable fields, MethodTable methods, AttributeTable attributes, IMemoryOwner<byte>? owner)
         {
             _version = version;
             _constants = constants;
@@ -565,7 +565,7 @@ namespace IKVM.ByteCode.Reading
             _interfaces = interfaces;
             _fields = fields;
             _methods = methods;
-            _attributes = attributes ?? throw new ArgumentNullException(nameof(attributes));
+            _attributes = attributes;
             _owner = owner;
         }
 
@@ -909,6 +909,7 @@ namespace IKVM.ByteCode.Reading
         public void Dispose()
         {
             _owner?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>

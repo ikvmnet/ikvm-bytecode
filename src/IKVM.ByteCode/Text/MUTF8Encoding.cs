@@ -10,8 +10,8 @@ namespace IKVM.ByteCode.Text
     public class MUTF8Encoding : Encoding
     {
 
-        readonly static MUTF8Encoding JavaSE_1_0 = new MUTF8Encoding(0);
-        readonly static MUTF8Encoding JavaSE_1_4 = new MUTF8Encoding(48);
+        readonly static MUTF8Encoding JavaSE_1_0 = new(0);
+        readonly static MUTF8Encoding JavaSE_1_4 = new(48);
 
         /// <summary>
         /// Gets an instance of the Sun modified UTF8 encoding targeting the specified JavaSE version.

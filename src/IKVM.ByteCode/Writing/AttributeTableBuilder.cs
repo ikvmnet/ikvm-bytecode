@@ -12,7 +12,7 @@ namespace IKVM.ByteCode.Writing
     {
 
         readonly ConstantBuilder _constants;
-        BlobBuilder _builder;
+        BlobBuilder? _builder;
         Blob _countBlob;
         int _count = 0;
 
@@ -586,7 +586,7 @@ namespace IKVM.ByteCode.Writing
                 throw new ArgumentNullException(nameof(provides));
 
             var b = new BlobBuilder();
-            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
+            var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU2(name.Index);
             w.TryWriteU2((ushort)flags);
             w.TryWriteU2(version.Index);

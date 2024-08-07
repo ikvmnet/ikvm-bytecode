@@ -34,7 +34,7 @@ namespace IKVM.ByteCode.Buffers
                 _currentOpt = null;
             }
 
-            object IEnumerator.Current => Current;
+            readonly object IEnumerator.Current => Current;
 
             /// <inheritdoc />
             public readonly BlobBuilder Current => _currentOpt!;
@@ -67,13 +67,13 @@ namespace IKVM.ByteCode.Buffers
             readonly void IDisposable.Dispose() { }
 
             /// <inheritdoc />
-            public BlobBuilderEnumerable GetEnumerator() => this;
+            public readonly BlobBuilderEnumerable GetEnumerator() => this;
 
             /// <inheritdoc />
-            IEnumerator<BlobBuilder> IEnumerable<BlobBuilder>.GetEnumerator() => GetEnumerator();
+            readonly IEnumerator<BlobBuilder> IEnumerable<BlobBuilder>.GetEnumerator() => GetEnumerator();
 
             /// <inheritdoc />
-            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+            readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         }
 
@@ -92,9 +92,9 @@ namespace IKVM.ByteCode.Buffers
             }
 
             /// <inheritdoc />
-            object IEnumerator.Current => Current;
+            readonly object IEnumerator.Current => Current;
 
-            public Blob Current
+            public readonly Blob Current
             {
                 get
                 {
@@ -113,16 +113,16 @@ namespace IKVM.ByteCode.Buffers
             public void Reset() => enumerable.Reset();
 
             /// <inheritdoc />
-            void IDisposable.Dispose() { }
+            readonly void IDisposable.Dispose() { }
 
             /// <inheritdoc />
-            public BlobEnumerable GetEnumerator() => this;
+            public readonly BlobEnumerable GetEnumerator() => this;
 
             /// <inheritdoc />
-            IEnumerator<Blob> IEnumerable<Blob>.GetEnumerator() => GetEnumerator();
+            readonly IEnumerator<Blob> IEnumerable<Blob>.GetEnumerator() => GetEnumerator();
 
             /// <inheritdoc />
-            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+            readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         }
 
