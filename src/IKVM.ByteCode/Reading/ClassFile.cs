@@ -267,7 +267,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            interfaces = new Interface[count];
+            interfaces = count == 0 ? [] : new Interface[count];
             for (int i = 0; i < count; i++)
             {
                 if (Interface.TryRead(ref reader, out Interface iface) == false)
@@ -309,7 +309,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            fields = new Field[count];
+            fields = count == 0 ? [] : new Field[count];
             for (int i = 0; i < count; i++)
             {
                 if (Field.TryRead(ref reader, out Field field) == false)
@@ -351,7 +351,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            methods = new Method[count];
+            methods = count == 0 ? [] : new Method[count];
             for (int i = 0; i < count; i++)
             {
                 if (Method.TryRead(ref reader, out Method method) == false)
@@ -393,7 +393,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            attributes = new Attribute[count];
+            attributes = count == 0 ? [] : new Attribute[count];
             for (int i = 0; i < count; i++)
             {
                 if (Attribute.TryRead(ref reader, out var attribute) == false)
