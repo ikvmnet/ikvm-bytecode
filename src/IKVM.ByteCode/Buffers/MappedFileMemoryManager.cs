@@ -3,6 +3,8 @@ using System.Buffers;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.CompilerServices;
 
+using Microsoft.Win32.SafeHandles;
+
 namespace IKVM.ByteCode.Buffers
 {
 
@@ -26,6 +28,11 @@ namespace IKVM.ByteCode.Buffers
         {
             _file = file ?? throw new ArgumentNullException(nameof(file));
             _view = view ?? throw new ArgumentNullException(nameof(view));
+
+            if (_file.SafeMemoryMappedFileHandle.IsClosed || _file.SafeMemoryMappedFileHandle.IsInvalid)
+                throw new InvalidOperationException();
+            if (_view.SafeMemoryMappedViewHandle.IsClosed || _view.SafeMemoryMappedViewHandle.IsInvalid)
+                throw new InvalidOperationException();
         }
 
         /// <inheritdoc />
@@ -57,8 +64,11 @@ namespace IKVM.ByteCode.Buffers
         /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
-            _view.Dispose();
-            _file.Dispose();
+            if (true)
+            {
+                _view.Dispose();
+                _file.Dispose();
+            }
         }
 
     }
