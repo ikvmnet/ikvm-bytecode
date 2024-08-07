@@ -5,27 +5,27 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly struct TypePath : IReadOnlyList<TypePathItem>
+    public readonly struct StackMapFrameTable : IReadOnlyList<StackMapFrame>
     {
 
-        public struct Enumerator : IEnumerator<TypePathItem>
+        public struct Enumerator : IEnumerator<StackMapFrame>
         {
 
-            readonly TypePathItem[] _items;
+            readonly StackMapFrame[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="items"></param>
-            internal Enumerator(TypePathItem[] items)
+            internal Enumerator(StackMapFrame[] items)
             {
                 _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly TypePathItem Current => _items[_index];
+            public readonly StackMapFrame Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,67 +50,49 @@ namespace IKVM.ByteCode.Reading
 
         }
 
-        public static bool TryRead(ref ClassFormatReader reader, out TypePath typePath)
-        {
-            typePath = default;
-
-            if (reader.TryReadU1(out byte length) == false)
-                return false;
-
-            var path = length == 0 ? [] : new TypePathItem[length];
-            for (int i = 0; i < length; i++)
-            {
-                if (TypePathItem.TryRead(ref reader, out var item) == false)
-                    return false;
-
-                path[i] = item;
-            }
-
-            typePath = new TypePath(path);
-            return true;
-        }
-
-        readonly TypePathItem[] _items;
+        readonly StackMapFrame[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="items"></param>
-        internal TypePath(TypePathItem[] items)
+        internal StackMapFrameTable(StackMapFrame[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
         /// <summary>
-        /// Gets a reference to the item at the given index.
+        /// Gets a reference to the frame at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly TypePathItem this[int index] => GetItem(index);
+        public readonly StackMapFrame this[int index] => GetItem(index);
 
         /// <summary>
-        /// Gets the item at the given index.
+        /// Gets the frame at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly TypePathItem GetItem(int index) => _items[index];
+        readonly StackMapFrame GetItem(int index) => _items[index];
 
         /// <summary>
-        /// Gets the number of items.
+        /// Gets the number of frames.
         /// </summary>
         public readonly int Count => _items.Length;
 
         /// <summary>
-        /// Gets an enumerator over the items.
+        /// Gets an enumerator over the frames.
         /// </summary>
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
-        readonly IEnumerator<TypePathItem> IEnumerable<TypePathItem>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<StackMapFrame> IEnumerable<StackMapFrame>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     }
+
+
 
 }

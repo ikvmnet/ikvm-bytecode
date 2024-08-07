@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct RuntimeInvisibleParameterAnnotationsAttribute(ReadOnlyMemory<ParameterAnnotation> Parameters, bool IsNotNil = true)
+    public readonly record struct RuntimeInvisibleParameterAnnotationsAttribute(ParameterAnnotationTable Parameters, bool IsNotNil = true)
     {
 
         public static RuntimeInvisibleParameterAnnotationsAttribute Nil => default;
@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU1(out byte count) == false)
                 return false;
 
-            var parameters = new ParameterAnnotation[count];
+            var parameters = count == 0 ? [] : new ParameterAnnotation[count];
             for (int i = 0; i < count; i++)
             {
                 if (ParameterAnnotation.TryRead(ref reader, out var parameter) == false)
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
                 parameters[i] = parameter;
             }
 
-            attribute = new RuntimeInvisibleParameterAnnotationsAttribute(parameters);
+            attribute = new RuntimeInvisibleParameterAnnotationsAttribute(new(parameters));
             return true;
         }
 

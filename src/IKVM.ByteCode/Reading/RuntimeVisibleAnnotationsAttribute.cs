@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct RuntimeVisibleAnnotationsAttribute(ReadOnlyMemory<Annotation> Annotations, bool IsNotNil = true)
+    public readonly record struct RuntimeVisibleAnnotationsAttribute(AnnotationTable Annotations, bool IsNotNil = true)
     {
 
         public static RuntimeVisibleAnnotationsAttribute Nil => default;
@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var items = new Annotation[count];
+            var items = count == 0 ? [] : new Annotation[count];
             for (int i = 0; i < count; i++)
             {
                 if (Annotation.TryRead(ref reader, out var annotation) == false)
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
                 items[i] = annotation;
             }
 
-            attribute = new RuntimeVisibleAnnotationsAttribute(items);
+            attribute = new RuntimeVisibleAnnotationsAttribute(new(items));
             return true;
         }
 

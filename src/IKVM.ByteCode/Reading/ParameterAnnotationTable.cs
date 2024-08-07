@@ -5,27 +5,27 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly struct TypePath : IReadOnlyList<TypePathItem>
+    public readonly struct ParameterAnnotationTable : IReadOnlyList<ParameterAnnotation>
     {
 
-        public struct Enumerator : IEnumerator<TypePathItem>
+        public struct Enumerator : IEnumerator<ParameterAnnotation>
         {
 
-            readonly TypePathItem[] _items;
+            readonly ParameterAnnotation[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="items"></param>
-            internal Enumerator(TypePathItem[] items)
+            internal Enumerator(ParameterAnnotation[] items)
             {
                 _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly TypePathItem Current => _items[_index];
+            public readonly ParameterAnnotation Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,67 +50,49 @@ namespace IKVM.ByteCode.Reading
 
         }
 
-        public static bool TryRead(ref ClassFormatReader reader, out TypePath typePath)
-        {
-            typePath = default;
-
-            if (reader.TryReadU1(out byte length) == false)
-                return false;
-
-            var path = length == 0 ? [] : new TypePathItem[length];
-            for (int i = 0; i < length; i++)
-            {
-                if (TypePathItem.TryRead(ref reader, out var item) == false)
-                    return false;
-
-                path[i] = item;
-            }
-
-            typePath = new TypePath(path);
-            return true;
-        }
-
-        readonly TypePathItem[] _items;
+        readonly ParameterAnnotation[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="items"></param>
-        internal TypePath(TypePathItem[] items)
+        internal ParameterAnnotationTable(ParameterAnnotation[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
         /// <summary>
-        /// Gets a reference to the item at the given index.
+        /// Gets a reference to the parameter at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly TypePathItem this[int index] => GetItem(index);
+        public readonly ParameterAnnotation this[int index] => GetItem(index);
 
         /// <summary>
-        /// Gets the item at the given index.
+        /// Gets the parameter at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly TypePathItem GetItem(int index) => _items[index];
+        readonly ParameterAnnotation GetItem(int index) => _items[index];
 
         /// <summary>
-        /// Gets the number of items.
+        /// Gets the number of parameters.
         /// </summary>
         public readonly int Count => _items.Length;
 
         /// <summary>
-        /// Gets an enumerator over the items.
+        /// Gets an enumerator over the parameters.
         /// </summary>
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
-        readonly IEnumerator<TypePathItem> IEnumerable<TypePathItem>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<ParameterAnnotation> IEnumerable<ParameterAnnotation>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     }
+
+
 
 }

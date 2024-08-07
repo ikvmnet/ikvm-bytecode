@@ -185,15 +185,15 @@ namespace IKVM.ByteCode.Reading.Tests
             TestAnnotations(clazz, attribute.Annotations);
         }
 
-        void TestAnnotations(ClassFile clazz, ReadOnlyMemory<Annotation> annotations)
+        void TestAnnotations(ClassFile clazz, AnnotationTable annotations)
         {
-            foreach (var annotation in annotations.Span)
+            foreach (var annotation in annotations)
                 TestAnnotation(clazz, annotation);
         }
 
-        void TestAnnotations(ClassFile clazz, ReadOnlyMemory<TypeAnnotation> annotations)
+        void TestAnnotations(ClassFile clazz, TypeAnnotationTable annotations)
         {
-            foreach (var annotation in annotations.Span)
+            foreach (var annotation in annotations)
                 TestAnnotation(clazz, annotation);
         }
 

@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct RuntimeVisibleParameterAnnotationsAttribute(ReadOnlyMemory<ParameterAnnotation> Parameters, bool IsNotNil = true)
+    public readonly record struct RuntimeVisibleParameterAnnotationsAttribute(ParameterAnnotationTable Parameters, bool IsNotNil = true)
     {
 
         public static RuntimeVisibleParameterAnnotationsAttribute Nil => default;
@@ -15,7 +13,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU1(out byte count) == false)
                 return false;
 
-            var items = new ParameterAnnotation[count];
+            var items = count == 0 ? [] : new ParameterAnnotation[count];
             for (int i = 0; i < count; i++)
             {
                 if (ParameterAnnotation.TryRead(ref reader, out var parameter) == false)
@@ -24,7 +22,7 @@ namespace IKVM.ByteCode.Reading
                 items[i] = parameter;
             }
 
-            attribute = new RuntimeVisibleParameterAnnotationsAttribute(items);
+            attribute = new RuntimeVisibleParameterAnnotationsAttribute(new(items));
             return true;
         }
 

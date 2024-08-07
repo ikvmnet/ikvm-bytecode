@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct StackMapTableAttribute(ReadOnlyMemory<StackMapFrame> Frames, bool IsNotNil = true)
+    public readonly record struct StackMapTableAttribute(StackMapFrameTable Frames, bool IsNotNil = true)
     {
 
         public static StackMapTableAttribute Nil => default;
@@ -15,12 +15,12 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var frames = new StackMapFrame[count];
+            var frames = count == 0 ? [] : new StackMapFrame[count];
             for (int i = 0; i < count; i++)
                 if (StackMapFrame.TryRead(ref reader, out frames[i]) == false)
                     return false;
 
-            attribute = new StackMapTableAttribute(frames);
+            attribute = new StackMapTableAttribute(new(frames));
             return true;
         }
 

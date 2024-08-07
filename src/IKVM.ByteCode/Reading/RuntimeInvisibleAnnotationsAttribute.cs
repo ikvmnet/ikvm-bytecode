@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct RuntimeInvisibleAnnotationsAttribute(ReadOnlyMemory<Annotation> Annotations, bool IsNotNil = true)
+    public readonly record struct RuntimeInvisibleAnnotationsAttribute(AnnotationTable Annotations, bool IsNotNil = true)
     {
 
         public static RuntimeInvisibleAnnotationsAttribute Nil => default;
@@ -15,16 +13,16 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            var items = new Annotation[count];
+            var items = count == 0 ? [] : new Annotation[count];
             for (int i = 0; i < count; i++)
             {
-                if (Annotation.TryRead( ref reader, out var annotation) == false)
+                if (Annotation.TryRead(ref reader, out var annotation) == false)
                     return false;
 
                 items[i] = annotation;
             }
 
-            attribute = new RuntimeInvisibleAnnotationsAttribute(items);
+            attribute = new RuntimeInvisibleAnnotationsAttribute(new(items));
             return true;
         }
 
