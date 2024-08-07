@@ -7,6 +7,8 @@ namespace IKVM.ByteCode.Reading
     public readonly record struct ElementValue
     {
 
+        public static ElementValue Nil => default;
+
         public static explicit operator ConstantElementValue(ElementValue value) => value.AsConstant();
 
         public static explicit operator EnumElementValue(ElementValue value) => value.AsEnum();

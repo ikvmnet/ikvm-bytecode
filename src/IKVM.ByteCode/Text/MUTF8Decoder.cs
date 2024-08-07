@@ -19,11 +19,13 @@ namespace IKVM.ByteCode.Text
             this.encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
         }
 
+        /// <inheritdoc />
         public override int GetCharCount(byte[] bytes, int index, int count)
         {
             return encoding.GetCharCount(bytes, index, count);
         }
 
+        /// <inheritdoc />
         public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
         {
             return encoding.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
