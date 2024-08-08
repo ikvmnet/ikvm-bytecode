@@ -23,6 +23,11 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the original attribute table.
+        /// </summary>
+        public ref readonly AttributeTable AttributeTable => ref _attributes;
+
+        /// <summary>
         /// Scans the attribute table for the matching attribute by name.
         /// </summary>
         /// <param name="name"></param>

@@ -49,15 +49,15 @@
             <LastGenOutput>Reading\Attribute.g.cs</LastGenOutput>
             <Generator>TextTemplatingFileGenerator</Generator>
         </None>
+        <Compile Update="Reading\Attribute.g.cs">
+            <DependentUpon>Reading\Attribute.g.tt</DependentUpon>
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
         <None Update="Reading\AttributeTableReader.g.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>Reading\AttributeTableReader.g.cs</LastGenOutput>
         </None>
-        <Compile Update="Reading\Attribute.g.cs">
-            <DependentUpon>Attribute.g.tt</DependentUpon>
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-        </Compile>
         <Compile Update="Reading\AttributeTableReader.g.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>

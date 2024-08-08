@@ -24,6 +24,11 @@ namespace IKVM.ByteCode.Reading
             _annotation = annotation;
         }
 
+        /// <summary>
+        /// Gets the original annotation.
+        /// </summary>
+        public ref readonly TypeAnnotation TypeAnnotation => ref _annotation;
+
         /// <inheritdoc />
         public ElementValue this[string key]
         {

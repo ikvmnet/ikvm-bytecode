@@ -1,4 +1,4 @@
-﻿namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode
 {
 
     public static partial class AttributeName
