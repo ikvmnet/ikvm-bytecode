@@ -21,7 +21,7 @@ namespace IKVM.ByteCode
 
         /// <summary>
         /// Gets the nil instance.
-        /// </summary>
+        /// </summary>  
         public static readonly DynamicConstantHandle Nil = new(0);
 
         /// <summary>

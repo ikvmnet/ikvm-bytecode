@@ -93,7 +93,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="data"></param>
         public AttributeTableBuilder Attribute(string name, BlobBuilder data)
         {
-            return Attribute(_constants.GetOrAddUtf8Constant(name), data);
+            return Attribute(_constants.GetOrAddUtf8(name), data);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="data"></param>
         public AttributeTableBuilder Attribute(string name, ReadOnlySpan<byte> data)
         {
-            return Attribute(_constants.GetOrAddUtf8Constant(name), data);
+            return Attribute(_constants.GetOrAddUtf8(name), data);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="name"></param>
         public AttributeTableBuilder Attribute(string name)
         {
-            return Attribute(_constants.GetOrAddUtf8Constant(name));
+            return Attribute(_constants.GetOrAddUtf8(name));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(int value)
         {
-            return ConstantValue(_constants.GetOrAddIntegerConstant(value));
+            return ConstantValue(_constants.GetOrAddInteger(value));
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(short value)
         {
-            return ConstantValue(_constants.GetOrAddIntegerConstant(value));
+            return ConstantValue(_constants.GetOrAddInteger(value));
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(char value)
         {
-            return ConstantValue(_constants.GetOrAddIntegerConstant(value));
+            return ConstantValue(_constants.GetOrAddInteger(value));
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(byte value)
         {
-            return ConstantValue(_constants.GetOrAddIntegerConstant(value));
+            return ConstantValue(_constants.GetOrAddInteger(value));
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(bool value)
         {
-            return ConstantValue(_constants.GetOrAddIntegerConstant(value ? 1 : 0));
+            return ConstantValue(_constants.GetOrAddInteger(value ? 1 : 0));
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(float value)
         {
-            return ConstantValue(_constants.GetOrAddFloatConstant(value));
+            return ConstantValue(_constants.GetOrAddFloat(value));
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(long value)
         {
-            return ConstantValue(_constants.GetOrAddLongConstant(value));
+            return ConstantValue(_constants.GetOrAddLong(value));
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(double value)
         {
-            return ConstantValue(_constants.GetOrAddDoubleConstant(value));
+            return ConstantValue(_constants.GetOrAddDouble(value));
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(string value)
         {
-            return ConstantValue(_constants.GetOrAddStringConstant(value));
+            return ConstantValue(_constants.GetOrAddString(value));
         }
 
         /// <summary>
@@ -354,7 +354,7 @@ namespace IKVM.ByteCode.Writing
             if (signature is null)
                 throw new ArgumentNullException(nameof(signature));
 
-            return Signature(_constants.GetOrAddUtf8Constant(signature));
+            return Signature(_constants.GetOrAddUtf8(signature));
         }
 
         /// <summary>
@@ -378,7 +378,7 @@ namespace IKVM.ByteCode.Writing
             if (sourceFile is null)
                 throw new ArgumentNullException(nameof(sourceFile));
 
-            return SourceFile(_constants.GetOrAddUtf8Constant(sourceFile));
+            return SourceFile(_constants.GetOrAddUtf8(sourceFile));
         }
 
         /// <summary>

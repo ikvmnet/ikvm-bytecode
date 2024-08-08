@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct MethodTypeConstant(Utf8ConstantHandle Descriptor)
+    public readonly record struct MethodTypeConstant(Utf8ConstantHandle Descriptor, bool IsNotNil = true)
     {
 
         /// <summary>
@@ -37,6 +37,8 @@ namespace IKVM.ByteCode.Reading
             constant = new MethodTypeConstant(new Utf8ConstantHandle(descriptorIndex));
             return true;
         }
+
+        public readonly bool IsNil => !IsNotNil;
 
     }
 

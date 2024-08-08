@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct MethodHandleConstant(ReferenceKind ReferenceKind, RefConstantHandle Reference)
+    public readonly record struct MethodHandleConstant(ReferenceKind ReferenceKind, RefConstantHandle Reference, bool IsNotNil = true)
     {
 
         /// <summary>
@@ -39,6 +39,8 @@ namespace IKVM.ByteCode.Reading
             constant = new MethodHandleConstant((ReferenceKind)referenceKind, new(ConstantKind.Unknown, referenceIndex));
             return true;
         }
+
+        public readonly bool IsNil => !IsNotNil;
 
     }
 

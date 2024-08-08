@@ -16,7 +16,7 @@ namespace IKVM.ByteCode.Tests.Writing
         [TestMethod]
         public void CanBuildSimpleClass()
         {
-            var b = new ClassBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "TestClass", "java/lang/Object");
+            var b = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "TestClass", "java/lang/Object");
             var f = b.AddField(AccessFlag.ACC_PUBLIC, "_field", "Z");
             var m = b.AddMethod(AccessFlag.ACC_PUBLIC, "method", "()Z");
 

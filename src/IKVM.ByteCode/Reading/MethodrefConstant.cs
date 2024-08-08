@@ -3,8 +3,10 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct MethodrefConstant(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType)
+    public readonly record struct MethodrefConstant(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType, bool IsNotNil = true)
     {
+
+        public static FieldrefConstant Nil => default;
 
         /// <summary>
         /// Parses a Methodref constant in the constant pool.
@@ -38,6 +40,8 @@ namespace IKVM.ByteCode.Reading
             constant = new MethodrefConstant(new(classIndex), new(nameAndTypeIndex));
             return true;
         }
+
+        public readonly bool IsNil => !IsNotNil;
 
     }
 

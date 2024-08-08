@@ -9,7 +9,7 @@ namespace IKVM.ByteCode.Writing
     /// <summary>
     /// Provides an API for writing a class file.
     /// </summary>
-    public class ClassBuilder
+    public class ClassFileBuilder
     {
 
         readonly ClassFormatVersion _version;
@@ -37,7 +37,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="thisClass"></param>
         /// <param name="superClass"></param>
         /// <attributes></attributes>
-        public ClassBuilder(ClassFormatVersion version, AccessFlag accessFlags, string thisClass, string superClass)
+        public ClassFileBuilder(ClassFormatVersion version, AccessFlag accessFlags, string thisClass, string superClass)
         {
             if (version.Major < 0)
                 throw new ArgumentOutOfRangeException(nameof(version));
@@ -59,8 +59,8 @@ namespace IKVM.ByteCode.Writing
             _attributes = new AttributeTableBuilder(_constants);
 
             // allocate constants
-            _thisClass = _constants.AddClassConstant(thisClass);
-            _superClass = _constants.AddClassConstant(superClass);
+            _thisClass = _constants.AddClass(thisClass);
+            _superClass = _constants.AddClass(superClass);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace IKVM.ByteCode.Writing
         /// <returns></returns>
         public InterfaceHandle AddInterface(string clazz)
         {
-            return AddInterface(Constants.GetOrAddClassConstant(Constants.GetOrAddUtf8Constant(clazz)));
+            return AddInterface(Constants.GetOrAddClass(Constants.GetOrAddUtf8(clazz)));
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace IKVM.ByteCode.Writing
         public FieldHandle AddField(AccessFlag accessFlags, string name, string descriptor, AttributeTableBuilder attributes = null)
         {
             attributes ??= new AttributeTableBuilder(Constants);
-            return AddField(accessFlags, Constants.GetOrAddUtf8Constant(name), Constants.GetOrAddUtf8Constant(descriptor), attributes);
+            return AddField(accessFlags, Constants.GetOrAddUtf8(name), Constants.GetOrAddUtf8(descriptor), attributes);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace IKVM.ByteCode.Writing
         public MethodHandle AddMethod(AccessFlag accessFlags, string name, string descriptor, AttributeTableBuilder attributes = null)
         {
             attributes ??= new AttributeTableBuilder(Constants);
-            return AddMethod(accessFlags, Constants.GetOrAddUtf8Constant(name), Constants.GetOrAddUtf8Constant(descriptor), attributes);
+            return AddMethod(accessFlags, Constants.GetOrAddUtf8(name), Constants.GetOrAddUtf8(descriptor), attributes);
         }
 
         /// <summary>

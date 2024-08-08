@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct NameAndTypeConstant(Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor)
+    public readonly record struct NameAndTypeConstant(Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, bool IsNotNil = true)
     {
 
         /// <summary>
@@ -39,6 +39,8 @@ namespace IKVM.ByteCode.Reading
             constant = new NameAndTypeConstant(new(nameIndex), new(descriptorIndex));
             return true;
         }
+
+        public readonly bool IsNil => !IsNotNil;
 
     }
 

@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct InterfaceMethodrefConstant(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType)
+    public readonly record struct InterfaceMethodrefConstant(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType, bool IsNotNil = true)
     {
 
         /// <summary>
@@ -38,6 +38,8 @@ namespace IKVM.ByteCode.Reading
             constant = new InterfaceMethodrefConstant(new(classIndex), new(nameAndTypeIndex));
             return true;
         }
+
+        public readonly bool IsNil => !IsNotNil;
 
     }
 

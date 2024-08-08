@@ -12,7 +12,7 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath("Attribute.txt")))
     var name = i.Trim();
 #>
 
-        public static readonly string <#= name #> = nameof(<#= name #>);
+        public const string <#= name #> = nameof(<#= name #>);
 <#
 }
 #>

@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct InvokeDynamicConstant(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType)
+    public readonly record struct InvokeDynamicConstant(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType, bool IsNotNil = true)
     {
 
         /// <summary>
@@ -38,6 +38,8 @@ namespace IKVM.ByteCode.Reading
             constant = new InvokeDynamicConstant(bootstrapMethodAttrIndex, new(nameAndTypeIndex));
             return true;
         }
+
+        public readonly bool IsNil => !IsNotNil;
 
     }
 

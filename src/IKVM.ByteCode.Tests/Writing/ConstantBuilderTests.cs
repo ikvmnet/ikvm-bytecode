@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Tests.Writing
         public void CanEncodeUtf8ConstantSE10()
         {
             var cp = new ConstantBuilder(new ClassFormatVersion(0, 1));
-            cp.AddUtf8Constant("TEST").Index.Should().Be(1);
+            cp.AddUtf8("TEST").Index.Should().Be(1);
 
             // output to array
             var _blob = new BlobBuilder();
@@ -50,7 +50,7 @@ namespace IKVM.ByteCode.Tests.Writing
         public void CanEncodeUtf8Constant()
         {
             var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
-            cp.AddUtf8Constant("TEST").Index.Should().Be(1);
+            cp.AddUtf8("TEST").Index.Should().Be(1);
 
             // output to array
             var _blob = new BlobBuilder();
@@ -78,8 +78,8 @@ namespace IKVM.ByteCode.Tests.Writing
         public void ShouldNotEncodeDuplicateUtf8Values()
         {
             var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
-            cp.GetOrAddUtf8Constant("TEST").Index.Should().Be(1);
-            cp.GetOrAddUtf8Constant("TEST").Index.Should().Be(1);
+            cp.GetOrAddUtf8("TEST").Index.Should().Be(1);
+            cp.GetOrAddUtf8("TEST").Index.Should().Be(1);
 
             // output to array
             var _blob = new BlobBuilder();
@@ -98,8 +98,8 @@ namespace IKVM.ByteCode.Tests.Writing
         public void CanEncodeTwoDistinctUtf8Values()
         {
             var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
-            cp.GetOrAddUtf8Constant("TEST1").Index.Should().Be(1);
-            cp.GetOrAddUtf8Constant("TEST2").Index.Should().Be(2);
+            cp.GetOrAddUtf8("TEST1").Index.Should().Be(1);
+            cp.GetOrAddUtf8("TEST2").Index.Should().Be(2);
 
             // output to array
             var _blob = new BlobBuilder();
@@ -131,7 +131,7 @@ namespace IKVM.ByteCode.Tests.Writing
         public void CanEncodeIntegerConstant()
         {
             var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
-            cp.AddIntegerConstant(65536).Index.Should().Be(1);
+            cp.AddInteger(65536).Index.Should().Be(1);
 
             // output to array
             var _blob = new BlobBuilder();
@@ -152,7 +152,7 @@ namespace IKVM.ByteCode.Tests.Writing
         public unsafe void CanEncodeFloatConstant()
         {
             var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
-            cp.AddFloatConstant(float.MaxValue - 1).Index.Should().Be(1);
+            cp.AddFloat(float.MaxValue - 1).Index.Should().Be(1);
 
             // output to array
             var _blob = new BlobBuilder();
@@ -177,7 +177,7 @@ namespace IKVM.ByteCode.Tests.Writing
             var l = (uint)v;
 
             var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
-            cp.AddLongConstant(v).Index.Should().Be(1);
+            cp.AddLong(v).Index.Should().Be(1);
 
             // output to array
             var _blob = new BlobBuilder();
@@ -204,7 +204,7 @@ namespace IKVM.ByteCode.Tests.Writing
             var l = (uint)(*(long*)&v);
 
             var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
-            cp.AddDoubleConstant(v).Index.Should().Be(1);
+            cp.AddDouble(v).Index.Should().Be(1);
 
             // output to array
             var _blob = new BlobBuilder();
