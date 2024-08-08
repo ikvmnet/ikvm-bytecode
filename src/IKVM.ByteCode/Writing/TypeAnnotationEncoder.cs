@@ -109,7 +109,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        public void ClassExtends(byte superTypeIndex, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        public void ClassExtends(ushort superTypeIndex, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
             SuperTypeTarget(TypeAnnotationTargetType.ClassExtends, superTypeIndex, targetPath, type, elementValues);
         }
@@ -296,9 +296,9 @@ namespace IKVM.ByteCode.Writing
         /// <param name="targetPath"></param>
         /// <param name="type"></param>
         /// <param name="elementValues"></param>
-        public void LocalVarTarget(Action<LocalVarTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
+        public void LocalVariable(Action<LocalVarTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
-            LocalVarTarget(TypeAnnotationTargetType.LocalVariable, localVars, targetPath, type, elementValues);
+            LocalVarTarget(TypeAnnotationTargetType.LocalVar, localVars, targetPath, type, elementValues);
         }
 
         /// <summary>

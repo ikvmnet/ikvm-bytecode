@@ -63,7 +63,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort pairCount) == false)
                 return false;
 
-            var elements = new ElementValuePair[pairCount];
+            var elements = pairCount == 0 ? [] : new ElementValuePair[pairCount];
             for (int i = 0; i < pairCount; i++)
                 if (ElementValuePair.TryRead(ref reader, out elements[i]) == false)
                     return false;

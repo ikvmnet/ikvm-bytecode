@@ -53,7 +53,7 @@ namespace IKVM.ByteCode.Reading
                 throw new ArgumentNullException(nameof(name));
 
             foreach (var elementValuePair in _annotation)
-                if (_clazz.GetUtf8Value(elementValuePair.Name) == name)
+                if (_clazz.Constants.GetUtf8Value(elementValuePair.Name) == name)
                     return elementValuePair.Value;
 
             return ElementValue.Nil;
@@ -65,9 +65,15 @@ namespace IKVM.ByteCode.Reading
             get
             {
                 foreach (var elementValuePair in _annotation)
-                    yield return _clazz.GetUtf8Value(elementValuePair.Name);
+                {
+                    var name = _clazz.Constants.GetUtf8Value(elementValuePair.Name);
+                    if (name == null)
+                        throw new InvalidClassException("ElementValuePair with null name entry encountered.");
+
+                    yield return name;
+                }
+                }
             }
-        }
 
         /// <inheritdoc />
         public IEnumerable<ElementValue> Values
@@ -89,7 +95,13 @@ namespace IKVM.ByteCode.Reading
         public IEnumerator<KeyValuePair<string, ElementValue>> GetEnumerator()
         {
             foreach (var elementValuePair in _annotation)
-                yield return new KeyValuePair<string, ElementValue>(_clazz.GetUtf8Value(elementValuePair.Name), elementValuePair.Value);
+            {
+                var name = _clazz.Constants.GetUtf8Value(elementValuePair.Name);
+                if (name == null)
+                    throw new InvalidClassException("ElementValuePair with null name entry encountered.");
+                
+                yield return new KeyValuePair<string, ElementValue>(name, elementValuePair.Value);
+            }
         }
 
         /// <inheritdoc />

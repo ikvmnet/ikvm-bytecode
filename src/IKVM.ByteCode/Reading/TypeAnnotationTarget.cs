@@ -65,7 +65,7 @@ namespace IKVM.ByteCode.Reading
             TypeAnnotationTargetType.MethodReceiver => EmptyTarget.TryMeasure(ref reader, ref size),
             TypeAnnotationTargetType.MethodFormalParameter => FormalParameterTarget.TryMeasure(ref reader, ref size),
             TypeAnnotationTargetType.Throws => ThrowsTarget.TryMeasure(ref reader, ref size),
-            TypeAnnotationTargetType.LocalVariable => LocalVarTarget.TryMeasure(ref reader, ref size),
+            TypeAnnotationTargetType.LocalVar => LocalVarTarget.TryMeasure(ref reader, ref size),
             TypeAnnotationTargetType.ResourceVariable => LocalVarTarget.TryMeasure(ref reader, ref size),
             TypeAnnotationTargetType.ExceptionParameter => CatchTarget.TryMeasure(ref reader, ref size),
             TypeAnnotationTargetType.InstanceOf => OffsetTarget.TryMeasure(ref reader, ref size),
@@ -105,7 +105,7 @@ namespace IKVM.ByteCode.Reading
                 TypeAnnotationTargetType.MethodReceiver => TryReadEmptyTargetData(ref reader, (TypeAnnotationTargetType)kind, out data),
                 TypeAnnotationTargetType.MethodFormalParameter => TryReadFormalParameterTargetData(ref reader, (TypeAnnotationTargetType)kind, out data),
                 TypeAnnotationTargetType.Throws => TryReadThrowsTargetData(ref reader, (TypeAnnotationTargetType)kind, out data),
-                TypeAnnotationTargetType.LocalVariable => TryReadLocalVarTargetData(ref reader, (TypeAnnotationTargetType)kind, out data),
+                TypeAnnotationTargetType.LocalVar => TryReadLocalVarTargetData(ref reader, (TypeAnnotationTargetType)kind, out data),
                 TypeAnnotationTargetType.ResourceVariable => TryReadLocalVarTargetData(ref reader, (TypeAnnotationTargetType)kind, out data),
                 TypeAnnotationTargetType.ExceptionParameter => TryReadCatchTargetData(ref reader, (TypeAnnotationTargetType)kind, out data),
                 TypeAnnotationTargetType.InstanceOf => TryReadOffsetTargetData(ref reader, (TypeAnnotationTargetType)kind, out data),
@@ -305,7 +305,7 @@ namespace IKVM.ByteCode.Reading
 
         public LocalVarTarget AsLocalVarTarget()
         {
-            if (Type is not TypeAnnotationTargetType.LocalVariable and not TypeAnnotationTargetType.ResourceVariable)
+            if (Type is not TypeAnnotationTargetType.LocalVar and not TypeAnnotationTargetType.ResourceVariable)
                 throw new InvalidCastException($"Cannot cast TypeAnnotationTarget of type {Type} to LocalVarTarget.");
 
             var reader = new ClassFormatReader(Data);

@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct NestHostAttribute(ClassConstantHandle HostClass, bool IsNotNil = true)
+    public readonly record struct NestHostAttribute(ClassConstantHandle NestHost, bool IsNotNil = true)
     {
 
         public static NestHostAttribute Nil => default;

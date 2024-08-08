@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct NestMembersAttribute(ClassConstantHandleTable Classes, bool IsNotNil = true)
+    public readonly record struct NestMembersAttribute(ClassConstantHandleTable NestMembers, bool IsNotNil = true)
     {
 
         public static NestMembersAttribute Nil => default;

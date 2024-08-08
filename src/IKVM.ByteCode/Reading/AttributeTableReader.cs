@@ -38,7 +38,7 @@ namespace IKVM.ByteCode.Reading
                 throw new ArgumentNullException(nameof(name));
 
             foreach (var i in _attributes)
-                if (i.Name.IsNil == false && _clazz.GetUtf8Value(i.Name) == name)
+                if (_clazz.Constants.GetUtf8Value(i.Name) == name)
                     return i;
 
             return Attribute.Nil;

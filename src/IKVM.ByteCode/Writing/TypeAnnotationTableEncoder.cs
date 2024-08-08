@@ -169,7 +169,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="elementValues"></param>
         public void LocalVarTarget(Action<LocalVarTargetTableEncoder> localVars, Action<TypePathEncoder> targetPath, Utf8ConstantHandle type, Action<ElementValuePairTableEncoder> elementValues)
         {
-            TypeAnnotation(encoder => encoder.LocalVarTarget(localVars, targetPath, type, elementValues));
+            TypeAnnotation(encoder => encoder.LocalVariable(localVars, targetPath, type, elementValues));
         }
 
         /// <summary>

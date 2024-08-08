@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct RecordAttribute(ReadOnlyMemory<RecordAttributeComponent> Components, bool IsNotNil = true)
+    public readonly record struct RecordAttribute(RecordComponentTable Components, bool IsNotNil = true)
     {
 
         public static RecordAttribute Nil => default;
@@ -15,7 +13,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort componentsCount) == false)
                 return false;
 
-            var components = new RecordAttributeComponent[componentsCount];
+            var components = componentsCount == 0 ? [] : new RecordComponent[componentsCount];
             for (int i = 0; i < componentsCount; i++)
             {
                 if (reader.TryReadU2(out ushort nameIndex) == false)
@@ -25,10 +23,10 @@ namespace IKVM.ByteCode.Reading
                 if (ClassFile.TryReadAttributeTable(ref reader, out var attributes) == false)
                     return false;
 
-                components[i] = new RecordAttributeComponent(new(nameIndex), new(descriptorIndex), attributes);
+                components[i] = new RecordComponent(new(nameIndex), new(descriptorIndex), attributes);
             }
 
-            attribute = new RecordAttribute(components);
+            attribute = new RecordAttribute(new(components));
             return true;
         }
 

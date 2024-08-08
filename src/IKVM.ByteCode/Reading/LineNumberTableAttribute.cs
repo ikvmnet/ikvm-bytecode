@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LineNumberTableAttribute(LineNumberTable Table, bool IsNotNil = true)
+    public readonly record struct LineNumberTableAttribute(LineNumberTable LineNumbers, bool IsNotNil = true)
     {
 
         public static LineNumberTableAttribute Nil => default;
@@ -13,7 +13,7 @@
             if (reader.TryReadU2(out ushort itemCount) == false)
                 return false;
 
-            var items = itemCount == 0 ? [] : new LineNumber[itemCount];
+            var items = itemCount == 0 ? [] : new LineNumberInfo[itemCount];
             for (int i = 0; i < itemCount; i++)
             {
                 if (reader.TryReadU2(out ushort codeOffset) == false)
@@ -21,7 +21,7 @@
                 if (reader.TryReadU2(out ushort lineNumber) == false)
                     return false;
 
-                items[i] = new LineNumber(codeOffset, lineNumber);
+                items[i] = new LineNumberInfo(codeOffset, lineNumber);
             }
 
             attribute = new LineNumberTableAttribute(new(items));

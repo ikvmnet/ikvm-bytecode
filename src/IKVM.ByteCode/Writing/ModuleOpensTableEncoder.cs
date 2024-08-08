@@ -30,7 +30,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="flags"></param>
         /// <param name="to"></param>
         /// <returns></returns>
-        public ModuleOpensTableEncoder ModuleOpens(PackageConstantHandle package, ModuleOpensFlag flags, Action<ModuleTableEncoder> to)
+        public ModuleOpensTableEncoder Opens(PackageConstantHandle package, ModuleOpensFlag flags, Action<ModuleTableEncoder> to)
         {
             if (to is null)
                 throw new ArgumentNullException(nameof(to));

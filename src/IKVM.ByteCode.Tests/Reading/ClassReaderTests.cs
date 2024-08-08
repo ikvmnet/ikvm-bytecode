@@ -48,9 +48,9 @@ namespace IKVM.ByteCode.Reading.Tests
             foreach (var m in clazz.Methods)
                 Console.WriteLine(m.Name);
 
-            clazz.GetUtf8(clazz.GetClass(clazz.This).Name).Value.Should().Be("0");
+            clazz.Constants.GetUtf8(clazz.Constants.GetClass(clazz.This).Name).Value.Should().Be("0");
             foreach (var i in clazz.Constants)
-                clazz.GetKind(i).Should().NotBe(ConstantKind.Unknown);
+                clazz.Constants.GetKind(i).Should().NotBe(ConstantKind.Unknown);
             clazz.Interfaces.ToList();
             clazz.Fields.Should().HaveCount(0);
             clazz.Fields.ToList();
@@ -84,13 +84,13 @@ namespace IKVM.ByteCode.Reading.Tests
                 c.Methods.Should().OnlyHaveUniqueItems();
 
                 foreach (var iface in c.Interfaces)
-                    c.GetClassName(iface.Class).Should().NotBeNull();
+                    c.Constants.GetClassName(iface.Class).Should().NotBeNull();
 
                 foreach (var field in c.Fields)
                 {
                     field.Should().NotBeNull();
-                    c.GetUtf8Value(field.Name).Should().NotBeNull();
-                    c.GetUtf8Value(field.Descriptor).Should().NotBeNull();
+                    c.Constants.GetUtf8Value(field.Name).Should().NotBeNull();
+                    c.Constants.GetUtf8Value(field.Descriptor).Should().NotBeNull();
                     field.Attributes.ToList();
 
                     foreach (var attribute in field.Attributes)
@@ -136,30 +136,30 @@ namespace IKVM.ByteCode.Reading.Tests
         void TestConstant(ClassFile clazz, MethodHandleConstant methodHandle)
         {
             if (methodHandle.ReferenceKind is ReferenceKind.GetField or ReferenceKind.GetStatic or ReferenceKind.PutField or ReferenceKind.PutStatic)
-                clazz.GetKind(methodHandle.Reference).Should().Be(ConstantKind.Fieldref);
+                clazz.Constants.GetKind(methodHandle.Reference).Should().Be(ConstantKind.Fieldref);
             if (methodHandle.ReferenceKind is ReferenceKind.InvokeVirtual or ReferenceKind.NewInvokeSpecial)
-                clazz.GetKind(methodHandle.Reference).Should().Be(ConstantKind.Methodref);
+                clazz.Constants.GetKind(methodHandle.Reference).Should().Be(ConstantKind.Methodref);
             if (methodHandle.ReferenceKind is ReferenceKind.InvokeStatic or ReferenceKind.InvokeSpecial && clazz.Version < new ClassFormatVersion(52, 0))
-                clazz.GetKind(methodHandle.Reference).Should().Be(ConstantKind.Methodref);
+                clazz.Constants.GetKind(methodHandle.Reference).Should().Be(ConstantKind.Methodref);
             if (methodHandle.ReferenceKind is ReferenceKind.InvokeStatic or ReferenceKind.InvokeSpecial && clazz.Version >= new ClassFormatVersion(52, 0))
-                clazz.GetKind(methodHandle.Reference).Should().Match<ConstantKind>(i => i == ConstantKind.Methodref || i == ConstantKind.InterfaceMethodref);
+                clazz.Constants.GetKind(methodHandle.Reference).Should().Match<ConstantKind>(i => i == ConstantKind.Methodref || i == ConstantKind.InterfaceMethodref);
             if (methodHandle.ReferenceKind is ReferenceKind.InvokeInterface)
-                clazz.GetKind(methodHandle.Reference).Should().Be(ConstantKind.InterfaceMethodref);
-            if (methodHandle.ReferenceKind is ReferenceKind.InvokeVirtual or ReferenceKind.InvokeStatic or ReferenceKind.InvokeSpecial or ReferenceKind.InvokeInterface && clazz.GetKind(methodHandle.Reference) is ConstantKind.Methodref)
-                clazz.GetUtf8Value(clazz.GetNameAndType(clazz.GetMethodref((MethodrefConstantHandle)methodHandle.Reference).NameAndType).Name).Should().NotBe("<init>").And.NotBe("<clinit>");
-            if (methodHandle.ReferenceKind is ReferenceKind.InvokeVirtual or ReferenceKind.InvokeStatic or ReferenceKind.InvokeSpecial or ReferenceKind.InvokeInterface && clazz.GetKind(methodHandle.Reference) is ConstantKind.InterfaceMethodref)
-                clazz.GetClassName(clazz.GetInterfaceMethodref((InterfaceMethodrefConstantHandle)methodHandle.Reference).Class).Should().NotBe("<init>").And.NotBe("<clinit>");
+                clazz.Constants.GetKind(methodHandle.Reference).Should().Be(ConstantKind.InterfaceMethodref);
+            if (methodHandle.ReferenceKind is ReferenceKind.InvokeVirtual or ReferenceKind.InvokeStatic or ReferenceKind.InvokeSpecial or ReferenceKind.InvokeInterface && clazz.Constants.GetKind(methodHandle.Reference) is ConstantKind.Methodref)
+                clazz.Constants.GetUtf8Value(clazz.Constants.GetNameAndType(clazz.Constants.GetMethodref((MethodrefConstantHandle)methodHandle.Reference).NameAndType).Name).Should().NotBe("<init>").And.NotBe("<clinit>");
+            if (methodHandle.ReferenceKind is ReferenceKind.InvokeVirtual or ReferenceKind.InvokeStatic or ReferenceKind.InvokeSpecial or ReferenceKind.InvokeInterface && clazz.Constants.GetKind(methodHandle.Reference) is ConstantKind.InterfaceMethodref)
+                clazz.Constants.GetClassName(clazz.Constants.GetInterfaceMethodref((InterfaceMethodrefConstantHandle)methodHandle.Reference).Class).Should().NotBe("<init>").And.NotBe("<clinit>");
         }
 
         void TestAttribute(ClassFile clazz, Attribute attribute)
         {
-            if (clazz.GetUtf8Value(attribute.Name) is "RuntimeVisibleAnnotations")
+            if (clazz.Constants.GetUtf8Value(attribute.Name) is "RuntimeVisibleAnnotations")
                 TestAttribute(clazz, (RuntimeVisibleAnnotationsAttribute)attribute);
-            if (clazz.GetUtf8Value(attribute.Name) is "RuntimeInvisibleAnnotations")
+            if (clazz.Constants.GetUtf8Value(attribute.Name) is "RuntimeInvisibleAnnotations")
                 TestAttribute(clazz, (RuntimeInvisibleAnnotationsAttribute)attribute);
-            if (clazz.GetUtf8Value(attribute.Name) is "RuntimeVisibleTypeAnnotations")
+            if (clazz.Constants.GetUtf8Value(attribute.Name) is "RuntimeVisibleTypeAnnotations")
                 TestAttribute(clazz, (RuntimeVisibleTypeAnnotationsAttribute)attribute);
-            if (clazz.GetUtf8Value(attribute.Name) is "RuntimeInvisibleTypeAnnotations")
+            if (clazz.Constants.GetUtf8Value(attribute.Name) is "RuntimeInvisibleTypeAnnotations")
                 TestAttribute(clazz, (RuntimeInvisibleTypeAnnotationsAttribute)attribute);
         }
 
@@ -197,13 +197,13 @@ namespace IKVM.ByteCode.Reading.Tests
 
         void TestAnnotation(ClassFile clazz, Annotation annotation)
         {
-            clazz.GetUtf8Value(annotation.Type).Should().NotBeEmpty();
+            clazz.Constants.GetUtf8Value(annotation.Type).Should().NotBeEmpty();
             TestElementValuePair(clazz, annotation);
         }
 
         void TestAnnotation(ClassFile clazz, TypeAnnotation annotation)
         {
-            clazz.GetUtf8Value(annotation.Type).Should().NotBeEmpty();
+            clazz.Constants.GetUtf8Value(annotation.Type).Should().NotBeEmpty();
             TestElementValuePair(clazz, annotation);
         }
 
@@ -212,7 +212,7 @@ namespace IKVM.ByteCode.Reading.Tests
             elements.Count.Should().BeLessThan(256);
 
             foreach (var element in elements)
-                TestElement(clazz, clazz.GetUtf8Value(element.Name), element.Value);
+                TestElement(clazz, clazz.Constants.GetUtf8Value(element.Name), element.Value);
         }
 
         void TestElement(ClassFile clazz, string name, ElementValue value)
@@ -243,7 +243,7 @@ namespace IKVM.ByteCode.Reading.Tests
 
         void TestElementValue(ClassFile clazz, ClassElementValue value)
         {
-            clazz.GetUtf8Value(value.Class).Should().NotBeEmpty();
+            clazz.Constants.GetUtf8Value(value.Class).Should().NotBeEmpty();
         }
 
         void TestElementValue(ClassFile clazz, AnnotationElementValue value)

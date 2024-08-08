@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct ModuleMainClassAttribute(ClassConstantHandle MainClassIndex, bool IsNotNil = true)
+    public readonly record struct ModuleMainClassAttribute(ClassConstantHandle MainClass, bool IsNotNil = true)
     {
 
         public static ModuleMainClassAttribute Nil => default;

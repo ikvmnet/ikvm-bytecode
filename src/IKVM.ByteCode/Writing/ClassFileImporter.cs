@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers;
+using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Reading;
@@ -8,12 +9,12 @@ namespace IKVM.ByteCode.Writing
 {
 
     /// <summary>
-    /// Provides methods to encode entities from an existing <see cref="ClassFile"/>.
+    /// Provides methods to encode entities loaded from an existing <see cref="ClassFile"/>.
     /// </summary>
     public partial class ClassFileImporter
     {
 
-        readonly ClassFile _source;
+        readonly ConstantTable _source;
         readonly ConstantBuilder _constants;
 
         /// <summary>
@@ -21,12 +22,18 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="source"></param>
         /// <param name="destination"></param>
-        public ClassFileImporter(in ConstantTable _source, ConstantBuilder destination)
+        public ClassFileImporter(ConstantTable source, ConstantBuilder destination)
         {
-            this._source = source ?? throw new System.ArgumentNullException(nameof(source));
-            this._constants = destination ?? throw new System.ArgumentNullException(nameof(destination));
+            this._source = source ?? throw new ArgumentNullException(nameof(source));
+            this._constants = destination ?? throw new ArgumentNullException(nameof(destination));
         }
 
+        /// <summary>
+        /// Imports a <see cref="ConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         ConstantHandle Import(ConstantHandle handle)
         {
             return _source.GetKind(handle) switch
@@ -52,6 +59,12 @@ namespace IKVM.ByteCode.Writing
             };
         }
 
+        /// <summary>
+        /// Imports a <see cref="RefConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         RefConstantHandle Import(RefConstantHandle handle)
         {
             return _source.GetKind(handle) switch
@@ -156,6 +169,11 @@ namespace IKVM.ByteCode.Writing
             return _constants.GetOrAddPackage(_source.GetPackageName(handle));
         }
 
+        /// <summary>
+        /// Imports a <see cref="Annotation"/>.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="encoder"></param>
         public void Import(Annotation source, ref AnnotationEncoder encoder)
         {
             encoder.Annotation(Import(source.Type), e =>
@@ -204,6 +222,455 @@ namespace IKVM.ByteCode.Writing
             builder.StackMapTable(e => Import(source, ref e));
         }
 
+        public void Import(ExceptionsAttribute source, AttributeTableBuilder builder)
+        {
+            builder.Exceptions(e => Import(source, ref e));
+        }
+
+        public void Import(InnerClassesAttribute source, AttributeTableBuilder builder)
+        {
+            builder.InnerClasses(e => Import(source, ref e));
+        }
+
+        public void Import(EnclosingMethodAttribute source, AttributeTableBuilder builder)
+        {
+            builder.EnclosingMethod(Import(source.Class), Import(source.Method));
+        }
+
+        public void Import(SyntheticAttribute source, AttributeTableBuilder builder)
+        {
+            builder.Synthetic();
+        }
+
+        public void Import(SignatureAttribute source, AttributeTableBuilder builder)
+        {
+            builder.Signature(Import(source.Signature));
+        }
+
+        public void Import(SourceFileAttribute source, AttributeTableBuilder builder)
+        {
+            builder.SourceFile(Import(source.SourceFile));
+        }
+
+        public void Import(SourceDebugExtensionAttribute source, AttributeTableBuilder builder)
+        {
+            var b = new BlobBuilder();
+            source.Data.CopyTo(b.ReserveBytes((int)source.Data.Length).GetBytes().AsSpan());
+            builder.SourceDebugExtension(b);
+        }
+
+        public void Import(LineNumberTableAttribute source, AttributeTableBuilder builder)
+        {
+            builder.LineNumberTable(e => Import(source.LineNumbers, ref e));
+        }
+
+        public void Import(LocalVariableTableAttribute source, AttributeTableBuilder builder)
+        {
+            builder.LocalVariableTable(e => Import(source.LocalVariables, ref e));
+        }
+
+        public void Import(LocalVariableTypeTableAttribute source, AttributeTableBuilder builder)
+        {
+            builder.LocalVariableTypeTable(e => Import(source.LocalVariableTypes, ref e));
+        }
+
+        public void Import(DeprecatedAttribute source, AttributeTableBuilder builder)
+        {
+            builder.Deprecated();
+        }
+
+        public void Import(RuntimeVisibleAnnotationsAttribute source, AttributeTableBuilder builder)
+        {
+            builder.RuntimeVisibleAnnotations(e => Import(source.Annotations, ref e));
+        }
+
+        public void Import(RuntimeInvisibleAnnotationsAttribute source, AttributeTableBuilder builder)
+        {
+            builder.RuntimeInvisibleAnnotations(e => Import(source.Annotations, ref e));
+        }
+
+        public void Import(RuntimeVisibleTypeAnnotationsAttribute source, AttributeTableBuilder builder)
+        {
+            builder.RuntimeVisibleTypeAnnotations(e => Import(source.Annotations, ref e));
+        }
+
+        public void Import(RuntimeInvisibleTypeAnnotationsAttribute source, AttributeTableBuilder builder)
+        {
+            builder.RuntimeInvisibleTypeAnnotations(e => Import(source.Annotations, ref e));
+        }
+
+        public void Import(RuntimeVisibleParameterAnnotationsAttribute source, AttributeTableBuilder builder)
+        {
+            builder.RuntimeVisibleParameterAnnotations(e => Import(source.Parameters, ref e));
+        }
+
+        public void Import(RuntimeInvisibleParameterAnnotationsAttribute source, AttributeTableBuilder builder)
+        {
+            builder.RuntimeInvisibleParametersAnnotations(e => Import(source.Parameters, ref e));
+        }
+
+        public void Import(AnnotationDefaultAttribute source, AttributeTableBuilder builder)
+        {
+            builder.AnnotationDefault(e => Import(source.DefaultValue, ref e));
+        }
+
+        public void Import(BootstrapMethodsAttribute source, AttributeTableBuilder builder)
+        {
+            builder.BootstrapMethods(e => Import(source.Methods, ref e));
+        }
+
+        public void Import(MethodParametersAttribute source, AttributeTableBuilder builder)
+        {
+            builder.MethodParameters(e => Import(source.Parameters, ref e));
+        }
+
+        public void Import(ModuleAttribute source, AttributeTableBuilder builder)
+        {
+            builder.Module(Import(source.Name), source.Flags, Import(source.Version), e => Import(source.Requires, ref e), e => Import(source.Exports, ref e), e => Import(source.Opens, ref e), e => Import(source.Uses, ref e), e => Import(source.Provides, ref e));
+        }
+
+        public void Import(ModulePackagesAttribute source, AttributeTableBuilder builder)
+        {
+            builder.ModulePackages(e => Import(source, ref e));
+        }
+
+        public void Import(ModuleMainClassAttribute source, AttributeTableBuilder builder)
+        {
+            builder.ModuleMainClass(Import(source.MainClass));
+        }
+
+        public void Import(NestHostAttribute source, AttributeTableBuilder builder)
+        {
+            builder.NestHost(Import(source.NestHost));
+        }
+
+        public void Import(NestMembersAttribute source, AttributeTableBuilder builder)
+        {
+            builder.NestMembers(e => Import(source, ref e));
+        }
+
+        public void Import(RecordAttribute source, AttributeTableBuilder builder)
+        {
+            builder.Record(e => Import(source.Components, ref e));
+        }
+
+        public void Import(PermittedSubclassesAttribute source, AttributeTableBuilder builder)
+        {
+            builder.PermittedSubclasses(e => Import(source, ref e));
+        }
+
+        public void Import(PermittedSubclassesAttribute source, ref ClassConstantTableEncoder encoder)
+        {
+            Import(source.PermittedSubclasses, ref encoder);
+        }
+
+        public void Import(RecordComponentTable source, ref RecordComponentTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(RecordComponent source, ref RecordComponentTableEncoder encoder)
+        {
+            encoder.RecordComponent(Import(source.Name), Import(source.Descriptor), Import(source.Attributes));
+        }
+
+        public void Import(NestMembersAttribute source, ref ClassConstantTableEncoder encoder)
+        {
+            Import(source.NestMembers, ref encoder);
+        }
+
+        public void Import(ModulePackagesAttribute source, ref PackageConstantTableEncoder encoder)
+        {
+            Import(source.Packages, ref encoder);
+        }
+
+        public void Import(PackageConstantHandleTable source, ref PackageConstantTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(PackageConstantHandle source, ref PackageConstantTableEncoder encoder)
+        {
+            encoder.PackageConstant(Import(source));
+        }
+
+        public void Import(ModuleRequiresTable source, ref ModuleRequiresTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(ModuleRequireInfo source, ref ModuleRequiresTableEncoder encoder)
+        {
+            encoder.Requires(Import(source.Module), source.Flag, Import(source.Version));
+        }
+
+        public void Import(ModuleExportsTable source, ref ModuleExportsTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(ModuleExportInfo source, ref ModuleExportsTableEncoder encoder)
+        {
+            encoder.Exports(Import(source.Package), source.Flags, e => Import(source.Modules, ref e));
+        }
+
+        public void Import(ModuleOpensTable source, ref ModuleOpensTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(ModuleOpenInfo source, ref ModuleOpensTableEncoder encoder)
+        {
+            encoder.Opens(Import(source.Package), source.Flags, e => Import(source.Modules, ref e));
+        }
+
+        private void Import(ModuleConstantHandleTable source, ref ModuleTableEncoder encoder)
+        {
+            foreach (var i in source)
+                encoder.Module(Import(i));
+        }
+
+        public void Import(ModuleProvidesTable source, ref ModuleProvidesTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(ModuleProvideInfo source, ref ModuleProvidesTableEncoder encoder)
+        {
+            encoder.Provides(Import(source.Class), e => Import(source.With, ref e));
+        }
+
+        private void Import(ClassConstantHandleTable source, ref ClassConstantTableEncoder encoder)
+        {
+            foreach (var i in source)
+                encoder.Class(Import(i));
+        }
+
+        public void Import(MethodParameterTable source, ref MethodParameterTableEncoder encoder)
+        {
+            foreach (var i in source)
+                encoder.MethodParameter(Import(i.Name), i.AccessFlags);
+        }
+
+        public void Import(BootstrapMethodTable source, ref BootstrapMethodTableEncoder encoder)
+        {
+            foreach (var i in source)
+                encoder.Method(Import(i.Method), e => Import(i.Arguments, ref e));
+        }
+
+        public void Import(ConstantHandleTable source, ref BootstrapArgumentTableEncoder encoder)
+        {
+            foreach (var i in source)
+                encoder.Argument(Import(i));
+        }
+
+        public void Import(ParameterAnnotationTable source, ref ParameterAnnotationTableEncoder encoder)
+        {
+            foreach (var i in source)
+                encoder.ParameterAnnotation(e => Import(i, ref e));
+        }
+
+        public void Import(ParameterAnnotation source, ref AnnotationTableEncoder encoder)
+        {
+            Import(source.Annotations, ref encoder);
+        }
+
+        public void Import(TypeAnnotationTable source, ref TypeAnnotationTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(TypeAnnotation source, ref TypeAnnotationTableEncoder encoder)
+        {
+            encoder.TypeAnnotation(e => Import(source, ref e));
+        }
+
+        public void Import(TypeAnnotation source, ref TypeAnnotationEncoder encoder)
+        {
+            switch (source.Target.Type)
+            {
+                case TypeAnnotationTargetType.ClassTypeParameter:
+                    var _classTypeParameter = source.Target.AsTypeParameterTarget();
+                    encoder.ClassTypeParameter(_classTypeParameter.ParameterIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodTypeParameter:
+                    var _methodTypeParameter = source.Target.AsTypeParameterTarget();
+                    encoder.MethodTypeParameter(_methodTypeParameter.ParameterIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.ClassExtends:
+                    var _superTypeTarget = source.Target.AsSuperTypeTarget();
+                    encoder.ClassExtends(_superTypeTarget.SuperTypeIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.ClassTypeParameterBound:
+                    var _classTypeParameterBound = source.Target.AsTypeParameterBoundTarget();
+                    encoder.ClassTypeParameterBound(_classTypeParameterBound.ParameterIndex, _classTypeParameterBound.BoundIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodTypeParameterBound:
+                    var _methodTypeParameterBound = source.Target.AsTypeParameterBoundTarget();
+                    encoder.MethodTypeParameterBound(_methodTypeParameterBound.ParameterIndex, _methodTypeParameterBound.BoundIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.Field:
+                    var _field = source.Target.AsEmptyTarget();
+                    encoder.Field(e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodReturn:
+                    var _methodReturn = source.Target.AsEmptyTarget();
+                    encoder.MethodReturn(e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodReceiver:
+                    var _methodReceiver = source.Target.AsEmptyTarget();
+                    encoder.MethodReceiver(e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodFormalParameter:
+                    var _methodFormalParameter = source.Target.AsFormalParameterTarget();
+                    encoder.MethodFormalParameter(_methodFormalParameter.ParameterIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.Throws:
+                    var _throws = source.Target.AsThrowsTarget();
+                    encoder.Throws(_throws.ThrowsTypeIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.LocalVar:
+                    var _localVar = source.Target.AsLocalVarTarget();
+                    encoder.LocalVariable(e => Import(_localVar, ref e), e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.ResourceVariable:
+                    var _resourceVariable = source.Target.AsLocalVarTarget();
+                    encoder.ResourceVariable(e => Import(_resourceVariable, ref e), e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.ExceptionParameter:
+                    var _catchTarget = source.Target.AsCatchTarget();
+                    encoder.ExceptionParameter(_catchTarget.ExceptionTableIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.InstanceOf:
+                    var _instanceOf = source.Target.AsOffsetTarget();
+                    encoder.InstanceOf(_instanceOf.Offset, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.New:
+                    var _new = source.Target.AsOffsetTarget();
+                    encoder.New(_new.Offset, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.ConstructorReference:
+                    var _constructorReference = source.Target.AsOffsetTarget();
+                    encoder.ConstructorReference(_constructorReference.Offset, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodReference:
+                    var _methodReference = source.Target.AsOffsetTarget();
+                    encoder.MethodReference(_methodReference.Offset, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.Cast:
+                    var _cast = source.Target.AsTypeArgumentTarget();
+                    encoder.Cast(_cast.Offset, _cast.TypeArgumentIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.ConstructorInvocationTypeArgument:
+                    var _constructorInvocationTypeArgument = source.Target.AsTypeArgumentTarget();
+                    encoder.ConstructorInvocationTypeArgument(_constructorInvocationTypeArgument.Offset, _constructorInvocationTypeArgument.TypeArgumentIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodInvocationTypeArgument:
+                    var _methodInvocationTypeArgument = source.Target.AsTypeArgumentTarget();
+                    encoder.MethodInvocationTypeArgument(_methodInvocationTypeArgument.Offset, _methodInvocationTypeArgument.TypeArgumentIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.ConstructorReferenceTypeArgument:
+                    var _constructorReferenceTypeArgument = source.Target.AsTypeArgumentTarget();
+                    encoder.ConstructorReferenceTypeArgument(_constructorReferenceTypeArgument.Offset, _constructorReferenceTypeArgument.TypeArgumentIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodReferenceTypeArgument:
+                    var _methodReferenceTypeArgument = source.Target.AsTypeArgumentTarget();
+                    encoder.ConstructorReferenceTypeArgument(_methodReferenceTypeArgument.Offset, _methodReferenceTypeArgument.TypeArgumentIndex, e => Import(source.TargetPath, ref e), Import(source.Type), e => Import(source, ref e));
+                    break;
+                default:
+                    throw new ByteCodeException("Invalid type annotation target type.");
+            }
+        }
+
+        public void Import(LocalVarTarget source, ref LocalVarTargetTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(LocalVarTargetItem source, ref LocalVarTargetTableEncoder encoder)
+        {
+            encoder.LocalVar(source.Start, source.Length, source.Index);
+        }
+
+        public void Import(TypePath source, ref TypePathEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(TypePathComponent source, ref TypePathEncoder encoder)
+        {
+            switch (source.Kind)
+            {
+                case TypePathKind.TypeArgument:
+                    encoder.TypeArgument(source.ArgumentIndex);
+                    break;
+                case TypePathKind.InnerType:
+                    encoder.InnerType();
+                    break;
+                case TypePathKind.Array:
+                    encoder.Array();
+                    break;
+                case TypePathKind.Wildcard:
+                    encoder.Wildcard();
+                    break;
+            }
+        }
+
+        public void Import(TypeAnnotation source, ref ElementValuePairTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(LocalVariableTypeTable source, ref LocalVariableTypeTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(LocalVariableType source, ref LocalVariableTypeTableEncoder encoder)
+        {
+            encoder.LocalVariableType(source.StartPc, source.Length, Import(source.Name), Import(source.Signature), source.Slot);
+        }
+
+        public void Import(LocalVariableTable source, ref LocalVariableTableEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(LocalVariable source, ref LocalVariableTableEncoder encoder)
+        {
+            encoder.LocalVariable(source.StartPc, source.Length, Import(source.Name), Import(source.Type), source.Slot);
+        }
+
+        public void Import(LineNumberTable source, ref LineNumberTableEncoder encoder)
+        {
+            foreach (var i in source)
+                encoder.LineNumber(i.StartPc, i.LineNumber);
+        }
+
+        public void Import(InnerClassesAttribute source, ref InnerClassTableEncoder encoder)
+        {
+            foreach (var i in source.Table)
+                encoder.InnerClass(Import(i.Inner), Import(i.Outer), Import(i.InnerName), i.InnerAccessFlags);
+        }
+
+        public void Import(ExceptionsAttribute source, ref ClassConstantTableEncoder encoder)
+        {
+            foreach (var i in source.Exceptions)
+                encoder.Class(Import(i));
+        }
+
         public void Import(StackMapTableAttribute source, ref StackMapTableEncoder encoder)
         {
             foreach (var i in source.Frames)
@@ -212,17 +679,97 @@ namespace IKVM.ByteCode.Writing
 
         public void Import(StackMapFrame source, ref StackMapTableEncoder encoder)
         {
-            source.FrameType switch
-            {
-                <= 63 => SameStackMapFrame.TryMeasure(null),
-                >= 64 and <= 127 => SameLocalsOneStackMapFrame.TryMeasure(null),
-                247 => SameLocalsOneExtendedStackMapFrame.TryMeasure(null),
-                >= 248 and <= 250 => ChopStackMapFrame.TryMeasure(null),
-                251 => SameExtendedStackMapFrame.TryMeasure(null),
-                >= 252 and <= 254 => AppendStackMapFrame.TryMeasure(null),
-                255 => FullStackMapFrame.TryMeasure(null),
-            };
+            if (source.FrameType is <= 65)
+                Import((SameStackMapFrame)source, ref encoder);
+            else if (source.FrameType is >= 64 and <= 127)
+                Import((SameLocalsOneStackMapFrame)source, ref encoder);
+            else if (source.FrameType is 247)
+                Import((SameLocalsOneExtendedStackMapFrame)source, ref encoder);
+            else if (source.FrameType is >= 248 and <= 250)
+                Import((ChopStackMapFrame)source, ref encoder);
+            else if (source.FrameType is 251)
+                Import((SameExtendedStackMapFrame)source, ref encoder);
+            else if (source.FrameType is >= 252 and <= 254)
+                Import((AppendStackMapFrame)source, ref encoder);
+            else if (source.FrameType is 255)
+                Import((FullStackMapFrame)source, ref encoder);
+            else
+                throw new ByteCodeException("Invalid stack map frame type.");
         }
+
+        public void Import(SameStackMapFrame source, ref StackMapTableEncoder encoder)
+        {
+            encoder.Same(source.FrameType);
+        }
+
+        public void Import(SameLocalsOneStackMapFrame source, ref StackMapTableEncoder encoder)
+        {
+            encoder.SameLocalsOneStackItem(source.FrameType, e => Import(source.Stack, ref e));
+        }
+
+        public void Import(SameLocalsOneExtendedStackMapFrame source, ref StackMapTableEncoder encoder)
+        {
+            encoder.SameLocalsOneStackItemExtended(source.OffsetDelta, e => Import(source.Stack, ref e));
+        }
+
+        public void Import(ChopStackMapFrame source, ref StackMapTableEncoder encoder)
+        {
+            encoder.Chop(source.FrameType, source.OffsetDelta);
+        }
+
+        public void Import(SameExtendedStackMapFrame source, ref StackMapTableEncoder encoder)
+        {
+            encoder.SameExtended(source.OffsetDelta);
+        }
+
+        public void Import(AppendStackMapFrame source, ref StackMapTableEncoder encoder)
+        {
+            encoder.Append(source.FrameType, source.OffsetDelta, e => Import(source.Locals, ref e));
+        }
+
+        public void Import(FullStackMapFrame source, ref StackMapTableEncoder encoder)
+        {
+            encoder.Full(source.OffsetDelta, e => Import(source.Locals, ref e), e => Import(source.Stack, ref e));
+        }
+
+        public void Import(VerificationTypeInfoTable source, ref VerificationTypeInfoEncoder encoder)
+        {
+            foreach (var i in source)
+                Import(i, ref encoder);
+        }
+
+        public void Import(VerificationTypeInfo source, ref VerificationTypeInfoEncoder encoder)
+        {
+            switch (source.Kind)
+            {
+                case VerificationTypeInfoKind.Top:
+                    encoder.Top();
+                    break;
+                case VerificationTypeInfoKind.Integer:
+                    encoder.Integer();
+                    break;
+                case VerificationTypeInfoKind.Float:
+                    encoder.Float();
+                    break;
+                case VerificationTypeInfoKind.Double:
+                    encoder.Double();
+                    break;
+                case VerificationTypeInfoKind.Long:
+                    encoder.Long();
+                    break;
+                case VerificationTypeInfoKind.Null:
+                    encoder.Null();
+                    break;
+                case VerificationTypeInfoKind.UninitializedThis:
+                    encoder.UninitializedThis();
+                    break;
+                case VerificationTypeInfoKind.Object:
+                    encoder.Object(Import(source.AsObject().Class));
+                    break;
+                case VerificationTypeInfoKind.Uninitialized:
+                    encoder.Uninitialized(source.AsUninitialized().Offset);
+                    break;
+            }
         }
 
         public void Import(ExceptionHandlerTable source, ref ExceptionTableEncoder encoder)

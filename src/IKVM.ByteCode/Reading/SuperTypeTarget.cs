@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct SuperTypeTarget(InterfaceHandle SuperType)
+    public readonly record struct SuperTypeTarget(ushort SuperTypeIndex)
     {
 
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
@@ -36,7 +36,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort superTypeIndex) == false)
                 return false;
 
-            target = new SuperTypeTarget(new InterfaceHandle(superTypeIndex));
+            target = new SuperTypeTarget(superTypeIndex);
             return true;
         }
 

@@ -27,14 +27,14 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a new local variable type.
         /// </summary>
-        public LocalVariableTypeTableEncoder LocalVariableType(ushort start, ushort length, Utf8ConstantHandle name, Utf8ConstantHandle signature, ushort index)
+        public LocalVariableTypeTableEncoder LocalVariableType(ushort startPc, ushort length, Utf8ConstantHandle name, Utf8ConstantHandle signature, ushort slot)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(start);
+            w.TryWriteU2(startPc);
             w.TryWriteU2(length);
             w.TryWriteU2(name.Index);
             w.TryWriteU2(signature.Index);
-            w.TryWriteU2(index);
+            w.TryWriteU2(slot);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }

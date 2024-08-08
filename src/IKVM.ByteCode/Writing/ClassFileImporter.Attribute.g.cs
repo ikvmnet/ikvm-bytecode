@@ -1,6 +1,4 @@
-﻿using System;
-
-using IKVM.ByteCode.Reading;
+﻿using IKVM.ByteCode.Reading;
 
 namespace IKVM.ByteCode.Writing
 {
@@ -106,6 +104,7 @@ namespace IKVM.ByteCode.Writing
                     throw new ByteCodeException("Cannot import unknown attribute since its layout would be unknown.");
             }
         }
+
     }
 
 }

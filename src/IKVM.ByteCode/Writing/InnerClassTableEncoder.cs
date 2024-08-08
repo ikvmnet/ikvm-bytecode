@@ -26,18 +26,18 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a inner class to the table.
         /// </summary>
-        /// <param name="innerClass"></param>
-        /// <param name="outerClass"></param>
+        /// <param name="inner"></param>
+        /// <param name="outer"></param>
         /// <param name="innerName"></param>
-        /// <param name="innerAccessFlags"></param>
+        /// <param name="accessFlags"></param>
         /// <returns></returns>
-        public InnerClassTableEncoder InnerClass(ClassConstantHandle innerClass, ClassConstantHandle outerClass, Utf8ConstantHandle innerName, AccessFlag innerAccessFlags)
+        public InnerClassTableEncoder InnerClass(ClassConstantHandle inner, ClassConstantHandle outer, Utf8ConstantHandle innerName, AccessFlag accessFlags)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(innerClass.Index);
-            w.TryWriteU2(outerClass.Index);
+            w.TryWriteU2(inner.Index);
+            w.TryWriteU2(outer.Index);
             w.TryWriteU2(innerName.Index);
-            w.TryWriteU2((ushort)innerAccessFlags);
+            w.TryWriteU2((ushort)accessFlags);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }

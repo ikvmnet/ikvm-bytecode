@@ -5,27 +5,27 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly struct ModuleProvidesTable : IReadOnlyList<ModuleProvideInfo>
+    public readonly struct RecordComponentTable : IReadOnlyList<RecordComponent>
     {
 
-        public struct Enumerator : IEnumerator<ModuleProvideInfo>
+        public struct Enumerator : IEnumerator<RecordComponent>
         {
 
-            readonly ModuleProvideInfo[] _items;
+            readonly RecordComponent[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="items"></param>
-            internal Enumerator(ModuleProvideInfo[] items)
+            internal Enumerator(RecordComponent[] items)
             {
                 _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly ModuleProvideInfo Current => _items[_index];
+            public readonly RecordComponent Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,27 +50,43 @@ namespace IKVM.ByteCode.Reading
 
         }
 
-        readonly ModuleProvideInfo[] _items;
+        readonly RecordComponent[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="items"></param>
-        internal ModuleProvidesTable(ModuleProvideInfo[] items)
+        internal RecordComponentTable(RecordComponent[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
-        public readonly ModuleProvideInfo this[int index] => GetItem(index);
+        /// <summary>
+        /// Gets a reference to the record component at the given index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public readonly RecordComponent this[int index] => GetItem(index);
 
-        readonly ModuleProvideInfo GetItem(int index) => _items[index];
+        /// <summary>
+        /// Gets the record component at the given index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        readonly RecordComponent GetItem(int index) => _items[index];
 
+        /// <summary>
+        /// Gets the number of record components.
+        /// </summary>
         public readonly int Count => _items.Length;
 
+        /// <summary>
+        /// Gets an enumerator over the record components.
+        /// </summary>
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
-        readonly IEnumerator<ModuleProvideInfo> IEnumerable<ModuleProvideInfo>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<RecordComponent> IEnumerable<RecordComponent>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

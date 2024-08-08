@@ -5,27 +5,27 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly struct LineNumberTable : IReadOnlyList<LineNumber>
+    public readonly struct LineNumberTable : IReadOnlyList<LineNumberInfo>
     {
 
-        public struct Enumerator : IEnumerator<LineNumber>
+        public struct Enumerator : IEnumerator<LineNumberInfo>
         {
 
-            readonly LineNumber[] _items;
+            readonly LineNumberInfo[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="items"></param>
-            internal Enumerator(LineNumber[] items)
+            internal Enumerator(LineNumberInfo[] items)
             {
                 _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly LineNumber Current => _items[_index];
+            public readonly LineNumberInfo Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,13 +50,13 @@ namespace IKVM.ByteCode.Reading
 
         }
 
-        readonly LineNumber[] _items;
+        readonly LineNumberInfo[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="items"></param>
-        internal LineNumberTable(LineNumber[] items)
+        internal LineNumberTable(LineNumberInfo[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
@@ -66,14 +66,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly LineNumber this[int index] => GetItem(index);
+        public readonly LineNumberInfo this[int index] => GetItem(index);
 
         /// <summary>
         /// Gets the line number at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly LineNumber GetItem(int index) => _items[index];
+        readonly LineNumberInfo GetItem(int index) => _items[index];
 
         /// <summary>
         /// Gets the number of line numbers.
@@ -86,7 +86,7 @@ namespace IKVM.ByteCode.Reading
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
-        readonly IEnumerator<LineNumber> IEnumerable<LineNumber>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<LineNumberInfo> IEnumerable<LineNumberInfo>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

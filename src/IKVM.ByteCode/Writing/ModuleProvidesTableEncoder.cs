@@ -29,7 +29,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="clazz"></param>
         /// <param name="with"></param>
         /// <returns></returns>
-        public ModuleProvidesTableEncoder ModuleProvides(ClassConstantHandle clazz, Action<ClassConstantTableEncoder> with)
+        public ModuleProvidesTableEncoder Provides(ClassConstantHandle clazz, Action<ClassConstantTableEncoder> with)
         {
             if (with is null)
                 throw new ArgumentNullException(nameof(with));

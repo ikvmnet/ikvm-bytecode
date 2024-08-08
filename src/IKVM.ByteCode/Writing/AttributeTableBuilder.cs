@@ -623,12 +623,12 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a new NestHost attribute.
         /// </summary>
-        /// <param name="hostClass"></param>
-        public AttributeTableBuilder NestHost(ClassConstantHandle hostClass)
+        /// <param name="nestHost"></param>
+        public AttributeTableBuilder NestHost(ClassConstantHandle nestHost)
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.TryWriteU2(hostClass.Index);
+            w.TryWriteU2(nestHost.Index);
             return Attribute("NestHost", b);
         }
 

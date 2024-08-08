@@ -5,27 +5,27 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly struct ModuleExportsTable : IReadOnlyList<ModuleExports>
+    public readonly struct ModuleExportsTable : IReadOnlyList<ModuleExportInfo>
     {
 
-        public struct Enumerator : IEnumerator<ModuleExports>
+        public struct Enumerator : IEnumerator<ModuleExportInfo>
         {
 
-            readonly ModuleExports[] _items;
+            readonly ModuleExportInfo[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="items"></param>
-            internal Enumerator(ModuleExports[] items)
+            internal Enumerator(ModuleExportInfo[] items)
             {
                 _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly ModuleExports Current => _items[_index];
+            public readonly ModuleExportInfo Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,27 +50,27 @@ namespace IKVM.ByteCode.Reading
 
         }
 
-        readonly ModuleExports[] _items;
+        readonly ModuleExportInfo[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="items"></param>
-        internal ModuleExportsTable(ModuleExports[] items)
+        internal ModuleExportsTable(ModuleExportInfo[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
-        public readonly ModuleExports this[int index] => GetItem(index);
+        public readonly ModuleExportInfo this[int index] => GetItem(index);
 
-        readonly ModuleExports GetItem(int index) => _items[index];
+        readonly ModuleExportInfo GetItem(int index) => _items[index];
 
         public readonly int Count => _items.Length;
 
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
-        readonly IEnumerator<ModuleExports> IEnumerable<ModuleExports>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<ModuleExportInfo> IEnumerable<ModuleExportInfo>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

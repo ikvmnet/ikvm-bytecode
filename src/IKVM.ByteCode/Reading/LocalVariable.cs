@@ -1,6 +1,6 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LocalVariable(ushort CodeOffset, ushort CodeLength, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, ushort Index);
+    public readonly record struct LocalVariable(ushort StartPc, ushort Length, Utf8ConstantHandle Name, Utf8ConstantHandle Type, ushort Slot);
 
 }

@@ -30,12 +30,12 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a new line number at the specified byte code offset.
         /// </summary>
-        /// <param name="start"></param>
+        /// <param name="startPc"></param>
         /// <param name="lineNumber"></param>
-        public LineNumberTableEncoder LineNumber(ushort start, ushort lineNumber)
+        public LineNumberTableEncoder LineNumber(ushort startPc, ushort lineNumber)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(start);
+            w.TryWriteU2(startPc);
             w.TryWriteU2(lineNumber);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;

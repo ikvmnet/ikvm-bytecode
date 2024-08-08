@@ -1,10 +1,25 @@
-﻿using System.Buffers;
+﻿using System;
+using System.Buffers;
 
 namespace IKVM.ByteCode.Reading
 {
 
     public readonly record struct StackMapFrame(byte FrameType, ReadOnlySequence<byte> Data)
     {
+
+        public static explicit operator SameStackMapFrame(StackMapFrame value) => value.AsSameStackMap();
+
+        public static explicit operator SameLocalsOneStackMapFrame(StackMapFrame value) => value.AsSameLocalsOneStackMap();
+
+        public static explicit operator SameLocalsOneExtendedStackMapFrame(StackMapFrame value) => value.AsSameLocalsOneExtendedStackMap();
+
+        public static explicit operator ChopStackMapFrame(StackMapFrame value) => value.AsChopStackMap();
+
+        public static explicit operator SameExtendedStackMapFrame(StackMapFrame value) => value.AsSameExtendedStackMap();
+
+        public static explicit operator AppendStackMapFrame(StackMapFrame value) => value.AsAppendStackMap();
+
+        public static explicit operator FullStackMapFrame(StackMapFrame value) => value.AsFullStackMap();
 
         /// <summary>
         /// Attempts to measure the size of the element value.
@@ -72,7 +87,7 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        public SameStackMapFrame ReadSameStackMapFrame()
+        public SameStackMapFrame AsSameStackMap()
         {
             if (FrameType is not <= 63)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a SameStackMapFrame.");
@@ -84,9 +99,9 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public SameLocalsOneStackMapFrame ReadSameLocalsOneStackMapFrame()
+        public SameLocalsOneStackMapFrame AsSameLocalsOneStackMap()
         {
-            if (FrameType is not >= 64 and <= 127)
+            if (FrameType is not >= 64 or not <= 127)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a SameLocalsOneStackMapFrame.");
 
             var reader = new ClassFormatReader(Data);
@@ -96,7 +111,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public SameLocalsOneExtendedStackMapFrame ReadSameLocalsOneExtendedStackMapFrame()
+        public SameLocalsOneExtendedStackMapFrame AsSameLocalsOneExtendedStackMap()
         {
             if (FrameType is not 247)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a SameLocalsOneExtendedStackMapFrame.");
@@ -108,9 +123,9 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public ChopStackMapFrame ReadChopStackMapFrame()
+        public ChopStackMapFrame AsChopStackMap()
         {
-            if (FrameType is not >= 248 and <= 250)
+            if (FrameType is not >= 248 or not <= 250)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a ChopStackMapFrame.");
 
             var reader = new ClassFormatReader(Data);
@@ -120,7 +135,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public SameExtendedStackMapFrame ReadSameExtendedStackMapFrame()
+        public SameExtendedStackMapFrame AsSameExtendedStackMap()
         {
             if (FrameType is not 251)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a SameExtendedStackMapFrame.");
@@ -132,9 +147,9 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public AppendStackMapFrame ReadAppendStackMapFrame()
+        public AppendStackMapFrame AsAppendStackMap()
         {
-            if (FrameType is not >= 252 and <= 254)
+            if (FrameType is not >= 252 or not <= 254)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a AppendStackMapFrame.");
 
             var reader = new ClassFormatReader(Data);
@@ -144,7 +159,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public FullStackMapFrame ReadFullStackMapFrame()
+        public FullStackMapFrame AsFullStackMap()
         {
             if (FrameType is not >= 255)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a FullStackMapFrame.");

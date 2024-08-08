@@ -65,7 +65,7 @@
         /// <summary>
         /// The sort of type references that target the type of a local variable in a method.
         /// </summary>
-        LocalVariable = 0x40,
+        LocalVar = 0x40,
 
         /// <summary>
         /// The sort of type references that target the type of a resource variable in a method.

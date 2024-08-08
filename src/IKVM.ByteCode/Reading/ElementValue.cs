@@ -187,7 +187,7 @@ namespace IKVM.ByteCode.Reading
 
         public readonly EnumElementValue AsEnum()
         {
-            if (Kind != ElementValueKind.Enum)
+            if (Kind is not ElementValueKind.Enum)
                 throw new InvalidCastException($"Cannot cast ElementValue of kind {Kind} to Enum.");
 
             var reader = new ClassFormatReader(Data);
@@ -199,7 +199,7 @@ namespace IKVM.ByteCode.Reading
 
         public readonly ClassElementValue AsClass()
         {
-            if (Kind != ElementValueKind.Class)
+            if (Kind is not ElementValueKind.Class)
                 throw new InvalidCastException($"Cannot cast ElementValue of kind {Kind} to Class.");
 
             var reader = new ClassFormatReader(Data);
@@ -211,7 +211,7 @@ namespace IKVM.ByteCode.Reading
 
         public readonly AnnotationElementValue AsAnnotation()
         {
-            if (Kind != ElementValueKind.Annotation)
+            if (Kind is not ElementValueKind.Annotation)
                 throw new InvalidCastException($"Cannot cast ElementValue of kind {Kind} to Annotation.");
 
             var reader = new ClassFormatReader(Data);
@@ -223,7 +223,7 @@ namespace IKVM.ByteCode.Reading
 
         public readonly ArrayElementValue AsArray()
         {
-            if (Kind != ElementValueKind.Array)
+            if (Kind is not ElementValueKind.Array)
                 throw new InvalidCastException($"Cannot cast ElementValue of kind {Kind} to Array.");
 
             var reader = new ClassFormatReader(Data);

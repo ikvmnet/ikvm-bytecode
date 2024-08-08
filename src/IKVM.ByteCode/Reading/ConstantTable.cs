@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public struct ConstantTable : IReadOnlyCollection<ConstantHandle>
+    public class ConstantTable : IReadOnlyCollection<ConstantHandle>
     {
 
         public struct Enumerator : IEnumerator<ConstantHandle>
@@ -82,31 +82,31 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly ref readonly Constant this[ConstantHandle handle] => ref Get(handle);
+        public ref readonly Constant this[ConstantHandle handle] => ref Get(handle);
 
         /// <summary>
         /// Gets the untyped constant for the given handle.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        readonly ref readonly Constant Get(ConstantHandle handle) => ref _items[handle.Index];
+        ref readonly Constant Get(ConstantHandle handle) => ref _items[handle.Index];
 
         /// <summary>
         /// Gets the number of constants.
         /// </summary>
-        public readonly int Count => _count;
+        public int Count => _count;
 
         /// <summary>
         /// Gets an enumerator over the interfaces.
         /// </summary>
-        public readonly Enumerator GetEnumerator() => new(_items);
+        public Enumerator GetEnumerator() => new(_items);
 
         /// <summary>
         /// Discovers the kind of the specified constant handle.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly ConstantKind GetKind(ConstantHandle handle) => Get(handle).Kind;
+        public ConstantKind GetKind(ConstantHandle handle) => Get(handle).Kind;
 
         /// <summary>
         /// Gets the <see cref="Utf8Constant"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
@@ -138,11 +138,26 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="Utf8Constant"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ByteCodeException"></exception>
+        public string? GetUtf8Value(Utf8ConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return null;
+
+            return GetUtf8(handle).Value;
+        }
+
+        /// <summary>
         /// Gets the <see cref="IntegerConstant"/> value refered to by the <see cref="IntegerConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly IntegerConstant GetInteger(IntegerConstantHandle handle)
+        public IntegerConstant GetInteger(IntegerConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -159,11 +174,21 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="IntegerConstant"/> value refered to by the <see cref="IntegerConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public int GetIntegerValue(IntegerConstantHandle handle)
+        {
+            return GetInteger(handle).Value;
+        }
+
+        /// <summary>
         /// Gets the <see cref="FloatConstant"/> value refered to by the <see cref="FloatConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly FloatConstant GetFloat(FloatConstantHandle handle)
+        public FloatConstant GetFloat(FloatConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -180,11 +205,21 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="FloatConstant"/> value refered to by the <see cref="FloatConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public float GetFloatValue(FloatConstantHandle handle)
+        {
+            return GetFloat(handle).Value;
+        }
+
+        /// <summary>
         /// Gets the <see cref="LongConstant"/> value refered to by the <see cref="LongConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly LongConstant GetLong(LongConstantHandle handle)
+        public LongConstant GetLong(LongConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -201,11 +236,21 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="LongConstant"/> value refered to by the <see cref="LongConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public long GetLongValue(LongConstantHandle handle)
+        {
+            return GetLong(handle).Value;
+        }
+
+        /// <summary>
         /// Gets the <see cref="DoubleConstant"/> value refered to by the <see cref="DoubleConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly DoubleConstant GetDouble(DoubleConstantHandle handle)
+        public DoubleConstant GetDouble(DoubleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -222,11 +267,21 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="DoubleConstant"/> value refered to by the <see cref="DoubleConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public double GetDoubleValue(DoubleConstantHandle handle)
+        {
+            return GetDouble(handle).Value;
+        }
+
+        /// <summary>
         /// Gets the <see cref="ClassConstant"/> value refered to by the <see cref="ClassConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly ClassConstant GetClass(ClassConstantHandle handle)
+        public ClassConstant GetClass(ClassConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -243,11 +298,24 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="ClassConstant"/> value refered to by the <see cref="ClassConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string? GetClassName(ClassConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return null;
+
+            return GetUtf8Value(GetClass(handle).Name);
+        }
+
+        /// <summary>
         /// Gets the <see cref="StringConstant"/> value refered to by the <see cref="StringConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly StringConstant GetString(StringConstantHandle handle)
+        public StringConstant GetString(StringConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -264,11 +332,24 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="StringConstant"/> value refered to by the <see cref="StringConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string? GetStringValue(StringConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return null;
+
+            return GetUtf8Value(GetString(handle).Value);
+        }
+
+        /// <summary>
         /// Gets the <see cref="FieldrefConstant"/> value refered to by the <see cref="FieldrefConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly FieldrefConstant GetFieldref(FieldrefConstantHandle handle)
+        public FieldrefConstant GetFieldref(FieldrefConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -289,7 +370,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly MethodrefConstant GetMethodref(MethodrefConstantHandle handle)
+        public MethodrefConstant GetMethodref(MethodrefConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -310,7 +391,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly InterfaceMethodrefConstant GetInterfaceMethodref(InterfaceMethodrefConstantHandle handle)
+        public InterfaceMethodrefConstant GetInterfaceMethodref(InterfaceMethodrefConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -331,7 +412,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly NameAndTypeConstant GetNameAndType(NameAndTypeConstantHandle handle)
+        public NameAndTypeConstant GetNameAndType(NameAndTypeConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -352,7 +433,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly MethodHandleConstant GetMethodHandle(MethodHandleConstantHandle handle)
+        public MethodHandleConstant GetMethodHandle(MethodHandleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -373,7 +454,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly MethodTypeConstant GetMethodType(MethodTypeConstantHandle handle)
+        public MethodTypeConstant GetMethodType(MethodTypeConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -390,11 +471,24 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="MethodTypeConstant"/> value refered to by the <see cref="MethodTypeConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string? GetMethodTypeDescriptor(MethodTypeConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return null;
+
+            return GetUtf8Value(GetMethodType(handle).Descriptor);
+        }
+
+        /// <summary>
         /// Gets the <see cref="DynamicConstant"/> value refered to by the <see cref="DynamicConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly DynamicConstant GetDynamic(DynamicConstantHandle handle)
+        public DynamicConstant GetDynamic(DynamicConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -415,7 +509,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly InvokeDynamicConstant GetInvokeDynamic(InvokeDynamicConstantHandle handle)
+        public InvokeDynamicConstant GetInvokeDynamic(InvokeDynamicConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -436,7 +530,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly ModuleConstant GetModule(ModuleConstantHandle handle)
+        public ModuleConstant GetModule(ModuleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -453,11 +547,24 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
+        /// Gets the <see cref="ModuleConstant"/> value refered to by the <see cref="ModuleConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string? GetModuleName(ModuleConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return null;
+
+            return GetUtf8Value(GetModule(handle).Name);
+        }
+
+        /// <summary>
         /// Gets the <see cref="PackageConstant"/> value refered to by the <see cref="PackageConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public readonly PackageConstant GetPackage(PackageConstantHandle handle)
+        public PackageConstant GetPackage(PackageConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -473,11 +580,24 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        /// <inheritdoc />
-        readonly IEnumerator<ConstantHandle> IEnumerable<ConstantHandle>.GetEnumerator() => GetEnumerator();
+        /// <summary>
+        /// Gets the <see cref="PackageConstant"/> value refered to by the <see cref="PackageConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public string? GetPackageName(PackageConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return null;
+
+            return GetUtf8Value(GetPackage(handle).Name);
+        }
 
         /// <inheritdoc />
-        readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator<ConstantHandle> IEnumerable<ConstantHandle>.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     }
 

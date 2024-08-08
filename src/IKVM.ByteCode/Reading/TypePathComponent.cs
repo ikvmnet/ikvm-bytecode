@@ -1,10 +1,10 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct TypePathItem(TypePathKind Kind, byte ArgumentIndex)
+    public readonly record struct TypePathComponent(TypePathKind Kind, byte ArgumentIndex)
     {
 
-        public static bool TryRead(ref ClassFormatReader reader, out TypePathItem record)
+        public static bool TryRead(ref ClassFormatReader reader, out TypePathComponent record)
         {
             record = default;
 
@@ -13,7 +13,7 @@
             if (reader.TryReadU1(out byte argumentIndex) == false)
                 return false;
 
-            record = new TypePathItem((TypePathKind)kind, argumentIndex);
+            record = new TypePathComponent((TypePathKind)kind, argumentIndex);
             return true;
         }
 

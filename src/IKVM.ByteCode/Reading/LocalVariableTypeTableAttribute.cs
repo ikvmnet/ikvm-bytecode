@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LocalVariableTypeTableAttribute(LocalVariableTypeTable Table, bool IsNotNil = true)
+    public readonly record struct LocalVariableTypeTableAttribute(LocalVariableTypeTable LocalVariableTypes, bool IsNotNil = true)
     {
 
         public static LocalVariableTypeTableAttribute Nil => default;

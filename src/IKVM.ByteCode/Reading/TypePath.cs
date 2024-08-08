@@ -5,27 +5,27 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly struct TypePath : IReadOnlyList<TypePathItem>
+    public readonly struct TypePath : IReadOnlyList<TypePathComponent>
     {
 
-        public struct Enumerator : IEnumerator<TypePathItem>
+        public struct Enumerator : IEnumerator<TypePathComponent>
         {
 
-            readonly TypePathItem[] _items;
+            readonly TypePathComponent[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="items"></param>
-            internal Enumerator(TypePathItem[] items)
+            internal Enumerator(TypePathComponent[] items)
             {
                 _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly TypePathItem Current => _items[_index];
+            public readonly TypePathComponent Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -57,10 +57,10 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU1(out byte length) == false)
                 return false;
 
-            var path = length == 0 ? [] : new TypePathItem[length];
+            var path = length == 0 ? [] : new TypePathComponent[length];
             for (int i = 0; i < length; i++)
             {
-                if (TypePathItem.TryRead(ref reader, out var item) == false)
+                if (TypePathComponent.TryRead(ref reader, out var item) == false)
                     return false;
 
                 path[i] = item;
@@ -70,13 +70,13 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        readonly TypePathItem[] _items;
+        readonly TypePathComponent[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="items"></param>
-        internal TypePath(TypePathItem[] items)
+        internal TypePath(TypePathComponent[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
@@ -86,14 +86,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly TypePathItem this[int index] => GetItem(index);
+        public readonly TypePathComponent this[int index] => GetItem(index);
 
         /// <summary>
         /// Gets the item at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly TypePathItem GetItem(int index) => _items[index];
+        readonly TypePathComponent GetItem(int index) => _items[index];
 
         /// <summary>
         /// Gets the number of items.
@@ -106,7 +106,7 @@ namespace IKVM.ByteCode.Reading
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
-        readonly IEnumerator<TypePathItem> IEnumerable<TypePathItem>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<TypePathComponent> IEnumerable<TypePathComponent>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

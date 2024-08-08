@@ -76,7 +76,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Utf8ConstantHandle AddUtf8(string value)
+        public Utf8ConstantHandle AddUtf8(string? value)
         {
             if (value is null)
                 throw new ArgumentNullException(nameof(value));
@@ -89,7 +89,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Utf8ConstantHandle GetOrAddUtf8(string value)
+        public Utf8ConstantHandle GetOrAddUtf8(string? value)
         {
             if (value == null)
                 return default;
@@ -220,7 +220,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public ClassConstantHandle AddClass(string name)
+        public ClassConstantHandle AddClass(string? name)
         {
             return AddClass(GetOrAddUtf8(name));
         }
@@ -240,7 +240,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public ClassConstantHandle GetOrAddClass(string name)
+        public ClassConstantHandle GetOrAddClass(string? name)
         {
             return GetOrAddClass(GetOrAddUtf8(name));
         }
@@ -255,7 +255,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantKind.String);
             w.TryWriteU2(name.Index);
-            return new(_next++);
+            return _stringCache[name] = new(_next++);
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public StringConstantHandle AddString(string value)
+        public StringConstantHandle AddString(string? value)
         {
             return AddString(GetOrAddUtf8(value));
         }
@@ -283,7 +283,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public StringConstantHandle GetOrAddString(string value)
+        public StringConstantHandle GetOrAddString(string? value)
         {
             return GetOrAddString(GetOrAddUtf8(value));
         }
@@ -451,7 +451,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantKind.MethodHandle);
             w.TryWriteU1((byte)kind);
             w.TryWriteU2(reference.Index);
-            return new(_next++);
+            return _methodHandleCache[(kind, reference)] = new(_next++);
         }
 
         /// <summary>
@@ -500,7 +500,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantKind.Dynamic);
             w.TryWriteU2(bootstrapMethodAttrIndex);
             w.TryWriteU2(nameAndType.Index);
-            return new(_next++);
+            return _dynamicCache[(bootstrapMethodAttrIndex, nameAndType)] = new(_next++);
         }
 
         /// <summary>
@@ -526,7 +526,7 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU1((byte)ConstantKind.InvokeDynamic);
             w.TryWriteU2(bootstrapMethodAttrIndex);
             w.TryWriteU2(nameAndType.Index);
-            return new(_next++);
+            return _invokeDynamicCache[(bootstrapMethodAttrIndex, nameAndType)] = new(_next++);
         }
 
         /// <summary>
@@ -550,7 +550,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantKind.Module);
             w.TryWriteU2(name.Index);
-            return new(_next++);
+            return _moduleCache[name] = new(_next++);
         }
 
         /// <summary>
@@ -593,7 +593,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantKind.Package);
             w.TryWriteU2(name.Index);
-            return new(_next++);
+            return _packageCache[name] = new(_next++);
         }
 
         /// <summary>

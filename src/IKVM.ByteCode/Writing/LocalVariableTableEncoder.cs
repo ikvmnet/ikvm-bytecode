@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 
@@ -27,14 +26,14 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Adds a new local variable.
         /// </summary>
-        public LocalVariableTableEncoder LocalVariable(ushort start, ushort length, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, ushort index)
+        public LocalVariableTableEncoder LocalVariable(ushort startPc, ushort length, Utf8ConstantHandle name, Utf8ConstantHandle type, ushort slot)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(start);
+            w.TryWriteU2(startPc);
             w.TryWriteU2(length);
             w.TryWriteU2(name.Index);
-            w.TryWriteU2(descriptor.Index);
-            w.TryWriteU2(index);
+            w.TryWriteU2(type.Index);
+            w.TryWriteU2(slot);
             new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
             return this;
         }

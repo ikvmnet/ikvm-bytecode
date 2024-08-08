@@ -5,27 +5,27 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly struct ModuleRequiresTable : IReadOnlyList<ModuleRequires>
+    public readonly struct ModuleRequiresTable : IReadOnlyList<ModuleRequireInfo>
     {
 
-        public struct Enumerator : IEnumerator<ModuleRequires>
+        public struct Enumerator : IEnumerator<ModuleRequireInfo>
         {
 
-            readonly ModuleRequires[] _items;
+            readonly ModuleRequireInfo[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="items"></param>
-            internal Enumerator(ModuleRequires[] items)
+            internal Enumerator(ModuleRequireInfo[] items)
             {
                 _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly ModuleRequires Current => _items[_index];
+            public readonly ModuleRequireInfo Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,27 +50,27 @@ namespace IKVM.ByteCode.Reading
 
         }
 
-        readonly ModuleRequires[] _items;
+        readonly ModuleRequireInfo[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="items"></param>
-        internal ModuleRequiresTable(ModuleRequires[] items)
+        internal ModuleRequiresTable(ModuleRequireInfo[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
-        public readonly ModuleRequires this[int index] => GetItem(index);
+        public readonly ModuleRequireInfo this[int index] => GetItem(index);
 
-        readonly ModuleRequires GetItem(int index) => _items[index];
+        readonly ModuleRequireInfo GetItem(int index) => _items[index];
 
         public readonly int Count => _items.Length;
 
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
-        readonly IEnumerator<ModuleRequires> IEnumerable<ModuleRequires>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<ModuleRequireInfo> IEnumerable<ModuleRequireInfo>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct PermittedSubclassesAttribute(ClassConstantHandleTable Classes, bool IsNotNil = true)
+    public readonly record struct PermittedSubclassesAttribute(ClassConstantHandleTable PermittedSubclasses, bool IsNotNil = true)
     {
 
         public static PermittedSubclassesAttribute Nil => default;

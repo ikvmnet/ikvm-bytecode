@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct MethodParametersAttribute(MethodParameterTable Table, bool IsNotNil = true)
+    public readonly record struct MethodParametersAttribute(MethodParameterTable Parameters, bool IsNotNil = true)
     {
 
         public static MethodParametersAttribute Nil => default;
