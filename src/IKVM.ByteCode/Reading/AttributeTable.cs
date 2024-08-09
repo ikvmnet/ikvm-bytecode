@@ -105,8 +105,7 @@ namespace IKVM.ByteCode.Reading
             if (pool is null)
                 throw new ArgumentNullException(nameof(pool));
 
-            var self = this;
-            foreach (var i in self)
+            foreach (var i in this)
                 i.EncodeTo(view, pool, builder);
         }
 
