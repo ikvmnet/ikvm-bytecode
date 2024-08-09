@@ -95,7 +95,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly TypePathComponent GetItem(int index) => _items[index];
+        readonly ref readonly TypePathComponent GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of items.
@@ -113,7 +113,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="view"></param>
         /// <param name="pool"></param>
         /// <param name="encoder"></param>
-        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref TypePathEncoder encoder)
+        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref TypePathEncoder encoder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {

@@ -31,7 +31,7 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
 }
 #>
 
-        void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
+        readonly void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {

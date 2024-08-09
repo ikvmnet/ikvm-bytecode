@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,27 +7,27 @@ using IKVM.ByteCode.Writing;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LocalVarTarget : IReadOnlyList<LocalVarTargetItem>
+    public readonly struct ElementValuePairTable : IReadOnlyList<ElementValuePair>
     {
 
-        public struct Enumerator : IEnumerator<LocalVarTargetItem>
+        public struct Enumerator : IEnumerator<ElementValuePair>
         {
 
-            readonly LocalVarTargetItem[] _items;
+            readonly ElementValuePair[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="items"></param>
-            internal Enumerator(LocalVarTargetItem[] items)
+            internal Enumerator(ElementValuePair[] items)
             {
                 _items = items;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly LocalVarTargetItem Current => _items[_index];
+            public readonly ElementValuePair Current => _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -53,99 +52,94 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <summary>
+        /// Measures the size of the current annotation.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
-            if (reader.TryReadU2(out ushort length) == false)
+
+            if (reader.TryReadU2(out ushort pairCount) == false)
                 return false;
 
-            for (int i = 0; i < length; i++)
-                if (LocalVarTargetItem.TryMeasure(ref reader, ref size) == false)
+            for (int i = 0; i < pairCount; i++)
+                if (ElementValuePair.TryMeasure(ref reader, ref size) == false)
                     return false;
 
             return true;
         }
 
         /// <summary>
-        /// Attempts to read the data of this target.
+        /// Attempts to read an annotation.
         /// </summary>
         /// <param name="reader"></param>
-        /// <param name="data"></param>
+        /// <param name="annotation"></param>
         /// <returns></returns>
-        public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data)
+        public static bool TryRead(ref ClassFormatReader reader, out ElementValuePairTable annotation)
         {
-            data = default;
+            annotation = default;
 
-            int size = 0;
-            if (TryMeasure(ref reader, ref size) == false)
+            if (reader.TryReadU2(out ushort pairCount) == false)
                 return false;
 
-            // rewind after measure to read data
-            reader.Rewind(size);
-            if (reader.TryReadMany(size, out data) == false)
-                return false;
-
-            return true;
-        }
-
-        public static bool TryRead(ref ClassFormatReader reader, out LocalVarTarget target)
-        {
-            target = default;
-
-            if (reader.TryReadU2(out ushort length) == false)
-                return false;
-
-            var items = length == 0 ? [] : new LocalVarTargetItem[length];
-            for (int i = 0; i < length; i++)
-                if (LocalVarTargetItem.TryRead(ref reader, out items[i]) == false)
+            var elements = new ElementValuePair[pairCount];
+            for (int i = 0; i < pairCount; i++)
+            {
+                if (ElementValuePair.TryRead(ref reader, out var element) == false)
                     return false;
 
-            target = new LocalVarTarget(items);
+                elements[i] = element;
+            }
+
+            annotation = new ElementValuePairTable(elements);
             return true;
         }
 
-        readonly LocalVarTargetItem[] _items;
+        readonly ElementValuePair[] _items;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="items"></param>
-        internal LocalVarTarget(LocalVarTargetItem[] items)
+        internal ElementValuePairTable(ElementValuePair[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
         /// <summary>
-        /// Gets a reference to the local var target at the given index.
+        /// Gets a reference to the element value pair at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly LocalVarTargetItem this[int index] => GetItem(index);
+        public readonly ElementValuePair this[int index] => Get(index);
 
         /// <summary>
-        /// Gets the local var target at the given index.
+        /// Gets the element value pair at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly LocalVarTargetItem GetItem(int index) => ref _items[index];
+        readonly ElementValuePair Get(int index) => _items[index];
 
         /// <summary>
-        /// Gets the number of local local var targets.
+        /// Gets the number of element values.
         /// </summary>
         public readonly int Count => _items.Length;
 
         /// <summary>
-        /// Gets an enumerator over the local var targets.
+        /// Gets an enumerator over the element values.
         /// </summary>
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Imports a <see cref="Annotation"/>.
         /// </summary>
         /// <param name="view"></param>
         /// <param name="pool"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref LocalVarTargetTableEncoder encoder)
+        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ElementValuePairTableEncoder encoder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {
@@ -159,7 +153,7 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <inheritdoc />
-        readonly IEnumerator<LocalVarTargetItem> IEnumerable<LocalVarTargetItem>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<ElementValuePair> IEnumerable<ElementValuePair>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

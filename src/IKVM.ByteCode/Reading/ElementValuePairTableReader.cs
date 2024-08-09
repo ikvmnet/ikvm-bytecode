@@ -6,11 +6,11 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public class AnnotationReader : IReadOnlyDictionary<string, ElementValue>
+    public class ElementValuePairTableReader : IReadOnlyDictionary<string, ElementValue>
     {
 
         readonly ClassFile _clazz;
-        readonly Annotation _annotation;
+        readonly ElementValuePairTable _table;
         readonly ConcurrentDictionary<string, ElementValue> _cache = new();
 
         /// <summary>
@@ -18,16 +18,16 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="clazz"></param>
         /// <param name="annotation"></param>
-        public AnnotationReader(ClassFile clazz, Annotation annotation)
+        public ElementValuePairTableReader(ClassFile clazz, ElementValuePairTable annotation)
         {
             _clazz = clazz ?? throw new ArgumentNullException(nameof(clazz));
-            _annotation = annotation;
+            _table = annotation;
         }
 
         /// <summary>
-        /// Gets the original annotation.
+        /// Gets the original table.
         /// </summary>
-        public ref readonly Annotation Annotation => ref _annotation;
+        public ref readonly ElementValuePairTable Table => ref _table;
 
         /// <inheritdoc />
         public ElementValue this[string key]
@@ -52,7 +52,7 @@ namespace IKVM.ByteCode.Reading
             if (name is null)
                 throw new ArgumentNullException(nameof(name));
 
-            foreach (var elementValuePair in _annotation)
+            foreach (var elementValuePair in _table)
                 if (_clazz.Constants.Get(elementValuePair.Name) == name)
                     return elementValuePair.Value;
 
@@ -64,7 +64,7 @@ namespace IKVM.ByteCode.Reading
         {
             get
             {
-                foreach (var elementValuePair in _annotation)
+                foreach (var elementValuePair in _table)
                 {
                     var name = _clazz.Constants.Get(elementValuePair.Name);
                     if (name.IsNil)
@@ -80,13 +80,13 @@ namespace IKVM.ByteCode.Reading
         {
             get
             {
-                foreach (var elementValuePair in _annotation)
+                foreach (var elementValuePair in _table)
                     yield return elementValuePair.Value;
             }
         }
 
         /// <inheritdoc />
-        public int Count => _annotation.Count;
+        public int Count => _table.Count;
 
         /// <inheritdoc />
         public bool ContainsKey(string key) => _cache.ContainsKey(key) || FindByName(key).IsNotNil;
@@ -94,7 +94,7 @@ namespace IKVM.ByteCode.Reading
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, ElementValue>> GetEnumerator()
         {
-            foreach (var elementValuePair in _annotation)
+            foreach (var elementValuePair in _table)
             {
                 var name = _clazz.Constants.Get(elementValuePair.Name);
                 if (name.IsNil)

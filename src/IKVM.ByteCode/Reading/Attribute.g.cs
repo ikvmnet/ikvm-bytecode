@@ -339,7 +339,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
+        readonly void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {

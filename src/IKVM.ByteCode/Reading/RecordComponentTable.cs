@@ -75,7 +75,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly RecordComponent GetItem(int index) => _items[index];
+        readonly ref readonly RecordComponent GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of record components.
@@ -93,7 +93,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="view"></param>
         /// <param name="pool"></param>
         /// <param name="builder"></param>
-        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref RecordComponentTableEncoder encoder)
+        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref RecordComponentTableEncoder encoder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {

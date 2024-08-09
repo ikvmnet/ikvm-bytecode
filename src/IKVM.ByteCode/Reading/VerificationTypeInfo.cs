@@ -191,7 +191,7 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        public TopVariableInfo AsTop()
+        public readonly TopVariableInfo AsTop()
         {
             if (Kind != VerificationTypeInfoKind.Top)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to Top.");
@@ -203,7 +203,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        public IntegerVariableInfo AsInteger()
+        public readonly IntegerVariableInfo AsInteger()
         {
             if (Kind != VerificationTypeInfoKind.Integer)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to Integer.");
@@ -215,7 +215,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        public FloatVariableInfo AsFloat()
+        public readonly FloatVariableInfo AsFloat()
         {
             if (Kind != VerificationTypeInfoKind.Float)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to Float.");
@@ -227,7 +227,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        public DoubleVariableInfo AsDouble()
+        public readonly DoubleVariableInfo AsDouble()
         {
             if (Kind != VerificationTypeInfoKind.Double)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to Double.");
@@ -239,7 +239,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        public LongVariableInfo AsLong()
+        public readonly LongVariableInfo AsLong()
         {
             if (Kind != VerificationTypeInfoKind.Long)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to Long.");
@@ -251,7 +251,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        public NullVariableInfo AsNull()
+        public readonly NullVariableInfo AsNull()
         {
             if (Kind != VerificationTypeInfoKind.Null)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to Null.");
@@ -263,7 +263,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        public UninitializedThisVariableInfo AsUninitializedThis()
+        public readonly UninitializedThisVariableInfo AsUninitializedThis()
         {
             if (Kind != VerificationTypeInfoKind.UninitializedThis)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to UninitializedThis.");
@@ -275,7 +275,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        public ObjectVariableInfo AsObject()
+        public readonly ObjectVariableInfo AsObject()
         {
             if (Kind != VerificationTypeInfoKind.Object)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to Object.");
@@ -287,7 +287,7 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        public UninitializedVariableInfo AsUninitialized()
+        public readonly UninitializedVariableInfo AsUninitialized()
         {
             if (Kind != VerificationTypeInfoKind.Uninitialized)
                 throw new InvalidCastException($"Cannot cast VerificationTypeInfo of kind {Kind} to Uninitialized.");
@@ -305,7 +305,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="view"></param>
         /// <param name="pool"></param>
         /// <param name="encoder"></param>
-        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref VerificationTypeInfoEncoder encoder)
+        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref VerificationTypeInfoEncoder encoder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {

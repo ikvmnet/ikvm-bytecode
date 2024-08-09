@@ -68,24 +68,24 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public ConstantHandle this[int index] => GetItem(index);
+        public readonly ConstantHandle this[int index] => GetItem(index);
 
         /// <summary>
         /// Gets the constant handle at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        ConstantHandle GetItem(int index) => _items[index];
+        readonly ConstantHandle GetItem(int index) => _items[index];
 
         /// <summary>
         /// Gets the number of constant handles.
         /// </summary>
-        public int Count => _items.Length;
+        public readonly int Count => _items.Length;
 
         /// <summary>
         /// Gets an enumerator over the constant handles.
         /// </summary>
-        public Enumerator GetEnumerator() => new Enumerator(_items);
+        public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <summary>
         /// Encodes this data class to the encoder.
@@ -93,7 +93,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="view"></param>
         /// <param name="pool"></param>
         /// <param name="encoder"></param>
-        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ConstantTableEncoder encoder)
+        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ConstantTableEncoder encoder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {
@@ -107,10 +107,10 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <inheritdoc />
-        IEnumerator<ConstantHandle> IEnumerable<ConstantHandle>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<ConstantHandle> IEnumerable<ConstantHandle>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     }
 

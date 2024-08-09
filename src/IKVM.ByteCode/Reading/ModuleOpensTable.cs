@@ -65,7 +65,7 @@ namespace IKVM.ByteCode.Reading
 
         public readonly ModuleOpenInfo this[int index] => GetItem(index);
 
-        readonly ModuleOpenInfo GetItem(int index) => _items[index];
+        readonly ref readonly ModuleOpenInfo GetItem(int index) => ref _items[index];
 
         public readonly int Count => _items.Length;
 
@@ -77,7 +77,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="view"></param>
         /// <param name="pool"></param>
         /// <param name="encoder"></param>
-        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ModuleOpensTableEncoder encoder)
+        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ModuleOpensTableEncoder encoder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {

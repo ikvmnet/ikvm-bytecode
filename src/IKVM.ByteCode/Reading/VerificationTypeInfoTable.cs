@@ -68,24 +68,24 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public VerificationTypeInfo this[int index] => GetItem(index);
+        public readonly VerificationTypeInfo this[int index] => GetItem(index);
 
         /// <summary>
         /// Gets the type info at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        VerificationTypeInfo GetItem(int index) => _items[index];
+        readonly ref readonly  VerificationTypeInfo GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of type infos.
         /// </summary>
-        public int Count => _items.Length;
+        public readonly int Count => _items.Length;
 
         /// <summary>
         /// Gets an enumerator over the type infos.
         /// </summary>
-        public Enumerator GetEnumerator() => new Enumerator(_items);
+        public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <summary>
         /// Encodes this data class to the encoder.
@@ -93,7 +93,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="view"></param>
         /// <param name="pool"></param>
         /// <param name="encoder"></param>
-        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref VerificationTypeInfoEncoder encoder)
+        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref VerificationTypeInfoEncoder encoder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {
@@ -107,10 +107,10 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <inheritdoc />
-        IEnumerator<VerificationTypeInfo> IEnumerable<VerificationTypeInfo>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<VerificationTypeInfo> IEnumerable<VerificationTypeInfo>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     }
 

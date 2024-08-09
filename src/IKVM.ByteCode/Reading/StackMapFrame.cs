@@ -89,7 +89,7 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        public SameStackMapFrame AsSameStackMap()
+        public readonly SameStackMapFrame AsSameStackMap()
         {
             if (FrameType is not <= 63)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a SameStackMapFrame.");
@@ -101,7 +101,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public SameLocalsOneStackMapFrame AsSameLocalsOneStackMap()
+        public readonly SameLocalsOneStackMapFrame AsSameLocalsOneStackMap()
         {
             if (FrameType is not >= 64 or not <= 127)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a SameLocalsOneStackMapFrame.");
@@ -113,7 +113,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public SameLocalsOneExtendedStackMapFrame AsSameLocalsOneExtendedStackMap()
+        public readonly SameLocalsOneExtendedStackMapFrame AsSameLocalsOneExtendedStackMap()
         {
             if (FrameType is not 247)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a SameLocalsOneExtendedStackMapFrame.");
@@ -125,7 +125,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public ChopStackMapFrame AsChopStackMap()
+        public readonly ChopStackMapFrame AsChopStackMap()
         {
             if (FrameType is not >= 248 or not <= 250)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a ChopStackMapFrame.");
@@ -137,7 +137,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public SameExtendedStackMapFrame AsSameExtendedStackMap()
+        public readonly SameExtendedStackMapFrame AsSameExtendedStackMap()
         {
             if (FrameType is not 251)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a SameExtendedStackMapFrame.");
@@ -149,7 +149,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public AppendStackMapFrame AsAppendStackMap()
+        public readonly AppendStackMapFrame AsAppendStackMap()
         {
             if (FrameType is not >= 252 or not <= 254)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a AppendStackMapFrame.");
@@ -161,7 +161,7 @@ namespace IKVM.ByteCode.Reading
             return frame;
         }
 
-        public FullStackMapFrame AsFullStackMap()
+        public readonly FullStackMapFrame AsFullStackMap()
         {
             if (FrameType is not >= 255)
                 throw new ByteCodeException($"StackMapFrame with FrameType {FrameType} is not a FullStackMapFrame.");
@@ -179,7 +179,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="view"></param>
         /// <param name="pool"></param>
         /// <param name="encoder"></param>
-        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref StackMapTableEncoder encoder)
+        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref StackMapTableEncoder encoder)
             where TConstantView : class, IConstantView
             where TConstantPool : class, IConstantPool
         {
