@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly StackMapFrame Current => _items[_index];
+            public readonly ref readonly StackMapFrame Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -48,6 +48,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly StackMapFrame IEnumerator<StackMapFrame>.Current => Current;
+
         }
 
         readonly StackMapFrame[] _items;
@@ -66,14 +69,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly StackMapFrame this[int index] => GetItem(index);
+        public readonly ref readonly StackMapFrame this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the frame at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly StackMapFrame GetItem(int index) => _items[index];
+        readonly ref readonly StackMapFrame GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of frames.
@@ -90,6 +93,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly StackMapFrame IReadOnlyList<StackMapFrame>.this[int index] => this[index];
 
     }
 

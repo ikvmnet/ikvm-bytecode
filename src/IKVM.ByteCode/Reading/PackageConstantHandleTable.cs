@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly PackageConstantHandle Current => _items[_index];
+            public readonly ref readonly PackageConstantHandle Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly PackageConstantHandle IEnumerator<PackageConstantHandle>.Current => Current;
+
         }
 
         readonly PackageConstantHandle[] _items;
@@ -68,7 +71,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly PackageConstantHandle this[int index] => GetItem(index);
+        public readonly ref readonly PackageConstantHandle this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the package handle at the given index.
@@ -111,6 +114,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly PackageConstantHandle IReadOnlyList<PackageConstantHandle>.this[int index] => this[index];
 
     }
 

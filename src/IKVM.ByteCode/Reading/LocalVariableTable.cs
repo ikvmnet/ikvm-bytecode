@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly LocalVariable Current => _items[_index];
+            public readonly ref readonly LocalVariable Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly LocalVariable IEnumerator<LocalVariable>.Current => Current;
+
         }
 
         readonly LocalVariable[] _items;
@@ -68,7 +71,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly LocalVariable this[int index] => GetItem(index);
+        public readonly ref readonly LocalVariable this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the local variable at the given index.
@@ -111,6 +114,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly LocalVariable IReadOnlyList<LocalVariable>.this[int index] => this[index];
 
     }
 

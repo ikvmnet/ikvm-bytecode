@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly LineNumberInfo Current => _items[_index];
+            public readonly ref readonly LineNumberInfo Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly LineNumberInfo IEnumerator<LineNumberInfo>.Current => Current;
+
         }
 
         readonly LineNumberInfo[] _items;
@@ -68,7 +71,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly LineNumberInfo this[int index] => GetItem(index);
+        public readonly ref readonly LineNumberInfo this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the line number at the given index.
@@ -111,6 +114,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly LineNumberInfo IReadOnlyList<LineNumberInfo>.this[int index] => this[index];
 
     }
 

@@ -11,26 +11,26 @@ namespace IKVM.ByteCode.Reading
         public struct Enumerator : IEnumerator<Interface>
         {
 
-            readonly InterfaceTable _interfaces;
+            readonly Interface[] _interfaces;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="interfaces"></param>
-            internal Enumerator(InterfaceTable interfaces)
+            internal Enumerator(Interface[] interfaces)
             {
                 _interfaces = interfaces;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly Interface Current => _interfaces[_index];
+            public readonly ref readonly Interface Current => ref _interfaces[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
             {
-                return ++_index < _interfaces.Count;
+                return ++_index < _interfaces.Length;
             }
 
             /// <inheritdoc />
@@ -47,6 +47,9 @@ namespace IKVM.ByteCode.Reading
 
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
+
+            /// <inheritdoc />
+            readonly Interface IEnumerator<Interface>.Current => Current;
 
         }
 
@@ -80,7 +83,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public Interface this[int index] => this[new InterfaceHandle((ushort)index)];
+        public readonly ref readonly Interface this[int index] => ref this[new InterfaceHandle((ushort)index)];
 
         /// <summary>
         /// Gets the number of interfaces.
@@ -90,13 +93,16 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets an enumerator over the interfaces.
         /// </summary>
-        public readonly Enumerator GetEnumerator() => new Enumerator(this);
+        public readonly Enumerator GetEnumerator() => new Enumerator(_interfaces);
 
         /// <inheritdoc />
         readonly IEnumerator<Interface> IEnumerable<Interface>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly Interface IReadOnlyList<Interface>.this[int index] => this[index];
 
     }
 

@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly BootstrapMethod Current => _items[_index];
+            public readonly ref readonly BootstrapMethod Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly BootstrapMethod IEnumerator<BootstrapMethod>.Current => Current;
+
         }
 
         readonly BootstrapMethod[] _items;
@@ -68,14 +71,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly BootstrapMethod this[int index] => GetItem(index);
+        public readonly ref readonly BootstrapMethod this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the constant handle at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly BootstrapMethod GetItem(int index) => _items[index];
+        readonly ref readonly BootstrapMethod GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of constant handles.
@@ -111,6 +114,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly BootstrapMethod IReadOnlyList<BootstrapMethod>.this[int index] => this[index];
 
     }
 

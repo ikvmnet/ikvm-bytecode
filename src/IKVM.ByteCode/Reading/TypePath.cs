@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly TypePathComponent Current => _items[_index];
+            public readonly ref readonly TypePathComponent Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -49,6 +49,9 @@ namespace IKVM.ByteCode.Reading
 
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
+
+            /// <inheritdoc />
+            readonly TypePathComponent IEnumerator<TypePathComponent>.Current => Current;
 
         }
 
@@ -88,7 +91,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly TypePathComponent this[int index] => GetItem(index);
+        public readonly ref readonly TypePathComponent this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the item at the given index.
@@ -131,6 +134,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly TypePathComponent IReadOnlyList<TypePathComponent>.this[int index] => this[index];
 
     }
 

@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly RecordComponent Current => _items[_index];
+            public readonly ref readonly RecordComponent Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly RecordComponent IEnumerator<RecordComponent>.Current => Current;
+
         }
 
         readonly RecordComponent[] _items;
@@ -68,7 +71,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly RecordComponent this[int index] => GetItem(index);
+        public readonly ref readonly RecordComponent this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the record component at the given index.
@@ -111,6 +114,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly RecordComponent IReadOnlyList<RecordComponent>.this[int index] => this[index];
 
     }
 

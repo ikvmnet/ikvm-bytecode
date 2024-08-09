@@ -30,7 +30,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly Attribute Current => _attributes[_index];
+            public readonly ref readonly Attribute Current => ref _attributes[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -52,6 +52,9 @@ namespace IKVM.ByteCode.Reading
 
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
+
+            /// <inheritdoc />
+            readonly Attribute IEnumerator<Attribute>.Current => Current;
 
         }
 

@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly InnerClass Current => _items[_index];
+            public readonly ref readonly InnerClass Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -48,6 +48,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly InnerClass IEnumerator<InnerClass>.Current => Current;
+
         }
 
         readonly InnerClass[] _items;
@@ -66,14 +69,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly InnerClass this[int index] => GetItem(index);
+        public readonly ref readonly InnerClass this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the inner class at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly InnerClass GetItem(int index) => _items[index];
+        readonly ref readonly InnerClass GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of inner classes.
@@ -90,6 +93,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly InnerClass IReadOnlyList<InnerClass>.this[int index] => this[index];
 
     }
 

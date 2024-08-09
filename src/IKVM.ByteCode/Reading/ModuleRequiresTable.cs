@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly ModuleRequireInfo Current => _items[_index];
+            public readonly ref readonly ModuleRequireInfo Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly ModuleRequireInfo IEnumerator<ModuleRequireInfo>.Current => Current;
+
         }
 
         readonly ModuleRequireInfo[] _items;
@@ -63,10 +66,23 @@ namespace IKVM.ByteCode.Reading
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
-        public readonly ModuleRequireInfo this[int index] => GetItem(index);
+        /// <summary>
+        /// Gets a reference to the table item at the given index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public readonly ref readonly ModuleRequireInfo this[int index] => ref GetItem(index);
 
-        readonly ModuleRequireInfo GetItem(int index) => _items[index];
+        /// <summary>
+        /// Gets the table item at the given index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public readonly ref readonly ModuleRequireInfo GetItem(int index) => ref _items[index];
 
+        /// <summary>
+        /// Gets the number of items in the table.
+        /// </summary>
         public readonly int Count => _items.Length;
 
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
@@ -95,6 +111,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly ModuleRequireInfo IReadOnlyList<ModuleRequireInfo>.this[int index] => this[index];
 
     }
 

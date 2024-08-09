@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly TypeAnnotation Current => _items[_index];
+            public readonly ref readonly TypeAnnotation Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly TypeAnnotation IEnumerator<TypeAnnotation>.Current => Current;
+
         }
 
         readonly TypeAnnotation[] _items;
@@ -68,7 +71,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly TypeAnnotation this[int index] => GetItem(index);
+        public readonly ref readonly TypeAnnotation this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the type annotation at the given index.
@@ -111,6 +114,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly TypeAnnotation IReadOnlyList<TypeAnnotation>.this[int index] => this[index];
 
     }
 

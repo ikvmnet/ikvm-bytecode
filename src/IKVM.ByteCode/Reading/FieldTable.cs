@@ -11,26 +11,26 @@ namespace IKVM.ByteCode.Reading
         public struct Enumerator : IEnumerator<Field>
         {
 
-            readonly FieldTable _fields;
+            readonly Field[] _fields;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="methods"></param>
-            internal Enumerator(FieldTable methods)
+            /// <param name="fields"></param>
+            internal Enumerator(Field[] fields)
             {
-                _fields = methods;
+                _fields = fields;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly Field Current => _fields[_index];
+            public readonly ref readonly Field Current => ref _fields[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
             {
-                return ++_index < _fields.Count;
+                return ++_index < _fields.Length;
             }
 
             /// <inheritdoc />
@@ -47,6 +47,9 @@ namespace IKVM.ByteCode.Reading
 
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
+
+            /// <inheritdoc />
+            readonly Field IEnumerator<Field>.Current => Current;
 
         }
 
@@ -80,7 +83,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public Field this[int index] => this[new FieldHandle((ushort)index)];
+        public readonly ref readonly Field this[int index] => ref this[new FieldHandle((ushort)index)];
 
         /// <summary>
         /// Gets the number of fields.
@@ -90,13 +93,16 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets an enumerator over the fields.
         /// </summary>
-        public readonly Enumerator GetEnumerator() => new Enumerator(this);
+        public readonly Enumerator GetEnumerator() => new Enumerator(_fields);
 
         /// <inheritdoc />
         readonly IEnumerator<Field> IEnumerable<Field>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly Field IReadOnlyList<Field>.this[int index] => this[index];
 
     }
 

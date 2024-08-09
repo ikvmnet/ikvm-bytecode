@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly VerificationTypeInfo Current => _items[_index];
+            public readonly ref readonly VerificationTypeInfo Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly VerificationTypeInfo IEnumerator<VerificationTypeInfo>.Current => Current;
+
         }
 
         readonly VerificationTypeInfo[] _items;
@@ -68,14 +71,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly VerificationTypeInfo this[int index] => GetItem(index);
+        public readonly ref readonly VerificationTypeInfo this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the type info at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly  VerificationTypeInfo GetItem(int index) => ref _items[index];
+        readonly ref readonly VerificationTypeInfo GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of type infos.
@@ -111,6 +114,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly VerificationTypeInfo IReadOnlyList<VerificationTypeInfo>.this[int index] => this[index];
 
     }
 

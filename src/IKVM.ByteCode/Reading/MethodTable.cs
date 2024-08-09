@@ -11,26 +11,26 @@ namespace IKVM.ByteCode.Reading
         public struct Enumerator : IEnumerator<Method>
         {
 
-            readonly MethodTable _methods;
+            readonly Method[] _methods;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
             /// <param name="methods"></param>
-            internal Enumerator(MethodTable methods)
+            internal Enumerator(Method[] methods)
             {
                 _methods = methods;
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly Method Current => _methods[_index];
+            public readonly ref readonly Method Current => ref _methods[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
             {
-                return ++_index < _methods.Count;
+                return ++_index < _methods.Length;
             }
 
             /// <inheritdoc />
@@ -47,6 +47,9 @@ namespace IKVM.ByteCode.Reading
 
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
+
+            /// <inheritdoc />
+            readonly Method IEnumerator<Method>.Current => Current;
 
         }
 
@@ -80,7 +83,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public Method this[int index] => this[new MethodHandle((ushort)index)];
+        public readonly ref readonly Method this[int index] => ref this[new MethodHandle((ushort)index)];
 
         /// <summary>
         /// Gets the number of methods.
@@ -90,13 +93,16 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets an enumerator over the methods.
         /// </summary>
-        public readonly Enumerator GetEnumerator() => new Enumerator(this);
+        public readonly Enumerator GetEnumerator() => new Enumerator(_methods);
 
         /// <inheritdoc />
         readonly IEnumerator<Method> IEnumerable<Method>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly Method IReadOnlyList<Method>.this[int index] => this[index];
 
     }
 

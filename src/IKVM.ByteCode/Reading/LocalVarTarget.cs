@@ -28,7 +28,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly LocalVarTargetItem Current => _items[_index];
+            public readonly ref readonly LocalVarTargetItem Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
 
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
+
+            /// <inheritdoc />
+            readonly LocalVarTargetItem IEnumerator<LocalVarTargetItem>.Current => Current;
 
         }
 
@@ -120,7 +123,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly LocalVarTargetItem this[int index] => GetItem(index);
+        public readonly ref readonly LocalVarTargetItem this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the local var target at the given index.
@@ -163,6 +166,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly LocalVarTargetItem IReadOnlyList<LocalVarTargetItem>.this[int index] => this[index];
 
     }
 

@@ -198,13 +198,13 @@ namespace IKVM.ByteCode.Reading.Tests
         void TestAnnotation(ClassFile clazz, Annotation annotation)
         {
             clazz.Constants.Get(annotation.Type).Value.Should().NotBeEmpty();
-            TestElementValuePair(clazz, annotation);
+            TestElementValuePair(clazz, annotation.Elements);
         }
 
         void TestAnnotation(ClassFile clazz, TypeAnnotation annotation)
         {
             clazz.Constants.Get(annotation.Type).Value.Should().NotBeEmpty();
-            TestElementValuePair(clazz, annotation);
+            TestElementValuePair(clazz, annotation.Elements);
         }
 
         void TestElementValuePair(ClassFile clazz, IReadOnlyCollection<ElementValuePair> elements)

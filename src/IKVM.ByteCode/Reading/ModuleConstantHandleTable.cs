@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-using IKVM.ByteCode.Writing;
-
 namespace IKVM.ByteCode.Reading
 {
 
@@ -27,7 +25,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly ModuleConstantHandle Current => _items[_index];
+            public readonly ref readonly ModuleConstantHandle Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +48,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly ModuleConstantHandle IEnumerator<ModuleConstantHandle>.Current => Current;
+
         }
 
         readonly ModuleConstantHandle[] _items;
@@ -68,14 +69,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly ModuleConstantHandle this[int index] => GetItem(index);
+        public readonly ref readonly ModuleConstantHandle this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the module handle at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ModuleConstantHandle GetItem(int index) => _items[index];
+        readonly ref readonly ModuleConstantHandle GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of module handles.
@@ -92,6 +93,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly ModuleConstantHandle IReadOnlyList<ModuleConstantHandle>.this[int index] => this[index];
 
     }
 

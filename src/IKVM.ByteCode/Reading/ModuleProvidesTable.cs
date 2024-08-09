@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly ModuleProvideInfo Current => _items[_index];
+            public readonly ref readonly ModuleProvideInfo Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly ModuleProvideInfo IEnumerator<ModuleProvideInfo>.Current => Current;
+
         }
 
         readonly ModuleProvideInfo[] _items;
@@ -63,7 +66,7 @@ namespace IKVM.ByteCode.Reading
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
-        public readonly ModuleProvideInfo this[int index] => GetItem(index);
+        public readonly ref readonly ModuleProvideInfo this[int index] => ref GetItem(index);
 
         readonly ref readonly ModuleProvideInfo GetItem(int index) => ref _items[index];
 
@@ -95,6 +98,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly ModuleProvideInfo IReadOnlyList<ModuleProvideInfo>.this[int index] => this[index];
 
     }
 

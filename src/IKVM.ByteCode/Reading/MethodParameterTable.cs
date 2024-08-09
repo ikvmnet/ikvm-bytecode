@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
             }
 
             /// <inheritdoc />
-            public readonly MethodParameter Current => _items[_index];
+            public readonly ref readonly MethodParameter Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -50,6 +50,9 @@ namespace IKVM.ByteCode.Reading
             /// <inheritdoc />
             readonly object IEnumerator.Current => Current;
 
+            /// <inheritdoc />
+            readonly MethodParameter IEnumerator<MethodParameter>.Current => Current;
+
         }
 
         readonly MethodParameter[] _items;
@@ -68,7 +71,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly MethodParameter this[int index] => GetItem(index);
+        public readonly ref readonly MethodParameter this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the method parameter at the given index.
@@ -111,6 +114,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly MethodParameter IReadOnlyList<MethodParameter>.this[int index] => this[index];
 
     }
 
