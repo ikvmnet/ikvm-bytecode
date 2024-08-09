@@ -108,9 +108,19 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
-        public ConstantData Read(ConstantHandle handle)
+        public ref readonly ConstantData Read(ConstantHandle handle)
         {
-            return ReadData(handle);
+            return ref ReadData(handle);
+        }
+
+        /// <summary>
+        /// Gets the kind of the constant with the specified handle.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public ConstantKind GetKind(ConstantHandle handle)
+        {
+            return handle.IsNotNil ? Read(handle).Kind : ConstantKind.Unknown;
         }
 
         /// <summary>
