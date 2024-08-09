@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct RuntimeVisibleTypeAnnotationsAttribute(TypeAnnotationTable Annotations, bool IsNotNil = true)
+    public readonly record struct RuntimeVisibleTypeAnnotationsAttribute(TypeAnnotationTable Annotations)
     {
 
         public static RuntimeVisibleTypeAnnotationsAttribute Nil => default;
@@ -26,7 +26,11 @@
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

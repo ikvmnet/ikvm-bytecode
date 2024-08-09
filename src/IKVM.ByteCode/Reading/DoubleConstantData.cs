@@ -6,7 +6,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct DoubleConstant(double Value)
+    public readonly record struct DoubleConstantData(double Value)
     {
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out DoubleConstant constant)
+        public static bool TryRead(ref ClassFormatReader reader, out DoubleConstantData constant)
         {
             constant = default;
 
@@ -39,13 +39,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU4(out uint b) == false)
                 return false;
 
-#if NETFRAMEWORK || NETCOREAPP3_1
-            var v = RawBitConverter.UInt64BitsToDouble(((ulong)a << 32) | b);
-#else
-            var v = BitConverter.UInt64BitsToDouble(((ulong)a << 32) | b);
-#endif
-
-            constant = new DoubleConstant(v);
+            constant = new DoubleConstantData(RawBitConverter.UInt64BitsToDouble(((ulong)a << 32) | b));
             return true;
         }
 

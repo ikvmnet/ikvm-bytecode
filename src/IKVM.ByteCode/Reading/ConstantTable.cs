@@ -5,13 +5,13 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public class ConstantTable : IReadOnlyCollection<ConstantHandle>
+    public class ConstantTable : IConstantView, IConstantPool, IReadOnlyCollection<ConstantHandle>
     {
 
         public struct Enumerator : IEnumerator<ConstantHandle>
         {
 
-            readonly Constant[] _constants;
+            readonly ConstantData[] _constants;
             int _index = 0;
             int _skip = 1;
 
@@ -19,7 +19,7 @@ namespace IKVM.ByteCode.Reading
             /// Initializes a new instance.
             /// </summary>
             /// <param name="constants"></param>
-            internal Enumerator(Constant[] constants)
+            internal Enumerator(ConstantData[] constants)
             {
                 _constants = constants ?? throw new ArgumentNullException(nameof(constants));
             }
@@ -58,16 +58,16 @@ namespace IKVM.ByteCode.Reading
         }
 
         readonly ClassFormatVersion _version;
-        readonly Constant[] _items;
+        readonly ConstantData[] _items;
         readonly int _count = 0;
-        Utf8Constant[]? _utf8Cache;
+        Utf8ConstantData[]? _utf8Cache;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="version"></param>
         /// <param name="constants"></param>
-        public ConstantTable(ClassFormatVersion version, Constant[] constants)
+        public ConstantTable(ClassFormatVersion version, ConstantData[] constants)
         {
             _version = version;
             _items = constants;
@@ -82,14 +82,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ref readonly Constant this[ConstantHandle handle] => ref Get(handle);
+        public ref readonly ConstantData this[ConstantHandle handle] => ref ReadData(handle);
 
         /// <summary>
         /// Gets the untyped constant for the given handle.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        ref readonly Constant Get(ConstantHandle handle) => ref _items[handle.Index];
+        ref readonly ConstantData ReadData(ConstantHandle handle) => ref _items[handle.Index];
 
         /// <summary>
         /// Gets the number of constants.
@@ -102,11 +102,16 @@ namespace IKVM.ByteCode.Reading
         public Enumerator GetEnumerator() => new(_items);
 
         /// <summary>
-        /// Discovers the kind of the specified constant handle.
+        /// Gets the <see cref="ConstantData"/> value refered to by the <see cref="ConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ConstantKind GetKind(ConstantHandle handle) => Get(handle).Kind;
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ByteCodeException"></exception>
+        public ConstantData Read(ConstantHandle handle)
+        {
+            return ReadData(handle);
+        }
 
         /// <summary>
         /// Gets the <see cref="Utf8Constant"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
@@ -115,24 +120,60 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
-        public Utf8Constant GetUtf8(Utf8ConstantHandle handle)
+        public Constant Get(ConstantHandle handle)
+        {
+            var kind = Read(handle).Kind;
+            if (handle.Kind != ConstantKind.Unknown && handle.Kind != kind)
+                throw new ArgumentException("Incompatible constant handle kind.");
+
+            return kind switch
+            {
+                ConstantKind.Utf8 => Get((Utf8ConstantHandle)handle),
+                ConstantKind.Integer => Get((IntegerConstantHandle)handle),
+                ConstantKind.Float => Get((FloatConstantHandle)handle),
+                ConstantKind.Long => Get((LongConstantHandle)handle),
+                ConstantKind.Double => Get((DoubleConstantHandle)handle),
+                ConstantKind.Class => Get((ClassConstantHandle)handle),
+                ConstantKind.String => Get((StringConstantHandle)handle),
+                ConstantKind.Fieldref => Get((FieldrefConstantHandle)handle),
+                ConstantKind.Methodref => Get((MethodrefConstantHandle)handle),
+                ConstantKind.InterfaceMethodref => Get((InterfaceMethodrefConstantHandle)handle),
+                ConstantKind.NameAndType => Get((NameAndTypeConstantHandle)handle),
+                ConstantKind.MethodHandle => Get((MethodHandleConstantHandle)handle),
+                ConstantKind.MethodType => Get((MethodTypeConstantHandle)handle),
+                ConstantKind.Dynamic => Get((DynamicConstantHandle)handle),
+                ConstantKind.InvokeDynamic => Get((InvokeDynamicConstantHandle)handle),
+                ConstantKind.Module => Get((ModuleConstantHandle)handle),
+                ConstantKind.Package => Get((PackageConstantHandle)handle),
+                _ => throw new ArgumentException("Unknown ConstantHandle kind."),
+            };
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Utf8ConstantData"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ByteCodeException"></exception>
+        public Utf8ConstantData Read(Utf8ConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             // we cache UTF8 values
-            _utf8Cache ??= new Utf8Constant[_items.Length];
+            _utf8Cache ??= new Utf8ConstantData[_items.Length];
             var cached = _utf8Cache[handle.Index];
             if (cached.Value != null)
                 return cached;
 
             var constant = _items[handle.Index];
             if (constant.Kind != ConstantKind.Utf8)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Utf8 constant.");
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a Utf8 constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (Utf8Constant.TryReadUtf8Constant(ref reader, out var value, _version.Major) == false)
-                throw new ByteCodeException($"Failed to read Utf8 constant at index {handle.Index}.");
+            if (Utf8ConstantData.TryRead(ref reader, out var value, _version.Major) == false)
+                throw new InvalidClassException($"Failed to read Utf8 constant at index {handle.Index}.");
 
             return value;
         }
@@ -144,31 +185,32 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
-        public string? GetUtf8Value(Utf8ConstantHandle handle)
+        public Utf8Constant Get(Utf8ConstantHandle handle)
         {
             if (handle.IsNil)
-                return null;
+                return default;
 
-            return GetUtf8(handle).Value;
+            var value = Read(handle);
+            return new Utf8Constant(value.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="IntegerConstant"/> value refered to by the <see cref="IntegerConstantHandle"/>.
+        /// Gets the <see cref="IntegerConstantData"/> value refered to by the <see cref="IntegerConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public IntegerConstant GetInteger(IntegerConstantHandle handle)
+        public IntegerConstantData Read(IntegerConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
             if (constant.Kind != ConstantKind.Integer)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not an Integer constant.");
+                throw new InvalidClassException($"Constant at index {handle.Index} is not an Integer constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (IntegerConstant.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Integer constant at index {handle.Index}.");
+            if (IntegerConstantData.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read Integer constant at index {handle.Index}.");
 
             return value;
         }
@@ -178,28 +220,32 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public int GetIntegerValue(IntegerConstantHandle handle)
+        public IntegerConstant Get(IntegerConstantHandle handle)
         {
-            return GetInteger(handle).Value;
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            return new IntegerConstant(value.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="FloatConstant"/> value refered to by the <see cref="FloatConstantHandle"/>.
+        /// Gets the <see cref="FloatConstantData"/> value refered to by the <see cref="FloatConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public FloatConstant GetFloat(FloatConstantHandle handle)
+        public FloatConstantData Read(FloatConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
             if (constant.Kind != ConstantKind.Float)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Float constant.");
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a Float constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (FloatConstant.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Float constant at index {handle.Index}.");
+            if (FloatConstantData.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read Float constant at index {handle.Index}.");
 
             return value;
         }
@@ -209,28 +255,32 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public float GetFloatValue(FloatConstantHandle handle)
+        public FloatConstant Get(FloatConstantHandle handle)
         {
-            return GetFloat(handle).Value;
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            return new FloatConstant(value.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="LongConstant"/> value refered to by the <see cref="LongConstantHandle"/>.
+        /// Gets the <see cref="LongConstantData"/> value refered to by the <see cref="LongConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public LongConstant GetLong(LongConstantHandle handle)
+        public LongConstantData Read(LongConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
             if (constant.Kind != ConstantKind.Long)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Long constant.");
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a Long constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (LongConstant.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Long constant at index {handle.Index}.");
+            if (LongConstantData.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read Long constant at index {handle.Index}.");
 
             return value;
         }
@@ -240,93 +290,106 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public long GetLongValue(LongConstantHandle handle)
+        public LongConstant Get(LongConstantHandle handle)
         {
-            return GetLong(handle).Value;
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            return new LongConstant(value.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="DoubleConstant"/> value refered to by the <see cref="DoubleConstantHandle"/>.
+        /// Gets the <see cref="DoubleConstantData"/> value refered to by the <see cref="DoubleConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public DoubleConstant GetDouble(DoubleConstantHandle handle)
+        public DoubleConstantData Read(DoubleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
             if (constant.Kind != ConstantKind.Double)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Double constant.");
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a Double constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (DoubleConstant.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Double constant at index {handle.Index}.");
+            if (DoubleConstantData.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read Double constant at index {handle.Index}.");
 
             return value;
         }
 
         /// <summary>
-        /// Gets the <see cref="DoubleConstant"/> value refered to by the <see cref="DoubleConstantHandle"/>.
+        /// Gets the <see cref="DoubleConstantData"/> value refered to by the <see cref="DoubleConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public double GetDoubleValue(DoubleConstantHandle handle)
+        public DoubleConstant Get(DoubleConstantHandle handle)
         {
-            return GetDouble(handle).Value;
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            return new DoubleConstant(value.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="ClassConstant"/> value refered to by the <see cref="ClassConstantHandle"/>.
+        /// Gets the <see cref="ClassConstantData"/> value refered to by the <see cref="ClassConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ClassConstant GetClass(ClassConstantHandle handle)
+        public ClassConstantData Read(ClassConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
             if (constant.Kind != ConstantKind.Class)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Class constant.");
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a Class constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (ClassConstant.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Class constant at index {handle.Index}.");
+            if (ClassConstantData.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read Class constant at index {handle.Index}.");
 
             return value;
         }
 
         /// <summary>
-        /// Gets the <see cref="ClassConstant"/> value refered to by the <see cref="ClassConstantHandle"/>.
+        /// Gets the <see cref="ClassConstantData"/> value refered to by the <see cref="ClassConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public string? GetClassName(ClassConstantHandle handle)
+        public ClassConstant Get(ClassConstantHandle handle)
         {
             if (handle.IsNil)
-                return null;
+                return default;
 
-            return GetUtf8Value(GetClass(handle).Name);
+            var value = Read(handle);
+            if (value.Name.IsNil)
+                throw new InvalidClassException("Nil name on ClassConstant.");
+
+            var nameValue = Read(value.Name);
+            return new ClassConstant(nameValue.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="StringConstant"/> value refered to by the <see cref="StringConstantHandle"/>.
+        /// Gets the <see cref="StringConstantData"/> value refered to by the <see cref="StringConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public StringConstant GetString(StringConstantHandle handle)
+        public StringConstantData Read(StringConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
             if (constant.Kind != ConstantKind.String)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a String constant.");
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a String constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (StringConstant.TryReadStringConstant(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read String constant at index {handle.Index}.");
+            if (StringConstantData.TryReadStringConstant(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read String constant at index {handle.Index}.");
 
             return value;
         }
@@ -336,12 +399,59 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public string? GetStringValue(StringConstantHandle handle)
+        public StringConstant Get(StringConstantHandle handle)
         {
             if (handle.IsNil)
-                return null;
+                return default;
 
-            return GetUtf8Value(GetString(handle).Value);
+            var value = Read(handle);
+            if (value.Value.IsNil)
+                throw new InvalidClassException("Nil Value on StringConstant.");
+
+            var nameValue = Read(value.Value);
+            return new StringConstant(nameValue.Value);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="RefConstant"/> value refered to by the <see cref="RefConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public RefConstant Get(RefConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return default;
+
+            var kind = ReadData(handle).Kind;
+            if (kind == ConstantKind.Fieldref)
+                return Get((FieldrefConstantHandle)handle);
+            if (kind == ConstantKind.Methodref)
+                return Get((MethodrefConstantHandle)handle);
+            if (kind == ConstantKind.InterfaceMethodref)
+                return Get((InterfaceMethodrefConstantHandle)handle);
+
+            throw new InvalidClassException("Unexpected Kind on RefConstant.");
+        }
+
+        /// <summary>
+        /// Gets the <see cref="FieldrefConstantData"/> value refered to by the <see cref="FieldrefConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public FieldrefConstantData Read(FieldrefConstantHandle handle)
+        {
+            if (handle.IsNil)
+                throw new ArgumentNullException(nameof(handle));
+
+            var constant = _items[handle.Index];
+            if (constant.Kind != ConstantKind.Fieldref)
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a Fieldref constant.");
+
+            var reader = new ClassFormatReader(constant.Data);
+            if (FieldrefConstantData.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read Fieldref constant at index {handle.Index}.");
+
+            return value;
         }
 
         /// <summary>
@@ -349,18 +459,39 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public FieldrefConstant GetFieldref(FieldrefConstantHandle handle)
+        public FieldrefConstant Get(FieldrefConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            if (value.Class.IsNil)
+                throw new InvalidClassException("Nil Class on Fieldref.");
+            if (value.NameAndType.IsNil)
+                throw new InvalidClassException("Nil NameAndType on Fieldref.");
+
+            var clazz = Get(value.Class);
+            var nameAndType = Get(value.NameAndType);
+            return new FieldrefConstant(clazz.Name, nameAndType.Name, nameAndType.Descriptor);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="MethodrefConstantData"/> value refered to by the <see cref="MethodrefConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public MethodrefConstantData Read(MethodrefConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
-            if (constant.Kind != ConstantKind.Fieldref)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Fieldref constant.");
+            if (constant.Kind != ConstantKind.Methodref)
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a Methodref constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (FieldrefConstant.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Fieldref constant at index {handle.Index}.");
+            if (MethodrefConstantData.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read Methodref constant at index {handle.Index}.");
 
             return value;
         }
@@ -370,18 +501,39 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodrefConstant GetMethodref(MethodrefConstantHandle handle)
+        public MethodrefConstant Get(MethodrefConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            if (value.Class.IsNil)
+                throw new InvalidClassException("Nil Class on Methodref.");
+            if (value.NameAndType.IsNil)
+                throw new InvalidClassException("Nil NameAndType on Methodref.");
+
+            var clazz = Get(value.Class);
+            var nameAndType = Get(value.NameAndType);
+            return new MethodrefConstant(clazz.Name, nameAndType.Name, nameAndType.Descriptor);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="InterfaceMethodrefConstantData"/> value refered to by the <see cref="InterfaceMethodrefConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public InterfaceMethodrefConstantData Read(InterfaceMethodrefConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
-            if (constant.Kind != ConstantKind.Methodref)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Methodref constant.");
+            if (constant.Kind != ConstantKind.InterfaceMethodref)
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a InterfaceMethodref constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (MethodrefConstant.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Methodref constant at index {handle.Index}.");
+            if (InterfaceMethodrefConstantData.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read InterfaceMethodref constant at index {handle.Index}.");
 
             return value;
         }
@@ -391,18 +543,39 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public InterfaceMethodrefConstant GetInterfaceMethodref(InterfaceMethodrefConstantHandle handle)
+        public InterfaceMethodrefConstant Get(InterfaceMethodrefConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            if (value.Class.IsNil)
+                throw new InvalidClassException("Nil Class on Methodref.");
+            if (value.NameAndType.IsNil)
+                throw new InvalidClassException("Nil NameAndType on Methodref.");
+
+            var clazz = Get(value.Class);
+            var nameAndType = Get(value.NameAndType);
+            return new InterfaceMethodrefConstant(clazz.Name, nameAndType.Name, nameAndType.Descriptor);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="NameAndTypeConstantData"/> value refered to by the <see cref="NameAndTypeConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public NameAndTypeConstantData Read(NameAndTypeConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             var constant = _items[handle.Index];
-            if (constant.Kind != ConstantKind.InterfaceMethodref)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a InterfaceMethodref constant.");
+            if (constant.Kind != ConstantKind.NameAndType)
+                throw new InvalidClassException($"Constant at index {handle.Index} is not a NameAndType constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (InterfaceMethodrefConstant.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read InterfaceMethodref constant at index {handle.Index}.");
+            if (NameAndTypeConstantData.TryReadNameAndTypeConstant(ref reader, out var value) == false)
+                throw new InvalidClassException($"Failed to read NameAndType constant at index {handle.Index}.");
 
             return value;
         }
@@ -412,28 +585,28 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public NameAndTypeConstant GetNameAndType(NameAndTypeConstantHandle handle)
+        public NameAndTypeConstant Get(NameAndTypeConstantHandle handle)
         {
             if (handle.IsNil)
-                throw new ArgumentNullException(nameof(handle));
+                return default;
 
-            var constant = _items[handle.Index];
-            if (constant.Kind != ConstantKind.NameAndType)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a NameAndType constant.");
+            var value = Read(handle);
+            if (value.Name.IsNil)
+                throw new InvalidClassException("Nil Name on NameAndType.");
+            if (value.Descriptor.IsNil)
+                throw new InvalidClassException("Nil Descriptor on NameAndType.");
 
-            var reader = new ClassFormatReader(constant.Data);
-            if (NameAndTypeConstant.TryReadNameAndTypeConstant(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read NameAndType constant at index {handle.Index}.");
-
-            return value;
+            var name = Get(value.Name);
+            var descriptor = Get(value.Descriptor);
+            return new NameAndTypeConstant(name.Value, descriptor.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="MethodHandleConstant"/> value refered to by the <see cref="MethodHandleConstantHandle"/>.
+        /// Gets the <see cref="MethodHandleConstantData"/> value refered to by the <see cref="MethodHandleConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodHandleConstant GetMethodHandle(MethodHandleConstantHandle handle)
+        public MethodHandleConstantData Read(MethodHandleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -443,18 +616,79 @@ namespace IKVM.ByteCode.Reading
                 throw new ByteCodeException($"Constant at index {handle.Index} is not a MethodHandle constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (MethodHandleConstant.TryRead(ref reader, out var value) == false)
+            if (MethodHandleConstantData.TryRead(ref reader, out var value) == false)
                 throw new ByteCodeException($"Failed to read MethodHandle constant at index {handle.Index}.");
 
             return value;
         }
 
         /// <summary>
-        /// Gets the <see cref="MethodTypeConstant"/> value refered to by the <see cref="MethodTypeConstantHandle"/>.
+        /// Gets the <see cref="MethodHandleConstant"/> value refered to by the <see cref="MethodHandleConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodTypeConstant GetMethodType(MethodTypeConstantHandle handle)
+        public MethodHandleConstant Get(MethodHandleConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            if (value.Reference.IsNil)
+                throw new InvalidClassException("Nil Reference on MethodHandle.");
+
+            var constant = Get(value.Reference);
+
+            if (value.Kind is MethodHandleKind.GetField or MethodHandleKind.GetStatic or MethodHandleKind.PutField or MethodHandleKind.PutStatic)
+            {
+                if (constant.Kind is ConstantKind.Fieldref)
+                {
+                    var fieldref = (FieldrefConstant)constant;
+                    return new MethodHandleConstant(value.Kind, constant.Kind, fieldref.ClassName, fieldref.Name, fieldref.Descriptor);
+                }
+            }
+
+            if (value.Kind is MethodHandleKind.InvokeVirtual or MethodHandleKind.NewInvokeSpecial)
+            {
+                if (constant.Kind is ConstantKind.Methodref)
+                {
+                    var methodref = (MethodrefConstant)constant;
+                    return new MethodHandleConstant(value.Kind, constant.Kind, methodref.ClassName, methodref.Name, methodref.Descriptor);
+                }
+            }
+
+            if (value.Kind is MethodHandleKind.InvokeStatic or MethodHandleKind.InvokeSpecial)
+            {
+                if (constant.Kind is ConstantKind.Methodref)
+                {
+                    var methodref = (MethodrefConstant)constant;
+                    return new MethodHandleConstant(value.Kind, constant.Kind, methodref.ClassName, methodref.Name, methodref.Descriptor);
+                }
+
+                if (constant.Kind is ConstantKind.InterfaceMethodref)
+                {
+                    var methodref = (InterfaceMethodrefConstant)constant;
+                    return new MethodHandleConstant(value.Kind, constant.Kind, methodref.ClassName, methodref.Name, methodref.Descriptor);
+                }
+            }
+
+            if (value.Kind is MethodHandleKind.InvokeInterface)
+            {
+                if (constant.Kind is ConstantKind.InterfaceMethodref)
+                {
+                    var methodref = (InterfaceMethodrefConstant)constant;
+                    return new MethodHandleConstant(value.Kind, constant.Kind, methodref.ClassName, methodref.Name, methodref.Descriptor);
+                }
+            }
+
+            throw new InvalidClassException($"MethodHandle {handle} of kind {value.Kind} cannot reference constant of kind {constant.Kind}.");
+        }
+
+        /// <summary>
+        /// Gets the <see cref="MethodTypeConstantData"/> value refered to by the <see cref="MethodTypeConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public MethodTypeConstantData Read(MethodTypeConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -464,7 +698,7 @@ namespace IKVM.ByteCode.Reading
                 throw new ByteCodeException($"Constant at index {handle.Index} is not a MethodType constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (MethodTypeConstant.TryRead(ref reader, out var value) == false)
+            if (MethodTypeConstantData.TryRead(ref reader, out var value) == false)
                 throw new ByteCodeException($"Failed to read MethodType constant at index {handle.Index}.");
 
             return value;
@@ -475,20 +709,25 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public string? GetMethodTypeDescriptor(MethodTypeConstantHandle handle)
+        public MethodTypeConstant Get(MethodTypeConstantHandle handle)
         {
             if (handle.IsNil)
-                return null;
+                return default;
 
-            return GetUtf8Value(GetMethodType(handle).Descriptor);
+            var value = Read(handle);
+            if (value.Descriptor.IsNil)
+                throw new InvalidClassException("Nil Descriptor on MethodType.");
+
+            var descriptor = Get(value.Descriptor);
+            return new MethodTypeConstant(descriptor.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="DynamicConstant"/> value refered to by the <see cref="DynamicConstantHandle"/>.
+        /// Gets the <see cref="DynamicConstantData"/> value refered to by the <see cref="DynamicConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public DynamicConstant GetDynamic(DynamicConstantHandle handle)
+        public DynamicConstantData Read(DynamicConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -498,18 +737,36 @@ namespace IKVM.ByteCode.Reading
                 throw new ByteCodeException($"Constant at index {handle.Index} is not a Dynamic constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (DynamicConstant.TryRead(ref reader, out var value) == false)
+            if (DynamicConstantData.TryRead(ref reader, out var value) == false)
                 throw new ByteCodeException($"Failed to read Dynamic constant at index {handle.Index}.");
 
             return value;
         }
 
         /// <summary>
-        /// Gets the <see cref="InvokeDynamicConstant"/> value refered to by the <see cref="InvokeDynamicConstantHandle"/>.
+        /// Gets the <see cref="DynamicConstant"/> value refered to by the <see cref="DynamicConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public InvokeDynamicConstant GetInvokeDynamic(InvokeDynamicConstantHandle handle)
+        public DynamicConstant Get(DynamicConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            if (value.NameAndType.IsNil)
+                throw new InvalidClassException("Nil NameAndType on Dynamic.");
+
+            var nameAndType = Get(value.NameAndType);
+            return new DynamicConstant(value.BootstrapMethodAttributeIndex, nameAndType.Name, nameAndType.Descriptor);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="InvokeDynamicConstantData"/> value refered to by the <see cref="InvokeDynamicConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public InvokeDynamicConstantData Read(InvokeDynamicConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -519,18 +776,36 @@ namespace IKVM.ByteCode.Reading
                 throw new ByteCodeException($"Constant at index {handle.Index} is not a InvokeDynamic constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (InvokeDynamicConstant.TryRead(ref reader, out var value) == false)
+            if (InvokeDynamicConstantData.TryRead(ref reader, out var value) == false)
                 throw new ByteCodeException($"Failed to read InvokeDynamic constant at index {handle.Index}.");
 
             return value;
         }
 
         /// <summary>
-        /// Gets the <see cref="ModuleConstant"/> value refered to by the <see cref="ModuleConstantHandle"/>.
+        /// Gets the <see cref="InvokeDynamicConstant"/> value refered to by the <see cref="InvokeDynamicConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ModuleConstant GetModule(ModuleConstantHandle handle)
+        public InvokeDynamicConstant Get(InvokeDynamicConstantHandle handle)
+        {
+            if (handle.IsNil)
+                return default;
+
+            var value = Read(handle);
+            if (value.NameAndType.IsNil)
+                throw new InvalidClassException("Nil NameAndType on InvokeDynamic.");
+
+            var nameAndType = Get(value.NameAndType);
+            return new InvokeDynamicConstant(value.BootstrapMethodAttributeIndex, nameAndType.Name, nameAndType.Descriptor);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="ModuleConstantData"/> value refered to by the <see cref="ModuleConstantHandle"/>.
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
+        public ModuleConstantData Read(ModuleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -540,7 +815,7 @@ namespace IKVM.ByteCode.Reading
                 throw new ByteCodeException($"Constant at index {handle.Index} is not a Module constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (ModuleConstant.TryRead(ref reader, out var value) == false)
+            if (ModuleConstantData.TryRead(ref reader, out var value) == false)
                 throw new ByteCodeException($"Failed to read Module constant at index {handle.Index}.");
 
             return value;
@@ -551,20 +826,25 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public string? GetModuleName(ModuleConstantHandle handle)
+        public ModuleConstant Get(ModuleConstantHandle handle)
         {
             if (handle.IsNil)
-                return null;
+                return default;
 
-            return GetUtf8Value(GetModule(handle).Name);
+            var value = Read(handle);
+            if (value.Name.IsNil)
+                throw new InvalidClassException("Nil Name on Module.");
+
+            var name = Get(value.Name);
+            return new ModuleConstant(name.Value);
         }
 
         /// <summary>
-        /// Gets the <see cref="PackageConstant"/> value refered to by the <see cref="PackageConstantHandle"/>.
+        /// Gets the <see cref="PackageConstantData"/> value refered to by the <see cref="PackageConstantHandle"/>.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public PackageConstant GetPackage(PackageConstantHandle handle)
+        public PackageConstantData Read(PackageConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
@@ -574,7 +854,7 @@ namespace IKVM.ByteCode.Reading
                 throw new ByteCodeException($"Constant at index {handle.Index} is not a Package constant.");
 
             var reader = new ClassFormatReader(constant.Data);
-            if (PackageConstant.TryRead(ref reader, out var value) == false)
+            if (PackageConstantData.TryRead(ref reader, out var value) == false)
                 throw new ByteCodeException($"Failed to read Package constant at index {handle.Index}.");
 
             return value;
@@ -585,12 +865,17 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public string? GetPackageName(PackageConstantHandle handle)
+        public PackageConstant Get(PackageConstantHandle handle)
         {
             if (handle.IsNil)
-                return null;
+                return default;
 
-            return GetUtf8Value(GetPackage(handle).Name);
+            var value = Read(handle);
+            if (value.Name.IsNil)
+                throw new InvalidClassException("Nil Name on Package.");
+
+            var name = Get(value.Name);
+            return new PackageConstant(name.Value);
         }
 
         /// <inheritdoc />
@@ -598,6 +883,303 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        ConstantHandle IConstantPool.Get(Constant value)
+        {
+            return value.Kind switch
+            {
+                ConstantKind.Utf8 => ((IConstantPool)this).Get((Utf8Constant)value),
+                ConstantKind.Integer => ((IConstantPool)this).Get((IntegerConstant)value),
+                ConstantKind.Float => ((IConstantPool)this).Get((FloatConstant)value),
+                ConstantKind.Long => ((IConstantPool)this).Get((LongConstant)value),
+                ConstantKind.Double => ((IConstantPool)this).Get((DoubleConstant)value),
+                ConstantKind.Class => ((IConstantPool)this).Get((ClassConstant)value),
+                ConstantKind.String => ((IConstantPool)this).Get((StringConstant)value),
+                ConstantKind.Fieldref => ((IConstantPool)this).Get((FieldrefConstant)value),
+                ConstantKind.Methodref => ((IConstantPool)this).Get((MethodrefConstant)value),
+                ConstantKind.InterfaceMethodref => ((IConstantPool)this).Get((InterfaceMethodrefConstant)value),
+                ConstantKind.NameAndType => ((IConstantPool)this).Get((NameAndTypeConstant)value),
+                ConstantKind.MethodHandle => ((IConstantPool)this).Get((MethodHandleConstant)value),
+                ConstantKind.MethodType => ((IConstantPool)this).Get((MethodTypeConstant)value),
+                ConstantKind.Dynamic => ((IConstantPool)this).Get((DynamicConstant)value),
+                ConstantKind.InvokeDynamic => ((IConstantPool)this).Get((InvokeDynamicConstant)value),
+                ConstantKind.Module => ((IConstantPool)this).Get((ModuleConstant)value),
+                ConstantKind.Package => ((IConstantPool)this).Get((PackageConstant)value),
+                _ => throw new ArgumentException("Unknown ConstantValue kind."),
+            };
+        }
+
+        Utf8ConstantHandle IConstantPool.Get(Utf8Constant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Utf8)
+                {
+                    var h = (Utf8ConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        IntegerConstantHandle IConstantPool.Get(IntegerConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Integer)
+                {
+                    var h = (IntegerConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        FloatConstantHandle IConstantPool.Get(FloatConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Float)
+                {
+                    var h = (FloatConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        LongConstantHandle IConstantPool.Get(LongConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Long)
+                {
+                    var h = (LongConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        DoubleConstantHandle IConstantPool.Get(DoubleConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Double)
+                {
+                    var h = (DoubleConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        ClassConstantHandle IConstantPool.Get(ClassConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Class)
+                {
+                    var h = (ClassConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        StringConstantHandle IConstantPool.Get(StringConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.String)
+                {
+                    var h = (StringConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        FieldrefConstantHandle IConstantPool.Get(FieldrefConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Fieldref)
+                {
+                    var h = (FieldrefConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        MethodrefConstantHandle IConstantPool.Get(MethodrefConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Methodref)
+                {
+                    var h = (MethodrefConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        InterfaceMethodrefConstantHandle IConstantPool.Get(InterfaceMethodrefConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.InterfaceMethodref)
+                {
+                    var h = (InterfaceMethodrefConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        NameAndTypeConstantHandle IConstantPool.Get(NameAndTypeConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.NameAndType)
+                {
+                    var h = (NameAndTypeConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        MethodHandleConstantHandle IConstantPool.Get(MethodHandleConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.MethodHandle)
+                {
+                    var h = (MethodHandleConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        MethodTypeConstantHandle IConstantPool.Get(MethodTypeConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.MethodType)
+                {
+                    var h = (MethodTypeConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        DynamicConstantHandle IConstantPool.Get(DynamicConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Dynamic)
+                {
+                    var h = (DynamicConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        InvokeDynamicConstantHandle IConstantPool.Get(InvokeDynamicConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.InvokeDynamic)
+                {
+                    var h = (InvokeDynamicConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        ModuleConstantHandle IConstantPool.Get(ModuleConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Module)
+                {
+                    var h = (ModuleConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
+
+        PackageConstantHandle IConstantPool.Get(PackageConstant value)
+        {
+            foreach (var i in this)
+            {
+                if (ReadData(i).Kind == ConstantKind.Package)
+                {
+                    var h = (PackageConstantHandle)i;
+                    var v = Get(h);
+                    if (v == value)
+                        return h;
+                }
+            }
+
+            throw new ByteCodeException("Unknown constant for value.");
+        }
 
     }
 

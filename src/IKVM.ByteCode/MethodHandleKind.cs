@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode
 {
 
-    public enum ReferenceKind : byte
+    public enum MethodHandleKind : byte
     {
 
         GetField = 1,

@@ -3,12 +3,14 @@
 namespace IKVM.ByteCode.Writing
 {
 
-    public partial class ClassFileImporter
+    public partial class ClassFileImporter<TConstantView, TConstantPool>
+        where TConstantView : class, IConstantView
+        where TConstantPool : class, IConstantPool
     {
 
         public void Import(IKVM.ByteCode.Reading.Attribute source, AttributeTableBuilder builder)
         {
-            switch (_source.GetUtf8Value(source.Name))
+            switch (_view.Get(source.Name).Value)
             {
                 case AttributeName.ConstantValue:
                     Import((ConstantValueAttribute)source, builder);

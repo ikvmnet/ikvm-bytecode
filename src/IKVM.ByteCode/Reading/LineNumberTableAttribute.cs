@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LineNumberTableAttribute(LineNumberTable LineNumbers, bool IsNotNil = true)
+    public readonly record struct LineNumberTableAttribute(LineNumberTable LineNumbers)
     {
 
         public static LineNumberTableAttribute Nil => default;
@@ -28,7 +28,11 @@
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

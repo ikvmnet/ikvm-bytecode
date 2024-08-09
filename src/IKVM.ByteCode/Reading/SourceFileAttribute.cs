@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct SourceFileAttribute(Utf8ConstantHandle SourceFile, bool IsNotNil = true)
+    public readonly record struct SourceFileAttribute(Utf8ConstantHandle SourceFile)
     {
 
         public static SourceFileAttribute Nil => default;
@@ -17,7 +17,11 @@
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

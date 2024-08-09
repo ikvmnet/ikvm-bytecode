@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct AnnotationDefaultAttribute(ElementValue DefaultValue, bool IsNotNil = true)
+    public readonly record struct AnnotationDefaultAttribute(ElementValue DefaultValue)
     {
 
         public static AnnotationDefaultAttribute Nil => default;
@@ -19,7 +17,11 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

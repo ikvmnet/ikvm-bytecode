@@ -26,21 +26,15 @@ namespace IKVM.ByteCode.Tests.Writing
 
             var cls = ClassFile.Read(a);
             cls.AccessFlags.Should().Be(AccessFlag.ACC_PUBLIC);
-            cls.Constants.GetClassName(cls.This).Should().Be("TestClass");
-            cls.Constants.GetClassName(cls.Super).Should().Be("java/lang/Object");
+            cls.Constants.Get(cls.This).Name.Should().Be("TestClass");
+            cls.Constants.Get(cls.Super).Name.Should().Be("java/lang/Object");
             cls.Fields.Should().HaveCount(1);
             cls.Fields[0].AccessFlags.Should().Be(AccessFlag.ACC_PUBLIC);
-            cls.Constants.GetUtf8Value(cls.Fields[0].Name).Should().Be("_field");
-            cls.Constants.GetUtf8Value(cls.Fields[0].Descriptor).Should().Be("Z");
+            cls.Constants.Get(cls.Fields[0].Name).Value.Should().Be("_field");
+            cls.Constants.Get(cls.Fields[0].Descriptor).Value.Should().Be("Z");
             cls.Methods.Should().HaveCount(1);
-            cls.Constants.GetUtf8Value(cls.Methods[0].Name).Should().Be("method");
-            cls.Constants.GetUtf8Value(cls.Methods[0].Descriptor).Should().Be("()Z");
-        }
-
-        public void Foo()
-        {
-            var p = new ConstantBuilder(new ClassFormatVersion(53, 0));
-            var a = new AttributeTableBuilder(p);
+            cls.Constants.Get(cls.Methods[0].Name).Value.Should().Be("method");
+            cls.Constants.Get(cls.Methods[0].Descriptor).Value.Should().Be("()Z");
         }
 
     }

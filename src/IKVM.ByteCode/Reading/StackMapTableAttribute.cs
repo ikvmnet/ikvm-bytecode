@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct StackMapTableAttribute(StackMapFrameTable Frames, bool IsNotNil = true)
+    public readonly record struct StackMapTableAttribute(StackMapFrameTable Frames)
     {
 
         public static StackMapTableAttribute Nil => default;
@@ -24,7 +24,11 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

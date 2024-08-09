@@ -98,7 +98,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public FieldHandle AddField(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeTableBuilder attributes = null)
+        public FieldHandle AddField(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeTableBuilder? attributes = null)
         {
             attributes ??= new AttributeTableBuilder(Constants);
             var w = new ClassFormatWriter(_fields.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
@@ -117,7 +117,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public FieldHandle AddField(AccessFlag accessFlags, string name, string descriptor, AttributeTableBuilder attributes = null)
+        public FieldHandle AddField(AccessFlag accessFlags, string name, string descriptor, AttributeTableBuilder? attributes = null)
         {
             attributes ??= new AttributeTableBuilder(Constants);
             return AddField(accessFlags, Constants.GetOrAddUtf8(name), Constants.GetOrAddUtf8(descriptor), attributes);
@@ -131,7 +131,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public MethodHandle AddMethod(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeTableBuilder attributes = null)
+        public MethodHandle AddMethod(AccessFlag accessFlags, Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeTableBuilder? attributes = null)
         {
             attributes ??= new AttributeTableBuilder(Constants);
             var w = new ClassFormatWriter(_methods.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
@@ -150,7 +150,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public MethodHandle AddMethod(AccessFlag accessFlags, string name, string descriptor, AttributeTableBuilder attributes = null)
+        public MethodHandle AddMethod(AccessFlag accessFlags, string name, string descriptor, AttributeTableBuilder? attributes = null)
         {
             attributes ??= new AttributeTableBuilder(Constants);
             return AddMethod(accessFlags, Constants.GetOrAddUtf8(name), Constants.GetOrAddUtf8(descriptor), attributes);

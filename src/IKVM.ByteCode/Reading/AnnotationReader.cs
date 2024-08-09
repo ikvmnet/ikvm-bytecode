@@ -11,7 +11,7 @@ namespace IKVM.ByteCode.Reading
 
         readonly ClassFile _clazz;
         readonly Annotation _annotation;
-        readonly ConcurrentDictionary<string, ElementValue> _cache = new ConcurrentDictionary<string, ElementValue>();
+        readonly ConcurrentDictionary<string, ElementValue> _cache = new();
 
         /// <summary>
         /// Initializes a new instance.
@@ -53,7 +53,7 @@ namespace IKVM.ByteCode.Reading
                 throw new ArgumentNullException(nameof(name));
 
             foreach (var elementValuePair in _annotation)
-                if (_clazz.Constants.GetUtf8Value(elementValuePair.Name) == name)
+                if (_clazz.Constants.Get(elementValuePair.Name) == name)
                     return elementValuePair.Value;
 
             return ElementValue.Nil;
@@ -66,11 +66,11 @@ namespace IKVM.ByteCode.Reading
             {
                 foreach (var elementValuePair in _annotation)
                 {
-                    var name = _clazz.Constants.GetUtf8Value(elementValuePair.Name);
-                    if (name == null)
+                    var name = _clazz.Constants.Get(elementValuePair.Name);
+                    if (name.IsNil)
                         throw new InvalidClassException("ElementValuePair with null name entry encountered.");
 
-                    yield return name;
+                    yield return name.Value;
                 }
             }
         }
@@ -96,11 +96,11 @@ namespace IKVM.ByteCode.Reading
         {
             foreach (var elementValuePair in _annotation)
             {
-                var name = _clazz.Constants.GetUtf8Value(elementValuePair.Name);
-                if (name == null)
+                var name = _clazz.Constants.Get(elementValuePair.Name);
+                if (name.IsNil)
                     throw new InvalidClassException("ElementValuePair with null name entry encountered.");
 
-                yield return new KeyValuePair<string, ElementValue>(name, elementValuePair.Value);
+                yield return new KeyValuePair<string, ElementValue>(name.Value, elementValuePair.Value);
             }
         }
 

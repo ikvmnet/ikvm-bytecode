@@ -3,15 +3,16 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct DynamicConstant(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType, bool IsNotNil = true)
+    public readonly record struct FieldrefConstantData(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType)
     {
 
+        public static FieldrefConstantData Nil => default;
+
         /// <summary>
-        /// Parses a Dynamic constant in the constant pool.
+        /// Parses a Fieldref constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
-        /// <param name="skip"></param>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
         {
             skip = 0;
@@ -23,24 +24,28 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Parses a Dynamic constant in the constant pool.
+        /// Parses a Fieldref constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out DynamicConstant constant)
+        public static bool TryRead(ref ClassFormatReader reader, out FieldrefConstantData constant)
         {
             constant = default;
 
-            if (reader.TryReadU2(out ushort bootstrapMethodAttrIndex) == false)
+            if (reader.TryReadU2(out ushort classIndex) == false)
                 return false;
             if (reader.TryReadU2(out ushort nameAndTypeIndex) == false)
                 return false;
 
-            constant = new DynamicConstant(bootstrapMethodAttrIndex, new(nameAndTypeIndex));
+            constant = new FieldrefConstantData(new(classIndex), new(nameAndTypeIndex));
             return true;
         }
 
+        readonly bool _isNotNil = true;
+
         public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

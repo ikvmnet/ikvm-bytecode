@@ -3,11 +3,11 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct ModuleConstant(Utf8ConstantHandle Name)
+    public readonly record struct MethodTypeConstantData(Utf8ConstantHandle Descriptor)
     {
 
         /// <summary>
-        /// Parses a Module constant in the constant pool.
+        /// Parses a MethodType constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
@@ -23,20 +23,26 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Parses a Module constant in the constant pool.
+        /// Parses a MethodType constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out ModuleConstant constant)
+        public static bool TryRead(ref ClassFormatReader reader, out MethodTypeConstantData constant)
         {
             constant = default;
 
-            if (reader.TryReadU2(out ushort nameIndex) == false)
+            if (reader.TryReadU2(out ushort descriptorIndex) == false)
                 return false;
 
-            constant = new ModuleConstant(new Utf8ConstantHandle(nameIndex));
+            constant = new MethodTypeConstantData(new Utf8ConstantHandle(descriptorIndex));
             return true;
         }
+
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

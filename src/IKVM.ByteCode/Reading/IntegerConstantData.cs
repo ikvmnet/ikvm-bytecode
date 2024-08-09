@@ -3,11 +3,11 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct MethodTypeConstant(Utf8ConstantHandle Descriptor, bool IsNotNil = true)
+    public readonly record struct IntegerConstantData(int Value)
     {
 
         /// <summary>
-        /// Parses a MethodType constant in the constant pool.
+        /// Parses a Integer constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
@@ -16,29 +16,27 @@ namespace IKVM.ByteCode.Reading
         {
             skip = 0;
 
-            if (reader.TryReadMany(ClassFormatReader.U2, out data) == false)
+            if (reader.TryReadMany(ClassFormatReader.U4, out data) == false)
                 return false;
 
             return true;
         }
 
         /// <summary>
-        /// Parses a MethodType constant in the constant pool.
+        /// Parses a Integer constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out MethodTypeConstant constant)
+        public static bool TryRead( ref ClassFormatReader reader, out IntegerConstantData constant)
         {
             constant = default;
 
-            if (reader.TryReadU2(out ushort descriptorIndex) == false)
+            if (reader.TryReadU4(out uint value) == false)
                 return false;
 
-            constant = new MethodTypeConstant(new Utf8ConstantHandle(descriptorIndex));
+            constant = new IntegerConstantData(unchecked((int)value));
             return true;
         }
-
-        public readonly bool IsNil => !IsNotNil;
 
     }
 

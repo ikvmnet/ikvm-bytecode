@@ -11,16 +11,15 @@ namespace IKVM.ByteCode.Writing
     public class AttributeTableBuilder
     {
 
-        readonly ConstantBuilder _constants;
+        readonly IConstantPool _constants;
         BlobBuilder? _builder;
-        Blob _countBlob;
-        int _count = 0;
+        AttributeTableEncoder _encoder;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="constants"></param>
-        public AttributeTableBuilder(ConstantBuilder constants)
+        public AttributeTableBuilder(IConstantPool constants)
         {
             _constants = constants ?? throw new ArgumentNullException(nameof(constants));
         }
@@ -28,62 +27,21 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Gets the builder.
         /// </summary>
-        BlobBuilder Builder => GetBuilder();
+        ref AttributeTableEncoder Encoder => ref GetEncoder();
 
         /// <summary>
         /// Gets the builder.
         /// </summary>
         /// <returns></returns>
-        BlobBuilder GetBuilder()
+        ref AttributeTableEncoder GetEncoder()
         {
             if (_builder == null)
             {
                 _builder = new BlobBuilder();
-                _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
-                WriteCount(_count);
+                _encoder = new AttributeTableEncoder(_builder);
             }
 
-            return _builder;
-        }
-
-        /// <summary>
-        /// Writes the count value.
-        /// </summary>
-        /// <param name="value"></param>
-        void WriteCount(int value)
-        {
-            GetBuilder();
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2((ushort)value);
-        }
-
-        /// <summary>
-        /// Increments the counter.
-        /// </summary>
-        void IncrementCount()
-        {
-            WriteCount(++_count);
-        }
-
-        /// <summary>
-        /// Adds a new attribute to the attribute set.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="data"></param>
-        public AttributeTableBuilder Attribute(Utf8ConstantHandle name, BlobBuilder data)
-        {
-            if (data != null && data.Count > 0)
-            {
-                var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-                w.TryWriteU2(name.Index);
-                w.TryWriteU2((ushort)data.Count);
-                Builder.LinkSuffix(data);
-                IncrementCount();
-                return this;
-            }
-            else
-            {
-                return Attribute(name);
-            }
+            return ref _encoder;
         }
 
         /// <summary>
@@ -93,29 +51,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="data"></param>
         public AttributeTableBuilder Attribute(string name, BlobBuilder data)
         {
-            return Attribute(_constants.GetOrAddUtf8(name), data);
-        }
-
-        /// <summary>
-        /// Adds a new attribute to the attribute set.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="data"></param>
-        public AttributeTableBuilder Attribute(Utf8ConstantHandle name, ReadOnlySpan<byte> data)
-        {
-            if (data.Length > 0)
-            {
-                var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-                w.TryWriteU2(name.Index);
-                w.TryWriteU2((ushort)data.Length);
-                Builder.WriteBytes(data);
-                IncrementCount();
-                return this;
-            }
-            else
-            {
-                return Attribute(name);
-            }
+            Encoder.Attribute(_constants.Get(Constant.Utf8(name)), data);
+            return this;
         }
 
         /// <summary>
@@ -125,19 +62,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="data"></param>
         public AttributeTableBuilder Attribute(string name, ReadOnlySpan<byte> data)
         {
-            return Attribute(_constants.GetOrAddUtf8(name), data);
-        }
-
-        /// <summary>
-        /// Adds a new attribute to the attribute set.
-        /// </summary>
-        /// <param name="name"></param>
-        public AttributeTableBuilder Attribute(Utf8ConstantHandle name)
-        {
-            var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(name.Index);
-            w.TryWriteU2(0);
-            IncrementCount();
+            Encoder.Attribute(_constants.Get(Constant.Utf8(name)), data);
             return this;
         }
 
@@ -147,7 +72,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="name"></param>
         public AttributeTableBuilder Attribute(string name)
         {
-            return Attribute(_constants.GetOrAddUtf8(name));
+            Encoder.Attribute(_constants.Get(Constant.Utf8(name)));
+            return this;
         }
 
         /// <summary>
@@ -156,10 +82,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(ConstantHandle value)
         {
-            var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
-            var w = new ClassFormatWriter(b);
-            w.TryWriteU2(value.Index);
-            return Attribute("ConstantValue", b);
+            Encoder.ConstantValue(_constants.Get(Constant.Utf8(AttributeName.ConstantValue)), value);
+            return this;
         }
 
         /// <summary>
@@ -168,7 +92,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(int value)
         {
-            return ConstantValue(_constants.GetOrAddInteger(value));
+            Encoder.ConstantValue(_constants.Get(Constant.Utf8(AttributeName.ConstantValue)), _constants.Get(Constant.Integer(value)));
+            return this;
         }
 
         /// <summary>
@@ -177,7 +102,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(short value)
         {
-            return ConstantValue(_constants.GetOrAddInteger(value));
+            Encoder.ConstantValue(_constants.Get(Constant.Utf8(AttributeName.ConstantValue)), _constants.Get(Constant.Integer(value)));
+            return this;
         }
 
         /// <summary>
@@ -186,7 +112,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(char value)
         {
-            return ConstantValue(_constants.GetOrAddInteger(value));
+            Encoder.ConstantValue(_constants.Get(Constant.Utf8(AttributeName.ConstantValue)), _constants.Get(Constant.Integer(value)));
+            return this;
         }
 
         /// <summary>
@@ -195,7 +122,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(byte value)
         {
-            return ConstantValue(_constants.GetOrAddInteger(value));
+            Encoder.ConstantValue(_constants.Get(Constant.Utf8(AttributeName.ConstantValue)), _constants.Get(Constant.Integer(value)));
+            return this;
         }
 
         /// <summary>
@@ -204,7 +132,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(bool value)
         {
-            return ConstantValue(_constants.GetOrAddInteger(value ? 1 : 0));
+            Encoder.ConstantValue(_constants.Get(Constant.Utf8(AttributeName.ConstantValue)), _constants.Get(Constant.Integer(value ? 1 : 0)));
+            return this;
         }
 
         /// <summary>
@@ -213,7 +142,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(float value)
         {
-            return ConstantValue(_constants.GetOrAddFloat(value));
+            Encoder.ConstantValue(_constants.Get(Constant.Utf8(AttributeName.ConstantValue)), _constants.Get((FloatConstant)value));
+            return this;
         }
 
         /// <summary>
@@ -222,7 +152,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(long value)
         {
-            return ConstantValue(_constants.GetOrAddLong(value));
+            Encoder.ConstantValue(_constants.Get(AttributeName.ConstantValue), _constants.Get((LongConstant)value));
+            return this;
         }
 
         /// <summary>
@@ -231,7 +162,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(double value)
         {
-            return ConstantValue(_constants.GetOrAddDouble(value));
+            Encoder.ConstantValue(_constants.Get(AttributeName.ConstantValue), _constants.Get((value)));
+            return this;
         }
 
         /// <summary>
@@ -240,7 +172,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="value"></param>
         public AttributeTableBuilder ConstantValue(string value)
         {
-            return ConstantValue(_constants.GetOrAddString(value));
+            Encoder.ConstantValue(_constants.Get(AttributeName.ConstantValue), _constants.Get(Constant.String(value)));
+            return this;
         }
 
         /// <summary>
@@ -253,22 +186,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="attributes"></param>
         public AttributeTableBuilder Code(ushort maxStack, ushort maxLocals, BlobBuilder code, Action<ExceptionTableEncoder> exceptions, AttributeTableBuilder attributes)
         {
-            if (code is null)
-                throw new ArgumentNullException(nameof(code));
-            if (exceptions is null)
-                throw new ArgumentNullException(nameof(exceptions));
-            if (attributes is null)
-                throw new ArgumentNullException(nameof(attributes));
-
-            var b = new BlobBuilder();
-            var w = new ClassFormatWriter(b.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
-            w.TryWriteU2(maxStack);
-            w.TryWriteU2(maxLocals);
-            w.TryWriteU4((uint)code.Count);
-            b.LinkSuffix(code);
-            exceptions(new ExceptionTableEncoder(b));
-            attributes.Serialize(b);
-            return Attribute("Code", b);
+            Encoder.Code(_constants.Get(AttributeName.Code), maxStack, maxLocals, code, exceptions, attributes);
+            return this;
         }
 
         /// <summary>
@@ -276,12 +195,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder StackMapTable(Action<StackMapTableEncoder> stackMapTable)
         {
-            if (stackMapTable is null)
-                throw new ArgumentNullException(nameof(stackMapTable));
-
-            var b = new BlobBuilder();
-            stackMapTable(new StackMapTableEncoder(b));
-            return Attribute("StackMapTable", b);
+            Encoder.StackMapTable(_constants.Get(AttributeName.StackMapTable), stackMapTable);
+            return this;
         }
 
         /// <summary>
@@ -289,12 +204,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder Exceptions(Action<ClassConstantTableEncoder> exceptions)
         {
-            if (exceptions is null)
-                throw new ArgumentNullException(nameof(exceptions));
-
-            var b = new BlobBuilder();
-            exceptions(new ClassConstantTableEncoder(b));
-            return Attribute("Exceptions", b);
+            Encoder.Exceptions(_constants.Get(AttributeName.Exceptions), exceptions);
+            return this;
         }
 
         /// <summary>
@@ -303,12 +214,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="classes"></param>
         public AttributeTableBuilder InnerClasses(Action<InnerClassTableEncoder> classes)
         {
-            if (classes is null)
-                throw new ArgumentNullException(nameof(classes));
-
-            var b = new BlobBuilder();
-            classes(new InnerClassTableEncoder(b));
-            return Attribute("InnerClasses", b);
+            Encoder.InnerClasses(_constants.Get(AttributeName.InnerClasses), classes);
+            return this;
         }
 
         /// <summary>
@@ -318,11 +225,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="method"></param>
         public AttributeTableBuilder EnclosingMethod(ClassConstantHandle clazz, NameAndTypeConstantHandle method)
         {
-            var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2 + ClassFormatWriter.U2];
-            var w = new ClassFormatWriter(b);
-            w.TryWriteU2(clazz.Index);
-            w.TryWriteU2(method.Index);
-            return Attribute("EnclosingMethod", b);
+            Encoder.EnclosingMethod(_constants.Get(AttributeName.EnclosingMethod), clazz, method);
+            return this;
         }
 
         /// <summary>
@@ -330,7 +234,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder Synthetic()
         {
-            return Attribute("Synthetic");
+            Encoder.Synthetic(_constants.Get(AttributeName.Synthetic));
+            return this;
         }
 
         /// <summary>
@@ -339,10 +244,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="signature"></param>
         public AttributeTableBuilder Signature(Utf8ConstantHandle signature)
         {
-            var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
-            var w = new ClassFormatWriter(b);
-            w.TryWriteU2(signature.Index);
-            return Attribute("Signature", b);
+            Encoder.Signature(_constants.Get(AttributeName.Signature), signature);
+            return this;
         }
 
         /// <summary>
@@ -351,10 +254,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="signature"></param>
         public AttributeTableBuilder Signature(string signature)
         {
-            if (signature is null)
-                throw new ArgumentNullException(nameof(signature));
-
-            return Signature(_constants.GetOrAddUtf8(signature));
+            Encoder.Signature(_constants.Get(AttributeName.Signature), _constants.Get(signature));
+            return this;
         }
 
         /// <summary>
@@ -363,10 +264,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="sourceFile"></param>
         public AttributeTableBuilder SourceFile(Utf8ConstantHandle sourceFile)
         {
-            var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
-            var w = new ClassFormatWriter(b);
-            w.TryWriteU2(sourceFile.Index);
-            return Attribute("SourceFile", b);
+            Encoder.SourceFile(_constants.Get(AttributeName.SourceFile), sourceFile);
+            return this;
         }
 
         /// <summary>
@@ -375,10 +274,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="sourceFile"></param>
         public AttributeTableBuilder SourceFile(string sourceFile)
         {
-            if (sourceFile is null)
-                throw new ArgumentNullException(nameof(sourceFile));
-
-            return SourceFile(_constants.GetOrAddUtf8(sourceFile));
+            Encoder.SourceFile(_constants.Get(AttributeName.SourceFile), _constants.Get(sourceFile));
+            return this;
         }
 
         /// <summary>
@@ -387,7 +284,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="debugExtension"></param>
         public AttributeTableBuilder SourceDebugExtension(BlobBuilder debugExtension)
         {
-            return Attribute("SourceDebugExtension", debugExtension);
+            Encoder.SourceDebugExtension(_constants.Get(AttributeName.SourceDebugExtension), debugExtension);
+            return this;
         }
 
         /// <summary>
@@ -395,12 +293,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder LineNumberTable(Action<LineNumberTableEncoder> lineNumbers)
         {
-            if (lineNumbers is null)
-                throw new ArgumentNullException(nameof(lineNumbers));
-
-            var b = new BlobBuilder();
-            lineNumbers(new LineNumberTableEncoder(b));
-            return Attribute("LineNumberTable", b);
+            Encoder.LineNumberTable(_constants.Get(AttributeName.LineNumberTable), lineNumbers);
+            return this;
         }
 
         /// <summary>
@@ -408,12 +302,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder LocalVariableTable(Action<LocalVariableTableEncoder> localVars)
         {
-            if (localVars is null)
-                throw new ArgumentNullException(nameof(localVars));
-
-            var b = new BlobBuilder();
-            localVars(new LocalVariableTableEncoder(b));
-            return Attribute("LocalVariableTable", b);
+            Encoder.LocalVariableTable(_constants.Get(AttributeName.LocalVariableTable), localVars);
+            return this;
         }
 
         /// <summary>
@@ -421,12 +311,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder LocalVariableTypeTable(Action<LocalVariableTypeTableEncoder> localVarTypes)
         {
-            if (localVarTypes is null)
-                throw new ArgumentNullException(nameof(localVarTypes));
-
-            var b = new BlobBuilder();
-            localVarTypes(new LocalVariableTypeTableEncoder(b));
-            return Attribute("LocalVariableTypeTable", b);
+            Encoder.LocalVariableTypeTable(_constants.Get(AttributeName.LocalVariableTypeTable), localVarTypes);
+            return this;
         }
 
         /// <summary>
@@ -434,7 +320,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder Deprecated()
         {
-            return Attribute("Deprecated");
+            Encoder.Deprecated(_constants.Get(AttributeName.Deprecated));
+            return this;
         }
 
         /// <summary>
@@ -443,12 +330,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="annotations"></param>
         public AttributeTableBuilder RuntimeVisibleAnnotations(Action<AnnotationTableEncoder> annotations)
         {
-            if (annotations is null)
-                throw new ArgumentNullException(nameof(annotations));
-
-            var b = new BlobBuilder();
-            annotations(new AnnotationTableEncoder(b));
-            return Attribute("RuntimeVisibleAnnotations", b);
+            Encoder.RuntimeVisibleAnnotations(_constants.Get(AttributeName.RuntimeVisibleAnnotations), annotations);
+            return this;
         }
 
         /// <summary>
@@ -456,12 +339,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder RuntimeInvisibleAnnotations(Action<AnnotationTableEncoder> annotations)
         {
-            if (annotations is null)
-                throw new ArgumentNullException(nameof(annotations));
-
-            var b = new BlobBuilder();
-            annotations(new AnnotationTableEncoder(b));
-            return Attribute("RuntimeInvisibleAnnotations", b);
+            Encoder.RuntimeInvisibleAnnotations(_constants.Get(AttributeName.RuntimeInvisibleAnnotations), annotations);
+            return this;
         }
 
         /// <summary>
@@ -469,25 +348,17 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder RuntimeVisibleParameterAnnotations(Action<ParameterAnnotationTableEncoder> parameterAnnotations)
         {
-            if (parameterAnnotations is null)
-                throw new ArgumentNullException(nameof(parameterAnnotations));
-
-            var b = new BlobBuilder();
-            parameterAnnotations(new ParameterAnnotationTableEncoder(b));
-            return Attribute("RuntimeVisibleParameterAnnotations", b);
+            Encoder.RuntimeVisibleParameterAnnotations(_constants.Get(AttributeName.RuntimeVisibleParameterAnnotations), parameterAnnotations);
+            return this;
         }
 
         /// <summary>
         /// Adds a new RuntimeInvisibleParameterAnnotations attribute.
         /// </summary>
-        public AttributeTableBuilder RuntimeInvisibleParametersAnnotations(Action<ParameterAnnotationTableEncoder> parameterAnnotations)
+        public AttributeTableBuilder RuntimeInvisibleParameterAnnotations(Action<ParameterAnnotationTableEncoder> parameterAnnotations)
         {
-            if (parameterAnnotations is null)
-                throw new ArgumentNullException(nameof(parameterAnnotations));
-
-            var b = new BlobBuilder();
-            parameterAnnotations(new ParameterAnnotationTableEncoder(b));
-            return Attribute("RuntimeInvisibleParameterAnnotations", b);
+            Encoder.RuntimeInvisibleParameterAnnotations(_constants.Get(AttributeName.RuntimeInvisibleParameterAnnotations), parameterAnnotations);
+            return this;
         }
 
         /// <summary>
@@ -496,12 +367,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="typeAnnotations"></param>
         public AttributeTableBuilder RuntimeVisibleTypeAnnotations(Action<TypeAnnotationTableEncoder> typeAnnotations)
         {
-            if (typeAnnotations is null)
-                throw new ArgumentNullException(nameof(typeAnnotations));
-
-            var b = new BlobBuilder();
-            typeAnnotations(new TypeAnnotationTableEncoder(b));
-            return Attribute("RuntimeVisibleTypeAnnotations", b);
+            Encoder.RuntimeVisibleTypeAnnotations(_constants.Get(AttributeName.RuntimeVisibleTypeAnnotations), typeAnnotations);
+            return this;
         }
 
         /// <summary>
@@ -510,12 +377,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="typeAnnotations"></param>
         public AttributeTableBuilder RuntimeInvisibleTypeAnnotations(Action<TypeAnnotationTableEncoder> typeAnnotations)
         {
-            if (typeAnnotations is null)
-                throw new ArgumentNullException(nameof(typeAnnotations));
-
-            var b = new BlobBuilder();
-            typeAnnotations(new TypeAnnotationTableEncoder(b));
-            return Attribute("RuntimeInvisibleTypeAnnotations", b);
+            Encoder.RuntimeInvisibleTypeAnnotations(_constants.Get(AttributeName.RuntimeInvisibleTypeAnnotations), typeAnnotations);
+            return this;
         }
 
         /// <summary>
@@ -524,12 +387,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="defaultValue"></param>
         public AttributeTableBuilder AnnotationDefault(Action<ElementValueEncoder> defaultValue)
         {
-            if (defaultValue is null)
-                throw new ArgumentNullException(nameof(defaultValue));
-
-            var b = new BlobBuilder();
-            defaultValue(new ElementValueEncoder(b));
-            return Attribute("AnnotationDefault", b);
+            Encoder.AnnotationDefault(_constants.Get(AttributeName.AnnotationDefault), defaultValue);
+            return this;
         }
 
         /// <summary>
@@ -538,12 +397,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="bootstrapMethods"></param>
         public AttributeTableBuilder BootstrapMethods(Action<BootstrapMethodTableEncoder> bootstrapMethods)
         {
-            if (bootstrapMethods is null)
-                throw new ArgumentNullException(nameof(bootstrapMethods));
-
-            var b = new BlobBuilder();
-            bootstrapMethods(new BootstrapMethodTableEncoder(b));
-            return Attribute("BootstrapMethods", b);
+            Encoder.BootstrapMethods(_constants.Get(AttributeName.BootstrapMethods), bootstrapMethods);
+            return this;
         }
 
         /// <summary>
@@ -551,12 +406,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder MethodParameters(Action<MethodParameterTableEncoder> parameters)
         {
-            if (parameters is null)
-                throw new ArgumentNullException(nameof(parameters));
-
-            var b = new BlobBuilder();
-            parameters(new MethodParameterTableEncoder(b));
-            return Attribute("MethodParameters", b);
+            Encoder.MethodParameters(_constants.Get(AttributeName.MethodParameters), parameters);
+            return this;
         }
 
         /// <summary>
@@ -574,28 +425,8 @@ namespace IKVM.ByteCode.Writing
         /// <exception cref="ArgumentNullException"></exception>
         public AttributeTableBuilder Module(ModuleConstantHandle name, ModuleFlag flags, Utf8ConstantHandle version, Action<ModuleRequiresTableEncoder> requires, Action<ModuleExportsTableEncoder> exports, Action<ModuleOpensTableEncoder> opens, Action<ClassConstantTableEncoder> uses, Action<ModuleProvidesTableEncoder> provides)
         {
-            if (requires is null)
-                throw new ArgumentNullException(nameof(requires));
-            if (exports is null)
-                throw new ArgumentNullException(nameof(exports));
-            if (opens is null)
-                throw new ArgumentNullException(nameof(opens));
-            if (uses is null)
-                throw new ArgumentNullException(nameof(uses));
-            if (provides is null)
-                throw new ArgumentNullException(nameof(provides));
-
-            var b = new BlobBuilder();
-            var w = new ClassFormatWriter(Builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(name.Index);
-            w.TryWriteU2((ushort)flags);
-            w.TryWriteU2(version.Index);
-            requires(new ModuleRequiresTableEncoder(b));
-            exports(new ModuleExportsTableEncoder(b));
-            opens(new ModuleOpensTableEncoder(b));
-            uses(new ClassConstantTableEncoder(b));
-            provides(new ModuleProvidesTableEncoder(b));
-            return Attribute("Module", b);
+            Encoder.Module(_constants.Get(AttributeName.Module), name, flags, version, requires, exports, opens, uses, provides);
+            return this;
         }
 
         /// <summary>
@@ -603,9 +434,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder ModulePackages(Action<PackageConstantTableEncoder> packages)
         {
-            var b = new BlobBuilder();
-            packages(new PackageConstantTableEncoder(b));
-            return Attribute("ModulePackages", b);
+            Encoder.ModulePackages(_constants.Get(AttributeName.ModulePackages), packages);
+            return this;
         }
 
         /// <summary>
@@ -614,10 +444,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="mainClass"></param>
         public AttributeTableBuilder ModuleMainClass(ClassConstantHandle mainClass)
         {
-            var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
-            var w = new ClassFormatWriter(b);
-            w.TryWriteU2(mainClass.Index);
-            return Attribute("ModuleMainClass", b);
+            Encoder.ModuleMainClass(_constants.Get(AttributeName.ModuleMainClass), mainClass);
+            return this;
         }
 
         /// <summary>
@@ -626,10 +454,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="nestHost"></param>
         public AttributeTableBuilder NestHost(ClassConstantHandle nestHost)
         {
-            var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
-            var w = new ClassFormatWriter(b);
-            w.TryWriteU2(nestHost.Index);
-            return Attribute("NestHost", b);
+            Encoder.NestHost(_constants.Get(AttributeName.NestHost), nestHost);
+            return this;
         }
 
         /// <summary>
@@ -638,9 +464,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="classes"></param>
         public AttributeTableBuilder NestMembers(Action<ClassConstantTableEncoder> classes)
         {
-            var b = new BlobBuilder();
-            classes(new ClassConstantTableEncoder(b));
-            return Attribute("NestMembers", b);
+            Encoder.NestMembers(_constants.Get(AttributeName.NestMembers), classes);
+            return this;
         }
 
         /// <summary>
@@ -648,9 +473,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         public AttributeTableBuilder Record(Action<RecordComponentTableEncoder> components)
         {
-            var b = new BlobBuilder();
-            components(new RecordComponentTableEncoder(b));
-            return Attribute("Record", b);
+            Encoder.Record(_constants.Get(AttributeName.Record), components);
+            return this;
         }
 
         /// <summary>
@@ -659,9 +483,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="classes"></param>
         public AttributeTableBuilder PermittedSubclasses(Action<ClassConstantTableEncoder> classes)
         {
-            var b = new BlobBuilder();
-            classes(new ClassConstantTableEncoder(b));
-            return Attribute("PermittedSubclasses", b);
+            Encoder.PermittedSubclasses(_constants.Get(AttributeName.PermittedSubclasses), classes);
+            return this;
         }
 
         /// <summary>

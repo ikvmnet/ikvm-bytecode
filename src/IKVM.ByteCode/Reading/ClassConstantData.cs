@@ -3,40 +3,39 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LongConstant(long Value)
+    public readonly record struct ClassConstantData(Utf8ConstantHandle Name)
     {
 
         /// <summary>
-        /// Parses a Long constant in the constant pool.
+        /// Parses a Class constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
         /// <param name="skip"></param>
+        /// <returns></returns>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
         {
-            skip = 1;
+            skip = 0;
 
-            if (reader.TryReadMany(ClassFormatReader.U4 + ClassFormatReader.U4, out data) == false)
+            if (reader.TryReadMany(ClassFormatReader.U2, out data) == false)
                 return false;
 
             return true;
         }
 
         /// <summary>
-        /// Parses a Long constant in the constant pool.
+        /// Parses a Class constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out LongConstant constant)
+        public static bool TryRead(ref ClassFormatReader reader, out ClassConstantData constant)
         {
             constant = default;
 
-            if (reader.TryReadU4(out uint a) == false)
-                return false;
-            if (reader.TryReadU4(out uint b) == false)
+            if (reader.TryReadU2(out ushort nameIndex) == false)
                 return false;
 
-            constant = new LongConstant((long)(((ulong)a << 32) | b));
+            constant = new ClassConstantData(new Utf8ConstantHandle(nameIndex));
             return true;
         }
 

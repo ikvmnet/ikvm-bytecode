@@ -3,13 +3,11 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct MethodrefConstant(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType, bool IsNotNil = true)
+    public readonly record struct InvokeDynamicConstantData(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType)
     {
 
-        public static FieldrefConstant Nil => default;
-
         /// <summary>
-        /// Parses a Methodref constant in the constant pool.
+        /// Parses a InvokeDynamic constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
@@ -24,24 +22,28 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Parses a Methodref constant in the constant pool.
+        /// Parses a InvokeDynamic constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out MethodrefConstant constant)
+        public static bool TryRead(ref ClassFormatReader reader, out InvokeDynamicConstantData constant)
         {
             constant = default;
 
-            if (reader.TryReadU2(out ushort classIndex) == false)
+            if (reader.TryReadU2(out ushort bootstrapMethodAttrIndex) == false)
                 return false;
             if (reader.TryReadU2(out ushort nameAndTypeIndex) == false)
                 return false;
 
-            constant = new MethodrefConstant(new(classIndex), new(nameAndTypeIndex));
+            constant = new InvokeDynamicConstantData(bootstrapMethodAttrIndex, new(nameAndTypeIndex));
             return true;
         }
 
+        readonly bool _isNotNil = true;
+
         public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

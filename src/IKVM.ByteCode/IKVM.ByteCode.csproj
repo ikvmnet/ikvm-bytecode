@@ -38,8 +38,13 @@
     <ItemGroup>
         <None Update="Writing\ClassFileImporter.Attribute.g.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>ClassFileImporter.Attribute.g.cs</LastGenOutput>
+            <LastGenOutput>Writing\ClassFileImporter.Attribute.g.cs</LastGenOutput>
         </None>
+        <Compile Update="Writing\ClassFileImporter.Attribute.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Writing\ClassFileImporter.Attribute.g.tt</DependentUpon>
+        </Compile>
         <None Update="AttributeName.g.tt">
             <LastGenOutput>AttributeName.g.cs</LastGenOutput>
             <Generator>TextTemplatingFileGenerator</Generator>
@@ -48,11 +53,6 @@
             <DependentUpon>AttributeName.g.tt</DependentUpon>
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-        </Compile>
-        <Compile Update="Writing\ClassFileImporter.Attribute.g.cs">
-          <DesignTime>True</DesignTime>
-          <AutoGen>True</AutoGen>
-          <DependentUpon>ClassFileImporter.Attribute.g.tt</DependentUpon>
         </Compile>
         <None Update="Reading\Attribute.g.tt">
             <LastGenOutput>Reading\Attribute.g.cs</LastGenOutput>
@@ -65,12 +65,12 @@
         </Compile>
         <None Update="Reading\AttributeTableReader.g.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>Reading\AttributeTableReader.g.cs</LastGenOutput>
+            <LastGenOutput>AttributeTableReader.g.cs</LastGenOutput>
         </None>
         <Compile Update="Reading\AttributeTableReader.g.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Reading\AttributeTableReader.g.tt</DependentUpon>
+            <DependentUpon>AttributeTableReader.g.tt</DependentUpon>
         </Compile>
     </ItemGroup>
 

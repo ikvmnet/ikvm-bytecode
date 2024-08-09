@@ -1,18 +1,22 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct SyntheticAttribute(bool IsNotNil = true)
+    public readonly record struct SyntheticAttribute()
     {
 
         public static SyntheticAttribute Nil => default;
 
-        public static bool TryRead(ref ClassFormatReader reader, out SyntheticAttribute attribute, bool IsNotNil = true)
+        public static bool TryRead(ref ClassFormatReader reader, out SyntheticAttribute attribute)
         {
             attribute = new SyntheticAttribute();
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

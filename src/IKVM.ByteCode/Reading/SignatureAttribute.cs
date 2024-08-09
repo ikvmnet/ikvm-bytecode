@@ -1,12 +1,12 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct SignatureAttribute(Utf8ConstantHandle Signature, bool IsNotNil = true)
+    public readonly record struct SignatureAttribute(Utf8ConstantHandle Signature)
     {
 
         public static SignatureAttribute Nil => default;
 
-        public static bool TryRead(ref ClassFormatReader reader, out SignatureAttribute attribute, bool IsNotNil = true)
+        public static bool TryRead(ref ClassFormatReader reader, out SignatureAttribute attribute)
         {
             attribute = default;
 
@@ -17,7 +17,11 @@
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

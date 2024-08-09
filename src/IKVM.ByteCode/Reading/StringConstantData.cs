@@ -3,16 +3,16 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct PackageConstant(Utf8ConstantHandle Name)
+    public readonly record struct StringConstantData(Utf8ConstantHandle Value)
     {
 
         /// <summary>
-        /// Parses a Package constant in the constant pool.
+        /// Parses a Class constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
         /// <param name="skip"></param>
-        public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
+        public static bool TryReadStringConstantData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
         {
             skip = 0;
 
@@ -23,18 +23,18 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Parses a Package constant in the constant pool.
+        /// Parses a Class constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out PackageConstant constant)
+        public static bool TryReadStringConstant(ref ClassFormatReader reader, out StringConstantData constant)
         {
             constant = default;
 
-            if (reader.TryReadU2(out ushort nameIndex) == false)
+            if (reader.TryReadU2(out ushort valueIndex) == false)
                 return false;
 
-            constant = new PackageConstant(new Utf8ConstantHandle(nameIndex));
+            constant = new StringConstantData(new Utf8ConstantHandle(valueIndex));
             return true;
         }
 

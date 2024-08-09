@@ -1,12 +1,11 @@
-﻿using System;
-using System.Buffers;
+﻿using System.Buffers;
 
 using IKVM.ByteCode.Buffers;
 
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct FloatConstant(float Value)
+    public readonly record struct FloatConstantData(float Value)
     {
 
         /// <summary>
@@ -29,20 +28,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead( ref ClassFormatReader reader, out FloatConstant constant)
+        public static bool TryRead( ref ClassFormatReader reader, out FloatConstantData constant)
         {
             constant = default;
 
             if (reader.TryReadU4(out uint value) == false)
                 return false;
 
-#if NETFRAMEWORK || NETCOREAPP3_1
-            var v = RawBitConverter.UInt32BitsToSingle(value);
-#else
-            var v = BitConverter.UInt32BitsToSingle(value);
-#endif
-
-            constant = new FloatConstant(v);
+            constant = new FloatConstantData(RawBitConverter.UInt32BitsToSingle(value));
             return true;
         }
 

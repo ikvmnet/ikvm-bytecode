@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct PermittedSubclassesAttribute(ClassConstantHandleTable PermittedSubclasses, bool IsNotNil = true)
+    public readonly record struct PermittedSubclassesAttribute(ClassConstantHandleTable PermittedSubclasses)
     {
 
         public static PermittedSubclassesAttribute Nil => default;
@@ -26,7 +26,11 @@
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct RuntimeVisibleAnnotationsAttribute(AnnotationTable Annotations, bool IsNotNil = true)
+    public readonly record struct RuntimeVisibleAnnotationsAttribute(AnnotationTable Annotations)
     {
 
         public static RuntimeVisibleAnnotationsAttribute Nil => default;
@@ -28,7 +28,11 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

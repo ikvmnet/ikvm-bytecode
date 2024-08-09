@@ -11,163 +11,118 @@ namespace IKVM.ByteCode.Writing
     /// <summary>
     /// Provides methods to encode entities loaded from an existing <see cref="ClassFile"/>.
     /// </summary>
-    public partial class ClassFileImporter
+    public partial class ClassFileImporter<TConstantView, TConstantPool>
+        where TConstantView : class, IConstantView
+        where TConstantPool : class, IConstantPool
     {
 
-        readonly ConstantTable _source;
-        readonly ConstantBuilder _constants;
+        readonly TConstantView _view;
+        readonly TConstantPool _pool;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="destination"></param>
-        public ClassFileImporter(ConstantTable source, ConstantBuilder destination)
+        /// <param name="_view"></param>
+        /// <param name="_pool"></param>
+        public ClassFileImporter(TConstantView _view, TConstantPool _pool)
         {
-            this._source = source ?? throw new ArgumentNullException(nameof(source));
-            this._constants = destination ?? throw new ArgumentNullException(nameof(destination));
+            this._view = _view ?? throw new ArgumentNullException(nameof(_view));
+            this._pool = _pool ?? throw new ArgumentNullException(nameof(_pool));
         }
 
-        /// <summary>
-        /// Imports a <see cref="ConstantHandle"/>.
-        /// </summary>
-        /// <param name="handle"></param>
-        /// <returns></returns>
-        /// <exception cref="ByteCodeException"></exception>
+        #region Constants
+
         ConstantHandle Import(ConstantHandle handle)
         {
-            return _source.GetKind(handle) switch
-            {
-                ConstantKind.Fieldref => Import((RefConstantHandle)handle),
-                ConstantKind.Methodref => Import((RefConstantHandle)handle),
-                ConstantKind.InterfaceMethodref => Import((RefConstantHandle)handle),
-                ConstantKind.Utf8 => Import((Utf8ConstantHandle)handle),
-                ConstantKind.Integer => Import((IntegerConstantHandle)handle),
-                ConstantKind.Float => Import((FloatConstantHandle)handle),
-                ConstantKind.Long => Import((LongConstantHandle)handle),
-                ConstantKind.Double => Import((DoubleConstantHandle)handle),
-                ConstantKind.Class => Import((ClassConstantHandle)handle),
-                ConstantKind.String => Import((StringConstantHandle)handle),
-                ConstantKind.NameAndType => Import((NameAndTypeConstantHandle)handle),
-                ConstantKind.MethodHandle => Import((MethodHandleConstantHandle)handle),
-                ConstantKind.MethodType => Import((MethodTypeConstantHandle)handle),
-                ConstantKind.Dynamic => Import((DynamicConstantHandle)handle),
-                ConstantKind.InvokeDynamic => Import((InvokeDynamicConstantHandle)handle),
-                ConstantKind.Module => Import((ModuleConstantHandle)handle),
-                ConstantKind.Package => Import((PackageConstantHandle)handle),
-                _ => throw new ByteCodeException("Unknown ConstantHandle kind."),
-            };
-        }
-
-        /// <summary>
-        /// Imports a <see cref="RefConstantHandle"/>.
-        /// </summary>
-        /// <param name="handle"></param>
-        /// <returns></returns>
-        /// <exception cref="ByteCodeException"></exception>
-        RefConstantHandle Import(RefConstantHandle handle)
-        {
-            return _source.GetKind(handle) switch
-            {
-                ConstantKind.Fieldref => (RefConstantHandle)Import((FieldrefConstantHandle)handle),
-                ConstantKind.Methodref => (RefConstantHandle)Import((MethodrefConstantHandle)handle),
-                ConstantKind.InterfaceMethodref => (RefConstantHandle)Import((InterfaceMethodrefConstantHandle)handle),
-                _ => throw new ByteCodeException("Unknown RefConstantHandle kind."),
-            };
+            return _pool.Get(_view.Get(handle));
         }
 
         Utf8ConstantHandle Import(Utf8ConstantHandle handle)
         {
-            return _constants.GetOrAddUtf8(_source.GetUtf8Value(handle));
+            return _pool.Get(_view.Get(handle));
         }
 
         IntegerConstantHandle Import(IntegerConstantHandle handle)
         {
-            return _constants.GetOrAddInteger(_source.GetIntegerValue(handle));
+            return _pool.Get(_view.Get(handle));
         }
 
         FloatConstantHandle Import(FloatConstantHandle handle)
         {
-            return _constants.GetOrAddFloat(_source.GetFloatValue(handle));
+            return _pool.Get(_view.Get(handle));
         }
 
         LongConstantHandle Import(LongConstantHandle handle)
         {
-            return _constants.GetOrAddLong(_source.GetLongValue(handle));
+            return _pool.Get(_view.Get(handle));
         }
 
         DoubleConstantHandle Import(DoubleConstantHandle handle)
         {
-            return _constants.GetOrAddDouble(_source.GetDoubleValue(handle));
+            return _pool.Get(_view.Get(handle));
         }
 
         ClassConstantHandle Import(ClassConstantHandle handle)
         {
-            return _constants.GetOrAddClass(_source.GetClassName(handle));
+            return _pool.Get(_view.Get(handle));
         }
 
         StringConstantHandle Import(StringConstantHandle handle)
         {
-            return _constants.GetOrAddString(_source.GetStringValue(handle));
+            return _pool.Get(_view.Get(handle));
         }
 
         FieldrefConstantHandle Import(FieldrefConstantHandle handle)
         {
-            var i = _source.GetFieldref(handle);
-            return i.IsNotNil ? _constants.GetOrAddFieldref(Import(i.Class), Import(i.NameAndType)) : default;
+            return _pool.Get(_view.Get(handle));
         }
 
         MethodrefConstantHandle Import(MethodrefConstantHandle handle)
         {
-            var i = _source.GetMethodref(handle);
-            return i.IsNotNil ? _constants.GetOrAddMethodref(Import(i.Class), Import(i.NameAndType)) : default;
+            return _pool.Get(_view.Get(handle));
         }
 
         InterfaceMethodrefConstantHandle Import(InterfaceMethodrefConstantHandle handle)
         {
-            var i = _source.GetInterfaceMethodref(handle);
-            return i.IsNotNil ? _constants.GetOrAddInterfaceref(Import(i.Class), Import(i.NameAndType)) : default;
+            return _pool.Get(_view.Get(handle));
         }
 
         NameAndTypeConstantHandle Import(NameAndTypeConstantHandle handle)
         {
-            var i = _source.GetNameAndType(handle);
-            return i.IsNotNil ? _constants.GetOrAddNameAndType(Import(i.Name), Import(i.Descriptor)) : default;
+            return _pool.Get(_view.Get(handle));
         }
 
         MethodHandleConstantHandle Import(MethodHandleConstantHandle handle)
         {
-            var i = _source.GetMethodHandle(handle);
-            return i.IsNotNil ? _constants.AddMethodHandle(i.ReferenceKind, Import(i.Reference)) : default;
+            return _pool.Get(_view.Get(handle));
         }
 
         MethodTypeConstantHandle Import(MethodTypeConstantHandle handle)
         {
-            var i = _source.GetMethodType(handle);
-            return i.IsNotNil ? _constants.GetOrAddMethodType(Import(i.Descriptor)) : default;
+            return _pool.Get(_view.Get(handle));
         }
 
         DynamicConstantHandle Import(DynamicConstantHandle handle)
         {
-            var i = _source.GetDynamic(handle);
-            return i.IsNotNil ? _constants.GetOrAddDynamic(i.BootstrapMethodAttributeIndex, Import(i.NameAndType)) : default;
+            return _pool.Get(_view.Get(handle));
         }
 
         InvokeDynamicConstantHandle Import(InvokeDynamicConstantHandle handle)
         {
-            var i = _source.GetInvokeDynamic(handle);
-            return i.IsNotNil ? _constants.GetOrAddInvokeDynamic(i.BootstrapMethodAttributeIndex, Import(i.NameAndType)) : default;
+            return _pool.Get(_view.Get(handle));
         }
 
         ModuleConstantHandle Import(ModuleConstantHandle handle)
         {
-            return _constants.GetOrAddModule(_source.GetModuleName(handle));
+            return _pool.Get(_view.Get(handle));
         }
 
         PackageConstantHandle Import(PackageConstantHandle handle)
         {
-            return _constants.GetOrAddPackage(_source.GetPackageName(handle));
+            return _pool.Get(_view.Get(handle));
         }
+
+        #endregion
 
         /// <summary>
         /// Imports a <see cref="Annotation"/>.
@@ -189,13 +144,6 @@ namespace IKVM.ByteCode.Writing
                 encoder.Annotation(e => Import(i, ref e));
         }
 
-        public AttributeTableBuilder Import(AttributeTable source)
-        {
-            var b = new AttributeTableBuilder(_constants);
-            Import(source, b);
-            return b;
-        }
-
         public void Import(AttributeTable source, AttributeTableBuilder builder)
         {
             foreach (var i in source)
@@ -211,10 +159,10 @@ namespace IKVM.ByteCode.Writing
         {
             throw new NotImplementedException("Cannot import the Code attribute since we are currently unable to parse byte code.");
 
-            var b = new BlobBuilder();
-            var s = b.ReserveBytes((int)source.Code.Length);
-            source.Code.CopyTo(s.GetBytes());
-            builder.Code(source.MaxStack, source.MaxLocals, b, e => Import(source.ExceptionTable, ref e), Import(source.Attributes));
+            //var b = new BlobBuilder();
+            //var s = b.ReserveBytes((int)source.Code.Length);
+            //source.Code.CopyTo(s.GetBytes());
+            //builder.Code(source.MaxStack, source.MaxLocals, b, e => Import(source.ExceptionTable, ref e), Import(source.Attributes));
         }
 
         public void Import(StackMapTableAttribute source, AttributeTableBuilder builder)
@@ -306,7 +254,7 @@ namespace IKVM.ByteCode.Writing
 
         public void Import(RuntimeInvisibleParameterAnnotationsAttribute source, AttributeTableBuilder builder)
         {
-            builder.RuntimeInvisibleParametersAnnotations(e => Import(source.Parameters, ref e));
+            builder.RuntimeInvisibleParameterAnnotations(e => Import(source.Parameters, ref e));
         }
 
         public void Import(AnnotationDefaultAttribute source, AttributeTableBuilder builder)
@@ -372,7 +320,9 @@ namespace IKVM.ByteCode.Writing
 
         public void Import(RecordComponent source, ref RecordComponentTableEncoder encoder)
         {
-            encoder.RecordComponent(Import(source.Name), Import(source.Descriptor), Import(source.Attributes));
+            var attributes = new AttributeTableBuilder(_pool);
+            Import(source.Attributes, attributes);
+            encoder.RecordComponent(Import(source.Name), Import(source.Descriptor), attributes);
         }
 
         public void Import(NestMembersAttribute source, ref ClassConstantTableEncoder encoder)

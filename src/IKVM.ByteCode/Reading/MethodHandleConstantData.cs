@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct MethodHandleConstant(ReferenceKind ReferenceKind, RefConstantHandle Reference, bool IsNotNil = true)
+    public readonly record struct MethodHandleConstantData(MethodHandleKind Kind, RefConstantHandle Reference)
     {
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out MethodHandleConstant constant)
+        public static bool TryRead(ref ClassFormatReader reader, out MethodHandleConstantData constant)
         {
             constant = default;
 
@@ -36,11 +36,15 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort referenceIndex) == false)
                 return false;
 
-            constant = new MethodHandleConstant((ReferenceKind)referenceKind, new(ConstantKind.Unknown, referenceIndex));
+            constant = new MethodHandleConstantData((MethodHandleKind)referenceKind, new(ConstantKind.Unknown, referenceIndex));
             return true;
         }
 
+        readonly bool _isNotNil = true;
+
         public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

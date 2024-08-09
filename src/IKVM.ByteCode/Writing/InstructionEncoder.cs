@@ -32,7 +32,7 @@ namespace IKVM.ByteCode.Writing
             public int Value;
             public FixupData Fixup1;
             public FixupData Fixup2;
-            public FixupData[] Fixups = Array.Empty<FixupData>();
+            public FixupData[] Fixups = [];
             public int FixupCount;
 
             /// <summary>
@@ -175,7 +175,7 @@ namespace IKVM.ByteCode.Writing
 
             // reset label fixups
             l.FixupCount = 0;
-            l.Fixups = null;
+            l.Fixups = [];
 
             return this;
         }

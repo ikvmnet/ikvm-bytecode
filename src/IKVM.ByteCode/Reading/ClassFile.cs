@@ -189,7 +189,7 @@ namespace IKVM.ByteCode.Reading
             if (TryReadAttributeTable(ref reader, out var attributes) == false)
                 return false;
 
-            clazz = new ClassFile(version, constants, (AccessFlag)accessFlags, new(thisClass), new(superClass), interfaces, fields, methods, attributes, owner);
+            clazz = new ClassFile(version, constants!, (AccessFlag)accessFlags, new(thisClass), new(superClass), interfaces, fields, methods, attributes, owner);
             return true;
         }
 
@@ -200,9 +200,9 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="constants"></param>
         /// <returns></returns>
-        internal static bool TryReadConstantTable(ClassFormatVersion version, ref ClassFormatReader reader, out ConstantTable constants)
+        internal static bool TryReadConstantTable(ClassFormatVersion version, ref ClassFormatReader reader, out ConstantTable? constants)
         {
-            constants = default;
+            constants = null;
 
             if (TryReadConstants(ref reader, out var data) == false)
                 return false;
@@ -217,17 +217,17 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="constantData"></param>
         /// <returns></returns>
-        internal static bool TryReadConstants(ref ClassFormatReader reader, out Constant[]? constantData)
+        internal static bool TryReadConstants(ref ClassFormatReader reader, out ConstantData[]? constantData)
         {
             constantData = null;
 
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            constantData = new Constant[count];
+            constantData = count == 0 ? [] : new ConstantData[count];
             for (int i = 1; i < count; i++)
             {
-                if (Constant.TryRead(ref reader, out var data, out var skip) == false)
+                if (ConstantData.TryRead(ref reader, out var data, out var skip) == false)
                     return false;
 
                 constantData[i] = data;

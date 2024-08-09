@@ -3,11 +3,13 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct InterfaceMethodrefConstant(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType, bool IsNotNil = true)
+    public readonly record struct MethodrefConstantData(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType)
     {
 
+        public static FieldrefConstantData Nil => default;
+
         /// <summary>
-        /// Parses a InterfaceMethodref constant in the constant pool.
+        /// Parses a Methodref constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
@@ -22,11 +24,11 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Parses a InterfaceMethodref constant in the constant pool.
+        /// Parses a Methodref constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out InterfaceMethodrefConstant constant)
+        public static bool TryRead(ref ClassFormatReader reader, out MethodrefConstantData constant)
         {
             constant = default;
 
@@ -35,11 +37,15 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort nameAndTypeIndex) == false)
                 return false;
 
-            constant = new InterfaceMethodrefConstant(new(classIndex), new(nameAndTypeIndex));
+            constant = new MethodrefConstantData(new(classIndex), new(nameAndTypeIndex));
             return true;
         }
 
+        readonly bool _isNotNil = true;
+
         public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

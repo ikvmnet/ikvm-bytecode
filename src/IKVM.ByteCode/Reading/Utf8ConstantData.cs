@@ -6,7 +6,7 @@ using IKVM.ByteCode.Text;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct Utf8Constant(string Value)
+    public readonly record struct Utf8ConstantData(string Value)
     {
 
         /// <summary>
@@ -14,7 +14,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
-        public static bool TryReadUtf8ConstantData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
+        public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
         {
             data = default;
             skip = 0;
@@ -37,7 +37,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="constant"></param>
         /// <param name="majorVersion"></param>
-        public static bool TryReadUtf8Constant(ref ClassFormatReader reader, out Utf8Constant constant, int majorVersion)
+        public static bool TryRead(ref ClassFormatReader reader, out Utf8ConstantData constant, int majorVersion)
         {
             constant = default;
 
@@ -46,7 +46,7 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadMany(length, out var value) == false)
                 return false;
 
-            constant = new Utf8Constant(Decode(value, majorVersion));
+            constant = new Utf8ConstantData(Decode(value, majorVersion));
             return true;
         }
 

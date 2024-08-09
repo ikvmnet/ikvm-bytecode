@@ -3,11 +3,11 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct InvokeDynamicConstant(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType, bool IsNotNil = true)
+    public readonly record struct InterfaceMethodrefConstantData(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType)
     {
 
         /// <summary>
-        /// Parses a InvokeDynamic constant in the constant pool.
+        /// Parses a InterfaceMethodref constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="data"></param>
@@ -22,24 +22,28 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Parses a InvokeDynamic constant in the constant pool.
+        /// Parses a InterfaceMethodref constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="constant"></param>
-        public static bool TryRead(ref ClassFormatReader reader, out InvokeDynamicConstant constant)
+        public static bool TryRead(ref ClassFormatReader reader, out InterfaceMethodrefConstantData constant)
         {
             constant = default;
 
-            if (reader.TryReadU2(out ushort bootstrapMethodAttrIndex) == false)
+            if (reader.TryReadU2(out ushort classIndex) == false)
                 return false;
             if (reader.TryReadU2(out ushort nameAndTypeIndex) == false)
                 return false;
 
-            constant = new InvokeDynamicConstant(bootstrapMethodAttrIndex, new(nameAndTypeIndex));
+            constant = new InterfaceMethodrefConstantData(new(classIndex), new(nameAndTypeIndex));
             return true;
         }
 
+        readonly bool _isNotNil = true;
+
         public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

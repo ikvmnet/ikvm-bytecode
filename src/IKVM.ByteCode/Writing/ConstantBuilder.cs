@@ -7,9 +7,10 @@ using IKVM.ByteCode.Text;
 namespace IKVM.ByteCode.Writing
 {
 
-    public class ConstantBuilder
+    public class ConstantBuilder : IConstantPool
     {
 
+        readonly ClassFormatVersion _version;
         readonly MUTF8Encoding _mutf8;
         readonly BlobBuilder _builder = new();
         ushort _next = 1;
@@ -26,7 +27,7 @@ namespace IKVM.ByteCode.Writing
         readonly Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), FieldrefConstantHandle> _fieldrefCache = new();
         readonly Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), MethodrefConstantHandle> _methodrefCache = new();
         readonly Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), InterfaceMethodrefConstantHandle> _interfaceMethodrefCache = new();
-        readonly Dictionary<(ReferenceKind kind, RefConstantHandle reference), MethodHandleConstantHandle> _methodHandleCache = new();
+        readonly Dictionary<(MethodHandleKind kind, RefConstantHandle reference), MethodHandleConstantHandle> _methodHandleCache = new();
         readonly Dictionary<Utf8ConstantHandle, MethodTypeConstantHandle> _methodTypeCache = new();
         readonly Dictionary<(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType), DynamicConstantHandle> _dynamicCache = new();
         readonly Dictionary<(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType), InvokeDynamicConstantHandle> _invokeDynamicCache = new();
@@ -39,6 +40,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="version"></param>
         public ConstantBuilder(ClassFormatVersion version)
         {
+            _version = version;
             _mutf8 = MUTF8Encoding.GetMUTF8(version.Major);
         }
 
@@ -48,11 +50,71 @@ namespace IKVM.ByteCode.Writing
         public int Count => _next - 1;
 
         /// <summary>
+        /// Gets or adds a constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ConstantHandle Add(Constant value)
+        {
+            return value.Kind switch
+            {
+                ConstantKind.Utf8 => Add((Utf8Constant)value),
+                ConstantKind.Integer => Add((IntegerConstant)value),
+                ConstantKind.Float => Add((FloatConstant)value),
+                ConstantKind.Long => Add((LongConstant)value),
+                ConstantKind.Double => Add((DoubleConstant)value),
+                ConstantKind.Class => Add((ClassConstant)value),
+                ConstantKind.String => Add((StringConstant)value),
+                ConstantKind.Fieldref => Add((FieldrefConstant)value),
+                ConstantKind.Methodref => Add((MethodrefConstant)value),
+                ConstantKind.InterfaceMethodref => Add((InterfaceMethodrefConstant)value),
+                ConstantKind.NameAndType => Add((NameAndTypeConstant)value),
+                ConstantKind.MethodHandle => Add((MethodHandleConstant)value),
+                ConstantKind.MethodType => Add((MethodTypeConstant)value),
+                ConstantKind.Dynamic => Add((DynamicConstant)value),
+                ConstantKind.InvokeDynamic => Add((InvokeDynamicConstant)value),
+                ConstantKind.Module => Add((ModuleConstant)value),
+                ConstantKind.Package => Add((PackageConstant)value),
+                _ => throw new ArgumentException("Unknown ConstantValue kind."),
+            };
+        }
+
+        /// <summary>
+        /// Gets or adds a constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ConstantHandle GetOrAdd(Constant value)
+        {
+            return value.Kind switch
+            {
+                ConstantKind.Utf8 => GetOrAdd((Utf8Constant)value),
+                ConstantKind.Integer => GetOrAdd((IntegerConstant)value),
+                ConstantKind.Float => GetOrAdd((FloatConstant)value),
+                ConstantKind.Long => GetOrAdd((LongConstant)value),
+                ConstantKind.Double => GetOrAdd((DoubleConstant)value),
+                ConstantKind.Class => GetOrAdd((ClassConstant)value),
+                ConstantKind.String => GetOrAdd((StringConstant)value),
+                ConstantKind.Fieldref => GetOrAdd((FieldrefConstant)value),
+                ConstantKind.Methodref => GetOrAdd((MethodrefConstant)value),
+                ConstantKind.InterfaceMethodref => GetOrAdd((InterfaceMethodrefConstant)value),
+                ConstantKind.NameAndType => GetOrAdd((NameAndTypeConstant)value),
+                ConstantKind.MethodHandle => GetOrAdd((MethodHandleConstant)value),
+                ConstantKind.MethodType => GetOrAdd((MethodTypeConstant)value),
+                ConstantKind.Dynamic => GetOrAdd((DynamicConstant)value),
+                ConstantKind.InvokeDynamic => GetOrAdd((InvokeDynamicConstant)value),
+                ConstantKind.Module => GetOrAdd((ModuleConstant)value),
+                ConstantKind.Package => GetOrAdd((PackageConstant)value),
+                _ => throw new ArgumentException("Unknown ConstantValue kind."),
+            };
+        }
+
+        /// <summary>
         /// Adds a new UTF8 constant value.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Utf8ConstantHandle AddUtf8Constant(ReadOnlyMemory<byte> value)
+        public Utf8ConstantHandle AddUtf8(ReadOnlyMemory<byte> value)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantKind.Utf8);
@@ -68,7 +130,7 @@ namespace IKVM.ByteCode.Writing
         /// <returns></returns>
         public Utf8ConstantHandle GetOrAddUtf8(ReadOnlyMemory<byte> value)
         {
-            return _blobUtf8Cache.TryGetValue(value, out var w) ? w : AddUtf8Constant(value);
+            return _blobUtf8Cache.TryGetValue(value, out var w) ? w : AddUtf8(value);
         }
 
         /// <summary>
@@ -76,12 +138,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Utf8ConstantHandle AddUtf8(string? value)
+        public Utf8ConstantHandle AddUtf8(string value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
-
-            return _stringUtf8cache[value] = AddUtf8Constant(_mutf8.GetBytes(value));
+            return _stringUtf8cache[value] = AddUtf8(_mutf8.GetBytes(value));
         }
 
         /// <summary>
@@ -89,12 +148,35 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Utf8ConstantHandle GetOrAddUtf8(string? value)
+        public Utf8ConstantHandle GetOrAddUtf8(string value)
         {
-            if (value == null)
-                return default;
-            else
-                return _stringUtf8cache.TryGetValue(value, out var w) ? w : _stringUtf8cache[value] = GetOrAddUtf8(_mutf8.GetBytes(value));
+            return _stringUtf8cache.TryGetValue(value, out var w) ? w : _stringUtf8cache[value] = GetOrAddUtf8(_mutf8.GetBytes(value));
+        }
+
+        /// <summary>
+        /// Adds a new UTF8 constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Utf8ConstantHandle Add(Utf8Constant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddUtf8(value.Value);
+        }
+
+        /// <summary>
+        /// Gets or adds a UTF8 constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Utf8ConstantHandle GetOrAdd(Utf8Constant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddUtf8(value.Value);
         }
 
         /// <summary>
@@ -121,6 +203,32 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Adds a new Integer constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public IntegerConstantHandle Add(IntegerConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddInteger(value.Value);
+        }
+
+        /// <summary>
+        /// Gets or adds an Integer constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public IntegerConstantHandle GetOrAdd(IntegerConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddInteger(value.Value);
+        }
+
+        /// <summary>
         /// Adds a new Float constant value.
         /// </summary>
         /// <param name="value"></param>
@@ -129,11 +237,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U4).GetBytes());
             w.TryWriteU1((byte)ConstantKind.Float);
-#if NETFRAMEWORK || NETCOREAPP3_1
             w.TryWriteU4(RawBitConverter.SingleToUInt32Bits(value));
-#else
-            w.TryWriteU4(BitConverter.SingleToUInt32Bits(value));
-#endif
             return _floatCache[value] = new(_next++);
         }
 
@@ -145,6 +249,32 @@ namespace IKVM.ByteCode.Writing
         public FloatConstantHandle GetOrAddFloat(float value)
         {
             return _floatCache.TryGetValue(value, out var w) ? w : AddFloat(value);
+        }
+
+        /// <summary>
+        /// Adds a new Float constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FloatConstantHandle Add(FloatConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddFloat(value.Value);
+        }
+
+        /// <summary>
+        /// Gets or adds an Integer constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FloatConstantHandle GetOrAdd(FloatConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddFloat(value.Value);
         }
 
         /// <summary>
@@ -172,6 +302,32 @@ namespace IKVM.ByteCode.Writing
         public LongConstantHandle GetOrAddLong(long value)
         {
             return _longCache.TryGetValue(value, out var w) ? w : AddLong(value);
+        }
+
+        /// <summary>
+        /// Adds a new Long constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public LongConstantHandle Add(LongConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddLong(value.Value);
+        }
+
+        /// <summary>
+        /// Gets or adds an Long constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public LongConstantHandle GetOrAdd(LongConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddLong(value.Value);
         }
 
         /// <summary>
@@ -203,6 +359,32 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Adds a new Double constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public DoubleConstantHandle Add(DoubleConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddDouble(value.Value);
+        }
+
+        /// <summary>
+        /// Gets or adds an Double constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public DoubleConstantHandle GetOrAdd(DoubleConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddDouble(value.Value);
+        }
+
+        /// <summary>
         /// Adds a new Class constant value.
         /// </summary>
         /// <param name="name"></param>
@@ -222,7 +404,7 @@ namespace IKVM.ByteCode.Writing
         /// <returns></returns>
         public ClassConstantHandle AddClass(string? name)
         {
-            return AddClass(GetOrAddUtf8(name));
+            return AddClass(name != null ? GetOrAddUtf8(name) : default);
         }
 
         /// <summary>
@@ -242,7 +424,33 @@ namespace IKVM.ByteCode.Writing
         /// <returns></returns>
         public ClassConstantHandle GetOrAddClass(string? name)
         {
-            return GetOrAddClass(GetOrAddUtf8(name));
+            return GetOrAddClass(name != null ? GetOrAddUtf8(name) : default);
+        }
+
+        /// <summary>
+        /// Adds a new Class constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ClassConstantHandle Add(ClassConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddClass(value.Name);
+        }
+
+        /// <summary>
+        /// Gets or adds an Class constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ClassConstantHandle GetOrAdd(ClassConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddClass(value.Name);
         }
 
         /// <summary>
@@ -265,7 +473,7 @@ namespace IKVM.ByteCode.Writing
         /// <returns></returns>
         public StringConstantHandle AddString(string? value)
         {
-            return AddString(GetOrAddUtf8(value));
+            return AddString(value != null ? GetOrAddUtf8(value) : default);
         }
 
         /// <summary>
@@ -285,7 +493,33 @@ namespace IKVM.ByteCode.Writing
         /// <returns></returns>
         public StringConstantHandle GetOrAddString(string? value)
         {
-            return GetOrAddString(GetOrAddUtf8(value));
+            return GetOrAddString(value != null ? GetOrAddUtf8(value) : default);
+        }
+
+        /// <summary>
+        /// Adds a new String constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public StringConstantHandle Add(StringConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddString(value.Value);
+        }
+
+        /// <summary>
+        /// Gets or adds an String constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public StringConstantHandle GetOrAdd(StringConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddString(value.Value);
         }
 
         /// <summary>
@@ -321,9 +555,35 @@ namespace IKVM.ByteCode.Writing
         /// <param name="name"></param>
         /// <param name="descriptor"></param>
         /// <returns></returns>
-        public FieldrefConstantHandle GetOrAddFieldref(string clazz, string name, string descriptor)
+        public FieldrefConstantHandle GetOrAddFieldref(string? clazz, string? name, string? descriptor)
         {
             return GetOrAddFieldref(GetOrAddClass(clazz), GetOrAddNameAndType(name, descriptor));
+        }
+
+        /// <summary>
+        /// Adds a new Fieldref constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FieldrefConstantHandle Add(FieldrefConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddFieldref(GetOrAddClass(value.ClassName), GetOrAddNameAndType(value.Name, value.Descriptor));
+        }
+
+        /// <summary>
+        /// Gets or adds an Fieldref constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FieldrefConstantHandle GetOrAdd(FieldrefConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddFieldref(value.ClassName, value.Name, value.Descriptor);
         }
 
         /// <summary>
@@ -359,9 +619,35 @@ namespace IKVM.ByteCode.Writing
         /// <param name="name"></param>
         /// <param name="descriptor"></param>
         /// <returns></returns>
-        public MethodrefConstantHandle GetOrAddMethodref(string clazz, string name, string descriptor)
+        public MethodrefConstantHandle GetOrAddMethodref(string? clazz, string? name, string? descriptor)
         {
             return GetOrAddMethodref(GetOrAddClass(clazz), GetOrAddNameAndType(name, descriptor));
+        }
+
+        /// <summary>
+        /// Adds a new Methodref constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public MethodrefConstantHandle Add(MethodrefConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddMethodref(GetOrAddClass(value.ClassName), GetOrAddNameAndType(value.Name, value.Descriptor));
+        }
+
+        /// <summary>
+        /// Gets or adds an Methodref constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public MethodrefConstantHandle GetOrAdd(MethodrefConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddMethodref(value.ClassName, value.Name, value.Descriptor);
         }
 
         /// <summary>
@@ -385,7 +671,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="clazz"></param>
         /// <param name="nameAndType"></param>
         /// <returns></returns>
-        public InterfaceMethodrefConstantHandle GetOrAddInterfaceref(ClassConstantHandle clazz, NameAndTypeConstantHandle nameAndType)
+        public InterfaceMethodrefConstantHandle GetOrAddInterfaceMethodref(ClassConstantHandle clazz, NameAndTypeConstantHandle nameAndType)
         {
             return _interfaceMethodrefCache.TryGetValue((clazz, nameAndType), out var w) ? w : AddInterfaceMethodref(clazz, nameAndType);
         }
@@ -397,9 +683,35 @@ namespace IKVM.ByteCode.Writing
         /// <param name="name"></param>
         /// <param name="descriptor"></param>
         /// <returns></returns>
-        public InterfaceMethodrefConstantHandle GetOrAddInterfaceref(string clazz, string name, string descriptor)
+        public InterfaceMethodrefConstantHandle GetOrAddInterfaceMethodref(string? clazz, string? name, string? descriptor)
         {
-            return GetOrAddInterfaceref(GetOrAddClass(clazz), GetOrAddNameAndType(name, descriptor));
+            return GetOrAddInterfaceMethodref(GetOrAddClass(clazz), GetOrAddNameAndType(name, descriptor));
+        }
+
+        /// <summary>
+        /// Adds a new InterfaceMethodref constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public InterfaceMethodrefConstantHandle Add(InterfaceMethodrefConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddInterfaceMethodref(GetOrAddClass(value.ClassName), GetOrAddNameAndType(value.Name, value.Descriptor));
+        }
+
+        /// <summary>
+        /// Gets or adds an InterfaceMethodref constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public InterfaceMethodrefConstantHandle GetOrAdd(InterfaceMethodrefConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddInterfaceMethodref(value.ClassName, value.Name, value.Descriptor);
         }
 
         /// <summary>
@@ -432,11 +744,37 @@ namespace IKVM.ByteCode.Writing
         /// Gets or adds a NameAndType constant value.
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="type"></param>
+        /// <param name="descriptor"></param>
         /// <returns></returns>
-        public NameAndTypeConstantHandle GetOrAddNameAndType(string name, string type)
+        public NameAndTypeConstantHandle GetOrAddNameAndType(string? name, string? descriptor)
         {
-            return GetOrAddNameAndType(GetOrAddUtf8(name), GetOrAddUtf8(type));
+            return GetOrAddNameAndType(name != null ? GetOrAddUtf8(name) : default, descriptor != null ? GetOrAddUtf8(descriptor) : default);
+        }
+
+        /// <summary>
+        /// Adds a new NameAndType constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public NameAndTypeConstantHandle Add(NameAndTypeConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddNameAndType(value.Name != null ? GetOrAddUtf8(value.Name) : default, value.Descriptor != null ? GetOrAddUtf8(value.Descriptor) : default);
+        }
+
+        /// <summary>
+        /// Gets or adds an NameAndType constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public NameAndTypeConstantHandle GetOrAdd(NameAndTypeConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddNameAndType(value.Name != null ? GetOrAddUtf8(value.Name) : default, value.Descriptor != null ? GetOrAddUtf8(value.Descriptor) : default);
         }
 
         /// <summary>
@@ -445,7 +783,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="kind"></param>
         /// <param name="reference"></param>
         /// <returns></returns>
-        public MethodHandleConstantHandle AddMethodHandle(ReferenceKind kind, RefConstantHandle reference)
+        public MethodHandleConstantHandle AddMethodHandle(MethodHandleKind kind, RefConstantHandle reference)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantKind.MethodHandle);
@@ -458,24 +796,152 @@ namespace IKVM.ByteCode.Writing
         /// Adds a new MethodHandle constant value.
         /// </summary>
         /// <param name="kind"></param>
+        /// <param name="clazz"></param>
+        /// <param name="name"></param>
+        /// <param name="descriptor"></param>
+        /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
+        public MethodHandleConstantHandle AddMethodHandle(MethodHandleKind kind, ConstantKind referenceKind, string? clazz, string? name, string? descriptor)
+        {
+            if (referenceKind is ConstantKind.Fieldref)
+            {
+                if (kind is not MethodHandleKind.GetField and not MethodHandleKind.GetStatic and not MethodHandleKind.PutField and not MethodHandleKind.PutStatic)
+                    throw new ByteCodeException($"MethodHandle of kind {kind} cannot reference field.");
+
+                return AddMethodHandle(kind, GetOrAddFieldref(clazz, name, descriptor));
+            }
+
+            if (referenceKind is ConstantKind.Methodref)
+            {
+                if (_version.Major >= 52)
+                {
+                    if (kind is not MethodHandleKind.InvokeVirtual and not MethodHandleKind.NewInvokeSpecial and not MethodHandleKind.InvokeStatic and not MethodHandleKind.InvokeSpecial)
+                        throw new ByteCodeException($"MethodHandle of kind {kind} cannot reference method.");
+                }
+                else
+                {
+                    if (kind is not MethodHandleKind.InvokeVirtual and not MethodHandleKind.NewInvokeSpecial)
+                        throw new ByteCodeException($"MethodHandle of kind {kind} cannot reference method.");
+                }
+
+                return AddMethodHandle(kind, GetOrAddMethodref(clazz, name, descriptor));
+            }
+
+            if (referenceKind is ConstantKind.InterfaceMethodref)
+            {
+                if (kind is not MethodHandleKind.InvokeVirtual and not MethodHandleKind.NewInvokeSpecial and not MethodHandleKind.InvokeStatic and not MethodHandleKind.InvokeSpecial and not MethodHandleKind.InvokeInterface)
+                    throw new ByteCodeException($"MethodHandle of kind {kind} cannot reference method.");
+
+                return AddMethodHandle(kind, GetOrAddInterfaceMethodref(clazz, name, descriptor));
+            }
+
+            throw new ArgumentException("Invalid ConstantKind for MethodHandle.");
+        }
+
+        /// <summary>
+        /// Adds a new MethodHandle constant value.
+        /// </summary>
+        /// <param name="kind"></param>
         /// <param name="reference"></param>
         /// <returns></returns>
-        public MethodHandleConstantHandle GetOrAddMethodHandle(ReferenceKind kind, RefConstantHandle reference)
+        public MethodHandleConstantHandle GetOrAddMethodHandle(MethodHandleKind kind, RefConstantHandle reference)
         {
             return _methodHandleCache.TryGetValue((kind, reference), out var w) ? w : AddMethodHandle(kind, reference);
         }
 
         /// <summary>
+        /// Adds a new MethodHandle constant value for the specified reference.
+        /// </summary>
+        /// <param name="kind"></param>
+        /// <param name="clazz"></param>
+        /// <param name="name"></param>
+        /// <param name="descriptor"></param>
+        /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
+        public MethodHandleConstantHandle GetOrAddMethodHandle(MethodHandleKind kind, ConstantKind referenceKind, string? clazz, string? name, string? descriptor)
+        {
+            if (referenceKind is ConstantKind.Fieldref)
+            {
+                if (kind is not MethodHandleKind.GetField and not MethodHandleKind.GetStatic and not MethodHandleKind.PutField and not MethodHandleKind.PutStatic)
+                    throw new ByteCodeException($"MethodHandle of kind {kind} cannot reference field.");
+
+                return GetOrAddMethodHandle(kind, GetOrAddFieldref(clazz, name, descriptor));
+            }
+
+            if (referenceKind is ConstantKind.Methodref)
+            {
+                if (_version.Major >= 52)
+                {
+                    if (kind is not MethodHandleKind.InvokeVirtual and not MethodHandleKind.NewInvokeSpecial and not MethodHandleKind.InvokeStatic and not MethodHandleKind.InvokeSpecial)
+                        throw new ByteCodeException($"MethodHandle of kind {kind} cannot reference method.");
+                }
+                else
+                {
+                    if (kind is not MethodHandleKind.InvokeVirtual and not MethodHandleKind.NewInvokeSpecial)
+                        throw new ByteCodeException($"MethodHandle of kind {kind} cannot reference method.");
+                }
+
+                return GetOrAddMethodHandle(kind, GetOrAddMethodref(clazz, name, descriptor));
+            }
+
+            if (referenceKind is ConstantKind.InterfaceMethodref)
+            {
+                if (kind is not MethodHandleKind.InvokeVirtual and not MethodHandleKind.NewInvokeSpecial and not MethodHandleKind.InvokeStatic and not MethodHandleKind.InvokeSpecial and not MethodHandleKind.InvokeInterface)
+                    throw new ByteCodeException($"MethodHandle of kind {kind} cannot reference method.");
+
+                return GetOrAddMethodHandle(kind, GetOrAddInterfaceMethodref(clazz, name, descriptor));
+            }
+
+            throw new ArgumentException("Invalid ConstantKind for MethodHandle.");
+        }
+
+        /// <summary>
+        /// Adds a new MethodHandle constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public MethodHandleConstantHandle Add(MethodHandleConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddMethodHandle(value.Kind, value.ReferenceKind, value.ClassName, value.Name, value.Descriptor);
+        }
+
+        /// <summary>
+        /// Gets or adds an MethodHandle constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public MethodHandleConstantHandle GetOrAdd(MethodHandleConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddMethodHandle(value.Kind, value.ReferenceKind, value.ClassName, value.Name, value.Descriptor);
+        }
+
+        /// <summary>
         /// Adds a new MethodType constant value.
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="descriptor"></param>
         /// <returns></returns>
-        public MethodTypeConstantHandle AddMethodType(Utf8ConstantHandle type)
+        public MethodTypeConstantHandle AddMethodType(Utf8ConstantHandle descriptor)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.TryWriteU1((byte)ConstantKind.MethodType);
-            w.TryWriteU2(type.Index);
-            return _methodTypeCache[type] = new(_next++);
+            w.TryWriteU2(descriptor.Index);
+            return _methodTypeCache[descriptor] = new(_next++);
+        }
+
+        /// <summary>
+        /// Adds a new MethodType constant value.
+        /// </summary>
+        /// <param name="descriptor"></param>
+        /// <returns></returns>
+        public MethodTypeConstantHandle AddMethodType(string? descriptor)
+        {
+            return AddMethodType(descriptor != null ? GetOrAddUtf8(descriptor) : default);
         }
 
         /// <summary>
@@ -486,6 +952,42 @@ namespace IKVM.ByteCode.Writing
         public MethodTypeConstantHandle GetOrAddMethodType(Utf8ConstantHandle type)
         {
             return _methodTypeCache.TryGetValue(type, out var w) ? w : AddMethodType(type);
+        }
+
+        /// <summary>
+        /// Gets or adds a MethodType constant value.
+        /// </summary>
+        /// <param name="descriptor"></param>
+        /// <returns></returns>
+        public MethodTypeConstantHandle GetOrAddMethodType(string? descriptor)
+        {
+            return GetOrAddMethodType(descriptor != null ? GetOrAddUtf8(descriptor) : default);
+        }
+
+        /// <summary>
+        /// Adds a new MethodType constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public MethodTypeConstantHandle Add(MethodTypeConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddMethodType(value.Descriptor);
+        }
+
+        /// <summary>
+        /// Gets or adds an MethodType constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public MethodTypeConstantHandle GetOrAdd(MethodTypeConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddMethodType(value.Descriptor);
         }
 
         /// <summary>
@@ -507,11 +1009,61 @@ namespace IKVM.ByteCode.Writing
         /// Gets or adds a Dynamic constant value.
         /// </summary>
         /// <param name="bootstrapMethodAttrIndex"></param>
+        /// <param name="name"></param>
+        /// <param name="descriptor"></param>
+        /// <returns></returns>
+        public DynamicConstantHandle AddDynamic(ushort bootstrapMethodAttrIndex, string? name, string? descriptor)
+        {
+            return AddDynamic(bootstrapMethodAttrIndex, GetOrAddNameAndType(name, descriptor));
+        }
+
+        /// <summary>
+        /// Gets or adds a Dynamic constant value.
+        /// </summary>
+        /// <param name="bootstrapMethodAttrIndex"></param>
         /// <param name="nameAndType"></param>
         /// <returns></returns>
         public DynamicConstantHandle GetOrAddDynamic(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType)
         {
             return _dynamicCache.TryGetValue((bootstrapMethodAttrIndex, nameAndType), out var w) ? w : AddDynamic(bootstrapMethodAttrIndex, nameAndType);
+        }
+
+        /// <summary>
+        /// Gets or adds a Dynamic constant value.
+        /// </summary>
+        /// <param name="bootstrapMethodAttrIndex"></param>
+        /// <param name="name"></param>
+        /// <param name="descriptor"></param>
+        /// <returns></returns>
+        public DynamicConstantHandle GetOrAddDynamic(ushort bootstrapMethodAttrIndex, string? name, string? descriptor)
+        {
+            return GetOrAddDynamic(bootstrapMethodAttrIndex, GetOrAddNameAndType(name, descriptor));
+        }
+
+        /// <summary>
+        /// Adds a new Dynamic constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public DynamicConstantHandle Add(DynamicConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor));
+        }
+
+        /// <summary>
+        /// Gets or adds an Dynamic constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public DynamicConstantHandle GetOrAdd(DynamicConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor));
         }
 
         /// <summary>
@@ -533,11 +1085,61 @@ namespace IKVM.ByteCode.Writing
         /// Gets or adds a InvokeDynamic constant value.
         /// </summary>
         /// <param name="bootstrapMethodAttrIndex"></param>
+        /// <param name="name"></param>
+        /// <param name="descriptor"></param>
+        /// <returns></returns>
+        public InvokeDynamicConstantHandle AddInvokeDynamic(ushort bootstrapMethodAttrIndex, string? name, string? descriptor)
+        {
+            return AddInvokeDynamic(bootstrapMethodAttrIndex, GetOrAddNameAndType(name, descriptor));
+        }
+
+        /// <summary>
+        /// Gets or adds a InvokeDynamic constant value.
+        /// </summary>
+        /// <param name="bootstrapMethodAttrIndex"></param>
         /// <param name="nameAndType"></param>
         /// <returns></returns>
         public InvokeDynamicConstantHandle GetOrAddInvokeDynamic(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType)
         {
             return _invokeDynamicCache.TryGetValue((bootstrapMethodAttrIndex, nameAndType), out var w) ? w : AddInvokeDynamic(bootstrapMethodAttrIndex, nameAndType);
+        }
+
+        /// <summary>
+        /// Gets or adds a InvokeDynamic constant value.
+        /// </summary>
+        /// <param name="bootstrapMethodAttrIndex"></param>
+        /// <param name="name"></param>
+        /// <param name="descriptor"></param>
+        /// <returns></returns>
+        public InvokeDynamicConstantHandle GetOrAddInvokeDynamic(ushort bootstrapMethodAttrIndex, string name, string descriptor)
+        {
+            return GetOrAddInvokeDynamic(bootstrapMethodAttrIndex, GetOrAddNameAndType(name, descriptor));
+        }
+
+        /// <summary>
+        /// Adds a new InvokeDynamic constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public InvokeDynamicConstantHandle Add(InvokeDynamicConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddInvokeDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor));
+        }
+
+        /// <summary>
+        /// Gets or adds an InvokeDynamic constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public InvokeDynamicConstantHandle GetOrAdd(InvokeDynamicConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddInvokeDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor));
         }
 
         /// <summary>
@@ -558,9 +1160,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public ModuleConstantHandle AddModule(string name)
+        public ModuleConstantHandle AddModule(string? name)
         {
-            return AddModule(GetOrAddUtf8(name));
+            return AddModule(name != null ? GetOrAddUtf8(name) : default);
         }
 
         /// <summary>
@@ -578,9 +1180,35 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public ModuleConstantHandle GetOrAddModule(string name)
+        public ModuleConstantHandle GetOrAddModule(string? name)
         {
-            return GetOrAddModule(GetOrAddUtf8(name));
+            return GetOrAddModule(name != null ? GetOrAddUtf8(name) : default);
+        }
+
+        /// <summary>
+        /// Adds a new Module constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ModuleConstantHandle Add(ModuleConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddModule(value.Name);
+        }
+
+        /// <summary>
+        /// Gets or adds an Module constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ModuleConstantHandle GetOrAdd(ModuleConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddModule(value.Name);
         }
 
         /// <summary>
@@ -601,9 +1229,9 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public PackageConstantHandle AddPackage(string name)
+        public PackageConstantHandle AddPackage(string? name)
         {
-            return AddPackage(GetOrAddUtf8(name));
+            return AddPackage(name != null ? GetOrAddUtf8(name) : default);
         }
 
         /// <summary>
@@ -621,9 +1249,38 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public PackageConstantHandle GetOrAddPackage(string name)
+        public PackageConstantHandle GetOrAddPackage(string? name)
         {
-            return GetOrAddPackage(GetOrAddUtf8(name));
+            if (name == null)
+                return default;
+
+            return GetOrAddPackage(name != null ? GetOrAddUtf8(name) : default);
+        }
+
+        /// <summary>
+        /// Adds a new Package constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public PackageConstantHandle Add(PackageConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return AddPackage(value.Name);
+        }
+
+        /// <summary>
+        /// Gets or adds an Module constant value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public PackageConstantHandle GetOrAdd(PackageConstant value)
+        {
+            if (value.IsNil)
+                throw new ArgumentNullException(nameof(value));
+
+            return GetOrAddPackage(value.Name);
         }
 
         /// <summary>
@@ -636,6 +1293,100 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU2((ushort)(Count + 1));
             builder.LinkSuffix(_builder);
         }
+
+        #region IConstantPool
+
+        ConstantHandle IConstantPool.Get(Constant value)
+        {
+            return GetOrAdd(value);
+        }
+
+        Utf8ConstantHandle IConstantPool.Get(Utf8Constant value)
+        {
+            return GetOrAddUtf8(value.Value);
+        }
+
+        IntegerConstantHandle IConstantPool.Get(IntegerConstant value)
+        {
+            return GetOrAddInteger(value.Value);
+        }
+
+        FloatConstantHandle IConstantPool.Get(FloatConstant value)
+        {
+            return GetOrAddFloat(value.Value);
+        }
+
+        LongConstantHandle IConstantPool.Get(LongConstant value)
+        {
+            return GetOrAddLong(value.Value);
+        }
+
+        DoubleConstantHandle IConstantPool.Get(DoubleConstant value)
+        {
+            return GetOrAddDouble(value.Value);
+        }
+
+        ClassConstantHandle IConstantPool.Get(ClassConstant value)
+        {
+            return GetOrAddClass(value.Name);
+        }
+
+        StringConstantHandle IConstantPool.Get(StringConstant value)
+        {
+            return GetOrAddString(value.Value);
+        }
+
+        FieldrefConstantHandle IConstantPool.Get(FieldrefConstant value)
+        {
+            return GetOrAddFieldref(value.ClassName, value.Name, value.Descriptor);
+        }
+
+        MethodrefConstantHandle IConstantPool.Get(MethodrefConstant value)
+        {
+            return GetOrAddMethodref(value.ClassName, value.Name, value.Descriptor);
+        }
+
+        InterfaceMethodrefConstantHandle IConstantPool.Get(InterfaceMethodrefConstant value)
+        {
+            return GetOrAddInterfaceMethodref(value.ClassName, value.Name, value.Descriptor);
+        }
+
+        NameAndTypeConstantHandle IConstantPool.Get(NameAndTypeConstant value)
+        {
+            return GetOrAddNameAndType(value.Name, value.Descriptor);
+        }
+
+        MethodHandleConstantHandle IConstantPool.Get(MethodHandleConstant value)
+        {
+            return GetOrAddMethodHandle(value.Kind, value.ReferenceKind, value.ClassName, value.Name, value.Descriptor);
+        }
+
+        MethodTypeConstantHandle IConstantPool.Get(MethodTypeConstant value)
+        {
+            return GetOrAddMethodType(value.Descriptor);
+        }
+
+        DynamicConstantHandle IConstantPool.Get(DynamicConstant value)
+        {
+            return GetOrAddDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor));
+        }
+
+        InvokeDynamicConstantHandle IConstantPool.Get(InvokeDynamicConstant value)
+        {
+            return GetOrAddInvokeDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor));
+        }
+
+        ModuleConstantHandle IConstantPool.Get(ModuleConstant value)
+        {
+            return GetOrAddModule(value.Name);
+        }
+
+        PackageConstantHandle IConstantPool.Get(PackageConstant value)
+        {
+            return GetOrAddPackage(value.Name);
+        }
+
+        #endregion
 
     }
 

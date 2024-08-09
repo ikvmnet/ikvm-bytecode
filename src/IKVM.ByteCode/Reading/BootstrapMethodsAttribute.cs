@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct BootstrapMethodsAttribute(BootstrapMethodTable Methods, bool IsNotNil = true)
+    public readonly record struct BootstrapMethodsAttribute(BootstrapMethodTable Methods)
     {
 
         public static BootstrapMethodsAttribute Nil => default;
@@ -28,7 +26,11 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        public bool IsNil => !IsNotNil;
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Reading;
 
 namespace IKVM.ByteCode.Writing
 {
@@ -52,11 +51,6 @@ namespace IKVM.ByteCode.Writing
             w.TryWriteU2(type.Index);
             elementValuePairs(new ElementValuePairTableEncoder(_builder));
             _count++;
-        }
-
-        public void Import(ConstantTable src, ConstantBuilder dst, Annotation annotation)
-        {
-
         }
 
     }
