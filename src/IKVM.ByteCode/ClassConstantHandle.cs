@@ -31,6 +31,11 @@ namespace IKVM.ByteCode
         /// </summary>
         public readonly bool IsNil => Index == 0;
 
+        /// <summary>
+        /// Gets whether or not this does not represent the nil instance.
+        /// </summary>
+        public readonly bool IsNotNil => !IsNil;
+
     }
 
 }
