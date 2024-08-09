@@ -9,6 +9,21 @@
             return new Utf8Constant(value);
         }
 
+        public static IntegerConstant Integer(bool value)
+        {
+            return new IntegerConstant(value ? 1 : 0);
+        }
+
+        public static IntegerConstant Integer(byte value)
+        {
+            return new IntegerConstant(value);
+        }
+
+        public static IntegerConstant Integer(short value)
+        {
+            return new IntegerConstant(value);
+        }
+
         public static IntegerConstant Integer(int value)
         {
             return new IntegerConstant(value);

@@ -34,7 +34,7 @@ namespace IKVM.ByteCode.Writing
         {
             targetPath(new TypePathEncoder(_builder));
             var w2 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w2.TryWriteU2(type.Index);
+            w2.WriteU2(type.Index);
             elementValues(new ElementValuePairTableEncoder(_builder));
             _count++;
         }
@@ -53,8 +53,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
-            w1.TryWriteU1((byte)targetType);
-            w1.TryWriteU1(typeParameterIndex);
+            w1.WriteU1((byte)targetType);
+            w1.WriteU1(typeParameterIndex);
             Footer(targetPath, type, elementValues);
         }
 
@@ -96,8 +96,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w1.TryWriteU1((byte)targetType);
-            w1.TryWriteU2(superTypeIndex);
+            w1.WriteU1((byte)targetType);
+            w1.WriteU2(superTypeIndex);
             Footer(targetPath, type, elementValues);
         }
 
@@ -128,9 +128,9 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
-            w1.TryWriteU1((byte)targetType);
-            w1.TryWriteU1(typeParameterIndex);
-            w1.TryWriteU1(boundIndex);
+            w1.WriteU1((byte)targetType);
+            w1.WriteU1(typeParameterIndex);
+            w1.WriteU1(boundIndex);
             Footer(targetPath, type, elementValues);
         }
 
@@ -173,7 +173,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w1.TryWriteU1((byte)targetType);
+            w1.WriteU1((byte)targetType);
             Footer(targetPath, type, elementValues);
         }
 
@@ -223,8 +223,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U1).GetBytes());
-            w1.TryWriteU1((byte)targetType);
-            w1.TryWriteU1(formalParameterIndex);
+            w1.WriteU1((byte)targetType);
+            w1.WriteU1(formalParameterIndex);
             Footer(targetPath, type, elementValues);
         }
 
@@ -253,8 +253,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w1.TryWriteU1((byte)targetType);
-            w1.TryWriteU2(throwsTypeIndex);
+            w1.WriteU1((byte)targetType);
+            w1.WriteU2(throwsTypeIndex);
             Footer(targetPath, type, elementValues);
         }
 
@@ -284,7 +284,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w1.TryWriteU1((byte)targetType);
+            w1.WriteU1((byte)targetType);
             localVars(new LocalVarTargetTableEncoder(_builder));
             Footer(targetPath, type, elementValues);
         }
@@ -327,8 +327,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w1.TryWriteU1((byte)targetType);
-            w1.TryWriteU2(exceptionTableIndex);
+            w1.WriteU1((byte)targetType);
+            w1.WriteU2(exceptionTableIndex);
             Footer(targetPath, type, elementValues);
         }
 
@@ -359,8 +359,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w1.TryWriteU1((byte)targetType);
-            w1.TryWriteU2(offset);
+            w1.WriteU1((byte)targetType);
+            w1.WriteU2(offset);
             Footer(targetPath, type, elementValues);
         }
 
@@ -427,9 +427,9 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Encoder can only encode a single type annotation.");
 
             var w1 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U1).GetBytes());
-            w1.TryWriteU1((byte)targetType);
-            w1.TryWriteU2(offset);
-            w1.TryWriteU1(typeArgumentIndex);
+            w1.WriteU1((byte)targetType);
+            w1.WriteU2(offset);
+            w1.WriteU1(typeArgumentIndex);
             Footer(targetPath, type, elementValues);
         }
 

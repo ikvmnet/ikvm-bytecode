@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -84,6 +86,26 @@ namespace IKVM.ByteCode.Reading
         /// Gets an enumerator over the annotations.
         /// </summary>
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
+
+        /// <summary>
+        /// Imports a <see cref="Annotation"/>.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="encoder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref AnnotationTableEncoder encoder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            var self = this;
+            foreach (var i in self)
+                encoder.Annotation(e => i.EncodeTo(view, pool, ref e));
+        }
 
         /// <inheritdoc />
         readonly IEnumerator<Annotation> IEnumerable<Annotation>.GetEnumerator() => GetEnumerator();

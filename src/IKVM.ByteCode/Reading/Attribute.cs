@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Buffers;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -31,7 +33,7 @@ namespace IKVM.ByteCode.Reading
 
         readonly Utf8ConstantHandle _name;
         readonly ReadOnlySequence<byte> _data;
-        readonly bool _isNotNil = false;
+        readonly bool _isNotNil = true;
 
         /// <summary>
         /// Initializes a new instance.
@@ -57,6 +59,24 @@ namespace IKVM.ByteCode.Reading
         public readonly bool IsNil => !IsNotNil;
 
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="builder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            EncodeSelfTo(view, pool, builder);
+        }
 
     }
 

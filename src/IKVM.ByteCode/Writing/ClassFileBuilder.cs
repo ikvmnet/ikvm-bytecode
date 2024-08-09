@@ -37,7 +37,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="thisClass"></param>
         /// <param name="superClass"></param>
         /// <attributes></attributes>
-        public ClassFileBuilder(ClassFormatVersion version, AccessFlag accessFlags, string thisClass, string superClass)
+        public ClassFileBuilder(ClassFormatVersion version, AccessFlag accessFlags, string thisClass, string? superClass)
         {
             if (version.Major < 0)
                 throw new ArgumentOutOfRangeException(nameof(version));
@@ -45,8 +45,6 @@ namespace IKVM.ByteCode.Writing
                 throw new ArgumentOutOfRangeException(nameof(version));
             if (thisClass == null)
                 throw new ArgumentException("Invalid class.", nameof(thisClass));
-            if (superClass == null)
-                throw new ArgumentException("Invalid super class.", nameof(superClass));
 
             _version = version;
             _accessFlags = accessFlags;
@@ -60,7 +58,7 @@ namespace IKVM.ByteCode.Writing
 
             // allocate constants
             _thisClass = _constants.AddClass(thisClass);
-            _superClass = _constants.AddClass(superClass);
+            _superClass = superClass != null ? _constants.AddClass(superClass) : default;
         }
 
         /// <summary>
@@ -76,7 +74,7 @@ namespace IKVM.ByteCode.Writing
         public InterfaceHandle AddInterface(ClassConstantHandle clazz)
         {
             var w = new ClassFormatWriter(_interfaces.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(clazz.Index);
+            w.WriteU2(clazz.Index);
             return new(_interfaceCount++);
         }
 
@@ -102,9 +100,9 @@ namespace IKVM.ByteCode.Writing
         {
             attributes ??= new AttributeTableBuilder(Constants);
             var w = new ClassFormatWriter(_fields.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2((ushort)accessFlags);
-            w.TryWriteU2(name.Index);
-            w.TryWriteU2(descriptor.Index);
+            w.WriteU2((ushort)accessFlags);
+            w.WriteU2(name.Index);
+            w.WriteU2(descriptor.Index);
             attributes.Serialize(_fields);
             return new(_fieldCount++);
         }
@@ -135,9 +133,9 @@ namespace IKVM.ByteCode.Writing
         {
             attributes ??= new AttributeTableBuilder(Constants);
             var w = new ClassFormatWriter(_methods.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2((ushort)accessFlags);
-            w.TryWriteU2(name.Index);
-            w.TryWriteU2(descriptor.Index);
+            w.WriteU2((ushort)accessFlags);
+            w.WriteU2(name.Index);
+            w.WriteU2(descriptor.Index);
             attributes.Serialize(_methods);
             return new(_methodCount++);
         }
@@ -186,9 +184,9 @@ namespace IKVM.ByteCode.Writing
         void SerializeHeader(BlobBuilder builder)
         {
             var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U4 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU4(ClassFile.MAGIC);
-            w.TryWriteU2(_version.Minor);
-            w.TryWriteU2(_version.Major);
+            w.WriteU4(ClassFile.MAGIC);
+            w.WriteU2(_version.Minor);
+            w.WriteU2(_version.Major);
         }
 
         /// <summary>
@@ -207,9 +205,9 @@ namespace IKVM.ByteCode.Writing
         void SerializeBody(BlobBuilder builder)
         {
             var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2((ushort)_accessFlags);
-            w.TryWriteU2(_thisClass.Index);
-            w.TryWriteU2(_superClass.Index);
+            w.WriteU2((ushort)_accessFlags);
+            w.WriteU2(_thisClass.Index);
+            w.WriteU2(_superClass.Index);
         }
 
         /// <summary>
@@ -219,7 +217,7 @@ namespace IKVM.ByteCode.Writing
         void SerializeInterfaces(BlobBuilder builder)
         {
             var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(_interfaceCount);
+            w.WriteU2(_interfaceCount);
             builder.LinkSuffix(_interfaces);
         }
 
@@ -230,7 +228,7 @@ namespace IKVM.ByteCode.Writing
         void SerializeFields(BlobBuilder builder)
         {
             var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(_fieldCount);
+            w.WriteU2(_fieldCount);
             builder.LinkSuffix(_fields);
         }
 
@@ -241,7 +239,7 @@ namespace IKVM.ByteCode.Writing
         void SerializeMethods(BlobBuilder builder)
         {
             var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(_methodCount);
+            w.WriteU2(_methodCount);
             builder.LinkSuffix(_methods);
         }
 

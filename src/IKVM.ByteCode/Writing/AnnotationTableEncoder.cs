@@ -34,7 +34,7 @@ namespace IKVM.ByteCode.Writing
         public AnnotationTableEncoder Annotation(Action<AnnotationEncoder> annotation)
         {
             annotation(new AnnotationEncoder(_builder));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

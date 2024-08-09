@@ -36,7 +36,7 @@ namespace IKVM.ByteCode.Writing
                 throw new ArgumentNullException(nameof(annotation));
 
             annotation(new TypeAnnotationEncoder(_builder));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

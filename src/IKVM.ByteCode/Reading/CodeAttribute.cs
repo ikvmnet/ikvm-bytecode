@@ -1,4 +1,7 @@
-﻿using System.Buffers;
+﻿using System;
+using System.Buffers;
+
+using IKVM.ByteCode.Writing;
 
 namespace IKVM.ByteCode.Reading
 {
@@ -51,6 +54,30 @@ namespace IKVM.ByteCode.Reading
         public readonly bool IsNil => !IsNotNil;
 
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="builder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            var self = this;
+            throw new NotImplementedException("Cannot import the Code attribute since we are currently unable to parse byte code.");
+
+            //var b = new BlobBuilder();
+            //var s = b.ReserveBytes((int)source.Code.Length);
+            //source.Code.CopyTo(s.GetBytes());
+            //builder.Code(source.MaxStack, source.MaxLocals, b, e => Import(source.ExceptionTable, ref e), Import(source.Attributes));
+        }
 
     }
 

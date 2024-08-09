@@ -3,6 +3,8 @@
 <#@ import namespace="System.IO" #>
 using System;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -28,6 +30,33 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
 <#
 }
 #>
+
+        void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            switch (view.Get(Name).Value)
+            {
+<#
+foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribute.txt"))))
+{
+    var name = i.Trim();
+#>
+                case AttributeName.<#= name #>:
+                    ((<#= name #>Attribute)this).EncodeTo(view, pool, builder);
+                    break;
+<#
+}
+#>
+                default:
+                    throw new ByteCodeException("Cannot encode unknown attribute. Attribute layout is unknown.");
+            }
+        }
 
     }
 

@@ -1,4 +1,6 @@
-﻿using IKVM.ByteCode.Writing;
+﻿using IKVM.ByteCode.Buffers;
+using IKVM.ByteCode.Reading;
+using IKVM.ByteCode.Writing;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,13 +11,30 @@ namespace IKVM.ByteCode.Tests.Writing
     public class ClassFileImporterTests
     {
 
+        [TestMethod]
         public void Foo()
         {
-            var b = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "TestClass", "java/lang/Object");
-            var f = b.AddField(AccessFlag.ACC_PUBLIC, "_field", "Z");
-            var m = b.AddMethod(AccessFlag.ACC_PUBLIC, "method", "()Z");
+            var srcBuilder = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "com/test/Test", null);
 
-            var i = new ClassFileImporter
+            srcBuilder.Attributes
+                .RuntimeVisibleAnnotations(e => e
+                    .Annotation(e2 => e2
+                        .Annotation(srcBuilder.Constants.GetOrAdd("test"), e3 => e3
+                            .Boolean(srcBuilder.Constants.GetOrAdd("test"), srcBuilder.Constants.GetOrAdd(Constant.Integer(true))))));
+
+            var srcBlob = new BlobBuilder();
+            srcBuilder.Serialize(srcBlob);
+
+            var src = ClassFile.Read(srcBlob.ToArray());
+
+            // create a copy of the attributes on the original loaded class
+            var dstBuilder = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "com/test/Test", null);
+            src.Attributes.EncodeTo(src.Constants, dstBuilder.Constants, dstBuilder.Attributes);
+
+            var dstBlob = new BlobBuilder();
+            dstBuilder.Serialize(dstBlob);
+
+            var dst = ClassFile.Read(dstBlob.ToArray());
         }
 
     }

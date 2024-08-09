@@ -49,8 +49,8 @@ namespace IKVM.ByteCode.Writing
         {
             ValidateFrameType(frameType, 0, 63, nameof(frameType), "SAME");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1(frameType);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU1(frameType);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 
@@ -62,9 +62,9 @@ namespace IKVM.ByteCode.Writing
         {
             ValidateFrameType(frameType, 64, 127, nameof(frameType), "SAME_LOCALS_1_STACK_ITEM");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1(frameType);
+            w.WriteU1(frameType);
             stack(new VerificationTypeInfoEncoder(_builder, 1));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 
@@ -74,10 +74,10 @@ namespace IKVM.ByteCode.Writing
         public StackMapTableEncoder SameLocalsOneStackItemExtended(ushort offsetDelta, Action<VerificationTypeInfoEncoder> stack)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1(247);
-            w.TryWriteU2(offsetDelta);
+            w.WriteU1(247);
+            w.WriteU2(offsetDelta);
             stack(new VerificationTypeInfoEncoder(_builder, 1));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 
@@ -88,9 +88,9 @@ namespace IKVM.ByteCode.Writing
         {
             ValidateFrameType(frameType, 248, 250, nameof(frameType), "CHOP");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1(247);
-            w.TryWriteU2(offsetDelta);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU1(247);
+            w.WriteU2(offsetDelta);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 
@@ -100,9 +100,9 @@ namespace IKVM.ByteCode.Writing
         public StackMapTableEncoder SameExtended(ushort offsetDelta)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1(251);
-            w.TryWriteU2(offsetDelta);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU1(251);
+            w.WriteU2(offsetDelta);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 
@@ -113,10 +113,10 @@ namespace IKVM.ByteCode.Writing
         {
             ValidateFrameType(frameType, 252, 254, nameof(frameType), "APPEND");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1(frameType);
-            w.TryWriteU2(offsetDelta);
+            w.WriteU1(frameType);
+            w.WriteU2(offsetDelta);
             locals(new VerificationTypeInfoEncoder(_builder, (ushort)(frameType - 251)));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 
@@ -126,11 +126,11 @@ namespace IKVM.ByteCode.Writing
         public StackMapTableEncoder Full(ushort offsetDelta, Action<VerificationTypeInfoEncoder> locals, Action<VerificationTypeInfoEncoder> stack)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1(255);
-            w.TryWriteU2(offsetDelta);
+            w.WriteU1(255);
+            w.WriteU2(offsetDelta);
             locals(new VerificationTypeInfoEncoder(_builder));
             stack(new VerificationTypeInfoEncoder(_builder));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

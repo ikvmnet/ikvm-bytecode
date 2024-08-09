@@ -884,7 +884,7 @@ namespace IKVM.ByteCode.Reading
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        ConstantHandle IConstantPool.Get(Constant value)
+        ConstantHandle IConstantPool.Get(in Constant value)
         {
             return value.Kind switch
             {
@@ -909,7 +909,7 @@ namespace IKVM.ByteCode.Reading
             };
         }
 
-        Utf8ConstantHandle IConstantPool.Get(Utf8Constant value)
+        Utf8ConstantHandle IConstantPool.Get(in Utf8Constant value)
         {
             foreach (var i in this)
             {
@@ -925,7 +925,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        IntegerConstantHandle IConstantPool.Get(IntegerConstant value)
+        IntegerConstantHandle IConstantPool.Get(in IntegerConstant value)
         {
             foreach (var i in this)
             {
@@ -941,7 +941,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        FloatConstantHandle IConstantPool.Get(FloatConstant value)
+        FloatConstantHandle IConstantPool.Get(in FloatConstant value)
         {
             foreach (var i in this)
             {
@@ -957,7 +957,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        LongConstantHandle IConstantPool.Get(LongConstant value)
+        LongConstantHandle IConstantPool.Get(in LongConstant value)
         {
             foreach (var i in this)
             {
@@ -973,7 +973,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        DoubleConstantHandle IConstantPool.Get(DoubleConstant value)
+        DoubleConstantHandle IConstantPool.Get(in DoubleConstant value)
         {
             foreach (var i in this)
             {
@@ -989,7 +989,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        ClassConstantHandle IConstantPool.Get(ClassConstant value)
+        ClassConstantHandle IConstantPool.Get(in ClassConstant value)
         {
             foreach (var i in this)
             {
@@ -1005,7 +1005,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        StringConstantHandle IConstantPool.Get(StringConstant value)
+        StringConstantHandle IConstantPool.Get(in StringConstant value)
         {
             foreach (var i in this)
             {
@@ -1021,7 +1021,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        FieldrefConstantHandle IConstantPool.Get(FieldrefConstant value)
+        FieldrefConstantHandle IConstantPool.Get(in FieldrefConstant value)
         {
             foreach (var i in this)
             {
@@ -1037,7 +1037,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        MethodrefConstantHandle IConstantPool.Get(MethodrefConstant value)
+        MethodrefConstantHandle IConstantPool.Get(in MethodrefConstant value)
         {
             foreach (var i in this)
             {
@@ -1053,7 +1053,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        InterfaceMethodrefConstantHandle IConstantPool.Get(InterfaceMethodrefConstant value)
+        InterfaceMethodrefConstantHandle IConstantPool.Get(in InterfaceMethodrefConstant value)
         {
             foreach (var i in this)
             {
@@ -1069,7 +1069,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        NameAndTypeConstantHandle IConstantPool.Get(NameAndTypeConstant value)
+        NameAndTypeConstantHandle IConstantPool.Get(in NameAndTypeConstant value)
         {
             foreach (var i in this)
             {
@@ -1085,7 +1085,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        MethodHandleConstantHandle IConstantPool.Get(MethodHandleConstant value)
+        MethodHandleConstantHandle IConstantPool.Get(in MethodHandleConstant value)
         {
             foreach (var i in this)
             {
@@ -1101,7 +1101,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        MethodTypeConstantHandle IConstantPool.Get(MethodTypeConstant value)
+        MethodTypeConstantHandle IConstantPool.Get(in MethodTypeConstant value)
         {
             foreach (var i in this)
             {
@@ -1117,7 +1117,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        DynamicConstantHandle IConstantPool.Get(DynamicConstant value)
+        DynamicConstantHandle IConstantPool.Get(in DynamicConstant value)
         {
             foreach (var i in this)
             {
@@ -1133,7 +1133,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        InvokeDynamicConstantHandle IConstantPool.Get(InvokeDynamicConstant value)
+        InvokeDynamicConstantHandle IConstantPool.Get(in InvokeDynamicConstant value)
         {
             foreach (var i in this)
             {
@@ -1149,7 +1149,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        ModuleConstantHandle IConstantPool.Get(ModuleConstant value)
+        ModuleConstantHandle IConstantPool.Get(in ModuleConstant value)
         {
             foreach (var i in this)
             {
@@ -1165,7 +1165,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        PackageConstantHandle IConstantPool.Get(PackageConstant value)
+        PackageConstantHandle IConstantPool.Get(in PackageConstant value)
         {
             foreach (var i in this)
             {

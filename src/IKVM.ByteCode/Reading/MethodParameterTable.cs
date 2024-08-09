@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -84,6 +86,25 @@ namespace IKVM.ByteCode.Reading
         /// Gets an enumerator over the method parameters.
         /// </summary>
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="encoder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref MethodParameterTableEncoder encoder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            foreach (var i in this)
+                encoder.MethodParameter(pool.Import(view, i.Name), i.AccessFlags);
+        }
 
         /// <inheritdoc />
         readonly IEnumerator<MethodParameter> IEnumerable<MethodParameter>.GetEnumerator() => GetEnumerator();

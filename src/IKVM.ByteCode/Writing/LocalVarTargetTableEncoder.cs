@@ -29,10 +29,10 @@ namespace IKVM.ByteCode.Writing
         public LocalVarTargetTableEncoder LocalVar(ushort start, ushort length, ushort index)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(start);
-            w.TryWriteU2(length);
-            w.TryWriteU2(index);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU2(start);
+            w.WriteU2(length);
+            w.WriteU2(index);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
     }

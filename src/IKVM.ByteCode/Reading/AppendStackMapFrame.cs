@@ -1,4 +1,8 @@
-﻿namespace IKVM.ByteCode.Reading
+﻿using System;
+
+using IKVM.ByteCode.Writing;
+
+namespace IKVM.ByteCode.Reading
 {
 
     public readonly record struct AppendStackMapFrame(byte FrameType, ushort OffsetDelta, VerificationTypeInfoTable Locals)
@@ -42,6 +46,25 @@
 
             frame = new AppendStackMapFrame(frameType, offsetDelta, new(locals));
             return true;
+        }
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="encoder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref StackMapTableEncoder encoder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            var self = this;
+            encoder.Append(FrameType, OffsetDelta, e => self.Locals.EncodeTo(view, pool, ref e));
         }
 
     }

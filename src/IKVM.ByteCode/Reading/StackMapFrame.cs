@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Buffers;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -169,6 +171,39 @@ namespace IKVM.ByteCode.Reading
                 throw new InvalidClassException("End of data reached while parsing stack map frame data.");
 
             return frame;
+        }
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="encoder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref StackMapTableEncoder encoder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            if (FrameType is <= 65)
+                ((SameStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+            else if (FrameType is >= 64 and <= 127)
+                ((SameLocalsOneStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+            else if (FrameType is 247)
+                ((SameLocalsOneExtendedStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+            else if (FrameType is >= 248 and <= 250)
+                ((ChopStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+            else if (FrameType is 251)
+                ((SameExtendedStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+            else if (FrameType is >= 252 and <= 254)
+                ((AppendStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+            else if (FrameType is 255)
+                ((FullStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+            else
+                throw new ByteCodeException("Invalid stack map frame type.");
         }
 
     }

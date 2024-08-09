@@ -1,6 +1,7 @@
 ﻿using System;
 
 using IKVM.ByteCode.Buffers;
+using IKVM.ByteCode.Reading;
 
 namespace IKVM.ByteCode.Writing
 {
@@ -32,12 +33,12 @@ namespace IKVM.ByteCode.Writing
         /// <param name="methodRef"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public BootstrapMethodTableEncoder Method(MethodHandleConstantHandle methodRef, Action<BootstrapArgumentTableEncoder> arguments)
+        public BootstrapMethodTableEncoder Method(MethodHandleConstantHandle methodRef, Action<ConstantTableEncoder> arguments)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(methodRef.Index);
-            arguments(new BootstrapArgumentTableEncoder(_builder));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU2(methodRef.Index);
+            arguments(new ConstantTableEncoder(_builder));
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

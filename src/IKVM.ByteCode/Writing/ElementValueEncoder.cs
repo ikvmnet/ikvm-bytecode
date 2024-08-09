@@ -33,8 +33,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Byte);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.Byte);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -48,8 +48,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Char);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.Char);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -63,8 +63,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Double);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.Double);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -78,8 +78,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Float);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.Float);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -93,8 +93,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Integer);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.Integer);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -108,8 +108,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Long);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.Long);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -123,8 +123,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Short);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.Short);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -138,8 +138,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Boolean);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.Boolean);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -153,8 +153,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.String);
-            w.TryWriteU2(constantValue.Index);
+            w.WriteU1((byte)ElementValueKind.String);
+            w.WriteU2(constantValue.Index);
             _count++;
         }
 
@@ -169,9 +169,9 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Enum);
-            w.TryWriteU2(typeName.Index);
-            w.TryWriteU2(constName.Index);
+            w.WriteU1((byte)ElementValueKind.Enum);
+            w.WriteU2(typeName.Index);
+            w.WriteU2(constName.Index);
             _count++;
         }
 
@@ -185,8 +185,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Class);
-            w.TryWriteU2(classInfo.Index);
+            w.WriteU1((byte)ElementValueKind.Class);
+            w.WriteU2(classInfo.Index);
             _count++;
         }
 
@@ -200,7 +200,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Annotation);
+            w.WriteU1((byte)ElementValueKind.Annotation);
             annotationValue(new AnnotationEncoder(_builder));
             _count++;
         }
@@ -215,7 +215,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single element value can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)ElementValueKind.Array);
+            w.WriteU1((byte)ElementValueKind.Array);
             arrayValue(new ElementValueTableEncoder(_builder));
             _count++;
         }

@@ -175,12 +175,12 @@ namespace IKVM.ByteCode.Reading.Tests
 
         void TestAttribute(ClassFile clazz, RuntimeVisibleTypeAnnotationsAttribute attribute)
         {
-            TestAnnotations(clazz, attribute.Annotations);
+            TestAnnotations(clazz, attribute.TypeAnnotations);
         }
 
         void TestAttribute(ClassFile clazz, RuntimeInvisibleTypeAnnotationsAttribute attribute)
         {
-            TestAnnotations(clazz, attribute.Annotations);
+            TestAnnotations(clazz, attribute.TypeAnnotations);
         }
 
         void TestAnnotations(ClassFile clazz, AnnotationTable annotations)

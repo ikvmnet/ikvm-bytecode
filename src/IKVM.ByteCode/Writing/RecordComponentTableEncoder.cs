@@ -36,10 +36,10 @@ namespace IKVM.ByteCode.Writing
         public RecordComponentTableEncoder RecordComponent(Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeTableBuilder attributes)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(name.Index);
-            w.TryWriteU2(descriptor.Index);
+            w.WriteU2(name.Index);
+            w.WriteU2(descriptor.Index);
             attributes.Serialize(_builder);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

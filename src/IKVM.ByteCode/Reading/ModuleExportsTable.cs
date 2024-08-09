@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -68,6 +70,25 @@ namespace IKVM.ByteCode.Reading
         public readonly int Count => _items.Length;
 
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="encoder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ModuleExportsTableEncoder encoder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            foreach (var i in this)
+                i.EncodeTo(view, pool, ref encoder);
+        }
 
         /// <inheritdoc />
         readonly IEnumerator<ModuleExportInfo> IEnumerable<ModuleExportInfo>.GetEnumerator() => GetEnumerator();

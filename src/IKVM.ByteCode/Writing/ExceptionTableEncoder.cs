@@ -37,11 +37,11 @@ namespace IKVM.ByteCode.Writing
         public ExceptionTableEncoder Exception(ushort start, ushort end, ushort handler, ClassConstantHandle catchType)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(start);
-            w.TryWriteU2(end);
-            w.TryWriteU2(handler);
-            w.TryWriteU2(catchType.Index);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU2(start);
+            w.WriteU2(end);
+            w.WriteU2(handler);
+            w.WriteU2(catchType.Index);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

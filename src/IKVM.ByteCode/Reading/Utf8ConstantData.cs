@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Buffers;
 
-using IKVM.ByteCode.Text;
+using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Reading
 {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Buffers;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -295,6 +297,53 @@ namespace IKVM.ByteCode.Reading
                 throw new InvalidCastException($"End of data reached casting VerificationTypeInfo of kind {Kind} to Uninitialized.");
 
             return value;
+        }
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="encoder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref VerificationTypeInfoEncoder encoder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            switch (Kind)
+            {
+                case VerificationTypeInfoKind.Top:
+                    encoder.Top();
+                    break;
+                case VerificationTypeInfoKind.Integer:
+                    encoder.Integer();
+                    break;
+                case VerificationTypeInfoKind.Float:
+                    encoder.Float();
+                    break;
+                case VerificationTypeInfoKind.Double:
+                    encoder.Double();
+                    break;
+                case VerificationTypeInfoKind.Long:
+                    encoder.Long();
+                    break;
+                case VerificationTypeInfoKind.Null:
+                    encoder.Null();
+                    break;
+                case VerificationTypeInfoKind.UninitializedThis:
+                    encoder.UninitializedThis();
+                    break;
+                case VerificationTypeInfoKind.Object:
+                    encoder.Object(pool.Import(view, AsObject().Class));
+                    break;
+                case VerificationTypeInfoKind.Uninitialized:
+                    encoder.Uninitialized(AsUninitialized().Offset);
+                    break;
+            }
         }
 
     }

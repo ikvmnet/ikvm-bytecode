@@ -30,7 +30,7 @@ namespace IKVM.ByteCode.Writing
         public ParameterAnnotationTableEncoder ParameterAnnotation(Action<AnnotationTableEncoder> annotations)
         {
             annotations(new AnnotationTableEncoder(_builder));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU1(++_count);
             return this;
         }
 

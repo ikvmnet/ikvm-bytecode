@@ -37,7 +37,7 @@ namespace IKVM.ByteCode.Writing
                 throw new ArgumentNullException(nameof(value));
 
             value(new ElementValueEncoder(_builder));
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

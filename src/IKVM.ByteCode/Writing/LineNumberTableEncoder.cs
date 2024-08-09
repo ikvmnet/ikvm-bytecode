@@ -35,9 +35,9 @@ namespace IKVM.ByteCode.Writing
         public LineNumberTableEncoder LineNumber(ushort startPc, ushort lineNumber)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(startPc);
-            w.TryWriteU2(lineNumber);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU2(startPc);
+            w.WriteU2(lineNumber);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

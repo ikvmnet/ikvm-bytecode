@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace IKVM.ByteCode.Text
+namespace IKVM.ByteCode.Encoding
 {
 
     public class MUTF8Encoder : Encoder

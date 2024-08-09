@@ -34,11 +34,11 @@ namespace IKVM.ByteCode.Writing
         public InnerClassTableEncoder InnerClass(ClassConstantHandle inner, ClassConstantHandle outer, Utf8ConstantHandle innerName, AccessFlag accessFlags)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(inner.Index);
-            w.TryWriteU2(outer.Index);
-            w.TryWriteU2(innerName.Index);
-            w.TryWriteU2((ushort)accessFlags);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU2(inner.Index);
+            w.WriteU2(outer.Index);
+            w.WriteU2(innerName.Index);
+            w.WriteU2((ushort)accessFlags);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

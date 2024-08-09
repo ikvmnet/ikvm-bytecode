@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Text;
 
-namespace IKVM.ByteCode.Text
+namespace IKVM.ByteCode.Encoding
 {
 
     /// <summary>
-    /// Implements an <see cref="Encoding"/> for Sun's modified UTF-8.
+    /// Implements an <see cref="System.Text.Encoding"/> for Sun's modified UTF-8.
     /// </summary>
-    public class MUTF8Encoding : Encoding
+    public class MUTF8Encoding : System.Text.Encoding
     {
 
         readonly static MUTF8Encoding JavaSE_1_0 = new(0);

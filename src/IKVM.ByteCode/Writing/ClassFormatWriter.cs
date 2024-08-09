@@ -30,7 +30,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Gets the span being written to.
         /// </summary>
-        public Span<byte> Span => span;
+        public readonly Span<byte> Span => span;
 
         /// <summary>
         /// Gets the total number of written bytes.
@@ -54,6 +54,17 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Writes a value defined as a 'u1' in the class format specification.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public void WriteU1(byte value)
+        {
+            if (TryWriteU1(value) == false)
+                throw new InvalidOperationException("Failed to write.");
+        }
+
+        /// <summary>
         /// Writes a value defined as a 'u2' in the class format specification.
         /// </summary>
         /// <param name="value"></param>
@@ -70,6 +81,17 @@ namespace IKVM.ByteCode.Writing
         }
 
         /// <summary>
+        /// Writes a value defined as a 'u2' in the class format specification.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public void WriteU2(ushort value)
+        {
+            if (TryWriteU2(value) == false)
+                throw new InvalidOperationException("Failed to write.");
+        }
+
+        /// <summary>
         /// Writes a value defined as a 'u4' in the class format specification.
         /// </summary>
         /// <param name="value"></param>
@@ -83,6 +105,17 @@ namespace IKVM.ByteCode.Writing
             next = next.Slice(sizeof(uint));
             size += sizeof(uint);
             return true;
+        }
+
+        /// <summary>
+        /// Writes a value defined as a 'u4' in the class format specification.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public void WriteU4(uint value)
+        {
+            if (TryWriteU4(value) == false)
+                throw new InvalidOperationException("Failed to write.");
         }
 
     }

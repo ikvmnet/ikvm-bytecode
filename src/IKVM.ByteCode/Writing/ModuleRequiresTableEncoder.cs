@@ -34,10 +34,10 @@ namespace IKVM.ByteCode.Writing
         public ModuleRequiresTableEncoder Requires(ModuleConstantHandle module, ModuleRequiresFlag flags, Utf8ConstantHandle version)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(module.Index);
-            w.TryWriteU2((ushort)flags);
-            w.TryWriteU2(version.Index);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU2(module.Index);
+            w.WriteU2((ushort)flags);
+            w.WriteU2(version.Index);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

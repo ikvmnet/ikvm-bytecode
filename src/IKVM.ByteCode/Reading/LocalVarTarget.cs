@@ -3,6 +3,8 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -136,6 +138,25 @@ namespace IKVM.ByteCode.Reading
         /// Gets an enumerator over the local var targets.
         /// </summary>
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="encoder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref LocalVarTargetTableEncoder encoder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            foreach (var i in this)
+                i.EncodeTo(view, pool, ref encoder);
+        }
 
         /// <inheritdoc />
         readonly IEnumerator<LocalVarTargetItem> IEnumerable<LocalVarTargetItem>.GetEnumerator() => GetEnumerator();

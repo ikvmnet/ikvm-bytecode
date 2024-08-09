@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -78,7 +80,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="annotation"></param>
         /// <returns></returns>
-        public static bool TryRead( ref ClassFormatReader reader, out Annotation annotation)
+        public static bool TryRead(ref ClassFormatReader reader, out Annotation annotation)
         {
             annotation = default;
 
@@ -96,7 +98,7 @@ namespace IKVM.ByteCode.Reading
                 elements[i] = element;
             }
 
-            annotation = new Annotation( new(typeIndex), elements);
+            annotation = new Annotation(new(typeIndex), elements);
             return true;
         }
 
@@ -108,7 +110,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="type"></param>
         /// <param name="items"></param>
-        internal Annotation( Utf8ConstantHandle type, ElementValuePair[] items)
+        internal Annotation(Utf8ConstantHandle type, ElementValuePair[] items)
         {
             _type = type;
             _items = items ?? throw new ArgumentNullException(nameof(items));
@@ -142,6 +144,29 @@ namespace IKVM.ByteCode.Reading
         /// Gets an enumerator over the element values.
         /// </summary>
         public Enumerator GetEnumerator() => new Enumerator(_items);
+
+        /// <summary>
+        /// Imports a <see cref="Annotation"/>.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="encoder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref AnnotationEncoder encoder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            var self = this;
+            encoder.Annotation(pool.Import(view, Type), e =>
+            {
+                foreach (var i in self)
+                    i.EncodeTo(view, pool, ref e);
+            });
+        }
 
         /// <inheritdoc />
         IEnumerator<ElementValuePair> IEnumerable<ElementValuePair>.GetEnumerator() => GetEnumerator();

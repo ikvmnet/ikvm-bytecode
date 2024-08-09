@@ -38,7 +38,7 @@ namespace IKVM.ByteCode.Writing
         void IncrementCount()
         {
             if (_fixedCount > 0)
-                new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+                new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
         }
 
         public VerificationTypeInfoEncoder Top()
@@ -47,7 +47,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.Top);
+            w.WriteU1((byte)VerificationTypeInfoKind.Top);
             IncrementCount();
             return this;
         }
@@ -58,7 +58,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.Integer);
+            w.WriteU1((byte)VerificationTypeInfoKind.Integer);
             IncrementCount();
             return this;
         }
@@ -69,7 +69,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.Float);
+            w.WriteU1((byte)VerificationTypeInfoKind.Float);
             IncrementCount();
             return this;
         }
@@ -80,7 +80,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.Double);
+            w.WriteU1((byte)VerificationTypeInfoKind.Double);
             IncrementCount();
             return this;
         }
@@ -91,7 +91,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.Long);
+            w.WriteU1((byte)VerificationTypeInfoKind.Long);
             IncrementCount();
             return this;
         }
@@ -102,7 +102,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.Null);
+            w.WriteU1((byte)VerificationTypeInfoKind.Null);
             IncrementCount();
             return this;
         }
@@ -113,7 +113,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.UninitializedThis);
+            w.WriteU1((byte)VerificationTypeInfoKind.UninitializedThis);
             IncrementCount();
             return this;
         }
@@ -124,8 +124,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.Object);
-            w.TryWriteU2(clazz.Index);
+            w.WriteU1((byte)VerificationTypeInfoKind.Object);
+            w.WriteU2(clazz.Index);
             IncrementCount();
             return this;
         }
@@ -136,8 +136,8 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException($"Only {_fixedCount} verification type info records can be inserted.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU1((byte)VerificationTypeInfoKind.Uninitialized);
-            w.TryWriteU2(offset);
+            w.WriteU1((byte)VerificationTypeInfoKind.Uninitialized);
+            w.WriteU2(offset);
             IncrementCount();
             return this;
         }

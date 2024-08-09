@@ -1,5 +1,7 @@
 ﻿using System;
 
+using IKVM.ByteCode.Writing;
+
 namespace IKVM.ByteCode.Reading
 {
 
@@ -335,6 +337,112 @@ namespace IKVM.ByteCode.Reading
                 throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.PermittedSubclasses)}.");
 
             return value;
+        }
+
+        void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            switch (view.Get(Name).Value)
+            {
+                case AttributeName.ConstantValue:
+                    ((ConstantValueAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.Code:
+                    ((CodeAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.StackMapTable:
+                    ((StackMapTableAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.Exceptions:
+                    ((ExceptionsAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.InnerClasses:
+                    ((InnerClassesAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.EnclosingMethod:
+                    ((EnclosingMethodAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.Synthetic:
+                    ((SyntheticAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.Signature:
+                    ((SignatureAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.SourceFile:
+                    ((SourceFileAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.SourceDebugExtension:
+                    ((SourceDebugExtensionAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.LineNumberTable:
+                    ((LineNumberTableAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.LocalVariableTable:
+                    ((LocalVariableTableAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.LocalVariableTypeTable:
+                    ((LocalVariableTypeTableAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.Deprecated:
+                    ((DeprecatedAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.RuntimeVisibleAnnotations:
+                    ((RuntimeVisibleAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.RuntimeInvisibleAnnotations:
+                    ((RuntimeInvisibleAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.RuntimeVisibleParameterAnnotations:
+                    ((RuntimeVisibleParameterAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.RuntimeInvisibleParameterAnnotations:
+                    ((RuntimeInvisibleParameterAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.RuntimeVisibleTypeAnnotations:
+                    ((RuntimeVisibleTypeAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.RuntimeInvisibleTypeAnnotations:
+                    ((RuntimeInvisibleTypeAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.AnnotationDefault:
+                    ((AnnotationDefaultAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.BootstrapMethods:
+                    ((BootstrapMethodsAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.MethodParameters:
+                    ((MethodParametersAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.Module:
+                    ((ModuleAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.ModulePackages:
+                    ((ModulePackagesAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.ModuleMainClass:
+                    ((ModuleMainClassAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.NestHost:
+                    ((NestHostAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.NestMembers:
+                    ((NestMembersAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.Record:
+                    ((RecordAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                case AttributeName.PermittedSubclasses:
+                    ((PermittedSubclassesAttribute)this).EncodeTo(view, pool, builder);
+                    break;
+                default:
+                    throw new ByteCodeException("Cannot encode unknown attribute. Attribute layout is unknown.");
+            }
         }
 
     }

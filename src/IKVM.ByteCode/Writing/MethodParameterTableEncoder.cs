@@ -36,9 +36,9 @@ namespace IKVM.ByteCode.Writing
         public MethodParameterTableEncoder MethodParameter(Utf8ConstantHandle name, AccessFlag accessFlags)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(name.Index);
-            w.TryWriteU2((ushort)accessFlags);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU1(++_count);
+            w.WriteU2(name.Index);
+            w.WriteU2((ushort)accessFlags);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU1(++_count);
             return this;
         }
 

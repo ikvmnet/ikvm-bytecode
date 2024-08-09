@@ -1,4 +1,8 @@
-﻿namespace IKVM.ByteCode.Reading
+﻿using System;
+
+using IKVM.ByteCode.Writing;
+
+namespace IKVM.ByteCode.Reading
 {
 
     public readonly record struct ModuleAttribute(ModuleConstantHandle Name, ModuleFlag Flags, Utf8ConstantHandle Version, ModuleRequiresTable Requires, ModuleExportsTable Exports, ModuleOpensTable Opens, ClassConstantHandleTable Uses, ModuleProvidesTable Provides)
@@ -130,6 +134,33 @@
         public readonly bool IsNil => !IsNotNil;
 
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="pool"></param>
+        /// <param name="builder"></param>
+        public void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
+            where TConstantView : class, IConstantView
+            where TConstantPool : class, IConstantPool
+        {
+            if (view is null)
+                throw new ArgumentNullException(nameof(view));
+            if (pool is null)
+                throw new ArgumentNullException(nameof(pool));
+
+            var self = this;
+            builder.Module(
+                pool.Import(view, Name),
+                Flags,
+                pool.Import(view, Version),
+                e => self.Requires.EncodeTo(view, pool, ref e),
+                e => self.Exports.EncodeTo(view, pool, ref e),
+                e => self.Opens.EncodeTo(view, pool, ref e),
+                e => self.Uses.EncodeTo(view, pool, ref e),
+                e => self.Provides.EncodeTo(view, pool, ref e));
+        }
 
     }
 

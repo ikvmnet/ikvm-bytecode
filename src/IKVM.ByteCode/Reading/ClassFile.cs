@@ -17,7 +17,8 @@ namespace IKVM.ByteCode.Reading
     public sealed class ClassFile : IDisposable
     {
 
-        const int MIN_CLASS_SIZE = 30;
+        public const uint MAGIC = 0xCAFEBABE;
+        public const uint MIN_CLASS_SIZE = 30;
 
         /// <summary>
         /// Attempts to read a class from the given memory position. This method is unsafe and assumes the lifetime of
@@ -493,7 +494,7 @@ namespace IKVM.ByteCode.Reading
 
             while (true)
             {
-                var result = await reader.ReadAtLeastAsync(MIN_CLASS_SIZE, cancellationToken);
+                var result = await reader.ReadAtLeastAsync((int)MIN_CLASS_SIZE, cancellationToken);
                 if (result.IsCanceled)
                     throw new OperationCanceledException();
 
@@ -613,11 +614,6 @@ namespace IKVM.ByteCode.Reading
         /// Gets the attributes of the class file.
         /// </summary>
         public AttributeTable Attributes => _attributes;
-
-        /// <summary>
-        /// Unique magic of a Java class file.
-        /// </summary>
-        public const uint MAGIC = 0xCAFEBABE;
 
         /// <summary>
         /// Disposes of the instance.

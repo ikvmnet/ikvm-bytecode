@@ -58,8 +58,8 @@ namespace IKVM.ByteCode.Writing
         public ModuleTableEncoder Module(ModuleConstantHandle module)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.TryWriteU2(module.Index);
-            new ClassFormatWriter(_countBlob.GetBytes()).TryWriteU2(++_count);
+            w.WriteU2(module.Index);
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }
 

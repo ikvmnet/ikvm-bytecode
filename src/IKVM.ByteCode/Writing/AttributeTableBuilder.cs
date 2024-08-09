@@ -499,7 +499,7 @@ namespace IKVM.ByteCode.Writing
             if (_builder != null)
                 builder.LinkSuffix(_builder);
             else
-                new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes()).TryWriteU2(0);
+                new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2).GetBytes()).WriteU2(0);
         }
 
     }

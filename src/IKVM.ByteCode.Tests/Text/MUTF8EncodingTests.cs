@@ -3,7 +3,7 @@ using System.Linq;
 
 using FluentAssertions;
 
-using IKVM.ByteCode.Text;
+using IKVM.ByteCode.Encoding;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
