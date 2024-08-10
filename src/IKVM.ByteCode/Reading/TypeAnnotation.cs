@@ -23,6 +23,22 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly TypeAnnotationTarget Target = Target;
+        public readonly TypePath TargetPath = TargetPath;
+        public readonly Utf8ConstantHandle Type = Type;
+        public readonly ElementValuePairTable Elements = Elements;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
+
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
