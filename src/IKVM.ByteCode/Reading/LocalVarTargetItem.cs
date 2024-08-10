@@ -1,6 +1,4 @@
-﻿using System;
-
-using IKVM.ByteCode.Writing;
+﻿using IKVM.ByteCode.Writing;
 
 namespace IKVM.ByteCode.Reading
 {
@@ -39,6 +37,16 @@ namespace IKVM.ByteCode.Reading
         /// <param name="encoder"></param>
         public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref LocalVarTargetTableEncoder encoder)
             where TConstantHandleMap : IConstantHandleMap
+        {
+            WriteTo(ref encoder);
+        }
+
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref LocalVarTargetTableEncoder encoder)
         {
             encoder.LocalVar(Start, Length, Index);
         }

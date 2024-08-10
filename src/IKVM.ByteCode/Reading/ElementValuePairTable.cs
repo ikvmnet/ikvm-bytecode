@@ -137,7 +137,7 @@ namespace IKVM.ByteCode.Reading
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <summary>
-        /// Imports a <see cref="Annotation"/>.
+        /// Encodes this data class to the encoder.
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
@@ -146,6 +146,16 @@ namespace IKVM.ByteCode.Reading
         {
             foreach (var i in this)
                 i.EncodeTo(map, ref encoder);
+        }
+
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref ElementValuePairTableEncoder encoder)
+        {
+            foreach (var i in this)
+                i.WriteTo(ref encoder);
         }
 
         /// <inheritdoc />

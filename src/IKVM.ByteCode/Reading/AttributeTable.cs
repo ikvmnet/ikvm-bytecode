@@ -74,14 +74,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly Attribute this[int index] => GetAttribute(index);
+        public readonly ref readonly Attribute this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the attribute at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly Attribute GetAttribute(int index) => _items[index];
+        readonly ref readonly Attribute GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of fields.
@@ -105,11 +105,24 @@ namespace IKVM.ByteCode.Reading
                 i.EncodeTo(map, ref encoder);
         }
 
+        /// <summary>
+        /// Encodes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref AttributeTableEncoder encoder)
+        {
+            foreach (var i in this)
+                i.WriteTo(ref encoder);
+        }
+
         /// <inheritdoc />
         readonly IEnumerator<Attribute> IEnumerable<Attribute>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly Attribute IReadOnlyList<Attribute>.this[int index] => this[index];
 
     }
 

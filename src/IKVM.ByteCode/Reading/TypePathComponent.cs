@@ -29,6 +29,15 @@ namespace IKVM.ByteCode.Reading
         public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref TypePathEncoder encoder)
             where TConstantHandleMap : IConstantHandleMap
         {
+            WriteTo(ref encoder);
+        }
+
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref TypePathEncoder encoder)
+        {
             switch (Kind)
             {
                 case TypePathKind.TypeArgument:

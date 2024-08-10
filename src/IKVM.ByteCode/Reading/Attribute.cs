@@ -71,6 +71,15 @@ namespace IKVM.ByteCode.Reading
             EncodeSelfTo(map, ref encoder);
         }
 
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref AttributeTableEncoder encoder)
+        {
+            encoder.Attribute(Name, Data);
+        }
+
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
@@ -791,12 +792,26 @@ namespace IKVM.ByteCode.Buffers
         /// </summary>
         /// <param name="buffer"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        internal void WriteBytes(ReadOnlySpan<byte> buffer)
+        public void WriteBytes(ReadOnlySpan<byte> buffer)
         {
             if (IsHead == false)
                 throw new InvalidOperationException("Builder already linked.");
 
             WriteBytesUnchecked(buffer);
+        }
+
+        /// <summary>
+        /// Writes the specified sequence to the builder.
+        /// </summary>
+        /// <param name="sequence"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public void WriteBytes(ReadOnlySequence<byte> sequence)
+        {
+            if (IsHead == false)
+                throw new InvalidOperationException("Builder already linked.");
+
+            foreach (var buffer in sequence)
+                WriteBytes(buffer.Span);
         }
 
         /// <summary>

@@ -91,16 +91,25 @@ namespace IKVM.ByteCode.Reading
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <summary>
-        /// Imports a <see cref="Annotation"/>.
+        /// Encodes this data class to the encoder.
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
         public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref AnnotationTableEncoder encoder)
             where TConstantHandleMap : IConstantHandleMap
         {
-            var self = this;
-            foreach (var i in self)
+            foreach (var i in this)
                 encoder.Annotation(e => i.EncodeTo(map, ref e));
+        }
+
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref AnnotationTableEncoder encoder)
+        {
+            foreach (var i in this)
+                encoder.Annotation(e => i.WriteTo(ref e));
         }
 
         /// <inheritdoc />
@@ -113,7 +122,5 @@ namespace IKVM.ByteCode.Reading
         readonly Annotation IReadOnlyList<Annotation>.this[int index] => this[index];
 
     }
-
-
 
 }

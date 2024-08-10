@@ -298,6 +298,67 @@ namespace IKVM.ByteCode.Reading
             }
         }
 
+        /// <summary>
+        /// Wrirtes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref ElementValueEncoder encoder)
+        {
+            switch (Kind)
+            {
+                case ElementValueKind.Byte:
+                    var _byte = AsConstant();
+                    encoder.Byte(((IntegerConstantHandle)_byte.Handle));
+                    break;
+                case ElementValueKind.Char:
+                    var _char = AsConstant();
+                    encoder.Char(((IntegerConstantHandle)_char.Handle));
+                    break;
+                case ElementValueKind.Double:
+                    var _double = AsConstant();
+                    encoder.Double(((DoubleConstantHandle)_double.Handle));
+                    break;
+                case ElementValueKind.Float:
+                    var _float = AsConstant();
+                    encoder.Float(((FloatConstantHandle)_float.Handle));
+                    break;
+                case ElementValueKind.Integer:
+                    var _integer = AsConstant();
+                    encoder.Integer(((IntegerConstantHandle)_integer.Handle));
+                    break;
+                case ElementValueKind.Long:
+                    var _long = AsConstant();
+                    encoder.Long(((LongConstantHandle)_long.Handle));
+                    break;
+                case ElementValueKind.Short:
+                    var _short = AsConstant();
+                    encoder.Short(((IntegerConstantHandle)_short.Handle));
+                    break;
+                case ElementValueKind.Boolean:
+                    var _boolean = AsConstant();
+                    encoder.Boolean(((IntegerConstantHandle)_boolean.Handle));
+                    break;
+                case ElementValueKind.String:
+                    var _string = AsConstant();
+                    encoder.String(((Utf8ConstantHandle)_string.Handle));
+                    break;
+                case ElementValueKind.Enum:
+                    var _enum = AsEnum();
+                    encoder.Enum((_enum.TypeName), (_enum.ConstantName));
+                    break;
+                case ElementValueKind.Class:
+                    var _class = AsClass();
+                    encoder.Class((_class.Class));
+                    break;
+                case ElementValueKind.Annotation:
+                    var _annotation = AsAnnotation();
+                    encoder.Annotation(e => _annotation.Annotation.WriteTo(ref e));
+                    break;
+                case ElementValueKind.Array:
+                    break;
+            }
+        }
+
     }
 
 }

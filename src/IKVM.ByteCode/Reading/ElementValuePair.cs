@@ -57,6 +57,16 @@ namespace IKVM.ByteCode.Reading
             encoder.Element(map.Map(Name), e => self.Value.EncodeTo(map, ref e));
         }
 
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref ElementValuePairTableEncoder encoder)
+        {
+            var self = this;
+            encoder.Element(Name, e => self.Value.WriteTo(ref e));
+        }
+
     }
 
 }

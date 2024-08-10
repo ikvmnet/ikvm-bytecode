@@ -102,6 +102,16 @@ namespace IKVM.ByteCode.Reading
                 i.EncodeTo(map, ref encoder);
         }
 
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref TypeAnnotationTableEncoder encoder)
+        {
+            foreach (var i in this)
+                i.WriteTo(ref encoder);
+        }
+
         /// <inheritdoc />
         readonly IEnumerator<TypeAnnotation> IEnumerable<TypeAnnotation>.GetEnumerator() => GetEnumerator();
 

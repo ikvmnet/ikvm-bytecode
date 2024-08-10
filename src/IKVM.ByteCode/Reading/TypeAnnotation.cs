@@ -142,6 +142,120 @@ namespace IKVM.ByteCode.Reading
             }
         }
 
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref TypeAnnotationTableEncoder encoder)
+        {
+            var self = this;
+            encoder.TypeAnnotation(e => self.WriteTo(ref e));
+        }
+
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref TypeAnnotationEncoder encoder)
+        {
+            var self = this;
+
+            switch (Target.Type)
+            {
+                case TypeAnnotationTargetType.ClassTypeParameter:
+                    var _classTypeParameter = Target.AsTypeParameterTarget();
+                    encoder.ClassTypeParameter(_classTypeParameter.ParameterIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodTypeParameter:
+                    var _methodTypeParameter = Target.AsTypeParameterTarget();
+                    encoder.MethodTypeParameter(_methodTypeParameter.ParameterIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.ClassExtends:
+                    var _superTypeTarget = Target.AsSuperTypeTarget();
+                    encoder.ClassExtends(_superTypeTarget.SuperTypeIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.ClassTypeParameterBound:
+                    var _classTypeParameterBound = Target.AsTypeParameterBoundTarget();
+                    encoder.ClassTypeParameterBound(_classTypeParameterBound.ParameterIndex, _classTypeParameterBound.BoundIndex, e => self.TargetPath.WriteTo(ref e), (self.Type), e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodTypeParameterBound:
+                    var _methodTypeParameterBound = Target.AsTypeParameterBoundTarget();
+                    encoder.MethodTypeParameterBound(_methodTypeParameterBound.ParameterIndex, _methodTypeParameterBound.BoundIndex, e => self.TargetPath.WriteTo(ref e), (self.Type), e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.Field:
+                    var _field = Target.AsEmptyTarget();
+                    encoder.Field(e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodReturn:
+                    var _methodReturn = Target.AsEmptyTarget();
+                    encoder.MethodReturn(e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodReceiver:
+                    var _methodReceiver = Target.AsEmptyTarget();
+                    encoder.MethodReceiver(e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo( ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodFormalParameter:
+                    var _methodFormalParameter = Target.AsFormalParameterTarget();
+                    encoder.MethodFormalParameter(_methodFormalParameter.ParameterIndex, e => self.TargetPath.WriteTo( ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.Throws:
+                    var _throws = Target.AsThrowsTarget();
+                    encoder.Throws(_throws.ThrowsTypeIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.LocalVar:
+                    var _localVar = Target.AsLocalVarTarget();
+                    encoder.LocalVariable(e => _localVar.WriteTo(ref e), e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.ResourceVariable:
+                    var _resourceVariable = Target.AsLocalVarTarget();
+                    encoder.ResourceVariable(e => _resourceVariable.WriteTo(ref e), e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.ExceptionParameter:
+                    var _catchTarget = Target.AsCatchTarget();
+                    encoder.ExceptionParameter(_catchTarget.ExceptionTableIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.InstanceOf:
+                    var _instanceOf = Target.AsOffsetTarget();
+                    encoder.InstanceOf(_instanceOf.Offset, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.New:
+                    var _new = Target.AsOffsetTarget();
+                    encoder.New(_new.Offset, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.ConstructorReference:
+                    var _constructorReference = Target.AsOffsetTarget();
+                    encoder.ConstructorReference(_constructorReference.Offset, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodReference:
+                    var _methodReference = Target.AsOffsetTarget();
+                    encoder.MethodReference(_methodReference.Offset, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo( ref e));
+                    break;
+                case TypeAnnotationTargetType.Cast:
+                    var _cast = Target.AsTypeArgumentTarget();
+                    encoder.Cast(_cast.Offset, _cast.TypeArgumentIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.ConstructorInvocationTypeArgument:
+                    var _constructorInvocationTypeArgument = Target.AsTypeArgumentTarget();
+                    encoder.ConstructorInvocationTypeArgument(_constructorInvocationTypeArgument.Offset, _constructorInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodInvocationTypeArgument:
+                    var _methodInvocationTypeArgument = Target.AsTypeArgumentTarget();
+                    encoder.MethodInvocationTypeArgument(_methodInvocationTypeArgument.Offset, _methodInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.ConstructorReferenceTypeArgument:
+                    var _constructorReferenceTypeArgument = Target.AsTypeArgumentTarget();
+                    encoder.ConstructorReferenceTypeArgument(_constructorReferenceTypeArgument.Offset, _constructorReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                case TypeAnnotationTargetType.MethodReferenceTypeArgument:
+                    var _methodReferenceTypeArgument = Target.AsTypeArgumentTarget();
+                    encoder.ConstructorReferenceTypeArgument(_methodReferenceTypeArgument.Offset, _methodReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.WriteTo(ref e), self.Type, e => self.Elements.WriteTo(ref e));
+                    break;
+                default:
+                    throw new ByteCodeException("Invalid type annotation target type.");
+            }
+        }
+
     }
 
 }

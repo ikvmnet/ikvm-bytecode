@@ -136,16 +136,16 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets a reference to the value for the given index.
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index"></param> 
         /// <returns></returns>
-        public ElementValue this[int index] => GetElementValue(index);
+        public readonly ref readonly ElementValue this[int index] => ref GetItem(index);
 
-        /// <summary>
+        /// <summary>r
         /// Gets a reference to the values for the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly ElementValue GetElementValue(int index) => ref _values[index];
+        readonly ref readonly ElementValue GetItem(int index) => ref _values[index];
 
         /// <summary>
         /// Gets the number of values.
@@ -162,6 +162,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly ElementValue IReadOnlyList<ElementValue>.this[int index] => this[index];
 
     }
 

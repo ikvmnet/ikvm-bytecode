@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 
 using IKVM.ByteCode.Buffers;
 
@@ -70,6 +71,28 @@ namespace IKVM.ByteCode.Writing
         /// <param name="attributeName"></param>
         /// <param name="data"></param>
         public AttributeTableEncoder Attribute(Utf8ConstantHandle attributeName, ReadOnlySpan<byte> data)
+        {
+            if (data.Length > 0)
+            {
+                var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
+                w.WriteU2(attributeName.Index);
+                w.WriteU4((uint)data.Length);
+                _builder.WriteBytes(data);
+                IncrementCount();
+                return this;
+            }
+            else
+            {
+                return Attribute(attributeName);
+            }
+        }
+
+        /// <summary>
+        /// Adds a new attribute to the attribute set.
+        /// </summary>
+        /// <param name="attributeName"></param>
+        /// <param name="data"></param>
+        public AttributeTableEncoder Attribute(Utf8ConstantHandle attributeName, ReadOnlySequence<byte> data)
         {
             if (data.Length > 0)
             {

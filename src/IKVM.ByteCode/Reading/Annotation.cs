@@ -1,6 +1,4 @@
-﻿using System;
-
-using IKVM.ByteCode.Writing;
+﻿using IKVM.ByteCode.Writing;
 
 namespace IKVM.ByteCode.Reading
 {
@@ -46,7 +44,7 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Imports a <see cref="Annotation"/>.
+        /// Encodes this data class to the encoder.
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
@@ -55,6 +53,16 @@ namespace IKVM.ByteCode.Reading
         {
             var self = this;
             encoder.Annotation(map.Map(Type), e => self.Elements.EncodeTo(map, ref e));
+        }
+
+        /// <summary>
+        /// Writes this data class to the encoder.
+        /// </summary>
+        /// <param name="encoder"></param>
+        public readonly void WriteTo(ref AnnotationEncoder encoder)
+        {
+            var self = this;
+            encoder.Annotation(Type, e => self.Elements.WriteTo(ref e));
         }
 
     }
