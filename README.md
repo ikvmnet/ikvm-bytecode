@@ -30,4 +30,8 @@ Constants are represented in three sets of data structures: `*ConstantData`, `*C
 
 ### Writing
 
-TBD
+Writing class files or parts of class files in `IKVM.ByteCode` is similar to `System.Reflection.Metadata.Ecma335`. A common linkable buffer, `BlobBuilder`, is provided which is the target of the various builders and encoders. `BlobBuilder` allows for fast append, and fast enumeration from the beginning, by linked list of segments of memory. `BlobBuilder`s can be linked to the end of existing `BlobBuilder`s. Assembling Java class files then is allocating a `BlobBuilder` and using one of the various Encoder classes to emit output into it. That output can then be appened together with other segments before being serialized to output.
+
+`ClassFormatWriter` represents the main operations for emitting class file output data: U1, U2 and U4, as defined by the specification. Each of the encoder structures target a `ClassFormatWriter`, which can be backed by a `Span<byte>` which can be allocated in segments from a `BlobBuilder`. Each Encoder provides a number of methods that have to be invoked in order to write the appropriate components. Encoders can be passed by `ref` between methods. They maintain minimal state such as a count of emitted elements. The nested structure of a Java class file is encapsulated by passing delegates with the nested encoders.
+
+`ClassBuilder` makes it easy to encode an entire Java class file to a temporary series of blobs that are then assembled into a final format.
