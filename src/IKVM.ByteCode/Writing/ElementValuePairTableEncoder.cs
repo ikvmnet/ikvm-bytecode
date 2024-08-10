@@ -38,7 +38,7 @@ namespace IKVM.ByteCode.Writing
                 throw new ArgumentNullException(nameof(elementValue));
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(elementName.Index);
+            w.WriteU2(elementName.Slot);
             elementValue(new ElementValueEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;

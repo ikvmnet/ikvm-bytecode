@@ -125,7 +125,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)VerificationTypeInfoKind.Object);
-            w.WriteU2(clazz.Index);
+            w.WriteU2(clazz.Slot);
             IncrementCount();
             return this;
         }

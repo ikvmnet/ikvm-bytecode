@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode
 {
 
-    public readonly record struct InterfaceMethodrefConstantHandle(ushort Index)
+    public readonly record struct InterfaceMethodrefConstantHandle(ushort Slot)
     {
 
         public static explicit operator InterfaceMethodrefConstantHandle(ConstantHandle handle)
@@ -11,12 +11,12 @@ namespace IKVM.ByteCode
             if (handle.Kind is not ConstantKind.InterfaceMethodref and not ConstantKind.Unknown)
                 throw new InvalidCastException($"ConstantHandle of Kind {handle.Kind} cannot be cast to InterfaceMethodref.");
 
-            return new InterfaceMethodrefConstantHandle(handle.Index);
+            return new InterfaceMethodrefConstantHandle(handle.Slot);
         }
 
         public static implicit operator ConstantHandle(InterfaceMethodrefConstantHandle handle)
         {
-            return new ConstantHandle(ConstantKind.InterfaceMethodref, handle.Index);
+            return new ConstantHandle(ConstantKind.InterfaceMethodref, handle.Slot);
         }
 
         public static explicit operator InterfaceMethodrefConstantHandle(RefConstantHandle handle)
@@ -29,7 +29,7 @@ namespace IKVM.ByteCode
 
         public static implicit operator RefConstantHandle(InterfaceMethodrefConstantHandle handle)
         {
-            return new RefConstantHandle(ConstantKind.InterfaceMethodref, handle.Index);
+            return new RefConstantHandle(ConstantKind.InterfaceMethodref, handle.Slot);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace IKVM.ByteCode
         /// <summary>
         /// Gets whether or not this represents the nil instance.
         /// </summary>
-        public readonly bool IsNil => Index == 0;
+        public readonly bool IsNil => Slot == 0;
 
         /// <summary>
         /// Gets whether or not this does not represent the nil instance.

@@ -36,8 +36,8 @@ namespace IKVM.ByteCode.Writing
         public RecordComponentTableEncoder RecordComponent(Utf8ConstantHandle name, Utf8ConstantHandle descriptor, Action<AttributeTableEncoder> attributes)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(name.Index);
-            w.WriteU2(descriptor.Index);
+            w.WriteU2(name.Slot);
+            w.WriteU2(descriptor.Slot);
             attributes(new AttributeTableEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;

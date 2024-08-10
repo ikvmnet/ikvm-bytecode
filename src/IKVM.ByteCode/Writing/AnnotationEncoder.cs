@@ -48,7 +48,7 @@ namespace IKVM.ByteCode.Writing
                 throw new InvalidOperationException("Only a single annotation can be encoded by this encoder.");
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(type.Index);
+            w.WriteU2(type.Slot);
             elementValuePairs(new ElementValuePairTableEncoder(_builder));
             _count++;
         }

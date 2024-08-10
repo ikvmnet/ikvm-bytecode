@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode
 {
 
-    public readonly record struct LongConstantHandle(ushort Index)
+    public readonly record struct LongConstantHandle(ushort Slot)
     {
 
         public static explicit operator LongConstantHandle(ConstantHandle handle)
@@ -11,12 +11,12 @@ namespace IKVM.ByteCode
             if (handle.Kind is not ConstantKind.Long and not ConstantKind.Unknown)
                 throw new InvalidCastException($"ConstantHandle of Kind {handle.Kind} cannot be cast to Long.");
 
-            return new LongConstantHandle(handle.Index);
+            return new LongConstantHandle(handle.Slot);
         }
 
         public static implicit operator ConstantHandle(LongConstantHandle handle)
         {
-            return new ConstantHandle(ConstantKind.Long, handle.Index);
+            return new ConstantHandle(ConstantKind.Long, handle.Slot);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace IKVM.ByteCode
         /// <summary>
         /// Gets whether or not this represents the nil instance.
         /// </summary>
-        public readonly bool IsNil => Index == 0;
+        public readonly bool IsNil => Slot == 0;
 
         /// <summary>
         /// Gets whether or not this does not represent the nil instance.

@@ -34,7 +34,7 @@ namespace IKVM.ByteCode.Writing
         {
             targetPath(new TypePathEncoder(_builder));
             var w2 = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w2.WriteU2(type.Index);
+            w2.WriteU2(type.Slot);
             elementValues(new ElementValuePairTableEncoder(_builder));
             _count++;
         }

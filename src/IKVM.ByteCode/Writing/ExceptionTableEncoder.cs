@@ -40,7 +40,7 @@ namespace IKVM.ByteCode.Writing
             w.WriteU2(start);
             w.WriteU2(end);
             w.WriteU2(handler);
-            w.WriteU2(catchType.Index);
+            w.WriteU2(catchType.Slot);
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }

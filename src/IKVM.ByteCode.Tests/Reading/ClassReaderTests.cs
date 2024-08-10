@@ -57,8 +57,8 @@ namespace IKVM.ByteCode.Reading.Tests
             clazz.Methods.Should().HaveCount(2);
             clazz.Methods.ToList();
 
-            new AttributeTableReader(clazz, clazz.Methods[0].Attributes).Code.Code.Should().NotBeNull();
-            new AttributeTableReader(clazz, clazz.Methods[1].Attributes).Code.Code.Should().NotBeNull();
+            clazz.Methods[0].Attributes.Where(i => clazz.Constants.Get(i.Name).Value == AttributeName.Code).Select(i => (CodeAttribute)i).First().Code.Length.Should().BeGreaterThan(0);
+            clazz.Methods[1].Attributes.Where(i => clazz.Constants.Get(i.Name).Value == AttributeName.Code).Select(i => (CodeAttribute)i).First().Code.Length.Should().BeGreaterThan(0);
         }
 
         [TestMethod]

@@ -393,7 +393,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Class);
-            w.WriteU2(name.Index);
+            w.WriteU2(name.Slot);
             return _classCache[name] = new(_next++);
         }
 
@@ -462,7 +462,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.String);
-            w.WriteU2(name.Index);
+            w.WriteU2(name.Slot);
             return _stringCache[name] = new(_next++);
         }
 
@@ -532,8 +532,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Fieldref);
-            w.WriteU2(clazz.Index);
-            w.WriteU2(nameAndType.Index);
+            w.WriteU2(clazz.Slot);
+            w.WriteU2(nameAndType.Slot);
             return _fieldrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
@@ -596,8 +596,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Methodref);
-            w.WriteU2(clazz.Index);
-            w.WriteU2(nameAndType.Index);
+            w.WriteU2(clazz.Slot);
+            w.WriteU2(nameAndType.Slot);
             return _methodrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
@@ -660,8 +660,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.InterfaceMethodref);
-            w.WriteU2(clazz.Index);
-            w.WriteU2(nameAndType.Index);
+            w.WriteU2(clazz.Slot);
+            w.WriteU2(nameAndType.Slot);
             return _interfaceMethodrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
@@ -724,8 +724,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.NameAndType);
-            w.WriteU2(name.Index);
-            w.WriteU2(type.Index);
+            w.WriteU2(name.Slot);
+            w.WriteU2(type.Slot);
             return _nameAndTypeCache[(name, type)] = new NameAndTypeConstantHandle(_next++);
         }
 
@@ -930,7 +930,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.MethodType);
-            w.WriteU2(descriptor.Index);
+            w.WriteU2(descriptor.Slot);
             return _methodTypeCache[descriptor] = new(_next++);
         }
 
@@ -1001,7 +1001,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Dynamic);
             w.WriteU2(bootstrapMethodAttrIndex);
-            w.WriteU2(nameAndType.Index);
+            w.WriteU2(nameAndType.Slot);
             return _dynamicCache[(bootstrapMethodAttrIndex, nameAndType)] = new(_next++);
         }
 
@@ -1077,7 +1077,7 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.InvokeDynamic);
             w.WriteU2(bootstrapMethodAttrIndex);
-            w.WriteU2(nameAndType.Index);
+            w.WriteU2(nameAndType.Slot);
             return _invokeDynamicCache[(bootstrapMethodAttrIndex, nameAndType)] = new(_next++);
         }
 
@@ -1151,7 +1151,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Module);
-            w.WriteU2(name.Index);
+            w.WriteU2(name.Slot);
             return _moduleCache[name] = new(_next++);
         }
 
@@ -1220,7 +1220,7 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Package);
-            w.WriteU2(name.Index);
+            w.WriteU2(name.Slot);
             return _packageCache[name] = new(_next++);
         }
 

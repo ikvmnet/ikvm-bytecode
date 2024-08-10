@@ -34,7 +34,7 @@ namespace IKVM.ByteCode.Writing
         public ClassConstantTableEncoder Class(ClassConstantHandle clazz)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(clazz.Index);
+            w.WriteU2(clazz.Slot);
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }

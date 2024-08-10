@@ -380,7 +380,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder Constant(ConstantHandle handle)
         {
-            WriteUInt16(handle.Index);
+            WriteUInt16(handle.Slot);
             return this;
         }
 
@@ -390,7 +390,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder InvokeStatic(MethodrefConstantHandle handle)
         {
-            return OpCode(ByteCode.OpCode._invokestatic, handle.Index);
+            return OpCode(ByteCode.OpCode._invokestatic, handle.Slot);
         }
 
         /// <summary>
@@ -399,7 +399,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder InvokeStatic(InterfaceMethodrefConstantHandle handle)
         {
-            return OpCode(ByteCode.OpCode._invokestatic, handle.Index);
+            return OpCode(ByteCode.OpCode._invokestatic, handle.Slot);
         }
 
         /// <summary>
@@ -408,7 +408,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder InvokeVirtual(MethodrefConstantHandle handle)
         {
-            return OpCode(ByteCode.OpCode._invokevirtual, handle.Index);
+            return OpCode(ByteCode.OpCode._invokevirtual, handle.Slot);
         }
 
         /// <summary>
@@ -677,10 +677,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder LoadConstant(IntegerConstantHandle handle)
         {
-            if (handle.Index <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Index);
+            if (handle.Slot <= byte.MaxValue)
+                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Index);
+                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
         }
 
         /// <summary>
@@ -689,10 +689,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder LoadConstant(FloatConstantHandle handle)
         {
-            if (handle.Index <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Index);
+            if (handle.Slot <= byte.MaxValue)
+                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Index);
+                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
         }
 
         /// <summary>
@@ -701,10 +701,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder LoadConstant(StringConstantHandle handle)
         {
-            if (handle.Index <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Index);
+            if (handle.Slot <= byte.MaxValue)
+                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Index);
+                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
         }
 
         /// <summary>
@@ -713,10 +713,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder LoadConstant(ClassConstantHandle handle)
         {
-            if (handle.Index <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Index);
+            if (handle.Slot <= byte.MaxValue)
+                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Index);
+                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
         }
 
         /// <summary>
@@ -725,10 +725,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder LoadConstant(MethodTypeConstantHandle handle)
         {
-            if (handle.Index <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Index);
+            if (handle.Slot <= byte.MaxValue)
+                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Index);
+                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
         }
 
         /// <summary>
@@ -737,10 +737,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder LoadConstant(MethodHandleConstantHandle handle)
         {
-            if (handle.Index <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Index);
+            if (handle.Slot <= byte.MaxValue)
+                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Index);
+                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
         }
 
         /// <summary>
@@ -749,7 +749,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder LoadConstant(LongConstantHandle handle)
         {
-            return OpCode(IKVM.ByteCode.OpCode._ldc2_w, handle.Index);
+            return OpCode(IKVM.ByteCode.OpCode._ldc2_w, handle.Slot);
         }
 
         /// <summary>
@@ -758,7 +758,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="handle"></param>
         public InstructionEncoder LoadConstant(DoubleConstantHandle handle)
         {
-            return OpCode(IKVM.ByteCode.OpCode._ldc2_w, handle.Index);
+            return OpCode(IKVM.ByteCode.OpCode._ldc2_w, handle.Slot);
         }
 
         /// <summary>

@@ -74,7 +74,7 @@ namespace IKVM.ByteCode.Writing
         public InterfaceHandle AddInterface(ClassConstantHandle clazz)
         {
             var w = new ClassFormatWriter(_interfaces.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(clazz.Index);
+            w.WriteU2(clazz.Slot);
             return new(_interfaceCount++);
         }
 
@@ -101,8 +101,8 @@ namespace IKVM.ByteCode.Writing
             attributes ??= new AttributeTableBuilder(Constants);
             var w = new ClassFormatWriter(_fields.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU2((ushort)accessFlags);
-            w.WriteU2(name.Index);
-            w.WriteU2(descriptor.Index);
+            w.WriteU2(name.Slot);
+            w.WriteU2(descriptor.Slot);
             attributes.Serialize(_fields);
             return new(_fieldCount++);
         }
@@ -133,8 +133,8 @@ namespace IKVM.ByteCode.Writing
             attributes ??= new AttributeTableBuilder(Constants);
             var w = new ClassFormatWriter(_methods.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU2((ushort)accessFlags);
-            w.WriteU2(name.Index);
-            w.WriteU2(descriptor.Index);
+            w.WriteU2(name.Slot);
+            w.WriteU2(descriptor.Slot);
             attributes.Serialize(_methods);
             return new(_methodCount++);
         }
@@ -204,8 +204,8 @@ namespace IKVM.ByteCode.Writing
         {
             var w = new ClassFormatWriter(builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU2((ushort)_accessFlags);
-            w.WriteU2(_thisClass.Index);
-            w.WriteU2(_superClass.Index);
+            w.WriteU2(_thisClass.Slot);
+            w.WriteU2(_superClass.Slot);
         }
 
         /// <summary>

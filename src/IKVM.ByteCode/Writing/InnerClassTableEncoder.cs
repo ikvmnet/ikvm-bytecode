@@ -34,9 +34,9 @@ namespace IKVM.ByteCode.Writing
         public InnerClassTableEncoder InnerClass(ClassConstantHandle inner, ClassConstantHandle outer, Utf8ConstantHandle innerName, AccessFlag accessFlags)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(inner.Index);
-            w.WriteU2(outer.Index);
-            w.WriteU2(innerName.Index);
+            w.WriteU2(inner.Slot);
+            w.WriteU2(outer.Slot);
+            w.WriteU2(innerName.Slot);
             w.WriteU2((ushort)accessFlags);
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;

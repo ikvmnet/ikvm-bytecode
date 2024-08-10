@@ -1,17 +1,17 @@
 ﻿namespace IKVM.ByteCode
 {
 
-    public readonly record struct FieldrefConstantHandle(ushort Index)
+    public readonly record struct FieldrefConstantHandle(ushort Slot)
     {
 
         public static explicit operator FieldrefConstantHandle(ConstantHandle handle)
         {
-            return new FieldrefConstantHandle(handle.Index);
+            return new FieldrefConstantHandle(handle.Slot);
         }
 
         public static implicit operator ConstantHandle(FieldrefConstantHandle handle)
         {
-            return new ConstantHandle(ConstantKind.Fieldref, handle.Index);
+            return new ConstantHandle(ConstantKind.Fieldref, handle.Slot);
         }
 
         public static explicit operator FieldrefConstantHandle(RefConstantHandle handle)
@@ -21,7 +21,7 @@
 
         public static implicit operator RefConstantHandle(FieldrefConstantHandle handle)
         {
-            return new RefConstantHandle(ConstantKind.Fieldref, handle.Index);
+            return new RefConstantHandle(ConstantKind.Fieldref, handle.Slot);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@
         /// <summary>
         /// Gets whether or not this represents the nil instance.
         /// </summary>
-        public readonly bool IsNil => Index == 0;
+        public readonly bool IsNil => Slot == 0;
 
         /// <summary>
         /// Gets whether or not this does not represent the nil instance.

@@ -36,7 +36,7 @@ namespace IKVM.ByteCode.Writing
         public BootstrapMethodTableEncoder Method(MethodHandleConstantHandle methodRef, Action<ConstantTableEncoder> arguments)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(methodRef.Index);
+            w.WriteU2(methodRef.Slot);
             arguments(new ConstantTableEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;

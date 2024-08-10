@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode
 {
 
-    public readonly record struct FloatConstantHandle(ushort Index)
+    public readonly record struct FloatConstantHandle(ushort Slot)
     {
 
         public static explicit operator FloatConstantHandle(ConstantHandle handle)
@@ -11,12 +11,12 @@ namespace IKVM.ByteCode
             if (handle.Kind is not ConstantKind.Float and not ConstantKind.Unknown)
                 throw new InvalidCastException($"ConstantHandle of Kind {handle.Kind} cannot be cast to Float.");
 
-            return new FloatConstantHandle(handle.Index);
+            return new FloatConstantHandle(handle.Slot);
         }
 
         public static implicit operator ConstantHandle(FloatConstantHandle handle)
         {
-            return new ConstantHandle( ConstantKind.Float,handle.Index);
+            return new ConstantHandle( ConstantKind.Float,handle.Slot);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace IKVM.ByteCode
         /// <summary>
         /// Gets whether or not this represents the nil instance.
         /// </summary>
-        public readonly bool IsNil => Index == 0;
+        public readonly bool IsNil => Slot == 0;
 
         /// <summary>
         /// Gets whether or not this does not represent the nil instance.

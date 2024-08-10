@@ -12,6 +12,16 @@
     <ItemGroup>
         <None Include="..\..\LICENSE" Pack="true" PackagePath="." />
         <None Include="..\..\README.md" Pack="true" PackagePath="." />
+        <None Include="OpCodeName.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>OpCodeName.g.tt</DependentUpon>
+        </None>
+        <None Include="Writing\InstructionEncoderExtensions.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>InstructionEncoderExtensions.g.tt</DependentUpon>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -45,23 +55,32 @@
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
         </Compile>
+        <Compile Update="OpCodeName.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>OpCodeName.g.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Writing\InstructionEncoderExtensions.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>InstructionEncoderExtensions.g.tt</DependentUpon>
+        </Compile>
+        <None Update="OpCodeName.g.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>OpCodeName.g.cs</LastGenOutput>
+        </None>
         <None Update="Reading\Attribute.g.tt">
             <LastGenOutput>Attribute.g.cs</LastGenOutput>
             <Generator>TextTemplatingFileGenerator</Generator>
+        </None>
+        <None Update="Writing\InstructionEncoderExtensions.g.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>InstructionEncoderExtensions.g.cs</LastGenOutput>
         </None>
         <Compile Update="Reading\Attribute.g.cs">
             <DependentUpon>Attribute.g.tt</DependentUpon>
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-        </Compile>
-        <None Update="Reading\AttributeTableReader.g.tt">
-            <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>AttributeTableReader.g.cs</LastGenOutput>
-        </None>
-        <Compile Update="Reading\AttributeTableReader.g.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>AttributeTableReader.g.tt</DependentUpon>
         </Compile>
     </ItemGroup>
 

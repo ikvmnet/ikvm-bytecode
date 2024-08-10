@@ -33,7 +33,7 @@ namespace IKVM.ByteCode.Writing
         public PackageConstantTableEncoder PackageConstant(PackageConstantHandle package)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(package.Index);
+            w.WriteU2(package.Slot);
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }

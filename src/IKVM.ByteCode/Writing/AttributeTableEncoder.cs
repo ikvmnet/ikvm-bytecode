@@ -53,7 +53,7 @@ namespace IKVM.ByteCode.Writing
             if (data != null && data.Count > 0)
             {
                 var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
-                w.WriteU2(attributeName.Index);
+                w.WriteU2(attributeName.Slot);
                 w.WriteU4((uint)data.Count);
                 _builder.LinkSuffix(data);
                 IncrementCount();
@@ -75,7 +75,7 @@ namespace IKVM.ByteCode.Writing
             if (data.Length > 0)
             {
                 var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
-                w.WriteU2(attributeName.Index);
+                w.WriteU2(attributeName.Slot);
                 w.WriteU4((uint)data.Length);
                 _builder.WriteBytes(data);
                 IncrementCount();
@@ -97,7 +97,7 @@ namespace IKVM.ByteCode.Writing
             if (data.Length > 0)
             {
                 var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
-                w.WriteU2(attributeName.Index);
+                w.WriteU2(attributeName.Slot);
                 w.WriteU4((uint)data.Length);
                 _builder.WriteBytes(data);
                 IncrementCount();
@@ -116,7 +116,7 @@ namespace IKVM.ByteCode.Writing
         public AttributeTableEncoder Attribute(Utf8ConstantHandle attributeName)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U4).GetBytes());
-            w.WriteU2(attributeName.Index);
+            w.WriteU2(attributeName.Slot);
             w.WriteU4(0);
             IncrementCount();
             return this;
@@ -131,7 +131,7 @@ namespace IKVM.ByteCode.Writing
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.WriteU2(value.Index);
+            w.WriteU2(value.Slot);
             return Attribute(attributeName, b);
         }
 
@@ -212,8 +212,8 @@ namespace IKVM.ByteCode.Writing
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2 + ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.WriteU2(clazz.Index);
-            w.WriteU2(method.Index);
+            w.WriteU2(clazz.Slot);
+            w.WriteU2(method.Slot);
             return Attribute(attributeName, b);
         }
 
@@ -233,7 +233,7 @@ namespace IKVM.ByteCode.Writing
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.WriteU2(signature.Index);
+            w.WriteU2(signature.Slot);
             return Attribute(attributeName, b);
         }
 
@@ -245,7 +245,7 @@ namespace IKVM.ByteCode.Writing
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.WriteU2(sourceFile.Index);
+            w.WriteU2(sourceFile.Slot);
             return Attribute(attributeName, b);
         }
 
@@ -455,9 +455,9 @@ namespace IKVM.ByteCode.Writing
 
             var b = new BlobBuilder();
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
-            w.WriteU2(name.Index);
+            w.WriteU2(name.Slot);
             w.WriteU2((ushort)flags);
-            w.WriteU2(version.Index);
+            w.WriteU2(version.Slot);
             requires(new ModuleRequiresTableEncoder(b));
             exports(new ModuleExportsTableEncoder(b));
             opens(new ModuleOpensTableEncoder(b));
@@ -484,7 +484,7 @@ namespace IKVM.ByteCode.Writing
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.WriteU2(mainClass.Index);
+            w.WriteU2(mainClass.Slot);
             return Attribute(attributeName, b);
         }
 
@@ -496,7 +496,7 @@ namespace IKVM.ByteCode.Writing
         {
             var b = (Span<byte>)stackalloc byte[ClassFormatWriter.U2];
             var w = new ClassFormatWriter(b);
-            w.WriteU2(nestHost.Index);
+            w.WriteU2(nestHost.Slot);
             return Attribute(attributeName, b);
         }
 

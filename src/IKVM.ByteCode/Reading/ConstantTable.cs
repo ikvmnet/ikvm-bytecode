@@ -5,45 +5,45 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Reading
 {
 
-    public class ConstantTable : IConstantView, IConstantPool, IReadOnlyCollection<ConstantHandle>
+    public readonly struct ConstantTable : IConstantView, IConstantPool, IReadOnlyCollection<ConstantHandle>
     {
 
         public struct Enumerator : IEnumerator<ConstantHandle>
         {
 
-            readonly ConstantData[] _constants;
-            int _index = 0;
+            readonly ConstantData[] _items;
+            int _slot = 0;
             int _skip = 1;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="constants"></param>
-            internal Enumerator(ConstantData[] constants)
+            /// <param name="items"></param>
+            internal Enumerator(ConstantData[] items)
             {
-                _constants = constants ?? throw new ArgumentNullException(nameof(constants));
+                _items = items ?? throw new ArgumentNullException(nameof(items));
             }
 
             /// <inheritdoc />
-            public readonly ConstantHandle Current => new(_constants[checked((ushort)_index)].Kind, checked((ushort)_index));
+            public readonly ConstantHandle Current => new(_items[checked((ushort)_slot)].Kind, checked((ushort)_slot));
 
             /// <inheritdoc />
             public bool MoveNext()
             {
                 // advance to next constant
-                _index += _skip;
-                if (_index >= _constants.Length)
+                _slot += _skip;
+                if (_slot >= _items.Length)
                     return false;
 
                 // current constant governs how many we should skip to reach the next constant
-                _skip = _constants[_index].Kind is ConstantKind.Long or ConstantKind.Double ? 2 : 1;
+                _skip = _items[_slot].Kind is ConstantKind.Long or ConstantKind.Double ? 2 : 1;
                 return true;
             }
 
             /// <inheritdoc />
             public void Reset()
             {
-                _index = -1;
+                _slot = -1;
             }
 
             /// <inheritdoc />
@@ -60,7 +60,7 @@ namespace IKVM.ByteCode.Reading
         readonly ClassFormatVersion _version;
         readonly ConstantData[] _items;
         readonly int _count = 0;
-        Utf8ConstantData[]? _utf8Cache;
+        readonly Utf8ConstantData[] _utf8Cache;
 
         /// <summary>
         /// Initializes a new instance.
@@ -72,6 +72,9 @@ namespace IKVM.ByteCode.Reading
             _version = version;
             _items = constants;
 
+            // we cache UTF8 items since MUTF8 decoding is intensive
+            _utf8Cache = new Utf8ConstantData[_items.Length];
+
             // since longs and doubles take two slots, count
             foreach (var constant in constants)
                 _count += constant.Kind is ConstantKind.Long or ConstantKind.Double ? 2 : 1;
@@ -82,24 +85,30 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ref readonly ConstantData this[ConstantHandle handle] => ref ReadData(handle);
+        public readonly ref readonly ConstantData this[ConstantHandle handle] => ref ReadData(handle);
 
         /// <summary>
         /// Gets the untyped constant for the given handle.
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        ref readonly ConstantData ReadData(ConstantHandle handle) => ref _items[handle.Index];
+        readonly ref readonly ConstantData ReadData(ConstantHandle handle) => ref _items[handle.Slot];
 
         /// <summary>
         /// Gets the number of constants.
         /// </summary>
-        public int Count => _count;
+        public readonly int Count => _count;
+
+        /// <summary>
+        /// Gets the count of slots on the table. The slot count may differ from the constant count. First, index-0 is
+        /// not included in the count of constants, and second long and double constants take up two slots.
+        /// </summary>
+        public readonly int SlotCount => _items.Length;
 
         /// <summary>
         /// Gets an enumerator over the interfaces.
         /// </summary>
-        public Enumerator GetEnumerator() => new(_items);
+        public readonly Enumerator GetEnumerator() => new(_items);
 
         /// <summary>
         /// Gets the <see cref="ConstantData"/> value refered to by the <see cref="ConstantHandle"/>.
@@ -108,7 +117,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
-        public ref readonly ConstantData Read(ConstantHandle handle)
+        public readonly ref readonly ConstantData Read(ConstantHandle handle)
         {
             return ref ReadData(handle);
         }
@@ -118,7 +127,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ConstantKind GetKind(ConstantHandle handle)
+        public readonly ConstantKind GetKind(ConstantHandle handle)
         {
             return handle.IsNotNil ? Read(handle).Kind : ConstantKind.Unknown;
         }
@@ -130,7 +139,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
-        public Constant Get(ConstantHandle handle)
+        public readonly Constant Get(ConstantHandle handle)
         {
             var kind = Read(handle).Kind;
             if (handle.Kind != ConstantKind.Unknown && handle.Kind != kind)
@@ -166,24 +175,23 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
-        public Utf8ConstantData Read(Utf8ConstantHandle handle)
+        public readonly Utf8ConstantData Read(Utf8ConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
             // we cache UTF8 values
-            _utf8Cache ??= new Utf8ConstantData[_items.Length];
-            var cached = _utf8Cache[handle.Index];
+            var cached = _utf8Cache[handle.Slot];
             if (cached.Value != null)
                 return cached;
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Utf8)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a Utf8 constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a Utf8 constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (Utf8ConstantData.TryRead(ref reader, out var value, _version.Major) == false)
-                throw new InvalidClassException($"Failed to read Utf8 constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read Utf8 constant at index {handle.Slot}.");
 
             return value;
         }
@@ -195,7 +203,7 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
-        public Utf8Constant Get(Utf8ConstantHandle handle)
+        public readonly Utf8Constant Get(Utf8ConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -209,18 +217,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public IntegerConstantData Read(IntegerConstantHandle handle)
+        public readonly IntegerConstantData Read(IntegerConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Integer)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not an Integer constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not an Integer constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (IntegerConstantData.TryRead(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read Integer constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read Integer constant at index {handle.Slot}.");
 
             return value;
         }
@@ -230,7 +238,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public IntegerConstant Get(IntegerConstantHandle handle)
+        public readonly IntegerConstant Get(IntegerConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -244,18 +252,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public FloatConstantData Read(FloatConstantHandle handle)
+        public readonly FloatConstantData Read(FloatConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Float)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a Float constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a Float constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (FloatConstantData.TryRead(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read Float constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read Float constant at index {handle.Slot}.");
 
             return value;
         }
@@ -265,7 +273,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public FloatConstant Get(FloatConstantHandle handle)
+        public readonly FloatConstant Get(FloatConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -279,18 +287,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public LongConstantData Read(LongConstantHandle handle)
+        public readonly LongConstantData Read(LongConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Long)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a Long constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a Long constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (LongConstantData.TryRead(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read Long constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read Long constant at index {handle.Slot}.");
 
             return value;
         }
@@ -300,7 +308,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public LongConstant Get(LongConstantHandle handle)
+        public readonly LongConstant Get(LongConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -314,18 +322,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public DoubleConstantData Read(DoubleConstantHandle handle)
+        public readonly DoubleConstantData Read(DoubleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Double)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a Double constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a Double constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (DoubleConstantData.TryRead(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read Double constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read Double constant at index {handle.Slot}.");
 
             return value;
         }
@@ -335,7 +343,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public DoubleConstant Get(DoubleConstantHandle handle)
+        public readonly DoubleConstant Get(DoubleConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -349,18 +357,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ClassConstantData Read(ClassConstantHandle handle)
+        public readonly ClassConstantData Read(ClassConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Class)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a Class constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a Class constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (ClassConstantData.TryRead(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read Class constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read Class constant at index {handle.Slot}.");
 
             return value;
         }
@@ -370,7 +378,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ClassConstant Get(ClassConstantHandle handle)
+        public readonly ClassConstant Get(ClassConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -388,18 +396,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public StringConstantData Read(StringConstantHandle handle)
+        public readonly StringConstantData Read(StringConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.String)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a String constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a String constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (StringConstantData.TryReadStringConstant(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read String constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read String constant at index {handle.Slot}.");
 
             return value;
         }
@@ -409,7 +417,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public StringConstant Get(StringConstantHandle handle)
+        public readonly StringConstant Get(StringConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -427,7 +435,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public RefConstant Get(RefConstantHandle handle)
+        public readonly RefConstant Get(RefConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -448,18 +456,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public FieldrefConstantData Read(FieldrefConstantHandle handle)
+        public readonly FieldrefConstantData Read(FieldrefConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Fieldref)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a Fieldref constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a Fieldref constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (FieldrefConstantData.TryRead(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read Fieldref constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read Fieldref constant at index {handle.Slot}.");
 
             return value;
         }
@@ -469,7 +477,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public FieldrefConstant Get(FieldrefConstantHandle handle)
+        public readonly FieldrefConstant Get(FieldrefConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -490,18 +498,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodrefConstantData Read(MethodrefConstantHandle handle)
+        public readonly MethodrefConstantData Read(MethodrefConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Methodref)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a Methodref constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a Methodref constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (MethodrefConstantData.TryRead(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read Methodref constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read Methodref constant at index {handle.Slot}.");
 
             return value;
         }
@@ -511,7 +519,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodrefConstant Get(MethodrefConstantHandle handle)
+        public readonly MethodrefConstant Get(MethodrefConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -532,18 +540,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public InterfaceMethodrefConstantData Read(InterfaceMethodrefConstantHandle handle)
+        public readonly InterfaceMethodrefConstantData Read(InterfaceMethodrefConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.InterfaceMethodref)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a InterfaceMethodref constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a InterfaceMethodref constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (InterfaceMethodrefConstantData.TryRead(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read InterfaceMethodref constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read InterfaceMethodref constant at index {handle.Slot}.");
 
             return value;
         }
@@ -553,7 +561,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public InterfaceMethodrefConstant Get(InterfaceMethodrefConstantHandle handle)
+        public readonly InterfaceMethodrefConstant Get(InterfaceMethodrefConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -574,18 +582,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public NameAndTypeConstantData Read(NameAndTypeConstantHandle handle)
+        public readonly NameAndTypeConstantData Read(NameAndTypeConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.NameAndType)
-                throw new InvalidClassException($"Constant at index {handle.Index} is not a NameAndType constant.");
+                throw new InvalidClassException($"Constant at index {handle.Slot} is not a NameAndType constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (NameAndTypeConstantData.TryReadNameAndTypeConstant(ref reader, out var value) == false)
-                throw new InvalidClassException($"Failed to read NameAndType constant at index {handle.Index}.");
+                throw new InvalidClassException($"Failed to read NameAndType constant at index {handle.Slot}.");
 
             return value;
         }
@@ -595,7 +603,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public NameAndTypeConstant Get(NameAndTypeConstantHandle handle)
+        public readonly NameAndTypeConstant Get(NameAndTypeConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -616,18 +624,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodHandleConstantData Read(MethodHandleConstantHandle handle)
+        public readonly MethodHandleConstantData Read(MethodHandleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.MethodHandle)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a MethodHandle constant.");
+                throw new ByteCodeException($"Constant at index {handle.Slot} is not a MethodHandle constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (MethodHandleConstantData.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read MethodHandle constant at index {handle.Index}.");
+                throw new ByteCodeException($"Failed to read MethodHandle constant at index {handle.Slot}.");
 
             return value;
         }
@@ -637,7 +645,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodHandleConstant Get(MethodHandleConstantHandle handle)
+        public readonly MethodHandleConstant Get(MethodHandleConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -698,18 +706,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodTypeConstantData Read(MethodTypeConstantHandle handle)
+        public readonly MethodTypeConstantData Read(MethodTypeConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.MethodType)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a MethodType constant.");
+                throw new ByteCodeException($"Constant at index {handle.Slot} is not a MethodType constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (MethodTypeConstantData.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read MethodType constant at index {handle.Index}.");
+                throw new ByteCodeException($"Failed to read MethodType constant at index {handle.Slot}.");
 
             return value;
         }
@@ -719,7 +727,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public MethodTypeConstant Get(MethodTypeConstantHandle handle)
+        public readonly MethodTypeConstant Get(MethodTypeConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -737,18 +745,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public DynamicConstantData Read(DynamicConstantHandle handle)
+        public readonly DynamicConstantData Read(DynamicConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Dynamic)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Dynamic constant.");
+                throw new ByteCodeException($"Constant at index {handle.Slot} is not a Dynamic constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (DynamicConstantData.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Dynamic constant at index {handle.Index}.");
+                throw new ByteCodeException($"Failed to read Dynamic constant at index {handle.Slot}.");
 
             return value;
         }
@@ -758,7 +766,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public DynamicConstant Get(DynamicConstantHandle handle)
+        public readonly DynamicConstant Get(DynamicConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -776,18 +784,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public InvokeDynamicConstantData Read(InvokeDynamicConstantHandle handle)
+        public readonly InvokeDynamicConstantData Read(InvokeDynamicConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.InvokeDynamic)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a InvokeDynamic constant.");
+                throw new ByteCodeException($"Constant at index {handle.Slot} is not a InvokeDynamic constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (InvokeDynamicConstantData.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read InvokeDynamic constant at index {handle.Index}.");
+                throw new ByteCodeException($"Failed to read InvokeDynamic constant at index {handle.Slot}.");
 
             return value;
         }
@@ -797,7 +805,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public InvokeDynamicConstant Get(InvokeDynamicConstantHandle handle)
+        public readonly InvokeDynamicConstant Get(InvokeDynamicConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -815,18 +823,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ModuleConstantData Read(ModuleConstantHandle handle)
+        public readonly ModuleConstantData Read(ModuleConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Module)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Module constant.");
+                throw new ByteCodeException($"Constant at index {handle.Slot} is not a Module constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (ModuleConstantData.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Module constant at index {handle.Index}.");
+                throw new ByteCodeException($"Failed to read Module constant at index {handle.Slot}.");
 
             return value;
         }
@@ -836,7 +844,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public ModuleConstant Get(ModuleConstantHandle handle)
+        public readonly ModuleConstant Get(ModuleConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -854,18 +862,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public PackageConstantData Read(PackageConstantHandle handle)
+        public readonly PackageConstantData Read(PackageConstantHandle handle)
         {
             if (handle.IsNil)
                 throw new ArgumentNullException(nameof(handle));
 
-            var constant = _items[handle.Index];
+            var constant = _items[handle.Slot];
             if (constant.Kind != ConstantKind.Package)
-                throw new ByteCodeException($"Constant at index {handle.Index} is not a Package constant.");
+                throw new ByteCodeException($"Constant at index {handle.Slot} is not a Package constant.");
 
             var reader = new ClassFormatReader(constant.Data);
             if (PackageConstantData.TryRead(ref reader, out var value) == false)
-                throw new ByteCodeException($"Failed to read Package constant at index {handle.Index}.");
+                throw new ByteCodeException($"Failed to read Package constant at index {handle.Slot}.");
 
             return value;
         }
@@ -875,7 +883,7 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public PackageConstant Get(PackageConstantHandle handle)
+        public readonly PackageConstant Get(PackageConstantHandle handle)
         {
             if (handle.IsNil)
                 return default;
@@ -889,12 +897,12 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <inheritdoc />
-        IEnumerator<ConstantHandle> IEnumerable<ConstantHandle>.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator<ConstantHandle> IEnumerable<ConstantHandle>.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        ConstantHandle IConstantPool.Get(in Constant value)
+        readonly ConstantHandle IConstantPool.Get(in Constant value)
         {
             return value.Kind switch
             {
@@ -919,7 +927,7 @@ namespace IKVM.ByteCode.Reading
             };
         }
 
-        Utf8ConstantHandle IConstantPool.Get(in Utf8Constant value)
+        readonly Utf8ConstantHandle IConstantPool.Get(in Utf8Constant value)
         {
             foreach (var i in this)
             {
@@ -935,7 +943,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        IntegerConstantHandle IConstantPool.Get(in IntegerConstant value)
+        readonly IntegerConstantHandle IConstantPool.Get(in IntegerConstant value)
         {
             foreach (var i in this)
             {
@@ -951,7 +959,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        FloatConstantHandle IConstantPool.Get(in FloatConstant value)
+        readonly FloatConstantHandle IConstantPool.Get(in FloatConstant value)
         {
             foreach (var i in this)
             {
@@ -967,7 +975,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        LongConstantHandle IConstantPool.Get(in LongConstant value)
+        readonly LongConstantHandle IConstantPool.Get(in LongConstant value)
         {
             foreach (var i in this)
             {
@@ -983,7 +991,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        DoubleConstantHandle IConstantPool.Get(in DoubleConstant value)
+        readonly DoubleConstantHandle IConstantPool.Get(in DoubleConstant value)
         {
             foreach (var i in this)
             {
@@ -999,7 +1007,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        ClassConstantHandle IConstantPool.Get(in ClassConstant value)
+        readonly ClassConstantHandle IConstantPool.Get(in ClassConstant value)
         {
             foreach (var i in this)
             {
@@ -1015,7 +1023,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        StringConstantHandle IConstantPool.Get(in StringConstant value)
+        readonly StringConstantHandle IConstantPool.Get(in StringConstant value)
         {
             foreach (var i in this)
             {
@@ -1031,7 +1039,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        FieldrefConstantHandle IConstantPool.Get(in FieldrefConstant value)
+        readonly FieldrefConstantHandle IConstantPool.Get(in FieldrefConstant value)
         {
             foreach (var i in this)
             {
@@ -1047,7 +1055,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        MethodrefConstantHandle IConstantPool.Get(in MethodrefConstant value)
+        readonly MethodrefConstantHandle IConstantPool.Get(in MethodrefConstant value)
         {
             foreach (var i in this)
             {
@@ -1063,7 +1071,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        InterfaceMethodrefConstantHandle IConstantPool.Get(in InterfaceMethodrefConstant value)
+        readonly InterfaceMethodrefConstantHandle IConstantPool.Get(in InterfaceMethodrefConstant value)
         {
             foreach (var i in this)
             {
@@ -1079,7 +1087,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        NameAndTypeConstantHandle IConstantPool.Get(in NameAndTypeConstant value)
+        readonly NameAndTypeConstantHandle IConstantPool.Get(in NameAndTypeConstant value)
         {
             foreach (var i in this)
             {
@@ -1095,7 +1103,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        MethodHandleConstantHandle IConstantPool.Get(in MethodHandleConstant value)
+        readonly MethodHandleConstantHandle IConstantPool.Get(in MethodHandleConstant value)
         {
             foreach (var i in this)
             {
@@ -1111,7 +1119,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        MethodTypeConstantHandle IConstantPool.Get(in MethodTypeConstant value)
+        readonly MethodTypeConstantHandle IConstantPool.Get(in MethodTypeConstant value)
         {
             foreach (var i in this)
             {
@@ -1127,7 +1135,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        DynamicConstantHandle IConstantPool.Get(in DynamicConstant value)
+        readonly DynamicConstantHandle IConstantPool.Get(in DynamicConstant value)
         {
             foreach (var i in this)
             {
@@ -1143,7 +1151,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        InvokeDynamicConstantHandle IConstantPool.Get(in InvokeDynamicConstant value)
+        readonly InvokeDynamicConstantHandle IConstantPool.Get(in InvokeDynamicConstant value)
         {
             foreach (var i in this)
             {
@@ -1159,7 +1167,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        ModuleConstantHandle IConstantPool.Get(in ModuleConstant value)
+        readonly ModuleConstantHandle IConstantPool.Get(in ModuleConstant value)
         {
             foreach (var i in this)
             {
@@ -1175,7 +1183,7 @@ namespace IKVM.ByteCode.Reading
             throw new ByteCodeException("Unknown constant for value.");
         }
 
-        PackageConstantHandle IConstantPool.Get(in PackageConstant value)
+        readonly PackageConstantHandle IConstantPool.Get(in PackageConstant value)
         {
             foreach (var i in this)
             {

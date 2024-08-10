@@ -34,7 +34,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Byte);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -49,7 +49,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Char);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -64,7 +64,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Double);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -79,7 +79,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Float);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -94,7 +94,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Integer);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -109,7 +109,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Long);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -124,7 +124,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Short);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -139,7 +139,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Boolean);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -154,7 +154,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.String);
-            w.WriteU2(constantValue.Index);
+            w.WriteU2(constantValue.Slot);
             _count++;
         }
 
@@ -170,8 +170,8 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Enum);
-            w.WriteU2(typeName.Index);
-            w.WriteU2(constName.Index);
+            w.WriteU2(typeName.Slot);
+            w.WriteU2(constName.Slot);
             _count++;
         }
 
@@ -186,7 +186,7 @@ namespace IKVM.ByteCode.Writing
 
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ElementValueKind.Class);
-            w.WriteU2(classInfo.Index);
+            w.WriteU2(classInfo.Slot);
             _count++;
         }
 

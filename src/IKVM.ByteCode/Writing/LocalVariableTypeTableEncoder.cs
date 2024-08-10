@@ -32,8 +32,8 @@ namespace IKVM.ByteCode.Writing
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU2(startPc);
             w.WriteU2(length);
-            w.WriteU2(name.Index);
-            w.WriteU2(signature.Index);
+            w.WriteU2(name.Slot);
+            w.WriteU2(signature.Slot);
             w.WriteU2(slot);
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
