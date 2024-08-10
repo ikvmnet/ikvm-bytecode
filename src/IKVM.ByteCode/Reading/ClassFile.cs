@@ -29,14 +29,20 @@ namespace IKVM.ByteCode.Reading
         /// <returns></returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
+            size += ClassFormatReader.U4;
             if (reader.TryReadU4(out uint magic) == false)
                 return false;
             if (magic != MAGIC)
                 throw new InvalidClassMagicException(magic);
 
             size += ClassFormatReader.U2 + ClassFormatReader.U2;
-            if (reader.TryAdvance(ClassFormatReader.U2 + ClassFormatReader.U2) == false)
+            if (reader.TryReadU2(out ushort minorVersion) == false)
                 return false;
+            if (reader.TryReadU2(out ushort majorVersion) == false)
+                return false;
+
+            if (majorVersion > 63)
+                throw new UnsupportedClassVersionException(new ClassFormatVersion(majorVersion, minorVersion));
 
             if (ConstantTable.TryMeasure(ref reader, ref size) == false)
                 return false;
@@ -146,6 +152,35 @@ namespace IKVM.ByteCode.Reading
         public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, IMemoryOwner<byte>? owner = null)
         {
             return TryRead(buffer, out clazz, out _, out _, owner);
+        }
+
+        /// <summary>
+        /// Attempts to measure a class from the given buffer, returning information about the number of consumed and examined bytes.
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="size"></param>
+        /// <param name="consumed"></param>
+        /// <param name="examined"></param>
+        /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
+        public static bool TryMeasure(in ReadOnlySequence<byte> buffer, ref int size, out SequencePosition consumed, out SequencePosition examined)
+        {
+            consumed = buffer.Start;
+
+            var reader = new ClassFormatReader(buffer);
+            if (TryMeasure(ref reader, ref size) == false)
+            {
+                // examined up to the position of the reader, but consumed nothing
+                examined = reader.Position;
+                return false;
+            }
+            else
+            {
+                // examined up to the point of the reader, consumed the same
+                consumed = reader.Position;
+                examined = reader.Position;
+                return true;
+            }
         }
 
         /// <summary>
@@ -326,37 +361,39 @@ namespace IKVM.ByteCode.Reading
                 if (result.IsCanceled)
                     throw new OperationCanceledException();
 
-                // temporary buffer used since ClassFile retains memory
-                var owner = MemoryPool<byte>.Shared.Rent(checked((int)result.Buffer.Length));
+                // we measure first, to prevent allocation of expensive arrays and structures if the data stream is not complete or the class structure invalid
+                int size = 0;
+                if (TryMeasure(result.Buffer, ref size, out var consumed, out var examined) == false)
+                {
+                    reader.AdvanceTo(consumed, examined);
+
+                    // we couldn't read a full class, and the pipe is at the end
+                    if (result.IsCompleted)
+                        throw new InvalidClassException("End of stream reached before valid class.");
+
+                    continue;
+                }
+
+                // allocate a new buffer of the appropriate size, private to the class file
+                var owner = MemoryPool<byte>.Shared.Rent(size);
 
                 try
                 {
+                    // copy original buffer for private use by the class file
                     result.Buffer.CopyTo(owner.Memory.Span);
 
-                    if (TryRead(new ReadOnlySequence<byte>(owner.Memory), out var clazz, out var consumed, out var examined, owner) == false)
+                    if (TryRead(new ReadOnlySequence<byte>(owner.Memory), out var clazz, out _, out _, owner) == false)
                     {
-                        // slice original buffer to report back
-                        var consumed_ = result.Buffer.Slice(0, consumed.GetInteger());
-                        var examined_ = result.Buffer.Slice(0, examined.GetInteger());
-                        reader.AdvanceTo(consumed_.End, examined_.End);
-
-                        // we couldn't read a full class, and the pipe is at the end
-                        if (result.IsCompleted)
-                            throw new InvalidClassException("End of stream reached before valid class.");
-
-                        continue;
+                        throw new ByteCodeException("End of stream reached reading already measured class data.");
                     }
                     else
                     {
-                        // we no longer own the memory
+                        // advance to values previously read by measurement
+                        reader.AdvanceTo(consumed, examined);
                         owner = null;
-
-                        // slice original buffer to report back
-                        var consumed_ = result.Buffer.Slice(0, consumed.GetInteger());
-                        var examined_ = result.Buffer.Slice(0, examined.GetInteger());
-                        reader.AdvanceTo(consumed_.End, examined_.End);
                         return clazz!;
                     }
+
                 }
                 finally
                 {

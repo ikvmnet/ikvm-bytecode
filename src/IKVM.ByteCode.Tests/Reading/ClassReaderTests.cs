@@ -40,9 +40,31 @@ namespace IKVM.ByteCode.Reading.Tests
         }
 
         [TestMethod]
-        public void CanLoadClass()
+        public void CanReadFromFile()
         {
             using var clazz = ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ClassReaderTests).Assembly.Location), "0.class"));
+            clazz.Should().NotBeNull();
+
+            foreach (var m in clazz.Methods)
+                Console.WriteLine(m.Name);
+
+            clazz.Constants.Read(clazz.Constants.Read(clazz.This).Name).Value.Should().Be("0");
+            foreach (var i in clazz.Constants)
+                i.Kind.Should().NotBe(ConstantKind.Unknown);
+            clazz.Interfaces.ToList();
+            clazz.Fields.Should().HaveCount(0);
+            clazz.Fields.ToList();
+            clazz.Methods.Should().HaveCount(2);
+            clazz.Methods.ToList();
+
+            clazz.Methods[0].Attributes.Where(i => clazz.Constants.Get(i.Name).Value == AttributeName.Code).Select(i => (CodeAttribute)i).First().Code.Length.Should().BeGreaterThan(0);
+            clazz.Methods[1].Attributes.Where(i => clazz.Constants.Get(i.Name).Value == AttributeName.Code).Select(i => (CodeAttribute)i).First().Code.Length.Should().BeGreaterThan(0);
+        }
+
+        [TestMethod]
+        public void CanReadFromStream()
+        {
+            using var clazz = ClassFile.Read(File.OpenRead(Path.Combine(Path.GetDirectoryName(typeof(ClassReaderTests).Assembly.Location), "0.class")));
             clazz.Should().NotBeNull();
 
             foreach (var m in clazz.Methods)
