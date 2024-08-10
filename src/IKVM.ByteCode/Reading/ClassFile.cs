@@ -507,9 +507,6 @@ namespace IKVM.ByteCode.Reading
 
                     if (TryRead(new ReadOnlySequence<byte>(owner.Memory), out var clazz, out var consumed, out var examined, owner) == false)
                     {
-                        // discard the memory copy
-                        owner.Dispose();
-
                         // slice original buffer to report back
                         var consumed_ = result.Buffer.Slice(0, consumed.GetInteger());
                         var examined_ = result.Buffer.Slice(0, examined.GetInteger());
