@@ -523,6 +523,9 @@ namespace IKVM.ByteCode.Reading
                     }
                     else
                     {
+                        // we no longer own the memory
+                        owner = null;
+
                         // slice original buffer to report back
                         var consumed_ = result.Buffer.Slice(0, consumed.GetInteger());
                         var examined_ = result.Buffer.Slice(0, examined.GetInteger());
@@ -530,10 +533,9 @@ namespace IKVM.ByteCode.Reading
                         return clazz!;
                     }
                 }
-                catch
+                finally
                 {
-                    owner.Dispose();
-                    throw;
+                    owner?.Dispose();
                 }
             }
         }
