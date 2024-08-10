@@ -504,11 +504,16 @@ namespace IKVM.ByteCode.Reading
                 try
                 {
                     result.Buffer.CopyTo(owner.Memory.Span);
+
                     if (TryRead(new ReadOnlySequence<byte>(owner.Memory), out var clazz, out var consumed, out var examined, owner) == false)
                     {
+                        // discard the memory copy
+                        owner.Dispose();
+
                         // slice original buffer to report back
-                        var range = result.Buffer.Slice(consumed.GetInteger(), examined.GetInteger());
-                        reader.AdvanceTo(range.Start, range.End);
+                        var consumed_ = result.Buffer.Slice(0, consumed.GetInteger());
+                        var examined_ = result.Buffer.Slice(0, examined.GetInteger());
+                        reader.AdvanceTo(consumed_.End, examined_.End);
 
                         // we couldn't read a full class, and the pipe is at the end
                         if (result.IsCompleted)
@@ -519,8 +524,9 @@ namespace IKVM.ByteCode.Reading
                     else
                     {
                         // slice original buffer to report back
-                        var range = result.Buffer.Slice(consumed.GetInteger(), examined.GetInteger());
-                        reader.AdvanceTo(range.Start, range.End);
+                        var consumed_ = result.Buffer.Slice(0, consumed.GetInteger());
+                        var examined_ = result.Buffer.Slice(0, examined.GetInteger());
+                        reader.AdvanceTo(consumed_.End, examined_.End);
                         return clazz!;
                     }
                 }
