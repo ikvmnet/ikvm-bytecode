@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly ParameterAnnotationTable Empty = new([]);
+
         readonly ParameterAnnotation[] _items;
 
         /// <summary>

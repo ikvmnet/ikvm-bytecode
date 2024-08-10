@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly ModuleExportsTable Empty = new([]);
+
         readonly ModuleExportInfo[] _items;
 
         /// <summary>

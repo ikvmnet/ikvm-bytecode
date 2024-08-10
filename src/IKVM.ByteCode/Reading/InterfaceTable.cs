@@ -53,6 +53,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly InterfaceTable Empty = new([]);
+
         readonly Interface[] _interfaces;
 
         /// <summary>

@@ -58,6 +58,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly AttributeTable Empty = new([]);
+
         readonly Attribute[] _items;
 
         /// <summary>

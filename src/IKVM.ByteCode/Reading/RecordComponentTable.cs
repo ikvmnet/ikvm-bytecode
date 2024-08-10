@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly RecordComponentTable Empty = new([]);
+
         readonly RecordComponent[] _items;
 
         /// <summary>

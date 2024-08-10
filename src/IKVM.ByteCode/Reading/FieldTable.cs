@@ -53,6 +53,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly FieldTable Empty = new([]);
+
         readonly Field[] _fields;
 
         /// <summary>

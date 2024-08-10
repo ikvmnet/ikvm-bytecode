@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly ExceptionHandlerTable Empty = new([]);
+
         readonly ExceptionHandler[] _items;
 
         /// <summary>

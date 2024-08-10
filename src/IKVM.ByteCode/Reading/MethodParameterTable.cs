@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly MethodParameterTable Empty = new([]);
+
         readonly MethodParameter[] _items;
 
         /// <summary>

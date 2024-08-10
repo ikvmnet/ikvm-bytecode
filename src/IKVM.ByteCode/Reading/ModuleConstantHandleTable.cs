@@ -53,6 +53,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly ModuleConstantHandleTable Empty = new([]);
+
         readonly ModuleConstantHandle[] _items;
 
         /// <summary>

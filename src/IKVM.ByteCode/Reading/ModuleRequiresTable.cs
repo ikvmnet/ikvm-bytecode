@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly ModuleRequiresTable Empty = new([]);
+
         readonly ModuleRequireInfo[] _items;
 
         /// <summary>

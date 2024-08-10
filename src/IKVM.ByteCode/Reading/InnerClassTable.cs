@@ -53,6 +53,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly InnerClassTable Empty = new([]);
+
         readonly InnerClass[] _items;
 
         /// <summary>

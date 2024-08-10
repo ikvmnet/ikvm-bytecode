@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly LineNumberTable Empty = new([]);
+
         readonly LineNumberInfo[] _items;
 
         /// <summary>

@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly BootstrapMethodTable Empty = new([]);
+
         readonly BootstrapMethod[] _items;
 
         /// <summary>

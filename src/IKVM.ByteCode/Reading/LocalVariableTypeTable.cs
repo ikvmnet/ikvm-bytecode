@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly LocalVariableTypeTable Empty = new([]);
+
         readonly LocalVariableType[] _items;
 
         /// <summary>

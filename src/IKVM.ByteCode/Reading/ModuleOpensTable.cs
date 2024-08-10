@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly ModuleOpensTable Empty = new([]);
+
         readonly ModuleOpenInfo[] _items;
 
         /// <summary>
