@@ -138,28 +138,23 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
-        /// <param name="builder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        /// <param name="map"></param>
+        /// <param name="attributeName"></param>
+        /// <param name="encoder"></param>
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             var self = this;
-            builder.Module(
-                pool.Import(view, Name),
+            encoder.Module(
+                attributeName,
+                map.Map(Name),
                 Flags,
-                pool.Import(view, Version),
-                e => self.Requires.EncodeTo(view, pool, ref e),
-                e => self.Exports.EncodeTo(view, pool, ref e),
-                e => self.Opens.EncodeTo(view, pool, ref e),
-                e => self.Uses.EncodeTo(view, pool, ref e),
-                e => self.Provides.EncodeTo(view, pool, ref e));
+                map.Map(Version),
+                e => self.Requires.EncodeTo(map, ref e),
+                e => self.Exports.EncodeTo(map, ref e),
+                e => self.Opens.EncodeTo(map, ref e),
+                e => self.Uses.EncodeTo(map, ref e),
+                e => self.Provides.EncodeTo(map, ref e));
         }
 
     }

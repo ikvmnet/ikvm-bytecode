@@ -25,19 +25,13 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
-        /// <param name="builder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        /// <param name="map"></param>
+        /// <param name="attributeName"></param>
+        /// <param name="encoder"></param>
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
-            builder.Synthetic();
+            encoder.Synthetic(attributeName);
         }
 
     }

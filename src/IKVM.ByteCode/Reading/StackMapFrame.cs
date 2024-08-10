@@ -176,32 +176,25 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref StackMapTableEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref StackMapTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             if (FrameType is <= 65)
-                ((SameStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+                ((SameStackMapFrame)this).EncodeTo(map, ref encoder);
             else if (FrameType is >= 64 and <= 127)
-                ((SameLocalsOneStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+                ((SameLocalsOneStackMapFrame)this).EncodeTo(map, ref encoder);
             else if (FrameType is 247)
-                ((SameLocalsOneExtendedStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+                ((SameLocalsOneExtendedStackMapFrame)this).EncodeTo(map, ref encoder);
             else if (FrameType is >= 248 and <= 250)
-                ((ChopStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+                ((ChopStackMapFrame)this).EncodeTo(map, ref encoder);
             else if (FrameType is 251)
-                ((SameExtendedStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+                ((SameExtendedStackMapFrame)this).EncodeTo(map, ref encoder);
             else if (FrameType is >= 252 and <= 254)
-                ((AppendStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+                ((AppendStackMapFrame)this).EncodeTo(map, ref encoder);
             else if (FrameType is 255)
-                ((FullStackMapFrame)this).EncodeTo(view, pool, ref encoder);
+                ((FullStackMapFrame)this).EncodeTo(map, ref encoder);
             else
                 throw new ByteCodeException("Invalid stack map frame type.");
         }

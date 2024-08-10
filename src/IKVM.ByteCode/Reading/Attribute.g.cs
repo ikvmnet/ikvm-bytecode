@@ -339,106 +339,100 @@ namespace IKVM.ByteCode.Reading
             return value;
         }
 
-        readonly void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        readonly void EncodeSelfTo<TConstantHandleMap>(TConstantHandleMap map, ref AttributeTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
-            switch (view.Get(Name).Value)
+            switch (map.Get(Name).Value)
             {
                 case AttributeName.ConstantValue:
-                    ((ConstantValueAttribute)this).EncodeTo(view, pool, builder);
+                    ((ConstantValueAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.Code:
-                    ((CodeAttribute)this).EncodeTo(view, pool, builder);
+                    ((CodeAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.StackMapTable:
-                    ((StackMapTableAttribute)this).EncodeTo(view, pool, builder);
+                    ((StackMapTableAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.Exceptions:
-                    ((ExceptionsAttribute)this).EncodeTo(view, pool, builder);
+                    ((ExceptionsAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.InnerClasses:
-                    ((InnerClassesAttribute)this).EncodeTo(view, pool, builder);
+                    ((InnerClassesAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.EnclosingMethod:
-                    ((EnclosingMethodAttribute)this).EncodeTo(view, pool, builder);
+                    ((EnclosingMethodAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.Synthetic:
-                    ((SyntheticAttribute)this).EncodeTo(view, pool, builder);
+                    ((SyntheticAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.Signature:
-                    ((SignatureAttribute)this).EncodeTo(view, pool, builder);
+                    ((SignatureAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.SourceFile:
-                    ((SourceFileAttribute)this).EncodeTo(view, pool, builder);
+                    ((SourceFileAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.SourceDebugExtension:
-                    ((SourceDebugExtensionAttribute)this).EncodeTo(view, pool, builder);
+                    ((SourceDebugExtensionAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.LineNumberTable:
-                    ((LineNumberTableAttribute)this).EncodeTo(view, pool, builder);
+                    ((LineNumberTableAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.LocalVariableTable:
-                    ((LocalVariableTableAttribute)this).EncodeTo(view, pool, builder);
+                    ((LocalVariableTableAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.LocalVariableTypeTable:
-                    ((LocalVariableTypeTableAttribute)this).EncodeTo(view, pool, builder);
+                    ((LocalVariableTypeTableAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.Deprecated:
-                    ((DeprecatedAttribute)this).EncodeTo(view, pool, builder);
+                    ((DeprecatedAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.RuntimeVisibleAnnotations:
-                    ((RuntimeVisibleAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    ((RuntimeVisibleAnnotationsAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.RuntimeInvisibleAnnotations:
-                    ((RuntimeInvisibleAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    ((RuntimeInvisibleAnnotationsAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.RuntimeVisibleParameterAnnotations:
-                    ((RuntimeVisibleParameterAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    ((RuntimeVisibleParameterAnnotationsAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.RuntimeInvisibleParameterAnnotations:
-                    ((RuntimeInvisibleParameterAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    ((RuntimeInvisibleParameterAnnotationsAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.RuntimeVisibleTypeAnnotations:
-                    ((RuntimeVisibleTypeAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    ((RuntimeVisibleTypeAnnotationsAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.RuntimeInvisibleTypeAnnotations:
-                    ((RuntimeInvisibleTypeAnnotationsAttribute)this).EncodeTo(view, pool, builder);
+                    ((RuntimeInvisibleTypeAnnotationsAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.AnnotationDefault:
-                    ((AnnotationDefaultAttribute)this).EncodeTo(view, pool, builder);
+                    ((AnnotationDefaultAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.BootstrapMethods:
-                    ((BootstrapMethodsAttribute)this).EncodeTo(view, pool, builder);
+                    ((BootstrapMethodsAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.MethodParameters:
-                    ((MethodParametersAttribute)this).EncodeTo(view, pool, builder);
+                    ((MethodParametersAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.Module:
-                    ((ModuleAttribute)this).EncodeTo(view, pool, builder);
+                    ((ModuleAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.ModulePackages:
-                    ((ModulePackagesAttribute)this).EncodeTo(view, pool, builder);
+                    ((ModulePackagesAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.ModuleMainClass:
-                    ((ModuleMainClassAttribute)this).EncodeTo(view, pool, builder);
+                    ((ModuleMainClassAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.NestHost:
-                    ((NestHostAttribute)this).EncodeTo(view, pool, builder);
+                    ((NestHostAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.NestMembers:
-                    ((NestMembersAttribute)this).EncodeTo(view, pool, builder);
+                    ((NestMembersAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.Record:
-                    ((RecordAttribute)this).EncodeTo(view, pool, builder);
+                    ((RecordAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 case AttributeName.PermittedSubclasses:
-                    ((PermittedSubclassesAttribute)this).EncodeTo(view, pool, builder);
+                    ((PermittedSubclassesAttribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
                 default:
                     throw new ByteCodeException("Cannot encode unknown attribute. Attribute layout is unknown.");

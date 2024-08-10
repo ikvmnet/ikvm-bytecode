@@ -302,18 +302,11 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref VerificationTypeInfoEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref VerificationTypeInfoEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             switch (Kind)
             {
                 case VerificationTypeInfoKind.Top:
@@ -338,7 +331,7 @@ namespace IKVM.ByteCode.Reading
                     encoder.UninitializedThis();
                     break;
                 case VerificationTypeInfoKind.Object:
-                    encoder.Object(pool.Import(view, AsObject().Class));
+                    encoder.Object(map.Map(AsObject().Class));
                     break;
                 case VerificationTypeInfoKind.Uninitialized:
                     encoder.Uninitialized(AsUninitialized().Offset);

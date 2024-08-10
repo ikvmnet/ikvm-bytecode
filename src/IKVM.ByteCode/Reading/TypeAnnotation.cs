@@ -28,128 +28,114 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref TypeAnnotationTableEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref TypeAnnotationTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             var self = this;
-            encoder.TypeAnnotation(e => self.EncodeTo(view, pool, ref e));
+            encoder.TypeAnnotation(e => self.EncodeTo(map, ref e));
         }
 
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref TypeAnnotationEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref TypeAnnotationEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             var self = this;
 
             switch (Target.Type)
             {
                 case TypeAnnotationTargetType.ClassTypeParameter:
                     var _classTypeParameter = Target.AsTypeParameterTarget();
-                    encoder.ClassTypeParameter(_classTypeParameter.ParameterIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ClassTypeParameter(_classTypeParameter.ParameterIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodTypeParameter:
                     var _methodTypeParameter = Target.AsTypeParameterTarget();
-                    encoder.MethodTypeParameter(_methodTypeParameter.ParameterIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.MethodTypeParameter(_methodTypeParameter.ParameterIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ClassExtends:
                     var _superTypeTarget = Target.AsSuperTypeTarget();
-                    encoder.ClassExtends(_superTypeTarget.SuperTypeIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ClassExtends(_superTypeTarget.SuperTypeIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ClassTypeParameterBound:
                     var _classTypeParameterBound = Target.AsTypeParameterBoundTarget();
-                    encoder.ClassTypeParameterBound(_classTypeParameterBound.ParameterIndex, _classTypeParameterBound.BoundIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ClassTypeParameterBound(_classTypeParameterBound.ParameterIndex, _classTypeParameterBound.BoundIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodTypeParameterBound:
                     var _methodTypeParameterBound = Target.AsTypeParameterBoundTarget();
-                    encoder.MethodTypeParameterBound(_methodTypeParameterBound.ParameterIndex, _methodTypeParameterBound.BoundIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.MethodTypeParameterBound(_methodTypeParameterBound.ParameterIndex, _methodTypeParameterBound.BoundIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.Field:
                     var _field = Target.AsEmptyTarget();
-                    encoder.Field(e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.Field(e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodReturn:
                     var _methodReturn = Target.AsEmptyTarget();
-                    encoder.MethodReturn(e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.MethodReturn(e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodReceiver:
                     var _methodReceiver = Target.AsEmptyTarget();
-                    encoder.MethodReceiver(e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.MethodReceiver(e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodFormalParameter:
                     var _methodFormalParameter = Target.AsFormalParameterTarget();
-                    encoder.MethodFormalParameter(_methodFormalParameter.ParameterIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.MethodFormalParameter(_methodFormalParameter.ParameterIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.Throws:
                     var _throws = Target.AsThrowsTarget();
-                    encoder.Throws(_throws.ThrowsTypeIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.Throws(_throws.ThrowsTypeIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.LocalVar:
                     var _localVar = Target.AsLocalVarTarget();
-                    encoder.LocalVariable(e => _localVar.EncodeTo(view, pool, ref e), e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.LocalVariable(e => _localVar.EncodeTo(map, ref e), e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ResourceVariable:
                     var _resourceVariable = Target.AsLocalVarTarget();
-                    encoder.ResourceVariable(e => _resourceVariable.EncodeTo(view, pool, ref e), e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ResourceVariable(e => _resourceVariable.EncodeTo(map, ref e), e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ExceptionParameter:
                     var _catchTarget = Target.AsCatchTarget();
-                    encoder.ExceptionParameter(_catchTarget.ExceptionTableIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ExceptionParameter(_catchTarget.ExceptionTableIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.InstanceOf:
                     var _instanceOf = Target.AsOffsetTarget();
-                    encoder.InstanceOf(_instanceOf.Offset, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.InstanceOf(_instanceOf.Offset, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.New:
                     var _new = Target.AsOffsetTarget();
-                    encoder.New(_new.Offset, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.New(_new.Offset, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ConstructorReference:
                     var _constructorReference = Target.AsOffsetTarget();
-                    encoder.ConstructorReference(_constructorReference.Offset, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ConstructorReference(_constructorReference.Offset, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodReference:
                     var _methodReference = Target.AsOffsetTarget();
-                    encoder.MethodReference(_methodReference.Offset, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.MethodReference(_methodReference.Offset, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.Cast:
                     var _cast = Target.AsTypeArgumentTarget();
-                    encoder.Cast(_cast.Offset, _cast.TypeArgumentIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.Cast(_cast.Offset, _cast.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ConstructorInvocationTypeArgument:
                     var _constructorInvocationTypeArgument = Target.AsTypeArgumentTarget();
-                    encoder.ConstructorInvocationTypeArgument(_constructorInvocationTypeArgument.Offset, _constructorInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ConstructorInvocationTypeArgument(_constructorInvocationTypeArgument.Offset, _constructorInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodInvocationTypeArgument:
                     var _methodInvocationTypeArgument = Target.AsTypeArgumentTarget();
-                    encoder.MethodInvocationTypeArgument(_methodInvocationTypeArgument.Offset, _methodInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.MethodInvocationTypeArgument(_methodInvocationTypeArgument.Offset, _methodInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ConstructorReferenceTypeArgument:
                     var _constructorReferenceTypeArgument = Target.AsTypeArgumentTarget();
-                    encoder.ConstructorReferenceTypeArgument(_constructorReferenceTypeArgument.Offset, _constructorReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ConstructorReferenceTypeArgument(_constructorReferenceTypeArgument.Offset, _constructorReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodReferenceTypeArgument:
                     var _methodReferenceTypeArgument = Target.AsTypeArgumentTarget();
-                    encoder.ConstructorReferenceTypeArgument(_methodReferenceTypeArgument.Offset, _methodReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(view, pool, ref e), pool.Import(view, self.Type), e => self.Elements.EncodeTo(view, pool, ref e));
+                    encoder.ConstructorReferenceTypeArgument(_methodReferenceTypeArgument.Offset, _methodReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
                     break;
                 default:
                     throw new ByteCodeException("Invalid type annotation target type.");

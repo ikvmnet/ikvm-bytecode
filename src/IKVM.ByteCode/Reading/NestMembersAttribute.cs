@@ -37,38 +37,25 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
-        /// <param name="builder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        /// <param name="map"></param>
+        /// <param name="attributeName"></param>
+        /// <param name="encoder"></param>
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             var self = this;
-            builder.NestMembers(e => self.EncodeTo(view, pool, ref e));
+            encoder.NestMembers(attributeName, e => self.EncodeTo(map, ref e));
         }
 
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ClassConstantTableEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref ClassConstantTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
-            NestMembers.EncodeTo(view, pool, ref encoder);
+            NestMembers.EncodeTo(map, ref encoder);
         }
 
     }

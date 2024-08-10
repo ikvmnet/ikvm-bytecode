@@ -37,38 +37,24 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ParameterAnnotationTableEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref ParameterAnnotationTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             var self = this;
-            encoder.ParameterAnnotation(e => self.EncodeTo(view, pool, ref e));
+            encoder.ParameterAnnotation(e => self.EncodeTo(map, ref e));
         }
 
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref AnnotationTableEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref AnnotationTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
-            Annotations.EncodeTo(view, pool, ref encoder);
+            Annotations.EncodeTo(map, ref encoder);
         }
 
     }

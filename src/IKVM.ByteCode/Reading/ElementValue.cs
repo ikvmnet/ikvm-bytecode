@@ -238,67 +238,60 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ElementValueEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref ElementValueEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             switch (Kind)
             {
                 case ElementValueKind.Byte:
                     var _byte = AsConstant();
-                    encoder.Byte(pool.Import(view, (IntegerConstantHandle)_byte.Handle));
+                    encoder.Byte(map.Map((IntegerConstantHandle)_byte.Handle));
                     break;
                 case ElementValueKind.Char:
                     var _char = AsConstant();
-                    encoder.Char(pool.Import(view, (IntegerConstantHandle)_char.Handle));
+                    encoder.Char(map.Map((IntegerConstantHandle)_char.Handle));
                     break;
                 case ElementValueKind.Double:
                     var _double = AsConstant();
-                    encoder.Double(pool.Import(view, (DoubleConstantHandle)_double.Handle));
+                    encoder.Double(map.Map((DoubleConstantHandle)_double.Handle));
                     break;
                 case ElementValueKind.Float:
                     var _float = AsConstant();
-                    encoder.Float(pool.Import(view, (FloatConstantHandle)_float.Handle));
+                    encoder.Float(map.Map((FloatConstantHandle)_float.Handle));
                     break;
                 case ElementValueKind.Integer:
                     var _integer = AsConstant();
-                    encoder.Integer(pool.Import(view, (IntegerConstantHandle)_integer.Handle));
+                    encoder.Integer(map.Map((IntegerConstantHandle)_integer.Handle));
                     break;
                 case ElementValueKind.Long:
                     var _long = AsConstant();
-                    encoder.Long(pool.Import(view, (LongConstantHandle)_long.Handle));
+                    encoder.Long(map.Map((LongConstantHandle)_long.Handle));
                     break;
                 case ElementValueKind.Short:
                     var _short = AsConstant();
-                    encoder.Short(pool.Import(view, (IntegerConstantHandle)_short.Handle));
+                    encoder.Short(map.Map((IntegerConstantHandle)_short.Handle));
                     break;
                 case ElementValueKind.Boolean:
                     var _boolean = AsConstant();
-                    encoder.Boolean(pool.Import(view, (IntegerConstantHandle)_boolean.Handle));
+                    encoder.Boolean(map.Map((IntegerConstantHandle)_boolean.Handle));
                     break;
                 case ElementValueKind.String:
                     var _string = AsConstant();
-                    encoder.String(pool.Import(view, (Utf8ConstantHandle)_string.Handle));
+                    encoder.String(map.Map((Utf8ConstantHandle)_string.Handle));
                     break;
                 case ElementValueKind.Enum:
                     var _enum = AsEnum();
-                    encoder.Enum(pool.Import(view, _enum.TypeName), pool.Import(view, _enum.ConstantName));
+                    encoder.Enum(map.Map(_enum.TypeName), map.Map(_enum.ConstantName));
                     break;
                 case ElementValueKind.Class:
                     var _class = AsClass();
-                    encoder.Class(pool.Import(view, _class.Class));
+                    encoder.Class(map.Map(_class.Class));
                     break;
                 case ElementValueKind.Annotation:
                     var _annotation = AsAnnotation();
-                    encoder.Annotation(e => _annotation.Annotation.EncodeTo(view, pool, ref e));
+                    encoder.Annotation(e => _annotation.Annotation.EncodeTo(map, ref e));
                     break;
                 case ElementValueKind.Array:
                     break;

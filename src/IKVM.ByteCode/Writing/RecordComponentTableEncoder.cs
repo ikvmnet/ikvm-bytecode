@@ -33,12 +33,12 @@ namespace IKVM.ByteCode.Writing
         /// <param name="descriptor"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        public RecordComponentTableEncoder RecordComponent(Utf8ConstantHandle name, Utf8ConstantHandle descriptor, AttributeTableBuilder attributes)
+        public RecordComponentTableEncoder RecordComponent(Utf8ConstantHandle name, Utf8ConstantHandle descriptor, Action<AttributeTableEncoder> attributes)
         {
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU2(name.Index);
             w.WriteU2(descriptor.Index);
-            attributes.Serialize(_builder);
+            attributes(new AttributeTableEncoder(_builder));
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
         }

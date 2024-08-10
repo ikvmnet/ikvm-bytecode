@@ -29,7 +29,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             // create a copy of the attributes on the original loaded class
             var dstBuilder = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "com/test/Test", null);
-            src.Attributes.EncodeTo(src.Constants, dstBuilder.Constants, dstBuilder.Attributes);
+            src.Attributes.EncodeTo(new IdentityConstantMap<ConstantTable>(src.Constants), ref dstBuilder.Attributes.Encoder);
 
             var dstBlob = new BlobBuilder();
             dstBuilder.Serialize(dstBlob);

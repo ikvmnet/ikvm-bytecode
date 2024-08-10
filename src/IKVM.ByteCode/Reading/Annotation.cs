@@ -48,20 +48,13 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Imports a <see cref="Annotation"/>.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref AnnotationEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref AnnotationEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             var self = this;
-            encoder.Annotation(pool.Import(view, Type), e => self.Elements.EncodeTo(view, pool, ref e));
+            encoder.Annotation(map.Map(Type), e => self.Elements.EncodeTo(map, ref e));
         }
 
     }

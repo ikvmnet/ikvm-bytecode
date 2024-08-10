@@ -27,7 +27,7 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Gets the builder.
         /// </summary>
-        ref AttributeTableEncoder Encoder => ref GetEncoder();
+        public ref AttributeTableEncoder Encoder => ref GetEncoder();
 
         /// <summary>
         /// Gets the builder.

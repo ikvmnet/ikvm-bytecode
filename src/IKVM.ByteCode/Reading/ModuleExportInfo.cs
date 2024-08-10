@@ -17,25 +17,18 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="view"></param>
-        /// <param name="pool"></param>
+        /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, ref ModuleExportsTableEncoder encoder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref ModuleExportsTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
             var self = this;
-            encoder.Exports(pool.Import(view, Package), Flags, e => Encode(self.Modules, ref e));
+            encoder.Exports(map.Map(Package), Flags, e => Encode(self.Modules, ref e));
 
             void Encode(in ModuleConstantHandleTable table, ref ModuleTableEncoder e)
             {
                 foreach (var i in table)
-                    e.Module(pool.Import(view, i));
+                    e.Module(map.Map(i));
             }
         }
 

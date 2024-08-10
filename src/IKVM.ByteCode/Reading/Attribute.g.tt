@@ -31,16 +31,10 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
 }
 #>
 
-        readonly void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView view, TConstantPool pool, AttributeTableBuilder builder)
-            where TConstantView : class, IConstantView
-            where TConstantPool : class, IConstantPool
+        readonly void EncodeSelfTo<TConstantHandleMap>(TConstantHandleMap map, ref AttributeTableEncoder encoder)
+            where TConstantHandleMap : IConstantHandleMap
         {
-            if (view is null)
-                throw new ArgumentNullException(nameof(view));
-            if (pool is null)
-                throw new ArgumentNullException(nameof(pool));
-
-            switch (view.Get(Name).Value)
+            switch (map.Get(Name).Value)
             {
 <#
 foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribute.txt"))))
@@ -48,7 +42,7 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
     var name = i.Trim();
 #>
                 case AttributeName.<#= name #>:
-                    ((<#= name #>Attribute)this).EncodeTo(view, pool, builder);
+                    ((<#= name #>Attribute)this).EncodeTo(map, map.Map(Name), ref encoder);
                     break;
 <#
 }
