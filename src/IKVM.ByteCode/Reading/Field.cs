@@ -1,6 +1,4 @@
-﻿using IKVM.ByteCode.Reading;
-
-namespace IKVM.ByteCode.Reading
+﻿namespace IKVM.ByteCode.Reading
 {
 
     public readonly record struct Field(AccessFlag AccessFlags, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, AttributeTable Attributes)
@@ -27,6 +25,22 @@ namespace IKVM.ByteCode.Reading
             field = new Field((AccessFlag)accessFlags, new(nameIndex), new(descriptorIndex), attributes);
             return true;
         }
+
+        public readonly AccessFlag AccessFlags = AccessFlags;
+        public readonly Utf8ConstantHandle Name = Name;
+        public readonly Utf8ConstantHandle Descriptor = Descriptor;
+        public readonly AttributeTable Attributes = Attributes;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

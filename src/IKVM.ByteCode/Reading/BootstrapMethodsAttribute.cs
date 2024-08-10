@@ -32,8 +32,16 @@ namespace IKVM.ByteCode.Reading
 
         readonly bool _isNotNil = true;
 
+        public readonly BootstrapMethodTable Methods = Methods;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>

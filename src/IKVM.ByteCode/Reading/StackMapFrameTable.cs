@@ -53,7 +53,7 @@ namespace IKVM.ByteCode.Reading
 
         }
 
-        public static readonly StackMapFrame Empty = new([]);
+        public static readonly StackMapFrameTable Empty = new([]);
 
         readonly StackMapFrame[] _items;
 

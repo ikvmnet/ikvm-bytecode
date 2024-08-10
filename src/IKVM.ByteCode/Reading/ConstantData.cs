@@ -231,10 +231,18 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly ConstantKind Kind = Kind;
+        public readonly ReadOnlySequence<byte> Data = Data;
         readonly bool _isNotNil = true;
 
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
     }

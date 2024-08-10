@@ -532,16 +532,52 @@ namespace IKVM.ByteCode.Reading
             }
         }
 
-        readonly ClassFormatVersion _version;
-        readonly ConstantTable _constants;
-        readonly AccessFlag _accessFlags;
-        readonly ClassConstantHandle _this;
-        readonly ClassConstantHandle _super;
-        readonly InterfaceTable _interfaces;
-        readonly FieldTable _fields;
-        readonly MethodTable _methods;
-        readonly AttributeTable _attributes;
         readonly IMemoryOwner<byte>? _owner;
+
+        /// <summary>
+        /// Gets the constants of the class file.
+        /// </summary>
+        public readonly ConstantTable Constants;
+
+        /// <summary>
+        /// Gets the version of the class file.
+        /// </summary>
+        public readonly ClassFormatVersion Version;
+
+        /// <summary>
+        /// Gets the access flags of the class file.
+        /// </summary>
+        public readonly AccessFlag AccessFlags;
+
+        /// <summary>
+        /// Gets the class constant that represents this class.
+        /// </summary>
+        public readonly ClassConstantHandle This;
+
+        /// <summary>
+        /// Gets the class constnat that represents the super class.
+        /// </summary>
+        public readonly ClassConstantHandle Super;
+
+        /// <summary>
+        /// Gets the interfaces of the class file.
+        /// </summary>
+        public readonly InterfaceTable Interfaces;
+
+        /// <summary>
+        /// Gets the fields of the class file.
+        /// </summary>
+        public readonly FieldTable Fields;
+
+        /// <summary>
+        /// Gets the methods of the class file.
+        /// </summary>
+        public readonly MethodTable Methods;
+
+        /// <summary>
+        /// Gets the attributes of the class file.
+        /// </summary>
+        public readonly AttributeTable Attributes;
 
         /// <summary>
         /// Initializes a new instance.
@@ -558,62 +594,17 @@ namespace IKVM.ByteCode.Reading
         /// <param name="owner"></param>
         internal ClassFile(ClassFormatVersion version, ConstantTable constants, AccessFlag accessFlags, ClassConstantHandle @this, ClassConstantHandle super, InterfaceTable interfaces, FieldTable fields, MethodTable methods, AttributeTable attributes, IMemoryOwner<byte>? owner)
         {
-            _version = version;
-            _constants = constants;
-            _accessFlags = accessFlags;
-            _this = @this;
-            _super = super;
-            _interfaces = interfaces;
-            _fields = fields;
-            _methods = methods;
-            _attributes = attributes;
+            Version = version;
+            Constants = constants;
+            AccessFlags = accessFlags;
+            This = @this;
+            Super = super;
+            Interfaces = interfaces;
+            Fields = fields;
+            Methods = methods;
+            Attributes = attributes;
             _owner = owner;
         }
-
-        /// <summary>
-        /// Gets the version of the class file.
-        /// </summary>
-        public ClassFormatVersion Version => _version;
-
-        /// <summary>
-        /// Gets the constants of the class file.
-        /// </summary>
-        public ConstantTable Constants => _constants;
-
-        /// <summary>
-        /// Gets the access flags of the class file.
-        /// </summary>
-        public AccessFlag AccessFlags => _accessFlags;
-
-        /// <summary>
-        /// Gets the class constant that represents this class.
-        /// </summary>
-        public ClassConstantHandle This => _this;
-
-        /// <summary>
-        /// Gets the class constnat that represents the super class.
-        /// </summary>
-        public ClassConstantHandle Super => _super;
-
-        /// <summary>
-        /// Gets the interfaces of the class file.
-        /// </summary>
-        public InterfaceTable Interfaces => _interfaces;
-
-        /// <summary>
-        /// Gets the fields of the class file.
-        /// </summary>
-        public FieldTable Fields => _fields;
-
-        /// <summary>
-        /// Gets the methods of the class file.
-        /// </summary>
-        public MethodTable Methods => _methods;
-
-        /// <summary>
-        /// Gets the attributes of the class file.
-        /// </summary>
-        public AttributeTable Attributes => _attributes;
 
         /// <summary>
         /// Disposes of the instance.

@@ -1,6 +1,4 @@
-﻿using System;
-
-using IKVM.ByteCode.Writing;
+﻿using IKVM.ByteCode.Writing;
 
 namespace IKVM.ByteCode.Reading
 {
@@ -44,6 +42,20 @@ namespace IKVM.ByteCode.Reading
             pair = new ElementValuePair(new(nameIndex), value);
             return true;
         }
+
+        public readonly Utf8ConstantHandle Name = Name;
+        public readonly ElementValue Value = Value;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
         /// Encodes this data class to the encoder.

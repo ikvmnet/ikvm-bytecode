@@ -41,6 +41,8 @@ namespace IKVM.ByteCode.Reading
 
         readonly bool _isNotNil = true;
 
+        public readonly Utf8ConstantHandle Name = Name;
+
         public readonly bool IsNil => !IsNotNil;
 
         public readonly bool IsNotNil => _isNotNil;

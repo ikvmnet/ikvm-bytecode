@@ -30,6 +30,21 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly ushort Start = Start;
+        public readonly ushort Length = Length;
+        public readonly ushort Index = Index;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
+
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>

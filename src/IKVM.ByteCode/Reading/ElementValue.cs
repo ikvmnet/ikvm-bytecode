@@ -6,7 +6,7 @@ using IKVM.ByteCode.Writing;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct ElementValue
+    public readonly record struct ElementValue(ElementValueKind Kind, ReadOnlySequence<byte> Data)
     {
 
         public static ElementValue Nil => default;
@@ -152,28 +152,19 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        readonly ElementValueKind _kind;
-        readonly ReadOnlySequence<byte> _data;
+        public readonly ElementValueKind Kind = Kind;
+        public readonly ReadOnlySequence<byte> Data = Data;
+        readonly bool _isNotNil = true;
 
         /// <summary>
-        /// Initializes a new instance.
+        /// Gets whether the instance is nil.
         /// </summary>
-        /// <param name="constants"></param>
-        /// <param name="kind"></param>
-        /// <param name="data"></param>
-        internal ElementValue(ElementValueKind kind, ReadOnlySequence<byte> data)
-        {
-            _kind = kind;
-            _data = data;
-        }
+        public readonly bool IsNil => !IsNotNil;
 
-        public readonly ElementValueKind Kind => _kind;
-
-        public readonly ReadOnlySequence<byte> Data => _data;
-
-        public readonly bool IsNil => Kind == ElementValueKind.Unknown;
-
-        public readonly bool IsNotNil => !IsNil;
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
 
         public readonly ConstantElementValue AsConstant()
         {

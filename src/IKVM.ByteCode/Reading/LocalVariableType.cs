@@ -19,6 +19,23 @@ namespace IKVM.ByteCode.Reading
             encoder.LocalVariableType(StartPc, Length, map.Map(Name), map.Map(Signature), Slot);
         }
 
+        public readonly ushort StartPc = StartPc;
+        public readonly ushort Length = Length;
+        public readonly Utf8ConstantHandle Name = Name;
+        public readonly Utf8ConstantHandle Signature = Signature;
+        public readonly ushort Slot = Slot;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
+
     }
 
 }

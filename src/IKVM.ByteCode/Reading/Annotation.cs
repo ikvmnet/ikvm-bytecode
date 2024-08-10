@@ -65,6 +65,21 @@ namespace IKVM.ByteCode.Reading
             encoder.Annotation(Type, e => self.Elements.WriteTo(ref e));
         }
 
+        readonly bool _isNotNil = true;
+
+        public readonly Utf8ConstantHandle Type = Type;
+        public readonly ElementValuePairTable Elements = Elements;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
+
     }
 
 }

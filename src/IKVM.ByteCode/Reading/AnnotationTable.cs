@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly AnnotationTable Empty = new([]);
+
         readonly Annotation[] _items;
 
         /// <summary>

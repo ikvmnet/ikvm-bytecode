@@ -1,6 +1,4 @@
-﻿using System;
-
-using IKVM.ByteCode.Writing;
+﻿using IKVM.ByteCode.Writing;
 
 namespace IKVM.ByteCode.Reading
 {
@@ -41,6 +39,20 @@ namespace IKVM.ByteCode.Reading
             var self = this;
             encoder.Method(map.Map(Method), e => self.Arguments.EncodeTo(map, ref e));
         }
+
+        public readonly MethodHandleConstantHandle Method = Method;
+        public readonly ConstantHandleTable Arguments = Arguments;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

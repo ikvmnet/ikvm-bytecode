@@ -49,10 +49,21 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly ushort MaxStack = MaxStack;
+        public readonly ushort MaxLocals = MaxLocals;
+        public readonly ReadOnlySequence<byte> Code = Code;
+        public readonly ExceptionHandlerTable ExceptionTable = ExceptionTable;
+        public readonly AttributeTable Attributes = Attributes;
         readonly bool _isNotNil = true;
 
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>

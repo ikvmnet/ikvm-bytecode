@@ -40,10 +40,18 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly ushort BootstrapMethodAttributeIndex = BootstrapMethodAttributeIndex;
+        public readonly NameAndTypeConstantHandle NameAndType = NameAndType;
         readonly bool _isNotNil = true;
 
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
     }

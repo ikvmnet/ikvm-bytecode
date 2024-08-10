@@ -231,6 +231,20 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly TypeAnnotationTargetType Type = Type;
+        public readonly ReadOnlySequence<byte> Data = Data;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
+
         public TypeParameterTarget AsTypeParameterTarget()
         {
             if (Type is not TypeAnnotationTargetType.ClassTypeParameter and not TypeAnnotationTargetType.MethodTypeParameter)

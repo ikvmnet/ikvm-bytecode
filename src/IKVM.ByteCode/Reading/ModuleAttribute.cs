@@ -129,10 +129,24 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly ModuleConstantHandle Name = Name;
+        public readonly ModuleFlag Flags = Flags;
+        public readonly Utf8ConstantHandle Version = Version;
+        public readonly ModuleRequiresTable Requires = Requires;
+        public readonly ModuleExportsTable Exports = Exports;
+        public readonly ModuleOpensTable Opens = Opens;
+        public readonly ClassConstantHandleTable Uses = Uses;
+        public readonly ModuleProvidesTable Provides = Provides;
         readonly bool _isNotNil = true;
 
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>

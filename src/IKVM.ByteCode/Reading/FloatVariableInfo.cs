@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct FloatVariableInfo
+    public readonly record struct FloatVariableInfo()
     {
 
         /// <summary>
@@ -28,6 +28,18 @@ namespace IKVM.ByteCode.Reading
             record = new FloatVariableInfo();
             return true;
         }
+
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

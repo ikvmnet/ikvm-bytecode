@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly ElementValuePairTable Empty = new([]);
+
         /// <summary>
         /// Measures the size of the current annotation.
         /// </summary>
@@ -117,14 +119,14 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public readonly ElementValuePair this[int index] => Get(index);
+        public readonly ref readonly ElementValuePair this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the element value pair at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ElementValuePair Get(int index) => _items[index];
+        readonly ref readonly ElementValuePair GetItem(int index) => ref _items[index];
 
         /// <summary>
         /// Gets the number of element values.
@@ -163,6 +165,9 @@ namespace IKVM.ByteCode.Reading
 
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        /// <inheritdoc />
+        readonly ElementValuePair IReadOnlyList<ElementValuePair>.this[int index] => this[index];
 
     }
 

@@ -16,7 +16,7 @@ namespace IKVM.ByteCode.Reading
         {
             skip = 0;
 
-            if (reader.TryReadMany(ClassFormatReader.U2+ ClassFormatReader.U2, out data) == false)
+            if (reader.TryReadMany(ClassFormatReader.U2 + ClassFormatReader.U2, out data) == false)
                 return false;
 
             return true;
@@ -40,10 +40,18 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly Utf8ConstantHandle Name = Name;
+        public readonly Utf8ConstantHandle Descriptor = Descriptor;
         readonly bool _isNotNil = true;
 
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
     }

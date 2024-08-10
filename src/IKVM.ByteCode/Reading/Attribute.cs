@@ -6,7 +6,7 @@ using IKVM.ByteCode.Writing;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly partial struct Attribute
+    public readonly partial struct Attribute(Utf8ConstantHandle Name, ReadOnlySequence<byte> Data)
     {
 
         public static Attribute Nil => default;
@@ -31,33 +31,26 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        readonly Utf8ConstantHandle _name;
-        readonly ReadOnlySequence<byte> _data;
         readonly bool _isNotNil = true;
-
-        /// <summary>
-        /// Initializes a new instance.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="data"></param>
-        public Attribute(Utf8ConstantHandle name, ReadOnlySequence<byte> data)
-        {
-            _name = name;
-            _data = data;
-        }
 
         /// <summary>
         /// Gets the name of the attribute.
         /// </summary>
-        public Utf8ConstantHandle Name => _name;
+        public readonly Utf8ConstantHandle Name = Name;
 
         /// <summary>
         /// Gets the backing data of the attribute.
         /// </summary>
-        public ReadOnlySequence<byte> Data => _data;
+        public readonly ReadOnlySequence<byte> Data = Data;
 
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>

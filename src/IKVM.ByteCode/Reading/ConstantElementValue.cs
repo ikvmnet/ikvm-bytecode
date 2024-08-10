@@ -66,6 +66,19 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        public readonly ElementValueKind Kind = Kind;
+        public readonly ConstantHandle Handle = Handle;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
     }
 
 }

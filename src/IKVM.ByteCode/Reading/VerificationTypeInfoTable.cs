@@ -55,6 +55,8 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static readonly VerificationTypeInfoTable Empty = new([]);
+
         readonly VerificationTypeInfo[] _items;
 
         /// <summary>

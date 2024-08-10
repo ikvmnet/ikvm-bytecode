@@ -58,6 +58,21 @@ namespace IKVM.ByteCode.Reading
             encoder.Append(FrameType, OffsetDelta, e => self.Locals.EncodeTo(map, ref e));
         }
 
+        public readonly byte FrameType = FrameType;
+        public readonly ushort OffsetDelta = OffsetDelta;
+        public readonly VerificationTypeInfoTable Locals = Locals;
+        readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
+
     }
 
 }

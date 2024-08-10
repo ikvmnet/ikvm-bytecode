@@ -122,6 +122,7 @@ namespace IKVM.ByteCode.Reading
         }
 
         readonly ElementValue[] _values;
+        readonly bool _isNotNil = true;
 
         /// <summary>
         /// Initializes a new instance.
@@ -132,6 +133,16 @@ namespace IKVM.ByteCode.Reading
         {
             _values = values ?? throw new ArgumentNullException(nameof(values));
         }
+
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
         /// Gets a reference to the value for the given index.

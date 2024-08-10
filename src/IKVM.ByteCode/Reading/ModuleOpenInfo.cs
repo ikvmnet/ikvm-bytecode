@@ -8,10 +8,19 @@ namespace IKVM.ByteCode.Reading
     public readonly record struct ModuleOpenInfo(PackageConstantHandle Package, ModuleOpensFlag Flags, ModuleConstantHandleTable Modules)
     {
 
+        public readonly PackageConstantHandle Package = Package;
+        public readonly ModuleOpensFlag Flags = Flags;
+        public readonly ModuleConstantHandleTable Modules = Modules;
         readonly bool _isNotNil = true;
 
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
