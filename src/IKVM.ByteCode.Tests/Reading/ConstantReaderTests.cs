@@ -69,12 +69,6 @@ namespace IKVM.ByteCode.Tests.Reading
             c.Constants.Where(i => i.Kind == ConstantKind.Methodref).Select(i => c.Constants.Read((MethodrefConstantHandle)i)).Should().Contain(i => c.Constants.Get(i.Class) == "java/lang/Object" && c.Constants.Get(c.Constants.Read(i.NameAndType).Name) == "<init>" && c.Constants.Get(c.Constants.Read(i.NameAndType).Descriptor) == "()V");
         }
 
-        [TestMethod]
-        public async Task Foo()
-        {
-            var c = await ClassFile.ReadAsync(File.OpenRead(@"D:\ikvm\src\IKVM.Java\obj\Debug\net472\classes\__AssemblyAttributes.class"));
-        }
-
     }
 
 }
