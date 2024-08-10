@@ -1,6 +1,4 @@
-﻿using IKVM.ByteCode.Reading;
-
-namespace IKVM.ByteCode
+﻿namespace IKVM.ByteCode
 {
 
     public readonly record struct ConstantHandle(ConstantKind Kind, ushort Index)

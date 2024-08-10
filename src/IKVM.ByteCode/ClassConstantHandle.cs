@@ -1,7 +1,5 @@
 ﻿using System;
 
-using IKVM.ByteCode.Reading;
-
 namespace IKVM.ByteCode
 {
 

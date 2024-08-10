@@ -38,6 +38,12 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        readonly bool _isNotNil = true;
+
+        public readonly bool IsNil => !IsNotNil;
+
+        public readonly bool IsNotNil => _isNotNil;
+
     }
 
 }
