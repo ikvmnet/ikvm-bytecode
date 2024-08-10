@@ -190,7 +190,7 @@ namespace IKVM.ByteCode.Reading
             if (TryReadAttributeTable(ref reader, out var attributes) == false)
                 return false;
 
-            clazz = new ClassFile(version, constants!, (AccessFlag)accessFlags, new(thisClass), new(superClass), interfaces, fields, methods, attributes, owner);
+            clazz = new ClassFile(version, constants, (AccessFlag)accessFlags, new(thisClass), new(superClass), interfaces, fields, methods, attributes, owner);
             return true;
         }
 
@@ -201,9 +201,9 @@ namespace IKVM.ByteCode.Reading
         /// <param name="reader"></param>
         /// <param name="constants"></param>
         /// <returns></returns>
-        internal static bool TryReadConstantTable(ClassFormatVersion version, ref ClassFormatReader reader, out ConstantTable? constants)
+        internal static bool TryReadConstantTable(ClassFormatVersion version, ref ClassFormatReader reader, out ConstantTable constants)
         {
-            constants = null;
+            constants = default;
 
             if (TryReadConstants(ref reader, out var data) == false)
                 return false;

@@ -6,7 +6,7 @@
 
         public static explicit operator RefConstantHandle(ConstantHandle handle)
         {
-            return new RefConstantHandle(handle.Kind, handle.Index);
+            return new RefConstantHandle(handle.Kind, handle.Slot);
         }
 
         public static implicit operator ConstantHandle(RefConstantHandle handle)

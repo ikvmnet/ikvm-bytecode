@@ -1,7 +1,7 @@
 ﻿namespace IKVM.ByteCode
 {
 
-    public readonly record struct ConstantHandle(ConstantKind Kind, ushort Index)
+    public readonly record struct ConstantHandle(ConstantKind Kind, ushort Slot)
     {
 
         /// <summary>
@@ -12,7 +12,7 @@
         /// <summary>
         /// Gets whether or not this represents the nil instance.
         /// </summary>
-        public readonly bool IsNil => Index == 0;
+        public readonly bool IsNil => Slot == 0;
 
         /// <summary>
         /// Gets whether or not this does not represent the nil instance.
