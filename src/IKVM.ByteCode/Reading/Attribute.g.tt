@@ -23,7 +23,7 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
         {
             var reader = new ClassFormatReader(Data);
             if (<#= name #>Attribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.<#= name #>)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.<#= name #>)}.");
 
             return value;
         }

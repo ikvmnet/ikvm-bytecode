@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (ConstantValueAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.ConstantValue)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.ConstantValue)}.");
 
             return value;
         }
@@ -26,7 +26,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (CodeAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.Code)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.Code)}.");
 
             return value;
         }
@@ -37,7 +37,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (StackMapTableAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.StackMapTable)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.StackMapTable)}.");
 
             return value;
         }
@@ -48,7 +48,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (ExceptionsAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.Exceptions)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.Exceptions)}.");
 
             return value;
         }
@@ -59,7 +59,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (InnerClassesAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.InnerClasses)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.InnerClasses)}.");
 
             return value;
         }
@@ -70,7 +70,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (EnclosingMethodAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.EnclosingMethod)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.EnclosingMethod)}.");
 
             return value;
         }
@@ -81,7 +81,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (SyntheticAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.Synthetic)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.Synthetic)}.");
 
             return value;
         }
@@ -92,7 +92,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (SignatureAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.Signature)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.Signature)}.");
 
             return value;
         }
@@ -103,7 +103,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (SourceFileAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.SourceFile)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.SourceFile)}.");
 
             return value;
         }
@@ -114,7 +114,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (SourceDebugExtensionAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.SourceDebugExtension)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.SourceDebugExtension)}.");
 
             return value;
         }
@@ -125,7 +125,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (LineNumberTableAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.LineNumberTable)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.LineNumberTable)}.");
 
             return value;
         }
@@ -136,7 +136,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (LocalVariableTableAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.LocalVariableTable)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.LocalVariableTable)}.");
 
             return value;
         }
@@ -147,7 +147,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (LocalVariableTypeTableAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.LocalVariableTypeTable)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.LocalVariableTypeTable)}.");
 
             return value;
         }
@@ -158,7 +158,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (DeprecatedAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.Deprecated)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.Deprecated)}.");
 
             return value;
         }
@@ -169,7 +169,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (RuntimeVisibleAnnotationsAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeVisibleAnnotations)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeVisibleAnnotations)}.");
 
             return value;
         }
@@ -180,7 +180,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (RuntimeInvisibleAnnotationsAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeInvisibleAnnotations)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeInvisibleAnnotations)}.");
 
             return value;
         }
@@ -191,7 +191,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (RuntimeVisibleParameterAnnotationsAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeVisibleParameterAnnotations)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeVisibleParameterAnnotations)}.");
 
             return value;
         }
@@ -202,7 +202,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (RuntimeInvisibleParameterAnnotationsAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeInvisibleParameterAnnotations)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeInvisibleParameterAnnotations)}.");
 
             return value;
         }
@@ -213,7 +213,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (RuntimeVisibleTypeAnnotationsAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeVisibleTypeAnnotations)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeVisibleTypeAnnotations)}.");
 
             return value;
         }
@@ -224,7 +224,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (RuntimeInvisibleTypeAnnotationsAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeInvisibleTypeAnnotations)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.RuntimeInvisibleTypeAnnotations)}.");
 
             return value;
         }
@@ -235,7 +235,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (AnnotationDefaultAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.AnnotationDefault)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.AnnotationDefault)}.");
 
             return value;
         }
@@ -246,7 +246,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (BootstrapMethodsAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.BootstrapMethods)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.BootstrapMethods)}.");
 
             return value;
         }
@@ -257,7 +257,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (MethodParametersAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.MethodParameters)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.MethodParameters)}.");
 
             return value;
         }
@@ -268,7 +268,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (ModuleAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.Module)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.Module)}.");
 
             return value;
         }
@@ -279,7 +279,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (ModulePackagesAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.ModulePackages)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.ModulePackages)}.");
 
             return value;
         }
@@ -290,7 +290,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (ModuleMainClassAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.ModuleMainClass)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.ModuleMainClass)}.");
 
             return value;
         }
@@ -301,7 +301,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (NestHostAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.NestHost)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.NestHost)}.");
 
             return value;
         }
@@ -312,7 +312,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (NestMembersAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.NestMembers)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.NestMembers)}.");
 
             return value;
         }
@@ -323,7 +323,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (RecordAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.Record)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.Record)}.");
 
             return value;
         }
@@ -334,7 +334,7 @@ namespace IKVM.ByteCode.Reading
         {
             var reader = new ClassFormatReader(Data);
             if (PermittedSubclassesAttribute.TryRead(ref reader, out var value) == false)
-                throw new InvalidCastException($"End of data reached casting Attribute to {nameof(AttributeName.PermittedSubclasses)}.");
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.PermittedSubclasses)}.");
 
             return value;
         }

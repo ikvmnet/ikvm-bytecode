@@ -5,7 +5,7 @@ using IKVM.ByteCode.Writing;
 namespace IKVM.ByteCode.Reading
 {
 
-    public readonly record struct LocalVariable(ushort StartPc, ushort Length, Utf8ConstantHandle Name, Utf8ConstantHandle Type, ushort Slot)
+    public readonly record struct LocalVariable(ushort StartPc, ushort Length, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, ushort Slot)
     {
 
         /// <summary>
