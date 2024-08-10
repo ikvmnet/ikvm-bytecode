@@ -42,7 +42,7 @@ namespace IKVM.ByteCode.Reading
                 exceptionTable[i] = new ExceptionHandler(startOffset, endOffset, handlerOffset, new(catchTypeIndex));
             }
 
-            if (ClassFile.TryReadAttributeTable(ref reader, out var attributes) == false)
+            if (AttributeTable.TryRead(ref reader, out var attributes) == false)
                 return false;
 
             attribute = new CodeAttribute(maxStack, maxLocals, code, new(exceptionTable), attributes);

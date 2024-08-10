@@ -1,12 +1,19 @@
-﻿using System;
-
-using IKVM.ByteCode.Writing;
+﻿using IKVM.ByteCode.Writing;
 
 namespace IKVM.ByteCode.Reading
 {
 
     public readonly record struct TypePathComponent(TypePathKind Kind, byte ArgumentIndex)
     {
+
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U1 + ClassFormatReader.U1;
+            if (reader.TryAdvance(ClassFormatReader.U1 + ClassFormatReader.U1) == false)
+                return false;
+
+            return true;
+        }
 
         public static bool TryRead(ref ClassFormatReader reader, out TypePathComponent record)
         {

@@ -58,6 +58,51 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <summary>
+        /// Attempts to read the set of attributes starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (Attribute.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Attempts to read the set of attributes starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attributes"></param>
+        /// <returns></returns>
+        public static bool TryRead(ref ClassFormatReader reader, out AttributeTable attributes)
+        {
+            attributes = default;
+
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            var items = count == 0 ? [] : new Attribute[count];
+            for (int i = 0; i < count; i++)
+            {
+                if (Attribute.TryRead(ref reader, out var attribute) == false)
+                    return false;
+
+                items[i] = attribute;
+            }
+
+            attributes = new AttributeTable(items);
+            return true;
+        }
+
         public static readonly AttributeTable Empty = new([]);
 
         readonly Attribute[] _items;

@@ -5,6 +5,31 @@
     {
 
         /// <summary>
+        /// Parses an interface.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            if (AttributeTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
         /// Attempts to read a Field starting from the current position.
         /// </summary>
         /// <param name="reader"></param>
@@ -19,7 +44,7 @@
                 return false;
             if (reader.TryReadU2(out ushort descriptorIndex) == false)
                 return false;
-            if (ClassFile.TryReadAttributeTable(ref reader, out var attributes) == false)
+            if (AttributeTable.TryRead(ref reader, out var attributes) == false)
                 return false;
 
             field = new Field((AccessFlag)accessFlags, new(nameIndex), new(descriptorIndex), attributes);

@@ -53,6 +53,51 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <summary>
+        /// Attempts to read the method table starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        internal static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (Method.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Attempts to read the method table starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="methods"></param>
+        /// <returns></returns>
+        internal static bool TryRead(ref ClassFormatReader reader, out MethodTable methods)
+        {
+            methods = default;
+
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            var items = count == 0 ? [] : new Method[count];
+            for (int i = 0; i < count; i++)
+            {
+                if (Method.TryRead(ref reader, out var method) == false)
+                    return false;
+
+                items[i] = method;
+            }
+
+            methods = new MethodTable(items);
+            return true;
+        }
+
         public static readonly MethodTable Empty = new([]);
 
         readonly Method[] _methods;

@@ -7,6 +7,20 @@ namespace IKVM.ByteCode.Reading
     {
 
         /// <summary>
+        /// Measures a constant in the constant pool.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U1 + ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U1 + ClassFormatReader.U2) == false)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
         /// Parses a MethodHandle constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>

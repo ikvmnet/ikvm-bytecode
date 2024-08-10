@@ -1,5 +1,4 @@
-﻿using System;
-using System.Buffers;
+﻿using System.Buffers;
 
 using IKVM.ByteCode.Writing;
 
@@ -10,6 +9,27 @@ namespace IKVM.ByteCode.Reading
     {
 
         public static Attribute Nil => default;
+
+        /// <summary>
+        /// Parses an attribute.
+        /// </summary>
+        /// <param name="reader"></param>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            size += ClassFormatReader.U4;
+            if (reader.TryReadU4(out uint length) == false)
+                return false;
+
+            size += checked((int)length);
+            if (reader.TryAdvance(length) == false)
+                return false;
+
+            return true;
+        }
 
         /// <summary>
         /// Parses an attribute.

@@ -8,6 +8,31 @@
         /// Parses a method.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="size"></param>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            if (AttributeTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Parses a method.
+        /// </summary>
+        /// <param name="reader"></param>
         /// <param name="method"></param>
         public static bool TryRead(ref ClassFormatReader reader, out Method method)
         {
@@ -19,7 +44,7 @@
                 return false;
             if (reader.TryReadU2(out ushort descriptorIndex) == false)
                 return false;
-            if (ClassFile.TryReadAttributeTable(ref reader, out var attributes) == false)
+            if (AttributeTable.TryRead(ref reader, out var attributes) == false)
                 return false;
 
             method = new Method((AccessFlag)accessFlags, new(nameIndex), new(descriptorIndex), attributes!);

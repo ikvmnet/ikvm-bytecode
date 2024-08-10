@@ -8,6 +8,20 @@
         /// Parses an interface.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="size"></param>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Parses an interface.
+        /// </summary>
+        /// <param name="reader"></param>
         /// <param name="iface"></param>
         public static bool TryRead(ref ClassFormatReader reader, out Interface iface)
         {

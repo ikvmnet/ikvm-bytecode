@@ -15,9 +15,9 @@ namespace IKVM.ByteCode.Reading
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
-
             if (reader.TryAdvance(ClassFormatReader.U2) == false)
                 return false;
+
             if (ElementValue.TryMeasure(ref reader, ref size) == false)
                 return false;
 

@@ -13,6 +13,25 @@ namespace IKVM.ByteCode.Reading
         /// Parses a UTF8 constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="size"></param>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            // read length
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort length) == false)
+                return false;
+
+            size += length;
+            if (reader.TryAdvance(length) == false)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Parses a UTF8 constant in the constant pool.
+        /// </summary>
+        /// <param name="reader"></param>
         /// <param name="data"></param>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
         {

@@ -6,6 +6,24 @@ namespace IKVM.ByteCode.Reading
     public readonly record struct TypeAnnotation(TypeAnnotationTarget Target, TypePath TargetPath, Utf8ConstantHandle Type, ElementValuePairTable Elements)
     {
 
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            if (TypeAnnotationTarget.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            if (TypePath.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            size += ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2) == false)
+                return false;
+
+            if (ElementValuePairTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
         public static bool TryRead(ref ClassFormatReader reader, out TypeAnnotation annotation)
         {
             annotation = default;

@@ -53,6 +53,51 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <summary>
+        /// Attempts to read the set of fields starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        internal static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (Field.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Attempts to read the set of fields starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        internal static bool TryRead(ref ClassFormatReader reader, out FieldTable fields)
+        {
+            fields = default;
+
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            var items = count == 0 ? [] : new Field[count];
+            for (int i = 0; i < count; i++)
+            {
+                if (Field.TryRead(ref reader, out var field) == false)
+                    return false;
+
+                items[i] = field;
+            }
+
+            fields = new FieldTable(items);
+            return true;
+        }
+
         public static readonly FieldTable Empty = new([]);
 
         readonly Field[] _fields;

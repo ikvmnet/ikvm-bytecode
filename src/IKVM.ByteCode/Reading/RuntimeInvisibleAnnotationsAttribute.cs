@@ -10,23 +10,22 @@ namespace IKVM.ByteCode.Reading
 
         public static RuntimeInvisibleAnnotationsAttribute Nil => default;
 
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            if (AnnotationTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
         public static bool TryRead(ref ClassFormatReader reader, out RuntimeInvisibleAnnotationsAttribute attribute)
         {
             attribute = default;
 
-            if (reader.TryReadU2(out ushort count) == false)
+            if (AnnotationTable.TryRead(ref reader, out var annotations) == false)
                 return false;
 
-            var items = count == 0 ? [] : new Annotation[count];
-            for (int i = 0; i < count; i++)
-            {
-                if (Annotation.TryRead(ref reader, out var annotation) == false)
-                    return false;
-
-                items[i] = annotation;
-            }
-
-            attribute = new RuntimeInvisibleAnnotationsAttribute(new(items));
+            attribute = new RuntimeInvisibleAnnotationsAttribute(annotations);
             return true;
         }
 

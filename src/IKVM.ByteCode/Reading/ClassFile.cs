@@ -20,6 +20,46 @@ namespace IKVM.ByteCode.Reading
         public const uint MAGIC = 0xCAFEBABE;
         public const uint MIN_CLASS_SIZE = 30;
 
+
+        /// <summary>
+        /// Attempts to measure a class starting at the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            if (reader.TryReadU4(out uint magic) == false)
+                return false;
+            if (magic != MAGIC)
+                throw new InvalidClassMagicException(magic);
+
+            size += ClassFormatReader.U2 + ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2 + ClassFormatReader.U2) == false)
+                return false;
+
+            if (ConstantTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            size += ClassFormatReader.U2 + ClassFormatReader.U2 + ClassFormatReader.U2;
+            if (reader.TryAdvance(ClassFormatReader.U2 + ClassFormatReader.U2 + ClassFormatReader.U2) == false)
+                return false;
+
+            if (InterfaceTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            if (FieldTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            if (MethodTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            if (AttributeTable.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
         /// <summary>
         /// Attempts to read a class from the given memory position. This method is unsafe and assumes the lifetime of
         /// the memory remains valid for as long as the <see cref="ClassFile"/> instance is retained.
@@ -166,7 +206,7 @@ namespace IKVM.ByteCode.Reading
 
             var version = new ClassFormatVersion(majorVersion, minorVersion);
 
-            if (TryReadConstantTable(version, ref reader, out var constants) == false)
+            if (ConstantTable.TryRead(version, ref reader, out var constants) == false)
                 return false;
 
             if (reader.TryReadU2(out ushort accessFlags) == false)
@@ -178,231 +218,19 @@ namespace IKVM.ByteCode.Reading
             if (reader.TryReadU2(out ushort superClass) == false)
                 return false;
 
-            if (TryReadInterfaceTable(ref reader, out var interfaces) == false)
+            if (InterfaceTable.TryRead(ref reader, out var interfaces) == false)
                 return false;
 
-            if (TryReadFieldTable(ref reader, out var fields) == false)
+            if (FieldTable.TryRead(ref reader, out var fields) == false)
                 return false;
 
-            if (TryReadMethodTable(ref reader, out var methods) == false)
+            if (MethodTable.TryRead(ref reader, out var methods) == false)
                 return false;
 
-            if (TryReadAttributeTable(ref reader, out var attributes) == false)
+            if (AttributeTable.TryRead(ref reader, out var attributes) == false)
                 return false;
 
             clazz = new ClassFile(version, constants, (AccessFlag)accessFlags, new(thisClass), new(superClass), interfaces, fields, methods, attributes, owner);
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the set of constants at the current position.
-        /// </summary>
-        /// <param name="version"></param>
-        /// <param name="reader"></param>
-        /// <param name="constants"></param>
-        /// <returns></returns>
-        internal static bool TryReadConstantTable(ClassFormatVersion version, ref ClassFormatReader reader, out ConstantTable constants)
-        {
-            constants = default;
-
-            if (TryReadConstants(ref reader, out var data) == false)
-                return false;
-
-            constants = new ConstantTable(version, data!);
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the set of constants at the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="constantData"></param>
-        /// <returns></returns>
-        internal static bool TryReadConstants(ref ClassFormatReader reader, out ConstantData[]? constantData)
-        {
-            constantData = null;
-
-            if (reader.TryReadU2(out ushort count) == false)
-                return false;
-
-            constantData = count == 0 ? [] : new ConstantData[count];
-            for (int i = 1; i < count; i++)
-            {
-                if (ConstantData.TryRead(ref reader, out var data, out var skip) == false)
-                    return false;
-
-                constantData[i] = data;
-                i += skip;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the interface table starting from the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="interfaces"></param>
-        /// <returns></returns>
-        internal static bool TryReadInterfaceTable(ref ClassFormatReader reader, out InterfaceTable interfaces)
-        {
-            interfaces = default;
-
-            if (TryReadInterfaces(ref reader, out var items) == false)
-                return false;
-
-            interfaces = new InterfaceTable(items!);
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the set of interfaces starting from the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="interfaces"></param>
-        /// <returns></returns>
-        internal static bool TryReadInterfaces(ref ClassFormatReader reader, out Interface[]? interfaces)
-        {
-            interfaces = null;
-
-            if (reader.TryReadU2(out ushort count) == false)
-                return false;
-
-            interfaces = count == 0 ? [] : new Interface[count];
-            for (int i = 0; i < count; i++)
-            {
-                if (Interface.TryRead(ref reader, out Interface iface) == false)
-                    return false;
-
-                interfaces[i] = iface;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the field table starting from the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="fields"></param>
-        /// <returns></returns>
-        internal static bool TryReadFieldTable(ref ClassFormatReader reader, out FieldTable fields)
-        {
-            fields = default;
-
-            if (TryReadFields(ref reader, out var items) == false)
-                return false;
-
-            fields = new FieldTable(items!);
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the set of fields starting from the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="fields"></param>
-        /// <returns></returns>
-        internal static bool TryReadFields(ref ClassFormatReader reader, out Field[]? fields)
-        {
-            fields = null;
-
-            if (reader.TryReadU2(out ushort count) == false)
-                return false;
-
-            fields = count == 0 ? [] : new Field[count];
-            for (int i = 0; i < count; i++)
-            {
-                if (Field.TryRead(ref reader, out Field field) == false)
-                    return false;
-
-                fields[i] = field;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the method table starting from the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="methods"></param>
-        /// <returns></returns>
-        internal static bool TryReadMethodTable(ref ClassFormatReader reader, out MethodTable methods)
-        {
-            methods = default;
-
-            if (TryReadMethods(ref reader, out var items) == false)
-                return false;
-
-            methods = new MethodTable(items!);
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the set of methods starting from the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="methods"></param>
-        /// <returns></returns>
-        internal static bool TryReadMethods(ref ClassFormatReader reader, out Method[]? methods)
-        {
-            methods = null;
-
-            if (reader.TryReadU2(out ushort count) == false)
-                return false;
-
-            methods = count == 0 ? [] : new Method[count];
-            for (int i = 0; i < count; i++)
-            {
-                if (Method.TryRead(ref reader, out Method method) == false)
-                    return false;
-
-                methods[i] = method;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the set of attributes starting from the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="attributes"></param>
-        /// <returns></returns>
-        internal static bool TryReadAttributeTable(ref ClassFormatReader reader, out AttributeTable attributes)
-        {
-            attributes = default;
-
-            if (TryReadAttributes(ref reader, out var items) == false)
-                return false;
-
-            attributes = new AttributeTable(items!);
-            return true;
-        }
-
-        /// <summary>
-        /// Attempts to read the set of attributes starting from the current position.
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="attributes"></param>
-        /// <returns></returns>
-        internal static bool TryReadAttributes(ref ClassFormatReader reader, out Attribute[]? attributes)
-        {
-            attributes = null;
-
-            if (reader.TryReadU2(out ushort count) == false)
-                return false;
-
-            attributes = count == 0 ? [] : new Attribute[count];
-            for (int i = 0; i < count; i++)
-            {
-                if (Attribute.TryRead(ref reader, out var attribute) == false)
-                    return false;
-
-                attributes[i] = attribute;
-            }
-
             return true;
         }
 

@@ -53,6 +53,51 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <summary>
+        /// Attempts to read the interface table starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="interfaces"></param>
+        /// <returns></returns>
+        internal static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (Interface.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Attempts to read the interface table starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="interfaces"></param>
+        /// <returns></returns>
+        internal static bool TryRead(ref ClassFormatReader reader, out InterfaceTable interfaces)
+        {
+            interfaces = default;
+
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            var items = count == 0 ? [] : new Interface[count];
+            for (int i = 0; i < count; i++)
+            {
+                if (Interface.TryRead(ref reader, out Interface iface) == false)
+                    return false;
+
+                items[i] = iface;
+            }
+
+            interfaces = new InterfaceTable(items);
+            return true;
+        }
+
         public static readonly InterfaceTable Empty = new([]);
 
         readonly Interface[] _interfaces;

@@ -10,6 +10,177 @@ namespace IKVM.ByteCode.Reading
         /// Attempts to read the constant at the current position. Returns the the number of index positions to skip.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        internal static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U1;
+            if (reader.TryReadU1(out byte kind) == false)
+                return false;
+
+            return (ConstantKind)kind switch
+            {
+                ConstantKind.Utf8 => TryMeasureConstantUtf8(ref reader, ref size),
+                ConstantKind.Integer => TryMeasureConstantInteger(ref reader, ref size),
+                ConstantKind.Float => TryMeasureConstantFloat(ref reader, ref size),
+                ConstantKind.Long => TryMeasureConstantLong(ref reader, ref size),
+                ConstantKind.Double => TryMeasureConstantDouble(ref reader, ref size),
+                ConstantKind.Class => TryMeasureConstantClass(ref reader, ref size),
+                ConstantKind.String => TryMeasureConstantString(ref reader, ref size),
+                ConstantKind.Fieldref => TryMeasureConstantFieldref(ref reader, ref size),
+                ConstantKind.Methodref => TryMeasureConstantMethodref(ref reader, ref size),
+                ConstantKind.InterfaceMethodref => TryMeasureConstantInterfaceMethodref(ref reader, ref size),
+                ConstantKind.NameAndType => TryMeasureConstantNameAndType(ref reader, ref size),
+                ConstantKind.MethodHandle => TryMeasureConstantMethodHandle(ref reader, ref size),
+                ConstantKind.MethodType => TryMeasureConstantMethodType(ref reader, ref size),
+                ConstantKind.Dynamic => TryMeasureConstantDynamic(ref reader, ref size),
+                ConstantKind.InvokeDynamic => TryMeasureConstantInvokeDynamic(ref reader, ref size),
+                ConstantKind.Module => TryMeasureConstantModule(ref reader, ref size),
+                ConstantKind.Package => TryMeasureConstantPackage(ref reader, ref size),
+                _ => throw new ByteCodeException($"Constant kind is nil."),
+            };
+        }
+
+        static bool TryMeasureConstantUtf8(ref ClassFormatReader reader, ref int size)
+        {
+            if (Utf8ConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantInteger(ref ClassFormatReader reader, ref int size)
+        {
+            if (IntegerConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantFloat(ref ClassFormatReader reader, ref int size)
+        {
+            if (FloatConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantLong(ref ClassFormatReader reader, ref int size)
+        {
+            if (LongConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantDouble(ref ClassFormatReader reader, ref int size)
+        {
+            if (DoubleConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantClass(ref ClassFormatReader reader, ref int size)
+        {
+            if (ClassConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantString(ref ClassFormatReader reader, ref int size)
+        {
+            if (StringConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantFieldref(ref ClassFormatReader reader, ref int size)
+        {
+            if (FieldrefConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantMethodref(ref ClassFormatReader reader, ref int size)
+        {
+            if (MethodrefConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantInterfaceMethodref(ref ClassFormatReader reader, ref int size)
+        {
+            if (InterfaceMethodrefConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantNameAndType(ref ClassFormatReader reader, ref int size)
+        {
+            if (NameAndTypeConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantMethodHandle(ref ClassFormatReader reader, ref int size)
+        {
+            if (MethodHandleConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantMethodType(ref ClassFormatReader reader, ref int size)
+        {
+            if (MethodTypeConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantDynamic(ref ClassFormatReader reader, ref int size)
+        {
+            if (DynamicConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantInvokeDynamic(ref ClassFormatReader reader, ref int size)
+        {
+            if (InvokeDynamicConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantModule(ref ClassFormatReader reader, ref int size)
+        {
+            if (ModuleConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        static bool TryMeasureConstantPackage(ref ClassFormatReader reader, ref int size)
+        {
+            if (PackageConstantData.TryMeasure(ref reader, ref size) == false)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Attempts to read the constant at the current position. Returns the the number of index positions to skip.
+        /// </summary>
+        /// <param name="reader"></param>
         /// <param name="constant"></param>
         /// <param name="skip"></param>
         /// <returns></returns>
@@ -114,7 +285,7 @@ namespace IKVM.ByteCode.Reading
         {
             data = default;
 
-            if (StringConstantData.TryReadStringConstantData(ref reader, out var _data, out skip) == false)
+            if (StringConstantData.TryReadData(ref reader, out var _data, out skip) == false)
                 return false;
 
             data = new ConstantData(ConstantKind.String, _data);
@@ -158,7 +329,7 @@ namespace IKVM.ByteCode.Reading
         {
             data = default;
 
-            if (NameAndTypeConstantData.TryReadNameAndTypeConstantData(ref reader, out var _data, out skip) == false)
+            if (NameAndTypeConstantData.TryReadData(ref reader, out var _data, out skip) == false)
                 return false;
 
             data = new ConstantData(ConstantKind.NameAndType, _data);

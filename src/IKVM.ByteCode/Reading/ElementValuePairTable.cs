@@ -66,7 +66,6 @@ namespace IKVM.ByteCode.Reading
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
-
             if (reader.TryReadU2(out ushort pairCount) == false)
                 return false;
 

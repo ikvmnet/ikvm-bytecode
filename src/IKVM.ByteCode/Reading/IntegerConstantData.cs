@@ -10,6 +10,20 @@ namespace IKVM.ByteCode.Reading
         /// Parses a Integer constant in the constant pool.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="size"></param>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U4;
+            if (reader.TryAdvance(ClassFormatReader.U4) == false)
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Parses a Integer constant in the constant pool.
+        /// </summary>
+        /// <param name="reader"></param>
         /// <param name="data"></param>
         /// <param name="skip"></param>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)

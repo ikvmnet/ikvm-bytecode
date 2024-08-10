@@ -57,6 +57,53 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <summary>
+        /// Attempts to read the set of constants at the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        internal static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            for (int i = 1; i < count; i++)
+                if (ConstantData.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Attempts to read the set of constants at the current position.
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="reader"></param>
+        /// <param name="constants"></param>
+        /// <returns></returns>
+        internal static bool TryRead(ClassFormatVersion version, ref ClassFormatReader reader, out ConstantTable constants)
+        {
+            constants = default;
+
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            var items = count == 0 ? [] : new ConstantData[count];
+            for (int i = 1; i < count; i++)
+            {
+                if (ConstantData.TryRead(ref reader, out var data, out var skip) == false)
+                    return false;
+
+                items[i] = data;
+                i += skip;
+            }
+
+            constants = new ConstantTable(version, items);
+            return true;
+        }
+
         readonly ClassFormatVersion _version;
         readonly ConstantData[] _items;
         readonly int _count = 0;

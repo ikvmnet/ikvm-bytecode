@@ -55,6 +55,39 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (TypeAnnotation.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
+        public static bool TryRead(ref ClassFormatReader reader, out TypeAnnotationTable annotations)
+        {
+            annotations = default;
+
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            var items = count == 0 ? [] : new TypeAnnotation[count];
+            for (int i = 0; i < count; i++)
+            {
+                if (TypeAnnotation.TryRead(ref reader, out var annotation) == false)
+                    return false;
+
+                items[i] = annotation;
+            }
+
+            annotations = new TypeAnnotationTable(items);
+            return true;
+        }
+
         public static readonly TypeAnnotationTable Empty = new([]);
 
         readonly TypeAnnotation[] _items;

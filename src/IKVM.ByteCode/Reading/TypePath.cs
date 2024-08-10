@@ -55,6 +55,19 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U1;
+            if (reader.TryReadU1(out byte length) == false)
+                return false;
+
+            for (int i = 0; i < length; i++)
+                if (TypePathComponent.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
         public static bool TryRead(ref ClassFormatReader reader, out TypePath typePath)
         {
             typePath = default;

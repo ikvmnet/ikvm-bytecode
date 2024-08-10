@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Reading
                     return false;
                 if (reader.TryReadU2(out ushort descriptorIndex) == false)
                     return false;
-                if (ClassFile.TryReadAttributeTable(ref reader, out var attributes) == false)
+                if (AttributeTable.TryRead(ref reader, out var attributes) == false)
                     return false;
 
                 components[i] = new RecordComponent(new(nameIndex), new(descriptorIndex), attributes);
