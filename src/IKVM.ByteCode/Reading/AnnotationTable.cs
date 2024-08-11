@@ -88,6 +88,9 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly AnnotationTable Empty = new([]);
 
         readonly Annotation[] _items;

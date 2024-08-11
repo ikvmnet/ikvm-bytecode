@@ -55,6 +55,54 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <summary>
+        /// Attempts to measure the size taken by the structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        {
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (ParameterAnnotation.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Attempts to read the structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="annotations"></param>
+        /// <returns></returns>
+        public static bool TryRead(ref ClassFormatReader reader, out ParameterAnnotationTable annotations)
+        {
+            annotations = default;
+
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            var items = count == 0 ? [] : new ParameterAnnotation[count];
+            for (int i = 0; i < count; i++)
+            {
+                if (ParameterAnnotation.TryRead(ref reader, out var annotation) == false)
+                    return false;
+
+                items[i] = annotation;
+            }
+
+            annotations = new ParameterAnnotationTable(items);
+            return true;
+        }
+
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly ParameterAnnotationTable Empty = new([]);
 
         readonly ParameterAnnotation[] _items;

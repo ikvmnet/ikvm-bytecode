@@ -55,6 +55,12 @@ namespace IKVM.ByteCode.Reading
 
         }
 
+        /// <summary>
+        /// Attempts to measure the size taken by the structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -68,6 +74,12 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        /// <summary>
+        /// Attempts to read the structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="annotations"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out TypeAnnotationTable annotations)
         {
             annotations = default;
@@ -88,6 +100,9 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly TypeAnnotationTable Empty = new([]);
 
         readonly TypeAnnotation[] _items;
@@ -125,16 +140,6 @@ namespace IKVM.ByteCode.Reading
         /// Gets the number of type annotations.
         /// </summary>
         public readonly int Count => _items?.Length ?? 0;
-
-        /// <summary>
-        /// Gets whether or not this represents the nil instance.
-        /// </summary>
-        public readonly bool IsNil => _items == null;
-
-        /// <summary>
-        /// Gets whether or not this does not represent the nil instance.
-        /// </summary>
-        public readonly bool IsNotNil => !IsNil;
 
         /// <summary>
         /// Gets an enumerator over the type annotations.

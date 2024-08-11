@@ -6,9 +6,34 @@ namespace IKVM.ByteCode.Reading
     public readonly record struct ParameterAnnotation(AnnotationTable Annotations)
     {
 
-        public static bool TryRead(ref ClassFormatReader reader, out ParameterAnnotation record)
+        /// <summary>
+        /// Attempts to read the structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="parameterAnnotation"></param>
+        /// <returns></returns>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
-            record = default;
+            size += ClassFormatReader.U2;
+            if (reader.TryReadU2(out ushort count) == false)
+                return false;
+
+            for (int i = 0; i < count; i++)
+                if (Annotation.TryMeasure(ref reader, ref size) == false)
+                    return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Attempts to read the structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="parameterAnnotation"></param>
+        /// <returns></returns>
+        public static bool TryRead(ref ClassFormatReader reader, out ParameterAnnotation parameterAnnotation)
+        {
+            parameterAnnotation = default;
 
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
@@ -22,7 +47,7 @@ namespace IKVM.ByteCode.Reading
                 annotations[i] = annotation;
             }
 
-            record = new ParameterAnnotation(new(annotations));
+            parameterAnnotation = new ParameterAnnotation(new(annotations));
             return true;
         }
 

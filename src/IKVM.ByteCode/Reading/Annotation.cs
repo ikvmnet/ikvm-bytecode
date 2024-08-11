@@ -7,7 +7,7 @@ namespace IKVM.ByteCode.Reading
     {
 
         /// <summary>
-        /// Measures the size of the current annotation.
+        /// Attempts to measure the structure.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="size"></param>
@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Attempts to read an annotation.
+        /// Attempts to read the structure.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="annotation"></param>
