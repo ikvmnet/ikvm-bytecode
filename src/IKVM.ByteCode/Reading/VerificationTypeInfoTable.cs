@@ -91,7 +91,7 @@ namespace IKVM.ByteCode.Reading
         /// <summary>
         /// Gets the number of type infos.
         /// </summary>
-        public readonly int Count => _items?.Length ?? [];
+        public readonly int Count => _items?.Length ?? 0;
 
         /// <summary>
         /// Gets an enumerator over the type infos.
