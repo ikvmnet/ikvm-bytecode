@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Reading
             /// <param name="items"></param>
             internal Enumerator(TypeAnnotation[] items)
             {
-                _items = items;
+                _items = items ?? [];
                 _index = -1;
             }
 
@@ -102,23 +102,39 @@ namespace IKVM.ByteCode.Reading
         }
 
         /// <summary>
-        /// Gets a reference to the type annotation at the given index.
+        /// Gets a reference to the item at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
         public readonly ref readonly TypeAnnotation this[int index] => ref GetItem(index);
 
         /// <summary>
-        /// Gets the type annotation at the given index.
+        /// Gets a reference to the item at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly TypeAnnotation GetItem(int index) => ref _items[index];
+        readonly ref readonly TypeAnnotation GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref _items[index];
+        }
 
         /// <summary>
         /// Gets the number of type annotations.
         /// </summary>
-        public readonly int Count => _items.Length;
+        public readonly int Count => _items?.Length ?? 0;
+
+        /// <summary>
+        /// Gets whether or not this represents the nil instance.
+        /// </summary>
+        public readonly bool IsNil => _items == null;
+
+        /// <summary>
+        /// Gets whether or not this does not represent the nil instance.
+        /// </summary>
+        public readonly bool IsNotNil => !IsNil;
 
         /// <summary>
         /// Gets an enumerator over the type annotations.

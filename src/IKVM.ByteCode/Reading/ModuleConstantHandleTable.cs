@@ -20,7 +20,7 @@ namespace IKVM.ByteCode.Reading
             /// <param name="items"></param>
             internal Enumerator(ModuleConstantHandle[] items)
             {
-                _items = items;
+                _items = items ?? [];
                 _index = -1;
             }
 
@@ -74,16 +74,22 @@ namespace IKVM.ByteCode.Reading
         public readonly ref readonly ModuleConstantHandle this[int index] => ref GetItem(index);
 
         /// <summary>
-        /// Gets the module handle at the given index.
+        /// Gets a reference to the item at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly ModuleConstantHandle GetItem(int index) => ref _items[index];
+        readonly ref readonly ModuleConstantHandle GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref _items[index];
+        }
 
         /// <summary>
         /// Gets the number of module handles.
         /// </summary>
-        public readonly int Count => _items.Length;
+        public readonly int Count => _items?.Length ?? 0;
 
         /// <summary>
         /// Gets an enumerator over the module handles.

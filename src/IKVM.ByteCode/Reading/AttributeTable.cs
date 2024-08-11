@@ -16,26 +16,26 @@ namespace IKVM.ByteCode.Reading
         public struct Enumerator : IEnumerator<Attribute>
         {
 
-            readonly Attribute[] _attributes;
+            readonly Attribute[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="attributes"></param>
-            internal Enumerator(Attribute[] attributes)
+            /// <param name="items"></param>
+            internal Enumerator(Attribute[] items)
             {
-                _attributes = attributes;
+                _items = items ?? [];
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly ref readonly Attribute Current => ref _attributes[_index];
+            public readonly ref readonly Attribute Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
             {
-                return ++_index < _attributes.Length;
+                return ++_index < _items.Length;
             }
 
             /// <inheritdoc />
@@ -128,12 +128,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly Attribute GetItem(int index) => ref _items[index];
+        readonly ref readonly Attribute GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref _items[index];
+        }
 
         /// <summary>
         /// Gets the number of fields.
         /// </summary>
-        public readonly int Count => _items.Length;
+        public readonly int Count => _items != null ? _items.Length : 0;
 
         /// <summary>
         /// Gets an enumerator over the fields.

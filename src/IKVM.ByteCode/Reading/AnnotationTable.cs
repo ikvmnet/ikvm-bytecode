@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Reading
             /// <param name="items"></param>
             internal Enumerator(Annotation[] items)
             {
-                _items = items;
+                _items = items ?? [];
                 _index = -1;
             }
 
@@ -113,12 +113,28 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly Annotation GetItem(int index) => ref _items[index];
+        readonly ref readonly Annotation GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref _items[index];
+        }
 
         /// <summary>
         /// Gets the number of annotations.
         /// </summary>
-        public readonly int Count => _items.Length;
+        public readonly int Count => _items?.Length ?? 0;
+
+        /// <summary>
+        /// Gets whether or not this represents the nil instance.
+        /// </summary>
+        public readonly bool IsNil => _items == null;
+
+        /// <summary>
+        /// Gets whether or not this does not represent the nil instance.
+        /// </summary>
+        public readonly bool IsNotNil => !IsNil;
 
         /// <summary>
         /// Gets an enumerator over the annotations.

@@ -20,7 +20,7 @@ namespace IKVM.ByteCode.Reading
             /// <param name="items"></param>
             internal Enumerator(InnerClass[] items)
             {
-                _items = items;
+                _items = items ?? [];
                 _index = -1;
             }
 
@@ -78,12 +78,18 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly InnerClass GetItem(int index) => ref _items[index];
+        readonly ref readonly InnerClass GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref _items[index];
+        }
 
         /// <summary>
         /// Gets the number of inner classes.
         /// </summary>
-        public readonly int Count => _items.Length;
+        public readonly int Count => _items?.Length ?? 0;
 
         /// <summary>
         /// Gets an enumerator over the inner classes.

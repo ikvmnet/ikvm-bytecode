@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Reading
             /// <param name="items"></param>
             internal Enumerator(MethodParameter[] items)
             {
-                _items = items;
+                _items = items ?? [];
                 _index = -1;
             }
 
@@ -76,16 +76,22 @@ namespace IKVM.ByteCode.Reading
         public readonly ref readonly MethodParameter this[int index] => ref GetItem(index);
 
         /// <summary>
-        /// Gets the method parameter at the given index.
+        /// Gets a reference to the method parameter at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly MethodParameter GetItem(int index) => ref _items[index];
+        readonly ref readonly MethodParameter GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref _items[index];
+        }
 
         /// <summary>
         /// Gets the number of method parameters.
         /// </summary>
-        public readonly int Count => _items.Length;
+        public readonly int Count => _items?.Length ?? 0;
 
         /// <summary>
         /// Gets an enumerator over the method parameters.
@@ -99,7 +105,7 @@ namespace IKVM.ByteCode.Reading
         /// <param name="encoder"></param>
         public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref MethodParameterTableEncoder encoder)
             where TConstantHandleMap : IConstantHandleMap
-            
+
         {
             foreach (var i in this)
                 encoder.MethodParameter(map.Map(i.Name), i.AccessFlags);

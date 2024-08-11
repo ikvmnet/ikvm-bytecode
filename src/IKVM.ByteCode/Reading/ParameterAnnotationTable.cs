@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Reading
             /// <param name="items"></param>
             internal Enumerator(ParameterAnnotation[] items)
             {
-                _items = items;
+                _items = items ?? [];
                 _index = -1;
             }
 
@@ -76,16 +76,22 @@ namespace IKVM.ByteCode.Reading
         public readonly ref readonly ParameterAnnotation this[int index] => ref GetItem(index);
 
         /// <summary>
-        /// Gets the parameter at the given index.
+        /// Gets a reference to the item at the given index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly ParameterAnnotation GetItem(int index) => ref _items[index];
+        readonly ref readonly ParameterAnnotation GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref _items[index];
+        }
 
         /// <summary>
         /// Gets the number of parameters.
         /// </summary>
-        public readonly int Count => _items.Length;
+        public readonly int Count => _items?.Length ?? 0;
 
         /// <summary>
         /// Gets an enumerator over the parameters.

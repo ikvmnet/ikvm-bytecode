@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Reading
             /// <param name="items"></param>
             internal Enumerator(ModuleOpenInfo[] items)
             {
-                _items = items;
+                _items = items ?? [];
                 _index = -1;
             }
 
@@ -68,11 +68,27 @@ namespace IKVM.ByteCode.Reading
             _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
+        /// <summary>
+        /// Gets a reference to the item at the given index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public readonly ref readonly ModuleOpenInfo this[int index] => ref GetItem(index);
 
-        readonly ref readonly ModuleOpenInfo GetItem(int index) => ref _items[index];
+        /// <summary>
+        /// Gets a reference to the item at the given index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        readonly ref readonly ModuleOpenInfo GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
 
-        public readonly int Count => _items.Length;
+            return ref _items[index];
+        }
+
+        public readonly int Count => _items?.Length ?? 0;
 
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 

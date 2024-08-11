@@ -12,26 +12,26 @@ namespace IKVM.ByteCode.Reading
         public struct Enumerator : IEnumerator<ElementValue>
         {
 
-            readonly ElementValue[] _values;
+            readonly ElementValue[] _items;
             int _index;
 
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="interfaces"></param>
-            internal Enumerator(ElementValue[] interfaces)
+            /// <param name="items"></param>
+            internal Enumerator(ElementValue[] items)
             {
-                _values = interfaces;
+                _items = items ?? [];
                 _index = -1;
             }
 
             /// <inheritdoc />
-            public readonly ref readonly ElementValue Current => ref _values[_index];
+            public readonly ref readonly ElementValue Current => ref _items[_index];
 
             /// <inheritdoc />
             public bool MoveNext()
             {
-                return ++_index < _values.Length;
+                return ++_index < _items.Length;
             }
 
             /// <inheritdoc />
@@ -121,7 +121,7 @@ namespace IKVM.ByteCode.Reading
             return true;
         }
 
-        readonly ElementValue[] _values;
+        readonly ElementValue[] _items;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace IKVM.ByteCode.Reading
         /// <exception cref="ArgumentNullException"></exception>
         internal ArrayElementValue(ElementValue[] values)
         {
-            _values = values ?? throw new ArgumentNullException(nameof(values));
+            _items = values ?? throw new ArgumentNullException(nameof(values));
         }
 
         /// <summary>
@@ -156,17 +156,23 @@ namespace IKVM.ByteCode.Reading
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        readonly ref readonly ElementValue GetItem(int index) => ref _values[index];
+        readonly ref readonly ElementValue GetItem(int index)
+        {
+            if (index >= Count || index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref _items[index];
+        }
 
         /// <summary>
         /// Gets the number of values.
         /// </summary>
-        public readonly int Count => _values.Length;
+        public readonly int Count => _items != null ? _items.Length : 0;
 
         /// <summary>
         /// Gets an enumerator over the values.
         /// </summary>
-        public readonly Enumerator GetEnumerator() => new Enumerator(_values);
+        public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <inheritdoc />
         readonly IEnumerator<ElementValue> IEnumerable<ElementValue>.GetEnumerator() => GetEnumerator();
