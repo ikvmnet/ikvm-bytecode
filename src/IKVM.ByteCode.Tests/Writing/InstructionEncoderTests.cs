@@ -18,21 +18,21 @@ namespace IKVM.ByteCode.Tests.Writing
         public void CanMarkShortLabel()
         {
             var blob = new BlobBuilder();
-            var code = new InstructionEncoder(blob);
+            var code = new CodeBuilder(blob);
             var label = code.DefineLabel();
 
             var branchOffset = code.Offset;
-            code.Branch(OpCode._goto, label);
+            code.Branch(OpCode.Goto, label);
 
             var labelOffset = code.Offset;
             code.MarkLabel(label);
-            code.OpCode(OpCode._return);
+            code.Return();
 
             var b = new SequenceReader<byte>(new ReadOnlySequence<byte>(blob.ToArray()));
 
             // start with instruction
             b.TryRead(out byte opcode).Should().BeTrue();
-            opcode.Should().Be((byte)OpCode._goto);
+            opcode.Should().Be((byte)OpCode.Goto);
 
             // argument of branch instruction should be offset to label
             b.TryReadBigEndian(out short argument).Should().BeTrue();
@@ -40,28 +40,28 @@ namespace IKVM.ByteCode.Tests.Writing
 
             // last value should be return instruction
             b.TryRead(out byte returnInstruction).Should().BeTrue();
-            returnInstruction.Should().Be((byte)OpCode._return);
+            returnInstruction.Should().Be((byte)OpCode.Return);
         }
 
         [TestMethod]
         public void CanMarkLongLabel()
         {
             var blob = new BlobBuilder();
-            var code = new InstructionEncoder(blob);
+            var code = new CodeBuilder(blob);
             var label = code.DefineLabel();
 
             var branchOffset = code.Offset;
-            code.Branch(OpCode._goto_w, label);
+            code.GotoW(label);
 
             var labelOffset = code.Offset;
             code.MarkLabel(label);
-            code.OpCode(OpCode._return);
+            code.Return();
 
             var b = new SequenceReader<byte>(new ReadOnlySequence<byte>(blob.ToArray()));
 
             // start with instruction
             b.TryRead(out byte opcode).Should().BeTrue();
-            opcode.Should().Be((byte)OpCode._goto_w);
+            opcode.Should().Be((byte)OpCode.GotoW);
 
             // argument of branch instruction should be offset to label
             b.TryReadBigEndian(out int argument).Should().BeTrue();
@@ -69,14 +69,14 @@ namespace IKVM.ByteCode.Tests.Writing
 
             // last value should be return instruction
             b.TryRead(out byte returnInstruction).Should().BeTrue();
-            returnInstruction.Should().Be((byte)OpCode._return);
+            returnInstruction.Should().Be((byte)OpCode.Return);
         }
 
         [TestMethod]
         public void CanRepeatLabel()
         {
             var blob = new BlobBuilder();
-            new InstructionEncoder(blob)
+            new CodeBuilder(blob)
                 .DefineLabel(out var label)
                 .Label(label, 4)
                 .Label(label, 4)
@@ -102,7 +102,7 @@ namespace IKVM.ByteCode.Tests.Writing
         public void CanEncodeTableSwitch()
         {
             var blob = new BlobBuilder();
-            var code = new InstructionEncoder(blob);
+            var code = new CodeBuilder(blob);
 
             var defaultLabel = code.DefineLabel();
             var case1Label = code.DefineLabel();
@@ -117,13 +117,13 @@ namespace IKVM.ByteCode.Tests.Writing
             code.MarkLabel(defaultLabel);
             code.MarkLabel(case1Label);
             code.MarkLabel(case2Label);
-            code.OpCode(OpCode._return);
+            code.Return();
 
             var b = new SequenceReader<byte>(new ReadOnlySequence<byte>(blob.ToArray()));
 
             // start with instruction
             b.TryRead(out byte opcode).Should().BeTrue();
-            opcode.Should().Be((byte)OpCode._tableswitch);
+            opcode.Should().Be((byte)OpCode.Tableswitch);
 
             // advance past padding
             b.TryRead(out byte _).Should().BeTrue();
@@ -152,14 +152,14 @@ namespace IKVM.ByteCode.Tests.Writing
 
             // last value should be return instruction
             b.TryRead(out byte returnInstruction).Should().BeTrue();
-            returnInstruction.Should().Be((byte)OpCode._return);
+            returnInstruction.Should().Be((byte)OpCode.Return);
         }
 
         [TestMethod]
         public void CanEncodeLookupSwitch()
         {
             var blob = new BlobBuilder();
-            var code = new InstructionEncoder(blob);
+            var code = new CodeBuilder(blob);
 
             var defaultLabel = code.DefineLabel();
             var case1Label = code.DefineLabel();
@@ -174,13 +174,13 @@ namespace IKVM.ByteCode.Tests.Writing
             code.MarkLabel(defaultLabel);
             code.MarkLabel(case1Label);
             code.MarkLabel(case2Label);
-            code.OpCode(OpCode._return);
+            code.Return();
 
             var b = new SequenceReader<byte>(new ReadOnlySequence<byte>(blob.ToArray()));
 
             // start with instruction
             b.TryRead(out byte opcode).Should().BeTrue();
-            opcode.Should().Be((byte)OpCode._lookupswitch);
+            opcode.Should().Be((byte)OpCode.Lookupswitch);
 
             // advance past padding
             b.TryRead(out byte _).Should().BeTrue();
@@ -213,7 +213,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             // last value should be return instruction
             b.TryRead(out byte returnInstruction).Should().BeTrue();
-            returnInstruction.Should().Be((byte)OpCode._return);
+            returnInstruction.Should().Be((byte)OpCode.Return);
         }
 
     }
