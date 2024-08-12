@@ -9,10 +9,10 @@ namespace IKVM.ByteCode.Writing
     /// <summary>
     /// Encodes a lookupswitch instruction.
     /// </summary>
-    public struct LookupSwitchInstructionEncoder
+    public struct LookupSwitchCodeEncoder
     {
 
-        readonly InstructionEncoder _encoder;
+        readonly CodeBuilder _encoder;
         readonly ushort _offset;
         readonly Blob _npairsBlob;
         int _npairs;
@@ -25,13 +25,13 @@ namespace IKVM.ByteCode.Writing
         /// <param name="defaultLabel"></param>
         /// <param name="low"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public LookupSwitchInstructionEncoder(InstructionEncoder encoder, LabelHandle defaultLabel)
+        public LookupSwitchCodeEncoder(CodeBuilder encoder, LabelHandle defaultLabel)
         {
             _encoder = encoder ?? throw new ArgumentNullException(nameof(encoder));
 
             // header of table switch is instruction, alignment, then default
             _offset = _encoder.Offset;
-            _encoder.OpCode(OpCode._lookupswitch);
+            _encoder.OpCode(OpCode.Lookupswitch);
             _encoder.Align(4);
             _encoder.Label(defaultLabel, 4, _offset);
 
@@ -47,7 +47,7 @@ namespace IKVM.ByteCode.Writing
         /// <param name="key"></param>
         /// <param name="label"></param>
         /// <returns></returns>
-        public LookupSwitchInstructionEncoder Case(int key, LabelHandle label)
+        public LookupSwitchCodeEncoder Case(int key, LabelHandle label)
         {
             if (key < _lastKey)
                 throw new ArgumentOutOfRangeException("Key must be greater than previos key.", nameof(key));

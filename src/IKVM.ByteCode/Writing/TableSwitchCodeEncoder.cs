@@ -9,10 +9,10 @@ namespace IKVM.ByteCode.Writing
     /// <summary>
     /// Encodes multiple table switch arguments.
     /// </summary>
-    public class TableSwitchInstructionEncoder
+    public struct TableSwitchCodeEncoder
     {
 
-        readonly InstructionEncoder _encoder;
+        readonly CodeBuilder _code;
         readonly ushort _offset;
         readonly int _low;
         readonly Blob _highBlob;
@@ -21,27 +21,27 @@ namespace IKVM.ByteCode.Writing
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="encoder"></param>
+        /// <param name="code"></param>
         /// <param name="defaultLabel"></param>
         /// <param name="low"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public TableSwitchInstructionEncoder(InstructionEncoder encoder, LabelHandle defaultLabel, int low)
+        public TableSwitchCodeEncoder(CodeBuilder code, LabelHandle defaultLabel, int low)
         {
-            _encoder = encoder ?? throw new ArgumentNullException(nameof(encoder));
+            _code = code ?? throw new ArgumentNullException(nameof(code));
 
             // header of table switch is instruction, alignment, then default
-            _offset = _encoder.Offset;
-            _encoder.OpCode(OpCode._tableswitch);
-            _encoder.Align(4);
-            _encoder.Label(defaultLabel, 4, _offset);
+            _offset = _code.Offset;
+            _code.OpCode(OpCode.Tableswitch);
+            _code.Align(4);
+            _code.Label(defaultLabel, 4, _offset);
 
             // write low value
             _low = low;
-            encoder.WriteInt32(_low);
+            code.WriteInt32(_low);
 
             // reserve space for high value and start at low
             _high = _low - 1;
-            _highBlob = _encoder.ReserveBytes(4);
+            _highBlob = _code.ReserveBytes(4);
             BinaryPrimitives.WriteInt32BigEndian(_highBlob.GetBytes(), _high);
         }
 
@@ -50,21 +50,11 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="label"></param>
         /// <returns></returns>
-        public TableSwitchInstructionEncoder Case(LabelHandle label)
+        public TableSwitchCodeEncoder Case(LabelHandle label)
         {
-            _encoder.Label(label, 4, _offset);
+            _code.Label(label, 4, _offset);
             BinaryPrimitives.WriteInt32BigEndian(_highBlob.GetBytes(), ++_high);
             return this;
-        }
-
-        /// <summary>
-        /// Validates whether we have written correct values.
-        /// </summary>
-        /// <exception cref="InvalidOperationException"></exception>
-        public void Validate()
-        {
-            if (_high < _low)
-                throw new InvalidOperationException("TableSwitch requires at least one item.");
         }
 
     }

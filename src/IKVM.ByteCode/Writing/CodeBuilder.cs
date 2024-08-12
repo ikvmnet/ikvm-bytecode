@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers.Binary;
+using System.Runtime.CompilerServices;
 
 using IKVM.ByteCode.Buffers;
 
@@ -7,9 +8,9 @@ namespace IKVM.ByteCode.Writing
 {
 
     /// <summary>
-    /// Encodes instructions.
+    /// Encodes a code block.
     /// </summary>
-    public class InstructionEncoder
+    public partial class CodeBuilder
     {
 
         /// <summary>
@@ -97,13 +98,13 @@ namespace IKVM.ByteCode.Writing
         }
 
         readonly BlobBuilder _builder;
-        LabelInfo[] _labels = Array.Empty<LabelInfo>();
+        LabelInfo[] _labels = [];
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="builder"></param>
-        public InstructionEncoder(BlobBuilder builder)
+        public CodeBuilder(BlobBuilder builder)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
@@ -122,6 +123,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="byteCount"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal Blob ReserveBytes(ushort byteCount)
         {
             if (_builder.Count + byteCount > ushort.MaxValue)
@@ -134,6 +136,7 @@ namespace IKVM.ByteCode.Writing
         /// Defines a label that can later be used to mark and refer to a location in the instruction stream.
         /// </summary>
         /// <returns>Label handle.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LabelHandle DefineLabel()
         {
             var h = new LabelHandle(_labels.Length);
@@ -148,7 +151,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="label"></param>
         /// <returns></returns>
-        public InstructionEncoder DefineLabel(out LabelHandle label)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder DefineLabel(out LabelHandle label)
         {
             label = DefineLabel();
             return this;
@@ -159,7 +163,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="label"></param>
         /// <param name="offset"></param>
-        public InstructionEncoder MarkLabel(LabelHandle label, out int offset)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder MarkLabel(LabelHandle label, out int offset)
         {
             ref var l = ref _labels[label.Id];
             if (l.Value != -1)
@@ -184,7 +189,8 @@ namespace IKVM.ByteCode.Writing
         /// Associates specified label with the current bytecode positon.
         /// </summary>
         /// <param name="label"></param>
-        public InstructionEncoder MarkLabel(LabelHandle label)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder MarkLabel(LabelHandle label)
         {
             return MarkLabel(label, out _);
         }
@@ -194,6 +200,7 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="label"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ushort GetLabelOffset(LabelHandle label)
         {
             ref var l = ref _labels[label.Id];
@@ -210,7 +217,8 @@ namespace IKVM.ByteCode.Writing
         /// <param name="label"></param>
         /// <param name="size"></param>
         /// <param name="offset"></param>
-        public InstructionEncoder Label(LabelHandle label, byte size, ushort offset)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder Label(LabelHandle label, byte size, ushort offset)
         {
             if (size is not 2 and not 4)
                 throw new ArgumentException("Label output size can only be 2 or 4 bytes.");
@@ -230,7 +238,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="label"></param>
         /// <param name="size"></param>
-        public InstructionEncoder Label(LabelHandle label, byte size)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder Label(LabelHandle label, byte size)
         {
             return Label(label, size, Offset);
         }
@@ -261,53 +270,10 @@ namespace IKVM.ByteCode.Writing
         /// Encodes the specified op-code.
         /// </summary>
         /// <param name="code"></param>
-        public InstructionEncoder OpCode(OpCode code)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder OpCode(OpCode code)
         {
             WriteByte((byte)code);
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes the specified op-code.
-        /// </summary>
-        /// <param name="code"></param>
-        public InstructionEncoder OpCode(OpCode code, ConstantHandle arg1)
-        {
-            WriteByte((byte)code);
-            Constant(arg1);
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes the specified op-code.
-        /// </summary>
-        /// <param name="code"></param>
-        public InstructionEncoder OpCode(OpCode code, byte arg1)
-        {
-            WriteByte((byte)code);
-            WriteByte(arg1);
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes the specified op-code.
-        /// </summary>
-        /// <param name="code"></param>
-        public InstructionEncoder OpCode(OpCode code, ushort arg1)
-        {
-            WriteByte((byte)code);
-            WriteUInt16(arg1);
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes the specified op-code.
-        /// </summary>
-        /// <param name="code"></param>
-        public InstructionEncoder OpCode(OpCode code, uint arg1)
-        {
-            WriteByte((byte)code);
-            WriteUInt32(arg1);
             return this;
         }
 
@@ -315,6 +281,7 @@ namespace IKVM.ByteCode.Writing
         /// Aligns the current position of the writer on <paramref name="alignment"/> boundary.
         /// </summary>
         /// <param name="alignment"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void Align(int alignment)
         {
             _builder.Align(alignment);
@@ -324,6 +291,7 @@ namespace IKVM.ByteCode.Writing
         /// Encodes a 8 bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void WriteSByte(sbyte value)
         {
             _builder.WriteBytes((byte)value, 1);
@@ -333,6 +301,7 @@ namespace IKVM.ByteCode.Writing
         /// Encodes a 16-bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void WriteInt16(short value)
         {
             BinaryPrimitives.WriteInt16BigEndian(ReserveBytes(sizeof(short)).GetBytes(), value);
@@ -342,6 +311,7 @@ namespace IKVM.ByteCode.Writing
         /// Encodes a 32-bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void WriteInt32(int value)
         {
             BinaryPrimitives.WriteInt32BigEndian(ReserveBytes(sizeof(int)).GetBytes(), value);
@@ -351,6 +321,7 @@ namespace IKVM.ByteCode.Writing
         /// Encodes a 8 bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void WriteByte(byte value)
         {
             ReserveBytes(sizeof(byte)).GetBytes().AsSpan()[0] = value;
@@ -360,6 +331,7 @@ namespace IKVM.ByteCode.Writing
         /// Encodes a 16-bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void WriteUInt16(ushort value)
         {
             BinaryPrimitives.WriteUInt16BigEndian(ReserveBytes(sizeof(ushort)).GetBytes(), value);
@@ -369,396 +341,329 @@ namespace IKVM.ByteCode.Writing
         /// Encodes a 32-bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void WriteUInt32(uint value)
         {
             BinaryPrimitives.WriteUInt32BigEndian(ReserveBytes(sizeof(uint)).GetBytes(), value);
         }
 
         /// <summary>
-        /// Inserts a <see cref="ConstantHandle"/> as an unsigned big endian pair of bytes.
+        /// Encodes a local variable load instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadLocalInteger(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Iload0(); break;
+                case 1: Iload1(); break;
+                case 2: Iload2(); break;
+                case 3: Iload3(); break;
+                default: Iload(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable load instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadLocalFloat(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Fload0(); break;
+                case 1: Fload1(); break;
+                case 2: Fload2(); break;
+                case 3: Fload3(); break;
+                default: Fload(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable load instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadLocalLong(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Lload0(); break;
+                case 1: Lload1(); break;
+                case 2: Lload2(); break;
+                case 3: Lload3(); break;
+                default: Lload(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable load instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadLocalDouble(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Dload0(); break;
+                case 1: Dload1(); break;
+                case 2: Dload2(); break;
+                case 3: Dload3(); break;
+                default: Dload(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable load instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadLocalReference(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Aload0(); break;
+                case 1: Aload1(); break;
+                case 2: Aload2(); break;
+                case 3: Aload3(); break;
+                default: Aload(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable store instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder StoreLocalInteger(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Istore0(); break;
+                case 1: Istore1(); break;
+                case 2: Istore2(); break;
+                case 3: Istore3(); break;
+                default: Istore(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable store instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder StoreLocalFloat(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Fstore0(); break;
+                case 1: Fstore1(); break;
+                case 2: Fstore2(); break;
+                case 3: Fstore3(); break;
+                default: Fstore(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable store instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder StoreLocalLong(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Lstore0(); break;
+                case 1: Lstore1(); break;
+                case 2: Lstore2(); break;
+                case 3: Lstore3(); break;
+                default: Lstore(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable store instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder StoreLocalDouble(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Dstore0(); break;
+                case 1: Dstore1(); break;
+                case 2: Dstore2(); break;
+                case 3: Dstore3(); break;
+                default: Dstore(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a local variable store instruction.
+        /// </summary>
+        /// <param name="slot"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder StoreLocalReference(ushort slot)
+        {
+            switch (slot)
+            {
+                case 0: Astore0(); break;
+                case 1: Astore1(); break;
+                case 2: Astore2(); break;
+                case 3: Astore3(); break;
+                default: Astore(slot); break;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Loads a constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder Constant(ConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(ConstantHandle handle)
         {
-            WriteUInt16(handle.Slot);
-            return this;
-        }
-
-        /// <summary>
-        /// Inserts an 'invokestatic' instruction.
-        /// </summary>
-        /// <param name="handle"></param>
-        public InstructionEncoder InvokeStatic(MethodrefConstantHandle handle)
-        {
-            return OpCode(ByteCode.OpCode._invokestatic, handle.Slot);
-        }
-
-        /// <summary>
-        /// Inserts an 'invokestatic' instruction.
-        /// </summary>
-        /// <param name="handle"></param>
-        public InstructionEncoder InvokeStatic(InterfaceMethodrefConstantHandle handle)
-        {
-            return OpCode(ByteCode.OpCode._invokestatic, handle.Slot);
-        }
-
-        /// <summary>
-        /// Inserts an 'invokevirtual' instruction.
-        /// </summary>
-        /// <param name="handle"></param>
-        public InstructionEncoder InvokeVirtual(MethodrefConstantHandle handle)
-        {
-            return OpCode(ByteCode.OpCode._invokevirtual, handle.Slot);
-        }
-
-        /// <summary>
-        /// Encodes a local variable load instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder LoadLocalInteger(ushort slot)
-        {
-            switch (slot)
+            switch (handle.Kind)
             {
-                case 0: OpCode(IKVM.ByteCode.OpCode._iload_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._iload_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._iload_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._iload_3); break;
+                case ConstantKind.Integer:
+                    return LoadConstant((IntegerConstantHandle)handle);
+                case ConstantKind.Float:
+                    return LoadConstant((FloatConstantHandle)handle);
+                case ConstantKind.Long:
+                    return LoadConstant((LongConstantHandle)handle);
+                case ConstantKind.Double:
+                    return LoadConstant((DoubleConstantHandle)handle);
+                case ConstantKind.Class:
+                    return LoadConstant((ClassConstantHandle)handle);
+                case ConstantKind.String:
+                    return LoadConstant((StringConstantHandle)handle);
+                case ConstantKind.MethodHandle:
+                    return LoadConstant((MethodHandleConstantHandle)handle);
+                case ConstantKind.MethodType:
+                    return LoadConstant((MethodTypeConstantHandle)handle);
+                case ConstantKind.Unknown:
                 default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._iload, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._iload, slot);
-                    }
-                    break;
+                    throw new InvalidOperationException("Invalid constant kind for load.");
             }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable load instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder LoadLocalFloat(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._fload_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._fload_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._fload_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._fload_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._fload, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._fload, slot);
-                    }
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable load instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder LoadLocalLong(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._lload_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._lload_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._lload_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._lload_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._lload, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._lload, slot);
-                    }
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable load instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder LoadLocalDouble(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._dload_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._dload_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._dload_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._dload_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._dload, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._dload, slot);
-                    }
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable load instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder LoadLocalReference(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._aload_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._aload_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._aload_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._aload_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._aload, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._aload, slot);
-                    }
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable store instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder StoreLocalInteger(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._istore_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._istore_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._istore_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._istore_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._istore, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._istore, slot);
-                    }
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable store instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder StoreLocalFloat(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._fstore_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._fstore_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._fstore_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._fstore_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._fstore, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._fstore, slot);
-                    }
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable store instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder StoreLocalLong(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._lstore_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._lstore_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._lstore_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._lstore_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._lstore, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._lstore, slot);
-                    }
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable store instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder StoreLocalDouble(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._dstore_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._dstore_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._dstore_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._dstore_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._dstore, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._dstore, slot);
-                    }
-                    break;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Encodes a local variable store instruction.
-        /// </summary>
-        /// <param name="slot"></param>
-        public InstructionEncoder StoreLocalReference(ushort slot)
-        {
-            switch (slot)
-            {
-                case 0: OpCode(IKVM.ByteCode.OpCode._astore_0); break;
-                case 1: OpCode(IKVM.ByteCode.OpCode._astore_1); break;
-                case 2: OpCode(IKVM.ByteCode.OpCode._astore_2); break;
-                case 3: OpCode(IKVM.ByteCode.OpCode._astore_3); break;
-                default:
-                    if (slot <= byte.MaxValue)
-                        OpCode(IKVM.ByteCode.OpCode._astore, (byte)slot);
-                    else
-                    {
-                        OpCode(IKVM.ByteCode.OpCode._wide);
-                        OpCode(IKVM.ByteCode.OpCode._astore, slot);
-                    }
-                    break;
-            }
-
-            return this;
         }
 
         /// <summary>
         /// Loads an integer constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder LoadConstant(IntegerConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(IntegerConstantHandle handle)
         {
             if (handle.Slot <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
+                return Ldc(handle);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
+                return LdcW(handle);
         }
 
         /// <summary>
         /// Loads a float constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder LoadConstant(FloatConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(FloatConstantHandle handle)
         {
             if (handle.Slot <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
+                return Ldc(handle);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
+                return LdcW(handle);
         }
 
         /// <summary>
         /// Loads a string constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder LoadConstant(StringConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(StringConstantHandle handle)
         {
             if (handle.Slot <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
+                return Ldc(handle);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
+                return LdcW(handle);
         }
 
         /// <summary>
         /// Loads a class constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder LoadConstant(ClassConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(ClassConstantHandle handle)
         {
             if (handle.Slot <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
+                return Ldc(handle);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
+                return LdcW(handle);
         }
 
         /// <summary>
         /// Loads a class constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder LoadConstant(MethodTypeConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(MethodTypeConstantHandle handle)
         {
             if (handle.Slot <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
+                return Ldc(handle);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
+                return LdcW(handle);
         }
 
         /// <summary>
         /// Loads a class constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder LoadConstant(MethodHandleConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(MethodHandleConstantHandle handle)
         {
             if (handle.Slot <= byte.MaxValue)
-                return OpCode(IKVM.ByteCode.OpCode._ldc, (byte)handle.Slot);
+                return Ldc(handle);
             else
-                return OpCode(IKVM.ByteCode.OpCode._ldc_w, handle.Slot);
+                return LdcW(handle);
         }
 
         /// <summary>
         /// Loads a float constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder LoadConstant(LongConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(LongConstantHandle handle)
         {
-            return OpCode(IKVM.ByteCode.OpCode._ldc2_w, handle.Slot);
+            return Ldc2W(handle);
         }
 
         /// <summary>
         /// Loads a double constant from the constant pool.
         /// </summary>
         /// <param name="handle"></param>
-        public InstructionEncoder LoadConstant(DoubleConstantHandle handle)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LoadConstant(DoubleConstantHandle handle)
         {
-            return OpCode(IKVM.ByteCode.OpCode._ldc2_w, handle.Slot);
+            return Ldc2W(handle);
         }
 
         /// <summary>
@@ -766,7 +671,8 @@ namespace IKVM.ByteCode.Writing
         /// </summary>
         /// <param name="opcode"></param>
         /// <param name="label"></param>
-        public InstructionEncoder Branch(OpCode opcode, LabelHandle label)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder Branch(OpCode opcode, LabelHandle label)
         {
             var offset = Offset;
             OpCode(opcode);
@@ -780,15 +686,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="defaultLabel"></param>
         /// <param name="low"></param>
         /// <param name="encode"></param>
-        public InstructionEncoder TableSwitch(LabelHandle defaultLabel, int low, Action<TableSwitchInstructionEncoder> encode)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder TableSwitch(LabelHandle defaultLabel, int low, Action<TableSwitchCodeEncoder> encode)
         {
-            if (encode is null)
-                throw new ArgumentNullException(nameof(encode));
-
-            var encoder = new TableSwitchInstructionEncoder(this, defaultLabel, low);
-            encode(encoder);
-            encoder.Validate();
-
+            encode(new TableSwitchCodeEncoder(this, defaultLabel, low));
             return this;
         }
 
@@ -799,13 +700,10 @@ namespace IKVM.ByteCode.Writing
         /// <param name="encode"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public InstructionEncoder LookupSwitch(LabelHandle defaultLabel, Action<LookupSwitchInstructionEncoder> encode)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LookupSwitch(LabelHandle defaultLabel, Action<LookupSwitchCodeEncoder> encode)
         {
-            if (encode is null)
-                throw new ArgumentNullException(nameof(encode));
-
-            encode(new LookupSwitchInstructionEncoder(this, defaultLabel));
-
+            encode(new LookupSwitchCodeEncoder(this, defaultLabel));
             return this;
         }
 

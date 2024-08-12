@@ -10,17 +10,27 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="OpCode - Copy.g.cs" />
+      <Compile Remove="OpCodeName - Copy.g.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
         <None Include="..\..\LICENSE" Pack="true" PackagePath="." />
         <None Include="..\..\README.md" Pack="true" PackagePath="." />
-        <None Include="OpCodeName.g.cs">
+        <None Include="OpCodeExtensions.g.cs">
+          <DependentUpon>OpCodeExtensions.g.tt</DependentUpon>
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
-          <DependentUpon>OpCodeName.g.tt</DependentUpon>
         </None>
-        <None Include="Writing\InstructionEncoderExtensions.g.cs">
+        <None Include="OpCode.g.cs">
+          <DependentUpon>OpCode.g.tt</DependentUpon>
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
-          <DependentUpon>InstructionEncoderExtensions.g.tt</DependentUpon>
+        </None>
+        <None Include="Writing\CodeBuilder.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>CodeBuilder.g.tt</DependentUpon>
         </None>
     </ItemGroup>
 
@@ -55,27 +65,46 @@
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
         </Compile>
+        <Compile Update="OpCodeExtensions.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>OpCodeExtensions.g.tt</DependentUpon>
+        </Compile>
         <Compile Update="OpCodeName.g.cs">
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
           <DependentUpon>OpCodeName.g.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Writing\CodeBuilder.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>CodeBuilder.g.tt</DependentUpon>
+        </Compile>
+        <Compile Update="Writing\InstructionEncoder.g.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>InstructionEncoder.g.tt</DependentUpon>
         </Compile>
         <Compile Update="Writing\InstructionEncoderExtensions.g.cs">
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
           <DependentUpon>InstructionEncoderExtensions.g.tt</DependentUpon>
         </Compile>
-        <None Update="OpCodeName.g.tt">
+        <None Update="OpCodeExtensions.g.tt">
+          <LastGenOutput>OpCodeExtensions.g.cs</LastGenOutput>
           <Generator>TextTemplatingFileGenerator</Generator>
-          <LastGenOutput>OpCodeName.g.cs</LastGenOutput>
+        </None>
+        <None Update="OpCode.g.tt">
+          <LastGenOutput>OpCode.g.cs</LastGenOutput>
+          <Generator>TextTemplatingFileGenerator</Generator>
         </None>
         <None Update="Reading\Attribute.g.tt">
             <LastGenOutput>Attribute.g.cs</LastGenOutput>
             <Generator>TextTemplatingFileGenerator</Generator>
         </None>
-        <None Update="Writing\InstructionEncoderExtensions.g.tt">
+        <None Update="Writing\CodeBuilder.g.tt">
           <Generator>TextTemplatingFileGenerator</Generator>
-          <LastGenOutput>InstructionEncoderExtensions.g.cs</LastGenOutput>
+          <LastGenOutput>CodeBuilder.g.cs</LastGenOutput>
         </None>
         <Compile Update="Reading\Attribute.g.cs">
             <DependentUpon>Attribute.g.tt</DependentUpon>

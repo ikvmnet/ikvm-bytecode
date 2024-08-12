@@ -1,0 +1,33 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ output extension=".cs" #>
+namespace IKVM.ByteCode
+{
+
+    /// <summary>
+    /// Java ByteCode values as defined by the JVM specification.
+    /// </summary>
+    public enum OpCode : byte
+    {
+
+<#
+var file = JObject.Parse(File.ReadAllText(Host.ResolvePath(Path.Combine("OpCode.json"))));
+foreach (var o in file)
+{
+#>
+        /// <summary>
+        /// The '<#= o.Key #>' opcode.
+        /// </summary>
+        <#= o.Value["name"] #> = <#= o.Value["byte"] #>,
+
+<#
+}
+#>
+    }
+
+}

@@ -1,0 +1,55 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ output extension=".cs" #>
+<#
+var file = JObject.Parse(File.ReadAllText(Host.ResolvePath(Path.Combine("OpCode.json"))));
+#>
+using System;
+
+namespace IKVM.ByteCode
+{
+
+    public static partial class OpCodeExtensions
+    {
+
+        public static partial byte GetBranchOperandSize(this OpCode opcode)
+        {
+            switch (opcode)
+            {
+<#
+foreach (var o in file)
+{
+    if (o.Value["kind"].ToString() == "Branch2")
+    {
+#>
+                case OpCode.<#= o.Value["name"] #>:
+<#
+    }
+}
+#>
+                    return 2;
+<#
+foreach (var o in file)
+{
+    if (o.Value["kind"].ToString() == "Branch4")
+    {
+#>
+                case OpCode.<#= o.Value["name"] #>:
+<#
+    }
+}
+#>
+                    return 4;
+                default:
+                    throw new ArgumentException("Unexpected opcode.", nameof(opcode));
+            }
+        }
+
+    }
+
+}
