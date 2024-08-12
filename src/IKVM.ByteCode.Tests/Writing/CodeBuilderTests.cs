@@ -11,7 +11,7 @@ namespace IKVM.ByteCode.Tests.Writing
 {
 
     [TestClass]
-    public class InstructionEncoderTests
+    public class CodeBuilderTests
     {
 
         [TestMethod]
