@@ -5,7 +5,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
-    public readonly record struct TableSwitchInstruction(int Offset, int DefaultTarget, int Low, int High, TableSwitchMatchTable Matches)
+    public readonly record struct TableSwitchInstruction(int DefaultTarget, int Low, int High, TableSwitchMatchTable Matches)
     {
 
         /// <summary>
@@ -14,16 +14,16 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
 
             if (opcode != OpCode.TableSwitch)
-                throw new ByteCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
 
             if (wide)
-                throw new ByteCodeException("OpCode does not support wide arguments.");
+                throw new InvalidCodeException("OpCode does not support wide arguments.");
 
             // advance by opcode size
             size += 1;
@@ -52,7 +52,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (high < low)
-                throw new InvalidClassException("High cannot be less than low.");
+                throw new InvalidCodeException("High cannot be less than low.");
 
             // size of resulting table
             if (TableSwitchMatchTable.TryMeasure(ref reader, high - low + 1, ref size) == false)
@@ -64,13 +64,24 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size of the instruction.
         /// </summary>
+        /// <param name="data"></param>
+        /// <param name="instruction"></param>
+        /// <returns></returns>
+        public static bool TryRead(ReadOnlySequence<byte> data, out TableSwitchInstruction instruction)
+        {
+            var reader = new SequenceReader<byte>(data);
+            return TryRead(ref reader, out instruction);
+        }
+
+        /// <summary>
+        /// Attempts to measure the size of the instruction.
+        /// </summary>
         /// <param name="reader"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
-        public static bool TryRead(ref SequenceReader<byte> reader, out TableSwitchInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, out TableSwitchInstruction instruction)
         {
             instruction = default;
-            var position = reader.Position;
 
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -105,14 +116,9 @@ namespace IKVM.ByteCode.Decoding
             if (TableSwitchMatchTable.TryRead(ref reader, high - low + 1, out var matches) == false)
                 return false;
 
-            instruction = new TableSwitchInstruction(position.GetInteger(), defaultTarget, low, high, matches);
+            instruction = new TableSwitchInstruction(defaultTarget, low, high, matches);
             return true;
         }
-
-        /// <summary>
-        /// Gets the position in the code stream of this instruction.
-        /// </summary>
-        public readonly int Offset = Offset;
 
         /// <summary>
         /// Gets the offset of the default condition.

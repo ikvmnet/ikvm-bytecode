@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Buffers
 
 #if NETFRAMEWORK
 
-    public ref partial struct SequenceReader<T>
+    internal ref partial struct SequenceReader<T>
         where T : unmanaged, IEquatable<T>
     {
 

@@ -34,7 +34,7 @@ namespace IKVM.ByteCode.Decoding
                 {
                     var reader = new SequenceReader<byte>(_data.Slice(_index * 8, 8));
                     if (LookupSwitchMatch.TryRead(ref reader, out var match) == false)
-                        throw new InvalidOperationException("Unexpected end of memory while reading a LookupSwitchMatch.");
+                        throw new InvalidCodeException("Unexpected end of memory while reading a LookupSwitchMatch.");
 
                     return match;
                 }
@@ -72,7 +72,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
         {
             size += 4;
             if (reader.TryReadBigEndian(out int npairs) == false)
@@ -92,7 +92,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="matches"></param>
         /// <returns></returns>
-        public static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchMatchTable matches)
+        internal static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchMatchTable matches)
         {
             matches = default;
 
@@ -139,7 +139,7 @@ namespace IKVM.ByteCode.Decoding
 
             var reader = new SequenceReader<byte>(_data.Slice(index * 8, 64));
             if (LookupSwitchMatch.TryRead(ref reader, out var match) == false)
-                throw new InvalidOperationException("Unexpected end of memory while reading a LookupSwitchMatch.");
+                throw new InvalidCodeException("Unexpected end of memory while reading a LookupSwitchMatch.");
 
             return match;
         }

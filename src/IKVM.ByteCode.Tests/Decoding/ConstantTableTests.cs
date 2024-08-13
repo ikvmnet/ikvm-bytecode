@@ -12,12 +12,12 @@ namespace IKVM.ByteCode.Tests.Decoding
 {
 
     [TestClass]
-    public class ConstantReaderTests
+    public class ConstantTableTests
     {
 
         ClassFile ReadClass()
         {
-            return ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ConstantReaderTests).Assembly.Location), nameof(Decoding), "ConstantReaderTests.class"));
+            return ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ConstantTableTests).Assembly.Location), nameof(Decoding), "ConstantReaderTests.class"));
         }
 
         [TestMethod]

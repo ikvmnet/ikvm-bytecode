@@ -5,7 +5,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
-    public readonly record struct LookupSwitchMatch(int Match, int Target)
+    public readonly record struct LookupSwitchMatch(int Key, int Target)
     {
 
         /// <summary>
@@ -14,24 +14,24 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        public static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchMatch item)
+        internal static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchMatch item)
         {
             item = default;
 
-            if (reader.TryReadBigEndian(out int match) == false)
+            if (reader.TryReadBigEndian(out int key) == false)
                 return false;
 
             if (reader.TryReadBigEndian(out int target) == false)
                 return false;
 
-            item = new LookupSwitchMatch(match, target);
+            item = new LookupSwitchMatch(key, target);
             return true;
         }
 
         /// <summary>
-        /// Gets the value to match.
+        /// Gets the key to match.
         /// </summary>
-        public readonly int Match = Match;
+        public readonly int Key = Key;
 
         /// <summary>
         /// Gets the offset target.

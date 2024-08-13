@@ -12,7 +12,7 @@ namespace IKVM.ByteCode.Decoding.Tests
 {
 
     [TestClass]
-    public class ClassReaderTests
+    public class ClassFileTests
     {
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace IKVM.ByteCode.Decoding.Tests
         [TestMethod]
         public void CanReadFromFile()
         {
-            using var clazz = ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ClassReaderTests).Assembly.Location), "0.class"));
+            using var clazz = ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ClassFileTests).Assembly.Location), "0.class"));
             clazz.Should().NotBeNull();
 
             foreach (var m in clazz.Methods)
@@ -64,7 +64,7 @@ namespace IKVM.ByteCode.Decoding.Tests
         [TestMethod]
         public void CanReadFromStream()
         {
-            using var clazz = ClassFile.Read(File.OpenRead(Path.Combine(Path.GetDirectoryName(typeof(ClassReaderTests).Assembly.Location), "0.class")));
+            using var clazz = ClassFile.Read(File.OpenRead(Path.Combine(Path.GetDirectoryName(typeof(ClassFileTests).Assembly.Location), "0.class")));
             clazz.Should().NotBeNull();
 
             foreach (var m in clazz.Methods)
@@ -86,7 +86,7 @@ namespace IKVM.ByteCode.Decoding.Tests
         [TestMethod]
         public void CanLoadTestClassFiles()
         {
-            var d = Path.Combine(Path.GetDirectoryName(typeof(ClassReaderTests).Assembly.Location), "resources");
+            var d = Path.Combine(Path.GetDirectoryName(typeof(ClassFileTests).Assembly.Location), "resources");
             var l = Directory.GetFiles(d, "*.class", SearchOption.AllDirectories);
 
             foreach (var i in l)

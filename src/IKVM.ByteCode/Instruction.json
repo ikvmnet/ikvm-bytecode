@@ -1455,7 +1455,8 @@
     "wide": {
         "byte": 196,
         "name": "Wide",
-        "flow": "Hide"
+        "hide": true,
+        "flow": "None"
     },
     "multianewarray": {
         "byte": 197,

@@ -2,7 +2,6 @@
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 
 using IKVM.ByteCode.Buffers;
 
@@ -35,9 +34,9 @@ namespace IKVM.ByteCode.Decoding
                 {
                     var reader = new SequenceReader<byte>(_data);
                     if (reader.TryAdvance(_index * 4) == false)
-                        throw new InvalidOperationException("Unexpected end of memory while reading a table match item.");
+                        throw new InvalidCodeException("Unexpected end of memory while reading a table match item.");
                     if (reader.TryReadBigEndian(out int target) == false)
-                        throw new InvalidOperationException("Unexpected end of memory while reading a table match item.");
+                        throw new InvalidCodeException("Unexpected end of memory while reading a table match item.");
 
                     return target;
                 }
@@ -75,7 +74,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public static bool TryMeasure(ref SequenceReader<byte> reader, int count, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int count, ref int size)
         {
             // each item between low/high inclusive is a 4 byte label
             var l = count * 4;
@@ -92,7 +91,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="matches"></param>
         /// <returns></returns>
-        public static bool TryRead(ref SequenceReader<byte> reader, int count, out TableSwitchMatchTable matches)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int count, out TableSwitchMatchTable matches)
         {
             matches = default;
 
@@ -137,9 +136,9 @@ namespace IKVM.ByteCode.Decoding
 
             var reader = new SequenceReader<byte>(_data);
             if (reader.TryAdvance(index * 4) == false)
-                throw new InvalidOperationException("Unexpected end of memory while reading a table match item.");
+                throw new InvalidCodeException("Unexpected end of memory while reading a table match item.");
             if (reader.TryReadBigEndian(out int target) == false)
-                throw new InvalidOperationException("Unexpected end of memory while reading a table match item.");
+                throw new InvalidCodeException("Unexpected end of memory while reading a table match item.");
 
             return target;
         }

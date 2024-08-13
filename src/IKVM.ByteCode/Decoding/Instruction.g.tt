@@ -8,6 +8,7 @@
 <#@ import namespace="Newtonsoft.Json" #>
 <#@ import namespace="Newtonsoft.Json.Linq" #>
 <#@ output extension=".cs" #>
+using System;
 using System.Buffers;
 using System.Runtime.CompilerServices;
 
@@ -26,6 +27,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="opcode"></param>
         /// <param name="size"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureInstruction(ref SequenceReader<byte> reader, OpCode opcode, ref int size)
         {
             switch (opcode)
@@ -46,9 +48,38 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 }
 #>
                 default:
-                    throw new ByteCodeException("Unsupported or unexpected instruction.");
+                    throw new InvalidCodeException("Unsupported or unexpected instruction.");
             }
         }
+
+<#
+foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+{
+    if (i.Value.Hide)
+        continue;
+
+    var inst = i.Key;
+    var name = i.Value.Name;
+    var args = i.Value.Args ?? [];
+#>
+        /// <summary>
+        /// Converts the <see cref="Instruction" /> to a <see cref="<#= name #>Instruction" /> if possible.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public <#= name #>Instruction As<#= name #>()
+        {
+            if (OpCode != OpCode.<#= name #>)
+                throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to '<#= name #>'.");
+
+            if (<#= name #>Instruction.TryRead(Data, out var instruction) == false)
+                throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
+
+            return instruction;
+        }
+
+<#
+}
+#>
     
     }
 
@@ -68,7 +99,6 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     /// <summary>
     /// Describes the '<#= inst #>' instruction.
     /// </summary>
-    /// <param name="Offset"></param>
 <#
         for (int j = 0; j < args.Length; j++)
         {
@@ -78,13 +108,14 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 <#
         }
 #>
-    public partial record struct <#= name #>Instruction(int Offset<#= BuildCtorArgList(args) #>)
+    public partial record struct <#= name #>Instruction(<#= BuildCtorArgList(args) #>)
     {
     
         /// <summary>
-        /// Gets the <see cref="OpCode"/> associated with this instruction type.
+        /// Converts the <see cref="Instruction" /> to a <see cref="<#= name #>Instruction" />.
         /// </summary>
-        public static readonly OpCode OpCode = OpCode.<#= name #>;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static explicit operator <#= name #>Instruction(Instruction value) => value.As<#= name #>();
         
         /// <summary>
         /// Attempts to measure this instruction.
@@ -93,13 +124,13 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
 
             if (opcode != OpCode.<#= name #>)
-                throw new ByteCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
 
 <#
     if (HasWide(args))
@@ -145,7 +176,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     {
 #>
             if (wide)
-                throw new ByteCodeException("OpCode does not support wide arguments.");
+                throw new InvalidCodeException("OpCode does not support wide arguments.");
             
             // advance by opcode size
             size += 1;
@@ -171,20 +202,32 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
+        /// <param name="data"></param>
+        /// <param name="instruction"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryRead(ReadOnlySequence<byte> data, out <#= name #>Instruction instruction)
+        {
+            var reader = new SequenceReader<byte>(data);
+            return TryRead(ref reader, out instruction);
+        }
+        
+        /// <summary>
+        /// Attempts to read this instruction.
+        /// </summary>
         /// <param name="reader"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ref SequenceReader<byte> reader, out <#= name #>Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, out <#= name #>Instruction instruction)
         {
             instruction = default;
-            var position = reader.Position;
 
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
 
             if (opcode != OpCode.<#= name #>)
-                throw new ByteCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
 
 <#
     if (HasWide(args))
@@ -205,7 +248,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         }
 #>
 
-                instruction = new <#= name #>Instruction(position.GetInteger()<#= BuildNewArgList(args) #>);
+                instruction = new <#= name #>Instruction(<#= BuildNewArgList(args) #>);
             }
             else
             {
@@ -222,7 +265,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         }
 #>
 
-                instruction = new <#= name #>Instruction(position.GetInteger()<#= BuildNewArgList(args) #>);
+                instruction = new <#= name #>Instruction(<#= BuildNewArgList(args) #>);
             }
 <#
     }
@@ -230,7 +273,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     {
 #>
             if (wide)
-                throw new ByteCodeException("OpCode does not support wide arguments.");
+                throw new InvalidCodeException("OpCode does not support wide arguments.");
 <#
         for (int j = 0; j < args.Length; j++)
         {
@@ -244,18 +287,13 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         }
 #>
 
-            instruction = new <#= name #>Instruction(position.GetInteger()<#= BuildNewArgList(args) #>);
+            instruction = new <#= name #>Instruction(<#= BuildNewArgList(args) #>);
 <#
     }
 #>
 
             return true;
         }
-        
-        /// <summary>
-        /// Gets the position in the code stream of this instruction.
-        /// </summary>
-        public readonly int Offset = Offset;
 <#
         for (int j = 0; j < args.Length; j++)
         {
@@ -364,22 +402,22 @@ static string GetRealTypeName(string type)
 
 static string BuildCtorArgList(InstructionArg[] args)
 {
-    var s = new System.Text.StringBuilder();
+    var s = new List<string>();
 
     foreach (var arg in args)
-        s.Append($", {GetTypeName(GetRealType(arg, true))} {arg.Name}");
-
-    return s.ToString();
+        s.Add($"{GetTypeName(GetRealType(arg, true))} {arg.Name}");
+        
+    return string.Join(", ", s);
 }
 
 static string BuildNewArgList(InstructionArg[] args)
 {
-    var s = new System.Text.StringBuilder();
+    var s = new List<string>();
 
     foreach (var arg in args)
-        s.Append($", {arg.Name.ToLower()}");
+        s.Add(arg.Name.ToLower());
 
-    return s.ToString();
+    return string.Join(", ", s);
 }
 
 #>

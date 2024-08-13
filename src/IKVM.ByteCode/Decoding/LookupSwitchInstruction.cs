@@ -5,7 +5,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
-    public readonly record struct LookupSwitchInstruction(int Offset, int DefaultTarget, LookupSwitchMatchTable Matches)
+    public readonly record struct LookupSwitchInstruction(int DefaultTarget, LookupSwitchMatchTable Matches)
     {
 
         /// <summary>
@@ -14,16 +14,16 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
 
             if (opcode != OpCode.LookupSwitch)
-                throw new ByteCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
 
             if (wide)
-                throw new ByteCodeException("OpCode does not support wide arguments.");
+                throw new InvalidCodeException("OpCode does not support wide arguments.");
 
             // advance by opcode size
             size += 1;
@@ -51,22 +51,33 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size of the instruction.
         /// </summary>
+        /// <param name="data"></param>
+        /// <param name="instruction"></param>
+        /// <returns></returns>
+        public static bool TryRead(ReadOnlySequence<byte> data, out LookupSwitchInstruction instruction)
+        {
+            var reader = new SequenceReader<byte>(data);
+            return TryRead(ref reader, out instruction);
+        }
+
+        /// <summary>
+        /// Attempts to measure the size of the instruction.
+        /// </summary>
         /// <param name="reader"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
-        public static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchInstruction instruction)
         {
             instruction = default;
-            var position = reader.Position;
 
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
 
             if (opcode != OpCode.LookupSwitch)
-                throw new ByteCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
 
             if (wide)
-                throw new ByteCodeException("OpCode does not support wide arguments.");
+                throw new InvalidCodeException("OpCode does not support wide arguments.");
 
             // structure is always aligned to 4 bytes
             var p = reader.Position;
@@ -81,14 +92,9 @@ namespace IKVM.ByteCode.Decoding
             if (LookupSwitchMatchTable.TryRead(ref reader, out var matches) == false)
                 return false;
 
-            instruction = new LookupSwitchInstruction(position.GetInteger(), defaultTarget, matches);
+            instruction = new LookupSwitchInstruction(defaultTarget, matches);
             return true;
         }
-
-        /// <summary>
-        /// Gets the position in the code stream of this instruction.
-        /// </summary>
-        public readonly int Offset = Offset;
 
         /// <summary>
         /// Gets the offset of the default condition.

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Buffers;
-using System.ComponentModel;
-using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
 
 using IKVM.ByteCode.Buffers;
@@ -12,11 +10,11 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Represents a single instruction within a code block.
     /// </summary>
-    /// <param name="Position"></param>
+    /// <param name="Offset"></param>
     /// <param name="OpCode"></param>
     /// <param name="IsWide"></param>
     /// <param name="Data"></param>
-    public readonly partial record struct Instruction(SequencePosition Position, OpCode OpCode, bool IsWide, ReadOnlySequence<byte> Data)
+    public readonly partial record struct Instruction(int Offset, OpCode OpCode, bool IsWide, ReadOnlySequence<byte> Data)
     {
 
         internal static bool TryMeasureU1(ref SequenceReader<byte> reader, ref int size)
@@ -295,7 +293,22 @@ namespace IKVM.ByteCode.Decoding
         /// <exception cref="ByteCodeException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        public static bool TryMeasure(ref ReadOnlySequence<byte> data, ref int size)
+        {
+            var reader = new SequenceReader<byte>(data);
+            return TryMeasure(ref reader, ref size);
+        }
+
+        /// <summary>
+        /// Attempts to measure the instruction at the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
         {
             // peek at the opcode so we can determine which instruction to dispatch to
             if (TryPeekOpCode(ref reader, out var opcode, out var wide) == false)
@@ -311,13 +324,28 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the instruction at the current position.
         /// </summary>
+        /// <param name="sequence"></param>
+        /// <param name="instruction"></param>
+        /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryRead(ref ReadOnlySequence<byte> sequence, out Instruction instruction)
+        {
+            var reader = new SequenceReader<byte>(sequence);
+            return TryRead(ref reader, out instruction);
+        }
+
+        /// <summary>
+        /// Attempts to read the instruction at the current position.
+        /// </summary>
         /// <param name="reader"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ref SequenceReader<byte> reader, out Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, out Instruction instruction)
         {
+            var position = reader.Position;
             instruction = default;
 
             // peek at the opcode information to include it in the output instruction
@@ -333,14 +361,14 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadExact(size, out var data) == false)
                 return false;
 
-            instruction = new Instruction(reader.Position, opcode, wide, data);
+            instruction = new Instruction(position.GetInteger(), opcode, wide, data);
             return true;
         }
 
         /// <summary>
         /// Gets the offset of this instruction within a larger block of code.
         /// </summary>
-        public readonly SequencePosition Position = Position;
+        public readonly int Offset = Offset;
 
         /// <summary>
         /// Gets the <see cref="OpCode"/> that makes up the instruction.
