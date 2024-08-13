@@ -2,6 +2,7 @@
 using System.Buffers;
 using System.Buffers.Binary;
 using System.Diagnostics;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -288,6 +289,63 @@ namespace IKVM.ByteCode.Buffers
         public static bool TryAdvance(ref this SequenceReader<byte> reader, long count)
         {
             return reader.TryReadExact(count, out _);
+        }
+
+
+        /// <summary>
+        /// Advances bytes up until the alignment is met.
+        /// </summary>
+        public static bool TryAlign(ref this SequenceReader<byte> reader, int alignment)
+        {
+            int position = reader.Position.GetInteger();
+            return TryAdvance(ref reader, CalculateAlignment(position, alignment) - position);
+        }
+
+        /// <summary>
+        /// Returns the number of bits set on the specified <see cref="int"/>.
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        static int PopCount(int v)
+        {
+            return PopCount(unchecked((uint)v));
+        }
+
+        /// <summary>
+        /// Returns the number of bits set on the specified <see cref="uint"/>.
+        /// </summary>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        static int PopCount(uint v)
+        {
+#if NET
+            return BitOperations.PopCount(v);
+#else
+            unchecked
+            {
+                v -= ((v >> 1) & 0x55555555u);
+                v = (v & 0x33333333u) + ((v >> 2) & 0x33333333u);
+                return (int)((v + (v >> 4) & 0xF0F0F0Fu) * 0x1010101u) >> 24;
+            }
+#endif
+        }
+
+        /// <summary>
+        /// Calculates the alignment based on the current position and alignment.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="alignment"></param>
+        /// <returns></returns>
+        static int CalculateAlignment(int position, int alignment)
+        {
+            Debug.Assert(position >= 0 && alignment > 0);
+            Debug.Assert(PopCount(alignment) == 1);
+
+            int result = position & ~(alignment - 1);
+            if (result == position)
+                return result;
+
+            return result + alignment;
         }
 
     }

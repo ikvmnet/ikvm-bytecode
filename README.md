@@ -4,9 +4,9 @@ Provides a Java class file parser, reader and writer implementation used by the 
 
 The core of the project contains the various abstractions that are used throughout. These abstractions are loosely modeled on the System.Reflection.Metadata namespace. The design is low allocation.
 
-### Reading
+### Decoding
 
-The `IKVM.ByteCode.Reading` namespace contains specialized structures for reading data from the class file specification. The main entry point of this namespace will be `ClassFile` which can be used to read a Java class file from a variety of sources. `ClassFile` itself holds a reference to the underlying original memory that was read from and parses the minimal amount possible depending on the operation. `ClassFile` implements `IDisposable` for releasing this memory.
+The `IKVM.ByteCode.Decoding` namespace contains specialized structures for reading data from the class file specification. The main entry point of this namespace will be `ClassFile` which can be used to read a Java class file from a variety of sources. `ClassFile` itself holds a reference to the underlying original memory that was read from and parses the minimal amount possible depending on the operation. `ClassFile` implements `IDisposable` for releasing this memory.
 
 `ClassFile`'s companion structures are field-only record types. This allows directly taking a `ref` to a item in a collection or a field.
 
@@ -28,9 +28,9 @@ Constants are represented in three sets of data structures: `*ConstantData`, `*C
 
 `*ConstantData` structures store the actual constant data that would be present in a constant table. Most constants are simply collections of handles to other constants. However, constants like `Utf8ConstantData` contain a pointer to the original parsed memory, and is decoded to a .NET string on demand. The base `ConstantData` structure maps over the original segmented constant data from a class file and parses it only on demand when cast.
 
-### Writing
+### Encoding
 
-Writing class files or parts of class files in `IKVM.ByteCode` is similar to `System.Reflection.Metadata.Ecma335`. A common linkable buffer, `BlobBuilder`, is provided which is the target of the various builders and encoders. `BlobBuilder` allows for fast append, and fast enumeration from the beginning, by linked list of segments of memory. `BlobBuilder`s can be linked to the end of existing `BlobBuilder`s. Assembling Java class files then is allocating a `BlobBuilder` and using one of the various Encoder classes to emit output into it. That output can then be appened together with other segments before being serialized to output.
+Encoding class files or parts of class files in `IKVM.ByteCode` is similar to `System.Reflection.Metadata.Ecma335`. A common linkable buffer, `BlobBuilder`, is provided which is the target of the various builders and encoders. `BlobBuilder` allows for fast append, and fast enumeration from the beginning, by linked list of segments of memory. `BlobBuilder`s can be linked to the end of existing `BlobBuilder`s. Assembling Java class files then is allocating a `BlobBuilder` and using one of the various Encoder classes to emit output into it. That output can then be appened together with other segments before being serialized to output.
 
 `ClassFormatWriter` represents the main operations for emitting class file output data: U1, U2 and U4, as defined by the specification. Each of the encoder structures target a `ClassFormatWriter`, which can be backed by a `Span<byte>` which can be allocated in segments from a `BlobBuilder`. Each Encoder provides a number of methods that have to be invoked in order to write the appropriate components. Encoders can be passed by `ref` between methods. They maintain minimal state such as a count of emitted elements. The nested structure of a Java class file is encapsulated by passing delegates with the nested encoders.
 

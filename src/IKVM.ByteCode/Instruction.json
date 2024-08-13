@@ -1,0 +1,1519 @@
+﻿{
+    "nop": {
+        "byte": 0,
+        "name": "Nop",
+        "flow": "Next",
+        "args": []
+    },
+    "aconst_null": {
+        "byte": 1,
+        "name": "AconstNull",
+        "flow": "Next",
+        "args": []
+    },
+    "iconst_m1": {
+        "byte": 2,
+        "name": "IconstM1",
+        "flow": "Next",
+        "args": []
+    },
+    "iconst_0": {
+        "byte": 3,
+        "name": "Iconst0",
+        "flow": "Next",
+        "args": []
+    },
+    "iconst_1": {
+        "byte": 4,
+        "name": "Iconst1",
+        "flow": "Next",
+        "args": []
+    },
+    "iconst_2": {
+        "byte": 5,
+        "name": "Iconst2",
+        "flow": "Next",
+        "args": []
+    },
+    "iconst_3": {
+        "byte": 6,
+        "name": "Iconst3",
+        "flow": "Next",
+        "args": []
+    },
+    "iconst_4": {
+        "byte": 7,
+        "name": "Iconst4",
+        "flow": "Next",
+        "args": []
+    },
+    "iconst_5": {
+        "byte": 8,
+        "name": "Iconst5",
+        "flow": "Next",
+        "args": []
+    },
+    "lconst_0": {
+        "byte": 9,
+        "name": "Lconst0",
+        "flow": "Next",
+        "args": []
+    },
+    "lconst_1": {
+        "byte": 10,
+        "name": "Lconst1",
+        "flow": "Next",
+        "args": []
+    },
+    "fconst_0": {
+        "byte": 11,
+        "name": "Fconst0",
+        "flow": "Next",
+        "args": []
+    },
+    "fconst_1": {
+        "byte": 12,
+        "name": "Fconst1",
+        "flow": "Next",
+        "args": []
+    },
+    "fconst_2": {
+        "byte": 13,
+        "name": "Fconst2",
+        "flow": "Next",
+        "args": []
+    },
+    "dconst_0": {
+        "byte": 14,
+        "name": "Dconst0",
+        "flow": "Next",
+        "args": []
+    },
+    "dconst_1": {
+        "byte": 15,
+        "name": "Dconst1",
+        "flow": "Next",
+        "args": []
+    },
+    "bipush": {
+        "byte": 16,
+        "name": "Bipush",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Value",
+                "type": "S1"
+            }
+        ]
+    },
+    "sipush": {
+        "byte": 17,
+        "name": "Sipush",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Value",
+                "type": "S2"
+            }
+        ]
+    },
+    "ldc": {
+        "byte": 18,
+        "name": "Ldc",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Constant",
+                "type": "C1"
+            }
+        ]
+    },
+    "ldc_w": {
+        "byte": 19,
+        "name": "LdcW",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Constant",
+                "type": "C2"
+            }
+        ]
+    },
+    "ldc2_w": {
+        "byte": 20,
+        "name": "Ldc2W",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Constant",
+                "type": "C2"
+            }
+        ]
+    },
+    "iload": {
+        "byte": 21,
+        "name": "Iload",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "lload": {
+        "byte": 22,
+        "name": "Lload",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "fload": {
+        "byte": 23,
+        "name": "Fload",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "dload": {
+        "byte": 24,
+        "name": "Dload",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "aload": {
+        "byte": 25,
+        "name": "Aload",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "iload_0": {
+        "byte": 26,
+        "name": "Iload0",
+        "flow": "Next",
+        "args": []
+    },
+    "iload_1": {
+        "byte": 27,
+        "name": "Iload1",
+        "flow": "Next",
+        "args": []
+    },
+    "iload_2": {
+        "byte": 28,
+        "name": "Iload2",
+        "flow": "Next",
+        "args": []
+    },
+    "iload_3": {
+        "byte": 29,
+        "name": "Iload3",
+        "flow": "Next",
+        "args": []
+    },
+    "lload_0": {
+        "byte": 30,
+        "name": "Lload0",
+        "flow": "Next",
+        "args": []
+    },
+    "lload_1": {
+        "byte": 31,
+        "name": "Lload1",
+        "flow": "Next",
+        "args": []
+    },
+    "lload_2": {
+        "byte": 32,
+        "name": "Lload2",
+        "flow": "Next",
+        "args": []
+    },
+    "lload_3": {
+        "byte": 33,
+        "name": "Lload3",
+        "flow": "Next",
+        "args": []
+    },
+    "fload_0": {
+        "byte": 34,
+        "name": "Fload0",
+        "flow": "Next",
+        "args": []
+    },
+    "fload_1": {
+        "byte": 35,
+        "name": "Fload1",
+        "flow": "Next",
+        "args": []
+    },
+    "fload_2": {
+        "byte": 36,
+        "name": "Fload2",
+        "flow": "Next",
+        "args": []
+    },
+    "fload_3": {
+        "byte": 37,
+        "name": "Fload3",
+        "flow": "Next",
+        "args": []
+    },
+    "dload_0": {
+        "byte": 38,
+        "name": "Dload0",
+        "flow": "Next",
+        "args": []
+    },
+    "dload_1": {
+        "byte": 39,
+        "name": "Dload1",
+        "flow": "Next",
+        "args": []
+    },
+    "dload_2": {
+        "byte": 40,
+        "name": "Dload2",
+        "flow": "Next",
+        "args": []
+    },
+    "dload_3": {
+        "byte": 41,
+        "name": "Dload3",
+        "flow": "Next",
+        "args": []
+    },
+    "aload_0": {
+        "byte": 42,
+        "name": "Aload0",
+        "flow": "Next",
+        "args": []
+    },
+    "aload_1": {
+        "byte": 43,
+        "name": "Aload1",
+        "flow": "Next",
+        "args": []
+    },
+    "aload_2": {
+        "byte": 44,
+        "name": "Aload2",
+        "flow": "Next",
+        "args": []
+    },
+    "aload_3": {
+        "byte": 45,
+        "name": "Aload3",
+        "flow": "Next",
+        "args": []
+    },
+    "iaload": {
+        "byte": 46,
+        "name": "Iaload",
+        "flow": "Next",
+        "args": []
+    },
+    "laload": {
+        "byte": 47,
+        "name": "Laload",
+        "flow": "Next",
+        "args": []
+    },
+    "faload": {
+        "byte": 48,
+        "name": "Faload",
+        "flow": "Next",
+        "args": []
+    },
+    "daload": {
+        "byte": 49,
+        "name": "Daload",
+        "flow": "Next",
+        "args": []
+    },
+    "aaload": {
+        "byte": 50,
+        "name": "Aaload",
+        "flow": "Next",
+        "args": []
+    },
+    "baload": {
+        "byte": 51,
+        "name": "Baload",
+        "flow": "Next",
+        "args": []
+    },
+    "caload": {
+        "byte": 52,
+        "name": "Caload",
+        "flow": "Next",
+        "args": []
+    },
+    "saload": {
+        "byte": 53,
+        "name": "Saload",
+        "flow": "Next",
+        "args": []
+    },
+    "istore": {
+        "byte": 54,
+        "name": "Istore",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "lstore": {
+        "byte": 55,
+        "name": "Lstore",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "fstore": {
+        "byte": 56,
+        "name": "Fstore",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "dstore": {
+        "byte": 57,
+        "name": "Dstore",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "astore": {
+        "byte": 58,
+        "name": "Astore",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "istore_0": {
+        "byte": 59,
+        "name": "Istore0",
+        "flow": "Next",
+        "args": []
+    },
+    "istore_1": {
+        "byte": 60,
+        "name": "Istore1",
+        "flow": "Next",
+        "args": []
+    },
+    "istore_2": {
+        "byte": 61,
+        "name": "Istore2",
+        "flow": "Next",
+        "args": []
+    },
+    "istore_3": {
+        "byte": 62,
+        "name": "Istore3",
+        "flow": "Next",
+        "args": []
+    },
+    "lstore_0": {
+        "byte": 63,
+        "name": "Lstore0",
+        "flow": "Next",
+        "args": []
+    },
+    "lstore_1": {
+        "byte": 64,
+        "name": "Lstore1",
+        "flow": "Next",
+        "args": []
+    },
+    "lstore_2": {
+        "byte": 65,
+        "name": "Lstore2",
+        "flow": "Next",
+        "args": []
+    },
+    "lstore_3": {
+        "byte": 66,
+        "name": "Lstore3",
+        "flow": "Next",
+        "args": []
+    },
+    "fstore_0": {
+        "byte": 67,
+        "name": "Fstore0",
+        "flow": "Next",
+        "args": []
+    },
+    "fstore_1": {
+        "byte": 68,
+        "name": "Fstore1",
+        "flow": "Next",
+        "args": []
+    },
+    "fstore_2": {
+        "byte": 69,
+        "name": "Fstore2",
+        "flow": "Next",
+        "args": []
+    },
+    "fstore_3": {
+        "byte": 70,
+        "name": "Fstore3",
+        "flow": "Next",
+        "args": []
+    },
+    "dstore_0": {
+        "byte": 71,
+        "name": "Dstore0",
+        "flow": "Next",
+        "args": []
+    },
+    "dstore_1": {
+        "byte": 72,
+        "name": "Dstore1",
+        "flow": "Next",
+        "args": []
+    },
+    "dstore_2": {
+        "byte": 73,
+        "name": "Dstore2",
+        "flow": "Next",
+        "args": []
+    },
+    "dstore_3": {
+        "byte": 74,
+        "name": "Dstore3",
+        "flow": "Next"
+    },
+    "astore_0": {
+        "byte": 75,
+        "name": "Astore0",
+        "flow": "Next",
+        "args": []
+    },
+    "astore_1": {
+        "byte": 76,
+        "name": "Astore1",
+        "flow": "Next",
+        "args": []
+    },
+    "astore_2": {
+        "byte": 77,
+        "name": "Astore2",
+        "flow": "Next",
+        "args": []
+    },
+    "astore_3": {
+        "byte": 78,
+        "name": "Astore3",
+        "flow": "Next",
+        "args": []
+    },
+    "iastore": {
+        "byte": 79,
+        "name": "Iastore",
+        "flow": "Next",
+        "args": []
+    },
+    "lastore": {
+        "byte": 80,
+        "name": "Lastore",
+        "flow": "Next",
+        "args": []
+    },
+    "fastore": {
+        "byte": 81,
+        "name": "Fastore",
+        "flow": "Next",
+        "args": []
+    },
+    "dastore": {
+        "byte": 82,
+        "name": "Dastore",
+        "flow": "Next",
+        "args": []
+    },
+    "aastore": {
+        "byte": 83,
+        "name": "Aastore",
+        "flow": "Next",
+        "args": []
+    },
+    "bastore": {
+        "byte": 84,
+        "name": "Bastore",
+        "flow": "Next",
+        "args": []
+    },
+    "castore": {
+        "byte": 85,
+        "name": "Castore",
+        "flow": "Next",
+        "args": []
+    },
+    "sastore": {
+        "byte": 86,
+        "name": "Sastore",
+        "flow": "Next",
+        "args": []
+    },
+    "pop": {
+        "byte": 87,
+        "name": "Pop",
+        "flow": "Next",
+        "args": []
+    },
+    "pop2": {
+        "byte": 88,
+        "name": "Pop2",
+        "flow": "Next",
+        "args": []
+    },
+    "dup": {
+        "byte": 89,
+        "name": "Dup",
+        "flow": "Next",
+        "args": []
+    },
+    "dup_x1": {
+        "byte": 90,
+        "name": "DupX1",
+        "flow": "Next",
+        "args": []
+    },
+    "dup_x2": {
+        "byte": 91,
+        "name": "DupX2",
+        "flow": "Next",
+        "args": []
+    },
+    "dup2": {
+        "byte": 92,
+        "name": "Dup2",
+        "flow": "Next",
+        "args": []
+    },
+    "dup2_x1": {
+        "byte": 93,
+        "name": "Dup2X1",
+        "flow": "Next",
+        "args": []
+    },
+    "dup2_x2": {
+        "byte": 94,
+        "name": "Dup2X2",
+        "flow": "Next",
+        "args": []
+    },
+    "swap": {
+        "byte": 95,
+        "name": "Swap",
+        "flow": "Next",
+        "args": []
+    },
+    "iadd": {
+        "byte": 96,
+        "name": "Iadd",
+        "flow": "Next",
+        "args": []
+    },
+    "ladd": {
+        "byte": 97,
+        "name": "Ladd",
+        "flow": "Next",
+        "args": []
+    },
+    "fadd": {
+        "byte": 98,
+        "name": "Fadd",
+        "flow": "Next",
+        "args": []
+    },
+    "dadd": {
+        "byte": 99,
+        "name": "Dadd",
+        "flow": "Next",
+        "args": []
+    },
+    "isub": {
+        "byte": 100,
+        "name": "Isub",
+        "flow": "Next",
+        "args": []
+    },
+    "lsub": {
+        "byte": 101,
+        "name": "Lsub",
+        "flow": "Next",
+        "args": []
+    },
+    "fsub": {
+        "byte": 102,
+        "name": "Fsub",
+        "flow": "Next",
+        "args": []
+    },
+    "dsub": {
+        "byte": 103,
+        "name": "Dsub",
+        "flow": "Next",
+        "args": []
+    },
+    "imul": {
+        "byte": 104,
+        "name": "Imul",
+        "flow": "Next",
+        "args": []
+    },
+    "lmul": {
+        "byte": 105,
+        "name": "Lmul",
+        "flow": "Next",
+        "args": []
+    },
+    "fmul": {
+        "byte": 106,
+        "name": "Fmul",
+        "flow": "Next",
+        "args": []
+    },
+    "dmul": {
+        "byte": 107,
+        "name": "Dmul",
+        "flow": "Next",
+        "args": []
+    },
+    "idiv": {
+        "byte": 108,
+        "name": "Idiv",
+        "flow": "Next",
+        "args": []
+    },
+    "ldiv": {
+        "byte": 109,
+        "name": "Ldiv",
+        "flow": "Next",
+        "args": []
+    },
+    "fdiv": {
+        "byte": 110,
+        "name": "Fdiv",
+        "flow": "Next",
+        "args": []
+    },
+    "ddiv": {
+        "byte": 111,
+        "name": "Ddiv",
+        "flow": "Next",
+        "args": []
+    },
+    "irem": {
+        "byte": 112,
+        "name": "Irem",
+        "flow": "Next",
+        "args": []
+    },
+    "lrem": {
+        "byte": 113,
+        "name": "Lrem",
+        "flow": "Next",
+        "args": []
+    },
+    "frem": {
+        "byte": 114,
+        "name": "Frem",
+        "flow": "Next",
+        "args": []
+    },
+    "drem": {
+        "byte": 115,
+        "name": "Drem",
+        "flow": "Next",
+        "args": []
+    },
+    "ineg": {
+        "byte": 116,
+        "name": "Ineg",
+        "flow": "Next",
+        "args": []
+    },
+    "lneg": {
+        "byte": 117,
+        "name": "Lneg",
+        "flow": "Next",
+        "args": []
+    },
+    "fneg": {
+        "byte": 118,
+        "name": "Fneg",
+        "flow": "Next",
+        "args": []
+    },
+    "dneg": {
+        "byte": 119,
+        "name": "Dneg",
+        "flow": "Next",
+        "args": []
+    },
+    "ishl": {
+        "byte": 120,
+        "name": "Ishl",
+        "flow": "Next",
+        "args": []
+    },
+    "lshl": {
+        "byte": 121,
+        "name": "Lshl",
+        "flow": "Next",
+        "args": []
+    },
+    "ishr": {
+        "byte": 122,
+        "name": "Ishr",
+        "flow": "Next",
+        "args": []
+    },
+    "lshr": {
+        "byte": 123,
+        "name": "Lshr",
+        "flow": "Next",
+        "args": []
+    },
+    "iushr": {
+        "byte": 124,
+        "name": "Iushr",
+        "flow": "Next",
+        "args": []
+    },
+    "lushr": {
+        "byte": 125,
+        "name": "Lushr",
+        "flow": "Next",
+        "args": []
+    },
+    "iand": {
+        "byte": 126,
+        "name": "Iand",
+        "flow": "Next",
+        "args": []
+    },
+    "land": {
+        "byte": 127,
+        "name": "Land",
+        "flow": "Next",
+        "args": []
+    },
+    "ior": {
+        "byte": 128,
+        "name": "Ior",
+        "flow": "Next",
+        "args": []
+    },
+    "lor": {
+        "byte": 129,
+        "name": "Lor",
+        "flow": "Next",
+        "args": []
+    },
+    "ixor": {
+        "byte": 130,
+        "name": "Ixor",
+        "flow": "Next",
+        "args": []
+    },
+    "lxor": {
+        "byte": 131,
+        "name": "Lxor",
+        "flow": "Next",
+        "args": []
+    },
+    "iinc": {
+        "byte": 132,
+        "name": "Iinc",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            },
+            {
+                "name": "Value",
+                "type": "S1",
+                "wideType": "S2"
+            }
+        ]
+    },
+    "i2l": {
+        "byte": 133,
+        "name": "I2l",
+        "flow": "Next",
+        "args": []
+    },
+    "i2f": {
+        "byte": 134,
+        "name": "I2f",
+        "flow": "Next",
+        "args": []
+    },
+    "i2d": {
+        "byte": 135,
+        "name": "I2d",
+        "flow": "Next",
+        "args": []
+    },
+    "l2i": {
+        "byte": 136,
+        "name": "L2i",
+        "flow": "Next",
+        "args": []
+    },
+    "l2f": {
+        "byte": 137,
+        "name": "L2f",
+        "flow": "Next",
+        "args": []
+    },
+    "l2d": {
+        "byte": 138,
+        "name": "L2d",
+        "flow": "Next",
+        "args": []
+    },
+    "f2i": {
+        "byte": 139,
+        "name": "F2i",
+        "flow": "Next",
+        "args": []
+    },
+    "f2l": {
+        "byte": 140,
+        "name": "F2l",
+        "flow": "Next",
+        "args": []
+    },
+    "f2d": {
+        "byte": 141,
+        "name": "F2d",
+        "flow": "Next",
+        "args": []
+    },
+    "d2i": {
+        "byte": 142,
+        "name": "D2i",
+        "flow": "Next",
+        "args": []
+    },
+    "d2l": {
+        "byte": 143,
+        "name": "D2l",
+        "flow": "Next",
+        "args": []
+    },
+    "d2f": {
+        "byte": 144,
+        "name": "D2f",
+        "flow": "Next",
+        "args": []
+    },
+    "i2b": {
+        "byte": 145,
+        "name": "I2b",
+        "flow": "Next",
+        "args": []
+    },
+    "i2c": {
+        "byte": 146,
+        "name": "I2c",
+        "flow": "Next",
+        "args": []
+    },
+    "i2s": {
+        "byte": 147,
+        "name": "I2s",
+        "flow": "Next",
+        "args": []
+    },
+    "lcmp": {
+        "byte": 148,
+        "name": "Lcmp",
+        "flow": "Next",
+        "args": []
+    },
+    "fcmpl": {
+        "byte": 149,
+        "name": "Fcmpl",
+        "flow": "Next",
+        "args": []
+    },
+    "fcmpg": {
+        "byte": 150,
+        "name": "Fcmpg",
+        "flow": "Next",
+        "args": []
+    },
+    "dcmpl": {
+        "byte": 151,
+        "name": "Dcmpl",
+        "flow": "Next",
+        "args": []
+    },
+    "dcmpg": {
+        "byte": 152,
+        "name": "Dcmpg",
+        "flow": "Next",
+        "args": []
+    },
+    "ifeq": {
+        "byte": 153,
+        "name": "Ifeq",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "ifne": {
+        "byte": 154,
+        "name": "Ifne",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "iflt": {
+        "byte": 155,
+        "name": "Iflt",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "ifge": {
+        "byte": 156,
+        "name": "Ifge",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "ifgt": {
+        "byte": 157,
+        "name": "Ifgt",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "ifle": {
+        "byte": 158,
+        "name": "Ifle",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "if_icmpeq": {
+        "byte": 159,
+        "name": "IfIcmpeq",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "if_icmpne": {
+        "byte": 160,
+        "name": "IfIcmpne",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "if_icmplt": {
+        "byte": 161,
+        "name": "IfIcmplt",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "if_icmpge": {
+        "byte": 162,
+        "name": "IfIcmpge",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "if_icmpgt": {
+        "byte": 163,
+        "name": "IfIcmpgt",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "if_icmple": {
+        "byte": 164,
+        "name": "IfIcmple",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "if_acmpeq": {
+        "byte": 165,
+        "name": "IfAcmpeq",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "if_acmpne": {
+        "byte": 166,
+        "name": "IfAcmpne",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "goto": {
+        "byte": 167,
+        "name": "Goto",
+        "flow": "Branch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "jsr": {
+        "byte": 168,
+        "name": "Jsr",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "ret": {
+        "byte": 169,
+        "name": "Ret",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Local",
+                "type": "L1",
+                "wideType": "L2"
+            }
+        ]
+    },
+    "tableswitch": {
+        "byte": 170,
+        "name": "TableSwitch",
+        "flow": "Switch",
+        "args": [
+            {
+                "name": "Switch",
+                "type": "TableSwitch"
+            }
+        ]
+    },
+    "lookupswitch": {
+        "byte": 171,
+        "name": "LookupSwitch",
+        "flow": "Switch",
+        "args": [
+            {
+                "name": "Switch",
+                "type": "LookupSwitch"
+            }
+        ]
+    },
+    "ireturn": {
+        "byte": 172,
+        "name": "Ireturn",
+        "flow": "Return",
+        "args": []
+    },
+    "lreturn": {
+        "byte": 173,
+        "name": "Lreturn",
+        "flow": "Return",
+        "args": []
+    },
+    "freturn": {
+        "byte": 174,
+        "name": "Freturn",
+        "flow": "Return",
+        "args": []
+    },
+    "dreturn": {
+        "byte": 175,
+        "name": "Dreturn",
+        "flow": "Return",
+        "args": []
+    },
+    "areturn": {
+        "byte": 176,
+        "name": "Areturn",
+        "flow": "Return",
+        "args": []
+    },
+    "return": {
+        "byte": 177,
+        "name": "Return",
+        "flow": "Return",
+        "args": []
+    },
+    "getstatic": {
+        "byte": 178,
+        "name": "GetStatic",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Field",
+                "type": "C2"
+            }
+        ]
+    },
+    "putstatic": {
+        "byte": 179,
+        "name": "PutStatic",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Field",
+                "type": "C2"
+            }
+        ]
+    },
+    "getfield": {
+        "byte": 180,
+        "name": "GetField",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Field",
+                "type": "C2"
+            }
+        ]
+    },
+    "putfield": {
+        "byte": 181,
+        "name": "PutField",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Field",
+                "type": "C2"
+            }
+        ]
+    },
+    "invokevirtual": {
+        "byte": 182,
+        "name": "InvokeVirtual",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Method",
+                "type": "C2"
+            }
+        ]
+    },
+    "invokespecial": {
+        "byte": 183,
+        "name": "InvokeSpecial",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Method",
+                "type": "C2"
+            }
+        ]
+    },
+    "invokestatic": {
+        "byte": 184,
+        "name": "InvokeStatic",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Method",
+                "type": "C2"
+            }
+        ]
+    },
+    "invokeinterface": {
+        "byte": 185,
+        "name": "InvokeInterface",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Method",
+                "type": "C2"
+            },
+            {
+                "name": "Count",
+                "type": "U1"
+            },
+            {
+                "name": "Zero",
+                "type": "U1"
+            }
+        ]
+    },
+    "invokedynamic": {
+        "byte": 186,
+        "name": "InvokeDynamic",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Method",
+                "type": "C2"
+            },
+            {
+                "name": "Zero",
+                "type": "U1"
+            },
+            {
+                "name": "Zero2",
+                "type": "U1"
+            }
+        ]
+    },
+    "new": {
+        "byte": 187,
+        "name": "New",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Constant",
+                "type": "C2"
+            }
+        ]
+    },
+    "newarray": {
+        "byte": 188,
+        "name": "Newarray",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Value",
+                "type": "U1"
+            }
+        ]
+    },
+    "anewarray": {
+        "byte": 189,
+        "name": "Anewarray",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Constant",
+                "type": "C2"
+            }
+        ]
+    },
+    "arraylength": {
+        "byte": 190,
+        "name": "Arraylength",
+        "flow": "Next",
+        "args": []
+    },
+    "athrow": {
+        "byte": 191,
+        "name": "Athrow",
+        "flow": "Throw",
+        "args": []
+    },
+    "checkcast": {
+        "byte": 192,
+        "name": "Checkcast",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Type",
+                "type": "C2"
+            }
+        ]
+    },
+    "instanceof": {
+        "byte": 193,
+        "name": "InstanceOf",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Type",
+                "type": "C2"
+            }
+        ]
+    },
+    "monitorenter": {
+        "byte": 194,
+        "name": "MonitorEnter",
+        "flow": "Next",
+        "args": []
+    },
+    "monitorexit": {
+        "byte": 195,
+        "name": "MonitorExit",
+        "flow": "Next",
+        "args": []
+    },
+    "wide": {
+        "byte": 196,
+        "name": "Wide",
+        "flow": "Hide"
+    },
+    "multianewarray": {
+        "byte": 197,
+        "name": "Multianewarray",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Type",
+                "type": "C2"
+            },
+            {
+                "name": "Dimensions",
+                "type": "U1"
+            }
+        ]
+    },
+    "ifnull": {
+        "byte": 198,
+        "name": "IfNull",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "ifnonnull": {
+        "byte": 199,
+        "name": "IfNonNull",
+        "flow": "ConditionalBranch",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J2"
+            }
+        ]
+    },
+    "goto_w": {
+        "byte": 200,
+        "name": "GotoW",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J4"
+            }
+        ]
+    },
+    "jsr_w": {
+        "byte": 201,
+        "name": "JsrW",
+        "flow": "Next",
+        "args": [
+            {
+                "name": "Target",
+                "type": "J4"
+            }
+        ]
+    }
+}

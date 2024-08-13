@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using FluentAssertions;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Reading;
+using IKVM.ByteCode.Decoding;
+using IKVM.ByteCode.Text;
 using IKVM.ByteCode.Encoding;
-using IKVM.ByteCode.Writing;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

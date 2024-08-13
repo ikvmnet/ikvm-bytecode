@@ -8,7 +8,7 @@ using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace IKVM.ByteCode.Reading.Tests
+namespace IKVM.ByteCode.Decoding.Tests
 {
 
     [TestClass]

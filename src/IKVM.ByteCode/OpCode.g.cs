@@ -860,12 +860,12 @@
         /// <summary>
         /// The 'tableswitch' opcode.
         /// </summary>
-        Tableswitch = 170,
+        TableSwitch = 170,
 
         /// <summary>
         /// The 'lookupswitch' opcode.
         /// </summary>
-        Lookupswitch = 171,
+        LookupSwitch = 171,
 
         /// <summary>
         /// The 'ireturn' opcode.
@@ -900,47 +900,47 @@
         /// <summary>
         /// The 'getstatic' opcode.
         /// </summary>
-        Getstatic = 178,
+        GetStatic = 178,
 
         /// <summary>
         /// The 'putstatic' opcode.
         /// </summary>
-        Putstatic = 179,
+        PutStatic = 179,
 
         /// <summary>
         /// The 'getfield' opcode.
         /// </summary>
-        Getfield = 180,
+        GetField = 180,
 
         /// <summary>
         /// The 'putfield' opcode.
         /// </summary>
-        Putfield = 181,
+        PutField = 181,
 
         /// <summary>
         /// The 'invokevirtual' opcode.
         /// </summary>
-        Invokevirtual = 182,
+        InvokeVirtual = 182,
 
         /// <summary>
         /// The 'invokespecial' opcode.
         /// </summary>
-        Invokespecial = 183,
+        InvokeSpecial = 183,
 
         /// <summary>
         /// The 'invokestatic' opcode.
         /// </summary>
-        Invokestatic = 184,
+        InvokeStatic = 184,
 
         /// <summary>
         /// The 'invokeinterface' opcode.
         /// </summary>
-        Invokeinterface = 185,
+        InvokeInterface = 185,
 
         /// <summary>
         /// The 'invokedynamic' opcode.
         /// </summary>
-        Invokedynamic = 186,
+        InvokeDynamic = 186,
 
         /// <summary>
         /// The 'new' opcode.
@@ -975,17 +975,17 @@
         /// <summary>
         /// The 'instanceof' opcode.
         /// </summary>
-        Instanceof = 193,
+        InstanceOf = 193,
 
         /// <summary>
         /// The 'monitorenter' opcode.
         /// </summary>
-        Monitorenter = 194,
+        MonitorEnter = 194,
 
         /// <summary>
         /// The 'monitorexit' opcode.
         /// </summary>
-        Monitorexit = 195,
+        MonitorExit = 195,
 
         /// <summary>
         /// The 'wide' opcode.
@@ -1000,12 +1000,12 @@
         /// <summary>
         /// The 'ifnull' opcode.
         /// </summary>
-        Ifnull = 198,
+        IfNull = 198,
 
         /// <summary>
         /// The 'ifnonnull' opcode.
         /// </summary>
-        Ifnonnull = 199,
+        IfNonNull = 199,
 
         /// <summary>
         /// The 'goto_w' opcode.

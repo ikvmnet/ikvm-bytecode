@@ -1,0 +1,385 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="..\Instruction.t4" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ output extension=".cs" #>
+using System.Buffers;
+using System.Runtime.CompilerServices;
+
+using IKVM.ByteCode.Buffers;
+
+namespace IKVM.ByteCode.Decoding
+{
+
+    public readonly partial record struct Instruction
+    {
+    
+        /// <summary>
+        /// Attempts to measure the instruction at the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="opcode"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        internal static bool TryMeasureInstruction(ref SequenceReader<byte> reader, OpCode opcode, ref int size)
+        {
+            switch (opcode)
+            {
+<#
+foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+{
+    if (i.Value.Hide)
+        continue;
+
+    var inst = i.Key;
+    var name = i.Value.Name;
+    var args = i.Value.Args ?? [];
+#>
+                case OpCode.<#= name #>:
+                    return <#= name #>Instruction.TryMeasure(ref reader, ref size);
+<#
+}
+#>
+                default:
+                    throw new ByteCodeException("Unsupported or unexpected instruction.");
+            }
+        }
+    
+    }
+
+<#
+foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+{
+    if (i.Value.Hide)
+        continue;
+
+    var inst = i.Key;
+    var name = i.Value.Name;
+    var args = i.Value.Args ?? [];
+
+    if (inst is "tableswitch" or "lookupswitch")
+        continue;
+#>
+    /// <summary>
+    /// Describes the '<#= inst #>' instruction.
+    /// </summary>
+    /// <param name="Offset"></param>
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+    /// <param name="<#= arg.Name #>"></param>
+<#
+        }
+#>
+    public partial record struct <#= name #>Instruction(int Offset<#= BuildCtorArgList(args) #>)
+    {
+    
+        /// <summary>
+        /// Gets the <see cref="OpCode"/> associated with this instruction type.
+        /// </summary>
+        public static readonly OpCode OpCode = OpCode.<#= name #>;
+        
+        /// <summary>
+        /// Attempts to measure this instruction.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        {
+            if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
+                return false;
+
+            if (opcode != OpCode.<#= name #>)
+                throw new ByteCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+
+<#
+    if (HasWide(args))
+    {
+#>
+            if (wide)
+            {
+                // advance by opcode and prefix
+                size += 2;
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+
+                // arg<#= j + 1 #>: <#= arg.Name #>
+                if (Instruction.TryMeasure<#= GetRealType(arg, true) #>(ref reader, ref size) == false)
+                    return false;
+<#
+        }
+#>
+            }
+            else
+            {
+                // advance by opcode size
+                size += 1;
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+
+                // arg<#= j + 1 #>: <#= arg.Name #>
+                if (Instruction.TryMeasure<#= GetRealType(arg, false) #>(ref reader, ref size) == false)
+                    return false;
+<#
+        }
+#>
+            }
+<#
+    }
+    else
+    {
+#>
+            if (wide)
+                throw new ByteCodeException("OpCode does not support wide arguments.");
+            
+            // advance by opcode size
+            size += 1;
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+
+            // arg<#= j + 1 #>: <#= arg.Name #>
+            if (Instruction.TryMeasure<#= GetRealType(arg, false) #>(ref reader, ref size) == false)
+                return false;
+<#
+        }
+#>
+<#
+    }
+#>
+
+            return true;
+        }
+        
+        /// <summary>
+        /// Attempts to read this instruction.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="instruction"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TryRead(ref SequenceReader<byte> reader, out <#= name #>Instruction instruction)
+        {
+            instruction = default;
+            var position = reader.Position;
+
+            if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
+                return false;
+
+            if (opcode != OpCode.<#= name #>)
+                throw new ByteCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+
+<#
+    if (HasWide(args))
+    {
+#>
+            if (wide)
+            {
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+
+                // arg<#= j + 1 #>: <#= arg.Name #>
+                if (Instruction.TryRead<#= GetRealType(arg, true) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
+                    return false;
+<#
+        }
+#>
+
+                instruction = new <#= name #>Instruction(position.GetInteger()<#= BuildNewArgList(args) #>);
+            }
+            else
+            {
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+
+                // arg<#= j + 1 #>: <#= arg.Name #>
+                if (Instruction.TryRead<#= GetRealType(arg, false) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
+                    return false;
+<#
+        }
+#>
+
+                instruction = new <#= name #>Instruction(position.GetInteger()<#= BuildNewArgList(args) #>);
+            }
+<#
+    }
+    else
+    {
+#>
+            if (wide)
+                throw new ByteCodeException("OpCode does not support wide arguments.");
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+
+            // arg<#= j + 1 #>: <#= arg.Name #>
+            if (Instruction.TryRead<#= GetRealType(arg, false) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
+                return false;
+<#
+        }
+#>
+
+            instruction = new <#= name #>Instruction(position.GetInteger()<#= BuildNewArgList(args) #>);
+<#
+    }
+#>
+
+            return true;
+        }
+        
+        /// <summary>
+        /// Gets the position in the code stream of this instruction.
+        /// </summary>
+        public readonly int Offset = Offset;
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+
+        // arg<#= j + 1 #>: <#= arg.Name #>
+        public readonly <#= GetTypeName(GetRealType(arg, true)) #> <#= arg.Name #> = <#= arg.Name #>;
+<#
+        }
+#>
+
+    }
+
+<#
+}
+#>
+}
+<#+
+
+static bool HasWide(InstructionArg[] args)
+{
+    return args.Any(i => i.WideType != null);
+}
+
+static string GetMeasureArg(InstructionArg arg, bool wide)
+{
+    var type = GetRealType(arg, wide);
+    var name = GetRealTypeName(type);
+    return $"TryAdvance{type}(ref reader)";
+}
+
+static string GetReadArg(InstructionArg arg, bool wide)
+{
+    var type = GetRealType(arg, wide);
+    var name = GetRealTypeName(type);
+    return $"TryRead{type}(ref reader, out {name} {arg.Name.ToLower()})";
+}
+
+static string GetTypeName(string type)
+{
+    switch (type)
+    {
+        case "U1":
+            return "byte";
+        case "U2":
+            return "ushort";
+        case "S1":
+            return "sbyte";
+        case "S2":
+            return "short";
+        case "C1":
+            return "ConstantHandle";
+        case "C2":
+            return "ConstantHandle";
+        case "L1":
+            return "byte";
+        case "L2":
+            return "ushort";
+        case "J2":
+            return "short";
+        case "J4":
+            return "int";
+        default:
+            throw new Exception(type);
+    }
+}
+
+static string GetRealType(InstructionArg arg, bool wide)
+{
+    var type = arg.Type;
+    if (wide && arg.WideType != null)
+        type = arg.WideType;
+
+    return type;
+}
+
+static string GetRealTypeName(string type)
+{
+    switch (type)
+    {
+        case "U1":
+            return "byte";
+        case "U2":
+            return "ushort";
+        case "S1":
+            return "sbyte";
+        case "S2":
+            return "short";
+        case "C1":
+            return "byte";
+        case "C2":
+            return "ushort";
+        case "L1":
+            return "byte";
+        case "L2":
+            return "ushort";
+        case "J2":
+            return "short";
+        case "J4":
+            return "int";
+        default:
+            throw new Exception(type);
+    }
+}
+
+static string BuildCtorArgList(InstructionArg[] args)
+{
+    var s = new System.Text.StringBuilder();
+
+    foreach (var arg in args)
+        s.Append($", {GetTypeName(GetRealType(arg, true))} {arg.Name}");
+
+    return s.ToString();
+}
+
+static string BuildNewArgList(InstructionArg[] args)
+{
+    var s = new System.Text.StringBuilder();
+
+    foreach (var arg in args)
+        s.Append($", {arg.Name.ToLower()}");
+
+    return s.ToString();
+}
+
+#>

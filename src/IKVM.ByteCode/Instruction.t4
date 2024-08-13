@@ -1,0 +1,47 @@
+﻿<#+
+
+public class InstructionFile : Dictionary<string, Instruction>
+{
+
+    public static InstructionFile Read(string path)
+    {
+        return JObject.Parse(File.ReadAllText(path)).ToObject<InstructionFile>();
+    }
+
+}
+
+public class Instruction
+{
+
+    [JsonProperty("byte")]
+    public int Byte { get; set; }
+    
+    [JsonProperty("name")]
+    public string Name { get; set; }
+    
+    [JsonProperty("hide")]
+    public bool Hide { get; set; }
+    
+    [JsonProperty("flow")]
+    public string Flow { get; set; }
+
+    [JsonProperty("args")]
+    public InstructionArg[] Args { get; set; }
+    
+}
+
+public class InstructionArg
+{
+    
+    [JsonProperty("name")]
+    public string Name { get; set; }
+    
+    [JsonProperty("type")]
+    public string Type { get; set; }
+    
+    [JsonProperty("wideType")]
+    public string WideType { get; set; }
+    
+}
+
+#>

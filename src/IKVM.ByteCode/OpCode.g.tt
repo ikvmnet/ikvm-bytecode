@@ -1,8 +1,10 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="Instruction.t4" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="Newtonsoft.Json" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
 <#@ import namespace="Newtonsoft.Json" #>
 <#@ import namespace="Newtonsoft.Json.Linq" #>
 <#@ output extension=".cs" #>
@@ -16,14 +18,13 @@ namespace IKVM.ByteCode
     {
 
 <#
-var file = JObject.Parse(File.ReadAllText(Host.ResolvePath(Path.Combine("OpCode.json"))));
-foreach (var o in file)
+foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("Instruction.json"))))
 {
 #>
         /// <summary>
-        /// The '<#= o.Key #>' opcode.
+        /// The '<#= i.Key #>' opcode.
         /// </summary>
-        <#= o.Value["name"] #> = <#= o.Value["byte"] #>,
+        <#= i.Value.Name #> = <#= i.Value.Byte #>,
 
 <#
 }

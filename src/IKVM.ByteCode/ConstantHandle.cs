@@ -9,6 +9,10 @@
         /// </summary>
         public static readonly ConstantHandle Nil = new(ConstantKind.Unknown, 0);
 
+        public static explicit operator byte(ConstantHandle handle) => checked((byte)handle.Slot);
+
+        public static explicit operator ushort(ConstantHandle handle) => handle.Slot;
+
         /// <summary>
         /// Gets whether or not this represents the nil instance.
         /// </summary>

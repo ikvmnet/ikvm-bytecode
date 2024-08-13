@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
-using IKVM.ByteCode.Reading;
+using IKVM.ByteCode.Decoding;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

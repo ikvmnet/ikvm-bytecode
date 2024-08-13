@@ -1,0 +1,296 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ include file="..\Instruction.t4" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json.Linq" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Runtime.CompilerServices;
+
+namespace IKVM.ByteCode.Encoding
+{
+
+    public partial class CodeBuilder
+    {
+
+<#
+foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+{
+    var inst = i.Key;
+    if (inst is "lookupswitch" or "tableswitch")
+        continue;
+
+    var name = i.Value.Name;
+    var args = i.Value.Args ?? [];
+#>
+        /// <summary>
+        /// Encodes the '<#= inst #>' opcode.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder <#= name #>(<#= BuildArgList(args) #>)
+        {
+<#
+    if (HasBranchTarget(args))
+    {
+#>
+            var _offset = Offset;
+<#
+    }
+#>
+<#
+    if (HasWide(args))
+    {
+#>
+            var wide = false;
+
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+            if (<#= arg.Name.ToLower() #> > <#= GetMaxSizeExpr(arg.Type) #> || <#= arg.Name.ToLower() #> < <#= GetMinSizeExpr(arg.Type) #>)
+                wide = true;
+
+<#
+        }
+#>
+            if (wide)
+            {
+                this.OpCode(IKVM.ByteCode.OpCode.Wide);
+                this.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+                <#= GetWriteArg(arg, true) #>;
+<#
+        }
+#>
+            }
+            else
+            {
+                this.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+                <#= GetWriteArg(arg, false) #>;
+<#
+        }
+#>
+            }
+<#
+    }
+    else
+    {
+#>
+            this.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+            <#= GetWriteArg(arg, false) #>;
+<#
+        }
+#>
+<#
+    }
+#>
+
+            return this;
+        }
+
+<#
+}
+#>
+
+    }
+
+}
+
+<#+
+
+static string GetWriteArg(InstructionArg arg, bool wide)
+{
+    var type = GetRealType(arg, wide);
+    var name = GetRealTypeName(type);
+    if (type == "J2")
+    {
+        return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, 2, _offset)";
+    }
+    if (type == "J4")
+    {
+        return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, 4, _offset)";
+    }
+
+    return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()})";
+}
+
+static string GetUserType(InstructionArg arg)
+{
+    var type = arg.Type;
+    if (arg.WideType != null)
+        type = arg.WideType;
+
+    return type;
+}
+
+static string GetRealType(InstructionArg arg, bool wide)
+{
+    var type = arg.Type;
+    if (wide && arg.WideType != null)
+        type = arg.WideType;
+
+    return type;
+}
+
+static string GetTypeName(string type)
+{
+    switch (type)
+    {
+        case "U1":
+            return "byte";
+        case "U2":
+            return "ushort";
+        case "S1":
+            return "sbyte";
+        case "S2":
+            return "short";
+        case "C1":
+            return "ConstantHandle";
+        case "C2":
+            return "ConstantHandle";
+        case "L1":
+            return "byte";
+        case "L2":
+            return "ushort";
+        case "J2":
+            return "LabelHandle";
+        case "J4":
+            return "LabelHandle";
+        default:
+            throw new Exception(type);
+    }
+}
+
+static string GetRealTypeName(string type)
+{
+    switch (type)
+    {
+        case "U1":
+            return "byte";
+        case "U2":
+            return "ushort";
+        case "S1":
+            return "sbyte";
+        case "S2":
+            return "short";
+        case "C1":
+            return "byte";
+        case "C2":
+            return "ushort";
+        case "L1":
+            return "byte";
+        case "L2":
+            return "ushort";
+        case "J2":
+            return "LabelHandle";
+        case "J4":
+            return "LabelHandle";
+        case "TableSwitch":
+            return "int";
+        case "LookupSwitch":
+            return "int";
+        default:
+            throw new Exception(type);
+    }
+}
+
+static bool HasBranchTarget(InstructionArg[] args)
+{
+    return args.Any(i => i.Type == "J2" || i.Type == "J4");
+}
+
+static bool HasWide(InstructionArg[] args)
+{
+    return args.Any(i => i.WideType != null);
+}
+
+static string GetMinSizeExpr(string type)
+{
+    switch (type)
+    {
+        case "U1":
+            return "byte.MinValue";
+        case "S1":
+            return "sbyte.MinValue";
+        case "L1":
+            return "byte.MinValue";
+        default:
+            throw new Exception(type);
+    }
+}
+
+static string GetMaxSizeExpr(string type)
+{
+    switch (type)
+    {
+        case "U1":
+            return "byte.MaxValue";
+        case "S1":
+            return "sbyte.MaxValue";
+        case "C1":
+            return "byte.MaxValue";
+        case "L1":
+            return "byte.MaxValue";
+        default:
+            throw new Exception(type);
+    }
+}
+
+static string GetWriteMethodName(string type)
+{
+    switch (type)
+    {
+        case "U1":
+            return "WriteByte";
+        case "S1":
+            return "WriteSByte";
+        case "S2":
+            return "WriteInt16";
+        case "C1":
+            return "WriteByte";
+        case "C2":
+            return "WriteUInt16";
+        case "L1":
+            return "WriteByte";
+        case "L2":
+            return "WriteUInt16";
+        case "J2":
+            return "Label";
+        case "J4":
+            return "Label";
+        default:
+            throw new Exception(type);
+    }
+}
+
+static string BuildArgList(InstructionArg[] args)
+{
+    var s = new List<string>();
+
+    foreach (var arg in args)
+        s.Add($"{GetTypeName(GetUserType(arg))} {arg.Name.ToLowerInvariant()}");
+
+    return string.Join(", ", s);
+}
+
+#>

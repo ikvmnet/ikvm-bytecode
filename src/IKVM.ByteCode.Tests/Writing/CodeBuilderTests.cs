@@ -3,7 +3,7 @@
 using FluentAssertions;
 
 using IKVM.ByteCode.Buffers;
-using IKVM.ByteCode.Writing;
+using IKVM.ByteCode.Encoding;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Tests.Writing
             var label = code.DefineLabel();
 
             var branchOffset = code.Offset;
-            code.Branch(OpCode.Goto, label);
+            code.Goto(label);
 
             var labelOffset = code.Offset;
             code.MarkLabel(label);
@@ -123,7 +123,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             // start with instruction
             b.TryRead(out byte opcode).Should().BeTrue();
-            opcode.Should().Be((byte)OpCode.Tableswitch);
+            opcode.Should().Be((byte)OpCode.TableSwitch);
 
             // advance past padding
             b.TryRead(out byte _).Should().BeTrue();
@@ -180,7 +180,7 @@ namespace IKVM.ByteCode.Tests.Writing
 
             // start with instruction
             b.TryRead(out byte opcode).Should().BeTrue();
-            opcode.Should().Be((byte)OpCode.Lookupswitch);
+            opcode.Should().Be((byte)OpCode.LookupSwitch);
 
             // advance past padding
             b.TryRead(out byte _).Should().BeTrue();
