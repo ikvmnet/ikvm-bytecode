@@ -8,7 +8,7 @@ using IKVM.ByteCode.Decoding;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace IKVM.ByteCode.Tests.Reading
+namespace IKVM.ByteCode.Tests.Decoding
 {
 
     [TestClass]
@@ -17,7 +17,7 @@ namespace IKVM.ByteCode.Tests.Reading
 
         ClassFile ReadClass()
         {
-            return ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ConstantReaderTests).Assembly.Location), "Reading", "ConstantReaderTests.class"));
+            return ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ConstantReaderTests).Assembly.Location), nameof(Decoding), "ConstantReaderTests.class"));
         }
 
         [TestMethod]

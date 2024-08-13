@@ -8,7 +8,7 @@ using IKVM.ByteCode.Encoding;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace IKVM.ByteCode.Tests.Writing
+namespace IKVM.ByteCode.Tests.Encoding
 {
 
     [TestClass]
