@@ -17,66 +17,107 @@ namespace IKVM.ByteCode.Decoding
     public readonly partial record struct Instruction(int Offset, OpCode OpCode, bool IsWide, ReadOnlySequence<byte> Data)
     {
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureU1(ref SequenceReader<byte> reader, ref int size)
         {
             size += 1;
+            if (reader.TryAdvance(1) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureU2(ref SequenceReader<byte> reader, ref int size)
         {
             size += 2;
+            if (reader.TryAdvance(2) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureS1(ref SequenceReader<byte> reader, ref int size)
         {
             size += 1;
+            if (reader.TryAdvance(1) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureS2(ref SequenceReader<byte> reader, ref int size)
         {
             size += 2;
+            if (reader.TryAdvance(2) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureC1(ref SequenceReader<byte> reader, ref int size)
         {
             size += 1;
+            if (reader.TryAdvance(1) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureC2(ref SequenceReader<byte> reader, ref int size)
         {
             size += 2;
+            if (reader.TryAdvance(2) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureL1(ref SequenceReader<byte> reader, ref int size)
         {
             size += 1;
+            if (reader.TryAdvance(1) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureL2(ref SequenceReader<byte> reader, ref int size)
         {
             size += 2;
+            if (reader.TryAdvance(2) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureJ2(ref SequenceReader<byte> reader, ref int size)
         {
             size += 2;
+            if (reader.TryAdvance(2) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryMeasureJ4(ref SequenceReader<byte> reader, ref int size)
         {
             size += 4;
+            if (reader.TryAdvance(4) == false)
+                return false;
+
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadU1(ref SequenceReader<byte> reader, out byte handle)
         {
             handle = default;
@@ -88,6 +129,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadU2(ref SequenceReader<byte> reader, out ushort handle)
         {
             handle = default;
@@ -99,6 +141,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadS1(ref SequenceReader<byte> reader, out sbyte handle)
         {
             handle = default;
@@ -110,6 +153,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadS2(ref SequenceReader<byte> reader, out short handle)
         {
             handle = default;
@@ -121,6 +165,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadC1(ref SequenceReader<byte> reader, out ConstantHandle handle)
         {
             handle = default;
@@ -132,6 +177,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadC2(ref SequenceReader<byte> reader, out ConstantHandle handle)
         {
             handle = default;
@@ -143,6 +189,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadL1(ref SequenceReader<byte> reader, out byte handle)
         {
             handle = default;
@@ -154,6 +201,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadL2(ref SequenceReader<byte> reader, out ushort handle)
         {
             handle = default;
@@ -165,6 +213,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadJ2(ref SequenceReader<byte> reader, out short handle)
         {
             handle = default;
@@ -176,6 +225,7 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadJ4(ref SequenceReader<byte> reader, out int handle)
         {
             handle = default;
@@ -357,7 +407,8 @@ namespace IKVM.ByteCode.Decoding
             if (TryMeasure(ref reader, ref size) == false)
                 return false;
 
-            // then read the entire instruction contents
+            // rewind and capture all of the instruction data
+            reader.Rewind(reader.Position.GetInteger() - position.GetInteger());
             if (reader.TryReadExact(size, out var data) == false)
                 return false;
 

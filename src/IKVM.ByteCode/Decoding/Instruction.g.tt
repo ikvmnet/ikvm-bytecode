@@ -130,7 +130,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
                 return false;
 
             if (opcode != OpCode.<#= name #>)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
 <#
     if (HasWide(args))
@@ -227,7 +227,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
                 return false;
 
             if (opcode != OpCode.<#= name #>)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
 <#
     if (HasWide(args))

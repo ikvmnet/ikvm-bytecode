@@ -23,7 +23,6 @@ namespace IKVM.ByteCode.Encoding
         /// </summary>
         /// <param name="encoder"></param>
         /// <param name="defaultLabel"></param>
-        /// <param name="low"></param>
         /// <exception cref="ArgumentNullException"></exception>
         public LookupSwitchCodeEncoder(CodeBuilder encoder, LabelHandle defaultLabel)
         {

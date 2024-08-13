@@ -3472,7 +3472,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Nop)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3511,7 +3511,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Nop)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3548,7 +3548,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.AconstNull)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3587,7 +3587,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.AconstNull)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3624,7 +3624,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IconstM1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3663,7 +3663,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IconstM1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3700,7 +3700,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3739,7 +3739,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3776,7 +3776,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3815,7 +3815,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3852,7 +3852,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3891,7 +3891,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3928,7 +3928,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -3967,7 +3967,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4004,7 +4004,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst4)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4043,7 +4043,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst4)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4080,7 +4080,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst5)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4119,7 +4119,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iconst5)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4156,7 +4156,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lconst0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4195,7 +4195,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lconst0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4232,7 +4232,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lconst1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4271,7 +4271,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lconst1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4308,7 +4308,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fconst0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4347,7 +4347,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fconst0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4384,7 +4384,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fconst1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4423,7 +4423,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fconst1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4460,7 +4460,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fconst2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4499,7 +4499,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fconst2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4536,7 +4536,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dconst0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4575,7 +4575,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dconst0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4612,7 +4612,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dconst1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4651,7 +4651,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dconst1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4689,7 +4689,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Bipush)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4732,7 +4732,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Bipush)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4777,7 +4777,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Sipush)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4820,7 +4820,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Sipush)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4865,7 +4865,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ldc)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4908,7 +4908,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ldc)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4953,7 +4953,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.LdcW)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -4996,7 +4996,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.LdcW)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5041,7 +5041,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ldc2W)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5084,7 +5084,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ldc2W)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5129,7 +5129,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5181,7 +5181,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5236,7 +5236,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5288,7 +5288,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5343,7 +5343,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5395,7 +5395,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5450,7 +5450,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5502,7 +5502,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5557,7 +5557,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5609,7 +5609,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -5663,7 +5663,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5702,7 +5702,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5739,7 +5739,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5778,7 +5778,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5815,7 +5815,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5854,7 +5854,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5891,7 +5891,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5930,7 +5930,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -5967,7 +5967,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6006,7 +6006,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6043,7 +6043,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6082,7 +6082,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6119,7 +6119,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6158,7 +6158,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6195,7 +6195,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6234,7 +6234,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6271,7 +6271,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6310,7 +6310,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6347,7 +6347,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6386,7 +6386,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6423,7 +6423,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6462,7 +6462,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6499,7 +6499,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6538,7 +6538,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6575,7 +6575,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6614,7 +6614,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6651,7 +6651,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6690,7 +6690,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6727,7 +6727,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6766,7 +6766,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6803,7 +6803,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6842,7 +6842,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6879,7 +6879,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6918,7 +6918,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6955,7 +6955,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -6994,7 +6994,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7031,7 +7031,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7070,7 +7070,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7107,7 +7107,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7146,7 +7146,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aload3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7183,7 +7183,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iaload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7222,7 +7222,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iaload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7259,7 +7259,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Laload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7298,7 +7298,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Laload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7335,7 +7335,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Faload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7374,7 +7374,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Faload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7411,7 +7411,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Daload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7450,7 +7450,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Daload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7487,7 +7487,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aaload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7526,7 +7526,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aaload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7563,7 +7563,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Baload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7602,7 +7602,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Baload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7639,7 +7639,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Caload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7678,7 +7678,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Caload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7715,7 +7715,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Saload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7754,7 +7754,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Saload)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -7792,7 +7792,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -7844,7 +7844,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -7899,7 +7899,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -7951,7 +7951,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -8006,7 +8006,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -8058,7 +8058,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -8113,7 +8113,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -8165,7 +8165,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -8220,7 +8220,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -8272,7 +8272,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -8326,7 +8326,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8365,7 +8365,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8402,7 +8402,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8441,7 +8441,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8478,7 +8478,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8517,7 +8517,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8554,7 +8554,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8593,7 +8593,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Istore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8630,7 +8630,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8669,7 +8669,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8706,7 +8706,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8745,7 +8745,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8782,7 +8782,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8821,7 +8821,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8858,7 +8858,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8897,7 +8897,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lstore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8934,7 +8934,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -8973,7 +8973,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9010,7 +9010,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9049,7 +9049,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9086,7 +9086,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9125,7 +9125,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9162,7 +9162,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9201,7 +9201,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fstore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9238,7 +9238,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9277,7 +9277,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9314,7 +9314,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9353,7 +9353,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9390,7 +9390,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9429,7 +9429,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9466,7 +9466,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9505,7 +9505,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dstore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9542,7 +9542,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9581,7 +9581,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore0)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9618,7 +9618,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9657,7 +9657,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9694,7 +9694,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9733,7 +9733,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9770,7 +9770,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9809,7 +9809,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Astore3)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9846,7 +9846,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9885,7 +9885,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9922,7 +9922,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9961,7 +9961,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -9998,7 +9998,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10037,7 +10037,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10074,7 +10074,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10113,7 +10113,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10150,7 +10150,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10189,7 +10189,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Aastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10226,7 +10226,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Bastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10265,7 +10265,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Bastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10302,7 +10302,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Castore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10341,7 +10341,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Castore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10378,7 +10378,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Sastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10417,7 +10417,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Sastore)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10454,7 +10454,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Pop)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10493,7 +10493,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Pop)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10530,7 +10530,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Pop2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10569,7 +10569,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Pop2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10606,7 +10606,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dup)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10645,7 +10645,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dup)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10682,7 +10682,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.DupX1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10721,7 +10721,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.DupX1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10758,7 +10758,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.DupX2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10797,7 +10797,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.DupX2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10834,7 +10834,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dup2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10873,7 +10873,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dup2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10910,7 +10910,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dup2X1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10949,7 +10949,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dup2X1)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -10986,7 +10986,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dup2X2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11025,7 +11025,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dup2X2)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11062,7 +11062,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Swap)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11101,7 +11101,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Swap)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11138,7 +11138,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iadd)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11177,7 +11177,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iadd)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11214,7 +11214,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ladd)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11253,7 +11253,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ladd)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11290,7 +11290,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fadd)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11329,7 +11329,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fadd)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11366,7 +11366,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dadd)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11405,7 +11405,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dadd)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11442,7 +11442,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Isub)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11481,7 +11481,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Isub)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11518,7 +11518,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lsub)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11557,7 +11557,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lsub)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11594,7 +11594,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fsub)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11633,7 +11633,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fsub)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11670,7 +11670,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dsub)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11709,7 +11709,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dsub)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11746,7 +11746,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Imul)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11785,7 +11785,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Imul)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11822,7 +11822,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lmul)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11861,7 +11861,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lmul)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11898,7 +11898,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fmul)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11937,7 +11937,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fmul)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -11974,7 +11974,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dmul)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12013,7 +12013,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dmul)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12050,7 +12050,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Idiv)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12089,7 +12089,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Idiv)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12126,7 +12126,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ldiv)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12165,7 +12165,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ldiv)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12202,7 +12202,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fdiv)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12241,7 +12241,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fdiv)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12278,7 +12278,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ddiv)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12317,7 +12317,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ddiv)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12354,7 +12354,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Irem)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12393,7 +12393,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Irem)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12430,7 +12430,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lrem)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12469,7 +12469,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lrem)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12506,7 +12506,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Frem)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12545,7 +12545,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Frem)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12582,7 +12582,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Drem)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12621,7 +12621,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Drem)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12658,7 +12658,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ineg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12697,7 +12697,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ineg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12734,7 +12734,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lneg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12773,7 +12773,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lneg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12810,7 +12810,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fneg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12849,7 +12849,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fneg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12886,7 +12886,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dneg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12925,7 +12925,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dneg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -12962,7 +12962,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ishl)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13001,7 +13001,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ishl)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13038,7 +13038,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lshl)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13077,7 +13077,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lshl)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13114,7 +13114,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ishr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13153,7 +13153,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ishr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13190,7 +13190,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lshr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13229,7 +13229,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lshr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13266,7 +13266,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iushr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13305,7 +13305,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iushr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13342,7 +13342,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lushr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13381,7 +13381,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lushr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13418,7 +13418,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iand)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13457,7 +13457,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iand)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13494,7 +13494,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Land)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13533,7 +13533,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Land)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13570,7 +13570,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ior)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13609,7 +13609,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ior)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13646,7 +13646,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lor)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13685,7 +13685,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lor)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13722,7 +13722,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ixor)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13761,7 +13761,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ixor)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13798,7 +13798,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lxor)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13837,7 +13837,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lxor)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -13876,7 +13876,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iinc)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -13936,7 +13936,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iinc)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -14001,7 +14001,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2l)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14040,7 +14040,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2l)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14077,7 +14077,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2f)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14116,7 +14116,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2f)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14153,7 +14153,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2d)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14192,7 +14192,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2d)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14229,7 +14229,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.L2i)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14268,7 +14268,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.L2i)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14305,7 +14305,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.L2f)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14344,7 +14344,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.L2f)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14381,7 +14381,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.L2d)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14420,7 +14420,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.L2d)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14457,7 +14457,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.F2i)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14496,7 +14496,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.F2i)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14533,7 +14533,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.F2l)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14572,7 +14572,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.F2l)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14609,7 +14609,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.F2d)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14648,7 +14648,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.F2d)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14685,7 +14685,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.D2i)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14724,7 +14724,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.D2i)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14761,7 +14761,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.D2l)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14800,7 +14800,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.D2l)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14837,7 +14837,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.D2f)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14876,7 +14876,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.D2f)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14913,7 +14913,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2b)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14952,7 +14952,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2b)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -14989,7 +14989,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2c)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15028,7 +15028,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2c)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15065,7 +15065,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2s)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15104,7 +15104,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.I2s)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15141,7 +15141,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lcmp)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15180,7 +15180,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lcmp)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15217,7 +15217,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fcmpl)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15256,7 +15256,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fcmpl)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15293,7 +15293,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fcmpg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15332,7 +15332,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Fcmpg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15369,7 +15369,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dcmpl)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15408,7 +15408,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dcmpl)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15445,7 +15445,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dcmpg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15484,7 +15484,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dcmpg)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15522,7 +15522,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifeq)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15565,7 +15565,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifeq)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15610,7 +15610,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifne)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15653,7 +15653,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifne)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15698,7 +15698,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iflt)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15741,7 +15741,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Iflt)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15786,7 +15786,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifge)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15829,7 +15829,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifge)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15874,7 +15874,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifgt)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15917,7 +15917,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifgt)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -15962,7 +15962,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifle)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16005,7 +16005,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ifle)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16050,7 +16050,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmpeq)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16093,7 +16093,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmpeq)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16138,7 +16138,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmpne)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16181,7 +16181,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmpne)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16226,7 +16226,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmplt)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16269,7 +16269,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmplt)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16314,7 +16314,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmpge)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16357,7 +16357,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmpge)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16402,7 +16402,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmpgt)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16445,7 +16445,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmpgt)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16490,7 +16490,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmple)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16533,7 +16533,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfIcmple)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16578,7 +16578,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfAcmpeq)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16621,7 +16621,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfAcmpeq)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16666,7 +16666,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfAcmpne)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16709,7 +16709,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfAcmpne)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16754,7 +16754,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Goto)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16797,7 +16797,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Goto)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16842,7 +16842,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Jsr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16885,7 +16885,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Jsr)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -16930,7 +16930,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ret)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -16982,7 +16982,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ret)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
             {
@@ -17036,7 +17036,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ireturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17075,7 +17075,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Ireturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17112,7 +17112,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lreturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17151,7 +17151,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Lreturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17188,7 +17188,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Freturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17227,7 +17227,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Freturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17264,7 +17264,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dreturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17303,7 +17303,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Dreturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17340,7 +17340,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Areturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17379,7 +17379,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Areturn)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17416,7 +17416,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Return)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17455,7 +17455,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Return)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17493,7 +17493,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.GetStatic)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17536,7 +17536,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.GetStatic)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17581,7 +17581,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.PutStatic)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17624,7 +17624,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.PutStatic)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17669,7 +17669,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.GetField)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17712,7 +17712,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.GetField)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17757,7 +17757,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.PutField)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17800,7 +17800,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.PutField)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17845,7 +17845,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeVirtual)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17888,7 +17888,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeVirtual)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17933,7 +17933,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeSpecial)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -17976,7 +17976,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeSpecial)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18021,7 +18021,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeStatic)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18064,7 +18064,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeStatic)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18111,7 +18111,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeInterface)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18162,7 +18162,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeInterface)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18223,7 +18223,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeDynamic)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18274,7 +18274,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InvokeDynamic)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18333,7 +18333,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.New)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18376,7 +18376,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.New)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18421,7 +18421,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Newarray)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18464,7 +18464,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Newarray)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18509,7 +18509,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Anewarray)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18552,7 +18552,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Anewarray)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18596,7 +18596,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Arraylength)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18635,7 +18635,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Arraylength)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18672,7 +18672,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Athrow)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18711,7 +18711,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Athrow)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18749,7 +18749,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Checkcast)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18792,7 +18792,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Checkcast)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18837,7 +18837,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InstanceOf)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18880,7 +18880,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.InstanceOf)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18924,7 +18924,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.MonitorEnter)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -18963,7 +18963,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.MonitorEnter)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19000,7 +19000,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.MonitorExit)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19039,7 +19039,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.MonitorExit)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19078,7 +19078,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Multianewarray)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19125,7 +19125,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.Multianewarray)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19177,7 +19177,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfNull)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19220,7 +19220,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfNull)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19265,7 +19265,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfNonNull)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19308,7 +19308,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.IfNonNull)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19353,7 +19353,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.GotoW)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19396,7 +19396,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.GotoW)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19441,7 +19441,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.JsrW)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -19484,7 +19484,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.JsrW)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");

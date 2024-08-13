@@ -6,8 +6,8 @@ using FluentAssertions;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Decoding;
-using IKVM.ByteCode.Text;
 using IKVM.ByteCode.Encoding;
+using IKVM.ByteCode.Text;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

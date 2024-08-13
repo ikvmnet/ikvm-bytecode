@@ -680,6 +680,22 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
+        /// Encodes a tableswitch instruction.
+        /// </summary>
+        /// <param name="defaultLabel"></param>
+        /// <param name="low"></param>
+        /// <param name="matches"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder TableSwitch(LabelHandle defaultLabel, int low, ReadOnlySpan<LabelHandle> cases)
+        {
+            var encoder = new TableSwitchCodeEncoder(this, defaultLabel, low);
+            foreach (var i in cases)
+                encoder.Case(i);
+
+            return this;
+        }
+
+        /// <summary>
         /// Encodes a lookupswitch instruction.
         /// </summary>
         /// <param name="defaultLabel"></param>
@@ -690,6 +706,23 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder LookupSwitch(LabelHandle defaultLabel, Action<LookupSwitchCodeEncoder> encode)
         {
             encode(new LookupSwitchCodeEncoder(this, defaultLabel));
+            return this;
+        }
+
+        /// <summary>
+        /// Encodes a lookupswitch instruction.
+        /// </summary>
+        /// <param name="defaultLabel"></param>
+        /// <param name="encode"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder LookupSwitch(LabelHandle defaultLabel, ReadOnlySpan<(int Key, LabelHandle Label)> cases)
+        {
+            var encoder = new LookupSwitchCodeEncoder(this, defaultLabel);
+            foreach (var i in cases)
+                encoder.Case(i.Key, i.Label);
+
             return this;
         }
 

@@ -137,7 +137,7 @@ namespace IKVM.ByteCode.Decoding
             if (index >= Count || index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
 
-            var reader = new SequenceReader<byte>(_data.Slice(index * 8, 64));
+            var reader = new SequenceReader<byte>(_data.Slice(index * 8, 8));
             if (LookupSwitchMatch.TryRead(ref reader, out var match) == false)
                 throw new InvalidCodeException("Unexpected end of memory while reading a LookupSwitchMatch.");
 

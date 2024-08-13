@@ -20,7 +20,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.LookupSwitch)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
@@ -74,7 +74,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.LookupSwitch)
-                throw new InvalidCodeException($"Unexpected opcode '{opcode:XX}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
