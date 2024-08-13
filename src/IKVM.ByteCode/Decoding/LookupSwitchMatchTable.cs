@@ -20,7 +20,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="items"></param>
+            /// <param name="data"></param>
             internal Enumerator(ReadOnlySequence<byte> data)
             {
                 _data = data;
