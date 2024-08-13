@@ -31,10 +31,7 @@ namespace IKVM.ByteCode.Encoding
 
             public readonly int Id;
             public int Value;
-            public FixupData Fixup1;
-            public FixupData Fixup2;
-            public FixupData[] Fixups = [];
-            public int FixupCount;
+            public Fixed4Table<FixupData> Fixups = new();
 
             /// <summary>
             /// Initializes a new instance.
@@ -52,27 +49,7 @@ namespace IKVM.ByteCode.Encoding
             /// <param name="data"></param>
             public void AddFixup(in FixupData data)
             {
-                var index = FixupCount;
-
-                if (index == 0)
-                {
-                    FixupCount = 1;
-                    Fixup1 = data;
-                    return;
-                }
-
-                if (index == 1)
-                {
-                    FixupCount = 2;
-                    Fixup2 = data;
-                    return;
-                }
-
-                FixupCount++;
-                if (FixupCount > Fixups.Length - 2)
-                    Array.Resize(ref Fixups, Fixups.Length + 8);
-
-                Fixups[index - 2] = data;
+                Fixups.Add(data);
             }
 
             /// <summary>
@@ -84,21 +61,13 @@ namespace IKVM.ByteCode.Encoding
             /// <exception cref="ArgumentOutOfRangeException"></exception>
             public static ref FixupData GetFixup(ref LabelInfo info, int index)
             {
-                if (index >= info.FixupCount)
-                    throw new ArgumentOutOfRangeException(nameof(index));
-
-                switch (index)
-                {
-                    case 0: return ref info.Fixup1;
-                    case 1: return ref info.Fixup2;
-                    default: return ref info.Fixups[index - 2];
-                }
+                return ref Fixed4Table<FixupData>.GetItem(ref info.Fixups, index);
             }
 
         }
 
         readonly BlobBuilder _builder;
-        LabelInfo[] _labels = [];
+        Fixed4Table<LabelInfo> _labels = new();
 
         /// <summary>
         /// Initializes a new instance.
@@ -139,10 +108,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LabelHandle DefineLabel()
         {
-            var h = new LabelHandle(_labels.Length);
-            if (h.Id >= _labels.Length)
-                Array.Resize(ref _labels, _labels.Length + 8);
-            _labels[h.Id] = new LabelInfo(h.Id);
+            var h = new LabelHandle(_labels.Count);
+            _labels.Add(new LabelInfo(h.Id));
             return h;
         }
 
@@ -166,7 +133,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder MarkLabel(LabelHandle label, out int offset)
         {
-            ref var l = ref _labels[label.Id];
+            ref var l = ref Fixed4Table<LabelInfo>.GetItem(ref _labels, label.Id);
             if (l.Value != -1)
                 throw new InvalidOperationException($"Label {label.Id} has already been marked.");
 
@@ -175,12 +142,11 @@ namespace IKVM.ByteCode.Encoding
             l.Value = offset;
 
             // apply any outstanding fixups for the label
-            for (int index = 0; index < l.FixupCount; index++)
+            for (int index = 0; index < l.Fixups.Count; index++)
                 ApplyFixup(ref l, ref LabelInfo.GetFixup(ref l, index));
 
             // reset label fixups
-            l.FixupCount = 0;
-            l.Fixups = [];
+            l.Fixups.Clear();
 
             return this;
         }
@@ -203,7 +169,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ushort GetLabelOffset(LabelHandle label)
         {
-            ref var l = ref _labels[label.Id];
+            ref var l = ref Fixed4Table<LabelInfo>.GetItem(ref _labels, label.Id);
             var v = l.Value;
             if (v == -1)
                 throw new InvalidOperationException($"Label {l.Id} has not been marked.");
@@ -223,7 +189,7 @@ namespace IKVM.ByteCode.Encoding
             if (size is not 2 and not 4)
                 throw new ArgumentException("Label output size can only be 2 or 4 bytes.");
 
-            ref var l = ref _labels[label.Id];
+            ref var l = ref Fixed4Table<LabelInfo>.GetItem(ref _labels, label.Id);
             var d = new FixupData(ReserveBytes(size), offset);
             if (l.Value == -1)
                 l.AddFixup(d);
