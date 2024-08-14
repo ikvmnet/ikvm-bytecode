@@ -16,20 +16,20 @@ namespace IKVM.ByteCode.Tests.Encoding
         [TestMethod]
         public void CanBuildSimpleClass()
         {
-            var b = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "TestClass", "java/lang/Object");
-            var f = b.AddField(AccessFlag.ACC_PUBLIC, "_field", "Z");
-            var m = b.AddMethod(AccessFlag.ACC_PUBLIC, "method", "()Z");
+            var b = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.Public, "TestClass", "java/lang/Object");
+            var f = b.AddField(AccessFlag.Public, "_field", "Z");
+            var m = b.AddMethod(AccessFlag.Public, "method", "()Z");
 
             var z = new BlobBuilder();
             b.Serialize(z);
             var a = z.ToArray();
 
             var cls = ClassFile.Read(a);
-            cls.AccessFlags.Should().Be(AccessFlag.ACC_PUBLIC);
+            cls.AccessFlags.Should().Be(AccessFlag.Public);
             cls.Constants.Get(cls.This).Name.Should().Be("TestClass");
             cls.Constants.Get(cls.Super).Name.Should().Be("java/lang/Object");
             cls.Fields.Should().HaveCount(1);
-            cls.Fields[0].AccessFlags.Should().Be(AccessFlag.ACC_PUBLIC);
+            cls.Fields[0].AccessFlags.Should().Be(AccessFlag.Public);
             cls.Constants.Get(cls.Fields[0].Name).Value.Should().Be("_field");
             cls.Constants.Get(cls.Fields[0].Descriptor).Value.Should().Be("Z");
             cls.Methods.Should().HaveCount(1);
