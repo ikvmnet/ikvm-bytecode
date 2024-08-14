@@ -1,4 +1,8 @@
-﻿using IKVM.ByteCode.Buffers;
+﻿using System;
+using System.Buffers;
+using System.IO;
+
+using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Decoding;
 using IKVM.ByteCode.Encoding;
 
@@ -12,29 +16,24 @@ namespace IKVM.ByteCode.Tests.Encoding
     {
 
         [TestMethod]
-        public void Foo()
+        public void OpenBigClass()
         {
-            var srcBuilder = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "com/test/Test", null);
+            using var src = ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ClassFileImporterTests).Assembly.Location), "Encoding", "ChatMessageCell.class"));
 
-            srcBuilder.Attributes
-                .RuntimeVisibleAnnotations(e => e
-                    .Annotation(e2 => e2
-                        .Annotation(srcBuilder.Constants.GetOrAdd("test"), e3 => e3
-                            .Boolean(srcBuilder.Constants.GetOrAdd("test"), srcBuilder.Constants.GetOrAdd(Constant.Integer(true))))));
+            foreach (var m in src.Methods)
+                foreach (var a in m.Attributes)
+                    if (src.Constants.Get(a.Name).Value == AttributeName.Code)
+                        Decode(src, m, ((CodeAttribute)a).Code);
+        }
 
-            var srcBlob = new BlobBuilder();
-            srcBuilder.Serialize(srcBlob);
+        void Decode(ClassFile src, Method m, ReadOnlySequence<byte> code)
+        {
+            var dec = new CodeDecoder(code);
 
-            var src = ClassFile.Read(srcBlob.ToArray());
+            foreach (var instruction in dec)
+            {
 
-            // create a copy of the attributes on the original loaded class
-            var dstBuilder = new ClassFileBuilder(new ClassFormatVersion(53, 0), AccessFlag.ACC_PUBLIC, "com/test/Test", null);
-            src.Attributes.EncodeTo(new IdentityConstantMap<ConstantTable>(src.Constants), ref dstBuilder.Attributes.Encoder);
-
-            var dstBlob = new BlobBuilder();
-            dstBuilder.Serialize(dstBlob);
-
-            var dst = ClassFile.Read(dstBlob.ToArray());
+            }
         }
 
     }

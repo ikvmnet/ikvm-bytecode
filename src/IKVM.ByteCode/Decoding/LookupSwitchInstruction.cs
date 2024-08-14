@@ -29,12 +29,12 @@ namespace IKVM.ByteCode.Decoding
             size += 1;
 
             // table structure is always aligned to 4 bytes
-            var p = reader.Position;
+            var position = (int)reader.Consumed;
             if (reader.TryAlign(4) == false)
                 return false;
 
             // how far we advanced
-            size += reader.Position.GetInteger() - p.GetInteger();
+            size += (int)reader.Consumed - position;
 
             // default label is always 4 bytes
             size += 4;

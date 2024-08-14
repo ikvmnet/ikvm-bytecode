@@ -29,12 +29,12 @@ namespace IKVM.ByteCode.Decoding
             size += 1;
 
             // table structure is always aligned to 4 bytes
-            var p = reader.Position;
+            var p = (int)reader.Consumed;
             if (reader.TryAlign(4) == false)
                 return false;
 
             // how far we advanced
-            size += reader.Position.GetInteger() - p.GetInteger();
+            size += (int)reader.Consumed - p;
 
             // default label is always 4 bytes
             size += 4;
@@ -87,10 +87,10 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (opcode != OpCode.TableSwitch)
-                throw new ByteCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
+                throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
             if (wide)
-                throw new ByteCodeException("OpCode does not support wide arguments.");
+                throw new InvalidCodeException("OpCode does not support wide arguments.");
 
             // table structure is always aligned to 4 bytes
             var p = reader.Position;
@@ -110,7 +110,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             if (high < low)
-                throw new InvalidClassException("High cannot be less than low.");
+                throw new InvalidCodeException("High cannot be less than low.");
 
             // low value is always 4 bytes
             if (TableSwitchMatchTable.TryRead(ref reader, high - low + 1, out var matches) == false)

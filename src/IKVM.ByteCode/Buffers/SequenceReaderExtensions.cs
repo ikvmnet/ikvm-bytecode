@@ -297,7 +297,7 @@ namespace IKVM.ByteCode.Buffers
         /// </summary>
         public static bool TryAlign(ref this SequenceReader<byte> reader, int alignment)
         {
-            int position = reader.Position.GetInteger();
+            var position = (int)reader.Consumed;
             return TryAdvance(ref reader, CalculateAlignment(position, alignment) - position);
         }
 

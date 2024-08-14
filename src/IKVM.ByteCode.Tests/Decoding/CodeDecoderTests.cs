@@ -32,33 +32,33 @@ namespace IKVM.ByteCode.Tests.Decoding
             var buf = code.ToArray();
             var dec = new CodeDecoder(buf);
 
-            dec.TryRead(out var inst1).Should().BeTrue();
+            dec.TryReadNext(out var inst1).Should().BeTrue();
             inst1.OpCode.Should().Be(OpCode.Bipush);
             inst1.IsWide.Should().BeFalse();
             var inst1T = inst1.AsBipush();
             inst1T.Value.Should().Be(64);
 
-            dec.TryRead(out var inst2).Should().BeTrue();
+            dec.TryReadNext(out var inst2).Should().BeTrue();
             inst2.OpCode.Should().Be(OpCode.Istore0);
             inst2.IsWide.Should().BeFalse();
             var inst2T = inst2.AsIstore0();
 
-            dec.TryRead(out var inst3).Should().BeTrue();
+            dec.TryReadNext(out var inst3).Should().BeTrue();
             inst3.OpCode.Should().Be(OpCode.Iload0);
             inst3.IsWide.Should().BeFalse();
             var inst3T = inst3.AsIload0();
 
-            dec.TryRead(out var inst4).Should().BeTrue();
+            dec.TryReadNext(out var inst4).Should().BeTrue();
             inst4.OpCode.Should().Be(OpCode.Ifne);
             inst4.IsWide.Should().BeFalse();
             var inst4T = inst4.AsIfne();
 
-            dec.TryRead(out var inst5).Should().BeTrue();
+            dec.TryReadNext(out var inst5).Should().BeTrue();
             inst5.OpCode.Should().Be(OpCode.Return);
             inst5.IsWide.Should().BeFalse();
             var inst5T = inst5.AsReturn();
 
-            dec.TryRead(out var inst6).Should().BeTrue();
+            dec.TryReadNext(out var inst6).Should().BeTrue();
             inst6.OpCode.Should().Be(OpCode.Return);
             inst6.IsWide.Should().BeFalse();
             var inst6T = inst6.AsReturn();
@@ -85,7 +85,7 @@ namespace IKVM.ByteCode.Tests.Decoding
             var buf = code.ToArray();
             var dec = new CodeDecoder(buf);
 
-            dec.TryRead(out var inst1).Should().BeTrue();
+            dec.TryReadNext(out var inst1).Should().BeTrue();
             inst1.OpCode.Should().Be(OpCode.TableSwitch);
             inst1.IsWide.Should().BeFalse();
             var inst1T = inst1.AsTableSwitch();
@@ -94,7 +94,7 @@ namespace IKVM.ByteCode.Tests.Decoding
             inst1T.Low.Should().Be(1);
             inst1T.High.Should().Be(3);
 
-            dec.TryRead(out var inst2).Should().BeTrue();
+            dec.TryReadNext(out var inst2).Should().BeTrue();
             inst2.OpCode.Should().Be(OpCode.Return);
             inst2.IsWide.Should().BeFalse();
             var inst2T = inst2.AsReturn();
@@ -124,13 +124,13 @@ namespace IKVM.ByteCode.Tests.Decoding
             var buf = code.ToArray();
             var dec = new CodeDecoder(buf);
 
-            dec.TryRead(out var inst1).Should().BeTrue();
+            dec.TryReadNext(out var inst1).Should().BeTrue();
             inst1.OpCode.Should().Be(OpCode.LookupSwitch);
             inst1.IsWide.Should().BeFalse();
             var inst1T = inst1.AsLookupSwitch();
             inst1T.Matches.Count.Should().Be(3);
 
-            dec.TryRead(out var inst2).Should().BeTrue();
+            dec.TryReadNext(out var inst2).Should().BeTrue();
             inst2.OpCode.Should().Be(OpCode.Return);
             inst2.IsWide.Should().BeFalse();
             var inst2T = inst2.AsReturn();
