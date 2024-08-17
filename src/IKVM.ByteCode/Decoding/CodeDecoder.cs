@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Buffers;
-using System.Reflection.PortableExecutable;
 
 using IKVM.ByteCode.Buffers;
 
