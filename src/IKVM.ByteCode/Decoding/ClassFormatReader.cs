@@ -16,7 +16,7 @@ namespace IKVM.ByteCode.Decoding
         public const int U2 = 2;
         public const int U4 = 4;
 
-        SequenceReader<byte> reader;
+        SequenceReader<byte> _reader;
 
         /// <summary>
         /// Initializes a new instance.
@@ -34,23 +34,28 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="sequence"></param>
         public ClassFormatReader(ReadOnlySequence<byte> sequence)
         {
-            reader = new SequenceReader<byte>(sequence);
+            _reader = new SequenceReader<byte>(sequence);
         }
 
         /// <summary>
         /// Gets the count of bytes in the reader.
         /// </summary>
-        public readonly long Length => reader.Length;
+        public readonly long Length => _reader.Length;
 
         /// <summary>
         /// Gets the current position in the reader.
         /// </summary>
-        public readonly SequencePosition Position => reader.Position;
+        public readonly SequencePosition Position => _reader.Position;
+
+        /// <summary>
+        /// Gets the amount of data that has been consumed by this reader.
+        /// </summary>
+        public readonly long Consumed => _reader.Consumed;
 
         /// <summary>
         /// Gets the number of remaining bytes in the reader.
         /// </summary>
-        public readonly long Remaining => reader.Remaining;
+        public readonly long Remaining => _reader.Remaining;
 
         /// <summary>
         /// Moves the reader back the specified number of bytes.
@@ -58,7 +63,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="count"></param>
         public void Rewind(long count)
         {
-            reader.Rewind(count);
+            _reader.Rewind(count);
         }
 
         /// <summary>
@@ -67,7 +72,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="count"></param>
         public bool TryAdvance(long count)
         {
-            return reader.TryAdvance(count);
+            return _reader.TryAdvance(count);
         }
 
         /// <summary>
@@ -77,7 +82,7 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public bool TryReadU1(out byte u1)
         {
-            return reader.TryRead(out u1);
+            return _reader.TryRead(out u1);
         }
 
         /// <summary>
@@ -87,7 +92,7 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public bool TryReadU2(out ushort u2)
         {
-            return reader.TryReadBigEndian(out u2);
+            return _reader.TryReadBigEndian(out u2);
         }
 
         /// <summary>
@@ -97,7 +102,7 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public bool TryReadU4(out uint u4)
         {
-            return reader.TryReadBigEndian(out u4);
+            return _reader.TryReadBigEndian(out u4);
         }
 
         /// <summary>
@@ -108,7 +113,7 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public bool TryReadMany(uint count, out ReadOnlySequence<byte> sequence)
         {
-            return reader.TryReadExact(count, out sequence);
+            return _reader.TryReadExact(count, out sequence);
         }
 
         /// <summary>
@@ -119,7 +124,7 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public bool TryReadMany(long count, out ReadOnlySequence<byte> sequence)
         {
-            return reader.TryReadExact(count, out sequence);
+            return _reader.TryReadExact(count, out sequence);
         }
 
         /// <summary>
@@ -129,7 +134,7 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public bool TryCopyTo(Span<byte> destination)
         {
-            return reader.TryCopyTo(destination);
+            return _reader.TryCopyTo(destination);
         }
 
     }

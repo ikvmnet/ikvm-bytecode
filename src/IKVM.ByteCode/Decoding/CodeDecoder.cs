@@ -48,7 +48,7 @@ namespace IKVM.ByteCode.Decoding
 
         }
 
-        SequenceReader<byte> _data;
+        SequenceReader<byte> _reader;
 
         /// <summary>
         /// Initializes a new instance.
@@ -56,7 +56,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="data"></param>
         public CodeDecoder(ReadOnlySequence<byte> data)
         {
-            _data = new SequenceReader<byte>(data);
+            _reader = new SequenceReader<byte>(data);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public bool TryReadNext(out Instruction instruction)
         {
-            return Instruction.TryRead(ref _data, out instruction);
+            return Instruction.TryRead(ref _reader, out instruction);
         }
 
         /// <summary>
@@ -85,23 +85,28 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public Instruction ReadNext()
         {
-            return Instruction.Read(ref _data);
+            return Instruction.Read(ref _reader);
         }
 
         /// <summary>
         /// Gets the count of bytes in the reader.
         /// </summary>
-        public readonly long Length => _data.Length;
+        public readonly long Length => _reader.Length;
 
         /// <summary>
         /// Gets the current position in the reader.
         /// </summary>
-        public readonly SequencePosition Position => _data.Position;
+        public readonly SequencePosition Position => _reader.Position;
+
+        /// <summary>
+        /// Gets the amount of data that has been consumed by this reader.
+        /// </summary>
+        public readonly long Consumed => _reader.Consumed;
 
         /// <summary>
         /// Gets the number of remaining bytes in the reader.
         /// </summary>
-        public readonly long Remaining => _data.Remaining;
+        public readonly long Remaining => _reader.Remaining;
 
         /// <summary>
         /// Gets an enumerator over the frames.

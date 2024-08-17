@@ -18,412 +18,412 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasureInstruction(ref SequenceReader<byte> reader, OpCode opcode, ref int size)
+        internal static bool TryMeasureInstruction(ref SequenceReader<byte> reader, OpCode opcode, int offset, ref int size)
         {
             switch (opcode)
             {
                 case OpCode.Nop:
-                    return NopInstruction.TryMeasure(ref reader, ref size);
+                    return NopInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.AconstNull:
-                    return AconstNullInstruction.TryMeasure(ref reader, ref size);
+                    return AconstNullInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IconstM1:
-                    return IconstM1Instruction.TryMeasure(ref reader, ref size);
+                    return IconstM1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iconst0:
-                    return Iconst0Instruction.TryMeasure(ref reader, ref size);
+                    return Iconst0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iconst1:
-                    return Iconst1Instruction.TryMeasure(ref reader, ref size);
+                    return Iconst1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iconst2:
-                    return Iconst2Instruction.TryMeasure(ref reader, ref size);
+                    return Iconst2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iconst3:
-                    return Iconst3Instruction.TryMeasure(ref reader, ref size);
+                    return Iconst3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iconst4:
-                    return Iconst4Instruction.TryMeasure(ref reader, ref size);
+                    return Iconst4Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iconst5:
-                    return Iconst5Instruction.TryMeasure(ref reader, ref size);
+                    return Iconst5Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lconst0:
-                    return Lconst0Instruction.TryMeasure(ref reader, ref size);
+                    return Lconst0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lconst1:
-                    return Lconst1Instruction.TryMeasure(ref reader, ref size);
+                    return Lconst1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fconst0:
-                    return Fconst0Instruction.TryMeasure(ref reader, ref size);
+                    return Fconst0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fconst1:
-                    return Fconst1Instruction.TryMeasure(ref reader, ref size);
+                    return Fconst1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fconst2:
-                    return Fconst2Instruction.TryMeasure(ref reader, ref size);
+                    return Fconst2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dconst0:
-                    return Dconst0Instruction.TryMeasure(ref reader, ref size);
+                    return Dconst0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dconst1:
-                    return Dconst1Instruction.TryMeasure(ref reader, ref size);
+                    return Dconst1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Bipush:
-                    return BipushInstruction.TryMeasure(ref reader, ref size);
+                    return BipushInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Sipush:
-                    return SipushInstruction.TryMeasure(ref reader, ref size);
+                    return SipushInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ldc:
-                    return LdcInstruction.TryMeasure(ref reader, ref size);
+                    return LdcInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.LdcW:
-                    return LdcWInstruction.TryMeasure(ref reader, ref size);
+                    return LdcWInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ldc2W:
-                    return Ldc2WInstruction.TryMeasure(ref reader, ref size);
+                    return Ldc2WInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iload:
-                    return IloadInstruction.TryMeasure(ref reader, ref size);
+                    return IloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lload:
-                    return LloadInstruction.TryMeasure(ref reader, ref size);
+                    return LloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fload:
-                    return FloadInstruction.TryMeasure(ref reader, ref size);
+                    return FloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dload:
-                    return DloadInstruction.TryMeasure(ref reader, ref size);
+                    return DloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Aload:
-                    return AloadInstruction.TryMeasure(ref reader, ref size);
+                    return AloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iload0:
-                    return Iload0Instruction.TryMeasure(ref reader, ref size);
+                    return Iload0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iload1:
-                    return Iload1Instruction.TryMeasure(ref reader, ref size);
+                    return Iload1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iload2:
-                    return Iload2Instruction.TryMeasure(ref reader, ref size);
+                    return Iload2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iload3:
-                    return Iload3Instruction.TryMeasure(ref reader, ref size);
+                    return Iload3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lload0:
-                    return Lload0Instruction.TryMeasure(ref reader, ref size);
+                    return Lload0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lload1:
-                    return Lload1Instruction.TryMeasure(ref reader, ref size);
+                    return Lload1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lload2:
-                    return Lload2Instruction.TryMeasure(ref reader, ref size);
+                    return Lload2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lload3:
-                    return Lload3Instruction.TryMeasure(ref reader, ref size);
+                    return Lload3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fload0:
-                    return Fload0Instruction.TryMeasure(ref reader, ref size);
+                    return Fload0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fload1:
-                    return Fload1Instruction.TryMeasure(ref reader, ref size);
+                    return Fload1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fload2:
-                    return Fload2Instruction.TryMeasure(ref reader, ref size);
+                    return Fload2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fload3:
-                    return Fload3Instruction.TryMeasure(ref reader, ref size);
+                    return Fload3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dload0:
-                    return Dload0Instruction.TryMeasure(ref reader, ref size);
+                    return Dload0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dload1:
-                    return Dload1Instruction.TryMeasure(ref reader, ref size);
+                    return Dload1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dload2:
-                    return Dload2Instruction.TryMeasure(ref reader, ref size);
+                    return Dload2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dload3:
-                    return Dload3Instruction.TryMeasure(ref reader, ref size);
+                    return Dload3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Aload0:
-                    return Aload0Instruction.TryMeasure(ref reader, ref size);
+                    return Aload0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Aload1:
-                    return Aload1Instruction.TryMeasure(ref reader, ref size);
+                    return Aload1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Aload2:
-                    return Aload2Instruction.TryMeasure(ref reader, ref size);
+                    return Aload2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Aload3:
-                    return Aload3Instruction.TryMeasure(ref reader, ref size);
+                    return Aload3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iaload:
-                    return IaloadInstruction.TryMeasure(ref reader, ref size);
+                    return IaloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Laload:
-                    return LaloadInstruction.TryMeasure(ref reader, ref size);
+                    return LaloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Faload:
-                    return FaloadInstruction.TryMeasure(ref reader, ref size);
+                    return FaloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Daload:
-                    return DaloadInstruction.TryMeasure(ref reader, ref size);
+                    return DaloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Aaload:
-                    return AaloadInstruction.TryMeasure(ref reader, ref size);
+                    return AaloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Baload:
-                    return BaloadInstruction.TryMeasure(ref reader, ref size);
+                    return BaloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Caload:
-                    return CaloadInstruction.TryMeasure(ref reader, ref size);
+                    return CaloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Saload:
-                    return SaloadInstruction.TryMeasure(ref reader, ref size);
+                    return SaloadInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Istore:
-                    return IstoreInstruction.TryMeasure(ref reader, ref size);
+                    return IstoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lstore:
-                    return LstoreInstruction.TryMeasure(ref reader, ref size);
+                    return LstoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fstore:
-                    return FstoreInstruction.TryMeasure(ref reader, ref size);
+                    return FstoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dstore:
-                    return DstoreInstruction.TryMeasure(ref reader, ref size);
+                    return DstoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Astore:
-                    return AstoreInstruction.TryMeasure(ref reader, ref size);
+                    return AstoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Istore0:
-                    return Istore0Instruction.TryMeasure(ref reader, ref size);
+                    return Istore0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Istore1:
-                    return Istore1Instruction.TryMeasure(ref reader, ref size);
+                    return Istore1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Istore2:
-                    return Istore2Instruction.TryMeasure(ref reader, ref size);
+                    return Istore2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Istore3:
-                    return Istore3Instruction.TryMeasure(ref reader, ref size);
+                    return Istore3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lstore0:
-                    return Lstore0Instruction.TryMeasure(ref reader, ref size);
+                    return Lstore0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lstore1:
-                    return Lstore1Instruction.TryMeasure(ref reader, ref size);
+                    return Lstore1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lstore2:
-                    return Lstore2Instruction.TryMeasure(ref reader, ref size);
+                    return Lstore2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lstore3:
-                    return Lstore3Instruction.TryMeasure(ref reader, ref size);
+                    return Lstore3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fstore0:
-                    return Fstore0Instruction.TryMeasure(ref reader, ref size);
+                    return Fstore0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fstore1:
-                    return Fstore1Instruction.TryMeasure(ref reader, ref size);
+                    return Fstore1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fstore2:
-                    return Fstore2Instruction.TryMeasure(ref reader, ref size);
+                    return Fstore2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fstore3:
-                    return Fstore3Instruction.TryMeasure(ref reader, ref size);
+                    return Fstore3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dstore0:
-                    return Dstore0Instruction.TryMeasure(ref reader, ref size);
+                    return Dstore0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dstore1:
-                    return Dstore1Instruction.TryMeasure(ref reader, ref size);
+                    return Dstore1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dstore2:
-                    return Dstore2Instruction.TryMeasure(ref reader, ref size);
+                    return Dstore2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dstore3:
-                    return Dstore3Instruction.TryMeasure(ref reader, ref size);
+                    return Dstore3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Astore0:
-                    return Astore0Instruction.TryMeasure(ref reader, ref size);
+                    return Astore0Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Astore1:
-                    return Astore1Instruction.TryMeasure(ref reader, ref size);
+                    return Astore1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Astore2:
-                    return Astore2Instruction.TryMeasure(ref reader, ref size);
+                    return Astore2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Astore3:
-                    return Astore3Instruction.TryMeasure(ref reader, ref size);
+                    return Astore3Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iastore:
-                    return IastoreInstruction.TryMeasure(ref reader, ref size);
+                    return IastoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lastore:
-                    return LastoreInstruction.TryMeasure(ref reader, ref size);
+                    return LastoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fastore:
-                    return FastoreInstruction.TryMeasure(ref reader, ref size);
+                    return FastoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dastore:
-                    return DastoreInstruction.TryMeasure(ref reader, ref size);
+                    return DastoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Aastore:
-                    return AastoreInstruction.TryMeasure(ref reader, ref size);
+                    return AastoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Bastore:
-                    return BastoreInstruction.TryMeasure(ref reader, ref size);
+                    return BastoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Castore:
-                    return CastoreInstruction.TryMeasure(ref reader, ref size);
+                    return CastoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Sastore:
-                    return SastoreInstruction.TryMeasure(ref reader, ref size);
+                    return SastoreInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Pop:
-                    return PopInstruction.TryMeasure(ref reader, ref size);
+                    return PopInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Pop2:
-                    return Pop2Instruction.TryMeasure(ref reader, ref size);
+                    return Pop2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dup:
-                    return DupInstruction.TryMeasure(ref reader, ref size);
+                    return DupInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.DupX1:
-                    return DupX1Instruction.TryMeasure(ref reader, ref size);
+                    return DupX1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.DupX2:
-                    return DupX2Instruction.TryMeasure(ref reader, ref size);
+                    return DupX2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dup2:
-                    return Dup2Instruction.TryMeasure(ref reader, ref size);
+                    return Dup2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dup2X1:
-                    return Dup2X1Instruction.TryMeasure(ref reader, ref size);
+                    return Dup2X1Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dup2X2:
-                    return Dup2X2Instruction.TryMeasure(ref reader, ref size);
+                    return Dup2X2Instruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Swap:
-                    return SwapInstruction.TryMeasure(ref reader, ref size);
+                    return SwapInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iadd:
-                    return IaddInstruction.TryMeasure(ref reader, ref size);
+                    return IaddInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ladd:
-                    return LaddInstruction.TryMeasure(ref reader, ref size);
+                    return LaddInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fadd:
-                    return FaddInstruction.TryMeasure(ref reader, ref size);
+                    return FaddInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dadd:
-                    return DaddInstruction.TryMeasure(ref reader, ref size);
+                    return DaddInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Isub:
-                    return IsubInstruction.TryMeasure(ref reader, ref size);
+                    return IsubInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lsub:
-                    return LsubInstruction.TryMeasure(ref reader, ref size);
+                    return LsubInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fsub:
-                    return FsubInstruction.TryMeasure(ref reader, ref size);
+                    return FsubInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dsub:
-                    return DsubInstruction.TryMeasure(ref reader, ref size);
+                    return DsubInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Imul:
-                    return ImulInstruction.TryMeasure(ref reader, ref size);
+                    return ImulInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lmul:
-                    return LmulInstruction.TryMeasure(ref reader, ref size);
+                    return LmulInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fmul:
-                    return FmulInstruction.TryMeasure(ref reader, ref size);
+                    return FmulInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dmul:
-                    return DmulInstruction.TryMeasure(ref reader, ref size);
+                    return DmulInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Idiv:
-                    return IdivInstruction.TryMeasure(ref reader, ref size);
+                    return IdivInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ldiv:
-                    return LdivInstruction.TryMeasure(ref reader, ref size);
+                    return LdivInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fdiv:
-                    return FdivInstruction.TryMeasure(ref reader, ref size);
+                    return FdivInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ddiv:
-                    return DdivInstruction.TryMeasure(ref reader, ref size);
+                    return DdivInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Irem:
-                    return IremInstruction.TryMeasure(ref reader, ref size);
+                    return IremInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lrem:
-                    return LremInstruction.TryMeasure(ref reader, ref size);
+                    return LremInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Frem:
-                    return FremInstruction.TryMeasure(ref reader, ref size);
+                    return FremInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Drem:
-                    return DremInstruction.TryMeasure(ref reader, ref size);
+                    return DremInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ineg:
-                    return InegInstruction.TryMeasure(ref reader, ref size);
+                    return InegInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lneg:
-                    return LnegInstruction.TryMeasure(ref reader, ref size);
+                    return LnegInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fneg:
-                    return FnegInstruction.TryMeasure(ref reader, ref size);
+                    return FnegInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dneg:
-                    return DnegInstruction.TryMeasure(ref reader, ref size);
+                    return DnegInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ishl:
-                    return IshlInstruction.TryMeasure(ref reader, ref size);
+                    return IshlInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lshl:
-                    return LshlInstruction.TryMeasure(ref reader, ref size);
+                    return LshlInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ishr:
-                    return IshrInstruction.TryMeasure(ref reader, ref size);
+                    return IshrInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lshr:
-                    return LshrInstruction.TryMeasure(ref reader, ref size);
+                    return LshrInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iushr:
-                    return IushrInstruction.TryMeasure(ref reader, ref size);
+                    return IushrInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lushr:
-                    return LushrInstruction.TryMeasure(ref reader, ref size);
+                    return LushrInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iand:
-                    return IandInstruction.TryMeasure(ref reader, ref size);
+                    return IandInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Land:
-                    return LandInstruction.TryMeasure(ref reader, ref size);
+                    return LandInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ior:
-                    return IorInstruction.TryMeasure(ref reader, ref size);
+                    return IorInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lor:
-                    return LorInstruction.TryMeasure(ref reader, ref size);
+                    return LorInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ixor:
-                    return IxorInstruction.TryMeasure(ref reader, ref size);
+                    return IxorInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lxor:
-                    return LxorInstruction.TryMeasure(ref reader, ref size);
+                    return LxorInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iinc:
-                    return IincInstruction.TryMeasure(ref reader, ref size);
+                    return IincInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.I2l:
-                    return I2lInstruction.TryMeasure(ref reader, ref size);
+                    return I2lInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.I2f:
-                    return I2fInstruction.TryMeasure(ref reader, ref size);
+                    return I2fInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.I2d:
-                    return I2dInstruction.TryMeasure(ref reader, ref size);
+                    return I2dInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.L2i:
-                    return L2iInstruction.TryMeasure(ref reader, ref size);
+                    return L2iInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.L2f:
-                    return L2fInstruction.TryMeasure(ref reader, ref size);
+                    return L2fInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.L2d:
-                    return L2dInstruction.TryMeasure(ref reader, ref size);
+                    return L2dInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.F2i:
-                    return F2iInstruction.TryMeasure(ref reader, ref size);
+                    return F2iInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.F2l:
-                    return F2lInstruction.TryMeasure(ref reader, ref size);
+                    return F2lInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.F2d:
-                    return F2dInstruction.TryMeasure(ref reader, ref size);
+                    return F2dInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.D2i:
-                    return D2iInstruction.TryMeasure(ref reader, ref size);
+                    return D2iInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.D2l:
-                    return D2lInstruction.TryMeasure(ref reader, ref size);
+                    return D2lInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.D2f:
-                    return D2fInstruction.TryMeasure(ref reader, ref size);
+                    return D2fInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.I2b:
-                    return I2bInstruction.TryMeasure(ref reader, ref size);
+                    return I2bInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.I2c:
-                    return I2cInstruction.TryMeasure(ref reader, ref size);
+                    return I2cInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.I2s:
-                    return I2sInstruction.TryMeasure(ref reader, ref size);
+                    return I2sInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lcmp:
-                    return LcmpInstruction.TryMeasure(ref reader, ref size);
+                    return LcmpInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fcmpl:
-                    return FcmplInstruction.TryMeasure(ref reader, ref size);
+                    return FcmplInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Fcmpg:
-                    return FcmpgInstruction.TryMeasure(ref reader, ref size);
+                    return FcmpgInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dcmpl:
-                    return DcmplInstruction.TryMeasure(ref reader, ref size);
+                    return DcmplInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dcmpg:
-                    return DcmpgInstruction.TryMeasure(ref reader, ref size);
+                    return DcmpgInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ifeq:
-                    return IfeqInstruction.TryMeasure(ref reader, ref size);
+                    return IfeqInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ifne:
-                    return IfneInstruction.TryMeasure(ref reader, ref size);
+                    return IfneInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Iflt:
-                    return IfltInstruction.TryMeasure(ref reader, ref size);
+                    return IfltInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ifge:
-                    return IfgeInstruction.TryMeasure(ref reader, ref size);
+                    return IfgeInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ifgt:
-                    return IfgtInstruction.TryMeasure(ref reader, ref size);
+                    return IfgtInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ifle:
-                    return IfleInstruction.TryMeasure(ref reader, ref size);
+                    return IfleInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfIcmpeq:
-                    return IfIcmpeqInstruction.TryMeasure(ref reader, ref size);
+                    return IfIcmpeqInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfIcmpne:
-                    return IfIcmpneInstruction.TryMeasure(ref reader, ref size);
+                    return IfIcmpneInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfIcmplt:
-                    return IfIcmpltInstruction.TryMeasure(ref reader, ref size);
+                    return IfIcmpltInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfIcmpge:
-                    return IfIcmpgeInstruction.TryMeasure(ref reader, ref size);
+                    return IfIcmpgeInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfIcmpgt:
-                    return IfIcmpgtInstruction.TryMeasure(ref reader, ref size);
+                    return IfIcmpgtInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfIcmple:
-                    return IfIcmpleInstruction.TryMeasure(ref reader, ref size);
+                    return IfIcmpleInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfAcmpeq:
-                    return IfAcmpeqInstruction.TryMeasure(ref reader, ref size);
+                    return IfAcmpeqInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfAcmpne:
-                    return IfAcmpneInstruction.TryMeasure(ref reader, ref size);
+                    return IfAcmpneInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Goto:
-                    return GotoInstruction.TryMeasure(ref reader, ref size);
+                    return GotoInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Jsr:
-                    return JsrInstruction.TryMeasure(ref reader, ref size);
+                    return JsrInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ret:
-                    return RetInstruction.TryMeasure(ref reader, ref size);
+                    return RetInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.TableSwitch:
-                    return TableSwitchInstruction.TryMeasure(ref reader, ref size);
+                    return TableSwitchInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.LookupSwitch:
-                    return LookupSwitchInstruction.TryMeasure(ref reader, ref size);
+                    return LookupSwitchInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Ireturn:
-                    return IreturnInstruction.TryMeasure(ref reader, ref size);
+                    return IreturnInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Lreturn:
-                    return LreturnInstruction.TryMeasure(ref reader, ref size);
+                    return LreturnInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Freturn:
-                    return FreturnInstruction.TryMeasure(ref reader, ref size);
+                    return FreturnInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Dreturn:
-                    return DreturnInstruction.TryMeasure(ref reader, ref size);
+                    return DreturnInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Areturn:
-                    return AreturnInstruction.TryMeasure(ref reader, ref size);
+                    return AreturnInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Return:
-                    return ReturnInstruction.TryMeasure(ref reader, ref size);
+                    return ReturnInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.GetStatic:
-                    return GetStaticInstruction.TryMeasure(ref reader, ref size);
+                    return GetStaticInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.PutStatic:
-                    return PutStaticInstruction.TryMeasure(ref reader, ref size);
+                    return PutStaticInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.GetField:
-                    return GetFieldInstruction.TryMeasure(ref reader, ref size);
+                    return GetFieldInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.PutField:
-                    return PutFieldInstruction.TryMeasure(ref reader, ref size);
+                    return PutFieldInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.InvokeVirtual:
-                    return InvokeVirtualInstruction.TryMeasure(ref reader, ref size);
+                    return InvokeVirtualInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.InvokeSpecial:
-                    return InvokeSpecialInstruction.TryMeasure(ref reader, ref size);
+                    return InvokeSpecialInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.InvokeStatic:
-                    return InvokeStaticInstruction.TryMeasure(ref reader, ref size);
+                    return InvokeStaticInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.InvokeInterface:
-                    return InvokeInterfaceInstruction.TryMeasure(ref reader, ref size);
+                    return InvokeInterfaceInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.InvokeDynamic:
-                    return InvokeDynamicInstruction.TryMeasure(ref reader, ref size);
+                    return InvokeDynamicInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.New:
-                    return NewInstruction.TryMeasure(ref reader, ref size);
+                    return NewInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Newarray:
-                    return NewarrayInstruction.TryMeasure(ref reader, ref size);
+                    return NewarrayInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Anewarray:
-                    return AnewarrayInstruction.TryMeasure(ref reader, ref size);
+                    return AnewarrayInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Arraylength:
-                    return ArraylengthInstruction.TryMeasure(ref reader, ref size);
+                    return ArraylengthInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Athrow:
-                    return AthrowInstruction.TryMeasure(ref reader, ref size);
+                    return AthrowInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Checkcast:
-                    return CheckcastInstruction.TryMeasure(ref reader, ref size);
+                    return CheckcastInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.InstanceOf:
-                    return InstanceOfInstruction.TryMeasure(ref reader, ref size);
+                    return InstanceOfInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.MonitorEnter:
-                    return MonitorEnterInstruction.TryMeasure(ref reader, ref size);
+                    return MonitorEnterInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.MonitorExit:
-                    return MonitorExitInstruction.TryMeasure(ref reader, ref size);
+                    return MonitorExitInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.Multianewarray:
-                    return MultianewarrayInstruction.TryMeasure(ref reader, ref size);
+                    return MultianewarrayInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfNull:
-                    return IfNullInstruction.TryMeasure(ref reader, ref size);
+                    return IfNullInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.IfNonNull:
-                    return IfNonNullInstruction.TryMeasure(ref reader, ref size);
+                    return IfNonNullInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.GotoW:
-                    return GotoWInstruction.TryMeasure(ref reader, ref size);
+                    return GotoWInstruction.TryMeasure(ref reader, offset, ref size);
                 case OpCode.JsrW:
-                    return JsrWInstruction.TryMeasure(ref reader, ref size);
+                    return JsrWInstruction.TryMeasure(ref reader, offset, ref size);
                 default:
                     throw new InvalidCodeException("Unsupported or unexpected instruction.");
             }
@@ -438,7 +438,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Nop)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Nop'.");
 
-            if (NopInstruction.TryRead(Data, out var instruction) == false)
+            if (NopInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -453,7 +453,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.AconstNull)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'AconstNull'.");
 
-            if (AconstNullInstruction.TryRead(Data, out var instruction) == false)
+            if (AconstNullInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -468,7 +468,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IconstM1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IconstM1'.");
 
-            if (IconstM1Instruction.TryRead(Data, out var instruction) == false)
+            if (IconstM1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -483,7 +483,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iconst0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iconst0'.");
 
-            if (Iconst0Instruction.TryRead(Data, out var instruction) == false)
+            if (Iconst0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -498,7 +498,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iconst1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iconst1'.");
 
-            if (Iconst1Instruction.TryRead(Data, out var instruction) == false)
+            if (Iconst1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -513,7 +513,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iconst2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iconst2'.");
 
-            if (Iconst2Instruction.TryRead(Data, out var instruction) == false)
+            if (Iconst2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -528,7 +528,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iconst3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iconst3'.");
 
-            if (Iconst3Instruction.TryRead(Data, out var instruction) == false)
+            if (Iconst3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -543,7 +543,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iconst4)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iconst4'.");
 
-            if (Iconst4Instruction.TryRead(Data, out var instruction) == false)
+            if (Iconst4Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -558,7 +558,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iconst5)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iconst5'.");
 
-            if (Iconst5Instruction.TryRead(Data, out var instruction) == false)
+            if (Iconst5Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -573,7 +573,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lconst0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lconst0'.");
 
-            if (Lconst0Instruction.TryRead(Data, out var instruction) == false)
+            if (Lconst0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -588,7 +588,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lconst1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lconst1'.");
 
-            if (Lconst1Instruction.TryRead(Data, out var instruction) == false)
+            if (Lconst1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -603,7 +603,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fconst0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fconst0'.");
 
-            if (Fconst0Instruction.TryRead(Data, out var instruction) == false)
+            if (Fconst0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -618,7 +618,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fconst1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fconst1'.");
 
-            if (Fconst1Instruction.TryRead(Data, out var instruction) == false)
+            if (Fconst1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -633,7 +633,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fconst2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fconst2'.");
 
-            if (Fconst2Instruction.TryRead(Data, out var instruction) == false)
+            if (Fconst2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -648,7 +648,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dconst0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dconst0'.");
 
-            if (Dconst0Instruction.TryRead(Data, out var instruction) == false)
+            if (Dconst0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -663,7 +663,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dconst1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dconst1'.");
 
-            if (Dconst1Instruction.TryRead(Data, out var instruction) == false)
+            if (Dconst1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -678,7 +678,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Bipush)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Bipush'.");
 
-            if (BipushInstruction.TryRead(Data, out var instruction) == false)
+            if (BipushInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -693,7 +693,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Sipush)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Sipush'.");
 
-            if (SipushInstruction.TryRead(Data, out var instruction) == false)
+            if (SipushInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -708,7 +708,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ldc)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ldc'.");
 
-            if (LdcInstruction.TryRead(Data, out var instruction) == false)
+            if (LdcInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -723,7 +723,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.LdcW)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'LdcW'.");
 
-            if (LdcWInstruction.TryRead(Data, out var instruction) == false)
+            if (LdcWInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -738,7 +738,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ldc2W)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ldc2W'.");
 
-            if (Ldc2WInstruction.TryRead(Data, out var instruction) == false)
+            if (Ldc2WInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -753,7 +753,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iload'.");
 
-            if (IloadInstruction.TryRead(Data, out var instruction) == false)
+            if (IloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -768,7 +768,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lload'.");
 
-            if (LloadInstruction.TryRead(Data, out var instruction) == false)
+            if (LloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -783,7 +783,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fload'.");
 
-            if (FloadInstruction.TryRead(Data, out var instruction) == false)
+            if (FloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -798,7 +798,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dload'.");
 
-            if (DloadInstruction.TryRead(Data, out var instruction) == false)
+            if (DloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -813,7 +813,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Aload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Aload'.");
 
-            if (AloadInstruction.TryRead(Data, out var instruction) == false)
+            if (AloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -828,7 +828,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iload0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iload0'.");
 
-            if (Iload0Instruction.TryRead(Data, out var instruction) == false)
+            if (Iload0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -843,7 +843,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iload1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iload1'.");
 
-            if (Iload1Instruction.TryRead(Data, out var instruction) == false)
+            if (Iload1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -858,7 +858,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iload2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iload2'.");
 
-            if (Iload2Instruction.TryRead(Data, out var instruction) == false)
+            if (Iload2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -873,7 +873,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iload3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iload3'.");
 
-            if (Iload3Instruction.TryRead(Data, out var instruction) == false)
+            if (Iload3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -888,7 +888,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lload0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lload0'.");
 
-            if (Lload0Instruction.TryRead(Data, out var instruction) == false)
+            if (Lload0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -903,7 +903,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lload1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lload1'.");
 
-            if (Lload1Instruction.TryRead(Data, out var instruction) == false)
+            if (Lload1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -918,7 +918,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lload2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lload2'.");
 
-            if (Lload2Instruction.TryRead(Data, out var instruction) == false)
+            if (Lload2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -933,7 +933,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lload3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lload3'.");
 
-            if (Lload3Instruction.TryRead(Data, out var instruction) == false)
+            if (Lload3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -948,7 +948,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fload0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fload0'.");
 
-            if (Fload0Instruction.TryRead(Data, out var instruction) == false)
+            if (Fload0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -963,7 +963,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fload1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fload1'.");
 
-            if (Fload1Instruction.TryRead(Data, out var instruction) == false)
+            if (Fload1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -978,7 +978,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fload2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fload2'.");
 
-            if (Fload2Instruction.TryRead(Data, out var instruction) == false)
+            if (Fload2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -993,7 +993,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fload3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fload3'.");
 
-            if (Fload3Instruction.TryRead(Data, out var instruction) == false)
+            if (Fload3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1008,7 +1008,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dload0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dload0'.");
 
-            if (Dload0Instruction.TryRead(Data, out var instruction) == false)
+            if (Dload0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1023,7 +1023,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dload1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dload1'.");
 
-            if (Dload1Instruction.TryRead(Data, out var instruction) == false)
+            if (Dload1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1038,7 +1038,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dload2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dload2'.");
 
-            if (Dload2Instruction.TryRead(Data, out var instruction) == false)
+            if (Dload2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1053,7 +1053,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dload3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dload3'.");
 
-            if (Dload3Instruction.TryRead(Data, out var instruction) == false)
+            if (Dload3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1068,7 +1068,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Aload0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Aload0'.");
 
-            if (Aload0Instruction.TryRead(Data, out var instruction) == false)
+            if (Aload0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1083,7 +1083,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Aload1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Aload1'.");
 
-            if (Aload1Instruction.TryRead(Data, out var instruction) == false)
+            if (Aload1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1098,7 +1098,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Aload2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Aload2'.");
 
-            if (Aload2Instruction.TryRead(Data, out var instruction) == false)
+            if (Aload2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1113,7 +1113,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Aload3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Aload3'.");
 
-            if (Aload3Instruction.TryRead(Data, out var instruction) == false)
+            if (Aload3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1128,7 +1128,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iaload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iaload'.");
 
-            if (IaloadInstruction.TryRead(Data, out var instruction) == false)
+            if (IaloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1143,7 +1143,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Laload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Laload'.");
 
-            if (LaloadInstruction.TryRead(Data, out var instruction) == false)
+            if (LaloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1158,7 +1158,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Faload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Faload'.");
 
-            if (FaloadInstruction.TryRead(Data, out var instruction) == false)
+            if (FaloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1173,7 +1173,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Daload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Daload'.");
 
-            if (DaloadInstruction.TryRead(Data, out var instruction) == false)
+            if (DaloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1188,7 +1188,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Aaload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Aaload'.");
 
-            if (AaloadInstruction.TryRead(Data, out var instruction) == false)
+            if (AaloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1203,7 +1203,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Baload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Baload'.");
 
-            if (BaloadInstruction.TryRead(Data, out var instruction) == false)
+            if (BaloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1218,7 +1218,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Caload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Caload'.");
 
-            if (CaloadInstruction.TryRead(Data, out var instruction) == false)
+            if (CaloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1233,7 +1233,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Saload)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Saload'.");
 
-            if (SaloadInstruction.TryRead(Data, out var instruction) == false)
+            if (SaloadInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1248,7 +1248,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Istore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Istore'.");
 
-            if (IstoreInstruction.TryRead(Data, out var instruction) == false)
+            if (IstoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1263,7 +1263,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lstore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lstore'.");
 
-            if (LstoreInstruction.TryRead(Data, out var instruction) == false)
+            if (LstoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1278,7 +1278,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fstore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fstore'.");
 
-            if (FstoreInstruction.TryRead(Data, out var instruction) == false)
+            if (FstoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1293,7 +1293,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dstore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dstore'.");
 
-            if (DstoreInstruction.TryRead(Data, out var instruction) == false)
+            if (DstoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1308,7 +1308,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Astore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Astore'.");
 
-            if (AstoreInstruction.TryRead(Data, out var instruction) == false)
+            if (AstoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1323,7 +1323,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Istore0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Istore0'.");
 
-            if (Istore0Instruction.TryRead(Data, out var instruction) == false)
+            if (Istore0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1338,7 +1338,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Istore1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Istore1'.");
 
-            if (Istore1Instruction.TryRead(Data, out var instruction) == false)
+            if (Istore1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1353,7 +1353,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Istore2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Istore2'.");
 
-            if (Istore2Instruction.TryRead(Data, out var instruction) == false)
+            if (Istore2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1368,7 +1368,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Istore3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Istore3'.");
 
-            if (Istore3Instruction.TryRead(Data, out var instruction) == false)
+            if (Istore3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1383,7 +1383,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lstore0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lstore0'.");
 
-            if (Lstore0Instruction.TryRead(Data, out var instruction) == false)
+            if (Lstore0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1398,7 +1398,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lstore1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lstore1'.");
 
-            if (Lstore1Instruction.TryRead(Data, out var instruction) == false)
+            if (Lstore1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1413,7 +1413,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lstore2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lstore2'.");
 
-            if (Lstore2Instruction.TryRead(Data, out var instruction) == false)
+            if (Lstore2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1428,7 +1428,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lstore3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lstore3'.");
 
-            if (Lstore3Instruction.TryRead(Data, out var instruction) == false)
+            if (Lstore3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1443,7 +1443,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fstore0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fstore0'.");
 
-            if (Fstore0Instruction.TryRead(Data, out var instruction) == false)
+            if (Fstore0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1458,7 +1458,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fstore1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fstore1'.");
 
-            if (Fstore1Instruction.TryRead(Data, out var instruction) == false)
+            if (Fstore1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1473,7 +1473,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fstore2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fstore2'.");
 
-            if (Fstore2Instruction.TryRead(Data, out var instruction) == false)
+            if (Fstore2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1488,7 +1488,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fstore3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fstore3'.");
 
-            if (Fstore3Instruction.TryRead(Data, out var instruction) == false)
+            if (Fstore3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1503,7 +1503,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dstore0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dstore0'.");
 
-            if (Dstore0Instruction.TryRead(Data, out var instruction) == false)
+            if (Dstore0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1518,7 +1518,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dstore1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dstore1'.");
 
-            if (Dstore1Instruction.TryRead(Data, out var instruction) == false)
+            if (Dstore1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1533,7 +1533,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dstore2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dstore2'.");
 
-            if (Dstore2Instruction.TryRead(Data, out var instruction) == false)
+            if (Dstore2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1548,7 +1548,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dstore3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dstore3'.");
 
-            if (Dstore3Instruction.TryRead(Data, out var instruction) == false)
+            if (Dstore3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1563,7 +1563,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Astore0)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Astore0'.");
 
-            if (Astore0Instruction.TryRead(Data, out var instruction) == false)
+            if (Astore0Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1578,7 +1578,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Astore1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Astore1'.");
 
-            if (Astore1Instruction.TryRead(Data, out var instruction) == false)
+            if (Astore1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1593,7 +1593,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Astore2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Astore2'.");
 
-            if (Astore2Instruction.TryRead(Data, out var instruction) == false)
+            if (Astore2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1608,7 +1608,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Astore3)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Astore3'.");
 
-            if (Astore3Instruction.TryRead(Data, out var instruction) == false)
+            if (Astore3Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1623,7 +1623,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iastore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iastore'.");
 
-            if (IastoreInstruction.TryRead(Data, out var instruction) == false)
+            if (IastoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1638,7 +1638,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lastore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lastore'.");
 
-            if (LastoreInstruction.TryRead(Data, out var instruction) == false)
+            if (LastoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1653,7 +1653,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fastore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fastore'.");
 
-            if (FastoreInstruction.TryRead(Data, out var instruction) == false)
+            if (FastoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1668,7 +1668,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dastore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dastore'.");
 
-            if (DastoreInstruction.TryRead(Data, out var instruction) == false)
+            if (DastoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1683,7 +1683,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Aastore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Aastore'.");
 
-            if (AastoreInstruction.TryRead(Data, out var instruction) == false)
+            if (AastoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1698,7 +1698,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Bastore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Bastore'.");
 
-            if (BastoreInstruction.TryRead(Data, out var instruction) == false)
+            if (BastoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1713,7 +1713,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Castore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Castore'.");
 
-            if (CastoreInstruction.TryRead(Data, out var instruction) == false)
+            if (CastoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1728,7 +1728,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Sastore)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Sastore'.");
 
-            if (SastoreInstruction.TryRead(Data, out var instruction) == false)
+            if (SastoreInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1743,7 +1743,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Pop)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Pop'.");
 
-            if (PopInstruction.TryRead(Data, out var instruction) == false)
+            if (PopInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1758,7 +1758,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Pop2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Pop2'.");
 
-            if (Pop2Instruction.TryRead(Data, out var instruction) == false)
+            if (Pop2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1773,7 +1773,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dup)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dup'.");
 
-            if (DupInstruction.TryRead(Data, out var instruction) == false)
+            if (DupInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1788,7 +1788,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.DupX1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'DupX1'.");
 
-            if (DupX1Instruction.TryRead(Data, out var instruction) == false)
+            if (DupX1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1803,7 +1803,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.DupX2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'DupX2'.");
 
-            if (DupX2Instruction.TryRead(Data, out var instruction) == false)
+            if (DupX2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1818,7 +1818,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dup2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dup2'.");
 
-            if (Dup2Instruction.TryRead(Data, out var instruction) == false)
+            if (Dup2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1833,7 +1833,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dup2X1)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dup2X1'.");
 
-            if (Dup2X1Instruction.TryRead(Data, out var instruction) == false)
+            if (Dup2X1Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1848,7 +1848,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dup2X2)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dup2X2'.");
 
-            if (Dup2X2Instruction.TryRead(Data, out var instruction) == false)
+            if (Dup2X2Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1863,7 +1863,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Swap)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Swap'.");
 
-            if (SwapInstruction.TryRead(Data, out var instruction) == false)
+            if (SwapInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1878,7 +1878,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iadd)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iadd'.");
 
-            if (IaddInstruction.TryRead(Data, out var instruction) == false)
+            if (IaddInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1893,7 +1893,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ladd)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ladd'.");
 
-            if (LaddInstruction.TryRead(Data, out var instruction) == false)
+            if (LaddInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1908,7 +1908,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fadd)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fadd'.");
 
-            if (FaddInstruction.TryRead(Data, out var instruction) == false)
+            if (FaddInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1923,7 +1923,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dadd)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dadd'.");
 
-            if (DaddInstruction.TryRead(Data, out var instruction) == false)
+            if (DaddInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1938,7 +1938,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Isub)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Isub'.");
 
-            if (IsubInstruction.TryRead(Data, out var instruction) == false)
+            if (IsubInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1953,7 +1953,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lsub)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lsub'.");
 
-            if (LsubInstruction.TryRead(Data, out var instruction) == false)
+            if (LsubInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1968,7 +1968,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fsub)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fsub'.");
 
-            if (FsubInstruction.TryRead(Data, out var instruction) == false)
+            if (FsubInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1983,7 +1983,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dsub)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dsub'.");
 
-            if (DsubInstruction.TryRead(Data, out var instruction) == false)
+            if (DsubInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -1998,7 +1998,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Imul)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Imul'.");
 
-            if (ImulInstruction.TryRead(Data, out var instruction) == false)
+            if (ImulInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2013,7 +2013,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lmul)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lmul'.");
 
-            if (LmulInstruction.TryRead(Data, out var instruction) == false)
+            if (LmulInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2028,7 +2028,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fmul)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fmul'.");
 
-            if (FmulInstruction.TryRead(Data, out var instruction) == false)
+            if (FmulInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2043,7 +2043,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dmul)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dmul'.");
 
-            if (DmulInstruction.TryRead(Data, out var instruction) == false)
+            if (DmulInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2058,7 +2058,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Idiv)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Idiv'.");
 
-            if (IdivInstruction.TryRead(Data, out var instruction) == false)
+            if (IdivInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2073,7 +2073,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ldiv)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ldiv'.");
 
-            if (LdivInstruction.TryRead(Data, out var instruction) == false)
+            if (LdivInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2088,7 +2088,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fdiv)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fdiv'.");
 
-            if (FdivInstruction.TryRead(Data, out var instruction) == false)
+            if (FdivInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2103,7 +2103,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ddiv)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ddiv'.");
 
-            if (DdivInstruction.TryRead(Data, out var instruction) == false)
+            if (DdivInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2118,7 +2118,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Irem)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Irem'.");
 
-            if (IremInstruction.TryRead(Data, out var instruction) == false)
+            if (IremInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2133,7 +2133,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lrem)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lrem'.");
 
-            if (LremInstruction.TryRead(Data, out var instruction) == false)
+            if (LremInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2148,7 +2148,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Frem)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Frem'.");
 
-            if (FremInstruction.TryRead(Data, out var instruction) == false)
+            if (FremInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2163,7 +2163,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Drem)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Drem'.");
 
-            if (DremInstruction.TryRead(Data, out var instruction) == false)
+            if (DremInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2178,7 +2178,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ineg)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ineg'.");
 
-            if (InegInstruction.TryRead(Data, out var instruction) == false)
+            if (InegInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2193,7 +2193,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lneg)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lneg'.");
 
-            if (LnegInstruction.TryRead(Data, out var instruction) == false)
+            if (LnegInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2208,7 +2208,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fneg)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fneg'.");
 
-            if (FnegInstruction.TryRead(Data, out var instruction) == false)
+            if (FnegInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2223,7 +2223,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dneg)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dneg'.");
 
-            if (DnegInstruction.TryRead(Data, out var instruction) == false)
+            if (DnegInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2238,7 +2238,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ishl)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ishl'.");
 
-            if (IshlInstruction.TryRead(Data, out var instruction) == false)
+            if (IshlInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2253,7 +2253,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lshl)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lshl'.");
 
-            if (LshlInstruction.TryRead(Data, out var instruction) == false)
+            if (LshlInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2268,7 +2268,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ishr)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ishr'.");
 
-            if (IshrInstruction.TryRead(Data, out var instruction) == false)
+            if (IshrInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2283,7 +2283,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lshr)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lshr'.");
 
-            if (LshrInstruction.TryRead(Data, out var instruction) == false)
+            if (LshrInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2298,7 +2298,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iushr)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iushr'.");
 
-            if (IushrInstruction.TryRead(Data, out var instruction) == false)
+            if (IushrInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2313,7 +2313,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lushr)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lushr'.");
 
-            if (LushrInstruction.TryRead(Data, out var instruction) == false)
+            if (LushrInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2328,7 +2328,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iand)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iand'.");
 
-            if (IandInstruction.TryRead(Data, out var instruction) == false)
+            if (IandInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2343,7 +2343,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Land)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Land'.");
 
-            if (LandInstruction.TryRead(Data, out var instruction) == false)
+            if (LandInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2358,7 +2358,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ior)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ior'.");
 
-            if (IorInstruction.TryRead(Data, out var instruction) == false)
+            if (IorInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2373,7 +2373,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lor)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lor'.");
 
-            if (LorInstruction.TryRead(Data, out var instruction) == false)
+            if (LorInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2388,7 +2388,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ixor)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ixor'.");
 
-            if (IxorInstruction.TryRead(Data, out var instruction) == false)
+            if (IxorInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2403,7 +2403,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lxor)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lxor'.");
 
-            if (LxorInstruction.TryRead(Data, out var instruction) == false)
+            if (LxorInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2418,7 +2418,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iinc)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iinc'.");
 
-            if (IincInstruction.TryRead(Data, out var instruction) == false)
+            if (IincInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2433,7 +2433,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.I2l)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'I2l'.");
 
-            if (I2lInstruction.TryRead(Data, out var instruction) == false)
+            if (I2lInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2448,7 +2448,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.I2f)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'I2f'.");
 
-            if (I2fInstruction.TryRead(Data, out var instruction) == false)
+            if (I2fInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2463,7 +2463,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.I2d)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'I2d'.");
 
-            if (I2dInstruction.TryRead(Data, out var instruction) == false)
+            if (I2dInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2478,7 +2478,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.L2i)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'L2i'.");
 
-            if (L2iInstruction.TryRead(Data, out var instruction) == false)
+            if (L2iInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2493,7 +2493,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.L2f)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'L2f'.");
 
-            if (L2fInstruction.TryRead(Data, out var instruction) == false)
+            if (L2fInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2508,7 +2508,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.L2d)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'L2d'.");
 
-            if (L2dInstruction.TryRead(Data, out var instruction) == false)
+            if (L2dInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2523,7 +2523,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.F2i)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'F2i'.");
 
-            if (F2iInstruction.TryRead(Data, out var instruction) == false)
+            if (F2iInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2538,7 +2538,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.F2l)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'F2l'.");
 
-            if (F2lInstruction.TryRead(Data, out var instruction) == false)
+            if (F2lInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2553,7 +2553,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.F2d)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'F2d'.");
 
-            if (F2dInstruction.TryRead(Data, out var instruction) == false)
+            if (F2dInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2568,7 +2568,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.D2i)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'D2i'.");
 
-            if (D2iInstruction.TryRead(Data, out var instruction) == false)
+            if (D2iInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2583,7 +2583,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.D2l)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'D2l'.");
 
-            if (D2lInstruction.TryRead(Data, out var instruction) == false)
+            if (D2lInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2598,7 +2598,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.D2f)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'D2f'.");
 
-            if (D2fInstruction.TryRead(Data, out var instruction) == false)
+            if (D2fInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2613,7 +2613,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.I2b)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'I2b'.");
 
-            if (I2bInstruction.TryRead(Data, out var instruction) == false)
+            if (I2bInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2628,7 +2628,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.I2c)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'I2c'.");
 
-            if (I2cInstruction.TryRead(Data, out var instruction) == false)
+            if (I2cInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2643,7 +2643,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.I2s)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'I2s'.");
 
-            if (I2sInstruction.TryRead(Data, out var instruction) == false)
+            if (I2sInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2658,7 +2658,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lcmp)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lcmp'.");
 
-            if (LcmpInstruction.TryRead(Data, out var instruction) == false)
+            if (LcmpInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2673,7 +2673,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fcmpl)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fcmpl'.");
 
-            if (FcmplInstruction.TryRead(Data, out var instruction) == false)
+            if (FcmplInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2688,7 +2688,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Fcmpg)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Fcmpg'.");
 
-            if (FcmpgInstruction.TryRead(Data, out var instruction) == false)
+            if (FcmpgInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2703,7 +2703,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dcmpl)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dcmpl'.");
 
-            if (DcmplInstruction.TryRead(Data, out var instruction) == false)
+            if (DcmplInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2718,7 +2718,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dcmpg)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dcmpg'.");
 
-            if (DcmpgInstruction.TryRead(Data, out var instruction) == false)
+            if (DcmpgInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2733,7 +2733,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ifeq)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ifeq'.");
 
-            if (IfeqInstruction.TryRead(Data, out var instruction) == false)
+            if (IfeqInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2748,7 +2748,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ifne)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ifne'.");
 
-            if (IfneInstruction.TryRead(Data, out var instruction) == false)
+            if (IfneInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2763,7 +2763,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Iflt)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Iflt'.");
 
-            if (IfltInstruction.TryRead(Data, out var instruction) == false)
+            if (IfltInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2778,7 +2778,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ifge)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ifge'.");
 
-            if (IfgeInstruction.TryRead(Data, out var instruction) == false)
+            if (IfgeInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2793,7 +2793,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ifgt)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ifgt'.");
 
-            if (IfgtInstruction.TryRead(Data, out var instruction) == false)
+            if (IfgtInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2808,7 +2808,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ifle)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ifle'.");
 
-            if (IfleInstruction.TryRead(Data, out var instruction) == false)
+            if (IfleInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2823,7 +2823,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfIcmpeq)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfIcmpeq'.");
 
-            if (IfIcmpeqInstruction.TryRead(Data, out var instruction) == false)
+            if (IfIcmpeqInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2838,7 +2838,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfIcmpne)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfIcmpne'.");
 
-            if (IfIcmpneInstruction.TryRead(Data, out var instruction) == false)
+            if (IfIcmpneInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2853,7 +2853,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfIcmplt)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfIcmplt'.");
 
-            if (IfIcmpltInstruction.TryRead(Data, out var instruction) == false)
+            if (IfIcmpltInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2868,7 +2868,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfIcmpge)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfIcmpge'.");
 
-            if (IfIcmpgeInstruction.TryRead(Data, out var instruction) == false)
+            if (IfIcmpgeInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2883,7 +2883,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfIcmpgt)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfIcmpgt'.");
 
-            if (IfIcmpgtInstruction.TryRead(Data, out var instruction) == false)
+            if (IfIcmpgtInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2898,7 +2898,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfIcmple)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfIcmple'.");
 
-            if (IfIcmpleInstruction.TryRead(Data, out var instruction) == false)
+            if (IfIcmpleInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2913,7 +2913,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfAcmpeq)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfAcmpeq'.");
 
-            if (IfAcmpeqInstruction.TryRead(Data, out var instruction) == false)
+            if (IfAcmpeqInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2928,7 +2928,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfAcmpne)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfAcmpne'.");
 
-            if (IfAcmpneInstruction.TryRead(Data, out var instruction) == false)
+            if (IfAcmpneInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2943,7 +2943,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Goto)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Goto'.");
 
-            if (GotoInstruction.TryRead(Data, out var instruction) == false)
+            if (GotoInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2958,7 +2958,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Jsr)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Jsr'.");
 
-            if (JsrInstruction.TryRead(Data, out var instruction) == false)
+            if (JsrInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2973,7 +2973,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ret)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ret'.");
 
-            if (RetInstruction.TryRead(Data, out var instruction) == false)
+            if (RetInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -2988,7 +2988,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.TableSwitch)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'TableSwitch'.");
 
-            if (TableSwitchInstruction.TryRead(Data, out var instruction) == false)
+            if (TableSwitchInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3003,7 +3003,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.LookupSwitch)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'LookupSwitch'.");
 
-            if (LookupSwitchInstruction.TryRead(Data, out var instruction) == false)
+            if (LookupSwitchInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3018,7 +3018,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Ireturn)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Ireturn'.");
 
-            if (IreturnInstruction.TryRead(Data, out var instruction) == false)
+            if (IreturnInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3033,7 +3033,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Lreturn)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Lreturn'.");
 
-            if (LreturnInstruction.TryRead(Data, out var instruction) == false)
+            if (LreturnInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3048,7 +3048,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Freturn)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Freturn'.");
 
-            if (FreturnInstruction.TryRead(Data, out var instruction) == false)
+            if (FreturnInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3063,7 +3063,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Dreturn)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Dreturn'.");
 
-            if (DreturnInstruction.TryRead(Data, out var instruction) == false)
+            if (DreturnInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3078,7 +3078,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Areturn)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Areturn'.");
 
-            if (AreturnInstruction.TryRead(Data, out var instruction) == false)
+            if (AreturnInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3093,7 +3093,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Return)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Return'.");
 
-            if (ReturnInstruction.TryRead(Data, out var instruction) == false)
+            if (ReturnInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3108,7 +3108,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.GetStatic)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'GetStatic'.");
 
-            if (GetStaticInstruction.TryRead(Data, out var instruction) == false)
+            if (GetStaticInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3123,7 +3123,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.PutStatic)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'PutStatic'.");
 
-            if (PutStaticInstruction.TryRead(Data, out var instruction) == false)
+            if (PutStaticInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3138,7 +3138,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.GetField)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'GetField'.");
 
-            if (GetFieldInstruction.TryRead(Data, out var instruction) == false)
+            if (GetFieldInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3153,7 +3153,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.PutField)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'PutField'.");
 
-            if (PutFieldInstruction.TryRead(Data, out var instruction) == false)
+            if (PutFieldInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3168,7 +3168,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.InvokeVirtual)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'InvokeVirtual'.");
 
-            if (InvokeVirtualInstruction.TryRead(Data, out var instruction) == false)
+            if (InvokeVirtualInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3183,7 +3183,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.InvokeSpecial)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'InvokeSpecial'.");
 
-            if (InvokeSpecialInstruction.TryRead(Data, out var instruction) == false)
+            if (InvokeSpecialInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3198,7 +3198,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.InvokeStatic)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'InvokeStatic'.");
 
-            if (InvokeStaticInstruction.TryRead(Data, out var instruction) == false)
+            if (InvokeStaticInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3213,7 +3213,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.InvokeInterface)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'InvokeInterface'.");
 
-            if (InvokeInterfaceInstruction.TryRead(Data, out var instruction) == false)
+            if (InvokeInterfaceInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3228,7 +3228,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.InvokeDynamic)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'InvokeDynamic'.");
 
-            if (InvokeDynamicInstruction.TryRead(Data, out var instruction) == false)
+            if (InvokeDynamicInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3243,7 +3243,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.New)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'New'.");
 
-            if (NewInstruction.TryRead(Data, out var instruction) == false)
+            if (NewInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3258,7 +3258,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Newarray)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Newarray'.");
 
-            if (NewarrayInstruction.TryRead(Data, out var instruction) == false)
+            if (NewarrayInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3273,7 +3273,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Anewarray)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Anewarray'.");
 
-            if (AnewarrayInstruction.TryRead(Data, out var instruction) == false)
+            if (AnewarrayInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3288,7 +3288,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Arraylength)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Arraylength'.");
 
-            if (ArraylengthInstruction.TryRead(Data, out var instruction) == false)
+            if (ArraylengthInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3303,7 +3303,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Athrow)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Athrow'.");
 
-            if (AthrowInstruction.TryRead(Data, out var instruction) == false)
+            if (AthrowInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3318,7 +3318,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Checkcast)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Checkcast'.");
 
-            if (CheckcastInstruction.TryRead(Data, out var instruction) == false)
+            if (CheckcastInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3333,7 +3333,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.InstanceOf)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'InstanceOf'.");
 
-            if (InstanceOfInstruction.TryRead(Data, out var instruction) == false)
+            if (InstanceOfInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3348,7 +3348,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.MonitorEnter)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'MonitorEnter'.");
 
-            if (MonitorEnterInstruction.TryRead(Data, out var instruction) == false)
+            if (MonitorEnterInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3363,7 +3363,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.MonitorExit)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'MonitorExit'.");
 
-            if (MonitorExitInstruction.TryRead(Data, out var instruction) == false)
+            if (MonitorExitInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3378,7 +3378,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.Multianewarray)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'Multianewarray'.");
 
-            if (MultianewarrayInstruction.TryRead(Data, out var instruction) == false)
+            if (MultianewarrayInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3393,7 +3393,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfNull)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfNull'.");
 
-            if (IfNullInstruction.TryRead(Data, out var instruction) == false)
+            if (IfNullInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3408,7 +3408,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.IfNonNull)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'IfNonNull'.");
 
-            if (IfNonNullInstruction.TryRead(Data, out var instruction) == false)
+            if (IfNonNullInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3423,7 +3423,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.GotoW)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'GotoW'.");
 
-            if (GotoWInstruction.TryRead(Data, out var instruction) == false)
+            if (GotoWInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3438,7 +3438,7 @@ namespace IKVM.ByteCode.Decoding
             if (OpCode != OpCode.JsrW)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to 'JsrW'.");
 
-            if (JsrWInstruction.TryRead(Data, out var instruction) == false)
+            if (JsrWInstruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -3450,7 +3450,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'nop' instruction.
     /// </summary>
-    public partial record struct NopInstruction()
+    public partial record struct NopInstruction(int Offset)
     {
     
         /// <summary>
@@ -3463,10 +3463,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -3487,23 +3488,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out NopInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out NopInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out NopInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out NopInstruction instruction)
         {
             instruction = default;
 
@@ -3516,7 +3519,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new NopInstruction();
+            instruction = new NopInstruction(offset);
 
             return true;
         }
@@ -3526,7 +3529,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aconst_null' instruction.
     /// </summary>
-    public partial record struct AconstNullInstruction()
+    public partial record struct AconstNullInstruction(int Offset)
     {
     
         /// <summary>
@@ -3539,10 +3542,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -3563,23 +3567,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out AconstNullInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out AconstNullInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out AconstNullInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out AconstNullInstruction instruction)
         {
             instruction = default;
 
@@ -3592,7 +3598,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new AconstNullInstruction();
+            instruction = new AconstNullInstruction(offset);
 
             return true;
         }
@@ -3602,7 +3608,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_m1' instruction.
     /// </summary>
-    public partial record struct IconstM1Instruction()
+    public partial record struct IconstM1Instruction(int Offset)
     {
     
         /// <summary>
@@ -3615,10 +3621,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -3639,23 +3646,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IconstM1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IconstM1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IconstM1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IconstM1Instruction instruction)
         {
             instruction = default;
 
@@ -3668,7 +3677,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IconstM1Instruction();
+            instruction = new IconstM1Instruction(offset);
 
             return true;
         }
@@ -3678,7 +3687,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_0' instruction.
     /// </summary>
-    public partial record struct Iconst0Instruction()
+    public partial record struct Iconst0Instruction(int Offset)
     {
     
         /// <summary>
@@ -3691,10 +3700,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -3715,23 +3725,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iconst0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iconst0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iconst0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iconst0Instruction instruction)
         {
             instruction = default;
 
@@ -3744,7 +3756,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iconst0Instruction();
+            instruction = new Iconst0Instruction(offset);
 
             return true;
         }
@@ -3754,7 +3766,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_1' instruction.
     /// </summary>
-    public partial record struct Iconst1Instruction()
+    public partial record struct Iconst1Instruction(int Offset)
     {
     
         /// <summary>
@@ -3767,10 +3779,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -3791,23 +3804,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iconst1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iconst1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iconst1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iconst1Instruction instruction)
         {
             instruction = default;
 
@@ -3820,7 +3835,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iconst1Instruction();
+            instruction = new Iconst1Instruction(offset);
 
             return true;
         }
@@ -3830,7 +3845,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_2' instruction.
     /// </summary>
-    public partial record struct Iconst2Instruction()
+    public partial record struct Iconst2Instruction(int Offset)
     {
     
         /// <summary>
@@ -3843,10 +3858,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -3867,23 +3883,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iconst2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iconst2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iconst2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iconst2Instruction instruction)
         {
             instruction = default;
 
@@ -3896,7 +3914,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iconst2Instruction();
+            instruction = new Iconst2Instruction(offset);
 
             return true;
         }
@@ -3906,7 +3924,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_3' instruction.
     /// </summary>
-    public partial record struct Iconst3Instruction()
+    public partial record struct Iconst3Instruction(int Offset)
     {
     
         /// <summary>
@@ -3919,10 +3937,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -3943,23 +3962,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iconst3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iconst3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iconst3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iconst3Instruction instruction)
         {
             instruction = default;
 
@@ -3972,7 +3993,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iconst3Instruction();
+            instruction = new Iconst3Instruction(offset);
 
             return true;
         }
@@ -3982,7 +4003,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_4' instruction.
     /// </summary>
-    public partial record struct Iconst4Instruction()
+    public partial record struct Iconst4Instruction(int Offset)
     {
     
         /// <summary>
@@ -3995,10 +4016,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4019,23 +4041,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iconst4Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iconst4Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iconst4Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iconst4Instruction instruction)
         {
             instruction = default;
 
@@ -4048,7 +4072,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iconst4Instruction();
+            instruction = new Iconst4Instruction(offset);
 
             return true;
         }
@@ -4058,7 +4082,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_5' instruction.
     /// </summary>
-    public partial record struct Iconst5Instruction()
+    public partial record struct Iconst5Instruction(int Offset)
     {
     
         /// <summary>
@@ -4071,10 +4095,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4095,23 +4120,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iconst5Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iconst5Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iconst5Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iconst5Instruction instruction)
         {
             instruction = default;
 
@@ -4124,7 +4151,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iconst5Instruction();
+            instruction = new Iconst5Instruction(offset);
 
             return true;
         }
@@ -4134,7 +4161,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lconst_0' instruction.
     /// </summary>
-    public partial record struct Lconst0Instruction()
+    public partial record struct Lconst0Instruction(int Offset)
     {
     
         /// <summary>
@@ -4147,10 +4174,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4171,23 +4199,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lconst0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lconst0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lconst0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lconst0Instruction instruction)
         {
             instruction = default;
 
@@ -4200,7 +4230,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lconst0Instruction();
+            instruction = new Lconst0Instruction(offset);
 
             return true;
         }
@@ -4210,7 +4240,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lconst_1' instruction.
     /// </summary>
-    public partial record struct Lconst1Instruction()
+    public partial record struct Lconst1Instruction(int Offset)
     {
     
         /// <summary>
@@ -4223,10 +4253,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4247,23 +4278,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lconst1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lconst1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lconst1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lconst1Instruction instruction)
         {
             instruction = default;
 
@@ -4276,7 +4309,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lconst1Instruction();
+            instruction = new Lconst1Instruction(offset);
 
             return true;
         }
@@ -4286,7 +4319,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fconst_0' instruction.
     /// </summary>
-    public partial record struct Fconst0Instruction()
+    public partial record struct Fconst0Instruction(int Offset)
     {
     
         /// <summary>
@@ -4299,10 +4332,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4323,23 +4357,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fconst0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fconst0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fconst0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fconst0Instruction instruction)
         {
             instruction = default;
 
@@ -4352,7 +4388,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fconst0Instruction();
+            instruction = new Fconst0Instruction(offset);
 
             return true;
         }
@@ -4362,7 +4398,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fconst_1' instruction.
     /// </summary>
-    public partial record struct Fconst1Instruction()
+    public partial record struct Fconst1Instruction(int Offset)
     {
     
         /// <summary>
@@ -4375,10 +4411,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4399,23 +4436,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fconst1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fconst1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fconst1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fconst1Instruction instruction)
         {
             instruction = default;
 
@@ -4428,7 +4467,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fconst1Instruction();
+            instruction = new Fconst1Instruction(offset);
 
             return true;
         }
@@ -4438,7 +4477,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fconst_2' instruction.
     /// </summary>
-    public partial record struct Fconst2Instruction()
+    public partial record struct Fconst2Instruction(int Offset)
     {
     
         /// <summary>
@@ -4451,10 +4490,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4475,23 +4515,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fconst2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fconst2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fconst2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fconst2Instruction instruction)
         {
             instruction = default;
 
@@ -4504,7 +4546,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fconst2Instruction();
+            instruction = new Fconst2Instruction(offset);
 
             return true;
         }
@@ -4514,7 +4556,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dconst_0' instruction.
     /// </summary>
-    public partial record struct Dconst0Instruction()
+    public partial record struct Dconst0Instruction(int Offset)
     {
     
         /// <summary>
@@ -4527,10 +4569,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4551,23 +4594,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dconst0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dconst0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dconst0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dconst0Instruction instruction)
         {
             instruction = default;
 
@@ -4580,7 +4625,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dconst0Instruction();
+            instruction = new Dconst0Instruction(offset);
 
             return true;
         }
@@ -4590,7 +4635,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dconst_1' instruction.
     /// </summary>
-    public partial record struct Dconst1Instruction()
+    public partial record struct Dconst1Instruction(int Offset)
     {
     
         /// <summary>
@@ -4603,10 +4648,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4627,23 +4673,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dconst1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dconst1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dconst1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dconst1Instruction instruction)
         {
             instruction = default;
 
@@ -4656,7 +4704,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dconst1Instruction();
+            instruction = new Dconst1Instruction(offset);
 
             return true;
         }
@@ -4667,7 +4715,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'bipush' instruction.
     /// </summary>
     /// <param name="Value"></param>
-    public partial record struct BipushInstruction(sbyte Value)
+    public partial record struct BipushInstruction(int Offset, sbyte Value)
     {
     
         /// <summary>
@@ -4680,10 +4728,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4708,23 +4757,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out BipushInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out BipushInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out BipushInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out BipushInstruction instruction)
         {
             instruction = default;
 
@@ -4741,7 +4792,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadS1(ref reader, out var value) == false)
                 return false;
 
-            instruction = new BipushInstruction(value);
+            instruction = new BipushInstruction(offset, value);
 
             return true;
         }
@@ -4755,7 +4806,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'sipush' instruction.
     /// </summary>
     /// <param name="Value"></param>
-    public partial record struct SipushInstruction(short Value)
+    public partial record struct SipushInstruction(int Offset, short Value)
     {
     
         /// <summary>
@@ -4768,10 +4819,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4796,23 +4848,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out SipushInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out SipushInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out SipushInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out SipushInstruction instruction)
         {
             instruction = default;
 
@@ -4829,7 +4883,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadS2(ref reader, out var value) == false)
                 return false;
 
-            instruction = new SipushInstruction(value);
+            instruction = new SipushInstruction(offset, value);
 
             return true;
         }
@@ -4843,7 +4897,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ldc' instruction.
     /// </summary>
     /// <param name="Constant"></param>
-    public partial record struct LdcInstruction(ConstantHandle Constant)
+    public partial record struct LdcInstruction(int Offset, ConstantHandle Constant)
     {
     
         /// <summary>
@@ -4856,10 +4910,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4884,23 +4939,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LdcInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LdcInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LdcInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LdcInstruction instruction)
         {
             instruction = default;
 
@@ -4917,7 +4974,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC1(ref reader, out var constant) == false)
                 return false;
 
-            instruction = new LdcInstruction(constant);
+            instruction = new LdcInstruction(offset, constant);
 
             return true;
         }
@@ -4931,7 +4988,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ldc_w' instruction.
     /// </summary>
     /// <param name="Constant"></param>
-    public partial record struct LdcWInstruction(ConstantHandle Constant)
+    public partial record struct LdcWInstruction(int Offset, ConstantHandle Constant)
     {
     
         /// <summary>
@@ -4944,10 +5001,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -4972,23 +5030,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LdcWInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LdcWInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LdcWInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LdcWInstruction instruction)
         {
             instruction = default;
 
@@ -5005,7 +5065,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var constant) == false)
                 return false;
 
-            instruction = new LdcWInstruction(constant);
+            instruction = new LdcWInstruction(offset, constant);
 
             return true;
         }
@@ -5019,7 +5079,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ldc2_w' instruction.
     /// </summary>
     /// <param name="Constant"></param>
-    public partial record struct Ldc2WInstruction(ConstantHandle Constant)
+    public partial record struct Ldc2WInstruction(int Offset, ConstantHandle Constant)
     {
     
         /// <summary>
@@ -5032,10 +5092,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5060,23 +5121,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Ldc2WInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Ldc2WInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Ldc2WInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Ldc2WInstruction instruction)
         {
             instruction = default;
 
@@ -5093,7 +5156,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var constant) == false)
                 return false;
 
-            instruction = new Ldc2WInstruction(constant);
+            instruction = new Ldc2WInstruction(offset, constant);
 
             return true;
         }
@@ -5107,7 +5170,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'iload' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct IloadInstruction(ushort Local)
+    public partial record struct IloadInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -5120,10 +5183,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5157,23 +5221,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IloadInstruction instruction)
         {
             instruction = default;
 
@@ -5190,7 +5256,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new IloadInstruction(local);
+                instruction = new IloadInstruction(offset, local);
             }
             else
             {
@@ -5199,7 +5265,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new IloadInstruction(local);
+                instruction = new IloadInstruction(offset, local);
             }
 
             return true;
@@ -5214,7 +5280,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'lload' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct LloadInstruction(ushort Local)
+    public partial record struct LloadInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -5227,10 +5293,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5264,23 +5331,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LloadInstruction instruction)
         {
             instruction = default;
 
@@ -5297,7 +5366,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new LloadInstruction(local);
+                instruction = new LloadInstruction(offset, local);
             }
             else
             {
@@ -5306,7 +5375,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new LloadInstruction(local);
+                instruction = new LloadInstruction(offset, local);
             }
 
             return true;
@@ -5321,7 +5390,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'fload' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct FloadInstruction(ushort Local)
+    public partial record struct FloadInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -5334,10 +5403,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5371,23 +5441,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FloadInstruction instruction)
         {
             instruction = default;
 
@@ -5404,7 +5476,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new FloadInstruction(local);
+                instruction = new FloadInstruction(offset, local);
             }
             else
             {
@@ -5413,7 +5485,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new FloadInstruction(local);
+                instruction = new FloadInstruction(offset, local);
             }
 
             return true;
@@ -5428,7 +5500,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'dload' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct DloadInstruction(ushort Local)
+    public partial record struct DloadInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -5441,10 +5513,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5478,23 +5551,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DloadInstruction instruction)
         {
             instruction = default;
 
@@ -5511,7 +5586,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new DloadInstruction(local);
+                instruction = new DloadInstruction(offset, local);
             }
             else
             {
@@ -5520,7 +5595,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new DloadInstruction(local);
+                instruction = new DloadInstruction(offset, local);
             }
 
             return true;
@@ -5535,7 +5610,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'aload' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct AloadInstruction(ushort Local)
+    public partial record struct AloadInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -5548,10 +5623,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5585,23 +5661,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out AloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out AloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out AloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out AloadInstruction instruction)
         {
             instruction = default;
 
@@ -5618,7 +5696,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new AloadInstruction(local);
+                instruction = new AloadInstruction(offset, local);
             }
             else
             {
@@ -5627,7 +5705,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new AloadInstruction(local);
+                instruction = new AloadInstruction(offset, local);
             }
 
             return true;
@@ -5641,7 +5719,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload_0' instruction.
     /// </summary>
-    public partial record struct Iload0Instruction()
+    public partial record struct Iload0Instruction(int Offset)
     {
     
         /// <summary>
@@ -5654,10 +5732,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5678,23 +5757,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iload0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iload0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iload0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iload0Instruction instruction)
         {
             instruction = default;
 
@@ -5707,7 +5788,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iload0Instruction();
+            instruction = new Iload0Instruction(offset);
 
             return true;
         }
@@ -5717,7 +5798,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload_1' instruction.
     /// </summary>
-    public partial record struct Iload1Instruction()
+    public partial record struct Iload1Instruction(int Offset)
     {
     
         /// <summary>
@@ -5730,10 +5811,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5754,23 +5836,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iload1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iload1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iload1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iload1Instruction instruction)
         {
             instruction = default;
 
@@ -5783,7 +5867,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iload1Instruction();
+            instruction = new Iload1Instruction(offset);
 
             return true;
         }
@@ -5793,7 +5877,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload_2' instruction.
     /// </summary>
-    public partial record struct Iload2Instruction()
+    public partial record struct Iload2Instruction(int Offset)
     {
     
         /// <summary>
@@ -5806,10 +5890,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5830,23 +5915,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iload2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iload2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iload2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iload2Instruction instruction)
         {
             instruction = default;
 
@@ -5859,7 +5946,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iload2Instruction();
+            instruction = new Iload2Instruction(offset);
 
             return true;
         }
@@ -5869,7 +5956,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload_3' instruction.
     /// </summary>
-    public partial record struct Iload3Instruction()
+    public partial record struct Iload3Instruction(int Offset)
     {
     
         /// <summary>
@@ -5882,10 +5969,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5906,23 +5994,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Iload3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Iload3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Iload3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Iload3Instruction instruction)
         {
             instruction = default;
 
@@ -5935,7 +6025,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Iload3Instruction();
+            instruction = new Iload3Instruction(offset);
 
             return true;
         }
@@ -5945,7 +6035,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload_0' instruction.
     /// </summary>
-    public partial record struct Lload0Instruction()
+    public partial record struct Lload0Instruction(int Offset)
     {
     
         /// <summary>
@@ -5958,10 +6048,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -5982,23 +6073,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lload0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lload0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lload0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lload0Instruction instruction)
         {
             instruction = default;
 
@@ -6011,7 +6104,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lload0Instruction();
+            instruction = new Lload0Instruction(offset);
 
             return true;
         }
@@ -6021,7 +6114,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload_1' instruction.
     /// </summary>
-    public partial record struct Lload1Instruction()
+    public partial record struct Lload1Instruction(int Offset)
     {
     
         /// <summary>
@@ -6034,10 +6127,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6058,23 +6152,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lload1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lload1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lload1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lload1Instruction instruction)
         {
             instruction = default;
 
@@ -6087,7 +6183,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lload1Instruction();
+            instruction = new Lload1Instruction(offset);
 
             return true;
         }
@@ -6097,7 +6193,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload_2' instruction.
     /// </summary>
-    public partial record struct Lload2Instruction()
+    public partial record struct Lload2Instruction(int Offset)
     {
     
         /// <summary>
@@ -6110,10 +6206,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6134,23 +6231,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lload2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lload2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lload2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lload2Instruction instruction)
         {
             instruction = default;
 
@@ -6163,7 +6262,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lload2Instruction();
+            instruction = new Lload2Instruction(offset);
 
             return true;
         }
@@ -6173,7 +6272,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload_3' instruction.
     /// </summary>
-    public partial record struct Lload3Instruction()
+    public partial record struct Lload3Instruction(int Offset)
     {
     
         /// <summary>
@@ -6186,10 +6285,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6210,23 +6310,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lload3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lload3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lload3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lload3Instruction instruction)
         {
             instruction = default;
 
@@ -6239,7 +6341,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lload3Instruction();
+            instruction = new Lload3Instruction(offset);
 
             return true;
         }
@@ -6249,7 +6351,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload_0' instruction.
     /// </summary>
-    public partial record struct Fload0Instruction()
+    public partial record struct Fload0Instruction(int Offset)
     {
     
         /// <summary>
@@ -6262,10 +6364,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6286,23 +6389,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fload0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fload0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fload0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fload0Instruction instruction)
         {
             instruction = default;
 
@@ -6315,7 +6420,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fload0Instruction();
+            instruction = new Fload0Instruction(offset);
 
             return true;
         }
@@ -6325,7 +6430,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload_1' instruction.
     /// </summary>
-    public partial record struct Fload1Instruction()
+    public partial record struct Fload1Instruction(int Offset)
     {
     
         /// <summary>
@@ -6338,10 +6443,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6362,23 +6468,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fload1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fload1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fload1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fload1Instruction instruction)
         {
             instruction = default;
 
@@ -6391,7 +6499,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fload1Instruction();
+            instruction = new Fload1Instruction(offset);
 
             return true;
         }
@@ -6401,7 +6509,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload_2' instruction.
     /// </summary>
-    public partial record struct Fload2Instruction()
+    public partial record struct Fload2Instruction(int Offset)
     {
     
         /// <summary>
@@ -6414,10 +6522,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6438,23 +6547,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fload2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fload2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fload2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fload2Instruction instruction)
         {
             instruction = default;
 
@@ -6467,7 +6578,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fload2Instruction();
+            instruction = new Fload2Instruction(offset);
 
             return true;
         }
@@ -6477,7 +6588,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload_3' instruction.
     /// </summary>
-    public partial record struct Fload3Instruction()
+    public partial record struct Fload3Instruction(int Offset)
     {
     
         /// <summary>
@@ -6490,10 +6601,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6514,23 +6626,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fload3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fload3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fload3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fload3Instruction instruction)
         {
             instruction = default;
 
@@ -6543,7 +6657,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fload3Instruction();
+            instruction = new Fload3Instruction(offset);
 
             return true;
         }
@@ -6553,7 +6667,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload_0' instruction.
     /// </summary>
-    public partial record struct Dload0Instruction()
+    public partial record struct Dload0Instruction(int Offset)
     {
     
         /// <summary>
@@ -6566,10 +6680,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6590,23 +6705,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dload0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dload0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dload0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dload0Instruction instruction)
         {
             instruction = default;
 
@@ -6619,7 +6736,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dload0Instruction();
+            instruction = new Dload0Instruction(offset);
 
             return true;
         }
@@ -6629,7 +6746,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload_1' instruction.
     /// </summary>
-    public partial record struct Dload1Instruction()
+    public partial record struct Dload1Instruction(int Offset)
     {
     
         /// <summary>
@@ -6642,10 +6759,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6666,23 +6784,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dload1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dload1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dload1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dload1Instruction instruction)
         {
             instruction = default;
 
@@ -6695,7 +6815,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dload1Instruction();
+            instruction = new Dload1Instruction(offset);
 
             return true;
         }
@@ -6705,7 +6825,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload_2' instruction.
     /// </summary>
-    public partial record struct Dload2Instruction()
+    public partial record struct Dload2Instruction(int Offset)
     {
     
         /// <summary>
@@ -6718,10 +6838,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6742,23 +6863,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dload2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dload2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dload2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dload2Instruction instruction)
         {
             instruction = default;
 
@@ -6771,7 +6894,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dload2Instruction();
+            instruction = new Dload2Instruction(offset);
 
             return true;
         }
@@ -6781,7 +6904,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload_3' instruction.
     /// </summary>
-    public partial record struct Dload3Instruction()
+    public partial record struct Dload3Instruction(int Offset)
     {
     
         /// <summary>
@@ -6794,10 +6917,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6818,23 +6942,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dload3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dload3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dload3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dload3Instruction instruction)
         {
             instruction = default;
 
@@ -6847,7 +6973,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dload3Instruction();
+            instruction = new Dload3Instruction(offset);
 
             return true;
         }
@@ -6857,7 +6983,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload_0' instruction.
     /// </summary>
-    public partial record struct Aload0Instruction()
+    public partial record struct Aload0Instruction(int Offset)
     {
     
         /// <summary>
@@ -6870,10 +6996,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6894,23 +7021,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Aload0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Aload0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Aload0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Aload0Instruction instruction)
         {
             instruction = default;
 
@@ -6923,7 +7052,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Aload0Instruction();
+            instruction = new Aload0Instruction(offset);
 
             return true;
         }
@@ -6933,7 +7062,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload_1' instruction.
     /// </summary>
-    public partial record struct Aload1Instruction()
+    public partial record struct Aload1Instruction(int Offset)
     {
     
         /// <summary>
@@ -6946,10 +7075,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -6970,23 +7100,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Aload1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Aload1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Aload1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Aload1Instruction instruction)
         {
             instruction = default;
 
@@ -6999,7 +7131,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Aload1Instruction();
+            instruction = new Aload1Instruction(offset);
 
             return true;
         }
@@ -7009,7 +7141,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload_2' instruction.
     /// </summary>
-    public partial record struct Aload2Instruction()
+    public partial record struct Aload2Instruction(int Offset)
     {
     
         /// <summary>
@@ -7022,10 +7154,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7046,23 +7179,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Aload2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Aload2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Aload2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Aload2Instruction instruction)
         {
             instruction = default;
 
@@ -7075,7 +7210,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Aload2Instruction();
+            instruction = new Aload2Instruction(offset);
 
             return true;
         }
@@ -7085,7 +7220,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload_3' instruction.
     /// </summary>
-    public partial record struct Aload3Instruction()
+    public partial record struct Aload3Instruction(int Offset)
     {
     
         /// <summary>
@@ -7098,10 +7233,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7122,23 +7258,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Aload3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Aload3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Aload3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Aload3Instruction instruction)
         {
             instruction = default;
 
@@ -7151,7 +7289,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Aload3Instruction();
+            instruction = new Aload3Instruction(offset);
 
             return true;
         }
@@ -7161,7 +7299,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iaload' instruction.
     /// </summary>
-    public partial record struct IaloadInstruction()
+    public partial record struct IaloadInstruction(int Offset)
     {
     
         /// <summary>
@@ -7174,10 +7312,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7198,23 +7337,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IaloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IaloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IaloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IaloadInstruction instruction)
         {
             instruction = default;
 
@@ -7227,7 +7368,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IaloadInstruction();
+            instruction = new IaloadInstruction(offset);
 
             return true;
         }
@@ -7237,7 +7378,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'laload' instruction.
     /// </summary>
-    public partial record struct LaloadInstruction()
+    public partial record struct LaloadInstruction(int Offset)
     {
     
         /// <summary>
@@ -7250,10 +7391,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7274,23 +7416,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LaloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LaloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LaloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LaloadInstruction instruction)
         {
             instruction = default;
 
@@ -7303,7 +7447,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LaloadInstruction();
+            instruction = new LaloadInstruction(offset);
 
             return true;
         }
@@ -7313,7 +7457,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'faload' instruction.
     /// </summary>
-    public partial record struct FaloadInstruction()
+    public partial record struct FaloadInstruction(int Offset)
     {
     
         /// <summary>
@@ -7326,10 +7470,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7350,23 +7495,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FaloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FaloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FaloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FaloadInstruction instruction)
         {
             instruction = default;
 
@@ -7379,7 +7526,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FaloadInstruction();
+            instruction = new FaloadInstruction(offset);
 
             return true;
         }
@@ -7389,7 +7536,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'daload' instruction.
     /// </summary>
-    public partial record struct DaloadInstruction()
+    public partial record struct DaloadInstruction(int Offset)
     {
     
         /// <summary>
@@ -7402,10 +7549,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7426,23 +7574,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DaloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DaloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DaloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DaloadInstruction instruction)
         {
             instruction = default;
 
@@ -7455,7 +7605,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DaloadInstruction();
+            instruction = new DaloadInstruction(offset);
 
             return true;
         }
@@ -7465,7 +7615,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aaload' instruction.
     /// </summary>
-    public partial record struct AaloadInstruction()
+    public partial record struct AaloadInstruction(int Offset)
     {
     
         /// <summary>
@@ -7478,10 +7628,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7502,23 +7653,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out AaloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out AaloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out AaloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out AaloadInstruction instruction)
         {
             instruction = default;
 
@@ -7531,7 +7684,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new AaloadInstruction();
+            instruction = new AaloadInstruction(offset);
 
             return true;
         }
@@ -7541,7 +7694,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'baload' instruction.
     /// </summary>
-    public partial record struct BaloadInstruction()
+    public partial record struct BaloadInstruction(int Offset)
     {
     
         /// <summary>
@@ -7554,10 +7707,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7578,23 +7732,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out BaloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out BaloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out BaloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out BaloadInstruction instruction)
         {
             instruction = default;
 
@@ -7607,7 +7763,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new BaloadInstruction();
+            instruction = new BaloadInstruction(offset);
 
             return true;
         }
@@ -7617,7 +7773,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'caload' instruction.
     /// </summary>
-    public partial record struct CaloadInstruction()
+    public partial record struct CaloadInstruction(int Offset)
     {
     
         /// <summary>
@@ -7630,10 +7786,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7654,23 +7811,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out CaloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out CaloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out CaloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out CaloadInstruction instruction)
         {
             instruction = default;
 
@@ -7683,7 +7842,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new CaloadInstruction();
+            instruction = new CaloadInstruction(offset);
 
             return true;
         }
@@ -7693,7 +7852,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'saload' instruction.
     /// </summary>
-    public partial record struct SaloadInstruction()
+    public partial record struct SaloadInstruction(int Offset)
     {
     
         /// <summary>
@@ -7706,10 +7865,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7730,23 +7890,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out SaloadInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out SaloadInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out SaloadInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out SaloadInstruction instruction)
         {
             instruction = default;
 
@@ -7759,7 +7921,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new SaloadInstruction();
+            instruction = new SaloadInstruction(offset);
 
             return true;
         }
@@ -7770,7 +7932,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'istore' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct IstoreInstruction(ushort Local)
+    public partial record struct IstoreInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -7783,10 +7945,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7820,23 +7983,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IstoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IstoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IstoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IstoreInstruction instruction)
         {
             instruction = default;
 
@@ -7853,7 +8018,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new IstoreInstruction(local);
+                instruction = new IstoreInstruction(offset, local);
             }
             else
             {
@@ -7862,7 +8027,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new IstoreInstruction(local);
+                instruction = new IstoreInstruction(offset, local);
             }
 
             return true;
@@ -7877,7 +8042,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'lstore' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct LstoreInstruction(ushort Local)
+    public partial record struct LstoreInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -7890,10 +8055,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -7927,23 +8093,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LstoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LstoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LstoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LstoreInstruction instruction)
         {
             instruction = default;
 
@@ -7960,7 +8128,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new LstoreInstruction(local);
+                instruction = new LstoreInstruction(offset, local);
             }
             else
             {
@@ -7969,7 +8137,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new LstoreInstruction(local);
+                instruction = new LstoreInstruction(offset, local);
             }
 
             return true;
@@ -7984,7 +8152,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'fstore' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct FstoreInstruction(ushort Local)
+    public partial record struct FstoreInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -7997,10 +8165,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8034,23 +8203,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FstoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FstoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FstoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FstoreInstruction instruction)
         {
             instruction = default;
 
@@ -8067,7 +8238,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new FstoreInstruction(local);
+                instruction = new FstoreInstruction(offset, local);
             }
             else
             {
@@ -8076,7 +8247,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new FstoreInstruction(local);
+                instruction = new FstoreInstruction(offset, local);
             }
 
             return true;
@@ -8091,7 +8262,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'dstore' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct DstoreInstruction(ushort Local)
+    public partial record struct DstoreInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -8104,10 +8275,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8141,23 +8313,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DstoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DstoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DstoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DstoreInstruction instruction)
         {
             instruction = default;
 
@@ -8174,7 +8348,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new DstoreInstruction(local);
+                instruction = new DstoreInstruction(offset, local);
             }
             else
             {
@@ -8183,7 +8357,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new DstoreInstruction(local);
+                instruction = new DstoreInstruction(offset, local);
             }
 
             return true;
@@ -8198,7 +8372,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'astore' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct AstoreInstruction(ushort Local)
+    public partial record struct AstoreInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -8211,10 +8385,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8248,23 +8423,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out AstoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out AstoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out AstoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out AstoreInstruction instruction)
         {
             instruction = default;
 
@@ -8281,7 +8458,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new AstoreInstruction(local);
+                instruction = new AstoreInstruction(offset, local);
             }
             else
             {
@@ -8290,7 +8467,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new AstoreInstruction(local);
+                instruction = new AstoreInstruction(offset, local);
             }
 
             return true;
@@ -8304,7 +8481,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore_0' instruction.
     /// </summary>
-    public partial record struct Istore0Instruction()
+    public partial record struct Istore0Instruction(int Offset)
     {
     
         /// <summary>
@@ -8317,10 +8494,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8341,23 +8519,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Istore0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Istore0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Istore0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Istore0Instruction instruction)
         {
             instruction = default;
 
@@ -8370,7 +8550,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Istore0Instruction();
+            instruction = new Istore0Instruction(offset);
 
             return true;
         }
@@ -8380,7 +8560,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore_1' instruction.
     /// </summary>
-    public partial record struct Istore1Instruction()
+    public partial record struct Istore1Instruction(int Offset)
     {
     
         /// <summary>
@@ -8393,10 +8573,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8417,23 +8598,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Istore1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Istore1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Istore1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Istore1Instruction instruction)
         {
             instruction = default;
 
@@ -8446,7 +8629,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Istore1Instruction();
+            instruction = new Istore1Instruction(offset);
 
             return true;
         }
@@ -8456,7 +8639,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore_2' instruction.
     /// </summary>
-    public partial record struct Istore2Instruction()
+    public partial record struct Istore2Instruction(int Offset)
     {
     
         /// <summary>
@@ -8469,10 +8652,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8493,23 +8677,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Istore2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Istore2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Istore2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Istore2Instruction instruction)
         {
             instruction = default;
 
@@ -8522,7 +8708,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Istore2Instruction();
+            instruction = new Istore2Instruction(offset);
 
             return true;
         }
@@ -8532,7 +8718,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore_3' instruction.
     /// </summary>
-    public partial record struct Istore3Instruction()
+    public partial record struct Istore3Instruction(int Offset)
     {
     
         /// <summary>
@@ -8545,10 +8731,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8569,23 +8756,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Istore3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Istore3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Istore3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Istore3Instruction instruction)
         {
             instruction = default;
 
@@ -8598,7 +8787,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Istore3Instruction();
+            instruction = new Istore3Instruction(offset);
 
             return true;
         }
@@ -8608,7 +8797,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore_0' instruction.
     /// </summary>
-    public partial record struct Lstore0Instruction()
+    public partial record struct Lstore0Instruction(int Offset)
     {
     
         /// <summary>
@@ -8621,10 +8810,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8645,23 +8835,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lstore0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lstore0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lstore0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lstore0Instruction instruction)
         {
             instruction = default;
 
@@ -8674,7 +8866,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lstore0Instruction();
+            instruction = new Lstore0Instruction(offset);
 
             return true;
         }
@@ -8684,7 +8876,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore_1' instruction.
     /// </summary>
-    public partial record struct Lstore1Instruction()
+    public partial record struct Lstore1Instruction(int Offset)
     {
     
         /// <summary>
@@ -8697,10 +8889,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8721,23 +8914,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lstore1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lstore1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lstore1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lstore1Instruction instruction)
         {
             instruction = default;
 
@@ -8750,7 +8945,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lstore1Instruction();
+            instruction = new Lstore1Instruction(offset);
 
             return true;
         }
@@ -8760,7 +8955,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore_2' instruction.
     /// </summary>
-    public partial record struct Lstore2Instruction()
+    public partial record struct Lstore2Instruction(int Offset)
     {
     
         /// <summary>
@@ -8773,10 +8968,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8797,23 +8993,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lstore2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lstore2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lstore2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lstore2Instruction instruction)
         {
             instruction = default;
 
@@ -8826,7 +9024,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lstore2Instruction();
+            instruction = new Lstore2Instruction(offset);
 
             return true;
         }
@@ -8836,7 +9034,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore_3' instruction.
     /// </summary>
-    public partial record struct Lstore3Instruction()
+    public partial record struct Lstore3Instruction(int Offset)
     {
     
         /// <summary>
@@ -8849,10 +9047,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8873,23 +9072,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Lstore3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Lstore3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Lstore3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Lstore3Instruction instruction)
         {
             instruction = default;
 
@@ -8902,7 +9103,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Lstore3Instruction();
+            instruction = new Lstore3Instruction(offset);
 
             return true;
         }
@@ -8912,7 +9113,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore_0' instruction.
     /// </summary>
-    public partial record struct Fstore0Instruction()
+    public partial record struct Fstore0Instruction(int Offset)
     {
     
         /// <summary>
@@ -8925,10 +9126,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -8949,23 +9151,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fstore0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fstore0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fstore0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fstore0Instruction instruction)
         {
             instruction = default;
 
@@ -8978,7 +9182,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fstore0Instruction();
+            instruction = new Fstore0Instruction(offset);
 
             return true;
         }
@@ -8988,7 +9192,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore_1' instruction.
     /// </summary>
-    public partial record struct Fstore1Instruction()
+    public partial record struct Fstore1Instruction(int Offset)
     {
     
         /// <summary>
@@ -9001,10 +9205,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9025,23 +9230,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fstore1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fstore1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fstore1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fstore1Instruction instruction)
         {
             instruction = default;
 
@@ -9054,7 +9261,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fstore1Instruction();
+            instruction = new Fstore1Instruction(offset);
 
             return true;
         }
@@ -9064,7 +9271,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore_2' instruction.
     /// </summary>
-    public partial record struct Fstore2Instruction()
+    public partial record struct Fstore2Instruction(int Offset)
     {
     
         /// <summary>
@@ -9077,10 +9284,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9101,23 +9309,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fstore2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fstore2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fstore2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fstore2Instruction instruction)
         {
             instruction = default;
 
@@ -9130,7 +9340,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fstore2Instruction();
+            instruction = new Fstore2Instruction(offset);
 
             return true;
         }
@@ -9140,7 +9350,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore_3' instruction.
     /// </summary>
-    public partial record struct Fstore3Instruction()
+    public partial record struct Fstore3Instruction(int Offset)
     {
     
         /// <summary>
@@ -9153,10 +9363,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9177,23 +9388,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Fstore3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Fstore3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Fstore3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Fstore3Instruction instruction)
         {
             instruction = default;
 
@@ -9206,7 +9419,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Fstore3Instruction();
+            instruction = new Fstore3Instruction(offset);
 
             return true;
         }
@@ -9216,7 +9429,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore_0' instruction.
     /// </summary>
-    public partial record struct Dstore0Instruction()
+    public partial record struct Dstore0Instruction(int Offset)
     {
     
         /// <summary>
@@ -9229,10 +9442,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9253,23 +9467,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dstore0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dstore0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dstore0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dstore0Instruction instruction)
         {
             instruction = default;
 
@@ -9282,7 +9498,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dstore0Instruction();
+            instruction = new Dstore0Instruction(offset);
 
             return true;
         }
@@ -9292,7 +9508,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore_1' instruction.
     /// </summary>
-    public partial record struct Dstore1Instruction()
+    public partial record struct Dstore1Instruction(int Offset)
     {
     
         /// <summary>
@@ -9305,10 +9521,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9329,23 +9546,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dstore1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dstore1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dstore1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dstore1Instruction instruction)
         {
             instruction = default;
 
@@ -9358,7 +9577,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dstore1Instruction();
+            instruction = new Dstore1Instruction(offset);
 
             return true;
         }
@@ -9368,7 +9587,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore_2' instruction.
     /// </summary>
-    public partial record struct Dstore2Instruction()
+    public partial record struct Dstore2Instruction(int Offset)
     {
     
         /// <summary>
@@ -9381,10 +9600,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9405,23 +9625,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dstore2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dstore2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dstore2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dstore2Instruction instruction)
         {
             instruction = default;
 
@@ -9434,7 +9656,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dstore2Instruction();
+            instruction = new Dstore2Instruction(offset);
 
             return true;
         }
@@ -9444,7 +9666,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore_3' instruction.
     /// </summary>
-    public partial record struct Dstore3Instruction()
+    public partial record struct Dstore3Instruction(int Offset)
     {
     
         /// <summary>
@@ -9457,10 +9679,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9481,23 +9704,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dstore3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dstore3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dstore3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dstore3Instruction instruction)
         {
             instruction = default;
 
@@ -9510,7 +9735,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dstore3Instruction();
+            instruction = new Dstore3Instruction(offset);
 
             return true;
         }
@@ -9520,7 +9745,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore_0' instruction.
     /// </summary>
-    public partial record struct Astore0Instruction()
+    public partial record struct Astore0Instruction(int Offset)
     {
     
         /// <summary>
@@ -9533,10 +9758,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9557,23 +9783,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Astore0Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Astore0Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Astore0Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Astore0Instruction instruction)
         {
             instruction = default;
 
@@ -9586,7 +9814,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Astore0Instruction();
+            instruction = new Astore0Instruction(offset);
 
             return true;
         }
@@ -9596,7 +9824,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore_1' instruction.
     /// </summary>
-    public partial record struct Astore1Instruction()
+    public partial record struct Astore1Instruction(int Offset)
     {
     
         /// <summary>
@@ -9609,10 +9837,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9633,23 +9862,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Astore1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Astore1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Astore1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Astore1Instruction instruction)
         {
             instruction = default;
 
@@ -9662,7 +9893,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Astore1Instruction();
+            instruction = new Astore1Instruction(offset);
 
             return true;
         }
@@ -9672,7 +9903,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore_2' instruction.
     /// </summary>
-    public partial record struct Astore2Instruction()
+    public partial record struct Astore2Instruction(int Offset)
     {
     
         /// <summary>
@@ -9685,10 +9916,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9709,23 +9941,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Astore2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Astore2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Astore2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Astore2Instruction instruction)
         {
             instruction = default;
 
@@ -9738,7 +9972,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Astore2Instruction();
+            instruction = new Astore2Instruction(offset);
 
             return true;
         }
@@ -9748,7 +9982,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore_3' instruction.
     /// </summary>
-    public partial record struct Astore3Instruction()
+    public partial record struct Astore3Instruction(int Offset)
     {
     
         /// <summary>
@@ -9761,10 +9995,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9785,23 +10020,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Astore3Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Astore3Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Astore3Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Astore3Instruction instruction)
         {
             instruction = default;
 
@@ -9814,7 +10051,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Astore3Instruction();
+            instruction = new Astore3Instruction(offset);
 
             return true;
         }
@@ -9824,7 +10061,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iastore' instruction.
     /// </summary>
-    public partial record struct IastoreInstruction()
+    public partial record struct IastoreInstruction(int Offset)
     {
     
         /// <summary>
@@ -9837,10 +10074,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9861,23 +10099,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IastoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IastoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IastoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IastoreInstruction instruction)
         {
             instruction = default;
 
@@ -9890,7 +10130,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IastoreInstruction();
+            instruction = new IastoreInstruction(offset);
 
             return true;
         }
@@ -9900,7 +10140,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lastore' instruction.
     /// </summary>
-    public partial record struct LastoreInstruction()
+    public partial record struct LastoreInstruction(int Offset)
     {
     
         /// <summary>
@@ -9913,10 +10153,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -9937,23 +10178,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LastoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LastoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LastoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LastoreInstruction instruction)
         {
             instruction = default;
 
@@ -9966,7 +10209,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LastoreInstruction();
+            instruction = new LastoreInstruction(offset);
 
             return true;
         }
@@ -9976,7 +10219,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fastore' instruction.
     /// </summary>
-    public partial record struct FastoreInstruction()
+    public partial record struct FastoreInstruction(int Offset)
     {
     
         /// <summary>
@@ -9989,10 +10232,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10013,23 +10257,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FastoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FastoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FastoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FastoreInstruction instruction)
         {
             instruction = default;
 
@@ -10042,7 +10288,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FastoreInstruction();
+            instruction = new FastoreInstruction(offset);
 
             return true;
         }
@@ -10052,7 +10298,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dastore' instruction.
     /// </summary>
-    public partial record struct DastoreInstruction()
+    public partial record struct DastoreInstruction(int Offset)
     {
     
         /// <summary>
@@ -10065,10 +10311,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10089,23 +10336,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DastoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DastoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DastoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DastoreInstruction instruction)
         {
             instruction = default;
 
@@ -10118,7 +10367,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DastoreInstruction();
+            instruction = new DastoreInstruction(offset);
 
             return true;
         }
@@ -10128,7 +10377,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aastore' instruction.
     /// </summary>
-    public partial record struct AastoreInstruction()
+    public partial record struct AastoreInstruction(int Offset)
     {
     
         /// <summary>
@@ -10141,10 +10390,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10165,23 +10415,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out AastoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out AastoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out AastoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out AastoreInstruction instruction)
         {
             instruction = default;
 
@@ -10194,7 +10446,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new AastoreInstruction();
+            instruction = new AastoreInstruction(offset);
 
             return true;
         }
@@ -10204,7 +10456,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'bastore' instruction.
     /// </summary>
-    public partial record struct BastoreInstruction()
+    public partial record struct BastoreInstruction(int Offset)
     {
     
         /// <summary>
@@ -10217,10 +10469,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10241,23 +10494,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out BastoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out BastoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out BastoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out BastoreInstruction instruction)
         {
             instruction = default;
 
@@ -10270,7 +10525,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new BastoreInstruction();
+            instruction = new BastoreInstruction(offset);
 
             return true;
         }
@@ -10280,7 +10535,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'castore' instruction.
     /// </summary>
-    public partial record struct CastoreInstruction()
+    public partial record struct CastoreInstruction(int Offset)
     {
     
         /// <summary>
@@ -10293,10 +10548,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10317,23 +10573,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out CastoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out CastoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out CastoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out CastoreInstruction instruction)
         {
             instruction = default;
 
@@ -10346,7 +10604,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new CastoreInstruction();
+            instruction = new CastoreInstruction(offset);
 
             return true;
         }
@@ -10356,7 +10614,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'sastore' instruction.
     /// </summary>
-    public partial record struct SastoreInstruction()
+    public partial record struct SastoreInstruction(int Offset)
     {
     
         /// <summary>
@@ -10369,10 +10627,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10393,23 +10652,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out SastoreInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out SastoreInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out SastoreInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out SastoreInstruction instruction)
         {
             instruction = default;
 
@@ -10422,7 +10683,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new SastoreInstruction();
+            instruction = new SastoreInstruction(offset);
 
             return true;
         }
@@ -10432,7 +10693,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'pop' instruction.
     /// </summary>
-    public partial record struct PopInstruction()
+    public partial record struct PopInstruction(int Offset)
     {
     
         /// <summary>
@@ -10445,10 +10706,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10469,23 +10731,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out PopInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out PopInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out PopInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out PopInstruction instruction)
         {
             instruction = default;
 
@@ -10498,7 +10762,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new PopInstruction();
+            instruction = new PopInstruction(offset);
 
             return true;
         }
@@ -10508,7 +10772,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'pop2' instruction.
     /// </summary>
-    public partial record struct Pop2Instruction()
+    public partial record struct Pop2Instruction(int Offset)
     {
     
         /// <summary>
@@ -10521,10 +10785,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10545,23 +10810,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Pop2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Pop2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Pop2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Pop2Instruction instruction)
         {
             instruction = default;
 
@@ -10574,7 +10841,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Pop2Instruction();
+            instruction = new Pop2Instruction(offset);
 
             return true;
         }
@@ -10584,7 +10851,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup' instruction.
     /// </summary>
-    public partial record struct DupInstruction()
+    public partial record struct DupInstruction(int Offset)
     {
     
         /// <summary>
@@ -10597,10 +10864,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10621,23 +10889,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DupInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DupInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DupInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DupInstruction instruction)
         {
             instruction = default;
 
@@ -10650,7 +10920,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DupInstruction();
+            instruction = new DupInstruction(offset);
 
             return true;
         }
@@ -10660,7 +10930,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup_x1' instruction.
     /// </summary>
-    public partial record struct DupX1Instruction()
+    public partial record struct DupX1Instruction(int Offset)
     {
     
         /// <summary>
@@ -10673,10 +10943,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10697,23 +10968,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DupX1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DupX1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DupX1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DupX1Instruction instruction)
         {
             instruction = default;
 
@@ -10726,7 +10999,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DupX1Instruction();
+            instruction = new DupX1Instruction(offset);
 
             return true;
         }
@@ -10736,7 +11009,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup_x2' instruction.
     /// </summary>
-    public partial record struct DupX2Instruction()
+    public partial record struct DupX2Instruction(int Offset)
     {
     
         /// <summary>
@@ -10749,10 +11022,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10773,23 +11047,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DupX2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DupX2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DupX2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DupX2Instruction instruction)
         {
             instruction = default;
 
@@ -10802,7 +11078,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DupX2Instruction();
+            instruction = new DupX2Instruction(offset);
 
             return true;
         }
@@ -10812,7 +11088,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup2' instruction.
     /// </summary>
-    public partial record struct Dup2Instruction()
+    public partial record struct Dup2Instruction(int Offset)
     {
     
         /// <summary>
@@ -10825,10 +11101,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10849,23 +11126,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dup2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dup2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dup2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dup2Instruction instruction)
         {
             instruction = default;
 
@@ -10878,7 +11157,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dup2Instruction();
+            instruction = new Dup2Instruction(offset);
 
             return true;
         }
@@ -10888,7 +11167,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup2_x1' instruction.
     /// </summary>
-    public partial record struct Dup2X1Instruction()
+    public partial record struct Dup2X1Instruction(int Offset)
     {
     
         /// <summary>
@@ -10901,10 +11180,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -10925,23 +11205,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dup2X1Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dup2X1Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dup2X1Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dup2X1Instruction instruction)
         {
             instruction = default;
 
@@ -10954,7 +11236,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dup2X1Instruction();
+            instruction = new Dup2X1Instruction(offset);
 
             return true;
         }
@@ -10964,7 +11246,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup2_x2' instruction.
     /// </summary>
-    public partial record struct Dup2X2Instruction()
+    public partial record struct Dup2X2Instruction(int Offset)
     {
     
         /// <summary>
@@ -10977,10 +11259,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11001,23 +11284,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out Dup2X2Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out Dup2X2Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out Dup2X2Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out Dup2X2Instruction instruction)
         {
             instruction = default;
 
@@ -11030,7 +11315,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new Dup2X2Instruction();
+            instruction = new Dup2X2Instruction(offset);
 
             return true;
         }
@@ -11040,7 +11325,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'swap' instruction.
     /// </summary>
-    public partial record struct SwapInstruction()
+    public partial record struct SwapInstruction(int Offset)
     {
     
         /// <summary>
@@ -11053,10 +11338,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11077,23 +11363,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out SwapInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out SwapInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out SwapInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out SwapInstruction instruction)
         {
             instruction = default;
 
@@ -11106,7 +11394,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new SwapInstruction();
+            instruction = new SwapInstruction(offset);
 
             return true;
         }
@@ -11116,7 +11404,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iadd' instruction.
     /// </summary>
-    public partial record struct IaddInstruction()
+    public partial record struct IaddInstruction(int Offset)
     {
     
         /// <summary>
@@ -11129,10 +11417,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11153,23 +11442,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IaddInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IaddInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IaddInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IaddInstruction instruction)
         {
             instruction = default;
 
@@ -11182,7 +11473,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IaddInstruction();
+            instruction = new IaddInstruction(offset);
 
             return true;
         }
@@ -11192,7 +11483,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ladd' instruction.
     /// </summary>
-    public partial record struct LaddInstruction()
+    public partial record struct LaddInstruction(int Offset)
     {
     
         /// <summary>
@@ -11205,10 +11496,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11229,23 +11521,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LaddInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LaddInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LaddInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LaddInstruction instruction)
         {
             instruction = default;
 
@@ -11258,7 +11552,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LaddInstruction();
+            instruction = new LaddInstruction(offset);
 
             return true;
         }
@@ -11268,7 +11562,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fadd' instruction.
     /// </summary>
-    public partial record struct FaddInstruction()
+    public partial record struct FaddInstruction(int Offset)
     {
     
         /// <summary>
@@ -11281,10 +11575,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11305,23 +11600,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FaddInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FaddInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FaddInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FaddInstruction instruction)
         {
             instruction = default;
 
@@ -11334,7 +11631,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FaddInstruction();
+            instruction = new FaddInstruction(offset);
 
             return true;
         }
@@ -11344,7 +11641,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dadd' instruction.
     /// </summary>
-    public partial record struct DaddInstruction()
+    public partial record struct DaddInstruction(int Offset)
     {
     
         /// <summary>
@@ -11357,10 +11654,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11381,23 +11679,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DaddInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DaddInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DaddInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DaddInstruction instruction)
         {
             instruction = default;
 
@@ -11410,7 +11710,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DaddInstruction();
+            instruction = new DaddInstruction(offset);
 
             return true;
         }
@@ -11420,7 +11720,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'isub' instruction.
     /// </summary>
-    public partial record struct IsubInstruction()
+    public partial record struct IsubInstruction(int Offset)
     {
     
         /// <summary>
@@ -11433,10 +11733,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11457,23 +11758,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IsubInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IsubInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IsubInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IsubInstruction instruction)
         {
             instruction = default;
 
@@ -11486,7 +11789,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IsubInstruction();
+            instruction = new IsubInstruction(offset);
 
             return true;
         }
@@ -11496,7 +11799,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lsub' instruction.
     /// </summary>
-    public partial record struct LsubInstruction()
+    public partial record struct LsubInstruction(int Offset)
     {
     
         /// <summary>
@@ -11509,10 +11812,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11533,23 +11837,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LsubInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LsubInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LsubInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LsubInstruction instruction)
         {
             instruction = default;
 
@@ -11562,7 +11868,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LsubInstruction();
+            instruction = new LsubInstruction(offset);
 
             return true;
         }
@@ -11572,7 +11878,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fsub' instruction.
     /// </summary>
-    public partial record struct FsubInstruction()
+    public partial record struct FsubInstruction(int Offset)
     {
     
         /// <summary>
@@ -11585,10 +11891,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11609,23 +11916,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FsubInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FsubInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FsubInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FsubInstruction instruction)
         {
             instruction = default;
 
@@ -11638,7 +11947,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FsubInstruction();
+            instruction = new FsubInstruction(offset);
 
             return true;
         }
@@ -11648,7 +11957,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dsub' instruction.
     /// </summary>
-    public partial record struct DsubInstruction()
+    public partial record struct DsubInstruction(int Offset)
     {
     
         /// <summary>
@@ -11661,10 +11970,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11685,23 +11995,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DsubInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DsubInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DsubInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DsubInstruction instruction)
         {
             instruction = default;
 
@@ -11714,7 +12026,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DsubInstruction();
+            instruction = new DsubInstruction(offset);
 
             return true;
         }
@@ -11724,7 +12036,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'imul' instruction.
     /// </summary>
-    public partial record struct ImulInstruction()
+    public partial record struct ImulInstruction(int Offset)
     {
     
         /// <summary>
@@ -11737,10 +12049,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11761,23 +12074,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out ImulInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out ImulInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out ImulInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out ImulInstruction instruction)
         {
             instruction = default;
 
@@ -11790,7 +12105,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new ImulInstruction();
+            instruction = new ImulInstruction(offset);
 
             return true;
         }
@@ -11800,7 +12115,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lmul' instruction.
     /// </summary>
-    public partial record struct LmulInstruction()
+    public partial record struct LmulInstruction(int Offset)
     {
     
         /// <summary>
@@ -11813,10 +12128,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11837,23 +12153,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LmulInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LmulInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LmulInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LmulInstruction instruction)
         {
             instruction = default;
 
@@ -11866,7 +12184,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LmulInstruction();
+            instruction = new LmulInstruction(offset);
 
             return true;
         }
@@ -11876,7 +12194,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fmul' instruction.
     /// </summary>
-    public partial record struct FmulInstruction()
+    public partial record struct FmulInstruction(int Offset)
     {
     
         /// <summary>
@@ -11889,10 +12207,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11913,23 +12232,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FmulInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FmulInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FmulInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FmulInstruction instruction)
         {
             instruction = default;
 
@@ -11942,7 +12263,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FmulInstruction();
+            instruction = new FmulInstruction(offset);
 
             return true;
         }
@@ -11952,7 +12273,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dmul' instruction.
     /// </summary>
-    public partial record struct DmulInstruction()
+    public partial record struct DmulInstruction(int Offset)
     {
     
         /// <summary>
@@ -11965,10 +12286,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -11989,23 +12311,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DmulInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DmulInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DmulInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DmulInstruction instruction)
         {
             instruction = default;
 
@@ -12018,7 +12342,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DmulInstruction();
+            instruction = new DmulInstruction(offset);
 
             return true;
         }
@@ -12028,7 +12352,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'idiv' instruction.
     /// </summary>
-    public partial record struct IdivInstruction()
+    public partial record struct IdivInstruction(int Offset)
     {
     
         /// <summary>
@@ -12041,10 +12365,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12065,23 +12390,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IdivInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IdivInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IdivInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IdivInstruction instruction)
         {
             instruction = default;
 
@@ -12094,7 +12421,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IdivInstruction();
+            instruction = new IdivInstruction(offset);
 
             return true;
         }
@@ -12104,7 +12431,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ldiv' instruction.
     /// </summary>
-    public partial record struct LdivInstruction()
+    public partial record struct LdivInstruction(int Offset)
     {
     
         /// <summary>
@@ -12117,10 +12444,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12141,23 +12469,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LdivInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LdivInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LdivInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LdivInstruction instruction)
         {
             instruction = default;
 
@@ -12170,7 +12500,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LdivInstruction();
+            instruction = new LdivInstruction(offset);
 
             return true;
         }
@@ -12180,7 +12510,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fdiv' instruction.
     /// </summary>
-    public partial record struct FdivInstruction()
+    public partial record struct FdivInstruction(int Offset)
     {
     
         /// <summary>
@@ -12193,10 +12523,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12217,23 +12548,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FdivInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FdivInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FdivInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FdivInstruction instruction)
         {
             instruction = default;
 
@@ -12246,7 +12579,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FdivInstruction();
+            instruction = new FdivInstruction(offset);
 
             return true;
         }
@@ -12256,7 +12589,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ddiv' instruction.
     /// </summary>
-    public partial record struct DdivInstruction()
+    public partial record struct DdivInstruction(int Offset)
     {
     
         /// <summary>
@@ -12269,10 +12602,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12293,23 +12627,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DdivInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DdivInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DdivInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DdivInstruction instruction)
         {
             instruction = default;
 
@@ -12322,7 +12658,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DdivInstruction();
+            instruction = new DdivInstruction(offset);
 
             return true;
         }
@@ -12332,7 +12668,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'irem' instruction.
     /// </summary>
-    public partial record struct IremInstruction()
+    public partial record struct IremInstruction(int Offset)
     {
     
         /// <summary>
@@ -12345,10 +12681,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12369,23 +12706,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IremInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IremInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IremInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IremInstruction instruction)
         {
             instruction = default;
 
@@ -12398,7 +12737,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IremInstruction();
+            instruction = new IremInstruction(offset);
 
             return true;
         }
@@ -12408,7 +12747,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lrem' instruction.
     /// </summary>
-    public partial record struct LremInstruction()
+    public partial record struct LremInstruction(int Offset)
     {
     
         /// <summary>
@@ -12421,10 +12760,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12445,23 +12785,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LremInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LremInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LremInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LremInstruction instruction)
         {
             instruction = default;
 
@@ -12474,7 +12816,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LremInstruction();
+            instruction = new LremInstruction(offset);
 
             return true;
         }
@@ -12484,7 +12826,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'frem' instruction.
     /// </summary>
-    public partial record struct FremInstruction()
+    public partial record struct FremInstruction(int Offset)
     {
     
         /// <summary>
@@ -12497,10 +12839,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12521,23 +12864,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FremInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FremInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FremInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FremInstruction instruction)
         {
             instruction = default;
 
@@ -12550,7 +12895,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FremInstruction();
+            instruction = new FremInstruction(offset);
 
             return true;
         }
@@ -12560,7 +12905,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'drem' instruction.
     /// </summary>
-    public partial record struct DremInstruction()
+    public partial record struct DremInstruction(int Offset)
     {
     
         /// <summary>
@@ -12573,10 +12918,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12597,23 +12943,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DremInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DremInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DremInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DremInstruction instruction)
         {
             instruction = default;
 
@@ -12626,7 +12974,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DremInstruction();
+            instruction = new DremInstruction(offset);
 
             return true;
         }
@@ -12636,7 +12984,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ineg' instruction.
     /// </summary>
-    public partial record struct InegInstruction()
+    public partial record struct InegInstruction(int Offset)
     {
     
         /// <summary>
@@ -12649,10 +12997,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12673,23 +13022,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out InegInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out InegInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out InegInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out InegInstruction instruction)
         {
             instruction = default;
 
@@ -12702,7 +13053,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new InegInstruction();
+            instruction = new InegInstruction(offset);
 
             return true;
         }
@@ -12712,7 +13063,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lneg' instruction.
     /// </summary>
-    public partial record struct LnegInstruction()
+    public partial record struct LnegInstruction(int Offset)
     {
     
         /// <summary>
@@ -12725,10 +13076,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12749,23 +13101,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LnegInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LnegInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LnegInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LnegInstruction instruction)
         {
             instruction = default;
 
@@ -12778,7 +13132,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LnegInstruction();
+            instruction = new LnegInstruction(offset);
 
             return true;
         }
@@ -12788,7 +13142,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fneg' instruction.
     /// </summary>
-    public partial record struct FnegInstruction()
+    public partial record struct FnegInstruction(int Offset)
     {
     
         /// <summary>
@@ -12801,10 +13155,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12825,23 +13180,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FnegInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FnegInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FnegInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FnegInstruction instruction)
         {
             instruction = default;
 
@@ -12854,7 +13211,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FnegInstruction();
+            instruction = new FnegInstruction(offset);
 
             return true;
         }
@@ -12864,7 +13221,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dneg' instruction.
     /// </summary>
-    public partial record struct DnegInstruction()
+    public partial record struct DnegInstruction(int Offset)
     {
     
         /// <summary>
@@ -12877,10 +13234,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12901,23 +13259,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DnegInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DnegInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DnegInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DnegInstruction instruction)
         {
             instruction = default;
 
@@ -12930,7 +13290,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DnegInstruction();
+            instruction = new DnegInstruction(offset);
 
             return true;
         }
@@ -12940,7 +13300,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ishl' instruction.
     /// </summary>
-    public partial record struct IshlInstruction()
+    public partial record struct IshlInstruction(int Offset)
     {
     
         /// <summary>
@@ -12953,10 +13313,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -12977,23 +13338,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IshlInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IshlInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IshlInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IshlInstruction instruction)
         {
             instruction = default;
 
@@ -13006,7 +13369,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IshlInstruction();
+            instruction = new IshlInstruction(offset);
 
             return true;
         }
@@ -13016,7 +13379,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lshl' instruction.
     /// </summary>
-    public partial record struct LshlInstruction()
+    public partial record struct LshlInstruction(int Offset)
     {
     
         /// <summary>
@@ -13029,10 +13392,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13053,23 +13417,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LshlInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LshlInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LshlInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LshlInstruction instruction)
         {
             instruction = default;
 
@@ -13082,7 +13448,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LshlInstruction();
+            instruction = new LshlInstruction(offset);
 
             return true;
         }
@@ -13092,7 +13458,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ishr' instruction.
     /// </summary>
-    public partial record struct IshrInstruction()
+    public partial record struct IshrInstruction(int Offset)
     {
     
         /// <summary>
@@ -13105,10 +13471,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13129,23 +13496,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IshrInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IshrInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IshrInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IshrInstruction instruction)
         {
             instruction = default;
 
@@ -13158,7 +13527,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IshrInstruction();
+            instruction = new IshrInstruction(offset);
 
             return true;
         }
@@ -13168,7 +13537,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lshr' instruction.
     /// </summary>
-    public partial record struct LshrInstruction()
+    public partial record struct LshrInstruction(int Offset)
     {
     
         /// <summary>
@@ -13181,10 +13550,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13205,23 +13575,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LshrInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LshrInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LshrInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LshrInstruction instruction)
         {
             instruction = default;
 
@@ -13234,7 +13606,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LshrInstruction();
+            instruction = new LshrInstruction(offset);
 
             return true;
         }
@@ -13244,7 +13616,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iushr' instruction.
     /// </summary>
-    public partial record struct IushrInstruction()
+    public partial record struct IushrInstruction(int Offset)
     {
     
         /// <summary>
@@ -13257,10 +13629,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13281,23 +13654,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IushrInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IushrInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IushrInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IushrInstruction instruction)
         {
             instruction = default;
 
@@ -13310,7 +13685,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IushrInstruction();
+            instruction = new IushrInstruction(offset);
 
             return true;
         }
@@ -13320,7 +13695,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lushr' instruction.
     /// </summary>
-    public partial record struct LushrInstruction()
+    public partial record struct LushrInstruction(int Offset)
     {
     
         /// <summary>
@@ -13333,10 +13708,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13357,23 +13733,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LushrInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LushrInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LushrInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LushrInstruction instruction)
         {
             instruction = default;
 
@@ -13386,7 +13764,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LushrInstruction();
+            instruction = new LushrInstruction(offset);
 
             return true;
         }
@@ -13396,7 +13774,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iand' instruction.
     /// </summary>
-    public partial record struct IandInstruction()
+    public partial record struct IandInstruction(int Offset)
     {
     
         /// <summary>
@@ -13409,10 +13787,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13433,23 +13812,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IandInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IandInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IandInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IandInstruction instruction)
         {
             instruction = default;
 
@@ -13462,7 +13843,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IandInstruction();
+            instruction = new IandInstruction(offset);
 
             return true;
         }
@@ -13472,7 +13853,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'land' instruction.
     /// </summary>
-    public partial record struct LandInstruction()
+    public partial record struct LandInstruction(int Offset)
     {
     
         /// <summary>
@@ -13485,10 +13866,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13509,23 +13891,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LandInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LandInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LandInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LandInstruction instruction)
         {
             instruction = default;
 
@@ -13538,7 +13922,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LandInstruction();
+            instruction = new LandInstruction(offset);
 
             return true;
         }
@@ -13548,7 +13932,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ior' instruction.
     /// </summary>
-    public partial record struct IorInstruction()
+    public partial record struct IorInstruction(int Offset)
     {
     
         /// <summary>
@@ -13561,10 +13945,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13585,23 +13970,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IorInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IorInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IorInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IorInstruction instruction)
         {
             instruction = default;
 
@@ -13614,7 +14001,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IorInstruction();
+            instruction = new IorInstruction(offset);
 
             return true;
         }
@@ -13624,7 +14011,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lor' instruction.
     /// </summary>
-    public partial record struct LorInstruction()
+    public partial record struct LorInstruction(int Offset)
     {
     
         /// <summary>
@@ -13637,10 +14024,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13661,23 +14049,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LorInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LorInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LorInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LorInstruction instruction)
         {
             instruction = default;
 
@@ -13690,7 +14080,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LorInstruction();
+            instruction = new LorInstruction(offset);
 
             return true;
         }
@@ -13700,7 +14090,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ixor' instruction.
     /// </summary>
-    public partial record struct IxorInstruction()
+    public partial record struct IxorInstruction(int Offset)
     {
     
         /// <summary>
@@ -13713,10 +14103,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13737,23 +14128,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IxorInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IxorInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IxorInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IxorInstruction instruction)
         {
             instruction = default;
 
@@ -13766,7 +14159,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IxorInstruction();
+            instruction = new IxorInstruction(offset);
 
             return true;
         }
@@ -13776,7 +14169,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lxor' instruction.
     /// </summary>
-    public partial record struct LxorInstruction()
+    public partial record struct LxorInstruction(int Offset)
     {
     
         /// <summary>
@@ -13789,10 +14182,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13813,23 +14207,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LxorInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LxorInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LxorInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LxorInstruction instruction)
         {
             instruction = default;
 
@@ -13842,7 +14238,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LxorInstruction();
+            instruction = new LxorInstruction(offset);
 
             return true;
         }
@@ -13854,7 +14250,7 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     /// <param name="Local"></param>
     /// <param name="Value"></param>
-    public partial record struct IincInstruction(ushort Local, short Value)
+    public partial record struct IincInstruction(int Offset, ushort Local, short Value)
     {
     
         /// <summary>
@@ -13867,10 +14263,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -13912,23 +14309,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IincInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IincInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IincInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IincInstruction instruction)
         {
             instruction = default;
 
@@ -13949,7 +14348,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadS2(ref reader, out var value) == false)
                     return false;
 
-                instruction = new IincInstruction(local, value);
+                instruction = new IincInstruction(offset, local, value);
             }
             else
             {
@@ -13962,7 +14361,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadS1(ref reader, out var value) == false)
                     return false;
 
-                instruction = new IincInstruction(local, value);
+                instruction = new IincInstruction(offset, local, value);
             }
 
             return true;
@@ -13979,7 +14378,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2l' instruction.
     /// </summary>
-    public partial record struct I2lInstruction()
+    public partial record struct I2lInstruction(int Offset)
     {
     
         /// <summary>
@@ -13992,10 +14391,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14016,23 +14416,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out I2lInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out I2lInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out I2lInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out I2lInstruction instruction)
         {
             instruction = default;
 
@@ -14045,7 +14447,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new I2lInstruction();
+            instruction = new I2lInstruction(offset);
 
             return true;
         }
@@ -14055,7 +14457,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2f' instruction.
     /// </summary>
-    public partial record struct I2fInstruction()
+    public partial record struct I2fInstruction(int Offset)
     {
     
         /// <summary>
@@ -14068,10 +14470,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14092,23 +14495,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out I2fInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out I2fInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out I2fInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out I2fInstruction instruction)
         {
             instruction = default;
 
@@ -14121,7 +14526,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new I2fInstruction();
+            instruction = new I2fInstruction(offset);
 
             return true;
         }
@@ -14131,7 +14536,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2d' instruction.
     /// </summary>
-    public partial record struct I2dInstruction()
+    public partial record struct I2dInstruction(int Offset)
     {
     
         /// <summary>
@@ -14144,10 +14549,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14168,23 +14574,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out I2dInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out I2dInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out I2dInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out I2dInstruction instruction)
         {
             instruction = default;
 
@@ -14197,7 +14605,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new I2dInstruction();
+            instruction = new I2dInstruction(offset);
 
             return true;
         }
@@ -14207,7 +14615,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'l2i' instruction.
     /// </summary>
-    public partial record struct L2iInstruction()
+    public partial record struct L2iInstruction(int Offset)
     {
     
         /// <summary>
@@ -14220,10 +14628,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14244,23 +14653,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out L2iInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out L2iInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out L2iInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out L2iInstruction instruction)
         {
             instruction = default;
 
@@ -14273,7 +14684,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new L2iInstruction();
+            instruction = new L2iInstruction(offset);
 
             return true;
         }
@@ -14283,7 +14694,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'l2f' instruction.
     /// </summary>
-    public partial record struct L2fInstruction()
+    public partial record struct L2fInstruction(int Offset)
     {
     
         /// <summary>
@@ -14296,10 +14707,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14320,23 +14732,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out L2fInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out L2fInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out L2fInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out L2fInstruction instruction)
         {
             instruction = default;
 
@@ -14349,7 +14763,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new L2fInstruction();
+            instruction = new L2fInstruction(offset);
 
             return true;
         }
@@ -14359,7 +14773,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'l2d' instruction.
     /// </summary>
-    public partial record struct L2dInstruction()
+    public partial record struct L2dInstruction(int Offset)
     {
     
         /// <summary>
@@ -14372,10 +14786,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14396,23 +14811,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out L2dInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out L2dInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out L2dInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out L2dInstruction instruction)
         {
             instruction = default;
 
@@ -14425,7 +14842,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new L2dInstruction();
+            instruction = new L2dInstruction(offset);
 
             return true;
         }
@@ -14435,7 +14852,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'f2i' instruction.
     /// </summary>
-    public partial record struct F2iInstruction()
+    public partial record struct F2iInstruction(int Offset)
     {
     
         /// <summary>
@@ -14448,10 +14865,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14472,23 +14890,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out F2iInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out F2iInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out F2iInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out F2iInstruction instruction)
         {
             instruction = default;
 
@@ -14501,7 +14921,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new F2iInstruction();
+            instruction = new F2iInstruction(offset);
 
             return true;
         }
@@ -14511,7 +14931,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'f2l' instruction.
     /// </summary>
-    public partial record struct F2lInstruction()
+    public partial record struct F2lInstruction(int Offset)
     {
     
         /// <summary>
@@ -14524,10 +14944,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14548,23 +14969,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out F2lInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out F2lInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out F2lInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out F2lInstruction instruction)
         {
             instruction = default;
 
@@ -14577,7 +15000,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new F2lInstruction();
+            instruction = new F2lInstruction(offset);
 
             return true;
         }
@@ -14587,7 +15010,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'f2d' instruction.
     /// </summary>
-    public partial record struct F2dInstruction()
+    public partial record struct F2dInstruction(int Offset)
     {
     
         /// <summary>
@@ -14600,10 +15023,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14624,23 +15048,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out F2dInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out F2dInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out F2dInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out F2dInstruction instruction)
         {
             instruction = default;
 
@@ -14653,7 +15079,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new F2dInstruction();
+            instruction = new F2dInstruction(offset);
 
             return true;
         }
@@ -14663,7 +15089,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'd2i' instruction.
     /// </summary>
-    public partial record struct D2iInstruction()
+    public partial record struct D2iInstruction(int Offset)
     {
     
         /// <summary>
@@ -14676,10 +15102,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14700,23 +15127,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out D2iInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out D2iInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out D2iInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out D2iInstruction instruction)
         {
             instruction = default;
 
@@ -14729,7 +15158,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new D2iInstruction();
+            instruction = new D2iInstruction(offset);
 
             return true;
         }
@@ -14739,7 +15168,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'd2l' instruction.
     /// </summary>
-    public partial record struct D2lInstruction()
+    public partial record struct D2lInstruction(int Offset)
     {
     
         /// <summary>
@@ -14752,10 +15181,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14776,23 +15206,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out D2lInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out D2lInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out D2lInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out D2lInstruction instruction)
         {
             instruction = default;
 
@@ -14805,7 +15237,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new D2lInstruction();
+            instruction = new D2lInstruction(offset);
 
             return true;
         }
@@ -14815,7 +15247,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'd2f' instruction.
     /// </summary>
-    public partial record struct D2fInstruction()
+    public partial record struct D2fInstruction(int Offset)
     {
     
         /// <summary>
@@ -14828,10 +15260,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14852,23 +15285,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out D2fInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out D2fInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out D2fInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out D2fInstruction instruction)
         {
             instruction = default;
 
@@ -14881,7 +15316,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new D2fInstruction();
+            instruction = new D2fInstruction(offset);
 
             return true;
         }
@@ -14891,7 +15326,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2b' instruction.
     /// </summary>
-    public partial record struct I2bInstruction()
+    public partial record struct I2bInstruction(int Offset)
     {
     
         /// <summary>
@@ -14904,10 +15339,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -14928,23 +15364,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out I2bInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out I2bInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out I2bInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out I2bInstruction instruction)
         {
             instruction = default;
 
@@ -14957,7 +15395,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new I2bInstruction();
+            instruction = new I2bInstruction(offset);
 
             return true;
         }
@@ -14967,7 +15405,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2c' instruction.
     /// </summary>
-    public partial record struct I2cInstruction()
+    public partial record struct I2cInstruction(int Offset)
     {
     
         /// <summary>
@@ -14980,10 +15418,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15004,23 +15443,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out I2cInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out I2cInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out I2cInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out I2cInstruction instruction)
         {
             instruction = default;
 
@@ -15033,7 +15474,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new I2cInstruction();
+            instruction = new I2cInstruction(offset);
 
             return true;
         }
@@ -15043,7 +15484,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2s' instruction.
     /// </summary>
-    public partial record struct I2sInstruction()
+    public partial record struct I2sInstruction(int Offset)
     {
     
         /// <summary>
@@ -15056,10 +15497,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15080,23 +15522,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out I2sInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out I2sInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out I2sInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out I2sInstruction instruction)
         {
             instruction = default;
 
@@ -15109,7 +15553,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new I2sInstruction();
+            instruction = new I2sInstruction(offset);
 
             return true;
         }
@@ -15119,7 +15563,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lcmp' instruction.
     /// </summary>
-    public partial record struct LcmpInstruction()
+    public partial record struct LcmpInstruction(int Offset)
     {
     
         /// <summary>
@@ -15132,10 +15576,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15156,23 +15601,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LcmpInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LcmpInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LcmpInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LcmpInstruction instruction)
         {
             instruction = default;
 
@@ -15185,7 +15632,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LcmpInstruction();
+            instruction = new LcmpInstruction(offset);
 
             return true;
         }
@@ -15195,7 +15642,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fcmpl' instruction.
     /// </summary>
-    public partial record struct FcmplInstruction()
+    public partial record struct FcmplInstruction(int Offset)
     {
     
         /// <summary>
@@ -15208,10 +15655,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15232,23 +15680,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FcmplInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FcmplInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FcmplInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FcmplInstruction instruction)
         {
             instruction = default;
 
@@ -15261,7 +15711,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FcmplInstruction();
+            instruction = new FcmplInstruction(offset);
 
             return true;
         }
@@ -15271,7 +15721,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fcmpg' instruction.
     /// </summary>
-    public partial record struct FcmpgInstruction()
+    public partial record struct FcmpgInstruction(int Offset)
     {
     
         /// <summary>
@@ -15284,10 +15734,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15308,23 +15759,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FcmpgInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FcmpgInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FcmpgInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FcmpgInstruction instruction)
         {
             instruction = default;
 
@@ -15337,7 +15790,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FcmpgInstruction();
+            instruction = new FcmpgInstruction(offset);
 
             return true;
         }
@@ -15347,7 +15800,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dcmpl' instruction.
     /// </summary>
-    public partial record struct DcmplInstruction()
+    public partial record struct DcmplInstruction(int Offset)
     {
     
         /// <summary>
@@ -15360,10 +15813,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15384,23 +15838,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DcmplInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DcmplInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DcmplInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DcmplInstruction instruction)
         {
             instruction = default;
 
@@ -15413,7 +15869,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DcmplInstruction();
+            instruction = new DcmplInstruction(offset);
 
             return true;
         }
@@ -15423,7 +15879,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dcmpg' instruction.
     /// </summary>
-    public partial record struct DcmpgInstruction()
+    public partial record struct DcmpgInstruction(int Offset)
     {
     
         /// <summary>
@@ -15436,10 +15892,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15460,23 +15917,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DcmpgInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DcmpgInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DcmpgInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DcmpgInstruction instruction)
         {
             instruction = default;
 
@@ -15489,7 +15948,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DcmpgInstruction();
+            instruction = new DcmpgInstruction(offset);
 
             return true;
         }
@@ -15500,7 +15959,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ifeq' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfeqInstruction(short Target)
+    public partial record struct IfeqInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -15513,10 +15972,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15541,23 +16001,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfeqInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfeqInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfeqInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfeqInstruction instruction)
         {
             instruction = default;
 
@@ -15574,7 +16036,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfeqInstruction(target);
+            instruction = new IfeqInstruction(offset, target);
 
             return true;
         }
@@ -15588,7 +16050,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ifne' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfneInstruction(short Target)
+    public partial record struct IfneInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -15601,10 +16063,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15629,23 +16092,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfneInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfneInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfneInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfneInstruction instruction)
         {
             instruction = default;
 
@@ -15662,7 +16127,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfneInstruction(target);
+            instruction = new IfneInstruction(offset, target);
 
             return true;
         }
@@ -15676,7 +16141,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'iflt' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfltInstruction(short Target)
+    public partial record struct IfltInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -15689,10 +16154,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15717,23 +16183,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfltInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfltInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfltInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfltInstruction instruction)
         {
             instruction = default;
 
@@ -15750,7 +16218,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfltInstruction(target);
+            instruction = new IfltInstruction(offset, target);
 
             return true;
         }
@@ -15764,7 +16232,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ifge' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfgeInstruction(short Target)
+    public partial record struct IfgeInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -15777,10 +16245,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15805,23 +16274,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfgeInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfgeInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfgeInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfgeInstruction instruction)
         {
             instruction = default;
 
@@ -15838,7 +16309,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfgeInstruction(target);
+            instruction = new IfgeInstruction(offset, target);
 
             return true;
         }
@@ -15852,7 +16323,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ifgt' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfgtInstruction(short Target)
+    public partial record struct IfgtInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -15865,10 +16336,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15893,23 +16365,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfgtInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfgtInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfgtInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfgtInstruction instruction)
         {
             instruction = default;
 
@@ -15926,7 +16400,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfgtInstruction(target);
+            instruction = new IfgtInstruction(offset, target);
 
             return true;
         }
@@ -15940,7 +16414,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ifle' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfleInstruction(short Target)
+    public partial record struct IfleInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -15953,10 +16427,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -15981,23 +16456,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfleInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfleInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfleInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfleInstruction instruction)
         {
             instruction = default;
 
@@ -16014,7 +16491,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfleInstruction(target);
+            instruction = new IfleInstruction(offset, target);
 
             return true;
         }
@@ -16028,7 +16505,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'if_icmpeq' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfIcmpeqInstruction(short Target)
+    public partial record struct IfIcmpeqInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16041,10 +16518,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16069,23 +16547,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfIcmpeqInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfIcmpeqInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfIcmpeqInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfIcmpeqInstruction instruction)
         {
             instruction = default;
 
@@ -16102,7 +16582,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfIcmpeqInstruction(target);
+            instruction = new IfIcmpeqInstruction(offset, target);
 
             return true;
         }
@@ -16116,7 +16596,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'if_icmpne' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfIcmpneInstruction(short Target)
+    public partial record struct IfIcmpneInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16129,10 +16609,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16157,23 +16638,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfIcmpneInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfIcmpneInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfIcmpneInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfIcmpneInstruction instruction)
         {
             instruction = default;
 
@@ -16190,7 +16673,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfIcmpneInstruction(target);
+            instruction = new IfIcmpneInstruction(offset, target);
 
             return true;
         }
@@ -16204,7 +16687,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'if_icmplt' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfIcmpltInstruction(short Target)
+    public partial record struct IfIcmpltInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16217,10 +16700,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16245,23 +16729,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfIcmpltInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfIcmpltInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfIcmpltInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfIcmpltInstruction instruction)
         {
             instruction = default;
 
@@ -16278,7 +16764,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfIcmpltInstruction(target);
+            instruction = new IfIcmpltInstruction(offset, target);
 
             return true;
         }
@@ -16292,7 +16778,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'if_icmpge' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfIcmpgeInstruction(short Target)
+    public partial record struct IfIcmpgeInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16305,10 +16791,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16333,23 +16820,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfIcmpgeInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfIcmpgeInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfIcmpgeInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfIcmpgeInstruction instruction)
         {
             instruction = default;
 
@@ -16366,7 +16855,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfIcmpgeInstruction(target);
+            instruction = new IfIcmpgeInstruction(offset, target);
 
             return true;
         }
@@ -16380,7 +16869,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'if_icmpgt' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfIcmpgtInstruction(short Target)
+    public partial record struct IfIcmpgtInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16393,10 +16882,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16421,23 +16911,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfIcmpgtInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfIcmpgtInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfIcmpgtInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfIcmpgtInstruction instruction)
         {
             instruction = default;
 
@@ -16454,7 +16946,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfIcmpgtInstruction(target);
+            instruction = new IfIcmpgtInstruction(offset, target);
 
             return true;
         }
@@ -16468,7 +16960,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'if_icmple' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfIcmpleInstruction(short Target)
+    public partial record struct IfIcmpleInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16481,10 +16973,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16509,23 +17002,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfIcmpleInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfIcmpleInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfIcmpleInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfIcmpleInstruction instruction)
         {
             instruction = default;
 
@@ -16542,7 +17037,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfIcmpleInstruction(target);
+            instruction = new IfIcmpleInstruction(offset, target);
 
             return true;
         }
@@ -16556,7 +17051,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'if_acmpeq' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfAcmpeqInstruction(short Target)
+    public partial record struct IfAcmpeqInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16569,10 +17064,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16597,23 +17093,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfAcmpeqInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfAcmpeqInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfAcmpeqInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfAcmpeqInstruction instruction)
         {
             instruction = default;
 
@@ -16630,7 +17128,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfAcmpeqInstruction(target);
+            instruction = new IfAcmpeqInstruction(offset, target);
 
             return true;
         }
@@ -16644,7 +17142,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'if_acmpne' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfAcmpneInstruction(short Target)
+    public partial record struct IfAcmpneInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16657,10 +17155,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16685,23 +17184,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfAcmpneInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfAcmpneInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfAcmpneInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfAcmpneInstruction instruction)
         {
             instruction = default;
 
@@ -16718,7 +17219,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfAcmpneInstruction(target);
+            instruction = new IfAcmpneInstruction(offset, target);
 
             return true;
         }
@@ -16732,7 +17233,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'goto' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct GotoInstruction(short Target)
+    public partial record struct GotoInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16745,10 +17246,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16773,23 +17275,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out GotoInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out GotoInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out GotoInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out GotoInstruction instruction)
         {
             instruction = default;
 
@@ -16806,7 +17310,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new GotoInstruction(target);
+            instruction = new GotoInstruction(offset, target);
 
             return true;
         }
@@ -16820,7 +17324,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'jsr' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct JsrInstruction(short Target)
+    public partial record struct JsrInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -16833,10 +17337,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16861,23 +17366,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out JsrInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out JsrInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out JsrInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out JsrInstruction instruction)
         {
             instruction = default;
 
@@ -16894,7 +17401,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new JsrInstruction(target);
+            instruction = new JsrInstruction(offset, target);
 
             return true;
         }
@@ -16908,7 +17415,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ret' instruction.
     /// </summary>
     /// <param name="Local"></param>
-    public partial record struct RetInstruction(ushort Local)
+    public partial record struct RetInstruction(int Offset, ushort Local)
     {
     
         /// <summary>
@@ -16921,10 +17428,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -16958,23 +17466,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out RetInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out RetInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out RetInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out RetInstruction instruction)
         {
             instruction = default;
 
@@ -16991,7 +17501,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL2(ref reader, out var local) == false)
                     return false;
 
-                instruction = new RetInstruction(local);
+                instruction = new RetInstruction(offset, local);
             }
             else
             {
@@ -17000,7 +17510,7 @@ namespace IKVM.ByteCode.Decoding
                 if (Instruction.TryReadL1(ref reader, out var local) == false)
                     return false;
 
-                instruction = new RetInstruction(local);
+                instruction = new RetInstruction(offset, local);
             }
 
             return true;
@@ -17014,7 +17524,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ireturn' instruction.
     /// </summary>
-    public partial record struct IreturnInstruction()
+    public partial record struct IreturnInstruction(int Offset)
     {
     
         /// <summary>
@@ -17027,10 +17537,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17051,23 +17562,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IreturnInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IreturnInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IreturnInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IreturnInstruction instruction)
         {
             instruction = default;
 
@@ -17080,7 +17593,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new IreturnInstruction();
+            instruction = new IreturnInstruction(offset);
 
             return true;
         }
@@ -17090,7 +17603,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lreturn' instruction.
     /// </summary>
-    public partial record struct LreturnInstruction()
+    public partial record struct LreturnInstruction(int Offset)
     {
     
         /// <summary>
@@ -17103,10 +17616,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17127,23 +17641,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out LreturnInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LreturnInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LreturnInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LreturnInstruction instruction)
         {
             instruction = default;
 
@@ -17156,7 +17672,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new LreturnInstruction();
+            instruction = new LreturnInstruction(offset);
 
             return true;
         }
@@ -17166,7 +17682,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'freturn' instruction.
     /// </summary>
-    public partial record struct FreturnInstruction()
+    public partial record struct FreturnInstruction(int Offset)
     {
     
         /// <summary>
@@ -17179,10 +17695,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17203,23 +17720,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out FreturnInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out FreturnInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out FreturnInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out FreturnInstruction instruction)
         {
             instruction = default;
 
@@ -17232,7 +17751,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new FreturnInstruction();
+            instruction = new FreturnInstruction(offset);
 
             return true;
         }
@@ -17242,7 +17761,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dreturn' instruction.
     /// </summary>
-    public partial record struct DreturnInstruction()
+    public partial record struct DreturnInstruction(int Offset)
     {
     
         /// <summary>
@@ -17255,10 +17774,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17279,23 +17799,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out DreturnInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out DreturnInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out DreturnInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out DreturnInstruction instruction)
         {
             instruction = default;
 
@@ -17308,7 +17830,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new DreturnInstruction();
+            instruction = new DreturnInstruction(offset);
 
             return true;
         }
@@ -17318,7 +17840,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'areturn' instruction.
     /// </summary>
-    public partial record struct AreturnInstruction()
+    public partial record struct AreturnInstruction(int Offset)
     {
     
         /// <summary>
@@ -17331,10 +17853,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17355,23 +17878,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out AreturnInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out AreturnInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out AreturnInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out AreturnInstruction instruction)
         {
             instruction = default;
 
@@ -17384,7 +17909,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new AreturnInstruction();
+            instruction = new AreturnInstruction(offset);
 
             return true;
         }
@@ -17394,7 +17919,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'return' instruction.
     /// </summary>
-    public partial record struct ReturnInstruction()
+    public partial record struct ReturnInstruction(int Offset)
     {
     
         /// <summary>
@@ -17407,10 +17932,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17431,23 +17957,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out ReturnInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out ReturnInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out ReturnInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out ReturnInstruction instruction)
         {
             instruction = default;
 
@@ -17460,7 +17988,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new ReturnInstruction();
+            instruction = new ReturnInstruction(offset);
 
             return true;
         }
@@ -17471,7 +17999,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'getstatic' instruction.
     /// </summary>
     /// <param name="Field"></param>
-    public partial record struct GetStaticInstruction(ConstantHandle Field)
+    public partial record struct GetStaticInstruction(int Offset, ConstantHandle Field)
     {
     
         /// <summary>
@@ -17484,10 +18012,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17512,23 +18041,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out GetStaticInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out GetStaticInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out GetStaticInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out GetStaticInstruction instruction)
         {
             instruction = default;
 
@@ -17545,7 +18076,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var field) == false)
                 return false;
 
-            instruction = new GetStaticInstruction(field);
+            instruction = new GetStaticInstruction(offset, field);
 
             return true;
         }
@@ -17559,7 +18090,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'putstatic' instruction.
     /// </summary>
     /// <param name="Field"></param>
-    public partial record struct PutStaticInstruction(ConstantHandle Field)
+    public partial record struct PutStaticInstruction(int Offset, ConstantHandle Field)
     {
     
         /// <summary>
@@ -17572,10 +18103,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17600,23 +18132,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out PutStaticInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out PutStaticInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out PutStaticInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out PutStaticInstruction instruction)
         {
             instruction = default;
 
@@ -17633,7 +18167,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var field) == false)
                 return false;
 
-            instruction = new PutStaticInstruction(field);
+            instruction = new PutStaticInstruction(offset, field);
 
             return true;
         }
@@ -17647,7 +18181,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'getfield' instruction.
     /// </summary>
     /// <param name="Field"></param>
-    public partial record struct GetFieldInstruction(ConstantHandle Field)
+    public partial record struct GetFieldInstruction(int Offset, ConstantHandle Field)
     {
     
         /// <summary>
@@ -17660,10 +18194,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17688,23 +18223,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out GetFieldInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out GetFieldInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out GetFieldInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out GetFieldInstruction instruction)
         {
             instruction = default;
 
@@ -17721,7 +18258,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var field) == false)
                 return false;
 
-            instruction = new GetFieldInstruction(field);
+            instruction = new GetFieldInstruction(offset, field);
 
             return true;
         }
@@ -17735,7 +18272,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'putfield' instruction.
     /// </summary>
     /// <param name="Field"></param>
-    public partial record struct PutFieldInstruction(ConstantHandle Field)
+    public partial record struct PutFieldInstruction(int Offset, ConstantHandle Field)
     {
     
         /// <summary>
@@ -17748,10 +18285,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17776,23 +18314,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out PutFieldInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out PutFieldInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out PutFieldInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out PutFieldInstruction instruction)
         {
             instruction = default;
 
@@ -17809,7 +18349,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var field) == false)
                 return false;
 
-            instruction = new PutFieldInstruction(field);
+            instruction = new PutFieldInstruction(offset, field);
 
             return true;
         }
@@ -17823,7 +18363,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'invokevirtual' instruction.
     /// </summary>
     /// <param name="Method"></param>
-    public partial record struct InvokeVirtualInstruction(ConstantHandle Method)
+    public partial record struct InvokeVirtualInstruction(int Offset, ConstantHandle Method)
     {
     
         /// <summary>
@@ -17836,10 +18376,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17864,23 +18405,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out InvokeVirtualInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out InvokeVirtualInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out InvokeVirtualInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out InvokeVirtualInstruction instruction)
         {
             instruction = default;
 
@@ -17897,7 +18440,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var method) == false)
                 return false;
 
-            instruction = new InvokeVirtualInstruction(method);
+            instruction = new InvokeVirtualInstruction(offset, method);
 
             return true;
         }
@@ -17911,7 +18454,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'invokespecial' instruction.
     /// </summary>
     /// <param name="Method"></param>
-    public partial record struct InvokeSpecialInstruction(ConstantHandle Method)
+    public partial record struct InvokeSpecialInstruction(int Offset, ConstantHandle Method)
     {
     
         /// <summary>
@@ -17924,10 +18467,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -17952,23 +18496,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out InvokeSpecialInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out InvokeSpecialInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out InvokeSpecialInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out InvokeSpecialInstruction instruction)
         {
             instruction = default;
 
@@ -17985,7 +18531,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var method) == false)
                 return false;
 
-            instruction = new InvokeSpecialInstruction(method);
+            instruction = new InvokeSpecialInstruction(offset, method);
 
             return true;
         }
@@ -17999,7 +18545,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'invokestatic' instruction.
     /// </summary>
     /// <param name="Method"></param>
-    public partial record struct InvokeStaticInstruction(ConstantHandle Method)
+    public partial record struct InvokeStaticInstruction(int Offset, ConstantHandle Method)
     {
     
         /// <summary>
@@ -18012,10 +18558,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18040,23 +18587,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out InvokeStaticInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out InvokeStaticInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out InvokeStaticInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out InvokeStaticInstruction instruction)
         {
             instruction = default;
 
@@ -18073,7 +18622,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var method) == false)
                 return false;
 
-            instruction = new InvokeStaticInstruction(method);
+            instruction = new InvokeStaticInstruction(offset, method);
 
             return true;
         }
@@ -18089,7 +18638,7 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Method"></param>
     /// <param name="Count"></param>
     /// <param name="Zero"></param>
-    public partial record struct InvokeInterfaceInstruction(ConstantHandle Method, byte Count, byte Zero)
+    public partial record struct InvokeInterfaceInstruction(int Offset, ConstantHandle Method, byte Count, byte Zero)
     {
     
         /// <summary>
@@ -18102,10 +18651,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18138,23 +18688,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out InvokeInterfaceInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out InvokeInterfaceInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out InvokeInterfaceInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out InvokeInterfaceInstruction instruction)
         {
             instruction = default;
 
@@ -18179,7 +18731,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadU1(ref reader, out var zero) == false)
                 return false;
 
-            instruction = new InvokeInterfaceInstruction(method, count, zero);
+            instruction = new InvokeInterfaceInstruction(offset, method, count, zero);
 
             return true;
         }
@@ -18201,7 +18753,7 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Method"></param>
     /// <param name="Zero"></param>
     /// <param name="Zero2"></param>
-    public partial record struct InvokeDynamicInstruction(ConstantHandle Method, byte Zero, byte Zero2)
+    public partial record struct InvokeDynamicInstruction(int Offset, ConstantHandle Method, byte Zero, byte Zero2)
     {
     
         /// <summary>
@@ -18214,10 +18766,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18250,23 +18803,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out InvokeDynamicInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out InvokeDynamicInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out InvokeDynamicInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out InvokeDynamicInstruction instruction)
         {
             instruction = default;
 
@@ -18291,7 +18846,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadU1(ref reader, out var zero2) == false)
                 return false;
 
-            instruction = new InvokeDynamicInstruction(method, zero, zero2);
+            instruction = new InvokeDynamicInstruction(offset, method, zero, zero2);
 
             return true;
         }
@@ -18311,7 +18866,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'new' instruction.
     /// </summary>
     /// <param name="Constant"></param>
-    public partial record struct NewInstruction(ConstantHandle Constant)
+    public partial record struct NewInstruction(int Offset, ConstantHandle Constant)
     {
     
         /// <summary>
@@ -18324,10 +18879,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18352,23 +18908,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out NewInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out NewInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out NewInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out NewInstruction instruction)
         {
             instruction = default;
 
@@ -18385,7 +18943,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var constant) == false)
                 return false;
 
-            instruction = new NewInstruction(constant);
+            instruction = new NewInstruction(offset, constant);
 
             return true;
         }
@@ -18399,7 +18957,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'newarray' instruction.
     /// </summary>
     /// <param name="Value"></param>
-    public partial record struct NewarrayInstruction(byte Value)
+    public partial record struct NewarrayInstruction(int Offset, byte Value)
     {
     
         /// <summary>
@@ -18412,10 +18970,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18440,23 +18999,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out NewarrayInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out NewarrayInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out NewarrayInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out NewarrayInstruction instruction)
         {
             instruction = default;
 
@@ -18473,7 +19034,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadU1(ref reader, out var value) == false)
                 return false;
 
-            instruction = new NewarrayInstruction(value);
+            instruction = new NewarrayInstruction(offset, value);
 
             return true;
         }
@@ -18487,7 +19048,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'anewarray' instruction.
     /// </summary>
     /// <param name="Constant"></param>
-    public partial record struct AnewarrayInstruction(ConstantHandle Constant)
+    public partial record struct AnewarrayInstruction(int Offset, ConstantHandle Constant)
     {
     
         /// <summary>
@@ -18500,10 +19061,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18528,23 +19090,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out AnewarrayInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out AnewarrayInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out AnewarrayInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out AnewarrayInstruction instruction)
         {
             instruction = default;
 
@@ -18561,7 +19125,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var constant) == false)
                 return false;
 
-            instruction = new AnewarrayInstruction(constant);
+            instruction = new AnewarrayInstruction(offset, constant);
 
             return true;
         }
@@ -18574,7 +19138,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'arraylength' instruction.
     /// </summary>
-    public partial record struct ArraylengthInstruction()
+    public partial record struct ArraylengthInstruction(int Offset)
     {
     
         /// <summary>
@@ -18587,10 +19151,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18611,23 +19176,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out ArraylengthInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out ArraylengthInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out ArraylengthInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out ArraylengthInstruction instruction)
         {
             instruction = default;
 
@@ -18640,7 +19207,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new ArraylengthInstruction();
+            instruction = new ArraylengthInstruction(offset);
 
             return true;
         }
@@ -18650,7 +19217,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'athrow' instruction.
     /// </summary>
-    public partial record struct AthrowInstruction()
+    public partial record struct AthrowInstruction(int Offset)
     {
     
         /// <summary>
@@ -18663,10 +19230,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18687,23 +19255,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out AthrowInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out AthrowInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out AthrowInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out AthrowInstruction instruction)
         {
             instruction = default;
 
@@ -18716,7 +19286,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new AthrowInstruction();
+            instruction = new AthrowInstruction(offset);
 
             return true;
         }
@@ -18727,7 +19297,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'checkcast' instruction.
     /// </summary>
     /// <param name="Type"></param>
-    public partial record struct CheckcastInstruction(ConstantHandle Type)
+    public partial record struct CheckcastInstruction(int Offset, ConstantHandle Type)
     {
     
         /// <summary>
@@ -18740,10 +19310,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18768,23 +19339,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out CheckcastInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out CheckcastInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out CheckcastInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out CheckcastInstruction instruction)
         {
             instruction = default;
 
@@ -18801,7 +19374,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var type) == false)
                 return false;
 
-            instruction = new CheckcastInstruction(type);
+            instruction = new CheckcastInstruction(offset, type);
 
             return true;
         }
@@ -18815,7 +19388,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'instanceof' instruction.
     /// </summary>
     /// <param name="Type"></param>
-    public partial record struct InstanceOfInstruction(ConstantHandle Type)
+    public partial record struct InstanceOfInstruction(int Offset, ConstantHandle Type)
     {
     
         /// <summary>
@@ -18828,10 +19401,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18856,23 +19430,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out InstanceOfInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out InstanceOfInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out InstanceOfInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out InstanceOfInstruction instruction)
         {
             instruction = default;
 
@@ -18889,7 +19465,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadC2(ref reader, out var type) == false)
                 return false;
 
-            instruction = new InstanceOfInstruction(type);
+            instruction = new InstanceOfInstruction(offset, type);
 
             return true;
         }
@@ -18902,7 +19478,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'monitorenter' instruction.
     /// </summary>
-    public partial record struct MonitorEnterInstruction()
+    public partial record struct MonitorEnterInstruction(int Offset)
     {
     
         /// <summary>
@@ -18915,10 +19491,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -18939,23 +19516,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out MonitorEnterInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out MonitorEnterInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out MonitorEnterInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out MonitorEnterInstruction instruction)
         {
             instruction = default;
 
@@ -18968,7 +19547,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new MonitorEnterInstruction();
+            instruction = new MonitorEnterInstruction(offset);
 
             return true;
         }
@@ -18978,7 +19557,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'monitorexit' instruction.
     /// </summary>
-    public partial record struct MonitorExitInstruction()
+    public partial record struct MonitorExitInstruction(int Offset)
     {
     
         /// <summary>
@@ -18991,10 +19570,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -19015,23 +19595,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out MonitorExitInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out MonitorExitInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out MonitorExitInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out MonitorExitInstruction instruction)
         {
             instruction = default;
 
@@ -19044,7 +19626,7 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            instruction = new MonitorExitInstruction();
+            instruction = new MonitorExitInstruction(offset);
 
             return true;
         }
@@ -19056,7 +19638,7 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     /// <param name="Type"></param>
     /// <param name="Dimensions"></param>
-    public partial record struct MultianewarrayInstruction(ConstantHandle Type, byte Dimensions)
+    public partial record struct MultianewarrayInstruction(int Offset, ConstantHandle Type, byte Dimensions)
     {
     
         /// <summary>
@@ -19069,10 +19651,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -19101,23 +19684,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out MultianewarrayInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out MultianewarrayInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out MultianewarrayInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out MultianewarrayInstruction instruction)
         {
             instruction = default;
 
@@ -19138,7 +19723,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadU1(ref reader, out var dimensions) == false)
                 return false;
 
-            instruction = new MultianewarrayInstruction(type, dimensions);
+            instruction = new MultianewarrayInstruction(offset, type, dimensions);
 
             return true;
         }
@@ -19155,7 +19740,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ifnull' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfNullInstruction(short Target)
+    public partial record struct IfNullInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -19168,10 +19753,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -19196,23 +19782,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfNullInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfNullInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfNullInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfNullInstruction instruction)
         {
             instruction = default;
 
@@ -19229,7 +19817,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfNullInstruction(target);
+            instruction = new IfNullInstruction(offset, target);
 
             return true;
         }
@@ -19243,7 +19831,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'ifnonnull' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct IfNonNullInstruction(short Target)
+    public partial record struct IfNonNullInstruction(int Offset, short Target)
     {
     
         /// <summary>
@@ -19256,10 +19844,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -19284,23 +19873,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out IfNonNullInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out IfNonNullInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out IfNonNullInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out IfNonNullInstruction instruction)
         {
             instruction = default;
 
@@ -19317,7 +19908,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ2(ref reader, out var target) == false)
                 return false;
 
-            instruction = new IfNonNullInstruction(target);
+            instruction = new IfNonNullInstruction(offset, target);
 
             return true;
         }
@@ -19331,7 +19922,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'goto_w' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct GotoWInstruction(int Target)
+    public partial record struct GotoWInstruction(int Offset, int Target)
     {
     
         /// <summary>
@@ -19344,10 +19935,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -19372,23 +19964,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out GotoWInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out GotoWInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out GotoWInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out GotoWInstruction instruction)
         {
             instruction = default;
 
@@ -19405,7 +19999,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ4(ref reader, out var target) == false)
                 return false;
 
-            instruction = new GotoWInstruction(target);
+            instruction = new GotoWInstruction(offset, target);
 
             return true;
         }
@@ -19419,7 +20013,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes the 'jsr_w' instruction.
     /// </summary>
     /// <param name="Target"></param>
-    public partial record struct JsrWInstruction(int Target)
+    public partial record struct JsrWInstruction(int Offset, int Target)
     {
     
         /// <summary>
@@ -19432,10 +20026,11 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -19460,23 +20055,25 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out JsrWInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out JsrWInstruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out JsrWInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out JsrWInstruction instruction)
         {
             instruction = default;
 
@@ -19493,7 +20090,7 @@ namespace IKVM.ByteCode.Decoding
             if (Instruction.TryReadJ4(ref reader, out var target) == false)
                 return false;
 
-            instruction = new JsrWInstruction(target);
+            instruction = new JsrWInstruction(offset, target);
 
             return true;
         }

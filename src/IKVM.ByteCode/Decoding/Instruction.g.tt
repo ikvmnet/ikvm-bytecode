@@ -28,7 +28,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasureInstruction(ref SequenceReader<byte> reader, OpCode opcode, ref int size)
+        internal static bool TryMeasureInstruction(ref SequenceReader<byte> reader, OpCode opcode, int offset, ref int size)
         {
             switch (opcode)
             {
@@ -43,7 +43,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     var args = i.Value.Args ?? [];
 #>
                 case OpCode.<#= name #>:
-                    return <#= name #>Instruction.TryMeasure(ref reader, ref size);
+                    return <#= name #>Instruction.TryMeasure(ref reader, offset, ref size);
 <#
 }
 #>
@@ -71,7 +71,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
             if (OpCode != OpCode.<#= name #>)
                 throw new InvalidCastException($"Cannot convert instruction of opcode '{OpCode}' to '<#= name #>'.");
 
-            if (<#= name #>Instruction.TryRead(Data, out var instruction) == false)
+            if (<#= name #>Instruction.TryRead(Data, Offset, out var instruction) == false)
                 throw new InvalidCodeException("Unexpected end of data trying to read instruction.");
 
             return instruction;
@@ -121,10 +121,11 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// Attempts to measure this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
@@ -203,23 +204,25 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryRead(ReadOnlySequence<byte> data, out <#= name #>Instruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out <#= name #>Instruction instruction)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
         
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryRead(ref SequenceReader<byte> reader, out <#= name #>Instruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out <#= name #>Instruction instruction)
         {
             instruction = default;
 
@@ -404,6 +407,8 @@ static string BuildCtorArgList(InstructionArg[] args)
 {
     var s = new List<string>();
 
+    s.Add("int Offset");
+
     foreach (var arg in args)
         s.Add($"{GetTypeName(GetRealType(arg, true))} {arg.Name}");
         
@@ -413,6 +418,8 @@ static string BuildCtorArgList(InstructionArg[] args)
 static string BuildNewArgList(InstructionArg[] args)
 {
     var s = new List<string>();
+
+    s.Add("offset");
 
     foreach (var arg in args)
         s.Add(arg.Name.ToLower());

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Net.Http.Headers;
 
 using FluentAssertions;
 
@@ -142,6 +145,79 @@ namespace IKVM.ByteCode.Tests.Decoding
             inst1T.Cases[1].Key.Should().Be(2);
             inst1T.Cases[2].Target.Should().Be(inst2.Offset - inst1.Offset);
             inst1T.Cases[2].Key.Should().Be(3);
+        }
+
+        [TestMethod]
+        public void Foo()
+        {
+            foreach (var f in Directory.GetFiles(@"D:\ikvm\src\IKVM.Java\obj\Debug\net8.0\classes", "*.class", SearchOption.AllDirectories))
+            {
+                if (f != @"D:\ikvm\src\IKVM.Java\obj\Debug\net8.0\classes\com\sun\activation\registries\MailcapTokenizer.class")
+                    continue;
+
+                using var c = ClassFile.Read(f);
+
+                foreach (var m in c.Methods)
+                {
+                    var methodName = c.Constants.Get(m.Name).Value;
+                    if (methodName != "isSpecialChar")
+                        continue;
+
+                    var code = m.Attributes.FirstOrDefault(i => c.Constants.Get(i.Name).Value == AttributeName.Code);
+                    if (code.IsNotNil)
+                    {
+                        var d = new CodeDecoder(code.AsCode().Code);
+
+                        foreach (var i in d)
+                        {
+                            switch (i.OpCode)
+                            {
+                                case OpCode.TableSwitch:
+                                    i.AsTableSwitch();
+                                    break;
+                                case OpCode.GetStatic:
+                                    i.AsGetStatic();
+                                    break;
+                                case OpCode.Iconst0:
+                                    i.AsIconst0();
+                                    break;
+                                case OpCode.Anewarray:
+                                    i.AsAnewarray();
+                                    break;
+                                case OpCode.InvokeVirtual:
+                                    i.AsInvokeVirtual();
+                                    break;
+                                case OpCode.Areturn:
+                                    i.AsAreturn();
+                                    break;
+                                case OpCode.Checkcast:
+                                    i.AsCheckcast();
+                                    break;
+                                case OpCode.New:
+                                    i.AsNew();
+                                    break;
+                                case OpCode.Dup:
+                                    i.AsDup();
+                                    break;
+                                case OpCode.Athrow:
+                                    i.AsAthrow();
+                                    break;
+                                case OpCode.Aload0:
+                                    i.AsAload0();
+                                    break;
+                                case OpCode.InvokeSpecial:
+                                    i.AsInvokeSpecial();
+                                    break;
+                                case OpCode.Astore0:
+                                    i.AsAstore0();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
     }

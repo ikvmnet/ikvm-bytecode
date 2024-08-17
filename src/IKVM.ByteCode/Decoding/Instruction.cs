@@ -338,35 +338,37 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the instruction at the current position.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool TryMeasure(ref ReadOnlySequence<byte> data, ref int size)
+        public static bool TryMeasure(ref ReadOnlySequence<byte> data, int offset, ref int size)
         {
             var reader = new SequenceReader<byte>(data);
-            return TryMeasure(ref reader, ref size);
+            return TryMeasure(ref reader, offset, ref size);
         }
 
         /// <summary>
         /// Attempts to measure the instruction at the current position.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
             // peek at the opcode so we can determine which instruction to dispatch to
             if (TryPeekOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
 
             // dispatch to instruction
-            if (TryMeasureInstruction(ref reader, opcode, ref size) == false)
+            if (TryMeasureInstruction(ref reader, opcode, offset, ref size) == false)
                 throw new InvalidCodeException("End of data reached before completion of instruction.");
 
             return true;
@@ -376,6 +378,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the instruction at the current position.
         /// </summary>
         /// <param name="sequence"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
@@ -405,11 +408,11 @@ namespace IKVM.ByteCode.Decoding
 
             // first measure the size of the instruction
             int size = 0;
-            if (TryMeasure(ref reader, ref size) == false)
+            if (TryMeasure(ref reader, position, ref size) == false)
                 return false;
 
             // rewind and capture all of the instruction data
-            reader.Rewind(reader.Consumed - position);
+            reader.Rewind(size);
             if (reader.TryReadExact(size, out var data) == false)
                 return false;
 

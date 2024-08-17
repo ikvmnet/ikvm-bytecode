@@ -1,4 +1,5 @@
-﻿using System.Buffers;
+﻿using System;
+using System.Buffers;
 
 using IKVM.ByteCode.Buffers;
 
@@ -12,10 +13,14 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure the size of the instruction.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
+        internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
         {
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
                 return false;
 
@@ -28,13 +33,13 @@ namespace IKVM.ByteCode.Decoding
             // advance by opcode size
             size += 1;
 
-            // table structure is always aligned to 4 bytes
-            var p = (int)reader.Consumed;
-            if (reader.TryAlign(4) == false)
-                return false;
-
-            // how far we advanced
-            size += (int)reader.Consumed - p;
+            // table structure is always aligned to 4 bytes from the offset of this instruction
+            while ((offset + size) % 4 > 0)
+            {
+                size += 1;
+                if (reader.TryAdvance(1) == false)
+                    return false;
+            }
 
             // default label is always 4 bytes
             size += 4;
@@ -65,12 +70,16 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure the size of the instruction.
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
-        public static bool TryRead(ReadOnlySequence<byte> data, out TableSwitchInstruction instruction)
+        public static bool TryRead(ReadOnlySequence<byte> data, int offset, out TableSwitchInstruction instruction)
         {
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+
             var reader = new SequenceReader<byte>(data);
-            return TryRead(ref reader, out instruction);
+            return TryRead(ref reader, offset, out instruction);
         }
 
         /// <summary>
@@ -79,8 +88,11 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
-        internal static bool TryRead(ref SequenceReader<byte> reader, out TableSwitchInstruction instruction)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out TableSwitchInstruction instruction)
         {
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException(nameof(offset));
+
             instruction = default;
 
             if (Instruction.TryReadOpCode(ref reader, out var opcode, out var wide) == false)
@@ -92,10 +104,14 @@ namespace IKVM.ByteCode.Decoding
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
 
-            // table structure is always aligned to 4 bytes
-            var p = reader.Position;
-            if (reader.TryAlign(4) == false)
-                return false;
+            // table structure is always aligned to 4 bytes from the offset of this instruction
+            int size = 1;
+            while ((offset + size) % 4 > 0)
+            {
+                size += 1;
+                if (reader.TryAdvance(1) == false)
+                    return false;
+            }
 
             // default label is always 4 bytes
             if (reader.TryReadBigEndian(out int defaultTarget) == false)
@@ -113,10 +129,10 @@ namespace IKVM.ByteCode.Decoding
                 throw new InvalidCodeException("High cannot be less than low.");
 
             // low value is always 4 bytes
-            if (TableSwitchCaseTable.TryRead(ref reader, high - low + 1, out var matches) == false)
+            if (TableSwitchCaseTable.TryRead(ref reader, high - low + 1, out var cases) == false)
                 return false;
 
-            instruction = new TableSwitchInstruction(defaultTarget, low, high, matches);
+            instruction = new TableSwitchInstruction(defaultTarget, low, high, cases);
             return true;
         }
 
