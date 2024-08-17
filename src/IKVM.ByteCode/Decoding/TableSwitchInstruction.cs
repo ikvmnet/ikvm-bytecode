@@ -5,7 +5,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
-    public readonly record struct TableSwitchInstruction(int DefaultTarget, int Low, int High, TableSwitchMatchTable Matches)
+    public readonly record struct TableSwitchInstruction(int DefaultTarget, int Low, int High, TableSwitchCaseTable Cases)
     {
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace IKVM.ByteCode.Decoding
                 throw new InvalidCodeException("High cannot be less than low.");
 
             // size of resulting table
-            if (TableSwitchMatchTable.TryMeasure(ref reader, high - low + 1, ref size) == false)
+            if (TableSwitchCaseTable.TryMeasure(ref reader, high - low + 1, ref size) == false)
                 return false;
 
             return true;
@@ -113,7 +113,7 @@ namespace IKVM.ByteCode.Decoding
                 throw new InvalidCodeException("High cannot be less than low.");
 
             // low value is always 4 bytes
-            if (TableSwitchMatchTable.TryRead(ref reader, high - low + 1, out var matches) == false)
+            if (TableSwitchCaseTable.TryRead(ref reader, high - low + 1, out var matches) == false)
                 return false;
 
             instruction = new TableSwitchInstruction(defaultTarget, low, high, matches);
@@ -138,7 +138,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the table of matches.
         /// </summary>
-        public readonly TableSwitchMatchTable Matches = Matches;
+        public readonly TableSwitchCaseTable Cases = Cases;
 
     }
 

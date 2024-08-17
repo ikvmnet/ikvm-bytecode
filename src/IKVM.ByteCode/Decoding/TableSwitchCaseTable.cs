@@ -8,7 +8,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
-    public readonly struct TableSwitchMatchTable : IReadOnlyList<int>
+    public readonly struct TableSwitchCaseTable : IReadOnlyList<int>
     {
 
         public struct Enumerator : IEnumerator<int>
@@ -91,7 +91,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="matches"></param>
         /// <returns></returns>
-        internal static bool TryRead(ref SequenceReader<byte> reader, int count, out TableSwitchMatchTable matches)
+        internal static bool TryRead(ref SequenceReader<byte> reader, int count, out TableSwitchCaseTable matches)
         {
             matches = default;
 
@@ -100,11 +100,11 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadExact(l, out var data) == false)
                 return false;
 
-            matches = new TableSwitchMatchTable(data);
+            matches = new TableSwitchCaseTable(data);
             return true;
         }
 
-        public static readonly TableSwitchMatchTable Empty = new(ReadOnlySequence<byte>.Empty);
+        public static readonly TableSwitchCaseTable Empty = new(ReadOnlySequence<byte>.Empty);
 
         readonly ReadOnlySequence<byte> _data;
 
@@ -112,7 +112,7 @@ namespace IKVM.ByteCode.Decoding
         /// Initializes a new instance.
         /// </summary>
         /// <param name="data"></param>
-        internal TableSwitchMatchTable(ReadOnlySequence<byte> data)
+        internal TableSwitchCaseTable(ReadOnlySequence<byte> data)
         {
             _data = data;
         }

@@ -5,7 +5,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
-    public readonly record struct LookupSwitchMatch(int Key, int Target)
+    public readonly record struct LookupSwitchCase(int Key, int Target)
     {
 
         /// <summary>
@@ -14,7 +14,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="item"></param>
         /// <returns></returns>
-        internal static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchMatch item)
+        internal static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchCase item)
         {
             item = default;
 
@@ -24,7 +24,7 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadBigEndian(out int target) == false)
                 return false;
 
-            item = new LookupSwitchMatch(key, target);
+            item = new LookupSwitchCase(key, target);
             return true;
         }
 

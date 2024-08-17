@@ -89,7 +89,7 @@ namespace IKVM.ByteCode.Tests.Decoding
             inst1.OpCode.Should().Be(OpCode.TableSwitch);
             inst1.IsWide.Should().BeFalse();
             var inst1T = inst1.AsTableSwitch();
-            inst1T.Matches.Count.Should().Be(3);
+            inst1T.Cases.Count.Should().Be(3);
 
             inst1T.Low.Should().Be(1);
             inst1T.High.Should().Be(3);
@@ -100,9 +100,9 @@ namespace IKVM.ByteCode.Tests.Decoding
             var inst2T = inst2.AsReturn();
 
             inst1T.DefaultTarget.Should().Be(inst2.Offset - inst1.Offset);
-            inst1T.Matches[0].Should().Be(inst2.Offset - inst1.Offset);
-            inst1T.Matches[1].Should().Be(inst2.Offset - inst1.Offset);
-            inst1T.Matches[2].Should().Be(inst2.Offset - inst1.Offset);
+            inst1T.Cases[0].Should().Be(inst2.Offset - inst1.Offset);
+            inst1T.Cases[1].Should().Be(inst2.Offset - inst1.Offset);
+            inst1T.Cases[2].Should().Be(inst2.Offset - inst1.Offset);
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace IKVM.ByteCode.Tests.Decoding
             inst1.OpCode.Should().Be(OpCode.LookupSwitch);
             inst1.IsWide.Should().BeFalse();
             var inst1T = inst1.AsLookupSwitch();
-            inst1T.Matches.Count.Should().Be(3);
+            inst1T.Cases.Count.Should().Be(3);
 
             dec.TryReadNext(out var inst2).Should().BeTrue();
             inst2.OpCode.Should().Be(OpCode.Return);
@@ -136,12 +136,12 @@ namespace IKVM.ByteCode.Tests.Decoding
             var inst2T = inst2.AsReturn();
 
             inst1T.DefaultTarget.Should().Be(inst2.Offset - inst1.Offset);
-            inst1T.Matches[0].Target.Should().Be(inst2.Offset - inst1.Offset);
-            inst1T.Matches[0].Key.Should().Be(1);
-            inst1T.Matches[1].Target.Should().Be(inst2.Offset - inst1.Offset);
-            inst1T.Matches[1].Key.Should().Be(2);
-            inst1T.Matches[2].Target.Should().Be(inst2.Offset - inst1.Offset);
-            inst1T.Matches[2].Key.Should().Be(3);
+            inst1T.Cases[0].Target.Should().Be(inst2.Offset - inst1.Offset);
+            inst1T.Cases[0].Key.Should().Be(1);
+            inst1T.Cases[1].Target.Should().Be(inst2.Offset - inst1.Offset);
+            inst1T.Cases[1].Key.Should().Be(2);
+            inst1T.Cases[2].Target.Should().Be(inst2.Offset - inst1.Offset);
+            inst1T.Cases[2].Key.Should().Be(3);
         }
 
     }

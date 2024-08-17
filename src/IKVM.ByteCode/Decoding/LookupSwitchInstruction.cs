@@ -5,7 +5,7 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
-    public readonly record struct LookupSwitchInstruction(int DefaultTarget, LookupSwitchMatchTable Matches)
+    public readonly record struct LookupSwitchInstruction(int DefaultTarget, LookupSwitchCaseTable Cases)
     {
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             // npairs is always 4 bytes
-            if (LookupSwitchMatchTable.TryMeasure(ref reader, ref size) == false)
+            if (LookupSwitchCaseTable.TryMeasure(ref reader, ref size) == false)
                 return false;
 
             return true;
@@ -89,7 +89,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             // read matches into a table
-            if (LookupSwitchMatchTable.TryRead(ref reader, out var matches) == false)
+            if (LookupSwitchCaseTable.TryRead(ref reader, out var matches) == false)
                 return false;
 
             instruction = new LookupSwitchInstruction(defaultTarget, matches);
@@ -104,7 +104,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the match table.
         /// </summary>
-        public readonly LookupSwitchMatchTable Matches = Matches;
+        public readonly LookupSwitchCaseTable Cases = Cases;
 
     }
 
