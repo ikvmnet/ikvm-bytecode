@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Buffers;
+using System.Reflection.PortableExecutable;
 
 using IKVM.ByteCode.Buffers;
 
@@ -87,6 +88,21 @@ namespace IKVM.ByteCode.Decoding
         {
             return Instruction.Read(ref _data);
         }
+
+        /// <summary>
+        /// Gets the count of bytes in the reader.
+        /// </summary>
+        public readonly long Length => _data.Length;
+
+        /// <summary>
+        /// Gets the current position in the reader.
+        /// </summary>
+        public readonly SequencePosition Position => _data.Position;
+
+        /// <summary>
+        /// Gets the number of remaining bytes in the reader.
+        /// </summary>
+        public readonly long Remaining => _data.Remaining;
 
         /// <summary>
         /// Gets an enumerator over the frames.
