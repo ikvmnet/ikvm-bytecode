@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 
@@ -7,7 +6,7 @@ namespace IKVM.ByteCode.Encoding
 {
 
     /// <summary>
-    /// Encodes an 'element_value_pair_table' structure.
+    /// Encodes a table of 'element_value_pair' structures.
     /// </summary>
     public struct ElementValuePairTableEncoder
     {
