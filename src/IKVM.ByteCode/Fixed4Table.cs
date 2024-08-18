@@ -126,7 +126,7 @@ namespace IKVM.ByteCode
         /// <param name="index"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static ref readonly T GetItem(in Fixed4Table<T> table, int index)
+        public static ref T GetItem(ref Fixed4Table<T> table, int index)
         {
             if (index >= table.Count)
                 throw new ArgumentOutOfRangeException(nameof(index));
