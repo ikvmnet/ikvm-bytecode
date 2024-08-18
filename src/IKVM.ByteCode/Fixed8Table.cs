@@ -4,16 +4,16 @@ namespace IKVM.ByteCode
 {
 
     /// <summary>
-    /// Implements a table where the first 4 items do not require an array to be allocated.
+    /// Implements a table where the first 8 items do not require an array to be allocated.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal struct Fixed4Table<T>
+    internal struct Fixed8Table<T>
         where T : struct
     {
 
 #if NET8_0_OR_GREATER
 
-        [System.Runtime.CompilerServices.InlineArray(4)]
+        [System.Runtime.CompilerServices.InlineArray(8)]
         struct InlineArray
         {
 
@@ -29,6 +29,10 @@ namespace IKVM.ByteCode
         T _item2 = default;
         T _item3 = default;
         T _item4 = default;
+        T _item5 = default;
+        T _item6 = default;
+        T _item7 = default;
+        T _item8 = default;
 
 #endif
 
@@ -38,7 +42,7 @@ namespace IKVM.ByteCode
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        public Fixed4Table()
+        public Fixed8Table()
         {
 
         }
@@ -46,10 +50,10 @@ namespace IKVM.ByteCode
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        public Fixed4Table(int allocate)
+        public Fixed8Table(int allocate)
         {
-            if (allocate > 4)
-                _items = new T[allocate - 4];
+            if (allocate > 8)
+                _items = new T[allocate - 8];
         }
 
         /// <summary>
@@ -67,7 +71,7 @@ namespace IKVM.ByteCode
 
 #if NET8_0_OR_GREATER
 
-            if (count < 4)
+            if (count < 8)
             {
                 _item0[_count++] = item;
                 return;
@@ -103,13 +107,41 @@ namespace IKVM.ByteCode
                 return;
             }
 
+            if (count == 4)
+            {
+                _count = 5;
+                _item5 = item;
+                return;
+            }
+
+            if (count == 5)
+            {
+                _count = 6;
+                _item6 = item;
+                return;
+            }
+
+            if (count == 6)
+            {
+                _count = 7;
+                _item7 = item;
+                return;
+            }
+
+            if (count == 7)
+            {
+                _count = 8;
+                _item8 = item;
+                return;
+            }
+
 #endif
 
             _count++;
-            if (_count > _items.Length - 4)
+            if (_count > _items.Length - 8)
                 Array.Resize(ref _items, _items.Length + 8);
 
-            _items[count - 4] = item;
+            _items[count - 8] = item;
         }
 
         /// <summary>
@@ -126,14 +158,14 @@ namespace IKVM.ByteCode
         /// <param name="index"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static ref readonly T GetItem(in Fixed4Table<T> table, int index)
+        public static ref T GetItem(ref Fixed8Table<T> table, int index)
         {
             if (index >= table.Count)
                 throw new ArgumentOutOfRangeException(nameof(index));
 
 #if NET8_0_OR_GREATER
 
-            if (index < 4)
+            if (index < 8)
                 return ref table._item0[index];
 
 #else
@@ -146,10 +178,18 @@ namespace IKVM.ByteCode
                 return ref table._item3;
             if (index == 3)
                 return ref table._item4;
+            if (index == 4)
+                return ref table._item5;
+            if (index == 5)
+                return ref table._item6;
+            if (index == 6)
+                return ref table._item7;
+            if (index == 7)
+                return ref table._item8;
 
 #endif
 
-            return ref table._items[index - 4];
+            return ref table._items[index - 8];
         }
 
         /// <summary>
