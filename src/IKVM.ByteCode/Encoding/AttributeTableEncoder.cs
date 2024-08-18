@@ -143,7 +143,7 @@ namespace IKVM.ByteCode.Encoding
         /// <param name="code"></param>
         /// <param name="exceptions"></param>
         /// <param name="attributes"></param>
-        public AttributeTableEncoder Code(Utf8ConstantHandle attributeName, ushort maxStack, ushort maxLocals, BlobBuilder code, Action<ExceptionTableEncoder> exceptions, AttributeTableBuilder attributes)
+        public AttributeTableEncoder Code(Utf8ConstantHandle attributeName, ushort maxStack, ushort maxLocals, BlobBuilder code, Action<ExceptionTableEncoder> exceptions, AttributeTableBuilder attributes = null)
         {
             if (code is null)
                 throw new ArgumentNullException(nameof(code));

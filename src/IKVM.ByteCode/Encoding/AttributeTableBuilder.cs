@@ -184,9 +184,9 @@ namespace IKVM.ByteCode.Encoding
         /// <param name="code"></param>
         /// <param name="exceptions"></param>
         /// <param name="attributes"></param>
-        public AttributeTableBuilder Code(ushort maxStack, ushort maxLocals, BlobBuilder code, Action<ExceptionTableEncoder> exceptions, AttributeTableBuilder attributes)
+        public AttributeTableBuilder Code(ushort maxStack, ushort maxLocals, BlobBuilder code, Action<ExceptionTableEncoder> exceptions, AttributeTableBuilder? attributes = null)
         {
-            Encoder.Code(_constants.Get(AttributeName.Code), maxStack, maxLocals, code, exceptions, attributes);
+            Encoder.Code(_constants.Get(AttributeName.Code), maxStack, maxLocals, code, exceptions, attributes ?? new AttributeTableBuilder(_constants));
             return this;
         }
 
