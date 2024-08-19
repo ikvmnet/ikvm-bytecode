@@ -49,7 +49,7 @@ namespace IKVM.ByteCode.Tests.Encoding
         [TestMethod]
         public void CanEncodeUtf8Constant()
         {
-            var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
+            var cp = new ConstantBuilder(new ClassFormatVersion(48, 0));
             cp.AddUtf8("TEST").Slot.Should().Be(1);
 
             // output to array
@@ -75,9 +75,33 @@ namespace IKVM.ByteCode.Tests.Encoding
         }
 
         [TestMethod]
+        public void CanEncodeManyUtf8Constants()
+        {
+            var cp = new ConstantBuilder(new ClassFormatVersion(48, 0));
+            for (int i = 1; i < 1024; i++)
+                cp.AddUtf8("System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+
+            // output to array
+            var _blob = new BlobBuilder();
+            cp.Serialize(_blob);
+            var blob = _blob.ToArray();
+
+            // read constant pool
+            var rd = new ClassFormatReader(blob);
+            ConstantTable.TryRead(new ClassFormatVersion(48, 0), ref rd, out var o).Should().BeTrue();
+
+            for (int i = 1; i < 1024; i++)
+            {
+                var c = o.Get(new Utf8ConstantHandle((ushort)i));
+                c.Value.Should().Be("System.Runtime, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+            }
+
+        }
+
+        [TestMethod]
         public void ShouldNotEncodeDuplicateUtf8Values()
         {
-            var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
+            var cp = new ConstantBuilder(new ClassFormatVersion(48, 0));
             cp.GetOrAddUtf8("TEST").Slot.Should().Be(1);
             cp.GetOrAddUtf8("TEST").Slot.Should().Be(1);
 
@@ -97,7 +121,7 @@ namespace IKVM.ByteCode.Tests.Encoding
         [TestMethod]
         public void CanEncodeTwoDistinctUtf8Values()
         {
-            var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
+            var cp = new ConstantBuilder(new ClassFormatVersion(48, 0));
             cp.GetOrAddUtf8("TEST1").Slot.Should().Be(1);
             cp.GetOrAddUtf8("TEST2").Slot.Should().Be(2);
 
@@ -130,7 +154,7 @@ namespace IKVM.ByteCode.Tests.Encoding
         [TestMethod]
         public void CanEncodeIntegerConstant()
         {
-            var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
+            var cp = new ConstantBuilder(new ClassFormatVersion(48, 0));
             cp.AddInteger(65536).Slot.Should().Be(1);
 
             // output to array
@@ -151,7 +175,7 @@ namespace IKVM.ByteCode.Tests.Encoding
         [TestMethod]
         public unsafe void CanEncodeFloatConstant()
         {
-            var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
+            var cp = new ConstantBuilder(new ClassFormatVersion(48, 0));
             cp.AddFloat(float.MaxValue - 1).Slot.Should().Be(1);
 
             // output to array
@@ -176,7 +200,7 @@ namespace IKVM.ByteCode.Tests.Encoding
             var h = (uint)(v >> 32);
             var l = (uint)v;
 
-            var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
+            var cp = new ConstantBuilder(new ClassFormatVersion(48, 0));
             cp.AddLong(v).Slot.Should().Be(1);
 
             // output to array
@@ -203,7 +227,7 @@ namespace IKVM.ByteCode.Tests.Encoding
             var h = (uint)((*(long*)&v) >> 32);
             var l = (uint)(*(long*)&v);
 
-            var cp = new ConstantBuilder(new ClassFormatVersion(0, 48));
+            var cp = new ConstantBuilder(new ClassFormatVersion(48, 0));
             cp.AddDouble(v).Slot.Should().Be(1);
 
             // output to array
