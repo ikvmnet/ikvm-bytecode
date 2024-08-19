@@ -35,7 +35,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Gets the total number of written bytes.
         /// </summary>
-        public long Size => size;
+        public readonly long Size => size;
 
         /// <summary>
         /// Writes a value defined as a 'u1' in the class format specification.
