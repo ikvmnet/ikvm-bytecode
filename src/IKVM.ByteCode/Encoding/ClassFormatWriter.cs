@@ -14,9 +14,9 @@ namespace IKVM.ByteCode.Encoding
         public const int U2 = 2;
         public const int U4 = 4;
 
-        Span<byte> span;
-        Span<byte> next;
-        long size = 0;
+        Span<byte> _span;
+        Span<byte> _next;
+        long _size = 0;
 
         /// <summary>
         /// Initializes a new instance.
@@ -24,18 +24,18 @@ namespace IKVM.ByteCode.Encoding
         /// <param name="span"></param>
         public ClassFormatWriter(Span<byte> span)
         {
-            this.span = next = span;
+            _span = _next = span;
         }
 
         /// <summary>
         /// Gets the span being written to.
         /// </summary>
-        public readonly Span<byte> Span => span;
+        public readonly Span<byte> Span => _span;
 
         /// <summary>
         /// Gets the total number of written bytes.
         /// </summary>
-        public readonly long Size => size;
+        public readonly long Size => _size;
 
         /// <summary>
         /// Writes a value defined as a 'u1' in the class format specification.
@@ -44,12 +44,12 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public bool TryWriteU1(byte value)
         {
-            if (next.Length < sizeof(byte))
+            if (_next.Length < U1)
                 return false;
 
-            next[0] = value;
-            next = next.Slice(sizeof(byte));
-            size += sizeof(byte);
+            _next[0] = value;
+            _next = _next.Slice(U1);
+            _size += U1;
             return true;
         }
 
@@ -71,12 +71,12 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public bool TryWriteU2(ushort value)
         {
-            if (next.Length < sizeof(ushort))
+            if (_next.Length < U2)
                 return false;
 
-            BinaryPrimitives.WriteUInt16BigEndian(next, value);
-            next = next.Slice(sizeof(ushort));
-            size += sizeof(ushort);
+            BinaryPrimitives.WriteUInt16BigEndian(_next, value);
+            _next = _next.Slice(U2);
+            _size += U2;
             return true;
         }
 
@@ -98,12 +98,12 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public bool TryWriteU4(uint value)
         {
-            if (next.Length < sizeof(uint))
+            if (_next.Length < U4)
                 return false;
 
-            BinaryPrimitives.WriteUInt32BigEndian(next, value);
-            next = next.Slice(sizeof(uint));
-            size += sizeof(uint);
+            BinaryPrimitives.WriteUInt32BigEndian(_next, value);
+            _next = _next.Slice(U4);
+            _size += U4;
             return true;
         }
 
