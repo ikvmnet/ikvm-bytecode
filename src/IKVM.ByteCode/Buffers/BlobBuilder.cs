@@ -562,7 +562,8 @@ namespace IKVM.ByteCode.Buffers
             if (byteCount < 0)
                 throw new ArgumentOutOfRangeException(nameof(byteCount));
 
-            return new Blob(_buffer, ReserveBytesImpl(byteCount), byteCount);
+            var start = ReserveBytesImpl(byteCount);
+            return new Blob(_buffer, start, byteCount);
         }
 
         /// <summary>

@@ -70,8 +70,12 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             for (int i = 1; i < count; i++)
-                if (ConstantData.TryMeasure(ref reader, ref size) == false)
+            {
+                if (ConstantData.TryMeasure(ref reader, ref size, out var skip) == false)
                     return false;
+
+                i += skip;
+            }
 
             return true;
         }

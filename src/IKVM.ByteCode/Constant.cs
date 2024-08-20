@@ -16,7 +16,7 @@
 
         public static IntegerConstant Integer(byte value)
         {
-            return new IntegerConstant(value);
+            return new IntegerConstant(unchecked((sbyte)value));
         }
 
         public static IntegerConstant Integer(short value)

@@ -164,6 +164,16 @@ namespace IKVM.ByteCode.Encoding
             return Element(elementName, e => e.Annotation(annotationValue));
         }
 
+        /// <summary>
+        /// Denotes a "nested" annotation as the value of this element-value pair.
+        /// </summary>
+        /// <param name="elementName"></param>
+        /// <param name="annotationValue"></param>
+        public ElementValuePairTableEncoder Array(Utf8ConstantHandle elementName, Action<ElementValueTableEncoder> annotationValue)
+        {
+            return Element(elementName, e => e.Array(annotationValue));
+        }
+
     }
 
 }

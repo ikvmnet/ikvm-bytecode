@@ -56,8 +56,10 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadBigEndian(out int high) == false)
                 return false;
 
-            if (high < low)
-                throw new InvalidCodeException("High cannot be less than low.");
+            if (low > high)
+                throw new InvalidCodeException("Low cannot be greater than high.");
+            if (high > 16384L + low)
+                throw new InvalidCodeException("High exceeds maximum size.");
 
             // size of resulting table
             if (TableSwitchCaseTable.TryMeasure(ref reader, high - low + 1, ref size) == false)
@@ -125,8 +127,10 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadBigEndian(out int high) == false)
                 return false;
 
-            if (high < low)
-                throw new InvalidCodeException("High cannot be less than low.");
+            if (low > high)
+                throw new InvalidCodeException("Low cannot be greater than high.");
+            if (high > 16384L + low)
+                throw new InvalidCodeException("High exceeds maximum size.");
 
             // low value is always 4 bytes
             if (TableSwitchCaseTable.TryRead(ref reader, high - low + 1, out var cases) == false)

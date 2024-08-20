@@ -12,166 +12,168 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        internal static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        internal static bool TryMeasure(ref ClassFormatReader reader, ref int size, out int skip)
         {
+            skip = 0;
+
             size += ClassFormatReader.U1;
             if (reader.TryReadU1(out byte kind) == false)
                 return false;
 
             return (ConstantKind)kind switch
             {
-                ConstantKind.Utf8 => TryMeasureConstantUtf8(ref reader, ref size),
-                ConstantKind.Integer => TryMeasureConstantInteger(ref reader, ref size),
-                ConstantKind.Float => TryMeasureConstantFloat(ref reader, ref size),
-                ConstantKind.Long => TryMeasureConstantLong(ref reader, ref size),
-                ConstantKind.Double => TryMeasureConstantDouble(ref reader, ref size),
-                ConstantKind.Class => TryMeasureConstantClass(ref reader, ref size),
-                ConstantKind.String => TryMeasureConstantString(ref reader, ref size),
-                ConstantKind.Fieldref => TryMeasureConstantFieldref(ref reader, ref size),
-                ConstantKind.Methodref => TryMeasureConstantMethodref(ref reader, ref size),
-                ConstantKind.InterfaceMethodref => TryMeasureConstantInterfaceMethodref(ref reader, ref size),
-                ConstantKind.NameAndType => TryMeasureConstantNameAndType(ref reader, ref size),
-                ConstantKind.MethodHandle => TryMeasureConstantMethodHandle(ref reader, ref size),
-                ConstantKind.MethodType => TryMeasureConstantMethodType(ref reader, ref size),
-                ConstantKind.Dynamic => TryMeasureConstantDynamic(ref reader, ref size),
-                ConstantKind.InvokeDynamic => TryMeasureConstantInvokeDynamic(ref reader, ref size),
-                ConstantKind.Module => TryMeasureConstantModule(ref reader, ref size),
-                ConstantKind.Package => TryMeasureConstantPackage(ref reader, ref size),
+                ConstantKind.Utf8 => TryMeasureConstantUtf8(ref reader, ref size, out skip),
+                ConstantKind.Integer => TryMeasureConstantInteger(ref reader, ref size, out skip),
+                ConstantKind.Float => TryMeasureConstantFloat(ref reader, ref size, out skip),
+                ConstantKind.Long => TryMeasureConstantLong(ref reader, ref size, out skip),
+                ConstantKind.Double => TryMeasureConstantDouble(ref reader, ref size, out skip),
+                ConstantKind.Class => TryMeasureConstantClass(ref reader, ref size, out skip),
+                ConstantKind.String => TryMeasureConstantString(ref reader, ref size, out skip),
+                ConstantKind.Fieldref => TryMeasureConstantFieldref(ref reader, ref size, out skip),
+                ConstantKind.Methodref => TryMeasureConstantMethodref(ref reader, ref size, out skip),
+                ConstantKind.InterfaceMethodref => TryMeasureConstantInterfaceMethodref(ref reader, ref size, out skip),
+                ConstantKind.NameAndType => TryMeasureConstantNameAndType(ref reader, ref size, out skip),
+                ConstantKind.MethodHandle => TryMeasureConstantMethodHandle(ref reader, ref size, out skip),
+                ConstantKind.MethodType => TryMeasureConstantMethodType(ref reader, ref size, out skip),
+                ConstantKind.Dynamic => TryMeasureConstantDynamic(ref reader, ref size, out skip),
+                ConstantKind.InvokeDynamic => TryMeasureConstantInvokeDynamic(ref reader, ref size, out skip),
+                ConstantKind.Module => TryMeasureConstantModule(ref reader, ref size, out skip),
+                ConstantKind.Package => TryMeasureConstantPackage(ref reader, ref size, out skip),
                 _ => throw new ByteCodeException($"Constant kind is nil."),
             };
         }
 
-        static bool TryMeasureConstantUtf8(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantUtf8(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (Utf8ConstantData.TryMeasure(ref reader, ref size) == false)
+            if (Utf8ConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantInteger(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantInteger(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (IntegerConstantData.TryMeasure(ref reader, ref size) == false)
+            if (IntegerConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantFloat(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantFloat(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (FloatConstantData.TryMeasure(ref reader, ref size) == false)
+            if (FloatConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantLong(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantLong(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (LongConstantData.TryMeasure(ref reader, ref size) == false)
+            if (LongConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantDouble(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantDouble(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (DoubleConstantData.TryMeasure(ref reader, ref size) == false)
+            if (DoubleConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantClass(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantClass(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (ClassConstantData.TryMeasure(ref reader, ref size) == false)
+            if (ClassConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantString(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantString(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (StringConstantData.TryMeasure(ref reader, ref size) == false)
+            if (StringConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantFieldref(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantFieldref(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (FieldrefConstantData.TryMeasure(ref reader, ref size) == false)
+            if (FieldrefConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantMethodref(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantMethodref(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (MethodrefConstantData.TryMeasure(ref reader, ref size) == false)
+            if (MethodrefConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantInterfaceMethodref(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantInterfaceMethodref(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (InterfaceMethodrefConstantData.TryMeasure(ref reader, ref size) == false)
+            if (InterfaceMethodrefConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantNameAndType(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantNameAndType(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (NameAndTypeConstantData.TryMeasure(ref reader, ref size) == false)
+            if (NameAndTypeConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantMethodHandle(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantMethodHandle(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (MethodHandleConstantData.TryMeasure(ref reader, ref size) == false)
+            if (MethodHandleConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantMethodType(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantMethodType(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (MethodTypeConstantData.TryMeasure(ref reader, ref size) == false)
+            if (MethodTypeConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantDynamic(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantDynamic(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (DynamicConstantData.TryMeasure(ref reader, ref size) == false)
+            if (DynamicConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantInvokeDynamic(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantInvokeDynamic(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (InvokeDynamicConstantData.TryMeasure(ref reader, ref size) == false)
+            if (InvokeDynamicConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantModule(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantModule(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (ModuleConstantData.TryMeasure(ref reader, ref size) == false)
+            if (ModuleConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;
         }
 
-        static bool TryMeasureConstantPackage(ref ClassFormatReader reader, ref int size)
+        static bool TryMeasureConstantPackage(ref ClassFormatReader reader, ref int size, out int skip)
         {
-            if (PackageConstantData.TryMeasure(ref reader, ref size) == false)
+            if (PackageConstantData.TryMeasure(ref reader, ref size, out skip) == false)
                 return false;
 
             return true;

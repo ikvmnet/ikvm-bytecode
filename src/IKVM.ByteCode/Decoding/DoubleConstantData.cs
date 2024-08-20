@@ -14,8 +14,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="size"></param>
-        public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
+        /// <param name="skip"></param>
+        public static bool TryMeasure(ref ClassFormatReader reader, ref int size, out int skip)
         {
+            skip = 1;
+
             size += ClassFormatReader.U4 + ClassFormatReader.U4;
             if (reader.TryAdvance(ClassFormatReader.U4 + ClassFormatReader.U4) == false)
                 return false;

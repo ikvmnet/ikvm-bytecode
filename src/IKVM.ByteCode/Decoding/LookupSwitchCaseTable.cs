@@ -78,6 +78,9 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadBigEndian(out int npairs) == false)
                 return false;
 
+            if (npairs < 0 || npairs > 16384)
+                throw new InvalidCodeException("Number of conditions in lookupswitch is out of range.");
+
             var pairsSize = npairs * 8;
             size += pairsSize;
             if (reader.TryAdvance(pairsSize) == false)
@@ -98,6 +101,9 @@ namespace IKVM.ByteCode.Decoding
 
             if (reader.TryReadBigEndian(out int npairs) == false)
                 return false;
+
+            if (npairs < 0 || npairs > 16384)
+                throw new InvalidCodeException("Number of conditions in lookupswitch is out of range.");
 
             var pairsSize = npairs * 8;
             if (reader.TryReadExact(pairsSize, out var items) == false)

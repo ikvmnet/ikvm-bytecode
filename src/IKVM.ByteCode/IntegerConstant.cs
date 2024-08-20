@@ -38,7 +38,7 @@ namespace IKVM.ByteCode
             if (value.IsNil)
                 throw new NullReferenceException();
 
-            return (byte)value.Value;
+            return (byte)(sbyte)value.Value;
         }
 
         public static explicit operator short(IntegerConstant value)
