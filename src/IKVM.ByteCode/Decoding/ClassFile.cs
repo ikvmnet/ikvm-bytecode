@@ -323,6 +323,20 @@ namespace IKVM.ByteCode.Decoding
         /// Reads the class from the stream.
         /// </summary>
         /// <param name="stream"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ByteCodeException"></exception>
+        public static ValueTask<ClassFile> ReadAsync(Stream stream, CancellationToken cancellationToken = default)
+        {
+            return ReadAsync(stream, 1024, cancellationToken);
+        }
+
+        /// <summary>
+        /// Reads the class from the stream.
+        /// </summary>
+        /// <param name="stream"></param>
         /// <param name="bufferSize"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
@@ -364,7 +378,7 @@ namespace IKVM.ByteCode.Decoding
 
                 // no data was ever read
                 if (beg == null)
-                    throw new ByteCodeException("End of stream reached without class data.");
+                    throw new InvalidClassException("End of stream reached without class data.");
 
                 // attempt to read assembled sequence, using start of sequence as disposable
                 return Read(new ReadOnlySequence<byte>(beg, 0, end!, end!.Array.AsSpan().Length), beg);
@@ -380,7 +394,6 @@ namespace IKVM.ByteCode.Decoding
         /// Reads the next class from the stream.
         /// </summary>
         /// <param name="stream"></param>
-        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public static ClassFile Read(Stream stream)
         {
@@ -391,7 +404,7 @@ namespace IKVM.ByteCode.Decoding
         /// Reads the next class from the stream.
         /// </summary>
         /// <param name="stream"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="bufferSize"></param>
         /// <returns></returns>
         public static ClassFile Read(Stream stream, int bufferSize = 1024)
         {
@@ -428,7 +441,7 @@ namespace IKVM.ByteCode.Decoding
 
                 // no data was ever read
                 if (beg == null)
-                    throw new ByteCodeException("End of stream reached without class data.");
+                    throw new InvalidClassException("End of stream reached without class data.");
 
                 // attempt to read assembled sequence, using start of sequence as disposable
                 return Read(new ReadOnlySequence<byte>(beg, 0, end!, end!.Array.AsSpan().Length), beg);
