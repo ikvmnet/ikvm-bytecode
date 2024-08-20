@@ -2,7 +2,6 @@
 using System.Buffers;
 using System.IO;
 using System.IO.MemoryMappedFiles;
-using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -98,13 +97,27 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="path"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
-        public static unsafe bool TryRead(string path, out ClassFile? clazz)
+        public static bool TryRead(string path, out ClassFile? clazz)
         {
             if (path is null)
                 throw new ArgumentNullException(nameof(path));
 
-            var file = MemoryMappedFile.CreateFromFile(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read), null, 0, MemoryMappedFileAccess.Read, HandleInheritability.None, true);
-            var view = file.CreateViewAccessor(0, 0, MemoryMappedFileAccess.Read);
+            return TryRead(File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read), out clazz);
+        }
+
+        /// <summary>
+        /// Attempts to read a class from the given file.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="clazz"></param>
+        /// <returns></returns>
+        static bool TryRead(FileStream stream, out ClassFile? clazz)
+        {
+            if (stream is null)
+                throw new ArgumentNullException(nameof(stream));
+
+            var file = MemoryMappedFile.CreateFromFile(stream, null, 0, MemoryMappedFileAccess.Read, HandleInheritability.None, true);
+            var view = file.CreateViewAccessor(stream.Position, stream.Length - stream.Position, MemoryMappedFileAccess.Read);
             return TryRead(new MappedFileMemoryManager(file, view), out clazz);
         }
 
@@ -114,7 +127,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="path"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
-        public static unsafe ClassFile Read(string path)
+        public static ClassFile Read(string path)
         {
             return TryRead(path, out var clazz) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
         }
@@ -122,7 +135,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given buffer.
         /// </summary>
-        /// <param name="buffer"></param>
+        /// <param name="owner"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
         public static bool TryRead(IMemoryOwner<byte> owner, out ClassFile? clazz)
@@ -307,28 +320,59 @@ namespace IKVM.ByteCode.Decoding
         }
 
         /// <summary>
-        /// Reads the next class from the stream.
+        /// Reads the class from the stream.
         /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="bufferSize"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async ValueTask<ClassFile> ReadAsync(Stream stream, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ByteCodeException"></exception>
+        public static async ValueTask<ClassFile> ReadAsync(Stream stream, int bufferSize = 1024, CancellationToken cancellationToken = default)
         {
             if (stream is null)
                 throw new ArgumentNullException(nameof(stream));
+            if (stream.CanRead == false)
+                throw new ArgumentException("Stream is not readable.", nameof(stream));
 
-            var reader = PipeReader.Create(stream, new StreamPipeReaderOptions(minimumReadSize: 1, leaveOpen: true));
+            // optimize for FileStream by using mmap
+            if (stream is FileStream fs)
+                return TryRead(fs, out var clazz) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
+
+            // initial buffer
+            var buf = ArrayPool<byte>.Shared.Rent(bufferSize);
 
             try
             {
-                return await ReadAsync(reader, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                await reader.CompleteAsync(e);
-                throw;
+                var beg = default(ArrayPoolSequenceSegment<byte>);
+                var end = beg;
+
+                // attempt to fill up the array
+                int len = 0;
+                while ((len = await stream.ReadAsync(buf, 0, buf.Length, cancellationToken)) > 0)
+                {
+                    // we are the first segment, or we append to the existing segment
+                    if (beg == null)
+                        beg = end = new ArrayPoolSequenceSegment<byte>(new ArraySegment<byte>(buf, 0, len), ArrayPool<byte>.Shared);
+                    else
+                        end = end!.Append(new ArraySegment<byte>(buf, 0, len), ArrayPool<byte>.Shared);
+
+                    // rent another array for the next amount
+                    buf = ArrayPool<byte>.Shared.Rent(bufferSize);
+                }
+
+                // no data was ever read
+                if (beg == null)
+                    throw new ByteCodeException("End of stream reached without class data.");
+
+                // attempt to read assembled sequence, using start of sequence as disposable
+                return Read(new ReadOnlySequence<byte>(beg, 0, end!, end!.Array.AsSpan().Length), beg);
             }
             finally
             {
-                await reader.CompleteAsync();
+                // return trailing unused array
+                ArrayPool<byte>.Shared.Return(buf);
             }
         }
 
@@ -338,67 +382,61 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="stream"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static ClassFile Read(Stream stream, CancellationToken cancellationToken = default)
+        public static ClassFile Read(Stream stream)
         {
-            if (stream is null)
-                throw new ArgumentNullException(nameof(stream));
-
-            return ReadAsync(stream, cancellationToken).AsTask().GetAwaiter().GetResult();
+            return Read(stream, 1024);
         }
 
         /// <summary>
         /// Reads the next class from the stream.
         /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static async ValueTask<ClassFile> ReadAsync(PipeReader reader, CancellationToken cancellationToken = default)
+        public static ClassFile Read(Stream stream, int bufferSize = 1024)
         {
-            if (reader is null)
-                throw new ArgumentNullException(nameof(reader));
+            if (stream is null)
+                throw new ArgumentNullException(nameof(stream));
+            if (stream.CanRead == false)
+                throw new ArgumentException("Stream is not readable.", nameof(stream));
 
-            while (true)
+            // optimize for FileStream by using mmap
+            if (stream is FileStream fs)
+                return TryRead(fs, out var clazz) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
+
+            // initial buffer
+            var buf = ArrayPool<byte>.Shared.Rent(bufferSize);
+
+            try
             {
-                var result = await reader.ReadAtLeastAsync((int)MIN_CLASS_SIZE, cancellationToken);
-                if (result.IsCanceled)
-                    throw new OperationCanceledException();
+                var beg = default(ArrayPoolSequenceSegment<byte>);
+                var end = beg;
 
-                // we measure first, to prevent allocation of expensive arrays and structures if the data stream is not complete or the class structure invalid
-                int size = 0;
-                if (TryMeasure(result.Buffer, ref size, out var consumed, out var examined) == false)
+                // attempt to fill up the array
+                int len = 0;
+                while ((len = stream.Read(buf, 0, buf.Length)) > 0)
                 {
-                    reader.AdvanceTo(consumed, examined);
-
-                    // we couldn't read a full class, and the pipe is at the end
-                    if (result.IsCompleted)
-                        throw new InvalidClassException("End of stream reached before valid class.");
-
-                    continue;
-                }
-
-                // allocate a new buffer of the appropriate size, private to the class file
-                var owner = MemoryPool<byte>.Shared.Rent(size);
-
-                try
-                {
-                    // copy original buffer for private use by the class file
-                    result.Buffer.CopyTo(owner.Memory.Span);
-
-                    if (TryRead(new ReadOnlySequence<byte>(owner.Memory), out var clazz, out _, out _, owner) == false)
-                    {
-                        throw new ByteCodeException("End of stream reached reading already measured class data.");
-                    }
+                    // we are the first segment, or we append to the existing segment
+                    if (beg == null)
+                        beg = end = new ArrayPoolSequenceSegment<byte>(new ArraySegment<byte>(buf, 0, len), ArrayPool<byte>.Shared);
                     else
-                    {
-                        // advance to values previously read by measurement
-                        reader.AdvanceTo(consumed, examined);
-                        owner = null;
-                        return clazz!;
-                    }
+                        end = end!.Append(new ArraySegment<byte>(buf, 0, len), ArrayPool<byte>.Shared);
 
+                    // rent another array for the next amount
+                    buf = ArrayPool<byte>.Shared.Rent(bufferSize);
                 }
-                finally
-                {
-                    owner?.Dispose();
-                }
+
+                // no data was ever read
+                if (beg == null)
+                    throw new ByteCodeException("End of stream reached without class data.");
+
+                // attempt to read assembled sequence, using start of sequence as disposable
+                return Read(new ReadOnlySequence<byte>(beg, 0, end!, end!.Array.AsSpan().Length), beg);
+            }
+            finally
+            {
+                // return trailing unused array
+                ArrayPool<byte>.Shared.Return(buf);
             }
         }
 

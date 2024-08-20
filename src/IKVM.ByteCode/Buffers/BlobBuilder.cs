@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace IKVM.ByteCode.Buffers
 {
@@ -321,26 +319,6 @@ namespace IKVM.ByteCode.Buffers
             Debug.Assert(bufferStart == bufferEnd);
 
             return result;
-        }
-
-        /// <summary>
-        /// Returns the written bytes as an <see cref="ImmutableArray{byte}"/>.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
-        public ImmutableArray<byte> ToImmutableArray()
-        {
-            return ToImmutableArray(0, Count);
-        }
-
-        /// <summary>
-        /// Returns the written bytes within the given range as an <see cref="ImmutableArray{byte}"/>.
-        /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
-        public ImmutableArray<byte> ToImmutableArray(int start, int byteCount)
-        {
-            var array = ToArray(start, byteCount);
-            return ImmutableCollectionsMarshal.AsImmutableArray(array);
         }
 
         /// <summary>
@@ -733,34 +711,6 @@ namespace IKVM.ByteCode.Buffers
         }
 
         /// <summary>
-        /// Writes the bytes from the immutable array.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
-        public void WriteBytes(ImmutableArray<byte> buffer)
-        {
-            if (buffer.IsDefault)
-                throw new ArgumentNullException(nameof(buffer));
-
-            WriteBytes(buffer.AsSpan());
-        }
-
-        /// <summary>
-        /// Writes the bytes from the specified range of the immutable array.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the <paramref name="buffer"/>.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
-        public void WriteBytes(ImmutableArray<byte> buffer, int start, int byteCount)
-        {
-            if (buffer.IsDefault)
-                throw new ArgumentNullException(nameof(buffer));
-
-            ValidateRange(buffer.Length, start, byteCount, nameof(byteCount));
-            WriteBytes(buffer.AsSpan(start, byteCount));
-        }
-
-        /// <summary>
         /// Writes the specified buffer to the builder.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
@@ -806,7 +756,7 @@ namespace IKVM.ByteCode.Buffers
         /// </summary>
         /// <param name="sequence"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void WriteBytes(ReadOnlySequence<byte> sequence)
+        public void WriteBytes(in ReadOnlySequence<byte> sequence)
         {
             if (IsHead == false)
                 throw new InvalidOperationException("Builder already linked.");
