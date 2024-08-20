@@ -135,11 +135,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="clazz"></param>
-        /// <param name="owner"></param>
+        /// <param name="disposable"></param>
         /// <returns></returns>
-        public static bool TryRead(ReadOnlyMemory<byte> buffer, out ClassFile? clazz, IMemoryOwner<byte>? owner = null)
+        public static bool TryRead(ReadOnlyMemory<byte> buffer, out ClassFile? clazz, IDisposable? disposable = null)
         {
-            return TryRead(new ReadOnlySequence<byte>(buffer), out clazz, owner);
+            return TryRead(new ReadOnlySequence<byte>(buffer), out clazz, disposable);
         }
 
         /// <summary>
@@ -147,11 +147,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="clazz"></param>
-        /// <param name="owner"></param>
+        /// <param name="disposable"></param>
         /// <returns></returns>
-        public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, IMemoryOwner<byte>? owner = null)
+        public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, IDisposable? disposable = null)
         {
-            return TryRead(buffer, out clazz, out _, out _, owner);
+            return TryRead(buffer, out clazz, out _, out _, disposable);
         }
 
         /// <summary>
@@ -192,12 +192,12 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="examined"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
-        public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, out SequencePosition consumed, out SequencePosition examined, IMemoryOwner<byte>? owner = null)
+        public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, out SequencePosition consumed, out SequencePosition examined, IDisposable? disposable = null)
         {
             consumed = buffer.Start;
 
             var reader = new ClassFormatReader(buffer);
-            if (TryRead(ref reader, out clazz, owner) == false)
+            if (TryRead(ref reader, out clazz, disposable) == false)
             {
                 // examined up to the position of the reader, but consumed nothing
                 examined = reader.Position;
@@ -218,11 +218,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="clazz"></param>
-        /// <param name="owner">Optional owner of the memory.</param>
+        /// <param name="disposable">Optional owner of the memory.</param>
         /// <returns></returns>
         /// <exception cref="InvalidClassMagicException"></exception>
         /// <exception cref="UnsupportedClassVersionException"></exception>
-        public static bool TryRead(ref ClassFormatReader reader, out ClassFile? clazz, IMemoryOwner<byte>? owner = null)
+        public static bool TryRead(ref ClassFormatReader reader, out ClassFile? clazz, IDisposable? disposable = null)
         {
             clazz = null;
 
@@ -265,7 +265,7 @@ namespace IKVM.ByteCode.Decoding
             if (AttributeTable.TryRead(ref reader, out var attributes) == false)
                 return false;
 
-            clazz = new ClassFile(version, constants, (AccessFlag)accessFlags, new(thisClass), new(superClass), interfaces, fields, methods, attributes, owner);
+            clazz = new ClassFile(version, constants, (AccessFlag)accessFlags, new(thisClass), new(superClass), interfaces, fields, methods, attributes, disposable);
             return true;
         }
 
@@ -298,12 +298,12 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a class from the given buffer.
         /// </summary>
         /// <param name="buffer"></param>
-        /// <param name="owner"></param>
+        /// <param name="disposable"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
-        public static ClassFile Read(in ReadOnlySequence<byte> buffer, IMemoryOwner<byte>? owner = null)
+        public static ClassFile Read(in ReadOnlySequence<byte> buffer, IDisposable? disposable = null)
         {
-            return TryRead(buffer, out var clazz, owner) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
+            return TryRead(buffer, out var clazz, disposable) ? clazz! : throw new InvalidClassException("Failed to open ClassFile. Incomplete class data.");
         }
 
         /// <summary>
@@ -402,7 +402,7 @@ namespace IKVM.ByteCode.Decoding
             }
         }
 
-        readonly IMemoryOwner<byte>? _owner;
+        readonly IDisposable? _disposable;
 
         /// <summary>
         /// Gets the constants of the class file.
@@ -461,8 +461,8 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="fields"></param>
         /// <param name="methods"></param>
         /// <param name="attributes"></param>
-        /// <param name="owner"></param>
-        internal ClassFile(ClassFormatVersion version, ConstantTable constants, AccessFlag accessFlags, ClassConstantHandle @this, ClassConstantHandle super, InterfaceTable interfaces, FieldTable fields, MethodTable methods, AttributeTable attributes, IMemoryOwner<byte>? owner)
+        /// <param name="disposable"></param>
+        internal ClassFile(ClassFormatVersion version, ConstantTable constants, AccessFlag accessFlags, ClassConstantHandle @this, ClassConstantHandle super, InterfaceTable interfaces, FieldTable fields, MethodTable methods, AttributeTable attributes, IDisposable? disposable)
         {
             Version = version;
             Constants = constants;
@@ -473,7 +473,7 @@ namespace IKVM.ByteCode.Decoding
             Fields = fields;
             Methods = methods;
             Attributes = attributes;
-            _owner = owner;
+            _disposable = disposable;
         }
 
         /// <summary>
@@ -481,7 +481,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         public void Dispose()
         {
-            _owner?.Dispose();
+            _disposable?.Dispose();
             GC.SuppressFinalize(this);
         }
 
