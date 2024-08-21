@@ -323,20 +323,6 @@ namespace IKVM.ByteCode.Decoding
         /// Reads the class from the stream.
         /// </summary>
         /// <param name="stream"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ByteCodeException"></exception>
-        public static ValueTask<ClassFile> ReadAsync(Stream stream, CancellationToken cancellationToken = default)
-        {
-            return ReadAsync(stream, 1024, cancellationToken);
-        }
-
-        /// <summary>
-        /// Reads the class from the stream.
-        /// </summary>
-        /// <param name="stream"></param>
         /// <param name="bufferSize"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
@@ -388,16 +374,6 @@ namespace IKVM.ByteCode.Decoding
                 // return trailing unused array
                 ArrayPool<byte>.Shared.Return(buf);
             }
-        }
-
-        /// <summary>
-        /// Reads the next class from the stream.
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <returns></returns>
-        public static ClassFile Read(Stream stream)
-        {
-            return Read(stream, 1024);
         }
 
         /// <summary>
