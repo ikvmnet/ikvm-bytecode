@@ -4,7 +4,7 @@
     /// <summary>
     /// Describes an attempt to parse an unsupported code data.
     /// </summary>
-    internal class InvalidCodeException :
+    public class InvalidCodeException :
         ByteCodeException
     {
 
