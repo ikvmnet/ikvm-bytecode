@@ -20,7 +20,6 @@ namespace IKVM.ByteCode.Decoding
         public const uint MAGIC = 0xCAFEBABE;
         public const uint MIN_CLASS_SIZE = 30;
 
-
         /// <summary>
         /// Attempts to measure a class starting at the current position.
         /// </summary>
