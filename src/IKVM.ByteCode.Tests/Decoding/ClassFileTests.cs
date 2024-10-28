@@ -306,6 +306,22 @@ namespace IKVM.ByteCode.Decoding.Tests
                 TestElementValue(clazz, elementValue);
         }
 
+        [TestMethod]
+        public void CanReadFromLargeModuleInfo()
+        {
+            using var clazz = ClassFile.Read(Path.Combine(Path.GetDirectoryName(typeof(ClassFileTests).Assembly.Location), "Decoding", "large-module-info.class"));
+            clazz.Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void CanReadFromLargeModuleInfoFromStream()
+        {
+            var buf = File.ReadAllBytes(Path.Combine(Path.GetDirectoryName(typeof(ClassFileTests).Assembly.Location), "Decoding", "large-module-info.class"));
+            var stm = new MemoryStream(buf);
+            using var clazz = ClassFile.Read(stm);
+            clazz.Should().NotBeNull();
+        }
+
     }
 
 }
