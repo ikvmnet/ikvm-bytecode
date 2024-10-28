@@ -327,7 +327,7 @@ namespace IKVM.ByteCode.Decoding
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ByteCodeException"></exception>
-        public static async ValueTask<ClassFile> ReadAsync(Stream stream, int bufferSize = 1024, CancellationToken cancellationToken = default)
+        public static async ValueTask<ClassFile> ReadAsync(Stream stream, int bufferSize = 4096, CancellationToken cancellationToken = default)
         {
             if (stream is null)
                 throw new ArgumentNullException(nameof(stream));
@@ -380,7 +380,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="stream"></param>
         /// <param name="bufferSize"></param>
         /// <returns></returns>
-        public static ClassFile Read(Stream stream, int bufferSize = 1024)
+        public static ClassFile Read(Stream stream, int bufferSize = 4096)
         {
             if (stream is null)
                 throw new ArgumentNullException(nameof(stream));
