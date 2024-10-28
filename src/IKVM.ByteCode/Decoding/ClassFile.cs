@@ -188,7 +188,7 @@ namespace IKVM.ByteCode.Decoding
             else
             {
                 // examined up to the end of thebuffer, but consumed up until the position of the reader
-                examined = buffer.End;
+                examined = reader.Position;
                 consumed = reader.Position;
                 return true;
             }
@@ -215,8 +215,8 @@ namespace IKVM.ByteCode.Decoding
             }
             else
             {
-                // examined up to the end of thebuffer, but consumed up until the position of the reader
-                examined = buffer.End;
+                // examined up to the end of the buffer, but consumed up until the position of the reader
+                examined = reader.Position;
                 consumed = reader.Position;
                 return true;
             }
