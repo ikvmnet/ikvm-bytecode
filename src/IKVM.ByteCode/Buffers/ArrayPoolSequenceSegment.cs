@@ -62,7 +62,6 @@ namespace IKVM.ByteCode.Buffers
         /// <summary>
         /// Disposes of the instance.
         /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
         public void Dispose()
         {
             // instruct the next segment to dispose
