@@ -164,20 +164,19 @@ namespace IKVM.ByteCode.Decoding
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryMeasure(in ReadOnlySequence<byte> buffer, ref int size, out SequencePosition consumed, out SequencePosition examined)
         {
-            consumed = buffer.Start;
-
             var reader = new ClassFormatReader(buffer);
             if (TryMeasure(ref reader, ref size) == false)
             {
-                // examined up to the position of the reader, but consumed nothing
-                examined = reader.Position;
+                // examined up to the end of the buffer, but consumed nothing
+                examined = buffer.End;
+                consumed = buffer.Start;
                 return false;
             }
             else
             {
-                // examined up to the point of the reader, consumed the same
+                // examined up to the end of thebuffer, but consumed up until the position of the reader
+                examined = buffer.End;
                 consumed = reader.Position;
-                examined = reader.Position;
                 return true;
             }
         }
