@@ -15,6 +15,7 @@ namespace IKVM.ByteCode.Buffers
 
         readonly MemoryMappedFile _file;
         readonly MemoryMappedViewAccessor _view;
+        readonly byte* _addr;
 
         /// <summary>
         /// Initializes a new instance.
@@ -31,15 +32,15 @@ namespace IKVM.ByteCode.Buffers
                 throw new InvalidOperationException();
             if (_view.SafeMemoryMappedViewHandle.IsClosed || _view.SafeMemoryMappedViewHandle.IsInvalid)
                 throw new InvalidOperationException();
+
+            _view.SafeMemoryMappedViewHandle.AcquirePointer(ref _addr);
         }
 
         /// <inheritdoc />
         public override Span<byte> GetSpan()
         {
-            byte* ptr = null;
-            _view.SafeMemoryMappedViewHandle.AcquirePointer(ref ptr);
             var len = _view.SafeMemoryMappedViewHandle.ByteLength;
-            return new Span<byte>(ptr, checked((int)len));
+            return new Span<byte>(_addr, checked((int)len));
         }
 
         /// <inheritdoc />
@@ -48,9 +49,7 @@ namespace IKVM.ByteCode.Buffers
             if (elementIndex < 0 || elementIndex >= checked((int)_view.SafeMemoryMappedViewHandle.ByteLength))
                 throw new ArgumentOutOfRangeException(nameof(elementIndex));
 
-            byte* ptr = null;
-            _view.SafeMemoryMappedViewHandle.AcquirePointer(ref ptr);
-            return new MemoryHandle(Unsafe.Add<byte>(ptr, elementIndex));
+            return new MemoryHandle(Unsafe.Add<byte>(_addr, elementIndex));
         }
 
         /// <inheritdoc />
@@ -62,11 +61,9 @@ namespace IKVM.ByteCode.Buffers
         /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
-            if (true)
-            {
-                _view.Dispose();
-                _file.Dispose();
-            }
+            _view.SafeMemoryMappedViewHandle.ReleasePointer();
+            _view.Dispose();
+            _file.Dispose();
         }
 
     }
