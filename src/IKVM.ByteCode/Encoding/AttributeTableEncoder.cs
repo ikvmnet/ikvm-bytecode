@@ -125,7 +125,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new ConstantValue attribute.
         /// </summary>
-        /// <param name="constantName"></param>
+        /// <param name="attributeName"></param>
         /// <param name="value"></param>
         public AttributeTableEncoder ConstantValue(Utf8ConstantHandle attributeName, ConstantHandle value)
         {
@@ -179,6 +179,8 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new Exceptions attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
+        /// <param name="exceptions"></param>
         public AttributeTableEncoder Exceptions(Utf8ConstantHandle attributeName, Action<ClassConstantTableEncoder> exceptions)
         {
             if (exceptions is null)
@@ -192,6 +194,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new InnerClasses attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="classes"></param>
         public AttributeTableEncoder InnerClasses(Utf8ConstantHandle attributeName, Action<InnerClassTableEncoder> classes)
         {
@@ -206,6 +209,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new EnclosingMethod attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="clazz"></param>
         /// <param name="method"></param>
         public AttributeTableEncoder EnclosingMethod(Utf8ConstantHandle attributeName, ClassConstantHandle clazz, NameAndTypeConstantHandle method)
@@ -220,6 +224,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new Synthetic attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder Synthetic(Utf8ConstantHandle attributeName)
         {
             return Attribute(attributeName);
@@ -228,6 +233,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new Signature attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="signature"></param>
         public AttributeTableEncoder Signature(Utf8ConstantHandle attributeName, Utf8ConstantHandle signature)
         {
@@ -240,6 +246,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new SourceFile attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="sourceFile"></param>
         public AttributeTableEncoder SourceFile(Utf8ConstantHandle attributeName, Utf8ConstantHandle sourceFile)
         {
@@ -252,6 +259,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new SourceDebugExtension attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="debugExtension"></param>
         public AttributeTableEncoder SourceDebugExtension(Utf8ConstantHandle attributeName, BlobBuilder debugExtension)
         {
@@ -261,6 +269,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new LineNumberTable attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder LineNumberTable(Utf8ConstantHandle attributeName, Action<LineNumberTableEncoder> lineNumbers)
         {
             if (lineNumbers is null)
@@ -274,6 +283,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new LocalVariableTable attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder LocalVariableTable(Utf8ConstantHandle attributeName, Action<LocalVariableTableEncoder> localVars)
         {
             if (localVars is null)
@@ -287,6 +297,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new LocalVariableTypeTable attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder LocalVariableTypeTable(Utf8ConstantHandle attributeName, Action<LocalVariableTypeTableEncoder> localVarTypes)
         {
             if (localVarTypes is null)
@@ -300,6 +311,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new Deprecated attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder Deprecated(Utf8ConstantHandle attributeName)
         {
             return Attribute(attributeName);
@@ -308,6 +320,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new RuntimeVisibleAnnotations attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="annotations"></param>
         public AttributeTableEncoder RuntimeVisibleAnnotations(Utf8ConstantHandle attributeName, Action<AnnotationTableEncoder> annotations)
         {
@@ -322,6 +335,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new RuntimeInvisibleAnnotations attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder RuntimeInvisibleAnnotations(Utf8ConstantHandle attributeName, Action<AnnotationTableEncoder> annotations)
         {
             if (annotations is null)
@@ -335,6 +349,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new RuntimeVisibleParameterAnnotations attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder RuntimeVisibleParameterAnnotations(Utf8ConstantHandle attributeName, Action<ParameterAnnotationTableEncoder> parameterAnnotations)
         {
             if (parameterAnnotations is null)
@@ -348,6 +363,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new RuntimeInvisibleParameterAnnotations attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder RuntimeInvisibleParameterAnnotations(Utf8ConstantHandle attributeName, Action<ParameterAnnotationTableEncoder> parameterAnnotations)
         {
             if (parameterAnnotations is null)
@@ -361,6 +377,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new RuntimeVisibleTypeAnnotations attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="typeAnnotations"></param>
         public AttributeTableEncoder RuntimeVisibleTypeAnnotations(Utf8ConstantHandle attributeName, Action<TypeAnnotationTableEncoder> typeAnnotations)
         {
@@ -375,6 +392,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new RuntimeInvisibleTypeAnnotations attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="typeAnnotations"></param>
         public AttributeTableEncoder RuntimeInvisibleTypeAnnotations(Utf8ConstantHandle attributeName, Action<TypeAnnotationTableEncoder> typeAnnotations)
         {
@@ -389,6 +407,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new AnnotationDefault attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="defaultValue"></param>
         public AttributeTableEncoder AnnotationDefault(Utf8ConstantHandle attributeName, Action<ElementValueEncoder> defaultValue)
         {
@@ -403,6 +422,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new BootstrapMethods attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="bootstrapMethods"></param>
         public AttributeTableEncoder BootstrapMethods(Utf8ConstantHandle attributeName, Action<BootstrapMethodTableEncoder> bootstrapMethods)
         {
@@ -417,6 +437,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new MethodParameters attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder MethodParameters(Utf8ConstantHandle attributeName, Action<MethodParameterTableEncoder> parameters)
         {
             if (parameters is null)
@@ -430,6 +451,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new Module attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="name"></param>
         /// <param name="flags"></param>
         /// <param name="version"></param>
@@ -469,6 +491,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new ModulePackages attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         public AttributeTableEncoder ModulePackages(Utf8ConstantHandle attributeName, Action<PackageConstantTableEncoder> packages)
         {
             var b = new BlobBuilder();
@@ -479,6 +502,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new ModuleMainClass attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="mainClass"></param>
         public AttributeTableEncoder ModuleMainClass(Utf8ConstantHandle attributeName, ClassConstantHandle mainClass)
         {
