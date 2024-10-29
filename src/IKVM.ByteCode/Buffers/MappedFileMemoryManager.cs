@@ -61,9 +61,12 @@ namespace IKVM.ByteCode.Buffers
         /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
-            _view.SafeMemoryMappedViewHandle.ReleasePointer();
-            _view.Dispose();
-            _file.Dispose();
+            if (disposing)
+            {
+                _view.SafeMemoryMappedViewHandle.ReleasePointer();
+                _view.Dispose();
+                _file.Dispose();
+            }
         }
 
     }
