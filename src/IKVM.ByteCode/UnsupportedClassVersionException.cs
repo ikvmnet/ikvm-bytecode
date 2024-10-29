@@ -4,7 +4,7 @@
     /// <summary>
     /// Describes an attempt to parse an unsupported class file version.
     /// </summary>
-    internal sealed class UnsupportedClassVersionException :
+    public sealed class UnsupportedClassVersionException :
         InvalidClassException
     {
 

@@ -4,7 +4,7 @@
     /// <summary>
     /// Describes an attempt to parse an unsupported class magic value.
     /// </summary>
-    internal sealed class InvalidClassMagicException :
+    public sealed class InvalidClassMagicException :
         InvalidClassException
     {
 

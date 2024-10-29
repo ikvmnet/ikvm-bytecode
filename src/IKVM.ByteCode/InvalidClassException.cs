@@ -4,7 +4,7 @@
     /// <summary>
     /// Describes an attempt to parse an unsupported class file.
     /// </summary>
-    internal class InvalidClassException :
+    public class InvalidClassException :
         ByteCodeException
     {
 
