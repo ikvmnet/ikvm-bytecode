@@ -23,9 +23,6 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Describes a recorded label and optionally it's absolute value.
         /// </summary>
-        /// <param name="Blob"></param>
-        /// <param name="LabelOffset"></param>
-        /// <param name="RelativeOffset"></param>
         struct LabelInfo
         {
 
@@ -66,8 +63,23 @@ namespace IKVM.ByteCode.Encoding
 
         }
 
+        /// <summary>
+        /// Represents an ongoing open exception handler.
+        /// </summary>
+        readonly struct ExceptionInfo(LabelHandle Start, LabelHandle End, LabelHandle Handler, ClassConstantHandle CatchType)
+        {
+
+            public readonly LabelHandle Start = Start;
+            public readonly LabelHandle End = End;
+            public readonly LabelHandle Handler = Handler;
+            public readonly ClassConstantHandle CatchType = CatchType;
+
+        }
+
         readonly BlobBuilder _builder;
         Fixed4Table<LabelInfo> _labels = new();
+        Fixed4Table<ExceptionInfo> _exceptions = new();
+        Fixed4Table<ExceptionInfo> _exceptionsStack = new();
 
         /// <summary>
         /// Initializes a new instance.
@@ -126,7 +138,7 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Associates specified label with the current bytecode positon, returning the program offset of the label.
+        /// Associates specified label with the current bytecode positon.
         /// </summary>
         /// <param name="label"></param>
         /// <param name="offset"></param>
@@ -679,7 +691,7 @@ namespace IKVM.ByteCode.Encoding
         /// Encodes a lookupswitch instruction.
         /// </summary>
         /// <param name="defaultLabel"></param>
-        /// <param name="encode"></param>
+        /// <param name="cases"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -688,6 +700,83 @@ namespace IKVM.ByteCode.Encoding
             var encoder = new LookupSwitchCodeEncoder(this, defaultLabel);
             foreach (var i in cases)
                 encoder.Case(i.Key, i.Label);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Begins an exception handler block at the current program position.
+        /// </summary>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder BeginExceptionBlock(ClassConstantHandle clazz, out LabelHandle handler)
+        {
+            // mark start position with label
+            var start = DefineLabel();
+            MarkLabel(start);
+
+            // add exception to list and stack
+            var exception = new ExceptionInfo(start, DefineLabel(), handler = DefineLabel(), clazz);
+            _exceptions.Add(exception);
+            _exceptionsStack.Add(exception);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Ends the current exception block.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public CodeBuilder EndExceptionBlock()
+        {
+            if (_exceptionsStack.Count == 0)
+                throw new InvalidOperationException("No current exception block.");
+
+            // pop current exception from stack
+            var exception = _exceptionsStack[_exceptionsStack.Count - 1];
+            _exceptionsStack.Count--;
+
+            // mark end of exception
+            MarkLabel(exception.End);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Serializes the recorded exceptions in the exception table format to <paramref name="exceptions"/>.
+        /// </summary>
+        /// <param name="exceptions"></param>
+        /// <returns></returns>
+        public CodeBuilder SerializeExceptions(BlobBuilder exceptions)
+        {
+            var encoder = new ExceptionTableEncoder(exceptions);
+            return SerializeExceptions(ref encoder);
+        }
+
+        /// <summary>
+        /// Serializes the recorded exceptions to <paramref name="encoder"/>.
+        /// </summary>
+        /// <param name="encoder"></param>
+        /// <returns></returns>
+        public CodeBuilder SerializeExceptions(ref ExceptionTableEncoder encoder)
+        {
+            if (_exceptionsStack.Count > 0)
+                throw new InvalidOperationException("Open exception blocks. Exception blocks must be closed before extracting the exceptions table.");
+
+            // we encode in reverse order because exception table is in first-come order
+            for (int i = _exceptions.Count - 1; i >= 0; i--)
+            {
+                var exception = _exceptions[i];
+                if (exception.End.IsNil)
+                    throw new InvalidOperationException("Open exception block.");
+                if (exception.Handler.IsNil)
+                    throw new InvalidOperationException("Exception block with undeclared handler.");
+
+                // encode the exception
+                encoder.Exception(GetLabelOffset(exception.Start), GetLabelOffset(exception.End), GetLabelOffset(exception.Handler), exception.CatchType);
+            }
 
             return this;
         }

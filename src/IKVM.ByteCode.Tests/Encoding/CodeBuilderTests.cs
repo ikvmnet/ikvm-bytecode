@@ -3,6 +3,7 @@
 using FluentAssertions;
 
 using IKVM.ByteCode.Buffers;
+using IKVM.ByteCode.Decoding;
 using IKVM.ByteCode.Encoding;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -214,6 +215,68 @@ namespace IKVM.ByteCode.Tests.Encoding
             // last value should be return instruction
             b.TryRead(out byte returnInstruction).Should().BeTrue();
             returnInstruction.Should().Be((byte)OpCode.Return);
+        }
+
+        [TestMethod]
+        public void CanEncodeException()
+        {
+            var code = new BlobBuilder();
+            var excp = new BlobBuilder();
+            new CodeBuilder(code)
+                .DefineLabel(out var end)
+                .BeginExceptionBlock(ClassConstantHandle.Nil, out var handlerLabel)
+                    .Nop() // should push exception
+                    .Athrow() // should throw exception
+                    .Goto(end)
+                .EndExceptionBlock()
+                .MarkLabel(handlerLabel)
+                    .Nop() // happens when exception caught
+                    .Goto(end)
+                .MarkLabel(end)
+                .Return()
+                .SerializeExceptions(excp);
+
+            var codeReader = new SequenceReader<byte>(new ReadOnlySequence<byte>(code.ToArray()));
+            var excpReader = new SequenceReader<byte>(new ReadOnlySequence<byte>(excp.ToArray()));
+
+            codeReader.TryRead(out byte i1).Should().BeTrue();
+            i1.Should().Be((byte)OpCode.Nop);
+
+            codeReader.TryRead(out byte i2).Should().BeTrue();
+            i2.Should().Be((byte)OpCode.Athrow);
+
+            codeReader.TryRead(out byte i3).Should().BeTrue();
+            i3.Should().Be((byte)OpCode.Goto);
+
+            codeReader.TryReadBigEndian(out ushort t3).Should().BeTrue();
+            t3.Should().Be(7);
+
+            codeReader.TryRead(out byte i4).Should().BeTrue();
+            i4.Should().Be((byte)OpCode.Nop);
+
+            codeReader.TryRead(out byte i5).Should().BeTrue();
+            i5.Should().Be((byte)OpCode.Goto);
+
+            codeReader.TryReadBigEndian(out ushort t5).Should().BeTrue();
+            t5.Should().Be(3);
+
+            codeReader.TryRead(out byte i6).Should().BeTrue();
+            i6.Should().Be((byte)OpCode.Return);
+
+            excpReader.TryReadBigEndian(out ushort eL).Should().BeTrue();
+            eL.Should().Be(1);
+
+            excpReader.TryReadBigEndian(out ushort e1S).Should().BeTrue();
+            e1S.Should().Be(0);
+
+            excpReader.TryReadBigEndian(out ushort e1E).Should().BeTrue();
+            e1E.Should().Be(5);
+
+            excpReader.TryReadBigEndian(out ushort e1H).Should().BeTrue();
+            e1H.Should().Be(5);
+
+            excpReader.TryReadBigEndian(out ushort e1T).Should().BeTrue();
+            e1T.Should().Be(0);
         }
 
     }
