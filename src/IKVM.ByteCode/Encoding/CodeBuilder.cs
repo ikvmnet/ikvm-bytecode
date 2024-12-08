@@ -200,7 +200,9 @@ namespace IKVM.ByteCode.Encoding
         {
             if (size is not 2 and not 4)
                 throw new ArgumentException("Label output size can only be 2 or 4 bytes.");
-
+            
+            // we handle fixups by reserving bytes of the appropriate size in the output blob and rewriting them when the label is marked
+            // if the label has already been marked, we do not need to record a future fixup, but can apply the fixup immediately
             ref var l = ref Fixed4Table<LabelInfo>.GetItem(ref _labels, label.Id);
             var d = new FixupData(ReserveBytes(size), offset);
             if (l.Value == -1)
@@ -771,7 +773,7 @@ namespace IKVM.ByteCode.Encoding
                 if (exception.End.IsNil)
                     throw new InvalidOperationException("Open exception block.");
                 if (exception.Handler.IsNil)
-                    throw new InvalidOperationException("Exception block with undeclared handler.");
+                    throw new InvalidOperationException("Exception block with unmarked handler.");
 
                 encoder.Exception(GetLabelOffset(exception.Start), GetLabelOffset(exception.End), GetLabelOffset(exception.Handler), exception.CatchType);
             }
