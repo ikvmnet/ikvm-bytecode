@@ -62,7 +62,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the set of attributes starting from the current position.
         /// </summary>
         /// <param name="reader"></param>
-        /// <param name="attributes"></param>
+        /// <param name="size"></param>
         /// <returns></returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
