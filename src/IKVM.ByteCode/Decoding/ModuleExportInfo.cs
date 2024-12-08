@@ -28,8 +28,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref ModuleExportsTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ModuleExportsTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             var self = this;
             encoder.Exports(map.Map(Package), Flags, e => Encode(self.Modules, ref e));

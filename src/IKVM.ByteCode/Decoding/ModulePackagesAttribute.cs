@@ -47,8 +47,8 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="map"></param>
         /// <param name="attributeName"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             var self = this;
             encoder.ModulePackages(attributeName, e => self.Packages.EncodeTo(map, ref e));
@@ -59,8 +59,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref PackageConstantTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref PackageConstantTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             Packages.EncodeTo(map, ref encoder);
         }

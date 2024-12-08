@@ -42,8 +42,8 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="map"></param>
         /// <param name="attributeName"></param>
         /// <param name="encoder"></param>
-        public void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public void EncodeTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             var b = new BlobBuilder();
             Data.CopyTo(b.ReserveBytes((int)Data.Length).GetBytes().AsSpan());

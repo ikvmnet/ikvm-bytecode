@@ -6,9 +6,9 @@ namespace IKVM.ByteCode
 {
 
     /// <summary>
-    /// Implements a <see cref="IConstantHandleMap"/> that emits constants unchanged from an existing <see cref="IConstantPool"/>.
+    /// Implements a <see cref="IConstantMap"/> that emits constants unchanged from an existing <see cref="IConstantPool"/>.
     /// </summary>
-    public class IdentityConstantMap<TConstantView> : IConstantHandleMap
+    public class IdentityConstantMap<TConstantView> : IConstantMap
         where TConstantView : IConstantView
     {
 

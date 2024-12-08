@@ -78,8 +78,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref AttributeTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref AttributeTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             EncodeSelfTo(map, ref encoder);
         }

@@ -6,7 +6,7 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Describes an interface that can map from one constant handle to another.
     /// </summary>
-    public interface IConstantHandleMap : IConstantView
+    public interface IConstantMap : IConstantView
     {
 
         /// <summary>

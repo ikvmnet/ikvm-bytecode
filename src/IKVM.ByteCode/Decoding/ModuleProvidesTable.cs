@@ -97,8 +97,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref ModuleProvidesTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ModuleProvidesTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             foreach (var i in this)
                 i.EncodeTo(map, ref encoder);

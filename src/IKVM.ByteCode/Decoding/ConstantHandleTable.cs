@@ -103,8 +103,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref ConstantTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ConstantTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             foreach (var i in this)
                 encoder.Constant(map.Map(i));

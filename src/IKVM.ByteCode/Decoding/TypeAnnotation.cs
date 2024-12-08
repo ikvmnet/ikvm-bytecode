@@ -62,8 +62,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref TypeAnnotationTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref TypeAnnotationTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             var self = this;
             encoder.TypeAnnotation(e => self.EncodeTo(map, ref e));
@@ -74,8 +74,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref TypeAnnotationEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref TypeAnnotationEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             var self = this;
 

@@ -30,8 +30,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref RecordComponentTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref RecordComponentTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             var self = this;
             encoder.RecordComponent(map.Map(Name), map.Map(Descriptor), e => self.Attributes.EncodeTo(map, ref e));

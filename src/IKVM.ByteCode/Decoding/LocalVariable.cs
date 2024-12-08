@@ -11,8 +11,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantHandleMap>(TConstantHandleMap map, ref LocalVariableTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref LocalVariableTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             encoder.LocalVariable(StartPc, Length, map.Map(Name), map.Map(Descriptor), Slot);
         }

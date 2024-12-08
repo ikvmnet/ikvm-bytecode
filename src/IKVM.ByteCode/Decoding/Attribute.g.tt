@@ -31,8 +31,8 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
 }
 #>
 
-        readonly void EncodeSelfTo<TConstantHandleMap>(TConstantHandleMap map, ref AttributeTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        readonly void EncodeSelfTo<TConstantMap>(TConstantMap map, ref AttributeTableEncoder encoder)
+            where TConstantMap : IConstantHandleMap
         {
             switch (map.Get(Name).Value)
             {

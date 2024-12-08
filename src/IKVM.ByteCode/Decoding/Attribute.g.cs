@@ -339,8 +339,8 @@ namespace IKVM.ByteCode.Decoding
             return value;
         }
 
-        readonly void EncodeSelfTo<TConstantHandleMap>(TConstantHandleMap map, ref AttributeTableEncoder encoder)
-            where TConstantHandleMap : IConstantHandleMap
+        readonly void EncodeSelfTo<TConstantMap>(TConstantMap map, ref AttributeTableEncoder encoder)
+            where TConstantMap : IConstantMap
         {
             switch (map.Get(Name).Value)
             {
