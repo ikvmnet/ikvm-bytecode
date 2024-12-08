@@ -4,21 +4,25 @@ namespace IKVM.ByteCode
 {
 
     /// <summary>
-    /// Implements a <see cref="IConstantMap"/> that emits constants unchanged from an existing <see cref="IConstantPool"/>.
+    /// Implements a <see cref="IConstantMap"/> that imports constants from one view to a pool.
     /// </summary>
-    public struct IdentityConstantMap<TConstantView> : IConstantMap
+    public struct ImportingConstantMap<TConstantView, TConstantPool> : IConstantMap
         where TConstantView : IConstantView
+        where TConstantPool : IConstantPool
     {
 
         readonly TConstantView _view;
+        readonly TConstantPool _pool;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
         /// <param name="view"></param>
-        public IdentityConstantMap(TConstantView view)
+        /// <param name="pool"></param>
+        public ImportingConstantMap(TConstantView view, TConstantPool pool)
         {
             _view = view;
+            _pool = pool;
         }
 
         public Constant Get(ConstantHandle handle)
@@ -118,93 +122,94 @@ namespace IKVM.ByteCode
 
         public ConstantHandle Map(ConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public Utf8ConstantHandle Map(Utf8ConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public IntegerConstantHandle Map(IntegerConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public FloatConstantHandle Map(FloatConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public LongConstantHandle Map(LongConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public DoubleConstantHandle Map(DoubleConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public ClassConstantHandle Map(ClassConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public StringConstantHandle Map(StringConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public FieldrefConstantHandle Map(FieldrefConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public MethodrefConstantHandle Map(MethodrefConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public InterfaceMethodrefConstantHandle Map(InterfaceMethodrefConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public NameAndTypeConstantHandle Map(NameAndTypeConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public MethodHandleConstantHandle Map(MethodHandleConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public MethodTypeConstantHandle Map(MethodTypeConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public DynamicConstantHandle Map(DynamicConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public InvokeDynamicConstantHandle Map(InvokeDynamicConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public ModuleConstantHandle Map(ModuleConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
 
         public PackageConstantHandle Map(PackageConstantHandle handle)
         {
-            return handle;
+            return _pool.Get(_view.Get(handle));
         }
+
     }
 
 }
