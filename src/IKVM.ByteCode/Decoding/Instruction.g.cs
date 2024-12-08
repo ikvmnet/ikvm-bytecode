@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Runtime.CompilerServices;
 
 using IKVM.ByteCode.Buffers;
+using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
 {
