@@ -53,9 +53,24 @@ namespace IKVM.ByteCode
         }
 
         /// <summary>
-        /// Gets the number of items in the table.
+        /// Gets or sets the number of items in the table.
         /// </summary>
-        public readonly int Count => _count;
+        public int Count
+        {
+            readonly get => _count;
+            set => SetCount(value);
+        }
+
+        /// <summary>
+        /// Sets the count of the list, potentially expanding the underlying array.
+        /// </summary>
+        /// <param name="value"></param>
+        void SetCount(int value)
+        {
+            _count = value;
+            if (_count > _items.Length - 4)
+                Array.Resize(ref _items, _items.Length + 8);
+        }
 
         /// <summary>
         /// Adds a new item to the table.
@@ -105,10 +120,7 @@ namespace IKVM.ByteCode
 
 #endif
 
-            _count++;
-            if (_count > _items.Length - 4)
-                Array.Resize(ref _items, _items.Length + 8);
-
+            SetCount(_count + 1);
             _items[count - 4] = item;
         }
 
