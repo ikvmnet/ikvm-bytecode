@@ -11,6 +11,12 @@ namespace IKVM.ByteCode.Decoding
 
         public static CodeAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the code attribute starting from the current position.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out CodeAttribute attribute)
         {
             attribute = default;
@@ -24,28 +30,13 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadMany(codeLength, out ReadOnlySequence<byte> code) == false)
                 return false;
 
-            if (reader.TryReadU2(out ushort exceptionTableLength) == false)
+            if (ExceptionHandlerTable.TryRead(ref reader, out var exceptionTable) == false)
                 return false;
-
-            var exceptionTable = exceptionTableLength == 0 ? [] : new ExceptionHandler[exceptionTableLength];
-            for (int i = 0; i < exceptionTableLength; i++)
-            {
-                if (reader.TryReadU2(out ushort startOffset) == false)
-                    return false;
-                if (reader.TryReadU2(out ushort endOffset) == false)
-                    return false;
-                if (reader.TryReadU2(out ushort handlerOffset) == false)
-                    return false;
-                if (reader.TryReadU2(out ushort catchTypeIndex) == false)
-                    return false;
-
-                exceptionTable[i] = new ExceptionHandler(startOffset, endOffset, handlerOffset, new(catchTypeIndex));
-            }
 
             if (AttributeTable.TryRead(ref reader, out var attributes) == false)
                 return false;
 
-            attribute = new CodeAttribute(maxStack, maxLocals, code, new(exceptionTable), attributes);
+            attribute = new CodeAttribute(maxStack, maxLocals, code, exceptionTable, attributes);
             return true;
         }
 
