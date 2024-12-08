@@ -717,7 +717,6 @@ namespace IKVM.ByteCode.Encoding
 
             // add exception to list and stack
             var exception = new ExceptionInfo(start, DefineLabel(), handler = DefineLabel(), clazz);
-            _exceptions.Add(exception);
             _exceptionsStack.Add(exception);
 
             return this;
@@ -737,6 +736,7 @@ namespace IKVM.ByteCode.Encoding
             // pop current exception from stack
             var exception = _exceptionsStack[_exceptionsStack.Count - 1];
             _exceptionsStack.Count--;
+            _exceptions.Add(exception);
 
             // mark end of exception
             MarkLabel(exception.End);
@@ -765,8 +765,7 @@ namespace IKVM.ByteCode.Encoding
             if (_exceptionsStack.Count > 0)
                 throw new InvalidOperationException("Open exception blocks. Exception blocks must be closed before extracting the exceptions table.");
 
-            // we encode in reverse order because exception table is in first-come order
-            for (int i = _exceptions.Count - 1; i >= 0; i--)
+            for (int i = 0; i < _exceptions.Count; i++)
             {
                 var exception = _exceptions[i];
                 if (exception.End.IsNil)
@@ -774,7 +773,6 @@ namespace IKVM.ByteCode.Encoding
                 if (exception.Handler.IsNil)
                     throw new InvalidOperationException("Exception block with undeclared handler.");
 
-                // encode the exception
                 encoder.Exception(GetLabelOffset(exception.Start), GetLabelOffset(exception.End), GetLabelOffset(exception.Handler), exception.CatchType);
             }
 
