@@ -6,7 +6,7 @@ namespace IKVM.ByteCode.Text
     static class EncodingExtensions
     {
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 
         public static unsafe string GetString(this System.Text.Encoding self, ReadOnlySpan<byte> bytes)
         {

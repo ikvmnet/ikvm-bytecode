@@ -75,7 +75,7 @@ namespace IKVM.ByteCode.Buffers
             return false;
         }
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 
         /// <summary>
         /// Reads an <see cref="Int16"/> as big endian.
@@ -120,7 +120,7 @@ namespace IKVM.ByteCode.Buffers
             return false;
         }
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 
         /// <summary>
         /// Reads an <see cref="Int32"/> as big endian.
@@ -160,7 +160,7 @@ namespace IKVM.ByteCode.Buffers
             return false;
         }
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 
         /// <summary>
         /// Reads an <see cref="Int64"/> as big endian.

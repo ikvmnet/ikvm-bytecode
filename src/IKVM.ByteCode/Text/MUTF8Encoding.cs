@@ -42,7 +42,7 @@ namespace IKVM.ByteCode.Text
             return GetByteCount(chars.AsSpan(index, count));
         }
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 
         public unsafe int GetByteCount(ReadOnlySpan<char> chars)
         {
@@ -113,7 +113,7 @@ namespace IKVM.ByteCode.Text
             return GetBytes(chars.AsSpan(charIndex, charCount), bytes.AsSpan(byteIndex));
         }
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 
         public unsafe int GetBytes(ReadOnlySpan<char> chars, Span<byte> bytes)
         {
@@ -173,7 +173,7 @@ namespace IKVM.ByteCode.Text
             return j;
         }
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 
         public unsafe int GetCharCount(ReadOnlySpan<byte> bytes)
         {
@@ -223,7 +223,7 @@ namespace IKVM.ByteCode.Text
             return GetChars(bytes.AsSpan(byteIndex, byteCount), chars.AsSpan(charIndex));
         }
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
 
         /// <inheritdoc />
         public unsafe int GetChars(ReadOnlySpan<byte> bytes, Span<char> chars)

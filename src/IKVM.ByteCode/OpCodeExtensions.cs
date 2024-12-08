@@ -13,7 +13,7 @@ namespace IKVM.ByteCode
         /// <returns></returns>
         public static bool IsValid(this OpCode opcode)
         {
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NETSTANDARD
             return Enum.IsDefined(typeof(OpCode), opcode);
 #else
             return Enum.IsDefined<OpCode>(opcode);
