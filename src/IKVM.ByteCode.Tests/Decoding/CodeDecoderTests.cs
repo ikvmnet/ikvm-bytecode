@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -8,6 +9,7 @@ using FluentAssertions;
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Decoding;
 using IKVM.ByteCode.Encoding;
+using IKVM.ByteCode.Text;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -145,6 +147,31 @@ namespace IKVM.ByteCode.Tests.Decoding
             inst1T.Cases[1].Key.Should().Be(2);
             inst1T.Cases[2].Target.Should().Be(inst2.Offset - inst1.Offset);
             inst1T.Cases[2].Key.Should().Be(3);
+        }
+
+        [TestMethod]
+        public void CanCopyTo()
+        {
+            var constants = new ConstantTable(new ClassFormatVersion(50, 0), [
+                new ConstantData(ConstantKind.String, new ReadOnlySequence<byte>(MUTF8Encoding.GetMUTF8(50).GetBytes("test"))),
+            ]);
+
+            var code = new BlobBuilder();
+            new CodeBuilder(code)
+                .Bipush(64)
+                .StoreLocalInteger(0)
+                .LoadLocalInteger(0)
+                .DefineLabel(out var iftrue)
+                .Ifne(iftrue)
+                .Return()
+                .MarkLabel(iftrue)
+                .Return();
+
+            var buf = code.ToArray();
+            var dec = new CodeDecoder(buf);
+
+            var code2 = new BlobBuilder();
+            dec.CopyTo(new IdentityConstantMap<ConstantTable>(constants), new CodeBuilder(code2));
         }
 
     }

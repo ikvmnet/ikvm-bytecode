@@ -68,7 +68,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-                <#= Util.GetWriteArgMethodCall(arg, true) #>;
+                <#= Util.GetBuilderWriteArgMethodCall(arg, true) #>;
 <#
         }
 #>
@@ -81,7 +81,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-                <#= Util.GetWriteArgMethodCall(arg, false) #>;
+                <#= Util.GetBuilderWriteArgMethodCall(arg, false) #>;
 <#
         }
 #>
@@ -97,7 +97,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-            <#= Util.GetWriteArgMethodCall(arg, false) #>;
+            <#= Util.GetBuilderWriteArgMethodCall(arg, false) #>;
 <#
         }
 #>

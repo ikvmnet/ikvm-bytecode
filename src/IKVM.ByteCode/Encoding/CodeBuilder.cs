@@ -275,6 +275,16 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
+        /// Encodes a 8 bit sized integer argument.
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteByte(byte value)
+        {
+            ReserveBytes(sizeof(byte)).GetBytes().AsSpan()[0] = value;
+        }
+
+        /// <summary>
         /// Encodes a 16-bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
@@ -282,6 +292,16 @@ namespace IKVM.ByteCode.Encoding
         internal void WriteInt16(short value)
         {
             BinaryPrimitives.WriteInt16BigEndian(ReserveBytes(sizeof(short)).GetBytes(), value);
+        }
+
+        /// <summary>
+        /// Encodes a 16-bit sized unsigned integer argument.
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteUInt16(ushort value)
+        {
+            BinaryPrimitives.WriteUInt16BigEndian(ReserveBytes(sizeof(ushort)).GetBytes(), value);
         }
 
         /// <summary>
@@ -295,13 +315,13 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 8 bit sized integer argument.
+        /// Encodes a 32-bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void WriteByte(byte value)
+        internal void WriteUInt32(uint value)
         {
-            ReserveBytes(sizeof(byte)).GetBytes().AsSpan()[0] = value;
+            BinaryPrimitives.WriteUInt32BigEndian(ReserveBytes(sizeof(uint)).GetBytes(), value);
         }
 
         /// <summary>
@@ -345,16 +365,6 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 16-bit sized unsigned integer argument.
-        /// </summary>
-        /// <param name="value"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void WriteUInt16(ushort value)
-        {
-            BinaryPrimitives.WriteUInt16BigEndian(ReserveBytes(sizeof(ushort)).GetBytes(), value);
-        }
-
-        /// <summary>
         /// Encodes a 16 bit sized signed integer argument.
         /// </summary>
         /// <param name="value"></param>
@@ -385,13 +395,23 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 32-bit sized integer argument.
+        /// Encodes a 16 bit sized target offset argument.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="target"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void WriteUInt32(uint value)
+        internal void WriteJ2(short target)
         {
-            BinaryPrimitives.WriteUInt32BigEndian(ReserveBytes(sizeof(uint)).GetBytes(), value);
+            WriteInt16(target);
+        }
+
+        /// <summary>
+        /// Encodes a 32 bit sized target offset argument.
+        /// </summary>
+        /// <param name="target"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteJ4(int target)
+        {
+            WriteInt32(target);
         }
 
         /// <summary>

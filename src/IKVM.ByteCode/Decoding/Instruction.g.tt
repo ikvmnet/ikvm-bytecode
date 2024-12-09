@@ -85,10 +85,10 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// Copies this instruction to the specified <see cref="CodeBuilder"/>.
         /// </summary>
         /// <typeparam name="TConstantMap"></typeparam>
-        /// <param name="map"></param>
+        /// <param name="constants"></param>
         /// <param name="builder"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+        internal void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
             where TConstantMap : IConstantMap
         {
             switch (OpCode)
@@ -104,7 +104,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     var args = i.Value.Args ?? [];
 #>
                 case OpCode.<#= name #>:
-                    ((<#= name #>Instruction)this).CopyTo(map, builder);
+                    ((<#= name #>Instruction)this).CopyTo(constants, builder);
                     break;
 <#
 }
@@ -345,27 +345,72 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
-        /// <param name="map"></param>
+        /// <param name="constants"></param>
         /// <param name="builder"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
             where TConstantMap : IConstantMap
         {
+<#
+    if (Util.HasWide(args))
+    {
+#>
+            var wide = false;
+
 <#
         for (int j = 0; j < args.Length; j++)
         {
             var arg = args[j];
 #>
-    /// <param name="<#= arg.Name #>"></param>
+            if (<#= arg.Name #> > <#= Util.GetMaxSizeExpr(arg.Type) #> || <#= arg.Name #> < <#= Util.GetMinSizeExpr(arg.Type) #>)
+                wide = true;
+
 <#
         }
 #>
+            if (wide)
+            {
+                builder.OpCode(IKVM.ByteCode.OpCode.Wide);
+                builder.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
 <#
-    if (Util.HasBranchTarget(args))
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, true) #>;
+<#
+        }
+#>
+            }
+            else
+            {
+                builder.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false) #>;
+<#
+        }
+#>
+            }
+<#
+    }
+    else
     {
 #>
-            var _offset = Offset;
+            builder.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+            builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false) #>;
+<#
+        }
+#>
 <#
     }
 #>
@@ -401,6 +446,16 @@ static string DecoderCtorArgList(InstructionArg[] args)
 
     foreach (var arg in args)
         s.Add($"{Util.GetDecoderTypeName(Util.GetRealType(arg, true))} {arg.Name}");
+        
+    return string.Join(", ", s);
+}
+
+static string DecoderCopyToArgList(InstructionArg[] args)
+{
+    var s = new List<string>();
+
+    foreach (var arg in args)
+        s.Add(arg.Name);
         
     return string.Join(", ", s);
 }
