@@ -14,7 +14,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Nop()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Nop);
+            OpCode(IKVM.ByteCode.OpCode.Nop);
 
             return this;
         }
@@ -26,7 +26,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder AconstNull()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.AconstNull);
+            OpCode(IKVM.ByteCode.OpCode.AconstNull);
 
             return this;
         }
@@ -38,7 +38,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder IconstM1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.IconstM1);
+            OpCode(IKVM.ByteCode.OpCode.IconstM1);
 
             return this;
         }
@@ -50,7 +50,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iconst0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iconst0);
+            OpCode(IKVM.ByteCode.OpCode.Iconst0);
 
             return this;
         }
@@ -62,7 +62,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iconst1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iconst1);
+            OpCode(IKVM.ByteCode.OpCode.Iconst1);
 
             return this;
         }
@@ -74,7 +74,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iconst2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iconst2);
+            OpCode(IKVM.ByteCode.OpCode.Iconst2);
 
             return this;
         }
@@ -86,7 +86,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iconst3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iconst3);
+            OpCode(IKVM.ByteCode.OpCode.Iconst3);
 
             return this;
         }
@@ -98,7 +98,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iconst4()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iconst4);
+            OpCode(IKVM.ByteCode.OpCode.Iconst4);
 
             return this;
         }
@@ -110,7 +110,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iconst5()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iconst5);
+            OpCode(IKVM.ByteCode.OpCode.Iconst5);
 
             return this;
         }
@@ -122,7 +122,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lconst0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lconst0);
+            OpCode(IKVM.ByteCode.OpCode.Lconst0);
 
             return this;
         }
@@ -134,7 +134,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lconst1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lconst1);
+            OpCode(IKVM.ByteCode.OpCode.Lconst1);
 
             return this;
         }
@@ -146,7 +146,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fconst0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fconst0);
+            OpCode(IKVM.ByteCode.OpCode.Fconst0);
 
             return this;
         }
@@ -158,7 +158,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fconst1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fconst1);
+            OpCode(IKVM.ByteCode.OpCode.Fconst1);
 
             return this;
         }
@@ -170,7 +170,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fconst2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fconst2);
+            OpCode(IKVM.ByteCode.OpCode.Fconst2);
 
             return this;
         }
@@ -182,7 +182,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dconst0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dconst0);
+            OpCode(IKVM.ByteCode.OpCode.Dconst0);
 
             return this;
         }
@@ -194,7 +194,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dconst1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dconst1);
+            OpCode(IKVM.ByteCode.OpCode.Dconst1);
 
             return this;
         }
@@ -206,8 +206,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Bipush(sbyte value)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Bipush);
-            this.WriteS1((sbyte)value);
+            OpCode(IKVM.ByteCode.OpCode.Bipush);
+            WriteS1((sbyte)value);
 
             return this;
         }
@@ -219,8 +219,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Sipush(short value)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Sipush);
-            this.WriteS2((short)value);
+            OpCode(IKVM.ByteCode.OpCode.Sipush);
+            WriteS2((short)value);
 
             return this;
         }
@@ -232,8 +232,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ldc(ConstantHandle constant)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ldc);
-            this.WriteC1((ConstantHandle)constant);
+            OpCode(IKVM.ByteCode.OpCode.Ldc);
+            WriteC1((ConstantHandle)constant);
 
             return this;
         }
@@ -245,8 +245,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder LdcW(ConstantHandle constant)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.LdcW);
-            this.WriteC2((ConstantHandle)constant);
+            OpCode(IKVM.ByteCode.OpCode.LdcW);
+            WriteC2((ConstantHandle)constant);
 
             return this;
         }
@@ -258,8 +258,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ldc2W(ConstantHandle constant)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ldc2W);
-            this.WriteC2((ConstantHandle)constant);
+            OpCode(IKVM.ByteCode.OpCode.Ldc2W);
+            WriteC2((ConstantHandle)constant);
 
             return this;
         }
@@ -278,14 +278,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Iload);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Iload);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Iload);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Iload);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -305,14 +305,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Lload);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Lload);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Lload);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Lload);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -332,14 +332,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Fload);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Fload);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Fload);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Fload);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -359,14 +359,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Dload);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Dload);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Dload);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Dload);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -386,14 +386,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Aload);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Aload);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Aload);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Aload);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -406,7 +406,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iload0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iload0);
+            OpCode(IKVM.ByteCode.OpCode.Iload0);
 
             return this;
         }
@@ -418,7 +418,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iload1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iload1);
+            OpCode(IKVM.ByteCode.OpCode.Iload1);
 
             return this;
         }
@@ -430,7 +430,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iload2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iload2);
+            OpCode(IKVM.ByteCode.OpCode.Iload2);
 
             return this;
         }
@@ -442,7 +442,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iload3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iload3);
+            OpCode(IKVM.ByteCode.OpCode.Iload3);
 
             return this;
         }
@@ -454,7 +454,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lload0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lload0);
+            OpCode(IKVM.ByteCode.OpCode.Lload0);
 
             return this;
         }
@@ -466,7 +466,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lload1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lload1);
+            OpCode(IKVM.ByteCode.OpCode.Lload1);
 
             return this;
         }
@@ -478,7 +478,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lload2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lload2);
+            OpCode(IKVM.ByteCode.OpCode.Lload2);
 
             return this;
         }
@@ -490,7 +490,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lload3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lload3);
+            OpCode(IKVM.ByteCode.OpCode.Lload3);
 
             return this;
         }
@@ -502,7 +502,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fload0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fload0);
+            OpCode(IKVM.ByteCode.OpCode.Fload0);
 
             return this;
         }
@@ -514,7 +514,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fload1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fload1);
+            OpCode(IKVM.ByteCode.OpCode.Fload1);
 
             return this;
         }
@@ -526,7 +526,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fload2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fload2);
+            OpCode(IKVM.ByteCode.OpCode.Fload2);
 
             return this;
         }
@@ -538,7 +538,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fload3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fload3);
+            OpCode(IKVM.ByteCode.OpCode.Fload3);
 
             return this;
         }
@@ -550,7 +550,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dload0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dload0);
+            OpCode(IKVM.ByteCode.OpCode.Dload0);
 
             return this;
         }
@@ -562,7 +562,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dload1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dload1);
+            OpCode(IKVM.ByteCode.OpCode.Dload1);
 
             return this;
         }
@@ -574,7 +574,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dload2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dload2);
+            OpCode(IKVM.ByteCode.OpCode.Dload2);
 
             return this;
         }
@@ -586,7 +586,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dload3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dload3);
+            OpCode(IKVM.ByteCode.OpCode.Dload3);
 
             return this;
         }
@@ -598,7 +598,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Aload0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Aload0);
+            OpCode(IKVM.ByteCode.OpCode.Aload0);
 
             return this;
         }
@@ -610,7 +610,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Aload1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Aload1);
+            OpCode(IKVM.ByteCode.OpCode.Aload1);
 
             return this;
         }
@@ -622,7 +622,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Aload2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Aload2);
+            OpCode(IKVM.ByteCode.OpCode.Aload2);
 
             return this;
         }
@@ -634,7 +634,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Aload3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Aload3);
+            OpCode(IKVM.ByteCode.OpCode.Aload3);
 
             return this;
         }
@@ -646,7 +646,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iaload()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iaload);
+            OpCode(IKVM.ByteCode.OpCode.Iaload);
 
             return this;
         }
@@ -658,7 +658,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Laload()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Laload);
+            OpCode(IKVM.ByteCode.OpCode.Laload);
 
             return this;
         }
@@ -670,7 +670,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Faload()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Faload);
+            OpCode(IKVM.ByteCode.OpCode.Faload);
 
             return this;
         }
@@ -682,7 +682,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Daload()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Daload);
+            OpCode(IKVM.ByteCode.OpCode.Daload);
 
             return this;
         }
@@ -694,7 +694,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Aaload()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Aaload);
+            OpCode(IKVM.ByteCode.OpCode.Aaload);
 
             return this;
         }
@@ -706,7 +706,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Baload()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Baload);
+            OpCode(IKVM.ByteCode.OpCode.Baload);
 
             return this;
         }
@@ -718,7 +718,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Caload()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Caload);
+            OpCode(IKVM.ByteCode.OpCode.Caload);
 
             return this;
         }
@@ -730,7 +730,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Saload()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Saload);
+            OpCode(IKVM.ByteCode.OpCode.Saload);
 
             return this;
         }
@@ -749,14 +749,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Istore);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Istore);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Istore);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Istore);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -776,14 +776,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Lstore);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Lstore);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Lstore);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Lstore);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -803,14 +803,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Fstore);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Fstore);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Fstore);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Fstore);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -830,14 +830,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Dstore);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Dstore);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Dstore);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Dstore);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -857,14 +857,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Astore);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Astore);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Astore);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Astore);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -877,7 +877,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Istore0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Istore0);
+            OpCode(IKVM.ByteCode.OpCode.Istore0);
 
             return this;
         }
@@ -889,7 +889,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Istore1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Istore1);
+            OpCode(IKVM.ByteCode.OpCode.Istore1);
 
             return this;
         }
@@ -901,7 +901,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Istore2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Istore2);
+            OpCode(IKVM.ByteCode.OpCode.Istore2);
 
             return this;
         }
@@ -913,7 +913,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Istore3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Istore3);
+            OpCode(IKVM.ByteCode.OpCode.Istore3);
 
             return this;
         }
@@ -925,7 +925,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lstore0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lstore0);
+            OpCode(IKVM.ByteCode.OpCode.Lstore0);
 
             return this;
         }
@@ -937,7 +937,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lstore1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lstore1);
+            OpCode(IKVM.ByteCode.OpCode.Lstore1);
 
             return this;
         }
@@ -949,7 +949,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lstore2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lstore2);
+            OpCode(IKVM.ByteCode.OpCode.Lstore2);
 
             return this;
         }
@@ -961,7 +961,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lstore3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lstore3);
+            OpCode(IKVM.ByteCode.OpCode.Lstore3);
 
             return this;
         }
@@ -973,7 +973,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fstore0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fstore0);
+            OpCode(IKVM.ByteCode.OpCode.Fstore0);
 
             return this;
         }
@@ -985,7 +985,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fstore1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fstore1);
+            OpCode(IKVM.ByteCode.OpCode.Fstore1);
 
             return this;
         }
@@ -997,7 +997,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fstore2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fstore2);
+            OpCode(IKVM.ByteCode.OpCode.Fstore2);
 
             return this;
         }
@@ -1009,7 +1009,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fstore3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fstore3);
+            OpCode(IKVM.ByteCode.OpCode.Fstore3);
 
             return this;
         }
@@ -1021,7 +1021,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dstore0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dstore0);
+            OpCode(IKVM.ByteCode.OpCode.Dstore0);
 
             return this;
         }
@@ -1033,7 +1033,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dstore1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dstore1);
+            OpCode(IKVM.ByteCode.OpCode.Dstore1);
 
             return this;
         }
@@ -1045,7 +1045,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dstore2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dstore2);
+            OpCode(IKVM.ByteCode.OpCode.Dstore2);
 
             return this;
         }
@@ -1057,7 +1057,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dstore3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dstore3);
+            OpCode(IKVM.ByteCode.OpCode.Dstore3);
 
             return this;
         }
@@ -1069,7 +1069,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Astore0()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Astore0);
+            OpCode(IKVM.ByteCode.OpCode.Astore0);
 
             return this;
         }
@@ -1081,7 +1081,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Astore1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Astore1);
+            OpCode(IKVM.ByteCode.OpCode.Astore1);
 
             return this;
         }
@@ -1093,7 +1093,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Astore2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Astore2);
+            OpCode(IKVM.ByteCode.OpCode.Astore2);
 
             return this;
         }
@@ -1105,7 +1105,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Astore3()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Astore3);
+            OpCode(IKVM.ByteCode.OpCode.Astore3);
 
             return this;
         }
@@ -1117,7 +1117,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iastore()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iastore);
+            OpCode(IKVM.ByteCode.OpCode.Iastore);
 
             return this;
         }
@@ -1129,7 +1129,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lastore()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lastore);
+            OpCode(IKVM.ByteCode.OpCode.Lastore);
 
             return this;
         }
@@ -1141,7 +1141,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fastore()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fastore);
+            OpCode(IKVM.ByteCode.OpCode.Fastore);
 
             return this;
         }
@@ -1153,7 +1153,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dastore()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dastore);
+            OpCode(IKVM.ByteCode.OpCode.Dastore);
 
             return this;
         }
@@ -1165,7 +1165,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Aastore()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Aastore);
+            OpCode(IKVM.ByteCode.OpCode.Aastore);
 
             return this;
         }
@@ -1177,7 +1177,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Bastore()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Bastore);
+            OpCode(IKVM.ByteCode.OpCode.Bastore);
 
             return this;
         }
@@ -1189,7 +1189,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Castore()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Castore);
+            OpCode(IKVM.ByteCode.OpCode.Castore);
 
             return this;
         }
@@ -1201,7 +1201,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Sastore()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Sastore);
+            OpCode(IKVM.ByteCode.OpCode.Sastore);
 
             return this;
         }
@@ -1213,7 +1213,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Pop()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Pop);
+            OpCode(IKVM.ByteCode.OpCode.Pop);
 
             return this;
         }
@@ -1225,7 +1225,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Pop2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Pop2);
+            OpCode(IKVM.ByteCode.OpCode.Pop2);
 
             return this;
         }
@@ -1237,7 +1237,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dup()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dup);
+            OpCode(IKVM.ByteCode.OpCode.Dup);
 
             return this;
         }
@@ -1249,7 +1249,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder DupX1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.DupX1);
+            OpCode(IKVM.ByteCode.OpCode.DupX1);
 
             return this;
         }
@@ -1261,7 +1261,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder DupX2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.DupX2);
+            OpCode(IKVM.ByteCode.OpCode.DupX2);
 
             return this;
         }
@@ -1273,7 +1273,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dup2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dup2);
+            OpCode(IKVM.ByteCode.OpCode.Dup2);
 
             return this;
         }
@@ -1285,7 +1285,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dup2X1()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dup2X1);
+            OpCode(IKVM.ByteCode.OpCode.Dup2X1);
 
             return this;
         }
@@ -1297,7 +1297,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dup2X2()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dup2X2);
+            OpCode(IKVM.ByteCode.OpCode.Dup2X2);
 
             return this;
         }
@@ -1309,7 +1309,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Swap()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Swap);
+            OpCode(IKVM.ByteCode.OpCode.Swap);
 
             return this;
         }
@@ -1321,7 +1321,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iadd()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iadd);
+            OpCode(IKVM.ByteCode.OpCode.Iadd);
 
             return this;
         }
@@ -1333,7 +1333,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ladd()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ladd);
+            OpCode(IKVM.ByteCode.OpCode.Ladd);
 
             return this;
         }
@@ -1345,7 +1345,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fadd()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fadd);
+            OpCode(IKVM.ByteCode.OpCode.Fadd);
 
             return this;
         }
@@ -1357,7 +1357,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dadd()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dadd);
+            OpCode(IKVM.ByteCode.OpCode.Dadd);
 
             return this;
         }
@@ -1369,7 +1369,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Isub()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Isub);
+            OpCode(IKVM.ByteCode.OpCode.Isub);
 
             return this;
         }
@@ -1381,7 +1381,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lsub()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lsub);
+            OpCode(IKVM.ByteCode.OpCode.Lsub);
 
             return this;
         }
@@ -1393,7 +1393,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fsub()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fsub);
+            OpCode(IKVM.ByteCode.OpCode.Fsub);
 
             return this;
         }
@@ -1405,7 +1405,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dsub()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dsub);
+            OpCode(IKVM.ByteCode.OpCode.Dsub);
 
             return this;
         }
@@ -1417,7 +1417,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Imul()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Imul);
+            OpCode(IKVM.ByteCode.OpCode.Imul);
 
             return this;
         }
@@ -1429,7 +1429,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lmul()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lmul);
+            OpCode(IKVM.ByteCode.OpCode.Lmul);
 
             return this;
         }
@@ -1441,7 +1441,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fmul()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fmul);
+            OpCode(IKVM.ByteCode.OpCode.Fmul);
 
             return this;
         }
@@ -1453,7 +1453,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dmul()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dmul);
+            OpCode(IKVM.ByteCode.OpCode.Dmul);
 
             return this;
         }
@@ -1465,7 +1465,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Idiv()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Idiv);
+            OpCode(IKVM.ByteCode.OpCode.Idiv);
 
             return this;
         }
@@ -1477,7 +1477,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ldiv()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ldiv);
+            OpCode(IKVM.ByteCode.OpCode.Ldiv);
 
             return this;
         }
@@ -1489,7 +1489,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fdiv()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fdiv);
+            OpCode(IKVM.ByteCode.OpCode.Fdiv);
 
             return this;
         }
@@ -1501,7 +1501,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ddiv()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ddiv);
+            OpCode(IKVM.ByteCode.OpCode.Ddiv);
 
             return this;
         }
@@ -1513,7 +1513,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Irem()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Irem);
+            OpCode(IKVM.ByteCode.OpCode.Irem);
 
             return this;
         }
@@ -1525,7 +1525,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lrem()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lrem);
+            OpCode(IKVM.ByteCode.OpCode.Lrem);
 
             return this;
         }
@@ -1537,7 +1537,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Frem()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Frem);
+            OpCode(IKVM.ByteCode.OpCode.Frem);
 
             return this;
         }
@@ -1549,7 +1549,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Drem()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Drem);
+            OpCode(IKVM.ByteCode.OpCode.Drem);
 
             return this;
         }
@@ -1561,7 +1561,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ineg()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ineg);
+            OpCode(IKVM.ByteCode.OpCode.Ineg);
 
             return this;
         }
@@ -1573,7 +1573,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lneg()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lneg);
+            OpCode(IKVM.ByteCode.OpCode.Lneg);
 
             return this;
         }
@@ -1585,7 +1585,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fneg()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fneg);
+            OpCode(IKVM.ByteCode.OpCode.Fneg);
 
             return this;
         }
@@ -1597,7 +1597,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dneg()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dneg);
+            OpCode(IKVM.ByteCode.OpCode.Dneg);
 
             return this;
         }
@@ -1609,7 +1609,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ishl()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ishl);
+            OpCode(IKVM.ByteCode.OpCode.Ishl);
 
             return this;
         }
@@ -1621,7 +1621,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lshl()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lshl);
+            OpCode(IKVM.ByteCode.OpCode.Lshl);
 
             return this;
         }
@@ -1633,7 +1633,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ishr()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ishr);
+            OpCode(IKVM.ByteCode.OpCode.Ishr);
 
             return this;
         }
@@ -1645,7 +1645,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lshr()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lshr);
+            OpCode(IKVM.ByteCode.OpCode.Lshr);
 
             return this;
         }
@@ -1657,7 +1657,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iushr()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iushr);
+            OpCode(IKVM.ByteCode.OpCode.Iushr);
 
             return this;
         }
@@ -1669,7 +1669,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lushr()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lushr);
+            OpCode(IKVM.ByteCode.OpCode.Lushr);
 
             return this;
         }
@@ -1681,7 +1681,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Iand()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Iand);
+            OpCode(IKVM.ByteCode.OpCode.Iand);
 
             return this;
         }
@@ -1693,7 +1693,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Land()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Land);
+            OpCode(IKVM.ByteCode.OpCode.Land);
 
             return this;
         }
@@ -1705,7 +1705,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ior()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ior);
+            OpCode(IKVM.ByteCode.OpCode.Ior);
 
             return this;
         }
@@ -1717,7 +1717,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lor()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lor);
+            OpCode(IKVM.ByteCode.OpCode.Lor);
 
             return this;
         }
@@ -1729,7 +1729,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ixor()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ixor);
+            OpCode(IKVM.ByteCode.OpCode.Ixor);
 
             return this;
         }
@@ -1741,7 +1741,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lxor()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lxor);
+            OpCode(IKVM.ByteCode.OpCode.Lxor);
 
             return this;
         }
@@ -1763,16 +1763,16 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Iinc);
-                this.WriteL2((ushort)local);
-                this.WriteS2((short)value);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Iinc);
+                WriteL2((ushort)local);
+                WriteS2((short)value);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Iinc);
-                this.WriteL1((byte)local);
-                this.WriteS1((sbyte)value);
+                OpCode(IKVM.ByteCode.OpCode.Iinc);
+                WriteL1((byte)local);
+                WriteS1((sbyte)value);
             }
 
             return this;
@@ -1785,7 +1785,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder I2l()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.I2l);
+            OpCode(IKVM.ByteCode.OpCode.I2l);
 
             return this;
         }
@@ -1797,7 +1797,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder I2f()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.I2f);
+            OpCode(IKVM.ByteCode.OpCode.I2f);
 
             return this;
         }
@@ -1809,7 +1809,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder I2d()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.I2d);
+            OpCode(IKVM.ByteCode.OpCode.I2d);
 
             return this;
         }
@@ -1821,7 +1821,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder L2i()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.L2i);
+            OpCode(IKVM.ByteCode.OpCode.L2i);
 
             return this;
         }
@@ -1833,7 +1833,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder L2f()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.L2f);
+            OpCode(IKVM.ByteCode.OpCode.L2f);
 
             return this;
         }
@@ -1845,7 +1845,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder L2d()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.L2d);
+            OpCode(IKVM.ByteCode.OpCode.L2d);
 
             return this;
         }
@@ -1857,7 +1857,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder F2i()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.F2i);
+            OpCode(IKVM.ByteCode.OpCode.F2i);
 
             return this;
         }
@@ -1869,7 +1869,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder F2l()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.F2l);
+            OpCode(IKVM.ByteCode.OpCode.F2l);
 
             return this;
         }
@@ -1881,7 +1881,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder F2d()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.F2d);
+            OpCode(IKVM.ByteCode.OpCode.F2d);
 
             return this;
         }
@@ -1893,7 +1893,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder D2i()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.D2i);
+            OpCode(IKVM.ByteCode.OpCode.D2i);
 
             return this;
         }
@@ -1905,7 +1905,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder D2l()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.D2l);
+            OpCode(IKVM.ByteCode.OpCode.D2l);
 
             return this;
         }
@@ -1917,7 +1917,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder D2f()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.D2f);
+            OpCode(IKVM.ByteCode.OpCode.D2f);
 
             return this;
         }
@@ -1929,7 +1929,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder I2b()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.I2b);
+            OpCode(IKVM.ByteCode.OpCode.I2b);
 
             return this;
         }
@@ -1941,7 +1941,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder I2c()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.I2c);
+            OpCode(IKVM.ByteCode.OpCode.I2c);
 
             return this;
         }
@@ -1953,7 +1953,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder I2s()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.I2s);
+            OpCode(IKVM.ByteCode.OpCode.I2s);
 
             return this;
         }
@@ -1965,7 +1965,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lcmp()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lcmp);
+            OpCode(IKVM.ByteCode.OpCode.Lcmp);
 
             return this;
         }
@@ -1977,7 +1977,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fcmpl()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fcmpl);
+            OpCode(IKVM.ByteCode.OpCode.Fcmpl);
 
             return this;
         }
@@ -1989,7 +1989,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Fcmpg()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Fcmpg);
+            OpCode(IKVM.ByteCode.OpCode.Fcmpg);
 
             return this;
         }
@@ -2001,7 +2001,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dcmpl()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dcmpl);
+            OpCode(IKVM.ByteCode.OpCode.Dcmpl);
 
             return this;
         }
@@ -2013,7 +2013,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dcmpg()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dcmpg);
+            OpCode(IKVM.ByteCode.OpCode.Dcmpg);
 
             return this;
         }
@@ -2026,8 +2026,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Ifeq(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.Ifeq);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.Ifeq);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2040,8 +2040,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Ifne(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.Ifne);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.Ifne);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2054,8 +2054,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Iflt(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.Iflt);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.Iflt);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2068,8 +2068,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Ifge(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.Ifge);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.Ifge);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2082,8 +2082,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Ifgt(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.Ifgt);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.Ifgt);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2096,8 +2096,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Ifle(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.Ifle);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.Ifle);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2110,8 +2110,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfIcmpeq(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfIcmpeq);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfIcmpeq);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2124,8 +2124,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfIcmpne(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfIcmpne);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfIcmpne);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2138,8 +2138,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfIcmplt(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfIcmplt);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfIcmplt);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2152,8 +2152,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfIcmpge(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfIcmpge);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfIcmpge);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2166,8 +2166,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfIcmpgt(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfIcmpgt);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfIcmpgt);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2180,8 +2180,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfIcmple(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfIcmple);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfIcmple);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2194,8 +2194,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfAcmpeq(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfAcmpeq);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfAcmpeq);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2208,8 +2208,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfAcmpne(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfAcmpne);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfAcmpne);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2222,8 +2222,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Goto(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.Goto);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.Goto);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2236,8 +2236,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Jsr(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.Jsr);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.Jsr);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2256,14 +2256,14 @@ namespace IKVM.ByteCode.Encoding
 
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.Ret);
-                this.WriteL2((ushort)local);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.Ret);
+                WriteL2((ushort)local);
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Ret);
-                this.WriteL1((byte)local);
+                OpCode(IKVM.ByteCode.OpCode.Ret);
+                WriteL1((byte)local);
             }
 
             return this;
@@ -2276,7 +2276,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Ireturn()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Ireturn);
+            OpCode(IKVM.ByteCode.OpCode.Ireturn);
 
             return this;
         }
@@ -2288,7 +2288,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Lreturn()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Lreturn);
+            OpCode(IKVM.ByteCode.OpCode.Lreturn);
 
             return this;
         }
@@ -2300,7 +2300,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Freturn()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Freturn);
+            OpCode(IKVM.ByteCode.OpCode.Freturn);
 
             return this;
         }
@@ -2312,7 +2312,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Dreturn()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Dreturn);
+            OpCode(IKVM.ByteCode.OpCode.Dreturn);
 
             return this;
         }
@@ -2324,7 +2324,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Areturn()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Areturn);
+            OpCode(IKVM.ByteCode.OpCode.Areturn);
 
             return this;
         }
@@ -2336,7 +2336,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Return()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Return);
+            OpCode(IKVM.ByteCode.OpCode.Return);
 
             return this;
         }
@@ -2348,8 +2348,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder GetStatic(ConstantHandle field)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.GetStatic);
-            this.WriteC2((ConstantHandle)field);
+            OpCode(IKVM.ByteCode.OpCode.GetStatic);
+            WriteC2((ConstantHandle)field);
 
             return this;
         }
@@ -2361,8 +2361,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder PutStatic(ConstantHandle field)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.PutStatic);
-            this.WriteC2((ConstantHandle)field);
+            OpCode(IKVM.ByteCode.OpCode.PutStatic);
+            WriteC2((ConstantHandle)field);
 
             return this;
         }
@@ -2374,8 +2374,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder GetField(ConstantHandle field)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.GetField);
-            this.WriteC2((ConstantHandle)field);
+            OpCode(IKVM.ByteCode.OpCode.GetField);
+            WriteC2((ConstantHandle)field);
 
             return this;
         }
@@ -2387,8 +2387,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder PutField(ConstantHandle field)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.PutField);
-            this.WriteC2((ConstantHandle)field);
+            OpCode(IKVM.ByteCode.OpCode.PutField);
+            WriteC2((ConstantHandle)field);
 
             return this;
         }
@@ -2400,8 +2400,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder InvokeVirtual(ConstantHandle method)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.InvokeVirtual);
-            this.WriteC2((ConstantHandle)method);
+            OpCode(IKVM.ByteCode.OpCode.InvokeVirtual);
+            WriteC2((ConstantHandle)method);
 
             return this;
         }
@@ -2413,8 +2413,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder InvokeSpecial(ConstantHandle method)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.InvokeSpecial);
-            this.WriteC2((ConstantHandle)method);
+            OpCode(IKVM.ByteCode.OpCode.InvokeSpecial);
+            WriteC2((ConstantHandle)method);
 
             return this;
         }
@@ -2426,8 +2426,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder InvokeStatic(ConstantHandle method)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.InvokeStatic);
-            this.WriteC2((ConstantHandle)method);
+            OpCode(IKVM.ByteCode.OpCode.InvokeStatic);
+            WriteC2((ConstantHandle)method);
 
             return this;
         }
@@ -2439,10 +2439,10 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder InvokeInterface(ConstantHandle method, byte count, byte zero)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.InvokeInterface);
-            this.WriteC2((ConstantHandle)method);
-            this.WriteU1((byte)count);
-            this.WriteU1((byte)zero);
+            OpCode(IKVM.ByteCode.OpCode.InvokeInterface);
+            WriteC2((ConstantHandle)method);
+            WriteU1((byte)count);
+            WriteU1((byte)zero);
 
             return this;
         }
@@ -2454,10 +2454,10 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder InvokeDynamic(ConstantHandle method, byte zero, byte zero2)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.InvokeDynamic);
-            this.WriteC2((ConstantHandle)method);
-            this.WriteU1((byte)zero);
-            this.WriteU1((byte)zero2);
+            OpCode(IKVM.ByteCode.OpCode.InvokeDynamic);
+            WriteC2((ConstantHandle)method);
+            WriteU1((byte)zero);
+            WriteU1((byte)zero2);
 
             return this;
         }
@@ -2469,8 +2469,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder New(ConstantHandle constant)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.New);
-            this.WriteC2((ConstantHandle)constant);
+            OpCode(IKVM.ByteCode.OpCode.New);
+            WriteC2((ConstantHandle)constant);
 
             return this;
         }
@@ -2482,8 +2482,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Newarray(byte value)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Newarray);
-            this.WriteU1((byte)value);
+            OpCode(IKVM.ByteCode.OpCode.Newarray);
+            WriteU1((byte)value);
 
             return this;
         }
@@ -2495,8 +2495,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Anewarray(ConstantHandle constant)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Anewarray);
-            this.WriteC2((ConstantHandle)constant);
+            OpCode(IKVM.ByteCode.OpCode.Anewarray);
+            WriteC2((ConstantHandle)constant);
 
             return this;
         }
@@ -2508,7 +2508,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Arraylength()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Arraylength);
+            OpCode(IKVM.ByteCode.OpCode.Arraylength);
 
             return this;
         }
@@ -2520,7 +2520,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Athrow()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Athrow);
+            OpCode(IKVM.ByteCode.OpCode.Athrow);
 
             return this;
         }
@@ -2532,8 +2532,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Checkcast(ConstantHandle type)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Checkcast);
-            this.WriteC2((ConstantHandle)type);
+            OpCode(IKVM.ByteCode.OpCode.Checkcast);
+            WriteC2((ConstantHandle)type);
 
             return this;
         }
@@ -2545,8 +2545,8 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder InstanceOf(ConstantHandle type)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.InstanceOf);
-            this.WriteC2((ConstantHandle)type);
+            OpCode(IKVM.ByteCode.OpCode.InstanceOf);
+            WriteC2((ConstantHandle)type);
 
             return this;
         }
@@ -2558,7 +2558,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder MonitorEnter()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.MonitorEnter);
+            OpCode(IKVM.ByteCode.OpCode.MonitorEnter);
 
             return this;
         }
@@ -2570,7 +2570,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder MonitorExit()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.MonitorExit);
+            OpCode(IKVM.ByteCode.OpCode.MonitorExit);
 
             return this;
         }
@@ -2582,7 +2582,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Wide()
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Wide);
+            OpCode(IKVM.ByteCode.OpCode.Wide);
 
             return this;
         }
@@ -2594,9 +2594,9 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CodeBuilder Multianewarray(ConstantHandle type, byte dimensions)
         {
-            this.OpCode(IKVM.ByteCode.OpCode.Multianewarray);
-            this.WriteC2((ConstantHandle)type);
-            this.WriteU1((byte)dimensions);
+            OpCode(IKVM.ByteCode.OpCode.Multianewarray);
+            WriteC2((ConstantHandle)type);
+            WriteU1((byte)dimensions);
 
             return this;
         }
@@ -2609,8 +2609,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfNull(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfNull);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfNull);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2623,8 +2623,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder IfNonNull(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.IfNonNull);
-            this.Label((LabelHandle)target, false, _offset);
+            OpCode(IKVM.ByteCode.OpCode.IfNonNull);
+            Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2637,8 +2637,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder GotoW(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.GotoW);
-            this.Label((LabelHandle)target, true, _offset);
+            OpCode(IKVM.ByteCode.OpCode.GotoW);
+            Label((LabelHandle)target, true, _offset);
 
             return this;
         }
@@ -2651,8 +2651,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder JsrW(LabelHandle target)
         {
             var _offset = Offset;
-            this.OpCode(IKVM.ByteCode.OpCode.JsrW);
-            this.Label((LabelHandle)target, true, _offset);
+            OpCode(IKVM.ByteCode.OpCode.JsrW);
+            Label((LabelHandle)target, true, _offset);
 
             return this;
         }

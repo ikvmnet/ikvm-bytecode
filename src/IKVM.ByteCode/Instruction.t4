@@ -47,30 +47,39 @@ public class InstructionArg
 public static class Util
 {
 
+    /// <summary>
+    /// Returns <c>true</c> if any of the instruction arguments is a type that has a branch target.
+    /// </summary>
     public static bool HasBranchTarget(InstructionArg[] args)
     {
         return args.Any(i => i.Type == "J2" || i.Type == "J4");
     }
-
+    
+    /// <summary>
+    /// Returns <c>true</c> if any of the instruction arguments has a wide version.
+    /// </summary>
     public static bool HasWide(InstructionArg[] args)
     {
         return args.Any(i => i.WideType != null);
     }
-
-    public static string GetWriteArg(InstructionArg arg, bool wide)
+    
+    /// <summary>
+    /// Returns a text string that represents a method call to write the given instruction argument to this builder.
+    /// </summary>
+    public static string GetWriteArgMethodCall(InstructionArg arg, bool wide)
     {
         var type = GetRealType(arg, wide);
         var name = GetWriterTypeName(type);
         if (type == "J2")
         {
-            return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, false, _offset)";
+            return $"{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, false, _offset)";
         }
         if (type == "J4")
         {
-            return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, true, _offset)";
+            return $"{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, true, _offset)";
         }
 
-        return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()})";
+        return $"{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()})";
     }
 
     public static string GetUserType(InstructionArg arg)
@@ -270,7 +279,7 @@ public static class Util
         }
     }
 
-    public static string BuilderArgList(InstructionArg[] args)
+    public static string BuilderInstructionArgList(InstructionArg[] args)
     {
         var s = new List<string>();
 

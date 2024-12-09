@@ -305,7 +305,7 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 8 bit sized argument.
+        /// Encodes a 8 bit sized unsigned integer argument.
         /// </summary>
         /// <param name="value"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -315,7 +315,7 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 8 bit sized argument.
+        /// Encodes a 8 bit sized signed integer argument.
         /// </summary>
         /// <param name="value"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -335,7 +335,7 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 8 bit sized constant argument.
+        /// Encodes a 8 bit sized local argument.
         /// </summary>
         /// <param name="local"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -345,7 +345,7 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 16-bit sized integer argument.
+        /// Encodes a 16-bit sized unsigned integer argument.
         /// </summary>
         /// <param name="value"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -355,7 +355,7 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 16 bit sized argument.
+        /// Encodes a 16 bit sized signed integer argument.
         /// </summary>
         /// <param name="value"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -365,7 +365,7 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Encodes a 16 bit sized constant argument.
+        /// Encodes a 16 bit sized local argument.
         /// </summary>
         /// <param name="value"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -381,7 +381,7 @@ namespace IKVM.ByteCode.Encoding
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void WriteC2(ConstantHandle handle)
         {
-            WriteUInt16(checked((ushort)handle.Slot));
+            WriteUInt16(handle.Slot);
         }
 
         /// <summary>

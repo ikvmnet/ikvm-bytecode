@@ -32,7 +32,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CodeBuilder <#= name #>(<#= Util.BuilderArgList(args) #>)
+        public CodeBuilder <#= name #>(<#= Util.BuilderInstructionArgList(args) #>)
         {
 <#
     if (Util.HasBranchTarget(args))
@@ -61,27 +61,27 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 #>
             if (wide)
             {
-                this.OpCode(IKVM.ByteCode.OpCode.Wide);
-                this.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
+                OpCode(IKVM.ByteCode.OpCode.Wide);
+                OpCode(IKVM.ByteCode.OpCode.<#= name #>);
 <#
         for (int j = 0; j < args.Length; j++)
         {
             var arg = args[j];
 #>
-                <#= Util.GetWriteArg(arg, true) #>;
+                <#= Util.GetWriteArgMethodCall(arg, true) #>;
 <#
         }
 #>
             }
             else
             {
-                this.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
+                OpCode(IKVM.ByteCode.OpCode.<#= name #>);
 <#
         for (int j = 0; j < args.Length; j++)
         {
             var arg = args[j];
 #>
-                <#= Util.GetWriteArg(arg, false) #>;
+                <#= Util.GetWriteArgMethodCall(arg, false) #>;
 <#
         }
 #>
@@ -91,13 +91,13 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     else
     {
 #>
-            this.OpCode(IKVM.ByteCode.OpCode.<#= name #>);
+            OpCode(IKVM.ByteCode.OpCode.<#= name #>);
 <#
         for (int j = 0; j < args.Length; j++)
         {
             var arg = args[j];
 #>
-            <#= Util.GetWriteArg(arg, false) #>;
+            <#= Util.GetWriteArgMethodCall(arg, false) #>;
 <#
         }
 #>
