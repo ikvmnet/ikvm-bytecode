@@ -97,11 +97,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ModuleExportsTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ModuleExportsTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             foreach (var i in this)
-                i.EncodeTo(map, ref encoder);
+                i.CopyTo(map, ref encoder);
         }
 
         /// <inheritdoc />

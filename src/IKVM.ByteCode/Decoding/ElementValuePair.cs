@@ -62,11 +62,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ElementValuePairTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ElementValuePairTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             var self = this;
-            encoder.Element(map.Map(Name), e => self.Value.EncodeTo(map, ref e));
+            encoder.Element(map.Map(Name), e => self.Value.CopyTo(map, ref e));
         }
 
         /// <summary>

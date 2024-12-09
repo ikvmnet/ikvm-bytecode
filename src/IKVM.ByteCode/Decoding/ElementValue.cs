@@ -231,7 +231,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ElementValueEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ElementValueEncoder encoder)
             where TConstantMap : IConstantMap
         {
             switch (Kind)
@@ -282,7 +282,7 @@ namespace IKVM.ByteCode.Decoding
                     break;
                 case ElementValueKind.Annotation:
                     var _annotation = AsAnnotation();
-                    encoder.Annotation(e => _annotation.Annotation.EncodeTo(map, ref e));
+                    encoder.Annotation(e => _annotation.Annotation.CopyTo(map, ref e));
                     break;
                 case ElementValueKind.Array:
                     break;

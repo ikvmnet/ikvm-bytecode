@@ -155,7 +155,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="map"></param>
         /// <param name="attributeName"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             var self = this;
@@ -164,11 +164,11 @@ namespace IKVM.ByteCode.Decoding
                 map.Map(Name),
                 Flags,
                 map.Map(Version),
-                e => self.Requires.EncodeTo(map, ref e),
-                e => self.Exports.EncodeTo(map, ref e),
-                e => self.Opens.EncodeTo(map, ref e),
-                e => self.Uses.EncodeTo(map, ref e),
-                e => self.Provides.EncodeTo(map, ref e));
+                e => self.Requires.CopyTo(map, ref e),
+                e => self.Exports.CopyTo(map, ref e),
+                e => self.Opens.CopyTo(map, ref e),
+                e => self.Uses.CopyTo(map, ref e),
+                e => self.Provides.CopyTo(map, ref e));
         }
 
     }

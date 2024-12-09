@@ -42,7 +42,7 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
     var name = i.Trim();
 #>
                 case AttributeName.<#= name #>:
-                    ((<#= name #>Attribute)this).EncodeTo(map, map.Map(Name), ref encoder);
+                    ((<#= name #>Attribute)this).CopyTo(map, map.Map(Name), ref encoder);
                     break;
 <#
 }

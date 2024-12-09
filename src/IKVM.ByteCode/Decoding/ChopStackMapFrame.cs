@@ -39,7 +39,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref StackMapTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref StackMapTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             encoder.Chop(FrameType, OffsetDelta);

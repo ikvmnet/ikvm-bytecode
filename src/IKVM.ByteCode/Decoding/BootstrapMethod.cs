@@ -33,11 +33,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref BootstrapMethodTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref BootstrapMethodTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             var self = this;
-            encoder.Method(map.Map(Method), e => self.Arguments.EncodeTo(map, ref e));
+            encoder.Method(map.Map(Method), e => self.Arguments.CopyTo(map, ref e));
         }
 
         public readonly MethodHandleConstantHandle Method = Method;

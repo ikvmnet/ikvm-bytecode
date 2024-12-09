@@ -51,11 +51,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref StackMapTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref StackMapTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             var self = this;
-            encoder.Append(FrameType, OffsetDelta, e => self.Locals.EncodeTo(map, ref e));
+            encoder.Append(FrameType, OffsetDelta, e => self.Locals.CopyTo(map, ref e));
         }
 
         public readonly byte FrameType = FrameType;

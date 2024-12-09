@@ -47,7 +47,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref TypePathEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref TypePathEncoder encoder)
             where TConstantMap : IConstantMap
         {
             WriteTo(ref encoder);

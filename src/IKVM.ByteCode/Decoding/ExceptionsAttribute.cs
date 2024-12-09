@@ -49,11 +49,11 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="map"></param>
         /// <param name="attributeName"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             var self = this;
-            encoder.Exceptions(attributeName, e => self.EncodeTo(map, ref e));
+            encoder.Exceptions(attributeName, e => self.CopyTo(map, ref e));
         }
 
         /// <summary>
@@ -61,10 +61,10 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ClassConstantTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ClassConstantTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
-            Exceptions.EncodeTo(map, ref encoder);
+            Exceptions.CopyTo(map, ref encoder);
         }
 
     }

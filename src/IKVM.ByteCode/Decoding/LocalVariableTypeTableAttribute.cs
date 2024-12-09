@@ -57,11 +57,11 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="map"></param>
         /// <param name="encoder"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             var self = this;
-            encoder.LocalVariableTypeTable(attributeName, e => self.LocalVariableTypes.EncodeTo(map, ref e));
+            encoder.LocalVariableTypeTable(attributeName, e => self.LocalVariableTypes.CopyTo(map, ref e));
         }
 
     }

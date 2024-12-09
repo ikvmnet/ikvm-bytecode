@@ -62,11 +62,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref TypeAnnotationTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref TypeAnnotationTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             var self = this;
-            encoder.TypeAnnotation(e => self.EncodeTo(map, ref e));
+            encoder.TypeAnnotation(e => self.CopyTo(map, ref e));
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref TypeAnnotationEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref TypeAnnotationEncoder encoder)
             where TConstantMap : IConstantMap
         {
             var self = this;
@@ -83,91 +83,91 @@ namespace IKVM.ByteCode.Decoding
             {
                 case TypeAnnotationTargetType.ClassTypeParameter:
                     var _classTypeParameter = Target.AsTypeParameterTarget();
-                    encoder.ClassTypeParameter(_classTypeParameter.ParameterIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ClassTypeParameter(_classTypeParameter.ParameterIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodTypeParameter:
                     var _methodTypeParameter = Target.AsTypeParameterTarget();
-                    encoder.MethodTypeParameter(_methodTypeParameter.ParameterIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.MethodTypeParameter(_methodTypeParameter.ParameterIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ClassExtends:
                     var superTypeTarget = Target.AsSuperTypeTarget();
-                    encoder.ClassExtends(superTypeTarget.SuperTypeIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ClassExtends(superTypeTarget.SuperTypeIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ClassTypeParameterBound:
                     var classTypeParameterBound = Target.AsTypeParameterBoundTarget();
-                    encoder.ClassTypeParameterBound(classTypeParameterBound.ParameterIndex, classTypeParameterBound.BoundIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ClassTypeParameterBound(classTypeParameterBound.ParameterIndex, classTypeParameterBound.BoundIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodTypeParameterBound:
                     var methodTypeParameterBound = Target.AsTypeParameterBoundTarget();
-                    encoder.MethodTypeParameterBound(methodTypeParameterBound.ParameterIndex, methodTypeParameterBound.BoundIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.MethodTypeParameterBound(methodTypeParameterBound.ParameterIndex, methodTypeParameterBound.BoundIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.Field:
                     var field = Target.AsEmptyTarget();
-                    encoder.Field(e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.Field(e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodReturn:
                     var methodReturn = Target.AsEmptyTarget();
-                    encoder.MethodReturn(e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.MethodReturn(e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodReceiver:
                     var methodReceiver = Target.AsEmptyTarget();
-                    encoder.MethodReceiver(e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.MethodReceiver(e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodFormalParameter:
                     var methodFormalParameter = Target.AsFormalParameterTarget();
-                    encoder.MethodFormalParameter(methodFormalParameter.ParameterIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.MethodFormalParameter(methodFormalParameter.ParameterIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.Throws:
                     var throws = Target.AsThrowsTarget();
-                    encoder.Throws(throws.ThrowsTypeIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.Throws(throws.ThrowsTypeIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.LocalVar:
                     var localVar = Target.AsLocalVarTarget();
-                    encoder.LocalVariable(e => localVar.EncodeTo(map, ref e), e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.LocalVariable(e => localVar.CopyTo(map, ref e), e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ResourceVariable:
                     var resourceVariable = Target.AsLocalVarTarget();
-                    encoder.ResourceVariable(e => resourceVariable.EncodeTo(map, ref e), e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ResourceVariable(e => resourceVariable.CopyTo(map, ref e), e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ExceptionParameter:
                     var catchTarget = Target.AsCatchTarget();
-                    encoder.ExceptionParameter(catchTarget.ExceptionTableIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ExceptionParameter(catchTarget.ExceptionTableIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.InstanceOf:
                     var instanceOf = Target.AsOffsetTarget();
-                    encoder.InstanceOf(instanceOf.Offset, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.InstanceOf(instanceOf.Offset, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.New:
                     var new_ = Target.AsOffsetTarget();
-                    encoder.New(new_.Offset, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.New(new_.Offset, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ConstructorReference:
                     var constructorReference = Target.AsOffsetTarget();
-                    encoder.ConstructorReference(constructorReference.Offset, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ConstructorReference(constructorReference.Offset, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodReference:
                     var methodReference = Target.AsOffsetTarget();
-                    encoder.MethodReference(methodReference.Offset, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.MethodReference(methodReference.Offset, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.Cast:
                     var cast = Target.AsTypeArgumentTarget();
-                    encoder.Cast(cast.Offset, cast.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.Cast(cast.Offset, cast.TypeArgumentIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ConstructorInvocationTypeArgument:
                     var constructorInvocationTypeArgument = Target.AsTypeArgumentTarget();
-                    encoder.ConstructorInvocationTypeArgument(constructorInvocationTypeArgument.Offset, constructorInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ConstructorInvocationTypeArgument(constructorInvocationTypeArgument.Offset, constructorInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodInvocationTypeArgument:
                     var methodInvocationTypeArgument = Target.AsTypeArgumentTarget();
-                    encoder.MethodInvocationTypeArgument(methodInvocationTypeArgument.Offset, methodInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.MethodInvocationTypeArgument(methodInvocationTypeArgument.Offset, methodInvocationTypeArgument.TypeArgumentIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.ConstructorReferenceTypeArgument:
                     var constructorReferenceTypeArgument = Target.AsTypeArgumentTarget();
-                    encoder.ConstructorReferenceTypeArgument(constructorReferenceTypeArgument.Offset, constructorReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ConstructorReferenceTypeArgument(constructorReferenceTypeArgument.Offset, constructorReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 case TypeAnnotationTargetType.MethodReferenceTypeArgument:
                     var methodReferenceTypeArgument = Target.AsTypeArgumentTarget();
-                    encoder.ConstructorReferenceTypeArgument(methodReferenceTypeArgument.Offset, methodReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.EncodeTo(map, ref e), map.Map(self.Type), e => self.Elements.EncodeTo(map, ref e));
+                    encoder.ConstructorReferenceTypeArgument(methodReferenceTypeArgument.Offset, methodReferenceTypeArgument.TypeArgumentIndex, e => self.TargetPath.CopyTo(map, ref e), map.Map(self.Type), e => self.Elements.CopyTo(map, ref e));
                     break;
                 default:
                     throw new ByteCodeException("Invalid type annotation target type.");

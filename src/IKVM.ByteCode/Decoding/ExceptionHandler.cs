@@ -51,7 +51,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ExceptionTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ExceptionTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             encoder.Exception(StartOffset, EndOffset, HandlerOffset, map.Map(CatchType));

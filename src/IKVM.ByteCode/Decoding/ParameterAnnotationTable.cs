@@ -151,11 +151,11 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void EncodeTo<TConstantMap>(TConstantMap map, ref ParameterAnnotationTableEncoder encoder)
+        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ParameterAnnotationTableEncoder encoder)
             where TConstantMap : IConstantMap
         {
             foreach (var i in this)
-                encoder.ParameterAnnotation(e => i.EncodeTo(map, ref e));
+                encoder.ParameterAnnotation(e => i.CopyTo(map, ref e));
         }
 
         /// <inheritdoc />
