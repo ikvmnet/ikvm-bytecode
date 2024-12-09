@@ -44,27 +44,34 @@ namespace IKVM.ByteCode.Decoding
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this attribute to the encoder.
         /// </summary>
-        /// <param name="map"></param>
-        /// <param name="attributeName"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             var self = this;
-            encoder.PermittedSubclasses(attributeName, e => self.CopyTo(map, ref e));
+            encoder.PermittedSubclasses(constantPool.Get(AttributeName.PermittedSubclasses), e => self.CopyTo(constantView, constantPool, ref e));
         }
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this attribute to the encoder.
         /// </summary>
-        /// <param name="map"></param>
-        /// <param name="builder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ClassConstantTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
+        /// <param name="encoder"></param>
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ClassConstantTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
-            PermittedSubclasses.CopyTo(map, ref encoder);
+            PermittedSubclasses.CopyTo(constantView, constantPool, ref encoder);
         }
 
     }

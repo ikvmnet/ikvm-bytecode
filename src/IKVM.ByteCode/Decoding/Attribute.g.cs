@@ -339,100 +339,101 @@ namespace IKVM.ByteCode.Decoding
             return value;
         }
 
-        readonly void EncodeSelfTo<TConstantMap>(TConstantMap map, ref AttributeTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        readonly void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
-            switch (map.Get(Name).Value)
+            switch (constantView.Get(Name).Value)
             {
                 case AttributeName.ConstantValue:
-                    ((ConstantValueAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((ConstantValueAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.Code:
-                    ((CodeAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((CodeAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.StackMapTable:
-                    ((StackMapTableAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((StackMapTableAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.Exceptions:
-                    ((ExceptionsAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((ExceptionsAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.InnerClasses:
-                    ((InnerClassesAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((InnerClassesAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.EnclosingMethod:
-                    ((EnclosingMethodAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((EnclosingMethodAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.Synthetic:
-                    ((SyntheticAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((SyntheticAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.Signature:
-                    ((SignatureAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((SignatureAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.SourceFile:
-                    ((SourceFileAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((SourceFileAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.SourceDebugExtension:
-                    ((SourceDebugExtensionAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((SourceDebugExtensionAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.LineNumberTable:
-                    ((LineNumberTableAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((LineNumberTableAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.LocalVariableTable:
-                    ((LocalVariableTableAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((LocalVariableTableAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.LocalVariableTypeTable:
-                    ((LocalVariableTypeTableAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((LocalVariableTypeTableAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.Deprecated:
-                    ((DeprecatedAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((DeprecatedAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.RuntimeVisibleAnnotations:
-                    ((RuntimeVisibleAnnotationsAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((RuntimeVisibleAnnotationsAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.RuntimeInvisibleAnnotations:
-                    ((RuntimeInvisibleAnnotationsAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((RuntimeInvisibleAnnotationsAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.RuntimeVisibleParameterAnnotations:
-                    ((RuntimeVisibleParameterAnnotationsAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((RuntimeVisibleParameterAnnotationsAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.RuntimeInvisibleParameterAnnotations:
-                    ((RuntimeInvisibleParameterAnnotationsAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((RuntimeInvisibleParameterAnnotationsAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.RuntimeVisibleTypeAnnotations:
-                    ((RuntimeVisibleTypeAnnotationsAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((RuntimeVisibleTypeAnnotationsAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.RuntimeInvisibleTypeAnnotations:
-                    ((RuntimeInvisibleTypeAnnotationsAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((RuntimeInvisibleTypeAnnotationsAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.AnnotationDefault:
-                    ((AnnotationDefaultAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((AnnotationDefaultAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.BootstrapMethods:
-                    ((BootstrapMethodsAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((BootstrapMethodsAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.MethodParameters:
-                    ((MethodParametersAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((MethodParametersAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.Module:
-                    ((ModuleAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((ModuleAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.ModulePackages:
-                    ((ModulePackagesAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((ModulePackagesAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.ModuleMainClass:
-                    ((ModuleMainClassAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((ModuleMainClassAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.NestHost:
-                    ((NestHostAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((NestHostAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.NestMembers:
-                    ((NestMembersAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((NestMembersAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.Record:
-                    ((RecordAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((RecordAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.PermittedSubclasses:
-                    ((PermittedSubclassesAttribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((PermittedSubclassesAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 default:
                     throw new ByteCodeException("Cannot encode unknown attribute. Attribute layout is unknown.");

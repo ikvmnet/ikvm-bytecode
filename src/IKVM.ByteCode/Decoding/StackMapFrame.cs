@@ -188,27 +188,32 @@ namespace IKVM.ByteCode.Decoding
         }
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this frame to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref StackMapTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        /// <exception cref="ByteCodeException"></exception>
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref StackMapTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             if (FrameType is <= 65)
-                ((SameStackMapFrame)this).CopyTo(map, ref encoder);
+                ((SameStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
             else if (FrameType is >= 64 and <= 127)
-                ((SameLocalsOneStackMapFrame)this).CopyTo(map, ref encoder);
+                ((SameLocalsOneStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
             else if (FrameType is 247)
-                ((SameLocalsOneExtendedStackMapFrame)this).CopyTo(map, ref encoder);
+                ((SameLocalsOneExtendedStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
             else if (FrameType is >= 248 and <= 250)
-                ((ChopStackMapFrame)this).CopyTo(map, ref encoder);
+                ((ChopStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
             else if (FrameType is 251)
-                ((SameExtendedStackMapFrame)this).CopyTo(map, ref encoder);
+                ((SameExtendedStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
             else if (FrameType is >= 252 and <= 254)
-                ((AppendStackMapFrame)this).CopyTo(map, ref encoder);
+                ((AppendStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
             else if (FrameType is 255)
-                ((FullStackMapFrame)this).CopyTo(map, ref encoder);
+                ((FullStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
             else
                 throw new ByteCodeException("Invalid stack map frame type.");
         }

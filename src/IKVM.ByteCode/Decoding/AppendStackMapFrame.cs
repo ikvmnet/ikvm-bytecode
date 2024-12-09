@@ -47,15 +47,19 @@ namespace IKVM.ByteCode.Decoding
         }
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this frame to the specified encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref StackMapTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref StackMapTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             var self = this;
-            encoder.Append(FrameType, OffsetDelta, e => self.Locals.CopyTo(map, ref e));
+            encoder.Append(FrameType, OffsetDelta, e => self.Locals.CopyTo(constantView, constantPool, ref e));
         }
 
         public readonly byte FrameType = FrameType;

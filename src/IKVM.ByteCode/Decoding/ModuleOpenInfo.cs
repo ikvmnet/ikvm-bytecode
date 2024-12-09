@@ -24,20 +24,24 @@ namespace IKVM.ByteCode.Decoding
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copes this info to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ModuleOpensTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ModuleOpensTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             var self = this;
-            encoder.Opens(map.Map(Package), Flags, e => Encode(self.Modules, ref e));
+            encoder.Opens(constantPool.Get(constantView.Get(Package)), Flags, e => Encode(self.Modules, ref e));
 
             void Encode(in ModuleConstantHandleTable table, ref ModuleTableEncoder e)
             {
                 foreach (var i in table)
-                    e.Module(map.Map(i));
+                    e.Module(constantPool.Get(constantView.Get(i)));
             }
         }
 

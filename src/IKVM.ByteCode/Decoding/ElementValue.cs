@@ -231,58 +231,59 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ElementValueEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ElementValueEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             switch (Kind)
             {
                 case ElementValueKind.Byte:
                     var _byte = AsConstant();
-                    encoder.Byte(map.Map((IntegerConstantHandle)_byte.Handle));
+                    encoder.Byte(constantPool.Get(constantView.Get((IntegerConstantHandle)_byte.Handle)));
                     break;
                 case ElementValueKind.Char:
                     var _char = AsConstant();
-                    encoder.Char(map.Map((IntegerConstantHandle)_char.Handle));
+                    encoder.Char(constantPool.Get(constantView.Get((IntegerConstantHandle)_char.Handle)));
                     break;
                 case ElementValueKind.Double:
                     var _double = AsConstant();
-                    encoder.Double(map.Map((DoubleConstantHandle)_double.Handle));
+                    encoder.Double(constantPool.Get(constantView.Get((DoubleConstantHandle)_double.Handle)));
                     break;
                 case ElementValueKind.Float:
                     var _float = AsConstant();
-                    encoder.Float(map.Map((FloatConstantHandle)_float.Handle));
+                    encoder.Float(constantPool.Get(constantView.Get((FloatConstantHandle)_float.Handle)));
                     break;
                 case ElementValueKind.Integer:
                     var _integer = AsConstant();
-                    encoder.Integer(map.Map((IntegerConstantHandle)_integer.Handle));
+                    encoder.Integer(constantPool.Get(constantView.Get((IntegerConstantHandle)_integer.Handle)));
                     break;
                 case ElementValueKind.Long:
                     var _long = AsConstant();
-                    encoder.Long(map.Map((LongConstantHandle)_long.Handle));
+                    encoder.Long(constantPool.Get(constantView.Get((LongConstantHandle)_long.Handle)));
                     break;
                 case ElementValueKind.Short:
                     var _short = AsConstant();
-                    encoder.Short(map.Map((IntegerConstantHandle)_short.Handle));
+                    encoder.Short(constantPool.Get(constantView.Get((IntegerConstantHandle)_short.Handle)));
                     break;
                 case ElementValueKind.Boolean:
                     var _boolean = AsConstant();
-                    encoder.Boolean(map.Map((IntegerConstantHandle)_boolean.Handle));
+                    encoder.Boolean(constantPool.Get(constantView.Get((IntegerConstantHandle)_boolean.Handle)));
                     break;
                 case ElementValueKind.String:
                     var _string = AsConstant();
-                    encoder.String(map.Map((Utf8ConstantHandle)_string.Handle));
+                    encoder.String(constantPool.Get(constantView.Get((Utf8ConstantHandle)_string.Handle)));
                     break;
                 case ElementValueKind.Enum:
                     var _enum = AsEnum();
-                    encoder.Enum(map.Map(_enum.TypeName), map.Map(_enum.ConstantName));
+                    encoder.Enum(constantPool.Get(constantView.Get(_enum.TypeName)), constantPool.Get(constantView.Get(_enum.ConstantName)));
                     break;
                 case ElementValueKind.Class:
                     var _class = AsClass();
-                    encoder.Class(map.Map(_class.Class));
+                    encoder.Class(constantPool.Get(constantView.Get(_class.Class)));
                     break;
                 case ElementValueKind.Annotation:
                     var _annotation = AsAnnotation();
-                    encoder.Annotation(e => _annotation.Annotation.CopyTo(map, ref e));
+                    encoder.Annotation(e => _annotation.Annotation.CopyTo(constantView, constantPool, ref e));
                     break;
                 case ElementValueKind.Array:
                     break;

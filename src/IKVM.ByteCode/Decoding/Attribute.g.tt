@@ -31,10 +31,11 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
 }
 #>
 
-        readonly void EncodeSelfTo<TConstantMap>(TConstantMap map, ref AttributeTableEncoder encoder)
-            where TConstantMap : IConstantHandleMap
+        readonly void EncodeSelfTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
-            switch (map.Get(Name).Value)
+            switch (constantView.Get(Name).Value)
             {
 <#
 foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribute.txt"))))
@@ -42,7 +43,7 @@ foreach (var i in File.ReadAllLines(Host.ResolvePath(Path.Combine("..", "Attribu
     var name = i.Trim();
 #>
                 case AttributeName.<#= name #>:
-                    ((<#= name #>Attribute)this).CopyTo(map, map.Map(Name), ref encoder);
+                    ((<#= name #>Attribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
 <#
 }

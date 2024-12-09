@@ -147,15 +147,19 @@ namespace IKVM.ByteCode.Decoding
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this table to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ParameterAnnotationTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ParameterAnnotationTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             foreach (var i in this)
-                encoder.ParameterAnnotation(e => i.CopyTo(map, ref e));
+                encoder.ParameterAnnotation(e => i.CopyTo(constantView, constantPool, ref e));
         }
 
         /// <inheritdoc />

@@ -130,15 +130,18 @@ namespace IKVM.ByteCode.Decoding
         public readonly LookupSwitchCaseTable Cases = Cases;
 
         /// <summary>
-        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// Copies this instruction to the builder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="builder"></param>
         /// <param name="offset"></param>
-        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder, int offset)
-            where TConstantMap : IConstantMap
+        public void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, CodeBuilder builder, int offset)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             builder.OpCode(OpCode.LookupSwitch);
             builder.Align(4);

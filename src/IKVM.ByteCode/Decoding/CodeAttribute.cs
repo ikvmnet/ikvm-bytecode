@@ -1,6 +1,6 @@
-﻿using System;
-using System.Buffers;
+﻿using System.Buffers;
 
+using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
@@ -58,21 +58,29 @@ namespace IKVM.ByteCode.Decoding
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this attribute to the specified attribute encoder.
         /// </summary>
-        /// <param name="map"></param>
-        /// <param name="attributeName"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
-            var self = this;
-            throw new NotImplementedException("Cannot import the Code attribute since we are currently unable to parse byte code.");
+            // copy code to new blob
+            var codeOffset = (int)Code.Length;
+            var code = new BlobBuilder((int)Code.Length);
+            new CodeDecoder(Code).CopyTo(constantView, constantPool, new CodeBuilder(code));
 
-            //var b = new BlobBuilder();
-            //var s = b.ReserveBytes((int)source.Code.Length);
-            //source.Code.CopyTo(s.GetBytes());
-            //builder.Code(source.MaxStack, source.MaxLocals, b, e => Import(source.ExceptionTable, ref e), Import(source.Attributes));
+            // copy attribute table to new builder
+            var attr = new AttributeTableBuilder(constantPool);
+            Attributes.CopyTo(constantView, constantPool, attr);
+
+            // add code attribute with copied values
+            var excp = ExceptionTable;
+            encoder.Code(constantPool.Get(AttributeName.Code), MaxStack, MaxLocals, code, e => excp.CopyTo(constantView, constantPool, ref e, codeOffset), attr);
         }
 
     }

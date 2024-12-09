@@ -29,15 +29,19 @@ namespace IKVM.ByteCode.Decoding
         }
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this method to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref BootstrapMethodTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref BootstrapMethodTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             var self = this;
-            encoder.Method(map.Map(Method), e => self.Arguments.CopyTo(map, ref e));
+            encoder.Method(constantPool.Get(constantView.Get(Method)), e => self.Arguments.CopyTo(constantView, constantPool, ref e));
         }
 
         public readonly MethodHandleConstantHandle Method = Method;

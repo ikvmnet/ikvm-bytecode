@@ -85,16 +85,16 @@ public static class Util
     /// <summary>
     /// Returns a text string that represents a method call to write the given instruction argument to this builder.
     /// </summary>
-    public static string GetCopyToWriteArgMethodCall(InstructionArg arg, bool wide, string offsetArgName)
+    public static string GetCopyToWriteArgMethodCall(InstructionArg arg, bool wide, string constantViewArgName, string constantPoolArgName, string offsetArgName)
     {
         var type = GetRealType(arg, wide);
         var name = GetDecoderTypeName(type);
 
         if (type == "C1")
-            return $"{GetCopyToMethodName(type)}(({name})constants.Map({arg.Name}))";
+            return $"{GetCopyToMethodName(type)}(({name}){constantPoolArgName}.Get({constantViewArgName}.Get({arg.Name})))";
 
         if (type == "C2")
-            return $"{GetCopyToMethodName(type)}(({name})constants.Map({arg.Name}))";
+            return $"{GetCopyToMethodName(type)}(({name}){constantPoolArgName}.Get({constantViewArgName}.Get({arg.Name})))";
 
         if (type == "J2")
             return $"{GetCopyToMethodName(type)}(({name})({arg.Name} + {offsetArgName}))";

@@ -90,20 +90,24 @@ namespace IKVM.ByteCode.Decoding
         }
 
         /// <summary>
-        /// Copies this code sequence to the specified builder.
+        /// Copies this code sequence to the specified code builder.
         /// </summary>
-        /// <typeparam name="TConstantMap"></typeparam>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="builder"></param>
-        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
-            where TConstantMap : IConstantMap
+        /// <exception cref="ArgumentNullException"></exception>
+        public void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, CodeBuilder builder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
 
             var offset = builder.Offset;
             foreach (var instruction in this)
-                instruction.CopyTo(map, builder, offset);
+                instruction.CopyTo(constantView, constantPool, builder, offset);
         }
 
         /// <summary>

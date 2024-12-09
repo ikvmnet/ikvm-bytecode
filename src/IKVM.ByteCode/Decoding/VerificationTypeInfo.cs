@@ -314,12 +314,16 @@ namespace IKVM.ByteCode.Decoding
         }
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this info to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref VerificationTypeInfoEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref VerificationTypeInfoEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             switch (Kind)
             {
@@ -345,7 +349,7 @@ namespace IKVM.ByteCode.Decoding
                     encoder.UninitializedThis();
                     break;
                 case VerificationTypeInfoKind.Object:
-                    encoder.Object(map.Map(AsObject().Class));
+                    encoder.Object(constantPool.Get(constantView.Get(AsObject().Class)));
                     break;
                 case VerificationTypeInfoKind.Uninitialized:
                     encoder.Uninitialized(AsUninitialized().Offset);

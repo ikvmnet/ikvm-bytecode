@@ -6,7 +6,7 @@ namespace IKVM.ByteCode.Decoding
     public readonly record struct ExceptionHandler(ushort StartOffset, ushort EndOffset, ushort HandlerOffset, ClassConstantHandle CatchType)
     {
 
-        internal const int RECORD_LENGTH = ClassFormatReader.U2 + ClassFormatReader.U2 + ClassFormatReader.U2 + ClassFormatReader.U2;
+        internal const int RecordSize = ClassFormatReader.U2 + ClassFormatReader.U2 + ClassFormatReader.U2 + ClassFormatReader.U2;
 
         /// <summary>
         /// Attempts to measure the exception handler starting from the current position.
@@ -16,8 +16,8 @@ namespace IKVM.ByteCode.Decoding
         /// <returns></returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
-            size += RECORD_LENGTH;
-            if (reader.TryAdvance(RECORD_LENGTH) == false)
+            size += RecordSize;
+            if (reader.TryAdvance(RecordSize) == false)
                 return false;
 
             return true;
@@ -47,14 +47,23 @@ namespace IKVM.ByteCode.Decoding
         }
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Encodes this exception handler to the specified table, offsetting any relative code locations.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ExceptionTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        /// <param name="offset"></param>
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ExceptionTableEncoder encoder, int offset)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
-            encoder.Exception(StartOffset, EndOffset, HandlerOffset, map.Map(CatchType));
+            encoder.Exception(
+                checked((ushort)(StartOffset + offset)),
+                checked((ushort)(EndOffset + offset)),
+                checked((ushort)(HandlerOffset + offset)),
+                constantPool.Get(constantView.Get(CatchType)));
         }
 
         public readonly ushort StartOffset = StartOffset;

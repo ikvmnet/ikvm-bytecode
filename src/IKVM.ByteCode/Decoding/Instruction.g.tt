@@ -84,13 +84,16 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder"/>.
         /// </summary>
-        /// <typeparam name="TConstantMap"></typeparam>
-        /// <param name="constants"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="builder"></param>
         /// <param name="offset"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
-            where TConstantMap : IConstantMap
+        internal void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, CodeBuilder builder, int offset)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             switch (OpCode)
             {
@@ -105,7 +108,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     var args = i.Value.Args ?? [];
 #>
                 case OpCode.<#= name #>:
-                    ((<#= name #>Instruction)this).CopyTo(constants, builder, offset);
+                    ((<#= name #>Instruction)this).CopyTo(constantView, constantPool, builder, offset);
                     break;
 <#
 }
@@ -346,13 +349,17 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
-        /// <param name="constants"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="builder"></param>
         /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
-            where TConstantMap : IConstantMap
+        public void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, CodeBuilder builder, int offset)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
 <#
     if (Util.HasWide(args))
@@ -380,7 +387,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, true, "offset") #>;
+                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, true, "constantView", "constantPool", "offset") #>;
 <#
         }
 #>
@@ -393,7 +400,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false, "offset") #>;
+                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false, "constantView", "constantPool", "offset") #>;
 <#
         }
 #>
@@ -409,7 +416,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-            builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false, "offset") #>;
+            builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false, "constantView", "constantPool", "offset") #>;
 <#
         }
 #>

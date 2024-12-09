@@ -26,15 +26,19 @@ namespace IKVM.ByteCode.Decoding
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this component to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref RecordComponentTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref RecordComponentTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             var self = this;
-            encoder.RecordComponent(map.Map(Name), map.Map(Descriptor), e => self.Attributes.CopyTo(map, ref e));
+            encoder.RecordComponent(constantPool.Get(constantView.Get(Name)), constantPool.Get(constantView.Get(Descriptor)), e => self.Attributes.CopyTo(constantView, constantPool, ref e));
         }
 
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Buffers;
-
-using IKVM.ByteCode.Encoding;
+﻿using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
 {
@@ -36,14 +33,18 @@ namespace IKVM.ByteCode.Decoding
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this attribute to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public void CopyTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
-            encoder.SourceFile(attributeName, map.Map(SourceFile));
+            encoder.SourceFile(constantPool.Get(AttributeName.SourceFile), constantPool.Get(constantView.Get(SourceFile)));
         }
 
     }

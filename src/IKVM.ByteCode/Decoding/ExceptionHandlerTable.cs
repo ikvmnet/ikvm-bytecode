@@ -67,8 +67,8 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadU2(out ushort count) == false)
                 return false;
 
-            size += count * ExceptionHandler.RECORD_LENGTH;
-            if (reader.TryAdvance(count * ExceptionHandler.RECORD_LENGTH) == false)
+            size += count * ExceptionHandler.RecordSize;
+            if (reader.TryAdvance(count * ExceptionHandler.RecordSize) == false)
                 return false;
 
             return true;
@@ -140,15 +140,20 @@ namespace IKVM.ByteCode.Decoding
         public readonly Enumerator GetEnumerator() => new Enumerator(_items);
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies the exception handles to the specified encoder, offsetting any relative code locations.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref ExceptionTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        /// <param name="offset"></param>
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ExceptionTableEncoder encoder, int offset)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             foreach (var i in this)
-                i.CopyTo(map, ref encoder);
+                i.CopyTo(constantView, constantPool, ref encoder, offset);
         }
 
         /// <inheritdoc />

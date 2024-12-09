@@ -103,11 +103,12 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref BootstrapMethodTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref BootstrapMethodTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             foreach (var i in this)
-                i.CopyTo(map, ref encoder);
+                i.CopyTo(constantView, constantPool, ref encoder);
         }
 
         /// <inheritdoc />

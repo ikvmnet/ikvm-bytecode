@@ -150,25 +150,28 @@ namespace IKVM.ByteCode.Decoding
         public readonly bool IsNotNil => _isNotNil;
 
         /// <summary>
-        /// Encodes this data class to the encoder.
+        /// Copies this attribute to the encoder.
         /// </summary>
-        /// <param name="map"></param>
-        /// <param name="attributeName"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, Utf8ConstantHandle attributeName, ref AttributeTableEncoder encoder)
-            where TConstantMap : IConstantMap
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
         {
             var self = this;
             encoder.Module(
-                attributeName,
-                map.Map(Name),
+                constantPool.Get(AttributeName.Module),
+                constantPool.Get(constantView.Get(Name)),
                 Flags,
-                map.Map(Version),
-                e => self.Requires.CopyTo(map, ref e),
-                e => self.Exports.CopyTo(map, ref e),
-                e => self.Opens.CopyTo(map, ref e),
-                e => self.Uses.CopyTo(map, ref e),
-                e => self.Provides.CopyTo(map, ref e));
+                constantPool.Get(constantView.Get(Version)),
+                e => self.Requires.CopyTo(constantView, constantPool, ref e),
+                e => self.Exports.CopyTo(constantView, constantPool, ref e),
+                e => self.Opens.CopyTo(constantView, constantPool, ref e),
+                e => self.Uses.CopyTo(constantView, constantPool, ref e),
+                e => self.Provides.CopyTo(constantView, constantPool, ref e));
         }
 
     }

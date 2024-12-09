@@ -6,17 +6,6 @@ namespace IKVM.ByteCode.Decoding
     public readonly record struct LocalVariable(ushort StartPc, ushort Length, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, ushort Slot)
     {
 
-        /// <summary>
-        /// Encodes this data class to the encoder.
-        /// </summary>
-        /// <param name="map"></param>
-        /// <param name="encoder"></param>
-        public readonly void CopyTo<TConstantMap>(TConstantMap map, ref LocalVariableTableEncoder encoder)
-            where TConstantMap : IConstantMap
-        {
-            encoder.LocalVariable(StartPc, Length, map.Map(Name), map.Map(Descriptor), Slot);
-        }
-
         public readonly ushort StartPc = StartPc;
         public readonly ushort Length = Length;
         public readonly Utf8ConstantHandle Name = Name;
@@ -33,6 +22,21 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Copies this variable to the encoder.
+        /// </summary>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
+        /// <param name="encoder"></param>
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref LocalVariableTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
+        {
+            encoder.LocalVariable(StartPc, Length, constantPool.Get(constantView.Get(Name)), constantPool.Get(constantView.Get(Descriptor)), Slot);
+        }
 
     }
 

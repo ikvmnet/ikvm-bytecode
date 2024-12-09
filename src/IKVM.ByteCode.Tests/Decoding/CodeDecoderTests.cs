@@ -1,4 +1,5 @@
 ﻿using System.Buffers;
+using System.Buffers.Binary;
 
 using FluentAssertions;
 
@@ -148,9 +149,12 @@ namespace IKVM.ByteCode.Tests.Decoding
         [TestMethod]
         public void CanCopyToWithConstant()
         {
+            var int32 = new byte[4];
+            BinaryPrimitives.WriteInt32BigEndian(int32, 1234);
+
             var constants = new ConstantTable(new ClassFormatVersion(50, 0), [
-                new(ConstantKind.String, new ReadOnlySequence<byte>(MUTF8Encoding.GetMUTF8(50).GetBytes("test"))),
-                new(ConstantKind.String, new ReadOnlySequence<byte>(MUTF8Encoding.GetMUTF8(50).GetBytes("test"))),
+                new(ConstantKind.Unknown, new ReadOnlySequence<byte>()),
+                new(ConstantKind.Integer, new ReadOnlySequence<byte>(int32)),
             ]);
 
             var buffer1 = new BlobBuilder();
@@ -159,7 +163,7 @@ namespace IKVM.ByteCode.Tests.Decoding
 
             // copy from decoder into new builder
             var buffer2 = new BlobBuilder();
-            code1.CopyTo(new IdentityConstantMap<ConstantTable>(constants), new CodeBuilder(buffer2));
+            code1.CopyTo(constants, constants, new CodeBuilder(buffer2));
             var code2 = new CodeDecoder(buffer2.ToArray());
 
             code2.TryReadNext(out var inst1).Should().BeTrue();
