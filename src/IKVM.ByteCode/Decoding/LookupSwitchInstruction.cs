@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Buffers;
+using System.Runtime.CompilerServices;
 
 using IKVM.ByteCode.Buffers;
+using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
 {
 
     public readonly record struct LookupSwitchInstruction(int DefaultTarget, LookupSwitchCaseTable Cases)
     {
+
+        /// <summary>
+        /// Converts the <see cref="Instruction" /> to a <see cref="LookupSwitchInstruction" />.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static explicit operator LookupSwitchInstruction(Instruction value) => value.AsLookupSwitch();
 
         /// <summary>
         /// Attempts to measure the size of the instruction.
@@ -120,6 +128,19 @@ namespace IKVM.ByteCode.Decoding
         /// Gets the match table.
         /// </summary>
         public readonly LookupSwitchCaseTable Cases = Cases;
+
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+            throw new NotImplementedException();
+        }
 
     }
 

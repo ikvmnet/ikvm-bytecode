@@ -32,10 +32,10 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CodeBuilder <#= name #>(<#= BuildArgList(args) #>)
+        public CodeBuilder <#= name #>(<#= Util.BuilderArgList(args) #>)
         {
 <#
-    if (HasBranchTarget(args))
+    if (Util.HasBranchTarget(args))
     {
 #>
             var _offset = Offset;
@@ -43,7 +43,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     }
 #>
 <#
-    if (HasWide(args))
+    if (Util.HasWide(args))
     {
 #>
             var wide = false;
@@ -53,7 +53,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-            if (<#= arg.Name.ToLower() #> > <#= GetMaxSizeExpr(arg.Type) #> || <#= arg.Name.ToLower() #> < <#= GetMinSizeExpr(arg.Type) #>)
+            if (<#= arg.Name.ToLower() #> > <#= Util.GetMaxSizeExpr(arg.Type) #> || <#= arg.Name.ToLower() #> < <#= Util.GetMinSizeExpr(arg.Type) #>)
                 wide = true;
 
 <#
@@ -68,7 +68,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-                <#= GetWriteArg(arg, true) #>;
+                <#= Util.GetWriteArg(arg, true) #>;
 <#
         }
 #>
@@ -81,7 +81,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-                <#= GetWriteArg(arg, false) #>;
+                <#= Util.GetWriteArg(arg, false) #>;
 <#
         }
 #>
@@ -97,7 +97,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-            <#= GetWriteArg(arg, false) #>;
+            <#= Util.GetWriteArg(arg, false) #>;
 <#
         }
 #>
@@ -115,182 +115,3 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     }
 
 }
-
-<#+
-
-static string GetWriteArg(InstructionArg arg, bool wide)
-{
-    var type = GetRealType(arg, wide);
-    var name = GetRealTypeName(type);
-    if (type == "J2")
-    {
-        return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, 2, _offset)";
-    }
-    if (type == "J4")
-    {
-        return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, 4, _offset)";
-    }
-
-    return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()})";
-}
-
-static string GetUserType(InstructionArg arg)
-{
-    var type = arg.Type;
-    if (arg.WideType != null)
-        type = arg.WideType;
-
-    return type;
-}
-
-static string GetRealType(InstructionArg arg, bool wide)
-{
-    var type = arg.Type;
-    if (wide && arg.WideType != null)
-        type = arg.WideType;
-
-    return type;
-}
-
-static string GetTypeName(string type)
-{
-    switch (type)
-    {
-        case "U1":
-            return "byte";
-        case "U2":
-            return "ushort";
-        case "S1":
-            return "sbyte";
-        case "S2":
-            return "short";
-        case "C1":
-            return "ConstantHandle";
-        case "C2":
-            return "ConstantHandle";
-        case "L1":
-            return "byte";
-        case "L2":
-            return "ushort";
-        case "J2":
-            return "LabelHandle";
-        case "J4":
-            return "LabelHandle";
-        default:
-            throw new Exception(type);
-    }
-}
-
-static string GetRealTypeName(string type)
-{
-    switch (type)
-    {
-        case "U1":
-            return "byte";
-        case "U2":
-            return "ushort";
-        case "S1":
-            return "sbyte";
-        case "S2":
-            return "short";
-        case "C1":
-            return "byte";
-        case "C2":
-            return "ushort";
-        case "L1":
-            return "byte";
-        case "L2":
-            return "ushort";
-        case "J2":
-            return "LabelHandle";
-        case "J4":
-            return "LabelHandle";
-        case "TableSwitch":
-            return "int";
-        case "LookupSwitch":
-            return "int";
-        default:
-            throw new Exception(type);
-    }
-}
-
-static bool HasBranchTarget(InstructionArg[] args)
-{
-    return args.Any(i => i.Type == "J2" || i.Type == "J4");
-}
-
-static bool HasWide(InstructionArg[] args)
-{
-    return args.Any(i => i.WideType != null);
-}
-
-static string GetMinSizeExpr(string type)
-{
-    switch (type)
-    {
-        case "U1":
-            return "byte.MinValue";
-        case "S1":
-            return "sbyte.MinValue";
-        case "L1":
-            return "byte.MinValue";
-        default:
-            throw new Exception(type);
-    }
-}
-
-static string GetMaxSizeExpr(string type)
-{
-    switch (type)
-    {
-        case "U1":
-            return "byte.MaxValue";
-        case "S1":
-            return "sbyte.MaxValue";
-        case "C1":
-            return "byte.MaxValue";
-        case "L1":
-            return "byte.MaxValue";
-        default:
-            throw new Exception(type);
-    }
-}
-
-static string GetWriteMethodName(string type)
-{
-    switch (type)
-    {
-        case "U1":
-            return "WriteByte";
-        case "S1":
-            return "WriteSByte";
-        case "S2":
-            return "WriteInt16";
-        case "C1":
-            return "WriteByte";
-        case "C2":
-            return "WriteUInt16";
-        case "L1":
-            return "WriteByte";
-        case "L2":
-            return "WriteUInt16";
-        case "J2":
-            return "Label";
-        case "J4":
-            return "Label";
-        default:
-            throw new Exception(type);
-    }
-}
-
-static string BuildArgList(InstructionArg[] args)
-{
-    var s = new List<string>();
-
-    foreach (var arg in args)
-        s.Add($"{GetTypeName(GetUserType(arg))} {arg.Name.ToLowerInvariant()}");
-
-    return string.Join(", ", s);
-}
-
-#>

@@ -81,6 +81,38 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 <#
 }
 #>
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder"/>.
+        /// </summary>
+        /// <typeparam name="TConstantMap"></typeparam>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+            switch (OpCode)
+            {
+<#
+foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+{
+    if (i.Value.Hide)
+        continue;
+
+    var inst = i.Key;
+    var name = i.Value.Name;
+    var args = i.Value.Args ?? [];
+#>
+                case OpCode.<#= name #>:
+                    ((<#= name #>Instruction)this).CopyTo(map, builder);
+                    break;
+<#
+}
+#>
+                default:
+                    throw new InvalidCodeException("Unsupported or unexpected instruction.");
+            }
+        }
     
     }
 
@@ -109,7 +141,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 <#
         }
 #>
-    public partial record struct <#= name #>Instruction(<#= BuildCtorArgList(args) #>)
+    public partial record struct <#= name #>Instruction(<#= DecoderCtorArgList(args) #>)
     {
     
         /// <summary>
@@ -135,7 +167,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
                 throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
 <#
-    if (HasWide(args))
+    if (Util.HasWide(args))
     {
 #>
             if (wide)
@@ -149,7 +181,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 #>
 
                 // arg<#= j + 1 #>: <#= arg.Name #>
-                if (Instruction.TryMeasure<#= GetRealType(arg, true) #>(ref reader, ref size) == false)
+                if (Instruction.TryMeasure<#= Util.GetRealType(arg, true) #>(ref reader, ref size) == false)
                     return false;
 <#
         }
@@ -166,7 +198,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 #>
 
                 // arg<#= j + 1 #>: <#= arg.Name #>
-                if (Instruction.TryMeasure<#= GetRealType(arg, false) #>(ref reader, ref size) == false)
+                if (Instruction.TryMeasure<#= Util.GetRealType(arg, false) #>(ref reader, ref size) == false)
                     return false;
 <#
         }
@@ -189,7 +221,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 #>
 
             // arg<#= j + 1 #>: <#= arg.Name #>
-            if (Instruction.TryMeasure<#= GetRealType(arg, false) #>(ref reader, ref size) == false)
+            if (Instruction.TryMeasure<#= Util.GetRealType(arg, false) #>(ref reader, ref size) == false)
                 return false;
 <#
         }
@@ -234,7 +266,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
                 throw new InvalidCodeException($"Unexpected opcode '{opcode:X}' at {reader.Position}.");
 
 <#
-    if (HasWide(args))
+    if (Util.HasWide(args))
     {
 #>
             if (wide)
@@ -246,7 +278,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 #>
 
                 // arg<#= j + 1 #>: <#= arg.Name #>
-                if (Instruction.TryRead<#= GetRealType(arg, true) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
+                if (Instruction.TryRead<#= Util.GetRealType(arg, true) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
                     return false;
 <#
         }
@@ -263,7 +295,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 #>
 
                 // arg<#= j + 1 #>: <#= arg.Name #>
-                if (Instruction.TryRead<#= GetRealType(arg, false) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
+                if (Instruction.TryRead<#= Util.GetRealType(arg, false) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
                     return false;
 <#
         }
@@ -285,7 +317,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 #>
 
             // arg<#= j + 1 #>: <#= arg.Name #>
-            if (Instruction.TryRead<#= GetRealType(arg, false) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
+            if (Instruction.TryRead<#= Util.GetRealType(arg, false) #>(ref reader, out var <#= arg.Name.ToLower() #>) == false)
                 return false;
 <#
         }
@@ -305,10 +337,39 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 #>
 
         // arg<#= j + 1 #>: <#= arg.Name #>
-        public readonly <#= GetTypeName(GetRealType(arg, true)) #> <#= arg.Name #> = <#= arg.Name #>;
+        public readonly <#= Util.GetDecoderTypeName(Util.GetRealType(arg, true)) #> <#= arg.Name #> = <#= arg.Name #>;
 <#
         }
 #>
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+<#
+        for (int j = 0; j < args.Length; j++)
+        {
+            var arg = args[j];
+#>
+    /// <param name="<#= arg.Name #>"></param>
+<#
+        }
+#>
+<#
+    if (Util.HasBranchTarget(args))
+    {
+#>
+            var _offset = Offset;
+<#
+    }
+#>
+        }
 
     }
 
@@ -318,100 +379,28 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 }
 <#+
 
-static bool HasWide(InstructionArg[] args)
-{
-    return args.Any(i => i.WideType != null);
-}
-
 static string GetMeasureArg(InstructionArg arg, bool wide)
 {
-    var type = GetRealType(arg, wide);
-    var name = GetRealTypeName(type);
+    var type = Util.GetRealType(arg, wide);
+    var name = Util.GetRealTypeName(type);
     return $"TryAdvance{type}(ref reader)";
 }
 
 static string GetReadArg(InstructionArg arg, bool wide)
 {
-    var type = GetRealType(arg, wide);
-    var name = GetRealTypeName(type);
+    var type = Util.GetRealType(arg, wide);
+    var name = Util.GetRealTypeName(type);
     return $"TryRead{type}(ref reader, out {name} {arg.Name.ToLower()})";
 }
 
-static string GetTypeName(string type)
-{
-    switch (type)
-    {
-        case "U1":
-            return "byte";
-        case "U2":
-            return "ushort";
-        case "S1":
-            return "sbyte";
-        case "S2":
-            return "short";
-        case "C1":
-            return "ConstantHandle";
-        case "C2":
-            return "ConstantHandle";
-        case "L1":
-            return "byte";
-        case "L2":
-            return "ushort";
-        case "J2":
-            return "short";
-        case "J4":
-            return "int";
-        default:
-            throw new Exception(type);
-    }
-}
-
-static string GetRealType(InstructionArg arg, bool wide)
-{
-    var type = arg.Type;
-    if (wide && arg.WideType != null)
-        type = arg.WideType;
-
-    return type;
-}
-
-static string GetRealTypeName(string type)
-{
-    switch (type)
-    {
-        case "U1":
-            return "byte";
-        case "U2":
-            return "ushort";
-        case "S1":
-            return "sbyte";
-        case "S2":
-            return "short";
-        case "C1":
-            return "byte";
-        case "C2":
-            return "ushort";
-        case "L1":
-            return "byte";
-        case "L2":
-            return "ushort";
-        case "J2":
-            return "short";
-        case "J4":
-            return "int";
-        default:
-            throw new Exception(type);
-    }
-}
-
-static string BuildCtorArgList(InstructionArg[] args)
+static string DecoderCtorArgList(InstructionArg[] args)
 {
     var s = new List<string>();
 
     s.Add("int Offset");
 
     foreach (var arg in args)
-        s.Add($"{GetTypeName(GetRealType(arg, true))} {arg.Name}");
+        s.Add($"{Util.GetDecoderTypeName(Util.GetRealType(arg, true))} {arg.Name}");
         
     return string.Join(", ", s);
 }

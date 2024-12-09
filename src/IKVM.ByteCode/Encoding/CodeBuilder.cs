@@ -193,18 +193,15 @@ namespace IKVM.ByteCode.Encoding
         /// Inserts a label value at the current position of the specified size, as calculated by the relative offset.
         /// </summary>
         /// <param name="label"></param>
-        /// <param name="size"></param>
+        /// <param name="wide"></param>
         /// <param name="offset"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CodeBuilder Label(LabelHandle label, byte size, ushort offset)
+        public CodeBuilder Label(LabelHandle label, bool wide, ushort offset)
         {
-            if (size is not 2 and not 4)
-                throw new ArgumentException("Label output size can only be 2 or 4 bytes.");
-            
             // we handle fixups by reserving bytes of the appropriate size in the output blob and rewriting them when the label is marked
             // if the label has already been marked, we do not need to record a future fixup, but can apply the fixup immediately
             ref var l = ref Fixed4Table<LabelInfo>.GetItem(ref _labels, label.Id);
-            var d = new FixupData(ReserveBytes(size), offset);
+            var d = new FixupData(ReserveBytes(wide ? (ushort)4 : (ushort)2), offset);
             if (l.Value == -1)
                 l.AddFixup(d);
             else
@@ -217,11 +214,11 @@ namespace IKVM.ByteCode.Encoding
         /// Inserts a label value at the current position of the specified size, as calculated by the relative offset.
         /// </summary>
         /// <param name="label"></param>
-        /// <param name="size"></param>
+        /// <param name="wide"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CodeBuilder Label(LabelHandle label, byte size)
+        public CodeBuilder Label(LabelHandle label, bool wide)
         {
-            return Label(label, size, Offset);
+            return Label(label, wide, Offset);
         }
 
         /// <summary>
@@ -308,6 +305,46 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
+        /// Encodes a 8 bit sized argument.
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteU1(byte value)
+        {
+            WriteByte(value);
+        }
+
+        /// <summary>
+        /// Encodes a 8 bit sized argument.
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteS1(sbyte value)
+        {
+            WriteSByte(value);
+        }
+
+        /// <summary>
+        /// Encodes a 8 bit sized constant argument.
+        /// </summary>
+        /// <param name="handle"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteC1(ConstantHandle handle)
+        {
+            WriteByte(checked((byte)handle.Slot));
+        }
+
+        /// <summary>
+        /// Encodes a 8 bit sized constant argument.
+        /// </summary>
+        /// <param name="local"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteL1(byte local)
+        {
+            WriteByte(local);
+        }
+
+        /// <summary>
         /// Encodes a 16-bit sized integer argument.
         /// </summary>
         /// <param name="value"></param>
@@ -315,6 +352,36 @@ namespace IKVM.ByteCode.Encoding
         internal void WriteUInt16(ushort value)
         {
             BinaryPrimitives.WriteUInt16BigEndian(ReserveBytes(sizeof(ushort)).GetBytes(), value);
+        }
+
+        /// <summary>
+        /// Encodes a 16 bit sized argument.
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteS2(short value)
+        {
+            WriteInt16(value);
+        }
+
+        /// <summary>
+        /// Encodes a 16 bit sized constant argument.
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteL2(ushort local)
+        {
+            WriteUInt16(local);
+        }
+
+        /// <summary>
+        /// Encodes a 16 bit sized constant argument.
+        /// </summary>
+        /// <param name="value"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void WriteC2(ConstantHandle handle)
+        {
+            WriteUInt16(checked((ushort)handle.Slot));
         }
 
         /// <summary>

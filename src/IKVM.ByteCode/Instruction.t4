@@ -44,4 +44,242 @@ public class InstructionArg
     
 }
 
+public static class Util
+{
+
+    public static bool HasBranchTarget(InstructionArg[] args)
+    {
+        return args.Any(i => i.Type == "J2" || i.Type == "J4");
+    }
+
+    public static bool HasWide(InstructionArg[] args)
+    {
+        return args.Any(i => i.WideType != null);
+    }
+
+    public static string GetWriteArg(InstructionArg arg, bool wide)
+    {
+        var type = GetRealType(arg, wide);
+        var name = GetWriterTypeName(type);
+        if (type == "J2")
+        {
+            return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, false, _offset)";
+        }
+        if (type == "J4")
+        {
+            return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, true, _offset)";
+        }
+
+        return $"this.{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()})";
+    }
+
+    public static string GetUserType(InstructionArg arg)
+    {
+        var type = arg.Type;
+        if (arg.WideType != null)
+            type = arg.WideType;
+
+        return type;
+    }
+
+    public static string GetRealType(InstructionArg arg, bool wide)
+    {
+        var type = arg.Type;
+        if (wide && arg.WideType != null)
+            type = arg.WideType;
+
+        return type;
+    }
+
+    public static string GetDecoderTypeName(string type)
+    {
+        switch (type)
+        {
+            case "U1":
+                return "byte";
+            case "U2":
+                return "ushort";
+            case "S1":
+                return "sbyte";
+            case "S2":
+                return "short";
+            case "C1":
+                return "ConstantHandle";
+            case "C2":
+                return "ConstantHandle";
+            case "L1":
+                return "byte";
+            case "L2":
+                return "ushort";
+            case "J2":
+                return "short";
+            case "J4":
+                return "int";
+            default:
+                throw new Exception(type);
+        }
+    }
+
+    public static string GetBuilderTypeName(string type)
+    {
+        switch (type)
+        {
+            case "U1":
+                return "byte";
+            case "U2":
+                return "ushort";
+            case "S1":
+                return "sbyte";
+            case "S2":
+                return "short";
+            case "C1":
+                return "ConstantHandle";
+            case "C2":
+                return "ConstantHandle";
+            case "L1":
+                return "byte";
+            case "L2":
+                return "ushort";
+            case "J2":
+                return "LabelHandle";
+            case "J4":
+                return "LabelHandle";
+            default:
+                throw new Exception(type);
+        }
+    }
+
+    public static string GetWriterTypeName(string type)
+    {
+        switch (type)
+        {
+            case "U1":
+                return "byte";
+            case "U2":
+                return "ushort";
+            case "S1":
+                return "sbyte";
+            case "S2":
+                return "short";
+            case "C1":
+                return "ConstantHandle";
+            case "C2":
+                return "ConstantHandle";
+            case "L1":
+                return "byte";
+            case "L2":
+                return "ushort";
+            case "J2":
+                return "LabelHandle";
+            case "J4":
+                return "LabelHandle";
+            default:
+                throw new Exception(type);
+        }
+    }
+
+    public static string GetRealTypeName(string type)
+    {
+        switch (type)
+        {
+            case "U1":
+                return "byte";
+            case "U2":
+                return "ushort";
+            case "S1":
+                return "sbyte";
+            case "S2":
+                return "short";
+            case "C1":
+                return "byte";
+            case "C2":
+                return "ushort";
+            case "L1":
+                return "byte";
+            case "L2":
+                return "ushort";
+            case "J2":
+                return "short";
+            case "J4":
+                return "int";
+            case "TableSwitch":
+                return "int";
+            case "LookupSwitch":
+                return "int";
+            default:
+                throw new Exception(type);
+        }
+    }
+
+    public static string GetMinSizeExpr(string type)
+    {
+        switch (type)
+        {
+            case "U1":
+                return "byte.MinValue";
+            case "S1":
+                return "sbyte.MinValue";
+            case "L1":
+                return "byte.MinValue";
+            default:
+                throw new Exception(type);
+        }
+    }
+
+    public static string GetMaxSizeExpr(string type)
+    {
+        switch (type)
+        {
+            case "U1":
+                return "byte.MaxValue";
+            case "S1":
+                return "sbyte.MaxValue";
+            case "C1":
+                return "byte.MaxValue";
+            case "L1":
+                return "byte.MaxValue";
+            default:
+                throw new Exception(type);
+        }
+    }
+
+    public static string GetWriteMethodName(string type)
+    {
+        switch (type)
+        {
+            case "U1":
+                return "WriteU1";
+            case "S1":
+                return "WriteS1";
+            case "S2":
+                return "WriteS2";
+            case "C1":
+                return "WriteC1";
+            case "C2":
+                return "WriteC2";
+            case "L1":
+                return "WriteL1";
+            case "L2":
+                return "WriteL2";
+            case "J2":
+                return "Label";
+            case "J4":
+                return "Label";
+            default:
+                throw new Exception(type);
+        }
+    }
+
+    public static string BuilderArgList(InstructionArg[] args)
+    {
+        var s = new List<string>();
+
+        foreach (var arg in args)
+            s.Add($"{GetBuilderTypeName(GetUserType(arg))} {arg.Name.ToLowerInvariant()}");
+
+        return string.Join(", ", s);
+    }
+
+}
+
 #>

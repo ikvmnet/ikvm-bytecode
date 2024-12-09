@@ -78,10 +78,10 @@ namespace IKVM.ByteCode.Tests.Encoding
             var blob = new BlobBuilder();
             new CodeBuilder(blob)
                 .DefineLabel(out var label)
-                .Label(label, 4)
-                .Label(label, 4)
-                .Label(label, 4)
-                .Label(label, 4)
+                .Label(label, true)
+                .Label(label, true)
+                .Label(label, true)
+                .Label(label, true)
                 .MarkLabel(label);
 
             var b = new SequenceReader<byte>(new ReadOnlySequence<byte>(blob.ToArray()));

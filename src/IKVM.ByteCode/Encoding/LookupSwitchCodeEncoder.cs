@@ -32,7 +32,7 @@ namespace IKVM.ByteCode.Encoding
             _offset = _encoder.Offset;
             _encoder.OpCode(OpCode.LookupSwitch);
             _encoder.Align(4);
-            _encoder.Label(defaultLabel, 4, _offset);
+            _encoder.Label(defaultLabel, true, _offset);
 
             // reserve space for high value and start at low
             _npairs = 0;
@@ -53,7 +53,7 @@ namespace IKVM.ByteCode.Encoding
 
             _lastKey = key;
             _encoder.WriteInt32(key);
-            _encoder.Label(label, 4, _offset);
+            _encoder.Label(label, true, _offset);
             BinaryPrimitives.WriteInt32BigEndian(_npairsBlob.GetBytes(), ++_npairs);
             return this;
         }

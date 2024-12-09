@@ -2,6 +2,7 @@
 using System.Buffers;
 
 using IKVM.ByteCode.Buffers;
+using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
 {
@@ -86,6 +87,35 @@ namespace IKVM.ByteCode.Decoding
         public Instruction ReadNext()
         {
             return Instruction.Read(ref _reader);
+        }
+
+        /// <summary>
+        /// Copies this code sequence to the specified builder.
+        /// </summary>
+        /// <typeparam name="TConstantMap"></typeparam>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+            if (builder is null)
+                throw new ArgumentNullException(nameof(builder));
+
+            foreach (var instruction in this)
+                CopyInstructionTo(map, instruction, builder);
+        }
+
+        /// <summary>
+        /// Copies the specified instruction to the builder.
+        /// </summary>
+        /// <typeparam name="TConstantMap"></typeparam>
+        /// <param name="map"></param>
+        /// <param name="instruction"></param>
+        /// <param name="builder"></param>
+        void CopyInstructionTo<TConstantMap>(TConstantMap map, Instruction instruction, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+            instruction.CopyTo(map, builder);
         }
 
         /// <summary>

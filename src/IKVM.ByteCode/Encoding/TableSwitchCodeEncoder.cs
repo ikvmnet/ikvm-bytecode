@@ -33,7 +33,7 @@ namespace IKVM.ByteCode.Encoding
             _offset = _code.Offset;
             _code.OpCode(OpCode.TableSwitch);
             _code.Align(4);
-            _code.Label(defaultLabel, 4, _offset);
+            _code.Label(defaultLabel, true, _offset);
 
             // write low value
             _low = low;
@@ -52,7 +52,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public TableSwitchCodeEncoder Case(LabelHandle label)
         {
-            _code.Label(label, 4, _offset);
+            _code.Label(label, true, _offset);
             BinaryPrimitives.WriteInt32BigEndian(_highBlob.GetBytes(), ++_high);
             return this;
         }

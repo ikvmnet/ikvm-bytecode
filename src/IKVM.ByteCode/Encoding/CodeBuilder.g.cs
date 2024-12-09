@@ -207,7 +207,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Bipush(sbyte value)
         {
             this.OpCode(IKVM.ByteCode.OpCode.Bipush);
-            this.WriteSByte((sbyte)value);
+            this.WriteS1((sbyte)value);
 
             return this;
         }
@@ -220,7 +220,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Sipush(short value)
         {
             this.OpCode(IKVM.ByteCode.OpCode.Sipush);
-            this.WriteInt16((short)value);
+            this.WriteS2((short)value);
 
             return this;
         }
@@ -233,7 +233,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Ldc(ConstantHandle constant)
         {
             this.OpCode(IKVM.ByteCode.OpCode.Ldc);
-            this.WriteByte((byte)constant);
+            this.WriteC1((ConstantHandle)constant);
 
             return this;
         }
@@ -246,7 +246,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder LdcW(ConstantHandle constant)
         {
             this.OpCode(IKVM.ByteCode.OpCode.LdcW);
-            this.WriteUInt16((ushort)constant);
+            this.WriteC2((ConstantHandle)constant);
 
             return this;
         }
@@ -259,7 +259,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Ldc2W(ConstantHandle constant)
         {
             this.OpCode(IKVM.ByteCode.OpCode.Ldc2W);
-            this.WriteUInt16((ushort)constant);
+            this.WriteC2((ConstantHandle)constant);
 
             return this;
         }
@@ -280,12 +280,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Iload);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Iload);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -307,12 +307,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Lload);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Lload);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -334,12 +334,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Fload);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Fload);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -361,12 +361,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Dload);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Dload);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -388,12 +388,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Aload);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Aload);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -751,12 +751,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Istore);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Istore);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -778,12 +778,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Lstore);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Lstore);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -805,12 +805,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Fstore);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Fstore);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -832,12 +832,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Dstore);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Dstore);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -859,12 +859,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Astore);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Astore);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -1765,14 +1765,14 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Iinc);
-                this.WriteUInt16((ushort)local);
-                this.WriteInt16((short)value);
+                this.WriteL2((ushort)local);
+                this.WriteS2((short)value);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Iinc);
-                this.WriteByte((byte)local);
-                this.WriteSByte((sbyte)value);
+                this.WriteL1((byte)local);
+                this.WriteS1((sbyte)value);
             }
 
             return this;
@@ -2027,7 +2027,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.Ifeq);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2041,7 +2041,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.Ifne);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2055,7 +2055,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.Iflt);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2069,7 +2069,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.Ifge);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2083,7 +2083,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.Ifgt);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2097,7 +2097,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.Ifle);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2111,7 +2111,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfIcmpeq);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2125,7 +2125,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfIcmpne);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2139,7 +2139,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfIcmplt);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2153,7 +2153,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfIcmpge);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2167,7 +2167,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfIcmpgt);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2181,7 +2181,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfIcmple);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2195,7 +2195,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfAcmpeq);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2209,7 +2209,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfAcmpne);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2223,7 +2223,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.Goto);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2237,7 +2237,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.Jsr);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2258,12 +2258,12 @@ namespace IKVM.ByteCode.Encoding
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Wide);
                 this.OpCode(IKVM.ByteCode.OpCode.Ret);
-                this.WriteUInt16((ushort)local);
+                this.WriteL2((ushort)local);
             }
             else
             {
                 this.OpCode(IKVM.ByteCode.OpCode.Ret);
-                this.WriteByte((byte)local);
+                this.WriteL1((byte)local);
             }
 
             return this;
@@ -2349,7 +2349,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder GetStatic(ConstantHandle field)
         {
             this.OpCode(IKVM.ByteCode.OpCode.GetStatic);
-            this.WriteUInt16((ushort)field);
+            this.WriteC2((ConstantHandle)field);
 
             return this;
         }
@@ -2362,7 +2362,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder PutStatic(ConstantHandle field)
         {
             this.OpCode(IKVM.ByteCode.OpCode.PutStatic);
-            this.WriteUInt16((ushort)field);
+            this.WriteC2((ConstantHandle)field);
 
             return this;
         }
@@ -2375,7 +2375,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder GetField(ConstantHandle field)
         {
             this.OpCode(IKVM.ByteCode.OpCode.GetField);
-            this.WriteUInt16((ushort)field);
+            this.WriteC2((ConstantHandle)field);
 
             return this;
         }
@@ -2388,7 +2388,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder PutField(ConstantHandle field)
         {
             this.OpCode(IKVM.ByteCode.OpCode.PutField);
-            this.WriteUInt16((ushort)field);
+            this.WriteC2((ConstantHandle)field);
 
             return this;
         }
@@ -2401,7 +2401,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder InvokeVirtual(ConstantHandle method)
         {
             this.OpCode(IKVM.ByteCode.OpCode.InvokeVirtual);
-            this.WriteUInt16((ushort)method);
+            this.WriteC2((ConstantHandle)method);
 
             return this;
         }
@@ -2414,7 +2414,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder InvokeSpecial(ConstantHandle method)
         {
             this.OpCode(IKVM.ByteCode.OpCode.InvokeSpecial);
-            this.WriteUInt16((ushort)method);
+            this.WriteC2((ConstantHandle)method);
 
             return this;
         }
@@ -2427,7 +2427,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder InvokeStatic(ConstantHandle method)
         {
             this.OpCode(IKVM.ByteCode.OpCode.InvokeStatic);
-            this.WriteUInt16((ushort)method);
+            this.WriteC2((ConstantHandle)method);
 
             return this;
         }
@@ -2440,9 +2440,9 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder InvokeInterface(ConstantHandle method, byte count, byte zero)
         {
             this.OpCode(IKVM.ByteCode.OpCode.InvokeInterface);
-            this.WriteUInt16((ushort)method);
-            this.WriteByte((byte)count);
-            this.WriteByte((byte)zero);
+            this.WriteC2((ConstantHandle)method);
+            this.WriteU1((byte)count);
+            this.WriteU1((byte)zero);
 
             return this;
         }
@@ -2455,9 +2455,9 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder InvokeDynamic(ConstantHandle method, byte zero, byte zero2)
         {
             this.OpCode(IKVM.ByteCode.OpCode.InvokeDynamic);
-            this.WriteUInt16((ushort)method);
-            this.WriteByte((byte)zero);
-            this.WriteByte((byte)zero2);
+            this.WriteC2((ConstantHandle)method);
+            this.WriteU1((byte)zero);
+            this.WriteU1((byte)zero2);
 
             return this;
         }
@@ -2470,7 +2470,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder New(ConstantHandle constant)
         {
             this.OpCode(IKVM.ByteCode.OpCode.New);
-            this.WriteUInt16((ushort)constant);
+            this.WriteC2((ConstantHandle)constant);
 
             return this;
         }
@@ -2483,7 +2483,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Newarray(byte value)
         {
             this.OpCode(IKVM.ByteCode.OpCode.Newarray);
-            this.WriteByte((byte)value);
+            this.WriteU1((byte)value);
 
             return this;
         }
@@ -2496,7 +2496,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Anewarray(ConstantHandle constant)
         {
             this.OpCode(IKVM.ByteCode.OpCode.Anewarray);
-            this.WriteUInt16((ushort)constant);
+            this.WriteC2((ConstantHandle)constant);
 
             return this;
         }
@@ -2533,7 +2533,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Checkcast(ConstantHandle type)
         {
             this.OpCode(IKVM.ByteCode.OpCode.Checkcast);
-            this.WriteUInt16((ushort)type);
+            this.WriteC2((ConstantHandle)type);
 
             return this;
         }
@@ -2546,7 +2546,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder InstanceOf(ConstantHandle type)
         {
             this.OpCode(IKVM.ByteCode.OpCode.InstanceOf);
-            this.WriteUInt16((ushort)type);
+            this.WriteC2((ConstantHandle)type);
 
             return this;
         }
@@ -2595,8 +2595,8 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Multianewarray(ConstantHandle type, byte dimensions)
         {
             this.OpCode(IKVM.ByteCode.OpCode.Multianewarray);
-            this.WriteUInt16((ushort)type);
-            this.WriteByte((byte)dimensions);
+            this.WriteC2((ConstantHandle)type);
+            this.WriteU1((byte)dimensions);
 
             return this;
         }
@@ -2610,7 +2610,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfNull);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2624,7 +2624,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.IfNonNull);
-            this.Label((LabelHandle)target, 2, _offset);
+            this.Label((LabelHandle)target, false, _offset);
 
             return this;
         }
@@ -2638,7 +2638,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.GotoW);
-            this.Label((LabelHandle)target, 4, _offset);
+            this.Label((LabelHandle)target, true, _offset);
 
             return this;
         }
@@ -2652,7 +2652,7 @@ namespace IKVM.ByteCode.Encoding
         {
             var _offset = Offset;
             this.OpCode(IKVM.ByteCode.OpCode.JsrW);
-            this.Label((LabelHandle)target, 4, _offset);
+            this.Label((LabelHandle)target, true, _offset);
 
             return this;
         }
@@ -2661,4 +2661,3 @@ namespace IKVM.ByteCode.Encoding
     }
 
 }
-

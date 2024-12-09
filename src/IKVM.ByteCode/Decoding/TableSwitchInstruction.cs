@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Buffers;
+using System.Runtime.CompilerServices;
 
 using IKVM.ByteCode.Buffers;
+using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
 {
 
     public readonly record struct TableSwitchInstruction(int DefaultTarget, int Low, int High, TableSwitchCaseTable Cases)
     {
+
+        /// <summary>
+        /// Converts the <see cref="Instruction" /> to a <see cref="TableSwitchInstruction" />.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static explicit operator TableSwitchInstruction(Instruction value) => value.AsTableSwitch();
 
         /// <summary>
         /// Attempts to measure the size of the instruction.
@@ -159,6 +167,19 @@ namespace IKVM.ByteCode.Decoding
         /// Gets the table of matches.
         /// </summary>
         public readonly TableSwitchCaseTable Cases = Cases;
+
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+            throw new NotImplementedException();
+        }
 
     }
 

@@ -3445,6 +3445,625 @@ namespace IKVM.ByteCode.Decoding
             return instruction;
         }
 
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder"/>.
+        /// </summary>
+        /// <typeparam name="TConstantMap"></typeparam>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+            switch (OpCode)
+            {
+                case OpCode.Nop:
+                    ((NopInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.AconstNull:
+                    ((AconstNullInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IconstM1:
+                    ((IconstM1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iconst0:
+                    ((Iconst0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iconst1:
+                    ((Iconst1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iconst2:
+                    ((Iconst2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iconst3:
+                    ((Iconst3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iconst4:
+                    ((Iconst4Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iconst5:
+                    ((Iconst5Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lconst0:
+                    ((Lconst0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lconst1:
+                    ((Lconst1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fconst0:
+                    ((Fconst0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fconst1:
+                    ((Fconst1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fconst2:
+                    ((Fconst2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dconst0:
+                    ((Dconst0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dconst1:
+                    ((Dconst1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Bipush:
+                    ((BipushInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Sipush:
+                    ((SipushInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ldc:
+                    ((LdcInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.LdcW:
+                    ((LdcWInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ldc2W:
+                    ((Ldc2WInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iload:
+                    ((IloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lload:
+                    ((LloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fload:
+                    ((FloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dload:
+                    ((DloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Aload:
+                    ((AloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iload0:
+                    ((Iload0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iload1:
+                    ((Iload1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iload2:
+                    ((Iload2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iload3:
+                    ((Iload3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lload0:
+                    ((Lload0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lload1:
+                    ((Lload1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lload2:
+                    ((Lload2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lload3:
+                    ((Lload3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fload0:
+                    ((Fload0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fload1:
+                    ((Fload1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fload2:
+                    ((Fload2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fload3:
+                    ((Fload3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dload0:
+                    ((Dload0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dload1:
+                    ((Dload1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dload2:
+                    ((Dload2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dload3:
+                    ((Dload3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Aload0:
+                    ((Aload0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Aload1:
+                    ((Aload1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Aload2:
+                    ((Aload2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Aload3:
+                    ((Aload3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iaload:
+                    ((IaloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Laload:
+                    ((LaloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Faload:
+                    ((FaloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Daload:
+                    ((DaloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Aaload:
+                    ((AaloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Baload:
+                    ((BaloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Caload:
+                    ((CaloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Saload:
+                    ((SaloadInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Istore:
+                    ((IstoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lstore:
+                    ((LstoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fstore:
+                    ((FstoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dstore:
+                    ((DstoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Astore:
+                    ((AstoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Istore0:
+                    ((Istore0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Istore1:
+                    ((Istore1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Istore2:
+                    ((Istore2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Istore3:
+                    ((Istore3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lstore0:
+                    ((Lstore0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lstore1:
+                    ((Lstore1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lstore2:
+                    ((Lstore2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lstore3:
+                    ((Lstore3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fstore0:
+                    ((Fstore0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fstore1:
+                    ((Fstore1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fstore2:
+                    ((Fstore2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fstore3:
+                    ((Fstore3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dstore0:
+                    ((Dstore0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dstore1:
+                    ((Dstore1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dstore2:
+                    ((Dstore2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dstore3:
+                    ((Dstore3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Astore0:
+                    ((Astore0Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Astore1:
+                    ((Astore1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Astore2:
+                    ((Astore2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Astore3:
+                    ((Astore3Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iastore:
+                    ((IastoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lastore:
+                    ((LastoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fastore:
+                    ((FastoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dastore:
+                    ((DastoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Aastore:
+                    ((AastoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Bastore:
+                    ((BastoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Castore:
+                    ((CastoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Sastore:
+                    ((SastoreInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Pop:
+                    ((PopInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Pop2:
+                    ((Pop2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dup:
+                    ((DupInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.DupX1:
+                    ((DupX1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.DupX2:
+                    ((DupX2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dup2:
+                    ((Dup2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dup2X1:
+                    ((Dup2X1Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dup2X2:
+                    ((Dup2X2Instruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Swap:
+                    ((SwapInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iadd:
+                    ((IaddInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ladd:
+                    ((LaddInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fadd:
+                    ((FaddInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dadd:
+                    ((DaddInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Isub:
+                    ((IsubInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lsub:
+                    ((LsubInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fsub:
+                    ((FsubInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dsub:
+                    ((DsubInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Imul:
+                    ((ImulInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lmul:
+                    ((LmulInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fmul:
+                    ((FmulInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dmul:
+                    ((DmulInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Idiv:
+                    ((IdivInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ldiv:
+                    ((LdivInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fdiv:
+                    ((FdivInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ddiv:
+                    ((DdivInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Irem:
+                    ((IremInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lrem:
+                    ((LremInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Frem:
+                    ((FremInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Drem:
+                    ((DremInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ineg:
+                    ((InegInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lneg:
+                    ((LnegInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fneg:
+                    ((FnegInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dneg:
+                    ((DnegInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ishl:
+                    ((IshlInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lshl:
+                    ((LshlInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ishr:
+                    ((IshrInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lshr:
+                    ((LshrInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iushr:
+                    ((IushrInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lushr:
+                    ((LushrInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iand:
+                    ((IandInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Land:
+                    ((LandInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ior:
+                    ((IorInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lor:
+                    ((LorInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ixor:
+                    ((IxorInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lxor:
+                    ((LxorInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iinc:
+                    ((IincInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.I2l:
+                    ((I2lInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.I2f:
+                    ((I2fInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.I2d:
+                    ((I2dInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.L2i:
+                    ((L2iInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.L2f:
+                    ((L2fInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.L2d:
+                    ((L2dInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.F2i:
+                    ((F2iInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.F2l:
+                    ((F2lInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.F2d:
+                    ((F2dInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.D2i:
+                    ((D2iInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.D2l:
+                    ((D2lInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.D2f:
+                    ((D2fInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.I2b:
+                    ((I2bInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.I2c:
+                    ((I2cInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.I2s:
+                    ((I2sInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lcmp:
+                    ((LcmpInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fcmpl:
+                    ((FcmplInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Fcmpg:
+                    ((FcmpgInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dcmpl:
+                    ((DcmplInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dcmpg:
+                    ((DcmpgInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ifeq:
+                    ((IfeqInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ifne:
+                    ((IfneInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Iflt:
+                    ((IfltInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ifge:
+                    ((IfgeInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ifgt:
+                    ((IfgtInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ifle:
+                    ((IfleInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfIcmpeq:
+                    ((IfIcmpeqInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfIcmpne:
+                    ((IfIcmpneInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfIcmplt:
+                    ((IfIcmpltInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfIcmpge:
+                    ((IfIcmpgeInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfIcmpgt:
+                    ((IfIcmpgtInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfIcmple:
+                    ((IfIcmpleInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfAcmpeq:
+                    ((IfAcmpeqInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfAcmpne:
+                    ((IfAcmpneInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Goto:
+                    ((GotoInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Jsr:
+                    ((JsrInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ret:
+                    ((RetInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.TableSwitch:
+                    ((TableSwitchInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.LookupSwitch:
+                    ((LookupSwitchInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Ireturn:
+                    ((IreturnInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Lreturn:
+                    ((LreturnInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Freturn:
+                    ((FreturnInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Dreturn:
+                    ((DreturnInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Areturn:
+                    ((AreturnInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Return:
+                    ((ReturnInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.GetStatic:
+                    ((GetStaticInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.PutStatic:
+                    ((PutStaticInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.GetField:
+                    ((GetFieldInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.PutField:
+                    ((PutFieldInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.InvokeVirtual:
+                    ((InvokeVirtualInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.InvokeSpecial:
+                    ((InvokeSpecialInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.InvokeStatic:
+                    ((InvokeStaticInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.InvokeInterface:
+                    ((InvokeInterfaceInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.InvokeDynamic:
+                    ((InvokeDynamicInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.New:
+                    ((NewInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Newarray:
+                    ((NewarrayInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Anewarray:
+                    ((AnewarrayInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Arraylength:
+                    ((ArraylengthInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Athrow:
+                    ((AthrowInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Checkcast:
+                    ((CheckcastInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.InstanceOf:
+                    ((InstanceOfInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.MonitorEnter:
+                    ((MonitorEnterInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.MonitorExit:
+                    ((MonitorExitInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.Multianewarray:
+                    ((MultianewarrayInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfNull:
+                    ((IfNullInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.IfNonNull:
+                    ((IfNonNullInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.GotoW:
+                    ((GotoWInstruction)this).CopyTo(map, builder);
+                    break;
+                case OpCode.JsrW:
+                    ((JsrWInstruction)this).CopyTo(map, builder);
+                    break;
+                default:
+                    throw new InvalidCodeException("Unsupported or unexpected instruction.");
+            }
+        }
     
     }
 
@@ -3523,6 +4142,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new NopInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -3603,6 +4234,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -3681,6 +4324,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new IconstM1Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -3761,6 +4416,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -3839,6 +4506,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Iconst1Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -3919,6 +4598,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -3997,6 +4688,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Iconst3Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -4077,6 +4780,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -4155,6 +4870,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Iconst5Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -4235,6 +4962,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -4313,6 +5052,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Lconst1Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -4393,6 +5144,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -4471,6 +5234,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Fconst1Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -4551,6 +5326,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -4630,6 +5417,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -4708,6 +5507,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Dconst1Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -4800,6 +5611,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Value
         public readonly sbyte Value = Value;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Value"></param>
+        }
 
     }
 
@@ -4891,6 +5715,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Value
         public readonly short Value = Value;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Value"></param>
+        }
 
     }
 
@@ -4982,6 +5819,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Constant"></param>
+        }
 
     }
 
@@ -5073,6 +5923,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Constant"></param>
+        }
 
     }
 
@@ -5164,6 +6027,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Constant"></param>
+        }
 
     }
 
@@ -5274,6 +6150,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -5384,6 +6273,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -5494,6 +6396,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -5604,6 +6519,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -5714,6 +6642,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -5792,6 +6733,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Iload0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -5872,6 +6825,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -5950,6 +6915,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Iload2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -6030,6 +7007,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -6108,6 +7097,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Lload0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -6188,6 +7189,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -6266,6 +7279,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Lload2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -6346,6 +7371,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -6424,6 +7461,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Fload0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -6504,6 +7553,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -6582,6 +7643,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Fload2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -6662,6 +7735,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -6740,6 +7825,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Dload0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -6820,6 +7917,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -6898,6 +8007,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Dload2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -6978,6 +8099,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -7056,6 +8189,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Aload0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -7136,6 +8281,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -7214,6 +8371,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Aload2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -7294,6 +8463,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -7372,6 +8553,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new IaloadInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -7452,6 +8645,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -7530,6 +8735,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new FaloadInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -7610,6 +8827,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -7688,6 +8917,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new AaloadInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -7768,6 +9009,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -7847,6 +9100,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -7925,6 +9190,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new SaloadInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -8036,6 +9313,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -8146,6 +9436,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -8256,6 +9559,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -8366,6 +9682,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -8476,6 +9805,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -8554,6 +9896,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Istore0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -8634,6 +9988,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -8712,6 +10078,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Istore2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -8792,6 +10170,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -8870,6 +10260,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Lstore0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -8950,6 +10352,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -9028,6 +10442,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Lstore2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -9108,6 +10534,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -9186,6 +10624,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Fstore0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -9266,6 +10716,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -9344,6 +10806,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Fstore2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -9424,6 +10898,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -9502,6 +10988,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Dstore0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -9582,6 +11080,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -9660,6 +11170,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Dstore2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -9740,6 +11262,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -9818,6 +11352,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Astore0Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -9898,6 +11444,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -9976,6 +11534,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Astore2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -10056,6 +11626,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -10134,6 +11716,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new IastoreInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -10214,6 +11808,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -10292,6 +11898,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new FastoreInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -10372,6 +11990,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -10450,6 +12080,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new AastoreInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -10530,6 +12172,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -10608,6 +12262,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new CastoreInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -10688,6 +12354,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -10766,6 +12444,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new PopInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -10846,6 +12536,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -10924,6 +12626,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DupInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -11004,6 +12718,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -11082,6 +12808,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DupX2Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -11162,6 +12900,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -11240,6 +12990,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new Dup2X1Instruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -11320,6 +13082,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -11398,6 +13172,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new SwapInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -11478,6 +13264,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -11556,6 +13354,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LaddInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -11636,6 +13446,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -11714,6 +13536,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DaddInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -11794,6 +13628,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -11872,6 +13718,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LsubInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -11952,6 +13810,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -12030,6 +13900,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DsubInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -12110,6 +13992,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -12188,6 +14082,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LmulInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -12268,6 +14174,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -12346,6 +14264,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DmulInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -12426,6 +14356,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -12504,6 +14446,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LdivInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -12584,6 +14538,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -12662,6 +14628,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DdivInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -12742,6 +14720,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -12820,6 +14810,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LremInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -12900,6 +14902,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -12978,6 +14992,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DremInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -13058,6 +15084,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -13136,6 +15174,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LnegInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -13216,6 +15266,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -13294,6 +15356,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DnegInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -13374,6 +15448,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -13452,6 +15538,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LshlInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -13532,6 +15630,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -13610,6 +15720,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LshrInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -13690,6 +15812,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -13768,6 +15902,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LushrInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -13848,6 +15994,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -13926,6 +16084,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LandInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -14006,6 +16176,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -14084,6 +16266,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LorInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -14164,6 +16358,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -14242,6 +16448,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new LxorInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -14373,6 +16591,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg2: Value
         public readonly short Value = Value;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+    /// <param name="Value"></param>
+        }
 
     }
 
@@ -14451,6 +16683,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new I2lInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -14531,6 +16775,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -14609,6 +16865,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new I2dInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -14689,6 +16957,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -14767,6 +17047,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new L2fInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -14847,6 +17139,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -14925,6 +17229,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new F2iInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -15005,6 +17321,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -15083,6 +17411,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new F2dInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -15163,6 +17503,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -15241,6 +17593,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new D2lInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -15321,6 +17685,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -15399,6 +17775,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new I2bInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -15479,6 +17867,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -15557,6 +17957,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new I2sInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -15637,6 +18049,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -15715,6 +18139,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new FcmplInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -15795,6 +18231,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -15874,6 +18322,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -15952,6 +18412,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new DcmpgInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -16044,6 +18516,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16135,6 +18621,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16226,6 +18726,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16317,6 +18831,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16408,6 +18936,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16499,6 +19041,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16590,6 +19146,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16681,6 +19251,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16772,6 +19356,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16863,6 +19461,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -16954,6 +19566,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -17045,6 +19671,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -17136,6 +19776,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -17227,6 +19881,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -17318,6 +19986,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -17409,6 +20091,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -17519,6 +20215,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Local"></param>
+        }
 
     }
 
@@ -17597,6 +20306,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new IreturnInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -17677,6 +20398,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -17755,6 +20488,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new FreturnInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -17835,6 +20580,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -17914,6 +20671,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -17992,6 +20761,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new ReturnInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -18084,6 +20865,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Field
         public readonly ConstantHandle Field = Field;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Field"></param>
+        }
 
     }
 
@@ -18175,6 +20969,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Field
         public readonly ConstantHandle Field = Field;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Field"></param>
+        }
 
     }
 
@@ -18266,6 +21073,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Field
         public readonly ConstantHandle Field = Field;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Field"></param>
+        }
 
     }
 
@@ -18357,6 +21177,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Field
         public readonly ConstantHandle Field = Field;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Field"></param>
+        }
 
     }
 
@@ -18448,6 +21281,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Method
         public readonly ConstantHandle Method = Method;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Method"></param>
+        }
 
     }
 
@@ -18539,6 +21385,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Method
         public readonly ConstantHandle Method = Method;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Method"></param>
+        }
 
     }
 
@@ -18630,6 +21489,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Method
         public readonly ConstantHandle Method = Method;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Method"></param>
+        }
 
     }
 
@@ -18745,6 +21617,21 @@ namespace IKVM.ByteCode.Decoding
 
         // arg3: Zero
         public readonly byte Zero = Zero;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Method"></param>
+    /// <param name="Count"></param>
+    /// <param name="Zero"></param>
+        }
 
     }
 
@@ -18860,6 +21747,21 @@ namespace IKVM.ByteCode.Decoding
 
         // arg3: Zero2
         public readonly byte Zero2 = Zero2;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Method"></param>
+    /// <param name="Zero"></param>
+    /// <param name="Zero2"></param>
+        }
 
     }
 
@@ -18951,6 +21853,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Constant"></param>
+        }
 
     }
 
@@ -19042,6 +21957,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Value
         public readonly byte Value = Value;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Value"></param>
+        }
 
     }
 
@@ -19133,6 +22061,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Constant"></param>
+        }
 
     }
 
@@ -19212,6 +22153,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -19290,6 +22243,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new AthrowInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -19382,6 +22347,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Type
         public readonly ConstantHandle Type = Type;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Type"></param>
+        }
 
     }
 
@@ -19473,6 +22451,19 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Type
         public readonly ConstantHandle Type = Type;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Type"></param>
+        }
 
     }
 
@@ -19552,6 +22543,18 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+        }
 
     }
 
@@ -19630,6 +22633,18 @@ namespace IKVM.ByteCode.Decoding
             instruction = new MonitorExitInstruction(offset);
 
             return true;
+        }
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
         }
 
     }
@@ -19734,6 +22749,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg2: Dimensions
         public readonly byte Dimensions = Dimensions;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Type"></param>
+    /// <param name="Dimensions"></param>
+        }
 
     }
 
@@ -19825,6 +22854,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -19916,6 +22959,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -20007,6 +23064,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly int Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
@@ -20098,6 +23169,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly int Target = Target;
+        
+        /// <summary>
+        /// Copies this instruction to the specified <see cref="CodeBuilder" />.
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+            where TConstantMap : IConstantMap
+        {
+    /// <param name="Target"></param>
+            var _offset = Offset;
+        }
 
     }
 
