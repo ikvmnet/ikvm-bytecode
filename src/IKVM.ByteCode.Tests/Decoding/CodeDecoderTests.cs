@@ -158,7 +158,7 @@ namespace IKVM.ByteCode.Tests.Decoding
             ]);
 
             var buffer1 = new BlobBuilder();
-            new CodeBuilder(buffer1).LoadConstant(new StringConstantHandle(1)).Pop().Return();
+            new CodeBuilder(buffer1).LoadConstant(new IntegerConstantHandle(1)).Pop().Return();
             var code1 = new CodeDecoder(buffer1.ToArray());
 
             // copy from decoder into new builder

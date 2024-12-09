@@ -70,7 +70,6 @@ namespace IKVM.ByteCode.Decoding
             where TConstantPool : IConstantPool
         {
             // copy code to new blob
-            var codeOffset = (int)Code.Length;
             var code = new BlobBuilder((int)Code.Length);
             new CodeDecoder(Code).CopyTo(constantView, constantPool, new CodeBuilder(code));
 
@@ -80,7 +79,7 @@ namespace IKVM.ByteCode.Decoding
 
             // add code attribute with copied values
             var excp = ExceptionTable;
-            encoder.Code(constantPool.Get(AttributeName.Code), MaxStack, MaxLocals, code, e => excp.CopyTo(constantView, constantPool, ref e, codeOffset), attr);
+            encoder.Code(constantPool.Get(AttributeName.Code), MaxStack, MaxLocals, code, e => excp.CopyTo(constantView, constantPool, ref e, 0), attr);
         }
 
     }
