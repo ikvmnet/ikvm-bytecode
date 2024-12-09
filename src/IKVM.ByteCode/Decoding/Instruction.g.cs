@@ -10,7 +10,7 @@ namespace IKVM.ByteCode.Decoding
 
     public readonly partial record struct Instruction
     {
-    
+
         /// <summary>
         /// Attempts to measure the instruction at the current position.
         /// </summary>
@@ -3451,620 +3451,621 @@ namespace IKVM.ByteCode.Decoding
         /// <typeparam name="TConstantMap"></typeparam>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        internal void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             switch (OpCode)
             {
                 case OpCode.Nop:
-                    ((NopInstruction)this).CopyTo(constants, builder);
+                    ((NopInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.AconstNull:
-                    ((AconstNullInstruction)this).CopyTo(constants, builder);
+                    ((AconstNullInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IconstM1:
-                    ((IconstM1Instruction)this).CopyTo(constants, builder);
+                    ((IconstM1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iconst0:
-                    ((Iconst0Instruction)this).CopyTo(constants, builder);
+                    ((Iconst0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iconst1:
-                    ((Iconst1Instruction)this).CopyTo(constants, builder);
+                    ((Iconst1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iconst2:
-                    ((Iconst2Instruction)this).CopyTo(constants, builder);
+                    ((Iconst2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iconst3:
-                    ((Iconst3Instruction)this).CopyTo(constants, builder);
+                    ((Iconst3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iconst4:
-                    ((Iconst4Instruction)this).CopyTo(constants, builder);
+                    ((Iconst4Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iconst5:
-                    ((Iconst5Instruction)this).CopyTo(constants, builder);
+                    ((Iconst5Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lconst0:
-                    ((Lconst0Instruction)this).CopyTo(constants, builder);
+                    ((Lconst0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lconst1:
-                    ((Lconst1Instruction)this).CopyTo(constants, builder);
+                    ((Lconst1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fconst0:
-                    ((Fconst0Instruction)this).CopyTo(constants, builder);
+                    ((Fconst0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fconst1:
-                    ((Fconst1Instruction)this).CopyTo(constants, builder);
+                    ((Fconst1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fconst2:
-                    ((Fconst2Instruction)this).CopyTo(constants, builder);
+                    ((Fconst2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dconst0:
-                    ((Dconst0Instruction)this).CopyTo(constants, builder);
+                    ((Dconst0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dconst1:
-                    ((Dconst1Instruction)this).CopyTo(constants, builder);
+                    ((Dconst1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Bipush:
-                    ((BipushInstruction)this).CopyTo(constants, builder);
+                    ((BipushInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Sipush:
-                    ((SipushInstruction)this).CopyTo(constants, builder);
+                    ((SipushInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ldc:
-                    ((LdcInstruction)this).CopyTo(constants, builder);
+                    ((LdcInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.LdcW:
-                    ((LdcWInstruction)this).CopyTo(constants, builder);
+                    ((LdcWInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ldc2W:
-                    ((Ldc2WInstruction)this).CopyTo(constants, builder);
+                    ((Ldc2WInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iload:
-                    ((IloadInstruction)this).CopyTo(constants, builder);
+                    ((IloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lload:
-                    ((LloadInstruction)this).CopyTo(constants, builder);
+                    ((LloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fload:
-                    ((FloadInstruction)this).CopyTo(constants, builder);
+                    ((FloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dload:
-                    ((DloadInstruction)this).CopyTo(constants, builder);
+                    ((DloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Aload:
-                    ((AloadInstruction)this).CopyTo(constants, builder);
+                    ((AloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iload0:
-                    ((Iload0Instruction)this).CopyTo(constants, builder);
+                    ((Iload0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iload1:
-                    ((Iload1Instruction)this).CopyTo(constants, builder);
+                    ((Iload1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iload2:
-                    ((Iload2Instruction)this).CopyTo(constants, builder);
+                    ((Iload2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iload3:
-                    ((Iload3Instruction)this).CopyTo(constants, builder);
+                    ((Iload3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lload0:
-                    ((Lload0Instruction)this).CopyTo(constants, builder);
+                    ((Lload0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lload1:
-                    ((Lload1Instruction)this).CopyTo(constants, builder);
+                    ((Lload1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lload2:
-                    ((Lload2Instruction)this).CopyTo(constants, builder);
+                    ((Lload2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lload3:
-                    ((Lload3Instruction)this).CopyTo(constants, builder);
+                    ((Lload3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fload0:
-                    ((Fload0Instruction)this).CopyTo(constants, builder);
+                    ((Fload0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fload1:
-                    ((Fload1Instruction)this).CopyTo(constants, builder);
+                    ((Fload1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fload2:
-                    ((Fload2Instruction)this).CopyTo(constants, builder);
+                    ((Fload2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fload3:
-                    ((Fload3Instruction)this).CopyTo(constants, builder);
+                    ((Fload3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dload0:
-                    ((Dload0Instruction)this).CopyTo(constants, builder);
+                    ((Dload0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dload1:
-                    ((Dload1Instruction)this).CopyTo(constants, builder);
+                    ((Dload1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dload2:
-                    ((Dload2Instruction)this).CopyTo(constants, builder);
+                    ((Dload2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dload3:
-                    ((Dload3Instruction)this).CopyTo(constants, builder);
+                    ((Dload3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Aload0:
-                    ((Aload0Instruction)this).CopyTo(constants, builder);
+                    ((Aload0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Aload1:
-                    ((Aload1Instruction)this).CopyTo(constants, builder);
+                    ((Aload1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Aload2:
-                    ((Aload2Instruction)this).CopyTo(constants, builder);
+                    ((Aload2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Aload3:
-                    ((Aload3Instruction)this).CopyTo(constants, builder);
+                    ((Aload3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iaload:
-                    ((IaloadInstruction)this).CopyTo(constants, builder);
+                    ((IaloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Laload:
-                    ((LaloadInstruction)this).CopyTo(constants, builder);
+                    ((LaloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Faload:
-                    ((FaloadInstruction)this).CopyTo(constants, builder);
+                    ((FaloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Daload:
-                    ((DaloadInstruction)this).CopyTo(constants, builder);
+                    ((DaloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Aaload:
-                    ((AaloadInstruction)this).CopyTo(constants, builder);
+                    ((AaloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Baload:
-                    ((BaloadInstruction)this).CopyTo(constants, builder);
+                    ((BaloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Caload:
-                    ((CaloadInstruction)this).CopyTo(constants, builder);
+                    ((CaloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Saload:
-                    ((SaloadInstruction)this).CopyTo(constants, builder);
+                    ((SaloadInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Istore:
-                    ((IstoreInstruction)this).CopyTo(constants, builder);
+                    ((IstoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lstore:
-                    ((LstoreInstruction)this).CopyTo(constants, builder);
+                    ((LstoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fstore:
-                    ((FstoreInstruction)this).CopyTo(constants, builder);
+                    ((FstoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dstore:
-                    ((DstoreInstruction)this).CopyTo(constants, builder);
+                    ((DstoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Astore:
-                    ((AstoreInstruction)this).CopyTo(constants, builder);
+                    ((AstoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Istore0:
-                    ((Istore0Instruction)this).CopyTo(constants, builder);
+                    ((Istore0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Istore1:
-                    ((Istore1Instruction)this).CopyTo(constants, builder);
+                    ((Istore1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Istore2:
-                    ((Istore2Instruction)this).CopyTo(constants, builder);
+                    ((Istore2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Istore3:
-                    ((Istore3Instruction)this).CopyTo(constants, builder);
+                    ((Istore3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lstore0:
-                    ((Lstore0Instruction)this).CopyTo(constants, builder);
+                    ((Lstore0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lstore1:
-                    ((Lstore1Instruction)this).CopyTo(constants, builder);
+                    ((Lstore1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lstore2:
-                    ((Lstore2Instruction)this).CopyTo(constants, builder);
+                    ((Lstore2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lstore3:
-                    ((Lstore3Instruction)this).CopyTo(constants, builder);
+                    ((Lstore3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fstore0:
-                    ((Fstore0Instruction)this).CopyTo(constants, builder);
+                    ((Fstore0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fstore1:
-                    ((Fstore1Instruction)this).CopyTo(constants, builder);
+                    ((Fstore1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fstore2:
-                    ((Fstore2Instruction)this).CopyTo(constants, builder);
+                    ((Fstore2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fstore3:
-                    ((Fstore3Instruction)this).CopyTo(constants, builder);
+                    ((Fstore3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dstore0:
-                    ((Dstore0Instruction)this).CopyTo(constants, builder);
+                    ((Dstore0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dstore1:
-                    ((Dstore1Instruction)this).CopyTo(constants, builder);
+                    ((Dstore1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dstore2:
-                    ((Dstore2Instruction)this).CopyTo(constants, builder);
+                    ((Dstore2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dstore3:
-                    ((Dstore3Instruction)this).CopyTo(constants, builder);
+                    ((Dstore3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Astore0:
-                    ((Astore0Instruction)this).CopyTo(constants, builder);
+                    ((Astore0Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Astore1:
-                    ((Astore1Instruction)this).CopyTo(constants, builder);
+                    ((Astore1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Astore2:
-                    ((Astore2Instruction)this).CopyTo(constants, builder);
+                    ((Astore2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Astore3:
-                    ((Astore3Instruction)this).CopyTo(constants, builder);
+                    ((Astore3Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iastore:
-                    ((IastoreInstruction)this).CopyTo(constants, builder);
+                    ((IastoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lastore:
-                    ((LastoreInstruction)this).CopyTo(constants, builder);
+                    ((LastoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fastore:
-                    ((FastoreInstruction)this).CopyTo(constants, builder);
+                    ((FastoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dastore:
-                    ((DastoreInstruction)this).CopyTo(constants, builder);
+                    ((DastoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Aastore:
-                    ((AastoreInstruction)this).CopyTo(constants, builder);
+                    ((AastoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Bastore:
-                    ((BastoreInstruction)this).CopyTo(constants, builder);
+                    ((BastoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Castore:
-                    ((CastoreInstruction)this).CopyTo(constants, builder);
+                    ((CastoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Sastore:
-                    ((SastoreInstruction)this).CopyTo(constants, builder);
+                    ((SastoreInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Pop:
-                    ((PopInstruction)this).CopyTo(constants, builder);
+                    ((PopInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Pop2:
-                    ((Pop2Instruction)this).CopyTo(constants, builder);
+                    ((Pop2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dup:
-                    ((DupInstruction)this).CopyTo(constants, builder);
+                    ((DupInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.DupX1:
-                    ((DupX1Instruction)this).CopyTo(constants, builder);
+                    ((DupX1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.DupX2:
-                    ((DupX2Instruction)this).CopyTo(constants, builder);
+                    ((DupX2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dup2:
-                    ((Dup2Instruction)this).CopyTo(constants, builder);
+                    ((Dup2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dup2X1:
-                    ((Dup2X1Instruction)this).CopyTo(constants, builder);
+                    ((Dup2X1Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dup2X2:
-                    ((Dup2X2Instruction)this).CopyTo(constants, builder);
+                    ((Dup2X2Instruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Swap:
-                    ((SwapInstruction)this).CopyTo(constants, builder);
+                    ((SwapInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iadd:
-                    ((IaddInstruction)this).CopyTo(constants, builder);
+                    ((IaddInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ladd:
-                    ((LaddInstruction)this).CopyTo(constants, builder);
+                    ((LaddInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fadd:
-                    ((FaddInstruction)this).CopyTo(constants, builder);
+                    ((FaddInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dadd:
-                    ((DaddInstruction)this).CopyTo(constants, builder);
+                    ((DaddInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Isub:
-                    ((IsubInstruction)this).CopyTo(constants, builder);
+                    ((IsubInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lsub:
-                    ((LsubInstruction)this).CopyTo(constants, builder);
+                    ((LsubInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fsub:
-                    ((FsubInstruction)this).CopyTo(constants, builder);
+                    ((FsubInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dsub:
-                    ((DsubInstruction)this).CopyTo(constants, builder);
+                    ((DsubInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Imul:
-                    ((ImulInstruction)this).CopyTo(constants, builder);
+                    ((ImulInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lmul:
-                    ((LmulInstruction)this).CopyTo(constants, builder);
+                    ((LmulInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fmul:
-                    ((FmulInstruction)this).CopyTo(constants, builder);
+                    ((FmulInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dmul:
-                    ((DmulInstruction)this).CopyTo(constants, builder);
+                    ((DmulInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Idiv:
-                    ((IdivInstruction)this).CopyTo(constants, builder);
+                    ((IdivInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ldiv:
-                    ((LdivInstruction)this).CopyTo(constants, builder);
+                    ((LdivInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fdiv:
-                    ((FdivInstruction)this).CopyTo(constants, builder);
+                    ((FdivInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ddiv:
-                    ((DdivInstruction)this).CopyTo(constants, builder);
+                    ((DdivInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Irem:
-                    ((IremInstruction)this).CopyTo(constants, builder);
+                    ((IremInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lrem:
-                    ((LremInstruction)this).CopyTo(constants, builder);
+                    ((LremInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Frem:
-                    ((FremInstruction)this).CopyTo(constants, builder);
+                    ((FremInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Drem:
-                    ((DremInstruction)this).CopyTo(constants, builder);
+                    ((DremInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ineg:
-                    ((InegInstruction)this).CopyTo(constants, builder);
+                    ((InegInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lneg:
-                    ((LnegInstruction)this).CopyTo(constants, builder);
+                    ((LnegInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fneg:
-                    ((FnegInstruction)this).CopyTo(constants, builder);
+                    ((FnegInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dneg:
-                    ((DnegInstruction)this).CopyTo(constants, builder);
+                    ((DnegInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ishl:
-                    ((IshlInstruction)this).CopyTo(constants, builder);
+                    ((IshlInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lshl:
-                    ((LshlInstruction)this).CopyTo(constants, builder);
+                    ((LshlInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ishr:
-                    ((IshrInstruction)this).CopyTo(constants, builder);
+                    ((IshrInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lshr:
-                    ((LshrInstruction)this).CopyTo(constants, builder);
+                    ((LshrInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iushr:
-                    ((IushrInstruction)this).CopyTo(constants, builder);
+                    ((IushrInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lushr:
-                    ((LushrInstruction)this).CopyTo(constants, builder);
+                    ((LushrInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iand:
-                    ((IandInstruction)this).CopyTo(constants, builder);
+                    ((IandInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Land:
-                    ((LandInstruction)this).CopyTo(constants, builder);
+                    ((LandInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ior:
-                    ((IorInstruction)this).CopyTo(constants, builder);
+                    ((IorInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lor:
-                    ((LorInstruction)this).CopyTo(constants, builder);
+                    ((LorInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ixor:
-                    ((IxorInstruction)this).CopyTo(constants, builder);
+                    ((IxorInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lxor:
-                    ((LxorInstruction)this).CopyTo(constants, builder);
+                    ((LxorInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iinc:
-                    ((IincInstruction)this).CopyTo(constants, builder);
+                    ((IincInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.I2l:
-                    ((I2lInstruction)this).CopyTo(constants, builder);
+                    ((I2lInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.I2f:
-                    ((I2fInstruction)this).CopyTo(constants, builder);
+                    ((I2fInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.I2d:
-                    ((I2dInstruction)this).CopyTo(constants, builder);
+                    ((I2dInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.L2i:
-                    ((L2iInstruction)this).CopyTo(constants, builder);
+                    ((L2iInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.L2f:
-                    ((L2fInstruction)this).CopyTo(constants, builder);
+                    ((L2fInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.L2d:
-                    ((L2dInstruction)this).CopyTo(constants, builder);
+                    ((L2dInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.F2i:
-                    ((F2iInstruction)this).CopyTo(constants, builder);
+                    ((F2iInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.F2l:
-                    ((F2lInstruction)this).CopyTo(constants, builder);
+                    ((F2lInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.F2d:
-                    ((F2dInstruction)this).CopyTo(constants, builder);
+                    ((F2dInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.D2i:
-                    ((D2iInstruction)this).CopyTo(constants, builder);
+                    ((D2iInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.D2l:
-                    ((D2lInstruction)this).CopyTo(constants, builder);
+                    ((D2lInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.D2f:
-                    ((D2fInstruction)this).CopyTo(constants, builder);
+                    ((D2fInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.I2b:
-                    ((I2bInstruction)this).CopyTo(constants, builder);
+                    ((I2bInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.I2c:
-                    ((I2cInstruction)this).CopyTo(constants, builder);
+                    ((I2cInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.I2s:
-                    ((I2sInstruction)this).CopyTo(constants, builder);
+                    ((I2sInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lcmp:
-                    ((LcmpInstruction)this).CopyTo(constants, builder);
+                    ((LcmpInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fcmpl:
-                    ((FcmplInstruction)this).CopyTo(constants, builder);
+                    ((FcmplInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Fcmpg:
-                    ((FcmpgInstruction)this).CopyTo(constants, builder);
+                    ((FcmpgInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dcmpl:
-                    ((DcmplInstruction)this).CopyTo(constants, builder);
+                    ((DcmplInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dcmpg:
-                    ((DcmpgInstruction)this).CopyTo(constants, builder);
+                    ((DcmpgInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ifeq:
-                    ((IfeqInstruction)this).CopyTo(constants, builder);
+                    ((IfeqInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ifne:
-                    ((IfneInstruction)this).CopyTo(constants, builder);
+                    ((IfneInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Iflt:
-                    ((IfltInstruction)this).CopyTo(constants, builder);
+                    ((IfltInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ifge:
-                    ((IfgeInstruction)this).CopyTo(constants, builder);
+                    ((IfgeInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ifgt:
-                    ((IfgtInstruction)this).CopyTo(constants, builder);
+                    ((IfgtInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ifle:
-                    ((IfleInstruction)this).CopyTo(constants, builder);
+                    ((IfleInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfIcmpeq:
-                    ((IfIcmpeqInstruction)this).CopyTo(constants, builder);
+                    ((IfIcmpeqInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfIcmpne:
-                    ((IfIcmpneInstruction)this).CopyTo(constants, builder);
+                    ((IfIcmpneInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfIcmplt:
-                    ((IfIcmpltInstruction)this).CopyTo(constants, builder);
+                    ((IfIcmpltInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfIcmpge:
-                    ((IfIcmpgeInstruction)this).CopyTo(constants, builder);
+                    ((IfIcmpgeInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfIcmpgt:
-                    ((IfIcmpgtInstruction)this).CopyTo(constants, builder);
+                    ((IfIcmpgtInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfIcmple:
-                    ((IfIcmpleInstruction)this).CopyTo(constants, builder);
+                    ((IfIcmpleInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfAcmpeq:
-                    ((IfAcmpeqInstruction)this).CopyTo(constants, builder);
+                    ((IfAcmpeqInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfAcmpne:
-                    ((IfAcmpneInstruction)this).CopyTo(constants, builder);
+                    ((IfAcmpneInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Goto:
-                    ((GotoInstruction)this).CopyTo(constants, builder);
+                    ((GotoInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Jsr:
-                    ((JsrInstruction)this).CopyTo(constants, builder);
+                    ((JsrInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ret:
-                    ((RetInstruction)this).CopyTo(constants, builder);
+                    ((RetInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.TableSwitch:
-                    ((TableSwitchInstruction)this).CopyTo(constants, builder);
+                    ((TableSwitchInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.LookupSwitch:
-                    ((LookupSwitchInstruction)this).CopyTo(constants, builder);
+                    ((LookupSwitchInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Ireturn:
-                    ((IreturnInstruction)this).CopyTo(constants, builder);
+                    ((IreturnInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Lreturn:
-                    ((LreturnInstruction)this).CopyTo(constants, builder);
+                    ((LreturnInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Freturn:
-                    ((FreturnInstruction)this).CopyTo(constants, builder);
+                    ((FreturnInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Dreturn:
-                    ((DreturnInstruction)this).CopyTo(constants, builder);
+                    ((DreturnInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Areturn:
-                    ((AreturnInstruction)this).CopyTo(constants, builder);
+                    ((AreturnInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Return:
-                    ((ReturnInstruction)this).CopyTo(constants, builder);
+                    ((ReturnInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.GetStatic:
-                    ((GetStaticInstruction)this).CopyTo(constants, builder);
+                    ((GetStaticInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.PutStatic:
-                    ((PutStaticInstruction)this).CopyTo(constants, builder);
+                    ((PutStaticInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.GetField:
-                    ((GetFieldInstruction)this).CopyTo(constants, builder);
+                    ((GetFieldInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.PutField:
-                    ((PutFieldInstruction)this).CopyTo(constants, builder);
+                    ((PutFieldInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.InvokeVirtual:
-                    ((InvokeVirtualInstruction)this).CopyTo(constants, builder);
+                    ((InvokeVirtualInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.InvokeSpecial:
-                    ((InvokeSpecialInstruction)this).CopyTo(constants, builder);
+                    ((InvokeSpecialInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.InvokeStatic:
-                    ((InvokeStaticInstruction)this).CopyTo(constants, builder);
+                    ((InvokeStaticInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.InvokeInterface:
-                    ((InvokeInterfaceInstruction)this).CopyTo(constants, builder);
+                    ((InvokeInterfaceInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.InvokeDynamic:
-                    ((InvokeDynamicInstruction)this).CopyTo(constants, builder);
+                    ((InvokeDynamicInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.New:
-                    ((NewInstruction)this).CopyTo(constants, builder);
+                    ((NewInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Newarray:
-                    ((NewarrayInstruction)this).CopyTo(constants, builder);
+                    ((NewarrayInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Anewarray:
-                    ((AnewarrayInstruction)this).CopyTo(constants, builder);
+                    ((AnewarrayInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Arraylength:
-                    ((ArraylengthInstruction)this).CopyTo(constants, builder);
+                    ((ArraylengthInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Athrow:
-                    ((AthrowInstruction)this).CopyTo(constants, builder);
+                    ((AthrowInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Checkcast:
-                    ((CheckcastInstruction)this).CopyTo(constants, builder);
+                    ((CheckcastInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.InstanceOf:
-                    ((InstanceOfInstruction)this).CopyTo(constants, builder);
+                    ((InstanceOfInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.MonitorEnter:
-                    ((MonitorEnterInstruction)this).CopyTo(constants, builder);
+                    ((MonitorEnterInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.MonitorExit:
-                    ((MonitorExitInstruction)this).CopyTo(constants, builder);
+                    ((MonitorExitInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.Multianewarray:
-                    ((MultianewarrayInstruction)this).CopyTo(constants, builder);
+                    ((MultianewarrayInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfNull:
-                    ((IfNullInstruction)this).CopyTo(constants, builder);
+                    ((IfNullInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.IfNonNull:
-                    ((IfNonNullInstruction)this).CopyTo(constants, builder);
+                    ((IfNonNullInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.GotoW:
-                    ((GotoWInstruction)this).CopyTo(constants, builder);
+                    ((GotoWInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 case OpCode.JsrW:
-                    ((JsrWInstruction)this).CopyTo(constants, builder);
+                    ((JsrWInstruction)this).CopyTo(constants, builder, offset);
                     break;
                 default:
                     throw new InvalidCodeException("Unsupported or unexpected instruction.");
             }
         }
-    
+
     }
 
     /// <summary>
@@ -4072,13 +4073,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct NopInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="NopInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator NopInstruction(Instruction value) => value.AsNop();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4097,13 +4098,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4117,7 +4118,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4143,15 +4144,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Nop);
@@ -4164,13 +4166,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct AconstNullInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="AconstNullInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator AconstNullInstruction(Instruction value) => value.AsAconstNull();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4189,13 +4191,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4209,7 +4211,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4235,15 +4237,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.AconstNull);
@@ -4256,13 +4259,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IconstM1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IconstM1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IconstM1Instruction(Instruction value) => value.AsIconstM1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4281,13 +4284,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4301,7 +4304,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4327,15 +4330,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IconstM1);
@@ -4348,13 +4352,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iconst0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iconst0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iconst0Instruction(Instruction value) => value.AsIconst0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4373,13 +4377,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4393,7 +4397,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4419,15 +4423,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iconst0);
@@ -4440,13 +4445,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iconst1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iconst1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iconst1Instruction(Instruction value) => value.AsIconst1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4465,13 +4470,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4485,7 +4490,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4511,15 +4516,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iconst1);
@@ -4532,13 +4538,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iconst2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iconst2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iconst2Instruction(Instruction value) => value.AsIconst2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4557,13 +4563,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4577,7 +4583,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4603,15 +4609,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iconst2);
@@ -4624,13 +4631,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iconst3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iconst3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iconst3Instruction(Instruction value) => value.AsIconst3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4649,13 +4656,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4669,7 +4676,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4695,15 +4702,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iconst3);
@@ -4716,13 +4724,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iconst4Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iconst4Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iconst4Instruction(Instruction value) => value.AsIconst4();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4741,13 +4749,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4761,7 +4769,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4787,15 +4795,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iconst4);
@@ -4808,13 +4817,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iconst5Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iconst5Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iconst5Instruction(Instruction value) => value.AsIconst5();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4833,13 +4842,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4853,7 +4862,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4879,15 +4888,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iconst5);
@@ -4900,13 +4910,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lconst0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lconst0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lconst0Instruction(Instruction value) => value.AsLconst0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -4925,13 +4935,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4945,7 +4955,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -4971,15 +4981,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lconst0);
@@ -4992,13 +5003,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lconst1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lconst1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lconst1Instruction(Instruction value) => value.AsLconst1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5017,13 +5028,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5037,7 +5048,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5063,15 +5074,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lconst1);
@@ -5084,13 +5096,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fconst0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fconst0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fconst0Instruction(Instruction value) => value.AsFconst0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5109,13 +5121,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5129,7 +5141,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5155,15 +5167,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fconst0);
@@ -5176,13 +5189,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fconst1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fconst1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fconst1Instruction(Instruction value) => value.AsFconst1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5201,13 +5214,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5221,7 +5234,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5247,15 +5260,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fconst1);
@@ -5268,13 +5282,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fconst2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fconst2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fconst2Instruction(Instruction value) => value.AsFconst2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5293,13 +5307,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5313,7 +5327,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5339,15 +5353,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fconst2);
@@ -5360,13 +5375,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dconst0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dconst0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dconst0Instruction(Instruction value) => value.AsDconst0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5385,13 +5400,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5405,7 +5420,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5431,15 +5446,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dconst0);
@@ -5452,13 +5468,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dconst1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dconst1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dconst1Instruction(Instruction value) => value.AsDconst1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5477,13 +5493,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5497,7 +5513,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5523,15 +5539,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dconst1);
@@ -5545,13 +5562,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Value"></param>
     public partial record struct BipushInstruction(int Offset, sbyte Value)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="BipushInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator BipushInstruction(Instruction value) => value.AsBipush();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5570,7 +5587,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -5580,7 +5597,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5594,7 +5611,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5627,15 +5644,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Value
         public readonly sbyte Value = Value;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Bipush);
@@ -5650,13 +5668,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Value"></param>
     public partial record struct SipushInstruction(int Offset, short Value)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="SipushInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator SipushInstruction(Instruction value) => value.AsSipush();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5675,7 +5693,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -5685,7 +5703,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5699,7 +5717,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5732,15 +5750,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Value
         public readonly short Value = Value;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Sipush);
@@ -5755,13 +5774,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Constant"></param>
     public partial record struct LdcInstruction(int Offset, ConstantHandle Constant)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LdcInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LdcInstruction(Instruction value) => value.AsLdc();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5780,7 +5799,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -5790,7 +5809,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5804,7 +5823,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5837,15 +5856,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ldc);
@@ -5860,13 +5880,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Constant"></param>
     public partial record struct LdcWInstruction(int Offset, ConstantHandle Constant)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LdcWInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LdcWInstruction(Instruction value) => value.AsLdcW();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5885,7 +5905,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -5895,7 +5915,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5909,7 +5929,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -5942,15 +5962,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.LdcW);
@@ -5965,13 +5986,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Constant"></param>
     public partial record struct Ldc2WInstruction(int Offset, ConstantHandle Constant)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Ldc2WInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Ldc2WInstruction(Instruction value) => value.AsLdc2W();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -5990,7 +6011,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -6000,7 +6021,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6014,7 +6035,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6047,15 +6068,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ldc2W);
@@ -6070,13 +6092,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct IloadInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IloadInstruction(Instruction value) => value.AsIload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -6114,7 +6136,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6128,7 +6150,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6171,15 +6193,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -6208,13 +6231,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct LloadInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LloadInstruction(Instruction value) => value.AsLload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -6252,7 +6275,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6266,7 +6289,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6309,15 +6332,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -6346,13 +6370,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct FloadInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FloadInstruction(Instruction value) => value.AsFload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -6390,7 +6414,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6404,7 +6428,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6447,15 +6471,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -6484,13 +6509,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct DloadInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DloadInstruction(Instruction value) => value.AsDload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -6528,7 +6553,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6542,7 +6567,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6585,15 +6610,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -6622,13 +6648,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct AloadInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="AloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator AloadInstruction(Instruction value) => value.AsAload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -6666,7 +6692,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6680,7 +6706,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6723,15 +6749,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -6759,13 +6786,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iload0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iload0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iload0Instruction(Instruction value) => value.AsIload0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -6784,13 +6811,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6804,7 +6831,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6830,15 +6857,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iload0);
@@ -6851,13 +6879,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iload1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iload1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iload1Instruction(Instruction value) => value.AsIload1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -6876,13 +6904,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6896,7 +6924,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6922,15 +6950,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iload1);
@@ -6943,13 +6972,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iload2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iload2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iload2Instruction(Instruction value) => value.AsIload2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -6968,13 +6997,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -6988,7 +7017,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7014,15 +7043,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iload2);
@@ -7035,13 +7065,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Iload3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Iload3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Iload3Instruction(Instruction value) => value.AsIload3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7060,13 +7090,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7080,7 +7110,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7106,15 +7136,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iload3);
@@ -7127,13 +7158,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lload0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lload0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lload0Instruction(Instruction value) => value.AsLload0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7152,13 +7183,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7172,7 +7203,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7198,15 +7229,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lload0);
@@ -7219,13 +7251,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lload1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lload1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lload1Instruction(Instruction value) => value.AsLload1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7244,13 +7276,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7264,7 +7296,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7290,15 +7322,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lload1);
@@ -7311,13 +7344,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lload2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lload2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lload2Instruction(Instruction value) => value.AsLload2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7336,13 +7369,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7356,7 +7389,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7382,15 +7415,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lload2);
@@ -7403,13 +7437,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lload3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lload3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lload3Instruction(Instruction value) => value.AsLload3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7428,13 +7462,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7448,7 +7482,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7474,15 +7508,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lload3);
@@ -7495,13 +7530,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fload0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fload0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fload0Instruction(Instruction value) => value.AsFload0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7520,13 +7555,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7540,7 +7575,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7566,15 +7601,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fload0);
@@ -7587,13 +7623,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fload1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fload1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fload1Instruction(Instruction value) => value.AsFload1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7612,13 +7648,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7632,7 +7668,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7658,15 +7694,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fload1);
@@ -7679,13 +7716,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fload2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fload2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fload2Instruction(Instruction value) => value.AsFload2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7704,13 +7741,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7724,7 +7761,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7750,15 +7787,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fload2);
@@ -7771,13 +7809,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fload3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fload3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fload3Instruction(Instruction value) => value.AsFload3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7796,13 +7834,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7816,7 +7854,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7842,15 +7880,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fload3);
@@ -7863,13 +7902,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dload0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dload0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dload0Instruction(Instruction value) => value.AsDload0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7888,13 +7927,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7908,7 +7947,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -7934,15 +7973,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dload0);
@@ -7955,13 +7995,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dload1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dload1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dload1Instruction(Instruction value) => value.AsDload1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -7980,13 +8020,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8000,7 +8040,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8026,15 +8066,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dload1);
@@ -8047,13 +8088,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dload2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dload2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dload2Instruction(Instruction value) => value.AsDload2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8072,13 +8113,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8092,7 +8133,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8118,15 +8159,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dload2);
@@ -8139,13 +8181,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dload3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dload3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dload3Instruction(Instruction value) => value.AsDload3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8164,13 +8206,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8184,7 +8226,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8210,15 +8252,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dload3);
@@ -8231,13 +8274,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Aload0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Aload0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Aload0Instruction(Instruction value) => value.AsAload0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8256,13 +8299,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8276,7 +8319,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8302,15 +8345,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Aload0);
@@ -8323,13 +8367,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Aload1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Aload1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Aload1Instruction(Instruction value) => value.AsAload1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8348,13 +8392,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8368,7 +8412,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8394,15 +8438,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Aload1);
@@ -8415,13 +8460,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Aload2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Aload2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Aload2Instruction(Instruction value) => value.AsAload2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8440,13 +8485,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8460,7 +8505,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8486,15 +8531,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Aload2);
@@ -8507,13 +8553,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Aload3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Aload3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Aload3Instruction(Instruction value) => value.AsAload3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8532,13 +8578,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8552,7 +8598,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8578,15 +8624,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Aload3);
@@ -8599,13 +8646,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IaloadInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IaloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IaloadInstruction(Instruction value) => value.AsIaload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8624,13 +8671,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8644,7 +8691,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8670,15 +8717,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iaload);
@@ -8691,13 +8739,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LaloadInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LaloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LaloadInstruction(Instruction value) => value.AsLaload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8716,13 +8764,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8736,7 +8784,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8762,15 +8810,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Laload);
@@ -8783,13 +8832,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FaloadInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FaloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FaloadInstruction(Instruction value) => value.AsFaload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8808,13 +8857,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8828,7 +8877,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8854,15 +8903,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Faload);
@@ -8875,13 +8925,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DaloadInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DaloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DaloadInstruction(Instruction value) => value.AsDaload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8900,13 +8950,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8920,7 +8970,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -8946,15 +8996,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Daload);
@@ -8967,13 +9018,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct AaloadInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="AaloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator AaloadInstruction(Instruction value) => value.AsAaload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -8992,13 +9043,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9012,7 +9063,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9038,15 +9089,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Aaload);
@@ -9059,13 +9111,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct BaloadInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="BaloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator BaloadInstruction(Instruction value) => value.AsBaload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -9084,13 +9136,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9104,7 +9156,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9130,15 +9182,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Baload);
@@ -9151,13 +9204,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct CaloadInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="CaloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator CaloadInstruction(Instruction value) => value.AsCaload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -9176,13 +9229,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9196,7 +9249,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9222,15 +9275,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Caload);
@@ -9243,13 +9297,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct SaloadInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="SaloadInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator SaloadInstruction(Instruction value) => value.AsSaload();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -9268,13 +9322,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9288,7 +9342,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9314,15 +9368,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Saload);
@@ -9336,13 +9391,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct IstoreInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IstoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IstoreInstruction(Instruction value) => value.AsIstore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -9380,7 +9435,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9394,7 +9449,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9437,15 +9492,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -9474,13 +9530,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct LstoreInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LstoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LstoreInstruction(Instruction value) => value.AsLstore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -9518,7 +9574,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9532,7 +9588,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9575,15 +9631,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -9612,13 +9669,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct FstoreInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FstoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FstoreInstruction(Instruction value) => value.AsFstore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -9656,7 +9713,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9670,7 +9727,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9713,15 +9770,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -9750,13 +9808,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct DstoreInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DstoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DstoreInstruction(Instruction value) => value.AsDstore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -9794,7 +9852,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9808,7 +9866,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9851,15 +9909,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -9888,13 +9947,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct AstoreInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="AstoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator AstoreInstruction(Instruction value) => value.AsAstore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -9932,7 +9991,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9946,7 +10005,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -9989,15 +10048,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -10025,13 +10085,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Istore0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Istore0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Istore0Instruction(Instruction value) => value.AsIstore0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10050,13 +10110,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10070,7 +10130,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10096,15 +10156,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Istore0);
@@ -10117,13 +10178,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Istore1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Istore1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Istore1Instruction(Instruction value) => value.AsIstore1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10142,13 +10203,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10162,7 +10223,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10188,15 +10249,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Istore1);
@@ -10209,13 +10271,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Istore2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Istore2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Istore2Instruction(Instruction value) => value.AsIstore2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10234,13 +10296,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10254,7 +10316,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10280,15 +10342,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Istore2);
@@ -10301,13 +10364,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Istore3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Istore3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Istore3Instruction(Instruction value) => value.AsIstore3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10326,13 +10389,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10346,7 +10409,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10372,15 +10435,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Istore3);
@@ -10393,13 +10457,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lstore0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lstore0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lstore0Instruction(Instruction value) => value.AsLstore0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10418,13 +10482,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10438,7 +10502,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10464,15 +10528,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lstore0);
@@ -10485,13 +10550,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lstore1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lstore1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lstore1Instruction(Instruction value) => value.AsLstore1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10510,13 +10575,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10530,7 +10595,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10556,15 +10621,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lstore1);
@@ -10577,13 +10643,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lstore2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lstore2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lstore2Instruction(Instruction value) => value.AsLstore2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10602,13 +10668,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10622,7 +10688,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10648,15 +10714,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lstore2);
@@ -10669,13 +10736,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Lstore3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Lstore3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Lstore3Instruction(Instruction value) => value.AsLstore3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10694,13 +10761,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10714,7 +10781,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10740,15 +10807,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lstore3);
@@ -10761,13 +10829,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fstore0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fstore0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fstore0Instruction(Instruction value) => value.AsFstore0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10786,13 +10854,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10806,7 +10874,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10832,15 +10900,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fstore0);
@@ -10853,13 +10922,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fstore1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fstore1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fstore1Instruction(Instruction value) => value.AsFstore1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10878,13 +10947,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10898,7 +10967,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10924,15 +10993,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fstore1);
@@ -10945,13 +11015,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fstore2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fstore2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fstore2Instruction(Instruction value) => value.AsFstore2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -10970,13 +11040,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -10990,7 +11060,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11016,15 +11086,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fstore2);
@@ -11037,13 +11108,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Fstore3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Fstore3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Fstore3Instruction(Instruction value) => value.AsFstore3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11062,13 +11133,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11082,7 +11153,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11108,15 +11179,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fstore3);
@@ -11129,13 +11201,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dstore0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dstore0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dstore0Instruction(Instruction value) => value.AsDstore0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11154,13 +11226,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11174,7 +11246,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11200,15 +11272,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dstore0);
@@ -11221,13 +11294,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dstore1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dstore1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dstore1Instruction(Instruction value) => value.AsDstore1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11246,13 +11319,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11266,7 +11339,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11292,15 +11365,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dstore1);
@@ -11313,13 +11387,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dstore2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dstore2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dstore2Instruction(Instruction value) => value.AsDstore2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11338,13 +11412,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11358,7 +11432,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11384,15 +11458,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dstore2);
@@ -11405,13 +11480,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dstore3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dstore3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dstore3Instruction(Instruction value) => value.AsDstore3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11430,13 +11505,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11450,7 +11525,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11476,15 +11551,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dstore3);
@@ -11497,13 +11573,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Astore0Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Astore0Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Astore0Instruction(Instruction value) => value.AsAstore0();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11522,13 +11598,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11542,7 +11618,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11568,15 +11644,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Astore0);
@@ -11589,13 +11666,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Astore1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Astore1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Astore1Instruction(Instruction value) => value.AsAstore1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11614,13 +11691,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11634,7 +11711,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11660,15 +11737,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Astore1);
@@ -11681,13 +11759,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Astore2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Astore2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Astore2Instruction(Instruction value) => value.AsAstore2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11706,13 +11784,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11726,7 +11804,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11752,15 +11830,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Astore2);
@@ -11773,13 +11852,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Astore3Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Astore3Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Astore3Instruction(Instruction value) => value.AsAstore3();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11798,13 +11877,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11818,7 +11897,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11844,15 +11923,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Astore3);
@@ -11865,13 +11945,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IastoreInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IastoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IastoreInstruction(Instruction value) => value.AsIastore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11890,13 +11970,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11910,7 +11990,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -11936,15 +12016,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iastore);
@@ -11957,13 +12038,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LastoreInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LastoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LastoreInstruction(Instruction value) => value.AsLastore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -11982,13 +12063,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12002,7 +12083,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12028,15 +12109,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lastore);
@@ -12049,13 +12131,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FastoreInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FastoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FastoreInstruction(Instruction value) => value.AsFastore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12074,13 +12156,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12094,7 +12176,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12120,15 +12202,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fastore);
@@ -12141,13 +12224,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DastoreInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DastoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DastoreInstruction(Instruction value) => value.AsDastore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12166,13 +12249,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12186,7 +12269,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12212,15 +12295,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dastore);
@@ -12233,13 +12317,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct AastoreInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="AastoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator AastoreInstruction(Instruction value) => value.AsAastore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12258,13 +12342,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12278,7 +12362,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12304,15 +12388,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Aastore);
@@ -12325,13 +12410,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct BastoreInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="BastoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator BastoreInstruction(Instruction value) => value.AsBastore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12350,13 +12435,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12370,7 +12455,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12396,15 +12481,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Bastore);
@@ -12417,13 +12503,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct CastoreInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="CastoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator CastoreInstruction(Instruction value) => value.AsCastore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12442,13 +12528,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12462,7 +12548,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12488,15 +12574,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Castore);
@@ -12509,13 +12596,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct SastoreInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="SastoreInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator SastoreInstruction(Instruction value) => value.AsSastore();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12534,13 +12621,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12554,7 +12641,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12580,15 +12667,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Sastore);
@@ -12601,13 +12689,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct PopInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="PopInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator PopInstruction(Instruction value) => value.AsPop();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12626,13 +12714,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12646,7 +12734,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12672,15 +12760,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Pop);
@@ -12693,13 +12782,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Pop2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Pop2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Pop2Instruction(Instruction value) => value.AsPop2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12718,13 +12807,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12738,7 +12827,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12764,15 +12853,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Pop2);
@@ -12785,13 +12875,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DupInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DupInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DupInstruction(Instruction value) => value.AsDup();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12810,13 +12900,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12830,7 +12920,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12856,15 +12946,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dup);
@@ -12877,13 +12968,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DupX1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DupX1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DupX1Instruction(Instruction value) => value.AsDupX1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12902,13 +12993,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12922,7 +13013,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -12948,15 +13039,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.DupX1);
@@ -12969,13 +13061,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DupX2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DupX2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DupX2Instruction(Instruction value) => value.AsDupX2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -12994,13 +13086,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13014,7 +13106,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13040,15 +13132,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.DupX2);
@@ -13061,13 +13154,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dup2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dup2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dup2Instruction(Instruction value) => value.AsDup2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13086,13 +13179,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13106,7 +13199,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13132,15 +13225,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dup2);
@@ -13153,13 +13247,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dup2X1Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dup2X1Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dup2X1Instruction(Instruction value) => value.AsDup2X1();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13178,13 +13272,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13198,7 +13292,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13224,15 +13318,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dup2X1);
@@ -13245,13 +13340,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct Dup2X2Instruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="Dup2X2Instruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Dup2X2Instruction(Instruction value) => value.AsDup2X2();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13270,13 +13365,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13290,7 +13385,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13316,15 +13411,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dup2X2);
@@ -13337,13 +13433,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct SwapInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="SwapInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator SwapInstruction(Instruction value) => value.AsSwap();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13362,13 +13458,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13382,7 +13478,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13408,15 +13504,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Swap);
@@ -13429,13 +13526,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IaddInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IaddInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IaddInstruction(Instruction value) => value.AsIadd();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13454,13 +13551,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13474,7 +13571,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13500,15 +13597,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iadd);
@@ -13521,13 +13619,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LaddInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LaddInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LaddInstruction(Instruction value) => value.AsLadd();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13546,13 +13644,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13566,7 +13664,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13592,15 +13690,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ladd);
@@ -13613,13 +13712,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FaddInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FaddInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FaddInstruction(Instruction value) => value.AsFadd();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13638,13 +13737,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13658,7 +13757,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13684,15 +13783,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fadd);
@@ -13705,13 +13805,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DaddInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DaddInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DaddInstruction(Instruction value) => value.AsDadd();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13730,13 +13830,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13750,7 +13850,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13776,15 +13876,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dadd);
@@ -13797,13 +13898,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IsubInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IsubInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IsubInstruction(Instruction value) => value.AsIsub();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13822,13 +13923,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13842,7 +13943,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13868,15 +13969,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Isub);
@@ -13889,13 +13991,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LsubInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LsubInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LsubInstruction(Instruction value) => value.AsLsub();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -13914,13 +14016,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13934,7 +14036,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -13960,15 +14062,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lsub);
@@ -13981,13 +14084,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FsubInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FsubInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FsubInstruction(Instruction value) => value.AsFsub();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14006,13 +14109,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14026,7 +14129,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14052,15 +14155,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fsub);
@@ -14073,13 +14177,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DsubInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DsubInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DsubInstruction(Instruction value) => value.AsDsub();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14098,13 +14202,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14118,7 +14222,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14144,15 +14248,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dsub);
@@ -14165,13 +14270,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct ImulInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="ImulInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator ImulInstruction(Instruction value) => value.AsImul();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14190,13 +14295,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14210,7 +14315,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14236,15 +14341,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Imul);
@@ -14257,13 +14363,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LmulInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LmulInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LmulInstruction(Instruction value) => value.AsLmul();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14282,13 +14388,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14302,7 +14408,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14328,15 +14434,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lmul);
@@ -14349,13 +14456,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FmulInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FmulInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FmulInstruction(Instruction value) => value.AsFmul();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14374,13 +14481,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14394,7 +14501,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14420,15 +14527,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fmul);
@@ -14441,13 +14549,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DmulInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DmulInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DmulInstruction(Instruction value) => value.AsDmul();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14466,13 +14574,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14486,7 +14594,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14512,15 +14620,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dmul);
@@ -14533,13 +14642,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IdivInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IdivInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IdivInstruction(Instruction value) => value.AsIdiv();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14558,13 +14667,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14578,7 +14687,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14604,15 +14713,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Idiv);
@@ -14625,13 +14735,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LdivInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LdivInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LdivInstruction(Instruction value) => value.AsLdiv();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14650,13 +14760,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14670,7 +14780,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14696,15 +14806,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ldiv);
@@ -14717,13 +14828,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FdivInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FdivInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FdivInstruction(Instruction value) => value.AsFdiv();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14742,13 +14853,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14762,7 +14873,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14788,15 +14899,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fdiv);
@@ -14809,13 +14921,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DdivInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DdivInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DdivInstruction(Instruction value) => value.AsDdiv();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14834,13 +14946,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14854,7 +14966,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14880,15 +14992,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ddiv);
@@ -14901,13 +15014,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IremInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IremInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IremInstruction(Instruction value) => value.AsIrem();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -14926,13 +15039,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14946,7 +15059,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -14972,15 +15085,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Irem);
@@ -14993,13 +15107,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LremInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LremInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LremInstruction(Instruction value) => value.AsLrem();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15018,13 +15132,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15038,7 +15152,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15064,15 +15178,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lrem);
@@ -15085,13 +15200,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FremInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FremInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FremInstruction(Instruction value) => value.AsFrem();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15110,13 +15225,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15130,7 +15245,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15156,15 +15271,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Frem);
@@ -15177,13 +15293,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DremInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DremInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DremInstruction(Instruction value) => value.AsDrem();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15202,13 +15318,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15222,7 +15338,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15248,15 +15364,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Drem);
@@ -15269,13 +15386,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct InegInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="InegInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator InegInstruction(Instruction value) => value.AsIneg();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15294,13 +15411,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15314,7 +15431,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15340,15 +15457,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ineg);
@@ -15361,13 +15479,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LnegInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LnegInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LnegInstruction(Instruction value) => value.AsLneg();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15386,13 +15504,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15406,7 +15524,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15432,15 +15550,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lneg);
@@ -15453,13 +15572,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FnegInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FnegInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FnegInstruction(Instruction value) => value.AsFneg();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15478,13 +15597,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15498,7 +15617,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15524,15 +15643,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fneg);
@@ -15545,13 +15665,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DnegInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DnegInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DnegInstruction(Instruction value) => value.AsDneg();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15570,13 +15690,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15590,7 +15710,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15616,15 +15736,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dneg);
@@ -15637,13 +15758,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IshlInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IshlInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IshlInstruction(Instruction value) => value.AsIshl();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15662,13 +15783,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15682,7 +15803,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15708,15 +15829,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ishl);
@@ -15729,13 +15851,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LshlInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LshlInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LshlInstruction(Instruction value) => value.AsLshl();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15754,13 +15876,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15774,7 +15896,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15800,15 +15922,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lshl);
@@ -15821,13 +15944,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IshrInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IshrInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IshrInstruction(Instruction value) => value.AsIshr();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15846,13 +15969,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15866,7 +15989,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15892,15 +16015,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ishr);
@@ -15913,13 +16037,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LshrInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LshrInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LshrInstruction(Instruction value) => value.AsLshr();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -15938,13 +16062,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15958,7 +16082,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -15984,15 +16108,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lshr);
@@ -16005,13 +16130,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IushrInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IushrInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IushrInstruction(Instruction value) => value.AsIushr();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16030,13 +16155,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16050,7 +16175,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16076,15 +16201,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iushr);
@@ -16097,13 +16223,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LushrInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LushrInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LushrInstruction(Instruction value) => value.AsLushr();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16122,13 +16248,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16142,7 +16268,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16168,15 +16294,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lushr);
@@ -16189,13 +16316,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IandInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IandInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IandInstruction(Instruction value) => value.AsIand();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16214,13 +16341,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16234,7 +16361,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16260,15 +16387,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iand);
@@ -16281,13 +16409,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LandInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LandInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LandInstruction(Instruction value) => value.AsLand();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16306,13 +16434,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16326,7 +16454,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16352,15 +16480,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Land);
@@ -16373,13 +16502,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IorInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IorInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IorInstruction(Instruction value) => value.AsIor();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16398,13 +16527,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16418,7 +16547,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16444,15 +16573,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ior);
@@ -16465,13 +16595,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LorInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LorInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LorInstruction(Instruction value) => value.AsLor();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16490,13 +16620,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16510,7 +16640,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16536,15 +16666,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lor);
@@ -16557,13 +16688,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IxorInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IxorInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IxorInstruction(Instruction value) => value.AsIxor();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16582,13 +16713,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16602,7 +16733,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16628,15 +16759,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ixor);
@@ -16649,13 +16781,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LxorInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LxorInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LxorInstruction(Instruction value) => value.AsLxor();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16674,13 +16806,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16694,7 +16826,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16720,15 +16852,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lxor);
@@ -16743,13 +16876,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Value"></param>
     public partial record struct IincInstruction(int Offset, ushort Local, short Value)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IincInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IincInstruction(Instruction value) => value.AsIinc();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16795,7 +16928,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16809,7 +16942,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16863,15 +16996,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg2: Value
         public readonly short Value = Value;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -16904,13 +17038,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct I2lInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="I2lInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator I2lInstruction(Instruction value) => value.AsI2l();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -16929,13 +17063,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16949,7 +17083,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -16975,15 +17109,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.I2l);
@@ -16996,13 +17131,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct I2fInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="I2fInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator I2fInstruction(Instruction value) => value.AsI2f();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17021,13 +17156,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17041,7 +17176,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17067,15 +17202,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.I2f);
@@ -17088,13 +17224,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct I2dInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="I2dInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator I2dInstruction(Instruction value) => value.AsI2d();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17113,13 +17249,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17133,7 +17269,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17159,15 +17295,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.I2d);
@@ -17180,13 +17317,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct L2iInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="L2iInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator L2iInstruction(Instruction value) => value.AsL2i();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17205,13 +17342,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17225,7 +17362,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17251,15 +17388,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.L2i);
@@ -17272,13 +17410,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct L2fInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="L2fInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator L2fInstruction(Instruction value) => value.AsL2f();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17297,13 +17435,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17317,7 +17455,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17343,15 +17481,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.L2f);
@@ -17364,13 +17503,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct L2dInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="L2dInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator L2dInstruction(Instruction value) => value.AsL2d();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17389,13 +17528,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17409,7 +17548,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17435,15 +17574,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.L2d);
@@ -17456,13 +17596,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct F2iInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="F2iInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator F2iInstruction(Instruction value) => value.AsF2i();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17481,13 +17621,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17501,7 +17641,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17527,15 +17667,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.F2i);
@@ -17548,13 +17689,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct F2lInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="F2lInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator F2lInstruction(Instruction value) => value.AsF2l();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17573,13 +17714,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17593,7 +17734,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17619,15 +17760,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.F2l);
@@ -17640,13 +17782,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct F2dInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="F2dInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator F2dInstruction(Instruction value) => value.AsF2d();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17665,13 +17807,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17685,7 +17827,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17711,15 +17853,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.F2d);
@@ -17732,13 +17875,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct D2iInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="D2iInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator D2iInstruction(Instruction value) => value.AsD2i();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17757,13 +17900,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17777,7 +17920,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17803,15 +17946,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.D2i);
@@ -17824,13 +17968,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct D2lInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="D2lInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator D2lInstruction(Instruction value) => value.AsD2l();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17849,13 +17993,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17869,7 +18013,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17895,15 +18039,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.D2l);
@@ -17916,13 +18061,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct D2fInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="D2fInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator D2fInstruction(Instruction value) => value.AsD2f();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -17941,13 +18086,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17961,7 +18106,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -17987,15 +18132,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.D2f);
@@ -18008,13 +18154,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct I2bInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="I2bInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator I2bInstruction(Instruction value) => value.AsI2b();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18033,13 +18179,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18053,7 +18199,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18079,15 +18225,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.I2b);
@@ -18100,13 +18247,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct I2cInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="I2cInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator I2cInstruction(Instruction value) => value.AsI2c();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18125,13 +18272,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18145,7 +18292,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18171,15 +18318,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.I2c);
@@ -18192,13 +18340,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct I2sInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="I2sInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator I2sInstruction(Instruction value) => value.AsI2s();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18217,13 +18365,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18237,7 +18385,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18263,15 +18411,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.I2s);
@@ -18284,13 +18433,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LcmpInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LcmpInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LcmpInstruction(Instruction value) => value.AsLcmp();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18309,13 +18458,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18329,7 +18478,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18355,15 +18504,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lcmp);
@@ -18376,13 +18526,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FcmplInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FcmplInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FcmplInstruction(Instruction value) => value.AsFcmpl();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18401,13 +18551,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18421,7 +18571,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18447,15 +18597,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fcmpl);
@@ -18468,13 +18619,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FcmpgInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FcmpgInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FcmpgInstruction(Instruction value) => value.AsFcmpg();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18493,13 +18644,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18513,7 +18664,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18539,15 +18690,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Fcmpg);
@@ -18560,13 +18712,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DcmplInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DcmplInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DcmplInstruction(Instruction value) => value.AsDcmpl();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18585,13 +18737,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18605,7 +18757,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18631,15 +18783,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dcmpl);
@@ -18652,13 +18805,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DcmpgInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DcmpgInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DcmpgInstruction(Instruction value) => value.AsDcmpg();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18677,13 +18830,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18697,7 +18850,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18723,15 +18876,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dcmpg);
@@ -18745,13 +18899,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfeqInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfeqInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfeqInstruction(Instruction value) => value.AsIfeq();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18770,7 +18924,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -18780,7 +18934,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18794,7 +18948,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18827,19 +18981,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ifeq);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -18850,13 +19005,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfneInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfneInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfneInstruction(Instruction value) => value.AsIfne();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18875,7 +19030,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -18885,7 +19040,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18899,7 +19054,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -18932,19 +19087,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ifne);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -18955,13 +19111,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfltInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfltInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfltInstruction(Instruction value) => value.AsIflt();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -18980,7 +19136,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -18990,7 +19146,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19004,7 +19160,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19037,19 +19193,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Iflt);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19060,13 +19217,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfgeInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfgeInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfgeInstruction(Instruction value) => value.AsIfge();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19085,7 +19242,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19095,7 +19252,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19109,7 +19266,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19142,19 +19299,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ifge);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19165,13 +19323,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfgtInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfgtInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfgtInstruction(Instruction value) => value.AsIfgt();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19190,7 +19348,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19200,7 +19358,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19214,7 +19372,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19247,19 +19405,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ifgt);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19270,13 +19429,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfleInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfleInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfleInstruction(Instruction value) => value.AsIfle();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19295,7 +19454,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19305,7 +19464,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19319,7 +19478,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19352,19 +19511,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ifle);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19375,13 +19535,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfIcmpeqInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfIcmpeqInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfIcmpeqInstruction(Instruction value) => value.AsIfIcmpeq();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19400,7 +19560,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19410,7 +19570,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19424,7 +19584,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19457,19 +19617,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfIcmpeq);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19480,13 +19641,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfIcmpneInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfIcmpneInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfIcmpneInstruction(Instruction value) => value.AsIfIcmpne();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19505,7 +19666,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19515,7 +19676,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19529,7 +19690,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19562,19 +19723,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfIcmpne);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19585,13 +19747,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfIcmpltInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfIcmpltInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfIcmpltInstruction(Instruction value) => value.AsIfIcmplt();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19610,7 +19772,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19620,7 +19782,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19634,7 +19796,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19667,19 +19829,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfIcmplt);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19690,13 +19853,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfIcmpgeInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfIcmpgeInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfIcmpgeInstruction(Instruction value) => value.AsIfIcmpge();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19715,7 +19878,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19725,7 +19888,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19739,7 +19902,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19772,19 +19935,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfIcmpge);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19795,13 +19959,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfIcmpgtInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfIcmpgtInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfIcmpgtInstruction(Instruction value) => value.AsIfIcmpgt();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19820,7 +19984,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19830,7 +19994,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19844,7 +20008,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19877,19 +20041,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfIcmpgt);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -19900,13 +20065,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfIcmpleInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfIcmpleInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfIcmpleInstruction(Instruction value) => value.AsIfIcmple();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -19925,7 +20090,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -19935,7 +20100,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19949,7 +20114,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -19982,19 +20147,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfIcmple);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -20005,13 +20171,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfAcmpeqInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfAcmpeqInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfAcmpeqInstruction(Instruction value) => value.AsIfAcmpeq();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20030,7 +20196,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -20040,7 +20206,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20054,7 +20220,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20087,19 +20253,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfAcmpeq);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -20110,13 +20277,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfAcmpneInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfAcmpneInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfAcmpneInstruction(Instruction value) => value.AsIfAcmpne();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20135,7 +20302,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -20145,7 +20312,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20159,7 +20326,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20192,19 +20359,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfAcmpne);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -20215,13 +20383,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct GotoInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="GotoInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator GotoInstruction(Instruction value) => value.AsGoto();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20240,7 +20408,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -20250,7 +20418,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20264,7 +20432,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20297,19 +20465,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Goto);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -20320,13 +20489,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct JsrInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="JsrInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator JsrInstruction(Instruction value) => value.AsJsr();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20345,7 +20514,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -20355,7 +20524,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20369,7 +20538,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20402,19 +20571,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Jsr);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -20425,13 +20595,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Local"></param>
     public partial record struct RetInstruction(int Offset, ushort Local)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="RetInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator RetInstruction(Instruction value) => value.AsRet();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20469,7 +20639,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20483,7 +20653,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20526,15 +20696,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Local
         public readonly ushort Local = Local;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             var wide = false;
@@ -20562,13 +20733,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct IreturnInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IreturnInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IreturnInstruction(Instruction value) => value.AsIreturn();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20587,13 +20758,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20607,7 +20778,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20633,15 +20804,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Ireturn);
@@ -20654,13 +20826,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct LreturnInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="LreturnInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator LreturnInstruction(Instruction value) => value.AsLreturn();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20679,13 +20851,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20699,7 +20871,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20725,15 +20897,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Lreturn);
@@ -20746,13 +20919,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct FreturnInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="FreturnInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator FreturnInstruction(Instruction value) => value.AsFreturn();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20771,13 +20944,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20791,7 +20964,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20817,15 +20990,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Freturn);
@@ -20838,13 +21012,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct DreturnInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="DreturnInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator DreturnInstruction(Instruction value) => value.AsDreturn();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20863,13 +21037,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20883,7 +21057,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20909,15 +21083,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Dreturn);
@@ -20930,13 +21105,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct AreturnInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="AreturnInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator AreturnInstruction(Instruction value) => value.AsAreturn();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -20955,13 +21130,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -20975,7 +21150,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21001,15 +21176,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Areturn);
@@ -21022,13 +21198,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct ReturnInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="ReturnInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator ReturnInstruction(Instruction value) => value.AsReturn();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21047,13 +21223,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21067,7 +21243,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21093,15 +21269,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Return);
@@ -21115,13 +21292,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Field"></param>
     public partial record struct GetStaticInstruction(int Offset, ConstantHandle Field)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="GetStaticInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator GetStaticInstruction(Instruction value) => value.AsGetStatic();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21140,7 +21317,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -21150,7 +21327,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21164,7 +21341,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21197,15 +21374,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Field
         public readonly ConstantHandle Field = Field;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.GetStatic);
@@ -21220,13 +21398,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Field"></param>
     public partial record struct PutStaticInstruction(int Offset, ConstantHandle Field)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="PutStaticInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator PutStaticInstruction(Instruction value) => value.AsPutStatic();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21245,7 +21423,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -21255,7 +21433,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21269,7 +21447,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21302,15 +21480,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Field
         public readonly ConstantHandle Field = Field;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.PutStatic);
@@ -21325,13 +21504,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Field"></param>
     public partial record struct GetFieldInstruction(int Offset, ConstantHandle Field)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="GetFieldInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator GetFieldInstruction(Instruction value) => value.AsGetField();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21350,7 +21529,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -21360,7 +21539,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21374,7 +21553,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21407,15 +21586,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Field
         public readonly ConstantHandle Field = Field;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.GetField);
@@ -21430,13 +21610,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Field"></param>
     public partial record struct PutFieldInstruction(int Offset, ConstantHandle Field)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="PutFieldInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator PutFieldInstruction(Instruction value) => value.AsPutField();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21455,7 +21635,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -21465,7 +21645,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21479,7 +21659,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21512,15 +21692,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Field
         public readonly ConstantHandle Field = Field;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.PutField);
@@ -21535,13 +21716,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Method"></param>
     public partial record struct InvokeVirtualInstruction(int Offset, ConstantHandle Method)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="InvokeVirtualInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator InvokeVirtualInstruction(Instruction value) => value.AsInvokeVirtual();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21560,7 +21741,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -21570,7 +21751,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21584,7 +21765,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21617,15 +21798,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Method
         public readonly ConstantHandle Method = Method;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.InvokeVirtual);
@@ -21640,13 +21822,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Method"></param>
     public partial record struct InvokeSpecialInstruction(int Offset, ConstantHandle Method)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="InvokeSpecialInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator InvokeSpecialInstruction(Instruction value) => value.AsInvokeSpecial();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21665,7 +21847,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -21675,7 +21857,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21689,7 +21871,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21722,15 +21904,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Method
         public readonly ConstantHandle Method = Method;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.InvokeSpecial);
@@ -21745,13 +21928,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Method"></param>
     public partial record struct InvokeStaticInstruction(int Offset, ConstantHandle Method)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="InvokeStaticInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator InvokeStaticInstruction(Instruction value) => value.AsInvokeStatic();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21770,7 +21953,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -21780,7 +21963,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21794,7 +21977,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21827,15 +22010,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Method
         public readonly ConstantHandle Method = Method;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.InvokeStatic);
@@ -21852,13 +22036,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Zero"></param>
     public partial record struct InvokeInterfaceInstruction(int Offset, ConstantHandle Method, byte Count, byte Zero)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="InvokeInterfaceInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator InvokeInterfaceInstruction(Instruction value) => value.AsInvokeInterface();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -21877,7 +22061,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -21895,7 +22079,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21909,7 +22093,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -21956,15 +22140,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg3: Zero
         public readonly byte Zero = Zero;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.InvokeInterface);
@@ -21983,13 +22168,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Zero2"></param>
     public partial record struct InvokeDynamicInstruction(int Offset, ConstantHandle Method, byte Zero, byte Zero2)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="InvokeDynamicInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator InvokeDynamicInstruction(Instruction value) => value.AsInvokeDynamic();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22008,7 +22193,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -22026,7 +22211,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22040,7 +22225,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22087,15 +22272,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg3: Zero2
         public readonly byte Zero2 = Zero2;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.InvokeDynamic);
@@ -22112,13 +22298,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Constant"></param>
     public partial record struct NewInstruction(int Offset, ConstantHandle Constant)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="NewInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator NewInstruction(Instruction value) => value.AsNew();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22137,7 +22323,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -22147,7 +22333,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22161,7 +22347,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22194,15 +22380,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.New);
@@ -22217,13 +22404,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Value"></param>
     public partial record struct NewarrayInstruction(int Offset, byte Value)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="NewarrayInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator NewarrayInstruction(Instruction value) => value.AsNewarray();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22242,7 +22429,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -22252,7 +22439,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22266,7 +22453,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22299,15 +22486,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Value
         public readonly byte Value = Value;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Newarray);
@@ -22322,13 +22510,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Constant"></param>
     public partial record struct AnewarrayInstruction(int Offset, ConstantHandle Constant)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="AnewarrayInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator AnewarrayInstruction(Instruction value) => value.AsAnewarray();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22347,7 +22535,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -22357,7 +22545,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22371,7 +22559,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22404,15 +22592,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Constant
         public readonly ConstantHandle Constant = Constant;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Anewarray);
@@ -22426,13 +22615,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct ArraylengthInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="ArraylengthInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator ArraylengthInstruction(Instruction value) => value.AsArraylength();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22451,13 +22640,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22471,7 +22660,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22497,15 +22686,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Arraylength);
@@ -22518,13 +22708,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct AthrowInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="AthrowInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator AthrowInstruction(Instruction value) => value.AsAthrow();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22543,13 +22733,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22563,7 +22753,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22589,15 +22779,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Athrow);
@@ -22611,13 +22802,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Type"></param>
     public partial record struct CheckcastInstruction(int Offset, ConstantHandle Type)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="CheckcastInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator CheckcastInstruction(Instruction value) => value.AsCheckcast();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22636,7 +22827,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -22646,7 +22837,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22660,7 +22851,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22693,15 +22884,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Type
         public readonly ConstantHandle Type = Type;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Checkcast);
@@ -22716,13 +22908,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Type"></param>
     public partial record struct InstanceOfInstruction(int Offset, ConstantHandle Type)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="InstanceOfInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator InstanceOfInstruction(Instruction value) => value.AsInstanceOf();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22741,7 +22933,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -22751,7 +22943,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22765,7 +22957,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22798,15 +22990,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Type
         public readonly ConstantHandle Type = Type;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.InstanceOf);
@@ -22820,13 +23013,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct MonitorEnterInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="MonitorEnterInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator MonitorEnterInstruction(Instruction value) => value.AsMonitorEnter();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22845,13 +23038,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22865,7 +23058,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22891,15 +23084,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.MonitorEnter);
@@ -22912,13 +23106,13 @@ namespace IKVM.ByteCode.Decoding
     /// </summary>
     public partial record struct MonitorExitInstruction(int Offset)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="MonitorExitInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator MonitorExitInstruction(Instruction value) => value.AsMonitorExit();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -22937,13 +23131,13 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22957,7 +23151,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -22983,15 +23177,16 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.MonitorExit);
@@ -23006,13 +23201,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Dimensions"></param>
     public partial record struct MultianewarrayInstruction(int Offset, ConstantHandle Type, byte Dimensions)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="MultianewarrayInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator MultianewarrayInstruction(Instruction value) => value.AsMultianewarray();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -23031,7 +23226,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -23045,7 +23240,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23059,7 +23254,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23099,15 +23294,16 @@ namespace IKVM.ByteCode.Decoding
 
         // arg2: Dimensions
         public readonly byte Dimensions = Dimensions;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.Multianewarray);
@@ -23123,13 +23319,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfNullInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfNullInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfNullInstruction(Instruction value) => value.AsIfNull();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -23148,7 +23344,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -23158,7 +23354,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23172,7 +23368,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23205,19 +23401,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfNull);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -23228,13 +23425,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct IfNonNullInstruction(int Offset, short Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="IfNonNullInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator IfNonNullInstruction(Instruction value) => value.AsIfNonNull();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -23253,7 +23450,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -23263,7 +23460,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23277,7 +23474,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23310,19 +23507,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly short Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.IfNonNull);
-            builder.WriteJ2((short)Target);
+            builder.WriteJ2((short)(Target + offset));
         }
 
     }
@@ -23333,13 +23531,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct GotoWInstruction(int Offset, int Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="GotoWInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator GotoWInstruction(Instruction value) => value.AsGotoW();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -23358,7 +23556,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -23368,7 +23566,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23382,7 +23580,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23415,19 +23613,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly int Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.GotoW);
-            builder.WriteJ4((int)Target);
+            builder.WriteJ4((int)(Target + offset));
         }
 
     }
@@ -23438,13 +23637,13 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Target"></param>
     public partial record struct JsrWInstruction(int Offset, int Target)
     {
-    
+
         /// <summary>
         /// Converts the <see cref="Instruction" /> to a <see cref="JsrWInstruction" />.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator JsrWInstruction(Instruction value) => value.AsJsrW();
-        
+
         /// <summary>
         /// Attempts to measure this instruction.
         /// </summary>
@@ -23463,7 +23662,7 @@ namespace IKVM.ByteCode.Decoding
 
             if (wide)
                 throw new InvalidCodeException("OpCode does not support wide arguments.");
-            
+
             // advance by opcode size
             size += 1;
 
@@ -23473,7 +23672,7 @@ namespace IKVM.ByteCode.Decoding
 
             return true;
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23487,7 +23686,7 @@ namespace IKVM.ByteCode.Decoding
             var reader = new SequenceReader<byte>(data);
             return TryRead(ref reader, offset, out instruction);
         }
-        
+
         /// <summary>
         /// Attempts to read this instruction.
         /// </summary>
@@ -23520,19 +23719,20 @@ namespace IKVM.ByteCode.Decoding
 
         // arg1: Target
         public readonly int Target = Target;
-        
+
         /// <summary>
         /// Copies this instruction to the specified <see cref="CodeBuilder" />.
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             builder.OpCode(IKVM.ByteCode.OpCode.JsrW);
-            builder.WriteJ4((int)Target);
+            builder.WriteJ4((int)(Target + offset));
         }
 
     }

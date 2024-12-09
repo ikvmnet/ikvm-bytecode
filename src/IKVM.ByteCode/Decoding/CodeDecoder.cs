@@ -101,21 +101,9 @@ namespace IKVM.ByteCode.Decoding
             if (builder is null)
                 throw new ArgumentNullException(nameof(builder));
 
+            var offset = builder.Offset;
             foreach (var instruction in this)
-                CopyInstructionTo(map, instruction, builder);
-        }
-
-        /// <summary>
-        /// Copies the specified instruction to the builder.
-        /// </summary>
-        /// <typeparam name="TConstantMap"></typeparam>
-        /// <param name="map"></param>
-        /// <param name="instruction"></param>
-        /// <param name="builder"></param>
-        void CopyInstructionTo<TConstantMap>(TConstantMap map, Instruction instruction, CodeBuilder builder)
-            where TConstantMap : IConstantMap
-        {
-            instruction.CopyTo(map, builder);
+                instruction.CopyTo(map, builder, offset);
         }
 
         /// <summary>

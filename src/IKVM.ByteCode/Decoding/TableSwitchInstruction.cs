@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Buffers;
+using System.Buffers.Binary;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 
 using IKVM.ByteCode.Buffers;
@@ -173,12 +175,21 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
-            throw new NotImplementedException();
+            // header of table switch is instruction, alignment, then default
+            builder.OpCode(OpCode.TableSwitch);
+            builder.Align(4);
+            builder.WriteJ4(DefaultTarget + offset);
+            builder.WriteInt32(Low);
+            builder.WriteInt32(High);
+
+            foreach (var c in Cases)
+                builder.WriteJ4(c + offset);
         }
 
     }

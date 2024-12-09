@@ -87,8 +87,9 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// <typeparam name="TConstantMap"></typeparam>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        internal void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
             switch (OpCode)
@@ -104,7 +105,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     var args = i.Value.Args ?? [];
 #>
                 case OpCode.<#= name #>:
-                    ((<#= name #>Instruction)this).CopyTo(constants, builder);
+                    ((<#= name #>Instruction)this).CopyTo(constants, builder, offset);
                     break;
 <#
 }
@@ -347,9 +348,10 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// </summary>
         /// <param name="constants"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap constants, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
 <#
@@ -378,7 +380,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, true) #>;
+                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, true, "offset") #>;
 <#
         }
 #>
@@ -391,7 +393,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false) #>;
+                builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false, "offset") #>;
 <#
         }
 #>
@@ -407,7 +409,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         {
             var arg = args[j];
 #>
-            builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false) #>;
+            builder.<#= Util.GetCopyToWriteArgMethodCall(arg, false, "offset") #>;
 <#
         }
 #>

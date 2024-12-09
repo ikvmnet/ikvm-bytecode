@@ -1,8 +1,4 @@
-﻿using System;
-using System.Buffers;
-using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using System.Buffers;
 
 using FluentAssertions;
 
@@ -150,28 +146,37 @@ namespace IKVM.ByteCode.Tests.Decoding
         }
 
         [TestMethod]
-        public void CanCopyTo()
+        public void CanCopyToWithConstant()
         {
             var constants = new ConstantTable(new ClassFormatVersion(50, 0), [
-                new ConstantData(ConstantKind.String, new ReadOnlySequence<byte>(MUTF8Encoding.GetMUTF8(50).GetBytes("test"))),
+                new(ConstantKind.String, new ReadOnlySequence<byte>(MUTF8Encoding.GetMUTF8(50).GetBytes("test"))),
+                new(ConstantKind.String, new ReadOnlySequence<byte>(MUTF8Encoding.GetMUTF8(50).GetBytes("test"))),
             ]);
 
-            var code = new BlobBuilder();
-            new CodeBuilder(code)
-                .Bipush(64)
-                .StoreLocalInteger(0)
-                .LoadLocalInteger(0)
-                .DefineLabel(out var iftrue)
-                .Ifne(iftrue)
-                .Return()
-                .MarkLabel(iftrue)
-                .Return();
+            var buffer1 = new BlobBuilder();
+            new CodeBuilder(buffer1).LoadConstant(new StringConstantHandle(1)).Pop().Return();
+            var code1 = new CodeDecoder(buffer1.ToArray());
 
-            var buf = code.ToArray();
-            var dec = new CodeDecoder(buf);
+            // copy from decoder into new builder
+            var buffer2 = new BlobBuilder();
+            code1.CopyTo(new IdentityConstantMap<ConstantTable>(constants), new CodeBuilder(buffer2));
+            var code2 = new CodeDecoder(buffer2.ToArray());
 
-            var code2 = new BlobBuilder();
-            dec.CopyTo(new IdentityConstantMap<ConstantTable>(constants), new CodeBuilder(code2));
+            code2.TryReadNext(out var inst1).Should().BeTrue();
+            inst1.OpCode.Should().Be(OpCode.Ldc);
+            inst1.IsWide.Should().BeFalse();
+            var inst1T = inst1.AsLdc();
+            inst1T.Constant.Slot.Should().Be(1);
+
+            code2.TryReadNext(out var inst2).Should().BeTrue();
+            inst2.OpCode.Should().Be(OpCode.Pop);
+            inst2.IsWide.Should().BeFalse();
+            var inst2T = inst2.AsPop();
+
+            code2.TryReadNext(out var inst3).Should().BeTrue();
+            inst3.OpCode.Should().Be(OpCode.Return);
+            inst3.IsWide.Should().BeFalse();
+            var inst3T = inst3.AsReturn();
         }
 
     }

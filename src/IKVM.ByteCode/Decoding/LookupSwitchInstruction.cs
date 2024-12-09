@@ -134,12 +134,22 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="map"></param>
         /// <param name="builder"></param>
+        /// <param name="offset"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder)
+        public void CopyTo<TConstantMap>(TConstantMap map, CodeBuilder builder, int offset)
             where TConstantMap : IConstantMap
         {
-            throw new NotImplementedException();
+            builder.OpCode(OpCode.LookupSwitch);
+            builder.Align(4);
+            builder.WriteJ4(DefaultTarget + offset);
+            builder.WriteInt32(Cases.Count);
+
+            foreach (var c in Cases)
+            {
+                builder.WriteInt32(c.Key);
+                builder.WriteJ4(c.Target + offset);
+            }
         }
 
     }
