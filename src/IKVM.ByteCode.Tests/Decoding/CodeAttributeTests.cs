@@ -35,6 +35,7 @@ namespace IKVM.ByteCode.Tests.Decoding
 
             var codeBuffer1 = new BlobBuilder();
             var excpBuffer1 = new BlobBuilder();
+            var excpEncoder1 = new ExceptionTableEncoder(excpBuffer1);
             new CodeBuilder(codeBuffer1)
                 .DefineLabel(out var end)
                 .BeginExceptionBlock(ClassConstantHandle.Nil, out var handler)
@@ -44,7 +45,7 @@ namespace IKVM.ByteCode.Tests.Decoding
                 .MarkLabel(handler)
                 .MarkLabel(end)
                 .Return()
-                .SerializeExceptions(excpBuffer1);
+                .WriteExceptionsTo(ref excpEncoder1);
 
             // fake up a code attribute
             var excpReader1 = new ClassFormatReader(excpBuffer1.ToArray());

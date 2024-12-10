@@ -1,4 +1,6 @@
-﻿using System.Buffers;
+﻿using System;
+using System.Buffers;
+using System.Buffers.Binary;
 
 using IKVM.ByteCode.Buffers;
 using IKVM.ByteCode.Encoding;

@@ -26,14 +26,16 @@ namespace IKVM.ByteCode.Buffers
         /// </summary>
         internal const int MinChunkSize = 16;
 
-        // Builders are linked like so:
-        //
-        // [1:first]->[2]->[3:last]<-[4:head]
-        //     ^_______________|
-        //
-        // In this case the content represented is a sequence (1,2,3,4).
-        // This structure optimizes for append write operations and sequential enumeration from the start of the chain.
-        // Data can only be written to the head node. Other nodes are "frozen".
+        /// <summary>
+        /// Builders are linked like so:
+        ///
+        /// [1:first]->[2]->[3:last]<-[4:head]
+        ///     ^_______________|
+        ///
+        /// In this case the content represented is a sequence (1,2,3,4).
+        /// This structure optimizes for append write operations and sequential enumeration from the start of the chain.
+        /// Data can only be written to the head node. Other nodes are "frozen".
+        /// </summary>
         BlobBuilder _nextOrPrevious;
 
         /// <summary>

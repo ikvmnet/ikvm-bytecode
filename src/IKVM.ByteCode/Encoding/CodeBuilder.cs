@@ -834,22 +834,11 @@ namespace IKVM.ByteCode.Encoding
         }
 
         /// <summary>
-        /// Serializes the recorded exceptions in the exception table format to <paramref name="exceptions"/>.
-        /// </summary>
-        /// <param name="exceptions"></param>
-        /// <returns></returns>
-        public CodeBuilder SerializeExceptions(BlobBuilder exceptions)
-        {
-            var encoder = new ExceptionTableEncoder(exceptions);
-            return SerializeExceptions(ref encoder);
-        }
-
-        /// <summary>
         /// Serializes the recorded exceptions to <paramref name="encoder"/>.
         /// </summary>
         /// <param name="encoder"></param>
         /// <returns></returns>
-        public CodeBuilder SerializeExceptions(ref ExceptionTableEncoder encoder)
+        public CodeBuilder WriteExceptionsTo(ref ExceptionTableEncoder encoder)
         {
             if (_exceptionsStack.Count > 0)
                 throw new InvalidOperationException("Open exception blocks. Exception blocks must be closed before extracting the exceptions table.");
