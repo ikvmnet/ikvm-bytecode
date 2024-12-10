@@ -221,6 +221,7 @@ namespace IKVM.ByteCode.Tests.Encoding
         {
             var code = new BlobBuilder();
             var excp = new BlobBuilder();
+            var excpEncoder = new ExceptionTableEncoder(excp);
             new CodeBuilder(code)
                 .DefineLabel(out var end)
                 .BeginExceptionBlock(ClassConstantHandle.Nil, out var handlerLabel)
@@ -233,7 +234,7 @@ namespace IKVM.ByteCode.Tests.Encoding
                     .Goto(end)
                 .MarkLabel(end)
                 .Return()
-                .SerializeExceptions(excp);
+                .WriteExceptionsTo(ref excpEncoder);
 
             var codeReader = new SequenceReader<byte>(new ReadOnlySequence<byte>(code.ToArray()));
             var excpReader = new SequenceReader<byte>(new ReadOnlySequence<byte>(excp.ToArray()));

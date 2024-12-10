@@ -953,8 +953,13 @@ namespace IKVM.ByteCode.Decoding
         /// <inheritdoc />
         readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        #region IConstantPool
+
         readonly ConstantHandle IConstantPool.Get(in Constant value)
         {
+            if (value.IsNil)
+                return ConstantHandle.Nil;
+
             return value.Kind switch
             {
                 ConstantKind.Utf8 => ((IConstantPool)this).Get((Utf8Constant)value),
@@ -980,6 +985,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly Utf8ConstantHandle IConstantPool.Get(in Utf8Constant value)
         {
+            if (value.IsNil)
+                return Utf8ConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Utf8)
@@ -996,6 +1004,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly IntegerConstantHandle IConstantPool.Get(in IntegerConstant value)
         {
+            if (value.IsNil)
+                return IntegerConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Integer)
@@ -1012,6 +1023,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly FloatConstantHandle IConstantPool.Get(in FloatConstant value)
         {
+            if (value.IsNil)
+                return FloatConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Float)
@@ -1028,6 +1042,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly LongConstantHandle IConstantPool.Get(in LongConstant value)
         {
+            if (value.IsNil)
+                return LongConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Long)
@@ -1044,6 +1061,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly DoubleConstantHandle IConstantPool.Get(in DoubleConstant value)
         {
+            if (value.IsNil)
+                return DoubleConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Double)
@@ -1060,6 +1080,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly ClassConstantHandle IConstantPool.Get(in ClassConstant value)
         {
+            if (value.IsNil)
+                return ClassConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Class)
@@ -1076,6 +1099,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly StringConstantHandle IConstantPool.Get(in StringConstant value)
         {
+            if (value.IsNil)
+                return StringConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.String)
@@ -1092,6 +1118,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly FieldrefConstantHandle IConstantPool.Get(in FieldrefConstant value)
         {
+            if (value.IsNil)
+                return FieldrefConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Fieldref)
@@ -1108,6 +1137,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly MethodrefConstantHandle IConstantPool.Get(in MethodrefConstant value)
         {
+            if (value.IsNil)
+                return MethodrefConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Methodref)
@@ -1124,6 +1156,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly InterfaceMethodrefConstantHandle IConstantPool.Get(in InterfaceMethodrefConstant value)
         {
+            if (value.IsNil)
+                return InterfaceMethodrefConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.InterfaceMethodref)
@@ -1140,6 +1175,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly NameAndTypeConstantHandle IConstantPool.Get(in NameAndTypeConstant value)
         {
+            if (value.IsNil)
+                return NameAndTypeConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.NameAndType)
@@ -1156,6 +1194,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly MethodHandleConstantHandle IConstantPool.Get(in MethodHandleConstant value)
         {
+            if (value.IsNil)
+                return MethodHandleConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.MethodHandle)
@@ -1172,6 +1213,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly MethodTypeConstantHandle IConstantPool.Get(in MethodTypeConstant value)
         {
+            if (value.IsNil)
+                return MethodTypeConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.MethodType)
@@ -1188,6 +1232,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly DynamicConstantHandle IConstantPool.Get(in DynamicConstant value)
         {
+            if (value.IsNil)
+                return DynamicConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Dynamic)
@@ -1204,6 +1251,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly InvokeDynamicConstantHandle IConstantPool.Get(in InvokeDynamicConstant value)
         {
+            if (value.IsNil)
+                return InvokeDynamicConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.InvokeDynamic)
@@ -1220,6 +1270,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly ModuleConstantHandle IConstantPool.Get(in ModuleConstant value)
         {
+            if (value.IsNil)
+                return ModuleConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Module)
@@ -1236,6 +1289,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly PackageConstantHandle IConstantPool.Get(in PackageConstant value)
         {
+            if (value.IsNil)
+                return PackageConstantHandle.Nil;
+
             foreach (var i in this)
             {
                 if (ReadData(i).Kind == ConstantKind.Package)
@@ -1249,6 +1305,8 @@ namespace IKVM.ByteCode.Decoding
 
             throw new ByteCodeException("Unknown constant for value.");
         }
+
+        #endregion
 
     }
 
