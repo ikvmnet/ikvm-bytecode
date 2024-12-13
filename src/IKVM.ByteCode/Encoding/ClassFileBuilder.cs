@@ -67,6 +67,16 @@ namespace IKVM.ByteCode.Encoding
         public ConstantBuilder Constants => _constants;
 
         /// <summary>
+        /// Gets the 'this' value, which represents the identity of the class being built.
+        /// </summary>
+        public ClassConstantHandle ThisClass => _thisClass;
+
+        /// <summary>
+        /// Gets the 'super' value which represents the identity of the super class of the class being built.
+        /// </summary>
+        public ClassConstantHandle SuperClass => _superClass;
+
+        /// <summary>
         /// Adds a new interface to the class.
         /// </summary>
         /// <param name="clazz"></param>
