@@ -101,7 +101,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref BootstrapMethodTableEncoder encoder)
             where TConstantView : IConstantView
