@@ -75,6 +75,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Decodes the UTF8 constant into a string value according the major version.
         /// </summary>
+        /// <param name="data"></param>
         /// <param name="majorVersion"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>

@@ -13,7 +13,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="size"></param>
-        /// <param name="skip".
+        /// <param name="skip"></param>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size, out int skip)
         {
             skip = 0;
