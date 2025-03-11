@@ -243,6 +243,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="opcode"></param>
+        /// <param name="wide"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -431,7 +432,7 @@ namespace IKVM.ByteCode.Decoding
         internal static Instruction Read(ref SequenceReader<byte> reader)
         {
             // if we don't have an opcode, we have no instruction to read, so return nil
-            if (TryPeekOpCode(ref reader, out var opcode, out var wide) == false)
+            if (TryPeekOpCode(ref reader, out _, out _) == false)
                 return default;
 
             // we did have an opcode, so attempt to read the remainder, but fail if end reached

@@ -111,6 +111,11 @@ namespace IKVM.ByteCode
         Transient = 0x0080,
 
         /// <summary>
+        /// The module requires flag ACC_TRANSITIVE with a mask value of 0x0020.
+        /// </summary>
+        Transitive = 0x0020,
+
+        /// <summary>
         /// The access flag ACC_VARARGS with a mask value of 0x0080.
         /// </summary>
         VarArgs = 0x0080,

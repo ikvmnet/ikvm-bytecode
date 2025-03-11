@@ -16,6 +16,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="opcode"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

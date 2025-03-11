@@ -3,12 +3,22 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// A modifier on an open package.
+    /// </summary>
     [Flags]
     public enum ModuleOpensFlag : ushort
     {
 
-        Synthetic = 0x1000,
-        Mandated = 0x8000,
+        /// <summary>
+        /// The open package was not explicitly or implicitly declared in the source of the module declaration.
+        /// </summary>
+        Synthetic = AccessFlag.Synthetic,
+
+        /// <summary>
+        /// The open package was implicitly declared in the source of the module declaration.
+        /// </summary>
+        Mandated = AccessFlag.Mandated,
 
     }
 

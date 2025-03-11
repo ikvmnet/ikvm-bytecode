@@ -86,7 +86,7 @@ namespace IKVM.ByteCode.Decoding
                 throw new InvalidOperationException($"Could not retrieve MUTF8 encoding for major version {majorVersion}.");
 
             if (data.IsSingleSegment)
-                return encoding.GetString(data.First.Span);
+                return data.First.Span.IsEmpty ? "" : encoding.GetString(data.First.Span);
             else
             {
                 int l = checked((int)data.Length);

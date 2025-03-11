@@ -3,13 +3,32 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// A modifier on a module.
+    /// </summary>
     [Flags]
     public enum ModuleFlag : ushort
     {
 
-        Open = 0x0020,
-        Synthetic = 0x1000,
-        Mandated = 0x8000,
+        /// <summary>
+        /// An automatic module.
+        /// </summary>
+        Automatic = 0,
+
+        /// <summary>
+        /// The module was implicitly declared.
+        /// </summary>
+        Mandated = AccessFlag.Mandated,
+
+        /// <summary>
+        /// An open module.
+        /// </summary>
+        Open = AccessFlag.Open,
+
+        /// <summary>
+        /// The module was not explicitly or implicitly declared.
+        /// </summary>
+        Synthetic = AccessFlag.Synthetic,
 
     }
 
