@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a handle to a Class constant.
+    /// </summary>
+    /// <param name="Slot"></param>
     public readonly record struct ClassConstantHandle(ushort Slot)
     {
 

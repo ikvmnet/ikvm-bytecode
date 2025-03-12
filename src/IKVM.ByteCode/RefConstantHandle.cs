@@ -1,6 +1,11 @@
 ﻿namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a handle to a Ref constant, including Fieldref, Methodref and InterfaceMethodref.
+    /// </summary>
+    /// <param name="Kind"></param>
+    /// <param name="Index"></param>
     public readonly record struct RefConstantHandle(ConstantKind Kind, ushort Index)
     {
 

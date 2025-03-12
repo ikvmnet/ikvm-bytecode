@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a handle to a InvokeDynamic constant.
+    /// </summary>
+    /// <param name="Slot"></param>
     public readonly record struct InvokeDynamicConstantHandle(ushort Slot)
     {
 

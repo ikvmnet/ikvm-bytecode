@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a handle to a Utf8 constant.
+    /// </summary>
+    /// <param name="Slot"></param>
     public readonly record struct Utf8ConstantHandle(ushort Slot)
     {
 

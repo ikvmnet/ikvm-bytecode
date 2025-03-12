@@ -1,6 +1,10 @@
 ﻿namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a handle to a Fieldref constant.
+    /// </summary>
+    /// <param name="Slot"></param>
     public readonly record struct FieldrefConstantHandle(ushort Slot)
     {
 

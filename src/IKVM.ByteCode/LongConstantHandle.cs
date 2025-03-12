@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a handle to a Long constant.
+    /// </summary>
+    /// <param name="Slot"></param>
     public readonly record struct LongConstantHandle(ushort Slot)
     {
 

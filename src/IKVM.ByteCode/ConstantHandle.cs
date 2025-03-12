@@ -1,6 +1,11 @@
 ﻿namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a handle to a constant.
+    /// </summary>
+    /// <param name="Kind"></param>
+    /// <param name="Slot"></param>
     public readonly record struct ConstantHandle(ConstantKind Kind, ushort Slot)
     {
 
