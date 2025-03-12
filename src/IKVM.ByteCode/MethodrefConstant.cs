@@ -3,6 +3,12 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a Methodref constant value.
+    /// </summary>
+    /// <param name="ClassName"></param>
+    /// <param name="Name"></param>
+    /// <param name="Descriptor"></param>
     public readonly record struct MethodrefConstant(string? ClassName, string? Name, string? Descriptor)
     {
 

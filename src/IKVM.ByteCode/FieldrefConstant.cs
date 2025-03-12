@@ -3,6 +3,12 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a Fieldref constant value.
+    /// </summary>
+    /// <param name="ClassName"></param>
+    /// <param name="Name"></param>
+    /// <param name="Descriptor"></param>
     public readonly record struct FieldrefConstant(string? ClassName, string? Name, string? Descriptor)
     {
 

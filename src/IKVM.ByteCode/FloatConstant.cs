@@ -5,6 +5,10 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a Float constant value.
+    /// </summary>
+    /// <param name="Value"></param>
     public readonly record struct FloatConstant(float Value)
     {
 

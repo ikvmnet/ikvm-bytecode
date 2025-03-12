@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a Class constant value.
+    /// </summary>
+    /// <param name="Name"></param>
     public readonly record struct ClassConstant(string? Name)
     {
 

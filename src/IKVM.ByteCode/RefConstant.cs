@@ -3,6 +3,13 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a Ref constant value, including Fieldref, Methodref and InterfaceMethodref.
+    /// </summary>
+    /// <param name="Kind"></param>
+    /// <param name="ClassName"></param>
+    /// <param name="Name"></param>
+    /// <param name="Descriptor"></param>
     public readonly record struct RefConstant(ConstantKind Kind, string? ClassName, string? Name, string? Descriptor)
     {
 
@@ -12,7 +19,7 @@ namespace IKVM.ByteCode
                 return default;
 
             if (value.Kind is not ConstantKind.Fieldref and not ConstantKind.Methodref and not ConstantKind.InterfaceMethodref)
-                throw new InvalidCastException($"Cannot cast RefConstantDescriptor of kind {value.Kind} to Ref.");
+                throw new InvalidCastException($"Cannot cast {nameof(Constant)} of kind {value.Kind} to {nameof(RefConstant)}.");
 
             return new RefConstant(value._kind, (string?)value._object1, (string?)value._object2, (string?)value._object3);
         }

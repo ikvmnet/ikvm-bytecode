@@ -3,6 +3,14 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a MethodHandle constant value.
+    /// </summary>
+    /// <param name="Kind"></param>
+    /// <param name="ReferenceKind"></param>
+    /// <param name="ClassName"></param>
+    /// <param name="Name"></param>
+    /// <param name="Descriptor"></param>
     public readonly record struct MethodHandleConstant(MethodHandleKind Kind, ConstantKind ReferenceKind, string? ClassName, string? Name, string? Descriptor)
     {
 

@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a Long constant value.
+    /// </summary>
+    /// <param name="Value"></param>
     public readonly record struct LongConstant(long Value)
     {
 

@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// The CONSTANT_Utf8_info structure is used to represent constant string values.
+    /// </summary>
+    /// <param name="Value"></param>
     public readonly record struct Utf8Constant(string Value)
     {
 

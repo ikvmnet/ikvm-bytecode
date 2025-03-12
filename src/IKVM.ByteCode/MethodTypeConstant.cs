@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a MethodType constant value.
+    /// </summary>
+    /// <param name="Descriptor"></param>
     public readonly record struct MethodTypeConstant(string? Descriptor)
     {
 

@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a Package constant value.
+    /// </summary>
+    /// <param name="Name"></param>
     public readonly record struct PackageConstant(string? Name)
     {
 

@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a NameAndType constant value.
+    /// </summary>
+    /// <param name="Name"></param>
+    /// <param name="Descriptor"></param>
     public readonly record struct NameAndTypeConstant(string? Name, string? Descriptor)
     {
 

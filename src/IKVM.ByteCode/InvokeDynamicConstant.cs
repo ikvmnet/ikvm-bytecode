@@ -3,6 +3,12 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents an InvokeDynamic constant value.
+    /// </summary>
+    /// <param name="BootstrapMethodAttributeIndex"></param>
+    /// <param name="Name"></param>
+    /// <param name="Descriptor"></param>
     public readonly record struct InvokeDynamicConstant(ushort BootstrapMethodAttributeIndex, string? Name, string? Descriptor)
     {
 

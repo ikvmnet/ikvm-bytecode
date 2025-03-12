@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents an Integer constant value.
+    /// </summary>
+    /// <param name="Value"></param>
     public readonly record struct IntegerConstant(int Value)
     {
 

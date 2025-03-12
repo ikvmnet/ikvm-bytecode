@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Represents a Module constant value.
+    /// </summary>
+    /// <param name="Name"></param>
     public readonly record struct ModuleConstant(string? Name)
     {
 
