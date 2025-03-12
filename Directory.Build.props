@@ -47,7 +47,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="IKVM.Core.MSBuild" Version="0.1.102">
+        <PackageReference Include="IKVM.Core.MSBuild" Version="0.1.106">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

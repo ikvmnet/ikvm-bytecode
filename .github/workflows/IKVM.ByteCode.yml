@@ -110,6 +110,7 @@ jobs:
         - net6.0
         - net7.0
         - net8.0
+        - net9.0
     name: Test (${{ matrix.run }}:${{ matrix.tfm }}:${{ matrix.sys }})
     timeout-minutes: 240
     needs:
