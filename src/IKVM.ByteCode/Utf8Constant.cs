@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode
 {
 
-    public readonly record struct Utf8Constant(string? Value)
+    public readonly record struct Utf8Constant(string Value)
     {
 
         readonly string? _value = Value;
