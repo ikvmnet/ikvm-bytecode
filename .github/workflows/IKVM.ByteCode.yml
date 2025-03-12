@@ -97,6 +97,7 @@ jobs:
         path: /tmp/tests.tar.gz
   test:
     strategy:
+      fail-fast: false
       matrix:
         run:
         - IKVM.ByteCode.Tests
