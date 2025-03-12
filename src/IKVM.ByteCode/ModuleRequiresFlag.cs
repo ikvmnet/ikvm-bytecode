@@ -11,24 +11,22 @@ namespace IKVM.ByteCode
     {
 
         /// <summary>
-        /// The dependence causes any module which depends on the <i>current module</i> to have an implicitly
-        /// declared dependence on the module named by the <c>Requires</c>.
+        /// Indicates that any module which depends on the current module, implicitly declares a dependence on the module indicated by this entry.
         /// </summary>
         Transitive = AccessFlag.Transitive,
 
         /// <summary>
-        /// The dependence is mandatory in the static phase, during compilation, but is optional in the dynamic
-        /// phase, during execution.
+        /// Indicates that this dependence is mandatory in the static phase, i.e., at compile time, but is optional in the dynamic phase, i.e., at run time.
         /// </summary>
-        Static = AccessFlag.StaticPhase,
+        StaticPhase = AccessFlag.StaticPhase,
 
         /// <summary>
-        /// The dependence was not explicitly or implicitly declared in the source of the module declaration.
+        /// Indicates that this dependence was not explicitly or implicitly declared in the source of the module declaration.
         /// </summary>
         Synthetic = AccessFlag.Synthetic,
 
         /// <summary>
-        /// The dependence was implicitly declared in the source of the module declaration.
+        /// Indicates that this dependence was implicitly declared in the source of the module declaration.
         /// </summary>
         Mandated = AccessFlag.Mandated,
 

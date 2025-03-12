@@ -11,22 +11,17 @@ namespace IKVM.ByteCode
     {
 
         /// <summary>
-        /// An automatic module.
-        /// </summary>
-        Automatic = 0,
-
-        /// <summary>
-        /// The module was implicitly declared.
+        /// Indicates that this module was implicitly declared.
         /// </summary>
         Mandated = AccessFlag.Mandated,
 
         /// <summary>
-        /// An open module.
+        /// Indicates that this module is open.
         /// </summary>
         Open = AccessFlag.Open,
 
         /// <summary>
-        /// The module was not explicitly or implicitly declared.
+        /// Indicates that this module was not explicitly or implicitly declared.
         /// </summary>
         Synthetic = AccessFlag.Synthetic,
 
