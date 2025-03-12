@@ -22,6 +22,7 @@ namespace IKVM.ByteCode.Encoding
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
             _count = 0;
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(_count);
         }
 
         /// <summary>

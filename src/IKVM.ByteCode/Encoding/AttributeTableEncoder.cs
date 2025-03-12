@@ -14,7 +14,7 @@ namespace IKVM.ByteCode.Encoding
 
         readonly BlobBuilder _builder;
         Blob _countBlob;
-        int _count = 0;
+        ushort _count = 0;
 
         /// <summary>
         /// Initializes a new instance.
@@ -24,6 +24,7 @@ namespace IKVM.ByteCode.Encoding
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
             _count = 0;
+            new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(_count);
         }
 
         /// <summary>
@@ -476,7 +477,7 @@ namespace IKVM.ByteCode.Encoding
                 throw new ArgumentNullException(nameof(provides));
 
             var b = new BlobBuilder();
-            var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
+            var w = new ClassFormatWriter(b.ReserveBytes(ClassFormatWriter.U2 + ClassFormatWriter.U2 + ClassFormatWriter.U2).GetBytes());
             w.WriteU2(name.Slot);
             w.WriteU2((ushort)flags);
             w.WriteU2(version.Slot);
