@@ -60,8 +60,14 @@ namespace IKVM.ByteCode.Decoding
 
         public readonly Utf8ConstantHandle Name = Name;
 
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
 
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
         public readonly bool IsNotNil => _isNotNil;
 
     }

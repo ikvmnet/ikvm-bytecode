@@ -32,9 +32,15 @@ namespace IKVM.ByteCode
 
         readonly bool _isNotNil = true;
 
-        public readonly bool IsNotNil => _isNotNil;
-
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
         public readonly bool IsNil => !IsNotNil;
+
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _isNotNil;
 
     }
 

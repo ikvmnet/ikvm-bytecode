@@ -3,8 +3,10 @@
 namespace IKVM.ByteCode
 {
 
-    public readonly record struct Utf8Constant(string Value)
+    public readonly record struct Utf8Constant(string? Value)
     {
+
+        readonly string? _value = Value;
 
         public static explicit operator Utf8Constant(Constant value)
         {
@@ -38,11 +40,20 @@ namespace IKVM.ByteCode
             return Constant.Utf8(value);
         }
 
-        readonly bool _isNotNil = true;
+        /// <summary>
+        /// Gets the value of the constant.
+        /// </summary>
+        public readonly string Value => _value ?? throw new InvalidOperationException("Utf8Constant is Nil.");
 
-        public readonly bool IsNotNil => _isNotNil;
+        /// <summary>
+        /// Gets whether the instance is nil.
+        /// </summary>
+        public readonly bool IsNil => _value is null;
 
-        public readonly bool IsNil => !IsNotNil;
+        /// <summary>
+        /// Gets whether the instance is not nil.
+        /// </summary>
+        public readonly bool IsNotNil => _value is not null;
 
     }
 
