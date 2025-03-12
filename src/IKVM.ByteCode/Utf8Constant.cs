@@ -6,8 +6,6 @@ namespace IKVM.ByteCode
     public readonly record struct Utf8Constant(string Value)
     {
 
-        readonly string? _value = Value;
-
         public static explicit operator Utf8Constant(Constant value)
         {
             if (value.IsNil)
@@ -39,6 +37,8 @@ namespace IKVM.ByteCode
         {
             return Constant.Utf8(value);
         }
+
+        readonly string? _value = Value;
 
         /// <summary>
         /// Gets the value of the constant.

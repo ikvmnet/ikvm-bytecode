@@ -1,7 +1,5 @@
 ﻿using System;
 
-using IKVM.ByteCode.Decoding;
-
 namespace IKVM.ByteCode
 {
 
@@ -41,6 +39,7 @@ namespace IKVM.ByteCode
         }
 
         readonly bool _isNotNil = true;
+        readonly double _value = Value;
 
         /// <summary>
         /// Gets whether the instance is nil.
@@ -51,6 +50,11 @@ namespace IKVM.ByteCode
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the value of the constant.
+        /// </summary>
+        public readonly double Value => IsNotNil ? _value : throw new InvalidOperationException("DoubleConstant is Nil.");
 
     }
 

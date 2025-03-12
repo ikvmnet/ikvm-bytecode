@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode
 {
 
-    public readonly record struct NameAndTypeConstant(string Name, string Descriptor)
+    public readonly record struct NameAndTypeConstant(string? Name, string? Descriptor)
     {
 
         public static explicit operator NameAndTypeConstant(Constant value)

@@ -44,32 +44,32 @@
             return new DoubleConstant(value);
         }
 
-        public static ClassConstant Class(string value)
+        public static ClassConstant Class(string? value)
         {
             return new ClassConstant(value);
         }
 
-        public static StringConstant String(string value)
+        public static StringConstant String(string? value)
         {
             return new StringConstant(value);
         }
 
-        public static FieldrefConstant Fieldref(string className, string name, string descriptor)
+        public static FieldrefConstant Fieldref(string? className, string? name, string? descriptor)
         {
             return new FieldrefConstant(className, name, descriptor);
         }
 
-        public static MethodrefConstant Methodref(string className, string name, string descriptor)
+        public static MethodrefConstant Methodref(string? className, string? name, string? descriptor)
         {
             return new MethodrefConstant(className, name, descriptor);
         }
 
-        public static InterfaceMethodrefConstant InterfaceMethodref(string className, string name, string descriptor)
+        public static InterfaceMethodrefConstant InterfaceMethodref(string? className, string? name, string? descriptor)
         {
             return new InterfaceMethodrefConstant(className, name, descriptor);
         }
 
-        public static NameAndTypeConstant NameAndType(string name, string descriptor)
+        public static NameAndTypeConstant NameAndType(string? name, string? descriptor)
         {
             return new NameAndTypeConstant(name, descriptor);
         }
@@ -94,27 +94,27 @@
             return new MethodHandleConstant(kind, ConstantKind.InterfaceMethodref, reference.ClassName, reference.Name, reference.Descriptor);
         }
 
-        public static MethodTypeConstant MethodType(string descriptor)
+        public static MethodTypeConstant MethodType(string? descriptor)
         {
             return new MethodTypeConstant(descriptor);
         }
 
-        public static DynamicConstant Dynamic(ushort bootstrapMethodAttributeIndex, string name, string descriptor)
+        public static DynamicConstant Dynamic(ushort bootstrapMethodAttributeIndex, string? name, string? descriptor)
         {
             return new DynamicConstant(bootstrapMethodAttributeIndex, name, descriptor);
         }
 
-        public static InvokeDynamicConstant InvokeDynamic(ushort bootstrapMethodAttributeIndex, string name, string descriptor)
+        public static InvokeDynamicConstant InvokeDynamic(ushort bootstrapMethodAttributeIndex, string? name, string? descriptor)
         {
             return new InvokeDynamicConstant(bootstrapMethodAttributeIndex, name, descriptor);
         }
 
-        public static ModuleConstant Module(string name)
+        public static ModuleConstant Module(string? name)
         {
             return new ModuleConstant(name);
         }
 
-        public static PackageConstant Package(string name)
+        public static PackageConstant Package(string? name)
         {
             return new PackageConstant(name);
         }
