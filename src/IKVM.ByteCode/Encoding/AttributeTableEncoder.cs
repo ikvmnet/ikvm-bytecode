@@ -139,6 +139,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Adds a new Code attribute.
         /// </summary>
+        /// <param name="attributeName"></param>
         /// <param name="maxStack"></param>
         /// <param name="maxLocals"></param>
         /// <param name="code"></param>
