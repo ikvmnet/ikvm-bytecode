@@ -56,6 +56,12 @@
 
         public const string ModuleMainClass = nameof(ModuleMainClass);
 
+        public const string ModuleTarget = nameof(ModuleTarget);
+
+        public const string ModuleHashes = nameof(ModuleHashes);
+
+        public const string ModuleResolution = nameof(ModuleResolution);
+
         public const string NestHost = nameof(NestHost);
 
         public const string NestMembers = nameof(NestMembers);

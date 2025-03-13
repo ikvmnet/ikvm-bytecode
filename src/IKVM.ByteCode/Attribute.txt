@@ -24,6 +24,9 @@ MethodParameters
 Module
 ModulePackages
 ModuleMainClass
+ModuleTarget
+ModuleHashes
+ModuleResolution
 NestHost
 NestMembers
 Record

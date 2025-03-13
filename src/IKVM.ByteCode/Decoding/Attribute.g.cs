@@ -295,6 +295,39 @@ namespace IKVM.ByteCode.Decoding
             return value;
         }
 
+        public static explicit operator ModuleTargetAttribute(Attribute attribute) => attribute.AsModuleTarget();
+
+        public ModuleTargetAttribute AsModuleTarget()
+        {
+            var reader = new ClassFormatReader(Data);
+            if (ModuleTargetAttribute.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.ModuleTarget)}.");
+
+            return value;
+        }
+
+        public static explicit operator ModuleHashesAttribute(Attribute attribute) => attribute.AsModuleHashes();
+
+        public ModuleHashesAttribute AsModuleHashes()
+        {
+            var reader = new ClassFormatReader(Data);
+            if (ModuleHashesAttribute.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.ModuleHashes)}.");
+
+            return value;
+        }
+
+        public static explicit operator ModuleResolutionAttribute(Attribute attribute) => attribute.AsModuleResolution();
+
+        public ModuleResolutionAttribute AsModuleResolution()
+        {
+            var reader = new ClassFormatReader(Data);
+            if (ModuleResolutionAttribute.TryRead(ref reader, out var value) == false)
+                throw new InvalidClassException($"End of data reached casting Attribute to {nameof(AttributeName.ModuleResolution)}.");
+
+            return value;
+        }
+
         public static explicit operator NestHostAttribute(Attribute attribute) => attribute.AsNestHost();
 
         public NestHostAttribute AsNestHost()
@@ -422,6 +455,15 @@ namespace IKVM.ByteCode.Decoding
                     break;
                 case AttributeName.ModuleMainClass:
                     ((ModuleMainClassAttribute)this).CopyTo(constantView, constantPool, ref encoder);
+                    break;
+                case AttributeName.ModuleTarget:
+                    ((ModuleTargetAttribute)this).CopyTo(constantView, constantPool, ref encoder);
+                    break;
+                case AttributeName.ModuleHashes:
+                    ((ModuleHashesAttribute)this).CopyTo(constantView, constantPool, ref encoder);
+                    break;
+                case AttributeName.ModuleResolution:
+                    ((ModuleResolutionAttribute)this).CopyTo(constantView, constantPool, ref encoder);
                     break;
                 case AttributeName.NestHost:
                     ((NestHostAttribute)this).CopyTo(constantView, constantPool, ref encoder);
