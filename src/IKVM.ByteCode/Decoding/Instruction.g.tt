@@ -26,6 +26,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="opcode"></param>
+        /// <param name="offset"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -136,6 +137,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     /// <summary>
     /// Describes the '<#= inst #>' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
 <#
         for (int j = 0; j < args.Length; j++)
         {
@@ -340,7 +342,9 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
             var arg = args[j];
 #>
 
-        // arg<#= j + 1 #>: <#= arg.Name #>
+        /// <summary>
+        /// arg<#= j + 1 #>: <#= arg.Name #>
+        /// </summary>
         public readonly <#= Util.GetDecoderTypeName(Util.GetRealType(arg, true)) #> <#= arg.Name #> = <#= arg.Name #>;
 <#
         }

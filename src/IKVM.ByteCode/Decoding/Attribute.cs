@@ -5,15 +5,24 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Encapsulates an attribute before the contents have been decoded.
+    /// </summary>
+    /// <param name="Name"></param>
+    /// <param name="Data"></param>
     public readonly partial struct Attribute(Utf8ConstantHandle Name, ReadOnlySequence<byte> Data)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static Attribute Nil => default;
 
         /// <summary>
         /// Parses an attribute.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="size"></param>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;

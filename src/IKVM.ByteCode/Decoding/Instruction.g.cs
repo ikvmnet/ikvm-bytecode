@@ -4075,6 +4075,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'nop' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct NopInstruction(int Offset)
     {
     
@@ -4172,6 +4173,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aconst_null' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct AconstNullInstruction(int Offset)
     {
     
@@ -4269,6 +4271,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_m1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IconstM1Instruction(int Offset)
     {
     
@@ -4366,6 +4369,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iconst0Instruction(int Offset)
     {
     
@@ -4463,6 +4467,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iconst1Instruction(int Offset)
     {
     
@@ -4560,6 +4565,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iconst2Instruction(int Offset)
     {
     
@@ -4657,6 +4663,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iconst3Instruction(int Offset)
     {
     
@@ -4754,6 +4761,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_4' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iconst4Instruction(int Offset)
     {
     
@@ -4851,6 +4859,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iconst_5' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iconst5Instruction(int Offset)
     {
     
@@ -4948,6 +4957,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lconst_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lconst0Instruction(int Offset)
     {
     
@@ -5045,6 +5055,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lconst_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lconst1Instruction(int Offset)
     {
     
@@ -5142,6 +5153,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fconst_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fconst0Instruction(int Offset)
     {
     
@@ -5239,6 +5251,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fconst_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fconst1Instruction(int Offset)
     {
     
@@ -5336,6 +5349,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fconst_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fconst2Instruction(int Offset)
     {
     
@@ -5433,6 +5447,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dconst_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dconst0Instruction(int Offset)
     {
     
@@ -5530,6 +5545,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dconst_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dconst1Instruction(int Offset)
     {
     
@@ -5627,6 +5643,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'bipush' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Value"></param>
     public partial record struct BipushInstruction(int Offset, sbyte Value)
     {
@@ -5710,7 +5727,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Value
+        /// <summary>
+        /// arg1: Value
+        /// </summary>
         public readonly sbyte Value = Value;
         
         /// <summary>
@@ -5737,6 +5756,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'sipush' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Value"></param>
     public partial record struct SipushInstruction(int Offset, short Value)
     {
@@ -5820,7 +5840,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Value
+        /// <summary>
+        /// arg1: Value
+        /// </summary>
         public readonly short Value = Value;
         
         /// <summary>
@@ -5847,6 +5869,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ldc' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Constant"></param>
     public partial record struct LdcInstruction(int Offset, ConstantHandle Constant)
     {
@@ -5930,7 +5953,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Constant
+        /// <summary>
+        /// arg1: Constant
+        /// </summary>
         public readonly ConstantHandle Constant = Constant;
         
         /// <summary>
@@ -5957,6 +5982,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ldc_w' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Constant"></param>
     public partial record struct LdcWInstruction(int Offset, ConstantHandle Constant)
     {
@@ -6040,7 +6066,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Constant
+        /// <summary>
+        /// arg1: Constant
+        /// </summary>
         public readonly ConstantHandle Constant = Constant;
         
         /// <summary>
@@ -6067,6 +6095,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ldc2_w' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Constant"></param>
     public partial record struct Ldc2WInstruction(int Offset, ConstantHandle Constant)
     {
@@ -6150,7 +6179,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Constant
+        /// <summary>
+        /// arg1: Constant
+        /// </summary>
         public readonly ConstantHandle Constant = Constant;
         
         /// <summary>
@@ -6177,6 +6208,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct IloadInstruction(int Offset, ushort Local)
     {
@@ -6279,7 +6311,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -6320,6 +6354,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct LloadInstruction(int Offset, ushort Local)
     {
@@ -6422,7 +6457,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -6463,6 +6500,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct FloadInstruction(int Offset, ushort Local)
     {
@@ -6565,7 +6603,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -6606,6 +6646,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct DloadInstruction(int Offset, ushort Local)
     {
@@ -6708,7 +6749,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -6749,6 +6792,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct AloadInstruction(int Offset, ushort Local)
     {
@@ -6851,7 +6895,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -6892,6 +6938,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iload0Instruction(int Offset)
     {
     
@@ -6989,6 +7036,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iload1Instruction(int Offset)
     {
     
@@ -7086,6 +7134,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iload2Instruction(int Offset)
     {
     
@@ -7183,6 +7232,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iload_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Iload3Instruction(int Offset)
     {
     
@@ -7280,6 +7330,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lload0Instruction(int Offset)
     {
     
@@ -7377,6 +7428,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lload1Instruction(int Offset)
     {
     
@@ -7474,6 +7526,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lload2Instruction(int Offset)
     {
     
@@ -7571,6 +7624,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lload_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lload3Instruction(int Offset)
     {
     
@@ -7668,6 +7722,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fload0Instruction(int Offset)
     {
     
@@ -7765,6 +7820,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fload1Instruction(int Offset)
     {
     
@@ -7862,6 +7918,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fload2Instruction(int Offset)
     {
     
@@ -7959,6 +8016,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fload_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fload3Instruction(int Offset)
     {
     
@@ -8056,6 +8114,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dload0Instruction(int Offset)
     {
     
@@ -8153,6 +8212,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dload1Instruction(int Offset)
     {
     
@@ -8250,6 +8310,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dload2Instruction(int Offset)
     {
     
@@ -8347,6 +8408,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dload_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dload3Instruction(int Offset)
     {
     
@@ -8444,6 +8506,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Aload0Instruction(int Offset)
     {
     
@@ -8541,6 +8604,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Aload1Instruction(int Offset)
     {
     
@@ -8638,6 +8702,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Aload2Instruction(int Offset)
     {
     
@@ -8735,6 +8800,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aload_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Aload3Instruction(int Offset)
     {
     
@@ -8832,6 +8898,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iaload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IaloadInstruction(int Offset)
     {
     
@@ -8929,6 +8996,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'laload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LaloadInstruction(int Offset)
     {
     
@@ -9026,6 +9094,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'faload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FaloadInstruction(int Offset)
     {
     
@@ -9123,6 +9192,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'daload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DaloadInstruction(int Offset)
     {
     
@@ -9220,6 +9290,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aaload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct AaloadInstruction(int Offset)
     {
     
@@ -9317,6 +9388,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'baload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct BaloadInstruction(int Offset)
     {
     
@@ -9414,6 +9486,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'caload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct CaloadInstruction(int Offset)
     {
     
@@ -9511,6 +9584,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'saload' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct SaloadInstruction(int Offset)
     {
     
@@ -9608,6 +9682,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct IstoreInstruction(int Offset, ushort Local)
     {
@@ -9710,7 +9785,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -9751,6 +9828,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct LstoreInstruction(int Offset, ushort Local)
     {
@@ -9853,7 +9931,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -9894,6 +9974,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct FstoreInstruction(int Offset, ushort Local)
     {
@@ -9996,7 +10077,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -10037,6 +10120,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct DstoreInstruction(int Offset, ushort Local)
     {
@@ -10139,7 +10223,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -10180,6 +10266,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct AstoreInstruction(int Offset, ushort Local)
     {
@@ -10282,7 +10369,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -10323,6 +10412,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Istore0Instruction(int Offset)
     {
     
@@ -10420,6 +10510,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Istore1Instruction(int Offset)
     {
     
@@ -10517,6 +10608,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Istore2Instruction(int Offset)
     {
     
@@ -10614,6 +10706,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'istore_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Istore3Instruction(int Offset)
     {
     
@@ -10711,6 +10804,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lstore0Instruction(int Offset)
     {
     
@@ -10808,6 +10902,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lstore1Instruction(int Offset)
     {
     
@@ -10905,6 +11000,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lstore2Instruction(int Offset)
     {
     
@@ -11002,6 +11098,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lstore_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Lstore3Instruction(int Offset)
     {
     
@@ -11099,6 +11196,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fstore0Instruction(int Offset)
     {
     
@@ -11196,6 +11294,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fstore1Instruction(int Offset)
     {
     
@@ -11293,6 +11392,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fstore2Instruction(int Offset)
     {
     
@@ -11390,6 +11490,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fstore_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Fstore3Instruction(int Offset)
     {
     
@@ -11487,6 +11588,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dstore0Instruction(int Offset)
     {
     
@@ -11584,6 +11686,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dstore1Instruction(int Offset)
     {
     
@@ -11681,6 +11784,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dstore2Instruction(int Offset)
     {
     
@@ -11778,6 +11882,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dstore_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dstore3Instruction(int Offset)
     {
     
@@ -11875,6 +11980,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore_0' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Astore0Instruction(int Offset)
     {
     
@@ -11972,6 +12078,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore_1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Astore1Instruction(int Offset)
     {
     
@@ -12069,6 +12176,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore_2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Astore2Instruction(int Offset)
     {
     
@@ -12166,6 +12274,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'astore_3' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Astore3Instruction(int Offset)
     {
     
@@ -12263,6 +12372,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iastore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IastoreInstruction(int Offset)
     {
     
@@ -12360,6 +12470,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lastore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LastoreInstruction(int Offset)
     {
     
@@ -12457,6 +12568,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fastore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FastoreInstruction(int Offset)
     {
     
@@ -12554,6 +12666,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dastore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DastoreInstruction(int Offset)
     {
     
@@ -12651,6 +12764,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'aastore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct AastoreInstruction(int Offset)
     {
     
@@ -12748,6 +12862,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'bastore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct BastoreInstruction(int Offset)
     {
     
@@ -12845,6 +12960,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'castore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct CastoreInstruction(int Offset)
     {
     
@@ -12942,6 +13058,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'sastore' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct SastoreInstruction(int Offset)
     {
     
@@ -13039,6 +13156,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'pop' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct PopInstruction(int Offset)
     {
     
@@ -13136,6 +13254,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'pop2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Pop2Instruction(int Offset)
     {
     
@@ -13233,6 +13352,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DupInstruction(int Offset)
     {
     
@@ -13330,6 +13450,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup_x1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DupX1Instruction(int Offset)
     {
     
@@ -13427,6 +13548,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup_x2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DupX2Instruction(int Offset)
     {
     
@@ -13524,6 +13646,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dup2Instruction(int Offset)
     {
     
@@ -13621,6 +13744,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup2_x1' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dup2X1Instruction(int Offset)
     {
     
@@ -13718,6 +13842,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dup2_x2' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct Dup2X2Instruction(int Offset)
     {
     
@@ -13815,6 +13940,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'swap' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct SwapInstruction(int Offset)
     {
     
@@ -13912,6 +14038,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iadd' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IaddInstruction(int Offset)
     {
     
@@ -14009,6 +14136,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ladd' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LaddInstruction(int Offset)
     {
     
@@ -14106,6 +14234,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fadd' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FaddInstruction(int Offset)
     {
     
@@ -14203,6 +14332,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dadd' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DaddInstruction(int Offset)
     {
     
@@ -14300,6 +14430,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'isub' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IsubInstruction(int Offset)
     {
     
@@ -14397,6 +14528,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lsub' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LsubInstruction(int Offset)
     {
     
@@ -14494,6 +14626,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fsub' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FsubInstruction(int Offset)
     {
     
@@ -14591,6 +14724,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dsub' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DsubInstruction(int Offset)
     {
     
@@ -14688,6 +14822,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'imul' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct ImulInstruction(int Offset)
     {
     
@@ -14785,6 +14920,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lmul' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LmulInstruction(int Offset)
     {
     
@@ -14882,6 +15018,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fmul' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FmulInstruction(int Offset)
     {
     
@@ -14979,6 +15116,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dmul' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DmulInstruction(int Offset)
     {
     
@@ -15076,6 +15214,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'idiv' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IdivInstruction(int Offset)
     {
     
@@ -15173,6 +15312,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ldiv' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LdivInstruction(int Offset)
     {
     
@@ -15270,6 +15410,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fdiv' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FdivInstruction(int Offset)
     {
     
@@ -15367,6 +15508,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ddiv' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DdivInstruction(int Offset)
     {
     
@@ -15464,6 +15606,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'irem' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IremInstruction(int Offset)
     {
     
@@ -15561,6 +15704,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lrem' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LremInstruction(int Offset)
     {
     
@@ -15658,6 +15802,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'frem' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FremInstruction(int Offset)
     {
     
@@ -15755,6 +15900,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'drem' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DremInstruction(int Offset)
     {
     
@@ -15852,6 +15998,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ineg' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct InegInstruction(int Offset)
     {
     
@@ -15949,6 +16096,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lneg' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LnegInstruction(int Offset)
     {
     
@@ -16046,6 +16194,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fneg' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FnegInstruction(int Offset)
     {
     
@@ -16143,6 +16292,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dneg' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DnegInstruction(int Offset)
     {
     
@@ -16240,6 +16390,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ishl' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IshlInstruction(int Offset)
     {
     
@@ -16337,6 +16488,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lshl' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LshlInstruction(int Offset)
     {
     
@@ -16434,6 +16586,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ishr' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IshrInstruction(int Offset)
     {
     
@@ -16531,6 +16684,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lshr' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LshrInstruction(int Offset)
     {
     
@@ -16628,6 +16782,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iushr' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IushrInstruction(int Offset)
     {
     
@@ -16725,6 +16880,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lushr' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LushrInstruction(int Offset)
     {
     
@@ -16822,6 +16978,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iand' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IandInstruction(int Offset)
     {
     
@@ -16919,6 +17076,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'land' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LandInstruction(int Offset)
     {
     
@@ -17016,6 +17174,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ior' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IorInstruction(int Offset)
     {
     
@@ -17113,6 +17272,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lor' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LorInstruction(int Offset)
     {
     
@@ -17210,6 +17370,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ixor' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IxorInstruction(int Offset)
     {
     
@@ -17307,6 +17468,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lxor' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LxorInstruction(int Offset)
     {
     
@@ -17404,6 +17566,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iinc' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     /// <param name="Value"></param>
     public partial record struct IincInstruction(int Offset, ushort Local, short Value)
@@ -17523,10 +17686,14 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
 
-        // arg2: Value
+        /// <summary>
+        /// arg2: Value
+        /// </summary>
         public readonly short Value = Value;
         
         /// <summary>
@@ -17572,6 +17739,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2l' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct I2lInstruction(int Offset)
     {
     
@@ -17669,6 +17837,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2f' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct I2fInstruction(int Offset)
     {
     
@@ -17766,6 +17935,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2d' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct I2dInstruction(int Offset)
     {
     
@@ -17863,6 +18033,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'l2i' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct L2iInstruction(int Offset)
     {
     
@@ -17960,6 +18131,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'l2f' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct L2fInstruction(int Offset)
     {
     
@@ -18057,6 +18229,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'l2d' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct L2dInstruction(int Offset)
     {
     
@@ -18154,6 +18327,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'f2i' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct F2iInstruction(int Offset)
     {
     
@@ -18251,6 +18425,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'f2l' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct F2lInstruction(int Offset)
     {
     
@@ -18348,6 +18523,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'f2d' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct F2dInstruction(int Offset)
     {
     
@@ -18445,6 +18621,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'd2i' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct D2iInstruction(int Offset)
     {
     
@@ -18542,6 +18719,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'd2l' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct D2lInstruction(int Offset)
     {
     
@@ -18639,6 +18817,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'd2f' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct D2fInstruction(int Offset)
     {
     
@@ -18736,6 +18915,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2b' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct I2bInstruction(int Offset)
     {
     
@@ -18833,6 +19013,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2c' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct I2cInstruction(int Offset)
     {
     
@@ -18930,6 +19111,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'i2s' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct I2sInstruction(int Offset)
     {
     
@@ -19027,6 +19209,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lcmp' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LcmpInstruction(int Offset)
     {
     
@@ -19124,6 +19307,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fcmpl' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FcmplInstruction(int Offset)
     {
     
@@ -19221,6 +19405,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'fcmpg' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FcmpgInstruction(int Offset)
     {
     
@@ -19318,6 +19503,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dcmpl' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DcmplInstruction(int Offset)
     {
     
@@ -19415,6 +19601,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dcmpg' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DcmpgInstruction(int Offset)
     {
     
@@ -19512,6 +19699,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ifeq' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfeqInstruction(int Offset, short Target)
     {
@@ -19595,7 +19783,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -19622,6 +19812,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ifne' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfneInstruction(int Offset, short Target)
     {
@@ -19705,7 +19896,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -19732,6 +19925,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'iflt' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfltInstruction(int Offset, short Target)
     {
@@ -19815,7 +20009,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -19842,6 +20038,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ifge' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfgeInstruction(int Offset, short Target)
     {
@@ -19925,7 +20122,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -19952,6 +20151,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ifgt' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfgtInstruction(int Offset, short Target)
     {
@@ -20035,7 +20235,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20062,6 +20264,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ifle' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfleInstruction(int Offset, short Target)
     {
@@ -20145,7 +20348,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20172,6 +20377,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'if_icmpeq' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfIcmpeqInstruction(int Offset, short Target)
     {
@@ -20255,7 +20461,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20282,6 +20490,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'if_icmpne' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfIcmpneInstruction(int Offset, short Target)
     {
@@ -20365,7 +20574,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20392,6 +20603,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'if_icmplt' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfIcmpltInstruction(int Offset, short Target)
     {
@@ -20475,7 +20687,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20502,6 +20716,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'if_icmpge' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfIcmpgeInstruction(int Offset, short Target)
     {
@@ -20585,7 +20800,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20612,6 +20829,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'if_icmpgt' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfIcmpgtInstruction(int Offset, short Target)
     {
@@ -20695,7 +20913,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20722,6 +20942,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'if_icmple' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfIcmpleInstruction(int Offset, short Target)
     {
@@ -20805,7 +21026,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20832,6 +21055,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'if_acmpeq' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfAcmpeqInstruction(int Offset, short Target)
     {
@@ -20915,7 +21139,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -20942,6 +21168,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'if_acmpne' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfAcmpneInstruction(int Offset, short Target)
     {
@@ -21025,7 +21252,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -21052,6 +21281,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'goto' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct GotoInstruction(int Offset, short Target)
     {
@@ -21135,7 +21365,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -21162,6 +21394,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'jsr' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct JsrInstruction(int Offset, short Target)
     {
@@ -21245,7 +21478,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -21272,6 +21507,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ret' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Local"></param>
     public partial record struct RetInstruction(int Offset, ushort Local)
     {
@@ -21374,7 +21610,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Local
+        /// <summary>
+        /// arg1: Local
+        /// </summary>
         public readonly ushort Local = Local;
         
         /// <summary>
@@ -21415,6 +21653,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ireturn' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct IreturnInstruction(int Offset)
     {
     
@@ -21512,6 +21751,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'lreturn' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct LreturnInstruction(int Offset)
     {
     
@@ -21609,6 +21849,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'freturn' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct FreturnInstruction(int Offset)
     {
     
@@ -21706,6 +21947,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'dreturn' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct DreturnInstruction(int Offset)
     {
     
@@ -21803,6 +22045,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'areturn' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct AreturnInstruction(int Offset)
     {
     
@@ -21900,6 +22143,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'return' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct ReturnInstruction(int Offset)
     {
     
@@ -21997,6 +22241,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'getstatic' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Field"></param>
     public partial record struct GetStaticInstruction(int Offset, ConstantHandle Field)
     {
@@ -22080,7 +22325,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Field
+        /// <summary>
+        /// arg1: Field
+        /// </summary>
         public readonly ConstantHandle Field = Field;
         
         /// <summary>
@@ -22107,6 +22354,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'putstatic' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Field"></param>
     public partial record struct PutStaticInstruction(int Offset, ConstantHandle Field)
     {
@@ -22190,7 +22438,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Field
+        /// <summary>
+        /// arg1: Field
+        /// </summary>
         public readonly ConstantHandle Field = Field;
         
         /// <summary>
@@ -22217,6 +22467,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'getfield' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Field"></param>
     public partial record struct GetFieldInstruction(int Offset, ConstantHandle Field)
     {
@@ -22300,7 +22551,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Field
+        /// <summary>
+        /// arg1: Field
+        /// </summary>
         public readonly ConstantHandle Field = Field;
         
         /// <summary>
@@ -22327,6 +22580,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'putfield' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Field"></param>
     public partial record struct PutFieldInstruction(int Offset, ConstantHandle Field)
     {
@@ -22410,7 +22664,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Field
+        /// <summary>
+        /// arg1: Field
+        /// </summary>
         public readonly ConstantHandle Field = Field;
         
         /// <summary>
@@ -22437,6 +22693,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'invokevirtual' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Method"></param>
     public partial record struct InvokeVirtualInstruction(int Offset, ConstantHandle Method)
     {
@@ -22520,7 +22777,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Method
+        /// <summary>
+        /// arg1: Method
+        /// </summary>
         public readonly ConstantHandle Method = Method;
         
         /// <summary>
@@ -22547,6 +22806,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'invokespecial' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Method"></param>
     public partial record struct InvokeSpecialInstruction(int Offset, ConstantHandle Method)
     {
@@ -22630,7 +22890,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Method
+        /// <summary>
+        /// arg1: Method
+        /// </summary>
         public readonly ConstantHandle Method = Method;
         
         /// <summary>
@@ -22657,6 +22919,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'invokestatic' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Method"></param>
     public partial record struct InvokeStaticInstruction(int Offset, ConstantHandle Method)
     {
@@ -22740,7 +23003,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Method
+        /// <summary>
+        /// arg1: Method
+        /// </summary>
         public readonly ConstantHandle Method = Method;
         
         /// <summary>
@@ -22767,6 +23032,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'invokeinterface' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Method"></param>
     /// <param name="Count"></param>
     /// <param name="Zero"></param>
@@ -22868,13 +23134,19 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Method
+        /// <summary>
+        /// arg1: Method
+        /// </summary>
         public readonly ConstantHandle Method = Method;
 
-        // arg2: Count
+        /// <summary>
+        /// arg2: Count
+        /// </summary>
         public readonly byte Count = Count;
 
-        // arg3: Zero
+        /// <summary>
+        /// arg3: Zero
+        /// </summary>
         public readonly byte Zero = Zero;
         
         /// <summary>
@@ -22903,6 +23175,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'invokedynamic' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Method"></param>
     /// <param name="Zero"></param>
     /// <param name="Zero2"></param>
@@ -23004,13 +23277,19 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Method
+        /// <summary>
+        /// arg1: Method
+        /// </summary>
         public readonly ConstantHandle Method = Method;
 
-        // arg2: Zero
+        /// <summary>
+        /// arg2: Zero
+        /// </summary>
         public readonly byte Zero = Zero;
 
-        // arg3: Zero2
+        /// <summary>
+        /// arg3: Zero2
+        /// </summary>
         public readonly byte Zero2 = Zero2;
         
         /// <summary>
@@ -23039,6 +23318,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'new' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Constant"></param>
     public partial record struct NewInstruction(int Offset, ConstantHandle Constant)
     {
@@ -23122,7 +23402,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Constant
+        /// <summary>
+        /// arg1: Constant
+        /// </summary>
         public readonly ConstantHandle Constant = Constant;
         
         /// <summary>
@@ -23149,6 +23431,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'newarray' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Value"></param>
     public partial record struct NewarrayInstruction(int Offset, byte Value)
     {
@@ -23232,7 +23515,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Value
+        /// <summary>
+        /// arg1: Value
+        /// </summary>
         public readonly byte Value = Value;
         
         /// <summary>
@@ -23259,6 +23544,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'anewarray' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Constant"></param>
     public partial record struct AnewarrayInstruction(int Offset, ConstantHandle Constant)
     {
@@ -23342,7 +23628,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Constant
+        /// <summary>
+        /// arg1: Constant
+        /// </summary>
         public readonly ConstantHandle Constant = Constant;
         
         /// <summary>
@@ -23369,6 +23657,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'arraylength' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct ArraylengthInstruction(int Offset)
     {
     
@@ -23466,6 +23755,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'athrow' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct AthrowInstruction(int Offset)
     {
     
@@ -23563,6 +23853,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'checkcast' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Type"></param>
     public partial record struct CheckcastInstruction(int Offset, ConstantHandle Type)
     {
@@ -23646,7 +23937,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Type
+        /// <summary>
+        /// arg1: Type
+        /// </summary>
         public readonly ConstantHandle Type = Type;
         
         /// <summary>
@@ -23673,6 +23966,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'instanceof' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Type"></param>
     public partial record struct InstanceOfInstruction(int Offset, ConstantHandle Type)
     {
@@ -23756,7 +24050,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Type
+        /// <summary>
+        /// arg1: Type
+        /// </summary>
         public readonly ConstantHandle Type = Type;
         
         /// <summary>
@@ -23783,6 +24079,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'monitorenter' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct MonitorEnterInstruction(int Offset)
     {
     
@@ -23880,6 +24177,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'monitorexit' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     public partial record struct MonitorExitInstruction(int Offset)
     {
     
@@ -23977,6 +24275,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'multianewarray' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Type"></param>
     /// <param name="Dimensions"></param>
     public partial record struct MultianewarrayInstruction(int Offset, ConstantHandle Type, byte Dimensions)
@@ -24069,10 +24368,14 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Type
+        /// <summary>
+        /// arg1: Type
+        /// </summary>
         public readonly ConstantHandle Type = Type;
 
-        // arg2: Dimensions
+        /// <summary>
+        /// arg2: Dimensions
+        /// </summary>
         public readonly byte Dimensions = Dimensions;
         
         /// <summary>
@@ -24100,6 +24403,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ifnull' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfNullInstruction(int Offset, short Target)
     {
@@ -24183,7 +24487,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -24210,6 +24516,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'ifnonnull' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct IfNonNullInstruction(int Offset, short Target)
     {
@@ -24293,7 +24600,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly short Target = Target;
         
         /// <summary>
@@ -24320,6 +24629,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'goto_w' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct GotoWInstruction(int Offset, int Target)
     {
@@ -24403,7 +24713,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly int Target = Target;
         
         /// <summary>
@@ -24430,6 +24742,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes the 'jsr_w' instruction.
     /// </summary>
+    /// <param name="Offset"></param>
     /// <param name="Target"></param>
     public partial record struct JsrWInstruction(int Offset, int Target)
     {
@@ -24513,7 +24826,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        // arg1: Target
+        /// <summary>
+        /// arg1: Target
+        /// </summary>
         public readonly int Target = Target;
         
         /// <summary>
