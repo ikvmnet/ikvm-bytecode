@@ -11,6 +11,10 @@ using System.Runtime.CompilerServices;
 namespace IKVM.ByteCode.Buffers
 {
 
+    /// <summary>
+    /// Provides methods for reading binary and text data out of a <see cref="ReadOnlySequence{T}"/> with a focus on performance and minimal or zero heap allocations.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     ref partial struct SequenceReader<T> where T : unmanaged, IEquatable<T>
     {
 

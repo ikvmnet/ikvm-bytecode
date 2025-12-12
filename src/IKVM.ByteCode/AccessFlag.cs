@@ -3,6 +3,9 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Models the access flags for a class, method, or field. The access flags appears exactly once in each class, method, or field.
+    /// </summary>
     [Flags]
     public enum AccessFlag : ushort
     {

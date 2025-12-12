@@ -10,11 +10,13 @@ namespace IKVM.ByteCode.Buffers
     public readonly struct ReadOnlyByteMemoryEqualityComparer : IEqualityComparer<ReadOnlyMemory<byte>>
     {
 
+        /// <inheritdoc />
         public bool Equals(ReadOnlyMemory<byte> x, ReadOnlyMemory<byte> y)
         {
             return x.Equals(y) || x.Span.SequenceEqual(y.Span);
         }
 
+        /// <inheritdoc />
         public int GetHashCode(ReadOnlyMemory<byte> obj)
         {
             return BlobHash.GetFNVHashCode(obj.Span);
