@@ -7,7 +7,7 @@ namespace IKVM.ByteCode.Buffers
 {
 
     /// <summary>
-    /// A <see cref="MemoryManager{byte}"/> over a raw pointer.
+    /// A <see cref="MemoryManager{T}"/> over a raw pointer.
     /// </summary>
     sealed unsafe class UnmanagedMemoryManager : MemoryManager<byte>
     {

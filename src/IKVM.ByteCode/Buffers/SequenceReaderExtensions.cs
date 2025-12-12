@@ -219,7 +219,7 @@ namespace IKVM.ByteCode.Buffers
         /// <summary>
         /// Reads a <see cref="Double"/> as big endian.
         /// </summary>
-        /// <returns>False if there wasn't enough data for a <see cref="Double"/>.</returns>
+        /// <returns>False if there wasn't enough data for a <see cref="double"/>.</returns>
         public static unsafe bool TryReadBigEndian(ref this SequenceReader<byte> reader, out double value)
         {
             if (reader.TryReadBigEndian(out long longValue))
@@ -237,7 +237,7 @@ namespace IKVM.ByteCode.Buffers
         /// </summary>
         /// <param name="count">Read count.</param>
         /// <param name="sequence">The read data, if successfully read requested <paramref name="count"/> data.</param>
-        /// <returns><c>true</c> if remaining items in current <see cref="SequenceReader{byte}" /> is enough for <paramref name="count"/>.</returns>
+        /// <returns><c>true</c> if remaining items in current <see cref="SequenceReader{Byte}" /> is enough for <paramref name="count"/>.</returns>
         public static bool TryReadExact(ref this SequenceReader<byte> reader, int count, out ReadOnlySequence<byte> sequence)
         {
             if (count < 0)
@@ -261,7 +261,7 @@ namespace IKVM.ByteCode.Buffers
         /// </summary>
         /// <param name="count">Read count.</param>
         /// <param name="sequence">The read data, if successfully read requested <paramref name="count"/> data.</param>
-        /// <returns><c>true</c> if remaining items in current <see cref="SequenceReader{byte}" /> is enough for <paramref name="count"/>.</returns>
+        /// <returns><c>true</c> if remaining items in current <see cref="SequenceReader{Byte}" /> is enough for <paramref name="count"/>.</returns>
         public static bool TryReadExact(ref this SequenceReader<byte> reader, long count, out ReadOnlySequence<byte> sequence)
         {
             if (count < 0)

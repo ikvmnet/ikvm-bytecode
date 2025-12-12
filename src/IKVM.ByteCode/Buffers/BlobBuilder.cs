@@ -29,7 +29,7 @@ namespace IKVM.ByteCode.Buffers
         /// <summary>
         /// Builders are linked like so:
         ///
-        /// [1:first]->[2]->[3:last]<-[4:head]
+        /// [1:first]-&gt;[2]-&gt;[3:last]&lt;-[4:head]
         ///     ^_______________|
         ///
         /// In this case the content represented is a sequence (1,2,3,4).
@@ -594,7 +594,7 @@ namespace IKVM.ByteCode.Buffers
         }
 
         /// <summary>
-        /// Writes the bytes from the specified array to <paramref name="buffer">.
+        /// Writes the bytes from the specified array to <paramref name="buffer" />.
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="start"></param>
