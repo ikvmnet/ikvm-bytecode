@@ -7,7 +7,7 @@ namespace IKVM.ByteCode.Buffers
 {
 
     /// <summary>
-    /// A <see cref="MemoryManager{byte}"/> over a region of a memory mapped file. This <see cref="MemoryManager{byte}"/>
+    /// A <see cref="MemoryManager{Byte}"/> over a region of a memory mapped file. This <see cref="MemoryManager{Byte}"/>
     /// becomes owner of the file and view, disposing it upon disposal of itself.
     /// </summary>
     sealed unsafe class MappedFileMemoryManager : MemoryManager<byte>
