@@ -95,6 +95,7 @@ namespace IKVM.ByteCode.Decoding
                 return false;
 
             var items = count == 0 ? [] : new ConstantData[count];
+            var total = 0;
             for (int i = 1; i < count; i++)
             {
                 if (ConstantData.TryRead(ref reader, out var data, out var skip) == false)
@@ -102,9 +103,10 @@ namespace IKVM.ByteCode.Decoding
 
                 items[i] = data;
                 i += skip;
+                total += 1;
             }
 
-            constants = new ConstantTable(version, items);
+            constants = new ConstantTable(version, items, total);
             return true;
         }
 
@@ -118,17 +120,20 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="version"></param>
         /// <param name="constants"></param>
-        public ConstantTable(ClassFormatVersion version, ConstantData[] constants)
+        /// <param name="count"></param>
+        public ConstantTable(ClassFormatVersion version, ConstantData[] constants, int count = -1)
         {
             _version = version;
-            _items = constants;
+            _items = constants ?? throw new ArgumentNullException(nameof(constants));
+            _count = count;
 
             // we cache UTF8 items since MUTF8 decoding is intensive
             _utf8Cache = new Utf8ConstantData[_items.Length];
 
-            // since longs and doubles take two slots, count
-            foreach (var constant in constants)
-                _count += constant.Kind is ConstantKind.Long or ConstantKind.Double ? 2 : 1;
+            // calculate count if not specified
+            if (_count <= -1)
+                for (int i = 1; i < constants.Length; i++)
+                    _count += constants[i].Kind switch { ConstantKind.Unknown => 0, ConstantKind.Long or ConstantKind.Double => 2, _ => 1 };
         }
 
         /// <summary>

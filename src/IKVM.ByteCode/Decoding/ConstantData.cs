@@ -3,7 +3,7 @@
 namespace IKVM.ByteCode.Decoding
 {
 
-    public record struct ConstantData(ConstantKind Kind, ReadOnlySequence<byte> Data)
+    public readonly record struct ConstantData(ConstantKind Kind, ReadOnlySequence<byte> Data)
     {
 
         /// <summary>
