@@ -4,7 +4,7 @@
         "rollForward": "latestFeature"
     },
     "msbuild-sdks": {
-        "MSTest.Sdk": "3.8.2",
+        "MSTest.Sdk": "3.11.1",
         "Microsoft.Build.NoTargets": "3.7.56"
     }
 }
