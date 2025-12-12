@@ -20,9 +20,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Memory" Version="4.5.5" />
-        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-        <PackageReference Include="Polyfill" Version="7.13.0">
+        <PackageReference Include="System.Memory" Version="4.6.3" />
+        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
+        <PackageReference Include="Polyfill" Version="9.3.4">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
