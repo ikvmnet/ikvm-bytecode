@@ -132,8 +132,8 @@ namespace IKVM.ByteCode.Decoding
 
             // calculate count if not specified
             if (_count <= -1)
-                for (int i = 1; i < constants.Length; i++)
-                    _count += constants[i].Kind switch { ConstantKind.Unknown => 0, ConstantKind.Long or ConstantKind.Double => 2, _ => 1 };
+                for (int i = 1; i < _items.Length; i++)
+                    _count += _items[i].Kind switch { ConstantKind.Unknown => 0, ConstantKind.Long or ConstantKind.Double => 2, _ => 1 };
         }
 
         /// <summary>
