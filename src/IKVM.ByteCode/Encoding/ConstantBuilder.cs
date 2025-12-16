@@ -1298,92 +1298,92 @@ namespace IKVM.ByteCode.Encoding
 
         ConstantHandle IConstantPool.Get(in Constant value)
         {
-            return GetOrAdd(value);
+            return value.IsNotNil ? GetOrAdd(value) : default;
         }
 
         Utf8ConstantHandle IConstantPool.Get(in Utf8Constant value)
         {
-            return GetOrAddUtf8(value.Value);
+            return value.IsNotNil ? GetOrAddUtf8(value.Value) : default;
         }
 
         IntegerConstantHandle IConstantPool.Get(in IntegerConstant value)
         {
-            return GetOrAddInteger(value.Value);
+            return value.IsNotNil ? GetOrAddInteger(value.Value) : default;
         }
 
         FloatConstantHandle IConstantPool.Get(in FloatConstant value)
         {
-            return GetOrAddFloat(value.Value);
+            return value.IsNotNil ? GetOrAddFloat(value.Value) : default;
         }
 
         LongConstantHandle IConstantPool.Get(in LongConstant value)
         {
-            return GetOrAddLong(value.Value);
+            return value.IsNotNil ? GetOrAddLong(value.Value) : default;
         }
 
         DoubleConstantHandle IConstantPool.Get(in DoubleConstant value)
         {
-            return GetOrAddDouble(value.Value);
+            return value.IsNotNil ? GetOrAddDouble(value.Value) : default;
         }
 
         ClassConstantHandle IConstantPool.Get(in ClassConstant value)
         {
-            return GetOrAddClass(value.Name);
+            return value.IsNotNil ? GetOrAddClass(value.Name) : default;
         }
 
         StringConstantHandle IConstantPool.Get(in StringConstant value)
         {
-            return GetOrAddString(value.Value);
+            return value.IsNotNil ? GetOrAddString(value.Value) : default;
         }
 
         FieldrefConstantHandle IConstantPool.Get(in FieldrefConstant value)
         {
-            return GetOrAddFieldref(value.ClassName, value.Name, value.Descriptor);
+            return value.IsNotNil ? GetOrAddFieldref(value.ClassName, value.Name, value.Descriptor) : default;
         }
 
         MethodrefConstantHandle IConstantPool.Get(in MethodrefConstant value)
         {
-            return GetOrAddMethodref(value.ClassName, value.Name, value.Descriptor);
+            return value.IsNotNil ? GetOrAddMethodref(value.ClassName, value.Name, value.Descriptor) : default;
         }
 
         InterfaceMethodrefConstantHandle IConstantPool.Get(in InterfaceMethodrefConstant value)
         {
-            return GetOrAddInterfaceMethodref(value.ClassName, value.Name, value.Descriptor);
+            return value.IsNotNil ? GetOrAddInterfaceMethodref(value.ClassName, value.Name, value.Descriptor) : default;
         }
 
         NameAndTypeConstantHandle IConstantPool.Get(in NameAndTypeConstant value)
         {
-            return GetOrAddNameAndType(value.Name, value.Descriptor);
+            return value.IsNotNil ? GetOrAddNameAndType(value.Name, value.Descriptor) : default;
         }
 
         MethodHandleConstantHandle IConstantPool.Get(in MethodHandleConstant value)
         {
-            return GetOrAddMethodHandle(value.Kind, value.ReferenceKind, value.ClassName, value.Name, value.Descriptor);
+            return value.IsNotNil ? GetOrAddMethodHandle(value.Kind, value.ReferenceKind, value.ClassName, value.Name, value.Descriptor) : default;
         }
 
         MethodTypeConstantHandle IConstantPool.Get(in MethodTypeConstant value)
         {
-            return GetOrAddMethodType(value.Descriptor);
+            return value.IsNotNil ? GetOrAddMethodType(value.Descriptor) : default;
         }
 
         DynamicConstantHandle IConstantPool.Get(in DynamicConstant value)
         {
-            return GetOrAddDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor));
+            return value.IsNotNil ? GetOrAddDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor)) : default;
         }
 
         InvokeDynamicConstantHandle IConstantPool.Get(in InvokeDynamicConstant value)
         {
-            return GetOrAddInvokeDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor));
+            return value.IsNotNil ? GetOrAddInvokeDynamic(value.BootstrapMethodAttributeIndex, GetOrAddNameAndType(value.Name, value.Descriptor)) : default;
         }
 
         ModuleConstantHandle IConstantPool.Get(in ModuleConstant value)
         {
-            return GetOrAddModule(value.Name);
+            return value.IsNotNil ? GetOrAddModule(value.Name) : default;
         }
 
         PackageConstantHandle IConstantPool.Get(in PackageConstant value)
         {
-            return GetOrAddPackage(value.Name);
+            return value.IsNotNil ? GetOrAddPackage(value.Name) : default;
         }
 
         #endregion
