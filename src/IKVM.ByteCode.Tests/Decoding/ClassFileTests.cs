@@ -191,7 +191,7 @@ namespace IKVM.ByteCode.Decoding.Tests
             if (methodHandle.Kind is MethodHandleKind.InvokeStatic or MethodHandleKind.InvokeSpecial && clazz.Version < new ClassFormatVersion(52, 0))
                 clazz.Constants.Get(methodHandle.Reference).Kind.Should().Be(ConstantKind.Methodref);
             if (methodHandle.Kind is MethodHandleKind.InvokeStatic or MethodHandleKind.InvokeSpecial && clazz.Version >= new ClassFormatVersion(52, 0))
-                clazz.Constants.Get(methodHandle.Reference).Kind.Should().Match<ConstantKind>(i => i == ConstantKind.Methodref || i == ConstantKind.InterfaceMethodref);
+                clazz.Constants.Get(methodHandle.Reference).Kind.Should().Match(i => i == ConstantKind.Methodref || i == ConstantKind.InterfaceMethodref);
             if (methodHandle.Kind is MethodHandleKind.InvokeInterface)
                 clazz.Constants.Get(methodHandle.Reference).Kind.Should().Be(ConstantKind.InterfaceMethodref);
             if (methodHandle.Kind is MethodHandleKind.InvokeVirtual or MethodHandleKind.InvokeStatic or MethodHandleKind.InvokeSpecial or MethodHandleKind.InvokeInterface && clazz.Constants.Get(methodHandle.Reference).Kind is ConstantKind.Methodref)
