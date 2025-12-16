@@ -25,6 +25,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="reader"></param>
         /// <param name="size"></param>
         /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U4;
@@ -72,6 +73,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="length"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         public static unsafe bool TryRead(byte* pointer, int length, out ClassFile? clazz)
         {
             return TryRead(new UnmanagedMemoryManager(pointer, length), out clazz);
@@ -96,6 +98,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="path"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(string path, out ClassFile? clazz)
         {
             if (path is null)
@@ -110,6 +113,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="stream"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         static bool TryRead(FileStream stream, out ClassFile? clazz)
         {
             if (stream is null)
@@ -137,6 +141,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="owner"></param>
         /// <param name="clazz"></param>
         /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(IMemoryOwner<byte> owner, out ClassFile? clazz)
         {
             return TryRead(owner.Memory, out clazz, owner);
@@ -149,6 +154,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="clazz"></param>
         /// <param name="disposable"></param>
         /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(ReadOnlyMemory<byte> buffer, out ClassFile? clazz, IDisposable? disposable = null)
         {
             return TryRead(new ReadOnlySequence<byte>(buffer), out clazz, disposable);
@@ -161,6 +167,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="clazz"></param>
         /// <param name="disposable"></param>
         /// <returns></returns>
+        /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, IDisposable? disposable = null)
         {
             return TryRead(buffer, out clazz, out _, out _, disposable);
@@ -230,8 +237,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="clazz"></param>
         /// <param name="disposable">Optional owner of the memory.</param>
         /// <returns></returns>
-        /// <exception cref="InvalidClassMagicException"></exception>
-        /// <exception cref="UnsupportedClassVersionException"></exception>
+        /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(ref ClassFormatReader reader, out ClassFile? clazz, IDisposable? disposable = null)
         {
             clazz = null;

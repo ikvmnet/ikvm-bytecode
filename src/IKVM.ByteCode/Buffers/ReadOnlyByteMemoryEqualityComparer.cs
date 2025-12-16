@@ -7,7 +7,7 @@ namespace IKVM.ByteCode.Buffers
     /// <summary>
     /// Represents a key in a dictionary associated with a blob.
     /// </summary>
-    public readonly struct ReadOnlyByteMemoryEqualityComparer : IEqualityComparer<ReadOnlyMemory<byte>>
+    readonly struct ReadOnlyByteMemoryEqualityComparer : IEqualityComparer<ReadOnlyMemory<byte>>
     {
 
         /// <inheritdoc />

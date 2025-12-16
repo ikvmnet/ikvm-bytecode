@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace IKVM.ByteCode.Buffers
 {
 
-    internal static partial class StreamExtensions
+    static partial class StreamExtensions
     {
 
         // From System.IO.Stream.CopyTo:
