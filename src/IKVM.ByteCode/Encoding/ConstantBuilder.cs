@@ -7,6 +7,9 @@ using IKVM.ByteCode.Text;
 namespace IKVM.ByteCode.Encoding
 {
 
+    /// <summary>
+    /// Provideds facilities to build a constant pool. Constants written to the <see cref="BlobBuilder"/> immediately but deduplicated on addition.
+    /// </summary>
     public class ConstantBuilder : IConstantPool
     {
 
@@ -15,24 +18,24 @@ namespace IKVM.ByteCode.Encoding
         readonly BlobBuilder _builder = new();
         ushort _next = 1;
 
-        readonly Dictionary<ReadOnlyMemory<byte>, Utf8ConstantHandle> _blobUtf8Cache = new(new ReadOnlyByteMemoryEqualityComparer());
-        readonly Dictionary<string, Utf8ConstantHandle> _stringUtf8cache = new();
-        readonly Dictionary<int, IntegerConstantHandle> _integerCache = new();
-        readonly Dictionary<long, LongConstantHandle> _longCache = new();
-        readonly Dictionary<float, FloatConstantHandle> _floatCache = new();
-        readonly Dictionary<double, DoubleConstantHandle> _doubleCache = new();
-        readonly Dictionary<Utf8ConstantHandle, ClassConstantHandle> _classCache = new();
-        readonly Dictionary<Utf8ConstantHandle, StringConstantHandle> _stringCache = new();
-        readonly Dictionary<(Utf8ConstantHandle, Utf8ConstantHandle), NameAndTypeConstantHandle> _nameAndTypeCache = new();
-        readonly Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), FieldrefConstantHandle> _fieldrefCache = new();
-        readonly Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), MethodrefConstantHandle> _methodrefCache = new();
-        readonly Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), InterfaceMethodrefConstantHandle> _interfaceMethodrefCache = new();
-        readonly Dictionary<(MethodHandleKind kind, RefConstantHandle reference), MethodHandleConstantHandle> _methodHandleCache = new();
-        readonly Dictionary<Utf8ConstantHandle, MethodTypeConstantHandle> _methodTypeCache = new();
-        readonly Dictionary<(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType), DynamicConstantHandle> _dynamicCache = new();
-        readonly Dictionary<(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType), InvokeDynamicConstantHandle> _invokeDynamicCache = new();
-        readonly Dictionary<Utf8ConstantHandle, ModuleConstantHandle> _moduleCache = new();
-        readonly Dictionary<Utf8ConstantHandle, PackageConstantHandle> _packageCache = new();
+        Dictionary<ReadOnlyMemory<byte>, Utf8ConstantHandle>? _blobUtf8Cache;
+        Dictionary<string, Utf8ConstantHandle>? _stringUtf8Cache;
+        Dictionary<int, IntegerConstantHandle>? _integerCache;
+        Dictionary<long, LongConstantHandle>? _longCache;
+        Dictionary<float, FloatConstantHandle>? _floatCache;
+        Dictionary<double, DoubleConstantHandle>? _doubleCache;
+        Dictionary<Utf8ConstantHandle, ClassConstantHandle>? _classCache;
+        Dictionary<Utf8ConstantHandle, StringConstantHandle>? _stringCache;
+        Dictionary<(Utf8ConstantHandle, Utf8ConstantHandle), NameAndTypeConstantHandle>? _nameAndTypeCache;
+        Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), FieldrefConstantHandle>? _fieldrefCache;
+        Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), MethodrefConstantHandle>? _methodrefCache;
+        Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), InterfaceMethodrefConstantHandle>? _interfaceMethodrefCache;
+        Dictionary<(MethodHandleKind kind, RefConstantHandle reference), MethodHandleConstantHandle>? _methodHandleCache;
+        Dictionary<Utf8ConstantHandle, MethodTypeConstantHandle>? _methodTypeCache;
+        Dictionary<(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType), DynamicConstantHandle>? _dynamicCache;
+        Dictionary<(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType), InvokeDynamicConstantHandle>? _invokeDynamicCache;
+        Dictionary<Utf8ConstantHandle, ModuleConstantHandle>? _moduleCache;
+        Dictionary<Utf8ConstantHandle, PackageConstantHandle>? _packageCache;
 
         /// <summary>
         /// Initializes a new instance.
@@ -43,6 +46,42 @@ namespace IKVM.ByteCode.Encoding
             _version = version;
             _mutf8 = MUTF8Encoding.GetMUTF8(version.Major);
         }
+
+        Dictionary<ReadOnlyMemory<byte>, Utf8ConstantHandle> BlobUtf8Cache => _blobUtf8Cache ??= new(new ReadOnlyByteMemoryEqualityComparer());
+
+        Dictionary<string, Utf8ConstantHandle> StringUtf8Cache => _stringUtf8Cache ??= [];
+
+        Dictionary<int, IntegerConstantHandle> IntegerCache => _integerCache ??= [];
+
+        Dictionary<long, LongConstantHandle> LongCache => _longCache ??= [];
+
+        Dictionary<float, FloatConstantHandle> FloatCache => _floatCache ??= [];
+
+        Dictionary<double, DoubleConstantHandle> DoubleCache => _doubleCache ??= [];
+
+        Dictionary<Utf8ConstantHandle, ClassConstantHandle> ClassCache => _classCache ??= [];
+
+        Dictionary<Utf8ConstantHandle, StringConstantHandle> StringCache => _stringCache ??= [];
+
+        Dictionary<(Utf8ConstantHandle, Utf8ConstantHandle), NameAndTypeConstantHandle> NameAndTypeCache => _nameAndTypeCache ??= [];
+
+        Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), FieldrefConstantHandle> FieldrefCache => _fieldrefCache ??= [];
+
+        Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), MethodrefConstantHandle> MethodrefCache => _methodrefCache ??= [];
+
+        Dictionary<(ClassConstantHandle, NameAndTypeConstantHandle), InterfaceMethodrefConstantHandle> InterfaceMethodrefCache => _interfaceMethodrefCache ??= [];
+
+        Dictionary<(MethodHandleKind kind, RefConstantHandle reference), MethodHandleConstantHandle> MethodHandleCache => _methodHandleCache ??= [];
+
+        Dictionary<Utf8ConstantHandle, MethodTypeConstantHandle> MethodTypeCache => _methodTypeCache ??= [];
+
+        Dictionary<(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType), DynamicConstantHandle> DynamicCache => _dynamicCache ??= [];
+
+        Dictionary<(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType), InvokeDynamicConstantHandle> InvokeDynamicCache => _invokeDynamicCache ??= [];
+
+        Dictionary<Utf8ConstantHandle, ModuleConstantHandle> ModuleCache => _moduleCache ??= [];
+
+        Dictionary<Utf8ConstantHandle, PackageConstantHandle> PackageCache => _packageCache ??= [];
 
         /// <summary>
         /// Gets the number of constants currently added.
@@ -120,7 +159,7 @@ namespace IKVM.ByteCode.Encoding
             w.WriteU1((byte)ConstantKind.Utf8);
             w.WriteU2((ushort)value.Length);
             _builder.WriteBytes(value.Span);
-            return _blobUtf8Cache[value] = new(_next++);
+            return BlobUtf8Cache[value] = new(_next++);
         }
 
         /// <summary>
@@ -130,7 +169,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public Utf8ConstantHandle GetOrAddUtf8(ReadOnlyMemory<byte> value)
         {
-            return _blobUtf8Cache.TryGetValue(value, out var w) ? w : AddUtf8(value);
+            return BlobUtf8Cache.TryGetValue(value, out var w) ? w : AddUtf8(value);
         }
 
         /// <summary>
@@ -140,7 +179,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public Utf8ConstantHandle AddUtf8(string value)
         {
-            return _stringUtf8cache[value] = AddUtf8(_mutf8.GetBytes(value));
+            return StringUtf8Cache[value] = AddUtf8(_mutf8.GetBytes(value));
         }
 
         /// <summary>
@@ -150,7 +189,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public Utf8ConstantHandle GetOrAddUtf8(string value)
         {
-            return _stringUtf8cache.TryGetValue(value, out var w) ? w : _stringUtf8cache[value] = GetOrAddUtf8(_mutf8.GetBytes(value));
+            return StringUtf8Cache.TryGetValue(value, out var w) ? w : StringUtf8Cache[value] = GetOrAddUtf8(_mutf8.GetBytes(value));
         }
 
         /// <summary>
@@ -189,7 +228,7 @@ namespace IKVM.ByteCode.Encoding
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U4).GetBytes());
             w.WriteU1((byte)ConstantKind.Integer);
             w.WriteU4((uint)value);
-            return _integerCache[value] = new(_next++);
+            return IntegerCache[value] = new(_next++);
         }
 
         /// <summary>
@@ -199,7 +238,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public IntegerConstantHandle GetOrAddInteger(int value)
         {
-            return _integerCache.TryGetValue(value, out var w) ? w : AddInteger(value);
+            return IntegerCache.TryGetValue(value, out var w) ? w : AddInteger(value);
         }
 
         /// <summary>
@@ -238,7 +277,7 @@ namespace IKVM.ByteCode.Encoding
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U4).GetBytes());
             w.WriteU1((byte)ConstantKind.Float);
             w.WriteU4(RawBitConverter.SingleToUInt32Bits(value));
-            return _floatCache[value] = new(_next++);
+            return FloatCache[value] = new(_next++);
         }
 
         /// <summary>
@@ -248,7 +287,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public FloatConstantHandle GetOrAddFloat(float value)
         {
-            return _floatCache.TryGetValue(value, out var w) ? w : AddFloat(value);
+            return FloatCache.TryGetValue(value, out var w) ? w : AddFloat(value);
         }
 
         /// <summary>
@@ -291,7 +330,7 @@ namespace IKVM.ByteCode.Encoding
 
             var n = _next;
             _next += 2;
-            return _longCache[value] = new(n);
+            return LongCache[value] = new(n);
         }
 
         /// <summary>
@@ -301,7 +340,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public LongConstantHandle GetOrAddLong(long value)
         {
-            return _longCache.TryGetValue(value, out var w) ? w : AddLong(value);
+            return LongCache.TryGetValue(value, out var w) ? w : AddLong(value);
         }
 
         /// <summary>
@@ -345,7 +384,7 @@ namespace IKVM.ByteCode.Encoding
 
             var n = _next;
             _next += 2;
-            return _doubleCache[value] = new(n);
+            return DoubleCache[value] = new(n);
         }
 
         /// <summary>
@@ -355,7 +394,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public DoubleConstantHandle GetOrAddDouble(double value)
         {
-            return _doubleCache.TryGetValue(value, out var w) ? w : AddDouble(value);
+            return DoubleCache.TryGetValue(value, out var w) ? w : AddDouble(value);
         }
 
         /// <summary>
@@ -394,7 +433,7 @@ namespace IKVM.ByteCode.Encoding
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Class);
             w.WriteU2(name.Slot);
-            return _classCache[name] = new(_next++);
+            return ClassCache[name] = new(_next++);
         }
 
         /// <summary>
@@ -414,7 +453,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public ClassConstantHandle GetOrAddClass(Utf8ConstantHandle name)
         {
-            return _classCache.TryGetValue(name, out var w) ? w : AddClass(name);
+            return ClassCache.TryGetValue(name, out var w) ? w : AddClass(name);
         }
 
         /// <summary>
@@ -463,7 +502,7 @@ namespace IKVM.ByteCode.Encoding
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.String);
             w.WriteU2(name.Slot);
-            return _stringCache[name] = new(_next++);
+            return StringCache[name] = new(_next++);
         }
 
         /// <summary>
@@ -483,7 +522,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public StringConstantHandle GetOrAddString(Utf8ConstantHandle value)
         {
-            return _stringCache.TryGetValue(value, out var w) ? w : AddString(value);
+            return StringCache.TryGetValue(value, out var w) ? w : AddString(value);
         }
 
         /// <summary>
@@ -534,7 +573,7 @@ namespace IKVM.ByteCode.Encoding
             w.WriteU1((byte)ConstantKind.Fieldref);
             w.WriteU2(clazz.Slot);
             w.WriteU2(nameAndType.Slot);
-            return _fieldrefCache[(clazz, nameAndType)] = new(_next++);
+            return FieldrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
         /// <summary>
@@ -545,7 +584,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public FieldrefConstantHandle GetOrAddFieldref(ClassConstantHandle clazz, NameAndTypeConstantHandle nameAndType)
         {
-            return _fieldrefCache.TryGetValue((clazz, nameAndType), out var w) ? w : AddFieldref(clazz, nameAndType);
+            return FieldrefCache.TryGetValue((clazz, nameAndType), out var w) ? w : AddFieldref(clazz, nameAndType);
         }
 
         /// <summary>
@@ -598,7 +637,7 @@ namespace IKVM.ByteCode.Encoding
             w.WriteU1((byte)ConstantKind.Methodref);
             w.WriteU2(clazz.Slot);
             w.WriteU2(nameAndType.Slot);
-            return _methodrefCache[(clazz, nameAndType)] = new(_next++);
+            return MethodrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
         /// <summary>
@@ -609,7 +648,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public MethodrefConstantHandle GetOrAddMethodref(ClassConstantHandle clazz, NameAndTypeConstantHandle nameAndType)
         {
-            return _methodrefCache.TryGetValue((clazz, nameAndType), out var w) ? w : AddMethodref(clazz, nameAndType);
+            return MethodrefCache.TryGetValue((clazz, nameAndType), out var w) ? w : AddMethodref(clazz, nameAndType);
         }
 
         /// <summary>
@@ -662,7 +701,7 @@ namespace IKVM.ByteCode.Encoding
             w.WriteU1((byte)ConstantKind.InterfaceMethodref);
             w.WriteU2(clazz.Slot);
             w.WriteU2(nameAndType.Slot);
-            return _interfaceMethodrefCache[(clazz, nameAndType)] = new(_next++);
+            return InterfaceMethodrefCache[(clazz, nameAndType)] = new(_next++);
         }
 
         /// <summary>
@@ -673,7 +712,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public InterfaceMethodrefConstantHandle GetOrAddInterfaceMethodref(ClassConstantHandle clazz, NameAndTypeConstantHandle nameAndType)
         {
-            return _interfaceMethodrefCache.TryGetValue((clazz, nameAndType), out var w) ? w : AddInterfaceMethodref(clazz, nameAndType);
+            return InterfaceMethodrefCache.TryGetValue((clazz, nameAndType), out var w) ? w : AddInterfaceMethodref(clazz, nameAndType);
         }
 
         /// <summary>
@@ -726,7 +765,7 @@ namespace IKVM.ByteCode.Encoding
             w.WriteU1((byte)ConstantKind.NameAndType);
             w.WriteU2(name.Slot);
             w.WriteU2(type.Slot);
-            return _nameAndTypeCache[(name, type)] = new NameAndTypeConstantHandle(_next++);
+            return NameAndTypeCache[(name, type)] = new NameAndTypeConstantHandle(_next++);
         }
 
         /// <summary>
@@ -737,7 +776,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public NameAndTypeConstantHandle GetOrAddNameAndType(Utf8ConstantHandle name, Utf8ConstantHandle type)
         {
-            return _nameAndTypeCache.TryGetValue((name, type), out var w) ? w : AddNameAndType(name, type);
+            return NameAndTypeCache.TryGetValue((name, type), out var w) ? w : AddNameAndType(name, type);
         }
 
         /// <summary>
@@ -789,13 +828,14 @@ namespace IKVM.ByteCode.Encoding
             w.WriteU1((byte)ConstantKind.MethodHandle);
             w.WriteU1((byte)kind);
             w.WriteU2(reference.Index);
-            return _methodHandleCache[(kind, reference)] = new(_next++);
+            return MethodHandleCache[(kind, reference)] = new(_next++);
         }
 
         /// <summary>
         /// Adds a new MethodHandle constant value.
         /// </summary>
         /// <param name="kind"></param>
+        /// <param name="referenceKind"></param>
         /// <param name="clazz"></param>
         /// <param name="name"></param>
         /// <param name="descriptor"></param>
@@ -846,13 +886,14 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public MethodHandleConstantHandle GetOrAddMethodHandle(MethodHandleKind kind, RefConstantHandle reference)
         {
-            return _methodHandleCache.TryGetValue((kind, reference), out var w) ? w : AddMethodHandle(kind, reference);
+            return MethodHandleCache.TryGetValue((kind, reference), out var w) ? w : AddMethodHandle(kind, reference);
         }
 
         /// <summary>
         /// Adds a new MethodHandle constant value for the specified reference.
         /// </summary>
         /// <param name="kind"></param>
+        /// <param name="referenceKind"></param>
         /// <param name="clazz"></param>
         /// <param name="name"></param>
         /// <param name="descriptor"></param>
@@ -931,7 +972,7 @@ namespace IKVM.ByteCode.Encoding
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.MethodType);
             w.WriteU2(descriptor.Slot);
-            return _methodTypeCache[descriptor] = new(_next++);
+            return MethodTypeCache[descriptor] = new(_next++);
         }
 
         /// <summary>
@@ -951,7 +992,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public MethodTypeConstantHandle GetOrAddMethodType(Utf8ConstantHandle type)
         {
-            return _methodTypeCache.TryGetValue(type, out var w) ? w : AddMethodType(type);
+            return MethodTypeCache.TryGetValue(type, out var w) ? w : AddMethodType(type);
         }
 
         /// <summary>
@@ -1002,7 +1043,7 @@ namespace IKVM.ByteCode.Encoding
             w.WriteU1((byte)ConstantKind.Dynamic);
             w.WriteU2(bootstrapMethodAttrIndex);
             w.WriteU2(nameAndType.Slot);
-            return _dynamicCache[(bootstrapMethodAttrIndex, nameAndType)] = new(_next++);
+            return DynamicCache[(bootstrapMethodAttrIndex, nameAndType)] = new(_next++);
         }
 
         /// <summary>
@@ -1025,7 +1066,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public DynamicConstantHandle GetOrAddDynamic(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType)
         {
-            return _dynamicCache.TryGetValue((bootstrapMethodAttrIndex, nameAndType), out var w) ? w : AddDynamic(bootstrapMethodAttrIndex, nameAndType);
+            return DynamicCache.TryGetValue((bootstrapMethodAttrIndex, nameAndType), out var w) ? w : AddDynamic(bootstrapMethodAttrIndex, nameAndType);
         }
 
         /// <summary>
@@ -1078,7 +1119,7 @@ namespace IKVM.ByteCode.Encoding
             w.WriteU1((byte)ConstantKind.InvokeDynamic);
             w.WriteU2(bootstrapMethodAttrIndex);
             w.WriteU2(nameAndType.Slot);
-            return _invokeDynamicCache[(bootstrapMethodAttrIndex, nameAndType)] = new(_next++);
+            return InvokeDynamicCache[(bootstrapMethodAttrIndex, nameAndType)] = new(_next++);
         }
 
         /// <summary>
@@ -1101,7 +1142,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public InvokeDynamicConstantHandle GetOrAddInvokeDynamic(ushort bootstrapMethodAttrIndex, NameAndTypeConstantHandle nameAndType)
         {
-            return _invokeDynamicCache.TryGetValue((bootstrapMethodAttrIndex, nameAndType), out var w) ? w : AddInvokeDynamic(bootstrapMethodAttrIndex, nameAndType);
+            return InvokeDynamicCache.TryGetValue((bootstrapMethodAttrIndex, nameAndType), out var w) ? w : AddInvokeDynamic(bootstrapMethodAttrIndex, nameAndType);
         }
 
         /// <summary>
@@ -1152,7 +1193,7 @@ namespace IKVM.ByteCode.Encoding
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Module);
             w.WriteU2(name.Slot);
-            return _moduleCache[name] = new(_next++);
+            return ModuleCache[name] = new(_next++);
         }
 
         /// <summary>
@@ -1172,7 +1213,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public ModuleConstantHandle GetOrAddModule(Utf8ConstantHandle name)
         {
-            return _moduleCache.TryGetValue(name, out var w) ? w : AddModule(name);
+            return ModuleCache.TryGetValue(name, out var w) ? w : AddModule(name);
         }
 
         /// <summary>
@@ -1221,7 +1262,7 @@ namespace IKVM.ByteCode.Encoding
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
             w.WriteU1((byte)ConstantKind.Package);
             w.WriteU2(name.Slot);
-            return _packageCache[name] = new(_next++);
+            return PackageCache[name] = new(_next++);
         }
 
         /// <summary>
@@ -1241,7 +1282,7 @@ namespace IKVM.ByteCode.Encoding
         /// <returns></returns>
         public PackageConstantHandle GetOrAddPackage(Utf8ConstantHandle name)
         {
-            return _packageCache.TryGetValue(name, out var w) ? w : AddPackage(name);
+            return PackageCache.TryGetValue(name, out var w) ? w : AddPackage(name);
         }
 
         /// <summary>
