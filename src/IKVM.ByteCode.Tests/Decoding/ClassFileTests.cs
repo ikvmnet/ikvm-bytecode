@@ -16,27 +16,24 @@ namespace IKVM.ByteCode.Decoding.Tests
     {
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidClassException))]
         public async Task ShouldThrowOnEmptyStream()
         {
             var stream = new MemoryStream();
-            using var clazz = await ClassFile.ReadAsync(stream);
+            Assert.ThrowsExactly<InvalidClassException>(() => ClassFile.ReadAsync(stream));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidClassMagicException))]
         public async Task ShouldThrowOnSmallStream()
         {
             var stream = new MemoryStream(new byte[10]);
-            using var clazz = await ClassFile.ReadAsync(stream);
+            Assert.ThrowsExactly<InvalidClassMagicException>(() => ClassFile.ReadAsync(stream));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidClassMagicException))]
         public async Task ShouldThrowOnBadStream()
         {
             var stream = new MemoryStream(new byte[35]);
-            using var clazz = await ClassFile.ReadAsync(stream);
+            Assert.ThrowsExactly<InvalidClassMagicException>(() => ClassFile.ReadAsync(stream));
         }
 
         [TestMethod]
