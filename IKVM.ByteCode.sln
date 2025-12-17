@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35027.167
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11304.174 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IKVM.ByteCode", "src\IKVM.ByteCode\IKVM.ByteCode.csproj", "{8A70A9B1-2F50-47CF-9A62-EFD9CF269E53}"
 EndProject
@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dist-nuget", "src\dist-nuge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dist-tests", "src\dist-tests\dist-tests.csproj", "{0661B88F-362C-4693-B7E3-DE4AD939DC68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IKVM.ByteCode.Console", "src\IKVM.ByteCode.Console\IKVM.ByteCode.Console.csproj", "{227F22D8-5CF8-43E0-8E51-DF2D6704E362}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{0661B88F-362C-4693-B7E3-DE4AD939DC68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0661B88F-362C-4693-B7E3-DE4AD939DC68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0661B88F-362C-4693-B7E3-DE4AD939DC68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{227F22D8-5CF8-43E0-8E51-DF2D6704E362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{227F22D8-5CF8-43E0-8E51-DF2D6704E362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{227F22D8-5CF8-43E0-8E51-DF2D6704E362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{227F22D8-5CF8-43E0-8E51-DF2D6704E362}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

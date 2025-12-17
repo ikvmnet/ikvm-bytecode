@@ -74,15 +74,19 @@ namespace IKVM.ByteCode.Decoding
         {
             frame = default;
 
-            if (reader.TryReadU1(out byte frameType) == false)
-                return false;
-
             int size = 0;
             if (TryMeasure(ref reader, ref size) == false)
                 return false;
 
+            // rewind to before measured
             reader.Rewind(size);
-            if (reader.TryReadMany(size, out var data) == false)
+
+            // read frame type
+            if (reader.TryReadU1(out byte frameType) == false)
+                return false;
+
+            // read data, which is size -1 (for frametype)
+            if (reader.TryReadMany(size - 1, out var data) == false)
                 return false;
 
             frame = new StackMapFrame(frameType, data);
