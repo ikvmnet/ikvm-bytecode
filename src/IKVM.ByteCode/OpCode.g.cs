@@ -2,7 +2,7 @@
 {
 
     /// <summary>
-    /// Java ByteCode values as defined by the JVM specification.
+    /// Java opcode values as defined by the JVM specification.
     /// </summary>
     public enum OpCode : byte
     {

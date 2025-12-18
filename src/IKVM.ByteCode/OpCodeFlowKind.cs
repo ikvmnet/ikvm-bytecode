@@ -4,7 +4,7 @@
     /// <summary>
     /// Describes the flow of an opcode.
     /// </summary>
-    public enum InstructionFlow : byte
+    public enum OpCodeFlowKind : byte
     {
 
         /// <summary>

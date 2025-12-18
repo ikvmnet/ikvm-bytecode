@@ -1,5 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
-<#@ include file="Instruction.t4" #>
+<#@ include file="OpCode.t4" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="Newtonsoft.Json" #>
 <#@ import namespace="System.IO" #>
@@ -12,13 +12,13 @@ namespace IKVM.ByteCode
 {
 
     /// <summary>
-    /// Java ByteCode values as defined by the JVM specification.
+    /// Java opcode values as defined by the JVM specification.
     /// </summary>
     public enum OpCode : byte
     {
 
 <#
-foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("Instruction.json"))))
+foreach (var i in OpCodeFile.Read(Host.ResolvePath(Path.Combine("OpCode.json"))))
 {
 #>
         /// <summary>

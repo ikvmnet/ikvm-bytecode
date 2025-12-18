@@ -1,16 +1,16 @@
 ﻿<#+
 
-public class InstructionFile : Dictionary<string, Instruction>
+public class OpCodeFile : Dictionary<string, OpCode>
 {
 
-    public static InstructionFile Read(string path)
+    public static OpCodeFile Read(string path)
     {
-        return JObject.Parse(File.ReadAllText(path)).ToObject<InstructionFile>();
+        return JObject.Parse(File.ReadAllText(path)).ToObject<OpCodeFile>();
     }
 
 }
 
-public class Instruction
+public class OpCode
 {
 
     [JsonProperty("byte")]
@@ -26,11 +26,11 @@ public class Instruction
     public string Flow { get; set; }
 
     [JsonProperty("args")]
-    public InstructionArg[] Args { get; set; }
+    public OpCodeArg[] Args { get; set; }
     
 }
 
-public class InstructionArg
+public class OpCodeArg
 {
     
     [JsonProperty("name")]
@@ -48,25 +48,25 @@ public static class Util
 {
 
     /// <summary>
-    /// Returns <c>true</c> if any of the instruction arguments is a type that has a branch target.
+    /// Returns <c>true</c> if any of the opcode arguments is a type that has a branch target.
     /// </summary>
-    public static bool HasBranchTarget(InstructionArg[] args)
+    public static bool HasBranchTarget(OpCodeArg[] args)
     {
         return args.Any(i => i.Type == "J2" || i.Type == "J4");
     }
     
     /// <summary>
-    /// Returns <c>true</c> if any of the instruction arguments has a wide version.
+    /// Returns <c>true</c> if any of the opcode arguments has a wide version.
     /// </summary>
-    public static bool HasWide(InstructionArg[] args)
+    public static bool HasWide(OpCodeArg[] args)
     {
         return args.Any(i => i.WideType != null);
     }
     
     /// <summary>
-    /// Returns a text string that represents a method call to write the given instruction argument to this builder.
+    /// Returns a text string that represents a method call to write the given opcode argument to this builder.
     /// </summary>
-    public static string GetBuilderWriteArgMethodCall(InstructionArg arg, bool wide)
+    public static string GetBuilderWriteArgMethodCall(OpCodeArg arg, bool wide)
     {
         var type = GetRealType(arg, wide);
         var name = GetWriterTypeName(type);
@@ -83,9 +83,9 @@ public static class Util
     }
     
     /// <summary>
-    /// Returns a text string that represents a method call to write the given instruction argument to this builder.
+    /// Returns a text string that represents a method call to write the given opcode argument to this builder.
     /// </summary>
-    public static string GetCopyToWriteArgMethodCall(InstructionArg arg, bool wide, string constantViewArgName, string constantPoolArgName, string offsetArgName)
+    public static string GetCopyToWriteArgMethodCall(OpCodeArg arg, bool wide, string constantViewArgName, string constantPoolArgName, string offsetArgName)
     {
         var type = GetRealType(arg, wide);
         var name = GetDecoderTypeName(type);
@@ -105,7 +105,7 @@ public static class Util
         return $"{GetCopyToMethodName(type)}(({name}){arg.Name})";
     }
 
-    public static string GetUserType(InstructionArg arg)
+    public static string GetUserType(OpCodeArg arg)
     {
         var type = arg.Type;
         if (arg.WideType != null)
@@ -114,7 +114,7 @@ public static class Util
         return type;
     }
 
-    public static string GetRealType(InstructionArg arg, bool wide)
+    public static string GetRealType(OpCodeArg arg, bool wide)
     {
         var type = arg.Type;
         if (wide && arg.WideType != null)
@@ -329,7 +329,7 @@ public static class Util
         }
     }
 
-    public static string BuilderInstructionArgList(InstructionArg[] args)
+    public static string BuilderOpCodeArgList(OpCodeArg[] args)
     {
         var s = new List<string>();
 

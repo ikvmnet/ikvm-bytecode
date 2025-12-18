@@ -1,5 +1,5 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
-<#@ include file="..\Instruction.t4" #>
+<#@ include file="..\OpCode.t4" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="Newtonsoft.Json" #>
 <#@ import namespace="System.IO" #>
@@ -18,7 +18,7 @@ namespace IKVM.ByteCode.Encoding
     {
 
 <#
-foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+foreach (var i in OpCodeFile.Read(Host.ResolvePath(Path.Combine("..", "OpCode.json"))))
 {
     var inst = i.Key;
     if (inst is "lookupswitch" or "tableswitch")
@@ -32,7 +32,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         /// </summary>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public CodeBuilder <#= name #>(<#= Util.BuilderInstructionArgList(args) #>)
+        public CodeBuilder <#= name #>(<#= Util.BuilderOpCodeArgList(args) #>)
         {
 <#
     if (Util.HasBranchTarget(args))

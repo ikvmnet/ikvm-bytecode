@@ -1,5 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
-<#@ include file="..\Instruction.t4" #>
+<#@ include file="..\OpCode.t4" #>
 <#@ assembly name="System.Core" #>
 <#@ assembly name="Newtonsoft.Json" #>
 <#@ import namespace="System.IO" #>
@@ -35,7 +35,7 @@ namespace IKVM.ByteCode.Decoding
             switch (opcode)
             {
 <#
-foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+foreach (var i in OpCodeFile.Read(Host.ResolvePath(Path.Combine("..", "OpCode.json"))))
 {
     if (i.Value.Hide)
         continue;
@@ -55,7 +55,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
         }
 
 <#
-foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+foreach (var i in OpCodeFile.Read(Host.ResolvePath(Path.Combine("..", "OpCode.json"))))
 {
     if (i.Value.Hide)
         continue;
@@ -99,7 +99,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
             switch (OpCode)
             {
 <#
-foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+foreach (var i in OpCodeFile.Read(Host.ResolvePath(Path.Combine("..", "OpCode.json"))))
 {
     if (i.Value.Hide)
         continue;
@@ -122,7 +122,7 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
     }
 
 <#
-foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Instruction.json"))))
+foreach (var i in OpCodeFile.Read(Host.ResolvePath(Path.Combine("..", "OpCode.json"))))
 {
     if (i.Value.Hide)
         continue;
@@ -437,21 +437,21 @@ foreach (var i in InstructionFile.Read(Host.ResolvePath(Path.Combine("..", "Inst
 }
 <#+
 
-static string GetMeasureArg(InstructionArg arg, bool wide)
+static string GetMeasureArg(OpCodeArg arg, bool wide)
 {
     var type = Util.GetRealType(arg, wide);
     var name = Util.GetRealTypeName(type);
     return $"TryAdvance{type}(ref reader)";
 }
 
-static string GetReadArg(InstructionArg arg, bool wide)
+static string GetReadArg(OpCodeArg arg, bool wide)
 {
     var type = Util.GetRealType(arg, wide);
     var name = Util.GetRealTypeName(type);
     return $"TryRead{type}(ref reader, out {name} {arg.Name.ToLower()})";
 }
 
-static string DecoderCtorArgList(InstructionArg[] args)
+static string DecoderCtorArgList(OpCodeArg[] args)
 {
     var s = new List<string>();
 
@@ -463,7 +463,7 @@ static string DecoderCtorArgList(InstructionArg[] args)
     return string.Join(", ", s);
 }
 
-static string DecoderCopyToArgList(InstructionArg[] args)
+static string DecoderCopyToArgList(OpCodeArg[] args)
 {
     var s = new List<string>();
 
@@ -473,7 +473,7 @@ static string DecoderCopyToArgList(InstructionArg[] args)
     return string.Join(", ", s);
 }
 
-static string BuildNewArgList(InstructionArg[] args)
+static string BuildNewArgList(OpCodeArg[] args)
 {
     var s = new List<string>();
 
