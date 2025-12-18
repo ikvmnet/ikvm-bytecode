@@ -4,7 +4,7 @@
     /// <summary>
     /// Describes the kind of an OpCode.
     /// </summary>
-    enum OpCodeArgumentKind : byte
+    public enum OpCodeArgumentKind : byte
     {
 
         /// <summary>
