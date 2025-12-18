@@ -3,6 +3,8 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 
+using IKVM.ByteCode.Encoding;
+
 namespace IKVM.ByteCode.Decoding
 {
 
@@ -119,6 +121,78 @@ namespace IKVM.ByteCode.Decoding
 
             value = new ArrayElementValue(values);
             return true;
+        }
+
+        /// <summary>
+        /// Copies this annotation to the encoder.
+        /// </summary>
+        /// <typeparam name="TConstantView"></typeparam>
+        /// <typeparam name="TConstantPool"></typeparam>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
+        /// <param name="encoder"></param>
+        public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ElementValueTableEncoder encoder)
+            where TConstantView : IConstantView
+            where TConstantPool : IConstantPool
+        {
+            foreach (var i in this)
+            {
+                switch (i.Kind)
+                {
+                    case ElementValueKind.Byte:
+                        var _byte = i.AsConstant();
+                        encoder.Byte(constantPool.Get(constantView.Get((IntegerConstantHandle)_byte.Handle)));
+                        break;
+                    case ElementValueKind.Char:
+                        var _char = i.AsConstant();
+                        encoder.Char(constantPool.Get(constantView.Get((IntegerConstantHandle)_char.Handle)));
+                        break;
+                    case ElementValueKind.Double:
+                        var _double = i.AsConstant();
+                        encoder.Double(constantPool.Get(constantView.Get((DoubleConstantHandle)_double.Handle)));
+                        break;
+                    case ElementValueKind.Float:
+                        var _float = i.AsConstant();
+                        encoder.Float(constantPool.Get(constantView.Get((FloatConstantHandle)_float.Handle)));
+                        break;
+                    case ElementValueKind.Integer:
+                        var _integer = i.AsConstant();
+                        encoder.Integer(constantPool.Get(constantView.Get((IntegerConstantHandle)_integer.Handle)));
+                        break;
+                    case ElementValueKind.Long:
+                        var _long = i.AsConstant();
+                        encoder.Long(constantPool.Get(constantView.Get((LongConstantHandle)_long.Handle)));
+                        break;
+                    case ElementValueKind.Short:
+                        var _short = i.AsConstant();
+                        encoder.Short(constantPool.Get(constantView.Get((IntegerConstantHandle)_short.Handle)));
+                        break;
+                    case ElementValueKind.Boolean:
+                        var _boolean = i.AsConstant();
+                        encoder.Boolean(constantPool.Get(constantView.Get((IntegerConstantHandle)_boolean.Handle)));
+                        break;
+                    case ElementValueKind.String:
+                        var _string = i.AsConstant();
+                        encoder.String(constantPool.Get(constantView.Get((Utf8ConstantHandle)_string.Handle)));
+                        break;
+                    case ElementValueKind.Enum:
+                        var _enum = i.AsEnum();
+                        encoder.Enum(constantPool.Get(constantView.Get(_enum.TypeName)), constantPool.Get(constantView.Get(_enum.ConstantName)));
+                        break;
+                    case ElementValueKind.Class:
+                        var _class = i.AsClass();
+                        encoder.Class(constantPool.Get(constantView.Get(_class.Class)));
+                        break;
+                    case ElementValueKind.Annotation:
+                        var _annotation = i.AsAnnotation();
+                        encoder.Annotation(e => _annotation.Annotation.CopyTo(constantView, constantPool, ref e));
+                        break;
+                    case ElementValueKind.Array:
+                        var _array = i.AsArray();
+                        encoder.Array(e => _array.CopyTo(constantView, constantPool, ref e));
+                        break;
+                }
+            }
         }
 
         readonly ElementValue[] _items;

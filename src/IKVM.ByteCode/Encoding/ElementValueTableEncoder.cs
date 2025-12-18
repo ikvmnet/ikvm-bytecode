@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using IKVM.ByteCode.Buffers;
 
@@ -148,6 +147,15 @@ namespace IKVM.ByteCode.Encoding
         public ElementValueTableEncoder Annotation(Action<AnnotationEncoder> annotationValue)
         {
             return ElementValue(e => e.Annotation(annotationValue));
+        }
+
+        /// <summary>
+        /// Denotes a "nested" annotation as the value of this element-value pair.
+        /// </summary>
+        /// <param name="array"></param>
+        public ElementValueTableEncoder Array(Action<ElementValueTableEncoder> array)
+        {
+            return ElementValue(e => e.Array(array));
         }
 
     }

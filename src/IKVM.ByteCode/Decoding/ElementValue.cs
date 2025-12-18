@@ -229,7 +229,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <param name="constantView"></param>
+        /// <param name="constantPool"></param>
         /// <param name="encoder"></param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ElementValueEncoder encoder)
             where TConstantView : IConstantView
@@ -286,6 +287,8 @@ namespace IKVM.ByteCode.Decoding
                     encoder.Annotation(e => _annotation.Annotation.CopyTo(constantView, constantPool, ref e));
                     break;
                 case ElementValueKind.Array:
+                    var _array = AsArray();
+                    encoder.Array(e => _array.CopyTo(constantView, constantPool, ref e));
                     break;
             }
         }

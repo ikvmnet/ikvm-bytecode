@@ -193,7 +193,7 @@ namespace IKVM.ByteCode.Encoding
         /// <summary>
         /// Denotes a "nested" annotation as the value of this element-value pair.
         /// </summary>
-        /// <param name="annotations"></param>
+        /// <param name="annotationValue"></param>
         public void Annotation(Action<AnnotationEncoder> annotationValue)
         {
             if (_count > 0)
