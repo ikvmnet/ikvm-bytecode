@@ -16,7 +16,7 @@ namespace IKVM.ByteCode
         None = 0,
 
         /// <summary>
-        /// Instructions using the opcode cannot throw exception.
+        /// Instructions using the opcode cannot throw an exception.
         /// </summary>
         CannotThrow = 2,
 

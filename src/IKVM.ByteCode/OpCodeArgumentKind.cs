@@ -8,11 +8,6 @@
     {
 
         /// <summary>
-        /// No kind specified.
-        /// </summary>
-        None = 0,
-
-        /// <summary>
         /// Has no arguments.
         /// </summary>
         Simple,
