@@ -4,13 +4,13 @@
     /// <summary>
     /// Describes the kind of an OpCode.
     /// </summary>
-    public enum OpCodeArgumentKind : byte
+    public enum OpCodeArgumentLayout : byte
     {
 
         /// <summary>
         /// Has no arguments.
         /// </summary>
-        Simple,
+        None,
 
         /// <summary>
         /// Has a single byte constant argument.

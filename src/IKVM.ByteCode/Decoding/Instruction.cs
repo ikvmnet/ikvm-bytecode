@@ -294,6 +294,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="opcode"></param>
+        /// <param name="wide"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -380,7 +381,6 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the instruction at the current position.
         /// </summary>
         /// <param name="sequence"></param>
-        /// <param name="offset"></param>
         /// <param name="instruction"></param>
         /// <returns></returns>
         /// <exception cref="ByteCodeException"></exception>
