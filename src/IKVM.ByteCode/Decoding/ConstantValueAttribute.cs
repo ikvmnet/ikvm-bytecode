@@ -42,8 +42,7 @@ namespace IKVM.ByteCode.Decoding
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
         {
-            var self = this;
-            encoder.ConstantValue(constantPool.Get(AttributeName.ConstantValue), constantPool.Get(constantView.Get(self.Value)));
+            encoder.ConstantValue(constantPool.Get(AttributeName.ConstantValue), constantPool.Get(constantView.Get(Value)));
         }
 
     }
