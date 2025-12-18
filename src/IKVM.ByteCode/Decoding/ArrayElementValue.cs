@@ -124,7 +124,7 @@ namespace IKVM.ByteCode.Decoding
         }
 
         /// <summary>
-        /// Copies this annotation to the encoder.
+        /// Copies this array element value to the encoder.
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
@@ -135,7 +135,7 @@ namespace IKVM.ByteCode.Decoding
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
         {
-            foreach (var i in this)
+            foreach (ref readonly var i in this)
             {
                 switch (i.Kind)
                 {
