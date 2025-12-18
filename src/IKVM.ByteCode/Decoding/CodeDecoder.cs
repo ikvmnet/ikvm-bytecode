@@ -7,6 +7,9 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Provides a decoder that reads instructions from a code sequence.
+    /// </summary>
     public ref struct CodeDecoder
     {
 
