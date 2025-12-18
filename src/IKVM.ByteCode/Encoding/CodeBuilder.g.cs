@@ -207,7 +207,7 @@ namespace IKVM.ByteCode.Encoding
         public CodeBuilder Bipush(sbyte value)
         {
             OpCode(IKVM.ByteCode.OpCode.Bipush);
-            WriteS1((sbyte)value);
+            WriteS1(checked((sbyte)value));
 
             return this;
         }
@@ -285,7 +285,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Iload);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -312,7 +312,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Lload);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -339,7 +339,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Fload);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -366,7 +366,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Dload);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -393,7 +393,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Aload);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -756,7 +756,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Istore);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -783,7 +783,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Lstore);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -810,7 +810,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Fstore);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -837,7 +837,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Dstore);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -864,7 +864,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Astore);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;
@@ -1771,8 +1771,8 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Iinc);
-                WriteL1((byte)local);
-                WriteS1((sbyte)value);
+                WriteL1(checked((byte)local));
+                WriteS1(checked((sbyte)value));
             }
 
             return this;
@@ -2263,7 +2263,7 @@ namespace IKVM.ByteCode.Encoding
             else
             {
                 OpCode(IKVM.ByteCode.OpCode.Ret);
-                WriteL1((byte)local);
+                WriteL1(checked((byte)local));
             }
 
             return this;

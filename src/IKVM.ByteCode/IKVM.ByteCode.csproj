@@ -42,6 +42,15 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>OpCode.g.tt</DependentUpon>
         </Compile>
+        <None Update="OpCodeDescription.g.tt">
+            <LastGenOutput>OpCodeDescription.g.cs</LastGenOutput>
+            <Generator>TextTemplatingFileGenerator</Generator>
+        </None>
+        <Compile Update="OpCodeDescription.g.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>OpCodeDescription.g.tt</DependentUpon>
+        </Compile>
         <None Update="AttributeName.g.tt">
             <LastGenOutput>AttributeName.g.cs</LastGenOutput>
             <Generator>TextTemplatingFileGenerator</Generator>

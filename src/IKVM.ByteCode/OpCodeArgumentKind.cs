@@ -10,7 +10,7 @@
         /// <summary>
         /// No kind specified.
         /// </summary>
-        None,
+        None = 0,
 
         /// <summary>
         /// Has no arguments.
@@ -46,6 +46,16 @@
         /// Has a single byte argument containing a local variable index followed by a single signed byte immediate value.
         /// </summary>
         Local1_ImmediateS1,
+
+        /// <summary>
+        /// Has a two byte argument containing a local variable index.
+        /// </summary>
+        Local2,
+
+        /// <summary>
+        /// Has a two byte argument containing a local variable index followed by a two signed byte immediate value.
+        /// </summary>
+        Local2_ImmediateS2,
 
         /// <summary>
         /// Has a single byte unsigned immediate value.

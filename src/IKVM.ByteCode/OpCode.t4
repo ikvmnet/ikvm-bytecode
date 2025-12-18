@@ -70,14 +70,18 @@ public static class Util
     {
         var type = GetRealType(arg, wide);
         var name = GetWriterTypeName(type);
+
+        if (type == "S1")
+            return $"{GetWriteMethodName(type)}(checked(({name}){arg.Name.ToLower()}))";
+
+        if (type == "L1")
+            return $"{GetWriteMethodName(type)}(checked(({name}){arg.Name.ToLower()}))";
+
         if (type == "J2")
-        {
             return $"{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, false, _offset)";
-        }
+
         if (type == "J4")
-        {
             return $"{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()}, true, _offset)";
-        }
 
         return $"{GetWriteMethodName(type)}(({name}){arg.Name.ToLower()})";
     }
