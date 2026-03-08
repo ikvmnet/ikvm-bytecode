@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Polyfill" Version="9.3.4">
+        <PackageReference Include="Polyfill" Version="9.18.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -39,10 +39,6 @@
             </ItemGroup>
         </When>
     </Choose>
-
-    <ItemGroup>
-        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-    </ItemGroup>
 
     <ItemGroup>
         <None Update="OpCode.g.tt">
