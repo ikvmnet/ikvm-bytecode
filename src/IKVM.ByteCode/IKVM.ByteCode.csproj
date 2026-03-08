@@ -20,13 +20,25 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Memory" Version="4.5.5" />
-        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
         <PackageReference Include="Polyfill" Version="9.3.4">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
+    
+    <Choose>
+        <When Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
+            <ItemGroup>
+                
+            </ItemGroup>
+        </When>
+        <When Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.0'))">
+            <ItemGroup>
+                <PackageReference Include="System.Memory" Version="4.6.3" />
+                <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
+            </ItemGroup>
+        </When>
+    </Choose>
 
     <ItemGroup>
         <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
