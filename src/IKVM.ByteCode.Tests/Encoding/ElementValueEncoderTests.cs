@@ -16,13 +16,13 @@ namespace IKVM.ByteCode.Tests.Encoding
     {
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void ShouldThrowOnEncodeTwo()
         {
             var builder = new BlobBuilder();
             var encoder = new ElementValueEncoder(builder);
             encoder.Byte(new IntegerConstantHandle(1));
-            encoder.Byte(new IntegerConstantHandle(1));
+            Action act = () => encoder.Byte(new IntegerConstantHandle(1));
+            act.Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]
