@@ -1,37 +1,75 @@
 # IKVM.ByteCode
 
-Provides a Java class file parser, reader and writer implementation used by the IKVM project.
+A low-allocation Java class file parser, reader, and writer for .NET. Designed for use by the [IKVM](https://github.com/ikvmnet/ikvm) project, but usable as a general-purpose library for reading and writing Java `.class` files.
 
-The core of the project contains the various abstractions that are used throughout. These abstractions are loosely modeled on the System.Reflection.Metadata namespace. The design is low allocation.
+The API is modeled after `System.Reflection.Metadata` — constant pool entries are referenced by typed handles rather than resolved eagerly, keeping allocations minimal.
 
-### Decoding
+## Decoding
 
-The `IKVM.ByteCode.Decoding` namespace contains specialized structures for reading data from the class file specification. The main entry point of this namespace will be `ClassFile` which can be used to read a Java class file from a variety of sources. `ClassFile` itself holds a reference to the underlying original memory that was read from and parses the minimal amount possible depending on the operation. `ClassFile` implements `IDisposable` for releasing this memory.
+The `IKVM.ByteCode.Decoding` namespace provides structures for reading Java class files. The main entry point is `ClassFile`, which can read from a file path, byte array, stream, or `ReadOnlyMemory<byte>`. `ClassFile` holds a reference to the underlying memory and parses lazily. It implements `IDisposable`.
 
-`ClassFile`'s companion structures are field-only record types. This allows directly taking a `ref` to a item in a collection or a field.
+```csharp
+using IKVM.ByteCode.Decoding;
 
-Constant values are left unresolved in this structure just like `System.Reflection.Metadata` token handles. It is the users responsibilty to obtain a `ConstantHandle` from one of the data structures and refer to the `ClassFile.Constants` `ConstantTable` to lookup the `ConstantKind`, `ConstantData` or `Constant` itself.
+using var clazz = ClassFile.Read("MyClass.class");
 
-Each of the field-only record structures can be individually used to parse or encode data. To parse each provides it's own `TryMeasure` and `TryRead` methods. `TryMeasure` does a minimal amount of parsing to determine the size of the data from the initial position. This is helpful due to a Java class file's forward-only nature: you can't know the size of the class without reading each part of the class. `TryMeasure` thus allows you to measure the given structure without committing to parsing or allocating objects.
+// Read the class name from the constant pool
+string className = clazz.Constants.Get(clazz.This).Name;
+Console.WriteLine($"Class: {className}");
 
-`TryRead` actually reads the data. In both of these cases, `false` is returned if the end of the memory has been reached. Exceptions are thrown for parsing errors involving valid data.
+// Enumerate methods
+foreach (var method in clazz.Methods)
+{
+    string name = clazz.Constants.Get(method.Name).Value;
+    string descriptor = clazz.Constants.Get(method.Descriptor).Value;
+    Console.WriteLine($"  Method: {name}{descriptor}");
+}
+```
 
-Each of the field-only record structures also contains `CopyTo` and `WriteTo`. `CopyTo` processes the structure, along with a `IConstantHandleMap`, and reemits it to an Encoder. This allows you to copy structures read from one class file into another, either creating the necessary constants in the new class, or reencode it to an output stream using `IdentityConstantMap`. `CopyTo` requires acccess to a `IConstantHandleMap` to read constant data in order to navigate into dynamic components that require constant data to reason about (for instance `Attribute`s). `WriteTo` is much lighter weight: it simply emits the structure as is without consideration as to the constants. They must already be present in whatever constant table is used with the resulting class file.
+Constant pool entries are not resolved automatically. Obtain a `*ConstantHandle` from any data structure, then look it up via `ClassFile.Constants`.
 
-### Constants
+Each decoding structure supports `CopyTo` (re-emits to an encoder with constant remapping via `IConstantHandleMap`) and `WriteTo` (raw emit, assuming constants are already present in the target).
 
-Constants are represented in three sets of data structures: `*ConstantData`, `*ConstantHandle` and `*Constant`
+## Constants
 
-`*Constant` structures represent a full local constant value in native .NET types. For instance, `Utf8Constant` directly contains the string value. These are used to pass around desired constant values for lookup or insertion. These types are arrainged in a hierarchy implemented through custom operators. For instance one can cast between `Constant` and `Utf8Constant`. Casting to `Constant` encodes the original `ConstantKind` on the structure, so that casting back to `Utf8Constant` would fail.
+Constants are represented by three families of types:
 
-`*ConstantHandle` structures represent a handle to a location (slot) in a constant table. These are single-field structures, merely used for type safety. Like `Constant`, casting is allowed between compatible types. These abstract the locality of a constant in a constant table.
+| Type | Description |
+|---|---|
+| `*Constant` | A fully resolved .NET value (e.g. `Utf8Constant` holds the `string`). Used for lookup or insertion. |
+| `*ConstantHandle` | A typed handle to a slot in a constant table. Analogous to `System.Reflection.Metadata` tokens. |
+| `*ConstantData` | The raw constant data as stored in the class file. Decoded lazily on demand. |
 
-`*ConstantData` structures store the actual constant data that would be present in a constant table. Most constants are simply collections of handles to other constants. However, constants like `Utf8ConstantData` contain a pointer to the original parsed memory, and is decoded to a .NET string on demand. The base `ConstantData` structure maps over the original segmented constant data from a class file and parses it only on demand when cast.
+Casts between compatible handle and constant types are supported via custom operators.
 
-### Encoding
+## Encoding
 
-Encoding class files or parts of class files in `IKVM.ByteCode` is similar to `System.Reflection.Metadata.Ecma335`. A common linkable buffer, `BlobBuilder`, is provided which is the target of the various builders and encoders. `BlobBuilder` allows for fast append, and fast enumeration from the beginning, by linked list of segments of memory. `BlobBuilder`s can be linked to the end of existing `BlobBuilder`s. Assembling Java class files then is allocating a `BlobBuilder` and using one of the various Encoder classes to emit output into it. That output can then be appened together with other segments before being serialized to output.
+The `IKVM.ByteCode.Encoding` namespace provides builders and encoders for writing class files.
 
-`ClassFormatWriter` represents the main operations for emitting class file output data: U1, U2 and U4, as defined by the specification. Each of the encoder structures target a `ClassFormatWriter`, which can be backed by a `Span<byte>` which can be allocated in segments from a `BlobBuilder`. Each Encoder provides a number of methods that have to be invoked in order to write the appropriate components. Encoders can be passed by `ref` between methods. They maintain minimal state such as a count of emitted elements. The nested structure of a Java class file is encapsulated by passing delegates with the nested encoders.
+`BlobBuilder` is a linked-list buffer supporting fast append and serialization. Encoders write into a `ClassFormatWriter` backed by segments of a `BlobBuilder`.
 
-`ClassBuilder` makes it easy to encode an entire Java class file to a temporary series of blobs that are then assembled into a final format.
+`ClassFileBuilder` is the high-level entry point for constructing a complete class file:
+
+```csharp
+using IKVM.ByteCode.Buffers;
+using IKVM.ByteCode.Decoding;
+using IKVM.ByteCode.Encoding;
+
+// Build a simple public class
+var builder = new ClassFileBuilder(
+    new ClassFormatVersion(53, 0),  // Java 9
+    AccessFlag.Public,
+    "com/example/MyClass",
+    "java/lang/Object");
+
+builder.AddField(AccessFlag.Private, "_value", "I");
+builder.AddMethod(AccessFlag.Public, "getValue", "()I");
+
+var blob = new BlobBuilder();
+builder.Serialize(blob);
+
+// Write to file
+File.WriteAllBytes("MyClass.class", blob.ToArray());
+```
+
+For lower-level encoding, individual encoder structures (e.g. `MethodEncoder`, `AttributeTableEncoder`) can be used directly, passed by `ref` between methods.
