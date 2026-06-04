@@ -17,7 +17,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the structure.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="item"></param>
+        /// <param name="item">The decoded lookup switch case.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchCase item)
         {

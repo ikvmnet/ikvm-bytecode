@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="decoder"></param>
+            /// <param name="decoder">The code decoder to enumerate instructions from.</param>
             internal Enumerator(CodeDecoder decoder)
             {
                 _decoder = decoder;
@@ -66,7 +66,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="span"></param>
+        /// <param name="span">The bytecode span to read from.</param>
         public CodeDecoder(ReadOnlyMemory<byte> span) :
             this(new ReadOnlySequence<byte>(span))
         {
@@ -76,7 +76,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the next instruction in the code.
         /// </summary>
-        /// <param name="instruction"></param>
+        /// <param name="instruction">The decoded instruction.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public bool TryReadNext(out Instruction instruction)
         {
@@ -99,7 +99,7 @@ namespace IKVM.ByteCode.Decoding
         /// <typeparam name="TConstantPool"></typeparam>
         /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
         /// <param name="constantPool">The constant pool to copy constants into.</param>
-        /// <param name="builder"></param>
+        /// <param name="builder">The encoder builder.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, CodeBuilder builder)
             where TConstantView : IConstantView

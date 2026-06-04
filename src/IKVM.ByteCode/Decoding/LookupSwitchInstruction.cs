@@ -26,7 +26,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure the size of the instruction.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="offset"></param>
+        /// <param name="offset">The bytecode offset.</param>
         /// <param name="size">The number of bytes read.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryMeasure(ref SequenceReader<byte> reader, int offset, ref int size)
@@ -70,7 +70,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure the size of the instruction.
         /// </summary>
         /// <param name="data">The raw data buffer.</param>
-        /// <param name="instruction"></param>
+        /// <param name="instruction">The decoded instruction.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ReadOnlySequence<byte> data, int offset, out LookupSwitchInstruction instruction)
         {
@@ -85,7 +85,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure the size of the instruction.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="instruction"></param>
+        /// <param name="instruction">The decoded instruction.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref SequenceReader<byte> reader, int offset, out LookupSwitchInstruction instruction)
         {
@@ -141,8 +141,8 @@ namespace IKVM.ByteCode.Decoding
         /// <typeparam name="TConstantPool"></typeparam>
         /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
         /// <param name="constantPool">The constant pool to copy constants into.</param>
-        /// <param name="builder"></param>
-        /// <param name="offset"></param>
+        /// <param name="builder">The encoder builder.</param>
+        /// <param name="offset">The bytecode offset.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, CodeBuilder builder, int offset)
             where TConstantView : IConstantView

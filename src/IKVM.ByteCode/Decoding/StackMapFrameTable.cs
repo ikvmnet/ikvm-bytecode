@@ -11,6 +11,9 @@ namespace IKVM.ByteCode.Decoding
     public readonly struct StackMapFrameTable : IReadOnlyList<StackMapFrame>
     {
 
+        /// <summary>
+        /// Enumerates the items in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<StackMapFrame>
         {
 

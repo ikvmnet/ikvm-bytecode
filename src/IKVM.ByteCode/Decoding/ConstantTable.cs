@@ -89,9 +89,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the set of constants at the current position.
         /// </summary>
-        /// <param name="version"></param>
+        /// <param name="version">The class format version.</param>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="constants"></param>
+        /// <param name="constants">The decoded constant table.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ClassFormatVersion version, ref ClassFormatReader reader, out ConstantTable constants)
         {
@@ -124,9 +124,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="version"></param>
-        /// <param name="constants"></param>
-        /// <param name="count"></param>
+        /// <param name="version">The class format version.</param>
+        /// <param name="constants">The decoded constant table.</param>
+        /// <param name="count">The number of items.</param>
         public ConstantTable(ClassFormatVersion version, ConstantData[] constants, int count = -1)
         {
             _version = version;
@@ -145,14 +145,14 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the untyped constant for the given handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly ConstantData this[ConstantHandle handle] => ref ReadData(handle);
 
         /// <summary>
         /// Gets the untyped constant for the given handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly ConstantData ReadData(ConstantHandle handle) => ref _items[handle.Slot];
 
@@ -175,7 +175,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="ConstantData"/> value refered to by the <see cref="ConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
@@ -187,7 +187,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the kind of the constant with the specified handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ConstantKind GetKind(ConstantHandle handle)
         {
@@ -197,7 +197,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="Utf8Constant"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
@@ -233,7 +233,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="Utf8ConstantData"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
@@ -261,7 +261,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="Utf8Constant"/> value refered to by the <see cref="Utf8ConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ByteCodeException"></exception>
@@ -277,7 +277,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="IntegerConstantData"/> value refered to by the <see cref="IntegerConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly IntegerConstantData Read(IntegerConstantHandle handle)
         {
@@ -298,7 +298,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="IntegerConstant"/> value refered to by the <see cref="IntegerConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly IntegerConstant Get(IntegerConstantHandle handle)
         {
@@ -312,7 +312,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="FloatConstantData"/> value refered to by the <see cref="FloatConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly FloatConstantData Read(FloatConstantHandle handle)
         {
@@ -333,7 +333,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="FloatConstant"/> value refered to by the <see cref="FloatConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly FloatConstant Get(FloatConstantHandle handle)
         {
@@ -347,7 +347,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="LongConstantData"/> value refered to by the <see cref="LongConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly LongConstantData Read(LongConstantHandle handle)
         {
@@ -368,7 +368,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="LongConstant"/> value refered to by the <see cref="LongConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly LongConstant Get(LongConstantHandle handle)
         {
@@ -382,7 +382,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="DoubleConstantData"/> value refered to by the <see cref="DoubleConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly DoubleConstantData Read(DoubleConstantHandle handle)
         {
@@ -403,7 +403,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="DoubleConstantData"/> value refered to by the <see cref="DoubleConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly DoubleConstant Get(DoubleConstantHandle handle)
         {
@@ -417,7 +417,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="ClassConstantData"/> value refered to by the <see cref="ClassConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ClassConstantData Read(ClassConstantHandle handle)
         {
@@ -438,7 +438,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="ClassConstantData"/> value refered to by the <see cref="ClassConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ClassConstant Get(ClassConstantHandle handle)
         {
@@ -456,7 +456,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="StringConstantData"/> value refered to by the <see cref="StringConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly StringConstantData Read(StringConstantHandle handle)
         {
@@ -477,7 +477,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="StringConstant"/> value refered to by the <see cref="StringConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly StringConstant Get(StringConstantHandle handle)
         {
@@ -495,7 +495,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="RefConstant"/> value refered to by the <see cref="RefConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly RefConstant Get(RefConstantHandle handle)
         {
@@ -516,7 +516,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="FieldrefConstantData"/> value refered to by the <see cref="FieldrefConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly FieldrefConstantData Read(FieldrefConstantHandle handle)
         {
@@ -537,7 +537,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="FieldrefConstant"/> value refered to by the <see cref="FieldrefConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly FieldrefConstant Get(FieldrefConstantHandle handle)
         {
@@ -558,7 +558,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="MethodrefConstantData"/> value refered to by the <see cref="MethodrefConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly MethodrefConstantData Read(MethodrefConstantHandle handle)
         {
@@ -579,7 +579,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="MethodrefConstant"/> value refered to by the <see cref="MethodrefConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly MethodrefConstant Get(MethodrefConstantHandle handle)
         {
@@ -600,7 +600,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="InterfaceMethodrefConstantData"/> value refered to by the <see cref="InterfaceMethodrefConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly InterfaceMethodrefConstantData Read(InterfaceMethodrefConstantHandle handle)
         {
@@ -621,7 +621,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="InterfaceMethodrefConstant"/> value refered to by the <see cref="InterfaceMethodrefConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly InterfaceMethodrefConstant Get(InterfaceMethodrefConstantHandle handle)
         {
@@ -642,7 +642,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="NameAndTypeConstantData"/> value refered to by the <see cref="NameAndTypeConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly NameAndTypeConstantData Read(NameAndTypeConstantHandle handle)
         {
@@ -663,7 +663,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="NameAndTypeConstant"/> value refered to by the <see cref="NameAndTypeConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly NameAndTypeConstant Get(NameAndTypeConstantHandle handle)
         {
@@ -684,7 +684,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="MethodHandleConstantData"/> value refered to by the <see cref="MethodHandleConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly MethodHandleConstantData Read(MethodHandleConstantHandle handle)
         {
@@ -705,7 +705,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="MethodHandleConstant"/> value refered to by the <see cref="MethodHandleConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly MethodHandleConstant Get(MethodHandleConstantHandle handle)
         {
@@ -766,7 +766,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="MethodTypeConstantData"/> value refered to by the <see cref="MethodTypeConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly MethodTypeConstantData Read(MethodTypeConstantHandle handle)
         {
@@ -787,7 +787,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="MethodTypeConstant"/> value refered to by the <see cref="MethodTypeConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly MethodTypeConstant Get(MethodTypeConstantHandle handle)
         {
@@ -805,7 +805,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="DynamicConstantData"/> value refered to by the <see cref="DynamicConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly DynamicConstantData Read(DynamicConstantHandle handle)
         {
@@ -826,7 +826,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="DynamicConstant"/> value refered to by the <see cref="DynamicConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly DynamicConstant Get(DynamicConstantHandle handle)
         {
@@ -844,7 +844,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="InvokeDynamicConstantData"/> value refered to by the <see cref="InvokeDynamicConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly InvokeDynamicConstantData Read(InvokeDynamicConstantHandle handle)
         {
@@ -865,7 +865,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="InvokeDynamicConstant"/> value refered to by the <see cref="InvokeDynamicConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly InvokeDynamicConstant Get(InvokeDynamicConstantHandle handle)
         {
@@ -883,7 +883,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="ModuleConstantData"/> value refered to by the <see cref="ModuleConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ModuleConstantData Read(ModuleConstantHandle handle)
         {
@@ -904,7 +904,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="ModuleConstant"/> value refered to by the <see cref="ModuleConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ModuleConstant Get(ModuleConstantHandle handle)
         {
@@ -922,7 +922,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="PackageConstantData"/> value refered to by the <see cref="PackageConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly PackageConstantData Read(PackageConstantHandle handle)
         {
@@ -943,7 +943,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets the <see cref="PackageConstant"/> value refered to by the <see cref="PackageConstantHandle"/>.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly PackageConstant Get(PackageConstantHandle handle)
         {

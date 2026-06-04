@@ -36,7 +36,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="map"></param>
+        /// <param name="map">The stack map frame encoder.</param>
         /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool,ref LineNumberTableEncoder encoder)
             where TConstantView : IConstantView

@@ -13,6 +13,9 @@ namespace IKVM.ByteCode.Decoding
     public readonly struct AttributeTable : IReadOnlyList<Attribute>
     {
 
+        /// <summary>
+        /// Enumerates the items in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<Attribute>
         {
 
@@ -153,7 +156,7 @@ namespace IKVM.ByteCode.Decoding
         /// <typeparam name="TConstantPool"></typeparam>
         /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
         /// <param name="constantPool">The constant pool to copy constants into.</param>
-        /// <param name="builder"></param>
+        /// <param name="builder">The encoder builder.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, AttributeTableBuilder builder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool

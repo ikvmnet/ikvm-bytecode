@@ -10,6 +10,9 @@ namespace IKVM.ByteCode.Decoding
     public readonly struct VerificationTypeInfoTable : IReadOnlyList<VerificationTypeInfo>
     {
 
+        /// <summary>
+        /// Enumerates the items in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<VerificationTypeInfo>
         {
 

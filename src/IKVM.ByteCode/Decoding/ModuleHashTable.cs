@@ -13,6 +13,9 @@ namespace IKVM.ByteCode.Decoding
     public readonly struct ModuleHashTable : IReadOnlyList<ModuleHash>
     {
 
+        /// <summary>
+        /// Enumerates the items in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<ModuleHash>
         {
 
@@ -81,7 +84,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the structure.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="hashes"></param>
+        /// <param name="hashes">The decoded module hash table.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ModuleHashTable hashes)
         {

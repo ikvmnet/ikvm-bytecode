@@ -36,7 +36,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the target structure.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="targetInfo"></param>
+        /// <param name="targetInfo">The decoded empty target info.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out EmptyTarget targetInfo)
         {

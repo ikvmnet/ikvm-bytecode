@@ -33,7 +33,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attemps to read an element value pair.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="pair"></param>
+        /// <param name="pair">The decoded element-value pair.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ElementValuePair pair)
         {

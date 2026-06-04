@@ -33,7 +33,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the structure.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="parameterAnnotation"></param>
+        /// <param name="parameterAnnotation">The decoded parameter annotation.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ParameterAnnotation parameterAnnotation)
         {

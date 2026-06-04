@@ -11,9 +11,9 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Represents a single instruction within a code block.
     /// </summary>
-    /// <param name="Offset"></param>
-    /// <param name="OpCode"></param>
-    /// <param name="IsWide"></param>
+    /// <param name="Offset">The bytecode offset of the instruction.</param>
+    /// <param name="OpCode">The opcode.</param>
+    /// <param name="IsWide"><see langword="true"/> if the instruction uses wide indexing.</param>
     /// <param name="Data">The raw attribute data buffer.</param>
     public readonly partial record struct Instruction(int Offset, OpCode OpCode, bool IsWide, ReadOnlySequence<byte> Data)
     {
@@ -242,8 +242,8 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to peek at the next opcode.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="opcode"></param>
-        /// <param name="wide"></param>
+        /// <param name="opcode">The opcode.</param>
+        /// <param name="wide"><see langword="true"/> if the instruction uses wide indexing.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -293,8 +293,8 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to peek at the next opcode.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="opcode"></param>
-        /// <param name="wide"></param>
+        /// <param name="opcode">The opcode.</param>
+        /// <param name="wide"><see langword="true"/> if the instruction uses wide indexing.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -342,7 +342,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure the instruction at the current position.
         /// </summary>
         /// <param name="data">The raw data buffer.</param>
-        /// <param name="offset"></param>
+        /// <param name="offset">The bytecode offset.</param>
         /// <param name="size">The number of bytes read.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
@@ -358,7 +358,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure the instruction at the current position.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="offset"></param>
+        /// <param name="offset">The bytecode offset.</param>
         /// <param name="size">The number of bytes read.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
@@ -380,8 +380,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the instruction at the current position.
         /// </summary>
-        /// <param name="sequence"></param>
-        /// <param name="instruction"></param>
+        /// <param name="sequence">The buffer sequence containing class file data.</param>
+        /// <param name="instruction">The decoded instruction.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -395,7 +395,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the instruction at the current position.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="instruction"></param>
+        /// <param name="instruction">The decoded instruction.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

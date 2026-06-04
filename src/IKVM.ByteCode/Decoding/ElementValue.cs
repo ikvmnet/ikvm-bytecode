@@ -66,7 +66,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure the size of the element value with the given tag.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="kind"></param>
+        /// <param name="kind">The method handle kind tag.</param>
         /// <param name="size">The number of bytes read.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>

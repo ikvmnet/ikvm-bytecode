@@ -40,7 +40,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a Field starting from the current position.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="field"></param>
+        /// <param name="field">The decoded field.</param>
         public static bool TryRead(ref ClassFormatReader reader, out Field field)
         {
             field = default;

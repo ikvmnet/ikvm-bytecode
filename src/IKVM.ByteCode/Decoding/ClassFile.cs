@@ -69,9 +69,9 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a class from the given memory position. This method is unsafe and assumes the lifetime of
         /// the memory remains valid for as long as the <see cref="ClassFile"/> instance is retained.
         /// </summary>
-        /// <param name="pointer"></param>
-        /// <param name="length"></param>
-        /// <param name="clazz"></param>
+        /// <param name="pointer">A pointer to the start of the class file data.</param>
+        /// <param name="length">The length of the class file data in bytes.</param>
+        /// <param name="clazz">The decoded class file.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static unsafe bool TryRead(byte* pointer, int length, out ClassFile? clazz)
@@ -83,8 +83,8 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a class from the given memory location. This method is unsafe and assumes the lifetime of
         /// the memory remains valid for as long as the <see cref="ClassFile"/> instance is retained.
         /// </summary>
-        /// <param name="pointer"></param>
-        /// <param name="length"></param>
+        /// <param name="pointer">A pointer to the start of the class file data.</param>
+        /// <param name="length">The length of the class file data in bytes.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static unsafe ClassFile Read(byte* pointer, int length)
@@ -95,8 +95,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given file.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="clazz"></param>
+        /// <param name="path">The path to the class file.</param>
+        /// <param name="clazz">The decoded class file.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(string path, out ClassFile? clazz)
@@ -110,8 +110,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given file.
         /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="clazz"></param>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="clazz">The decoded class file.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         static bool TryRead(FileStream stream, out ClassFile? clazz)
@@ -127,7 +127,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given file.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The path to the class file.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(string path)
@@ -138,8 +138,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given buffer.
         /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="clazz"></param>
+        /// <param name="owner">The memory owner providing the backing buffer.</param>
+        /// <param name="clazz">The decoded class file.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(IMemoryOwner<byte> owner, out ClassFile? clazz)
@@ -150,9 +150,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given buffer.
         /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="clazz"></param>
-        /// <param name="disposable"></param>
+        /// <param name="buffer">The buffer containing class file data.</param>
+        /// <param name="clazz">The decoded class file.</param>
+        /// <param name="disposable">A resource to dispose along with the class file.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(ReadOnlyMemory<byte> buffer, out ClassFile? clazz, IDisposable? disposable = null)
@@ -163,9 +163,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given buffer.
         /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="clazz"></param>
-        /// <param name="disposable"></param>
+        /// <param name="buffer">The buffer containing class file data.</param>
+        /// <param name="clazz">The decoded class file.</param>
+        /// <param name="disposable">A resource to dispose along with the class file.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, IDisposable? disposable = null)
@@ -176,10 +176,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure a class from the given buffer, returning information about the number of consumed and examined bytes.
         /// </summary>
-        /// <param name="buffer"></param>
+        /// <param name="buffer">The buffer containing class file data.</param>
         /// <param name="size">The number of bytes read.</param>
-        /// <param name="consumed"></param>
-        /// <param name="examined"></param>
+        /// <param name="consumed">The position up to which the buffer has been consumed.</param>
+        /// <param name="examined">The position up to which the buffer has been examined.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryMeasure(in ReadOnlySequence<byte> buffer, ref int size, out SequencePosition consumed, out SequencePosition examined)
@@ -204,10 +204,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given buffer, returning information about the number of consumed and examined bytes.
         /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="clazz"></param>
-        /// <param name="consumed"></param>
-        /// <param name="examined"></param>
+        /// <param name="buffer">The buffer containing class file data.</param>
+        /// <param name="clazz">The decoded class file.</param>
+        /// <param name="consumed">The position up to which the buffer has been consumed.</param>
+        /// <param name="examined">The position up to which the buffer has been examined.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, out SequencePosition consumed, out SequencePosition examined, IDisposable? disposable = null)
@@ -234,7 +234,7 @@ namespace IKVM.ByteCode.Decoding
         /// cref="ClassFormatReader"/> must remain valid for the lifetime of the <see cref="ClassFile"/> instance.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="clazz"></param>
+        /// <param name="clazz">The decoded class file.</param>
         /// <param name="disposable">Optional owner of the memory.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
@@ -288,7 +288,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given buffer.
         /// </summary>
-        /// <param name="buffer"></param>
+        /// <param name="buffer">The buffer containing class file data.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(ReadOnlyMemory<byte> buffer)
@@ -299,7 +299,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given buffer.
         /// </summary>
-        /// <param name="owner"></param>
+        /// <param name="owner">The memory owner providing the backing buffer.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(IMemoryOwner<byte> owner)
@@ -313,8 +313,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read a class from the given buffer.
         /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="disposable"></param>
+        /// <param name="buffer">The buffer containing class file data.</param>
+        /// <param name="disposable">A resource to dispose along with the class file.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(in ReadOnlySequence<byte> buffer, IDisposable? disposable = null)
@@ -325,9 +325,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Reads the class from the stream.
         /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="bufferSize"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="bufferSize">The size of the read buffer in bytes.</param>
+        /// <param name="cancellationToken">A token to cancel the operation.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
@@ -382,8 +382,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Reads the next class from the stream.
         /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="bufferSize"></param>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="bufferSize">The size of the read buffer in bytes.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static ClassFile Read(Stream stream, int bufferSize = 4096)
         {
@@ -482,16 +482,16 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="version"></param>
-        /// <param name="constants"></param>
-        /// <param name="accessFlags"></param>
-        /// <param name="this"></param>
-        /// <param name="super"></param>
-        /// <param name="interfaces"></param>
-        /// <param name="fields"></param>
-        /// <param name="methods"></param>
+        /// <param name="version">The class format version.</param>
+        /// <param name="constants">The decoded constant table.</param>
+        /// <param name="accessFlags">The class access flags.</param>
+        /// <param name="this">The constant handle of the class being defined.</param>
+        /// <param name="super">The constant handle of the superclass.</param>
+        /// <param name="interfaces">The decoded interface table.</param>
+        /// <param name="fields">The decoded field table.</param>
+        /// <param name="methods">The decoded method table.</param>
         /// <param name="attributes">The decoded attribute table.</param>
-        /// <param name="disposable"></param>
+        /// <param name="disposable">A resource to dispose along with the class file.</param>
         internal ClassFile(ClassFormatVersion version, ConstantTable constants, AccessFlag accessFlags, ClassConstantHandle @this, ClassConstantHandle super, InterfaceTable interfaces, FieldTable fields, MethodTable methods, AttributeTable attributes, IDisposable? disposable)
         {
             Version = version;

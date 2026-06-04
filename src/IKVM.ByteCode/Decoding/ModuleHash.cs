@@ -9,7 +9,7 @@ namespace IKVM.ByteCode.Decoding
     /// Describes a hash of a named module.
     /// </summary>
     /// <param name="Name">The attribute name constant handle.</param>
-    /// <param name="Hash"></param>
+    /// <param name="Hash">The hash bytes of the module.</param>
     public readonly record struct ModuleHash(Utf8ConstantHandle Name, ReadOnlySequence<byte> Hash)
     {
 
@@ -40,7 +40,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the structure.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="hash"></param>
+        /// <param name="hash">The decoded module hash.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ModuleHash hash)
         {

@@ -40,7 +40,7 @@ namespace IKVM.ByteCode.Decoding
         /// Parses a method.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="method"></param>
+        /// <param name="method">The decoded method.</param>
         public static bool TryRead(ref ClassFormatReader reader, out Method method)
         {
             method = default;

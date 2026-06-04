@@ -26,7 +26,7 @@ namespace IKVM.ByteCode.Decoding
         /// Parses an interface.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="iface"></param>
+        /// <param name="iface">The decoded interface entry.</param>
         public static bool TryRead(ref ClassFormatReader reader, out Interface iface)
         {
             iface = default;

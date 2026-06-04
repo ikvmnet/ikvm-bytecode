@@ -11,6 +11,9 @@ namespace IKVM.ByteCode.Decoding
     public readonly struct ModuleConstantHandleTable : IReadOnlyList<ModuleConstantHandle>
     {
 
+        /// <summary>
+        /// Enumerates the items in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<ModuleConstantHandle>
         {
 

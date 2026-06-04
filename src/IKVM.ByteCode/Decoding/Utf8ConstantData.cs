@@ -14,7 +14,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="size">The number of bytes read.</param>
-        /// <param name="skip"></param>
+        /// <param name="skip">The number of bytes to skip.</param>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size, out int skip)
         {
             skip = 0;
@@ -57,8 +57,8 @@ namespace IKVM.ByteCode.Decoding
         /// Parses a UTF8 constant in the constant pool.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="constant"></param>
-        /// <param name="majorVersion"></param>
+        /// <param name="constant">The decoded constant.</param>
+        /// <param name="majorVersion">The major class format version number.</param>
         public static bool TryRead(ref ClassFormatReader reader, out Utf8ConstantData constant, int majorVersion)
         {
             constant = default;
@@ -76,7 +76,7 @@ namespace IKVM.ByteCode.Decoding
         /// Decodes the UTF8 constant into a string value according the major version.
         /// </summary>
         /// <param name="data">The raw data buffer.</param>
-        /// <param name="majorVersion"></param>
+        /// <param name="majorVersion">The major class format version number.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="InvalidOperationException"></exception>
         static string Decode(ReadOnlySequence<byte> data, int majorVersion)

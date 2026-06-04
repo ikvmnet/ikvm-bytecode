@@ -13,6 +13,9 @@ namespace IKVM.ByteCode.Decoding
     public readonly struct ModuleRequiresTable : IReadOnlyList<ModuleRequireInfo>
     {
 
+        /// <summary>
+        /// Enumerates the items in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<ModuleRequireInfo>
         {
 

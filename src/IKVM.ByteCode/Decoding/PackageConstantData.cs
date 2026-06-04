@@ -15,7 +15,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="size">The number of bytes read.</param>
-        /// <param name="skip"></param>
+        /// <param name="skip">The number of bytes to skip.</param>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size, out int skip)
         {
             skip = 0;
@@ -32,7 +32,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="data">The raw data buffer.</param>
-        /// <param name="skip"></param>
+        /// <param name="skip">The number of bytes to skip.</param>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
         {
             skip = 0;
@@ -47,7 +47,7 @@ namespace IKVM.ByteCode.Decoding
         /// Parses a Package constant in the constant pool.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="constant"></param>
+        /// <param name="constant">The decoded constant.</param>
         public static bool TryRead(ref ClassFormatReader reader, out PackageConstantData constant)
         {
             constant = default;

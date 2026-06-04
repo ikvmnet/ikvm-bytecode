@@ -84,7 +84,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the exception handler table starting from the current position.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="exceptionTable"></param>
+        /// <param name="exceptionTable">The decoded exception handler table.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ExceptionHandlerTable exceptionTable)
         {
@@ -156,7 +156,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
         /// <param name="constantPool">The constant pool to copy constants into.</param>
         /// <param name="encoder">The encoder to write to.</param>
-        /// <param name="offset"></param>
+        /// <param name="offset">The bytecode offset.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ExceptionTableEncoder encoder, int offset)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool

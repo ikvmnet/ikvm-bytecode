@@ -86,7 +86,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read an annotation.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="annotation"></param>
+        /// <param name="annotation">The decoded annotation.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ElementValuePairTable annotation)
         {

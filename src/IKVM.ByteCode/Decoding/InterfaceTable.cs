@@ -23,7 +23,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="interfaces"></param>
+            /// <param name="interfaces">The decoded interface table.</param>
             internal Enumerator(Interface[] interfaces)
             {
                 _interfaces = interfaces;
@@ -63,7 +63,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the interface table starting from the current position.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="interfaces"></param>
+        /// <param name="interfaces">The decoded interface table.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
@@ -82,7 +82,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the interface table starting from the current position.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="interfaces"></param>
+        /// <param name="interfaces">The decoded interface table.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref ClassFormatReader reader, out InterfaceTable interfaces)
         {
@@ -114,7 +114,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="interfaces"></param>
+        /// <param name="interfaces">The decoded interface table.</param>
         internal InterfaceTable(Interface[] interfaces)
         {
             _interfaces = interfaces ?? throw new ArgumentNullException(nameof(interfaces));
@@ -123,14 +123,14 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the interface for the given handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly Interface this[InterfaceHandle handle] => ref GetInterface(handle);
 
         /// <summary>
         /// Gets a reference to the interface for the given handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly Interface GetInterface(InterfaceHandle handle) => ref _interfaces[handle.Index];
 

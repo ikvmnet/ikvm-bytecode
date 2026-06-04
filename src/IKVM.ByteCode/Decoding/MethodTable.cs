@@ -23,7 +23,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="methods"></param>
+            /// <param name="methods">The decoded method table.</param>
             internal Enumerator(Method[] methods)
             {
                 _methods = methods;
@@ -82,7 +82,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the method table starting from the current position.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="methods"></param>
+        /// <param name="methods">The decoded method table.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref ClassFormatReader reader, out MethodTable methods)
         {
@@ -114,7 +114,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="methods"></param>
+        /// <param name="methods">The decoded method table.</param>
         internal MethodTable(Method[] methods)
         {
             _methods = methods ?? throw new ArgumentNullException(nameof(methods));
@@ -123,14 +123,14 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the method reader for the given handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly Method this[MethodHandle handle] => ref GetMethod(handle);
 
         /// <summary>
         /// Gets a reference to the method reader for the given handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly Method GetMethod(MethodHandle handle) => ref _methods[handle.Index];
 

@@ -73,7 +73,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the data for the element value.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="frame"></param>
+        /// <param name="frame">The decoded stack map frame.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out StackMapFrame frame)
         {

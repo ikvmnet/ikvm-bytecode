@@ -183,8 +183,8 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the constant at the current position. Returns the the number of index positions to skip.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="constant"></param>
-        /// <param name="skip"></param>
+        /// <param name="constant">The decoded constant.</param>
+        /// <param name="skip">The number of bytes to skip.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ConstantData constant, out int skip)
         {

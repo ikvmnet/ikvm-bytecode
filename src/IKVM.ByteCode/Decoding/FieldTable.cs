@@ -23,7 +23,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="fields"></param>
+            /// <param name="fields">The decoded field table.</param>
             internal Enumerator(Field[] fields)
             {
                 _fields = fields;
@@ -82,7 +82,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the set of fields starting from the current position.
         /// </summary>
         /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
-        /// <param name="fields"></param>
+        /// <param name="fields">The decoded field table.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref ClassFormatReader reader, out FieldTable fields)
         {
@@ -114,7 +114,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="fields"></param>
+        /// <param name="fields">The decoded field table.</param>
         internal FieldTable(Field[] fields)
         {
             _fields = fields ?? throw new ArgumentNullException(nameof(fields));
@@ -123,14 +123,14 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the field for the given handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly Field this[FieldHandle handle] => ref GetField(handle);
 
         /// <summary>
         /// Gets a reference to the field for the given handle.
         /// </summary>
-        /// <param name="handle"></param>
+        /// <param name="handle">The constant handle.</param>
         /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly Field GetField(FieldHandle handle) => ref _fields[handle.Index];
 
