@@ -8,6 +8,11 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a decoded <c>lookupswitch</c> instruction.
+    /// </summary>
+    /// <param name="DefaultTarget">The signed branch offset for the default case.</param>
+    /// <param name="Cases">The table of key-target pairs.</param>
     public readonly record struct LookupSwitchInstruction(int DefaultTarget, LookupSwitchCaseTable Cases)
     {
 

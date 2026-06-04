@@ -8,9 +8,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents an array element value decoded from a class file annotation.
+    /// </summary>
     public readonly record struct ArrayElementValue : IReadOnlyList<ElementValue>
     {
 
+        /// <summary>
+        /// Enumerates the element values in the array.
+        /// </summary>
         public struct Enumerator : IEnumerator<ElementValue>
         {
 

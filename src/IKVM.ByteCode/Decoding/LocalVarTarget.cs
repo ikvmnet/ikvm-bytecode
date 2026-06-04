@@ -8,9 +8,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a <c>localvar_target</c> type annotation target decoded from a class file.
+    /// </summary>
     public readonly record struct LocalVarTarget : IReadOnlyList<LocalVarTargetItem>
     {
 
+        /// <summary>
+        /// Enumerates the local variable target items in the target.
+        /// </summary>
         public struct Enumerator : IEnumerator<LocalVarTargetItem>
         {
 

@@ -55,7 +55,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly Utf8ConstantHandle Name = Name;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -67,6 +66,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the module name.
+        /// </summary>
+        public readonly Utf8ConstantHandle Name = Name;
 
     }
 

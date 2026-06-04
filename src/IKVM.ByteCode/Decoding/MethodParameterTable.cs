@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the method parameter table decoded from the <c>MethodParameters</c> attribute.
+    /// </summary>
     public readonly struct MethodParameterTable : IReadOnlyList<MethodParameter>
     {
 
+        /// <summary>
+        /// Enumerates the method parameter entries in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<MethodParameter>
         {
 
@@ -55,6 +61,9 @@ namespace IKVM.ByteCode.Decoding
 
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly MethodParameterTable Empty = new([]);
 
         readonly MethodParameter[] _items;

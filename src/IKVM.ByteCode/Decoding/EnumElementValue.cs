@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents an enum element value decoded from a class file annotation.
+    /// </summary>
+    /// <param name="TypeName">The constant pool handle to the UTF-8 binary name of the enum type.</param>
+    /// <param name="ConstantName">The constant pool handle to the UTF-8 simple name of the enum constant.</param>
     public readonly record struct EnumElementValue(Utf8ConstantHandle TypeName, Utf8ConstantHandle ConstantName)
     {
 
@@ -42,7 +47,14 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets the constant pool handle to the UTF-8 binary name of the enum type.
+        /// </summary>
         public readonly Utf8ConstantHandle TypeName = TypeName;
+
+        /// <summary>
+        /// Gets the constant pool handle to the UTF-8 simple name of the enum constant.
+        /// </summary>
         public readonly Utf8ConstantHandle ConstantName = ConstantName;
         readonly bool _isNotNil = true;
 

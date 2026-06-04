@@ -5,6 +5,10 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_Float_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="Value">The single-precision floating-point value.</param>
     public readonly record struct FloatConstantData(float Value)
     {
 
@@ -56,7 +60,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly float Value = Value;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -68,6 +71,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the single-precision floating-point value.
+        /// </summary>
+        public readonly float Value = Value;
 
     }
 

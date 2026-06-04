@@ -5,6 +5,9 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// A read-only table of <see cref="StackMapFrame"/> entries decoded from the <c>StackMapTable</c> attribute.
+    /// </summary>
     public readonly struct StackMapFrameTable : IReadOnlyList<StackMapFrame>
     {
 

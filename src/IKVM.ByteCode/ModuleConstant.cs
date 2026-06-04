@@ -6,11 +6,15 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents a Module constant value.
     /// </summary>
-    /// <param name="Name"></param>
+    /// <param name="Name">The module name.</param>
     public readonly record struct ModuleConstant(string? Name)
     {
 
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="Constant"/> to a <see cref="ModuleConstant"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when <paramref name="value"/> is not a <see cref="ConstantKind.Module"/> constant.</exception>
         public static explicit operator ModuleConstant(Constant value)
         {
             if (value.IsNil)
@@ -22,6 +26,9 @@ namespace IKVM.ByteCode
             return new ModuleConstant((string?)value._object1);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="ModuleConstant"/> to its generic <see cref="Constant"/> representation.
+        /// </summary>
         public static implicit operator Constant(ModuleConstant value)
         {
             if (value.IsNil)

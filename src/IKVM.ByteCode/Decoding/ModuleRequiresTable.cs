@@ -7,6 +7,9 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// A read-only table of <see cref="ModuleRequireInfo"/> entries from the <c>Module</c> attribute requires list.
+    /// </summary>
     public readonly struct ModuleRequiresTable : IReadOnlyList<ModuleRequireInfo>
     {
 

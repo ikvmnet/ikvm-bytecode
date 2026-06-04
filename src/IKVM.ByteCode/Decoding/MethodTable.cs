@@ -5,9 +5,15 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the methods table of a decoded class file.
+    /// </summary>
     public readonly struct MethodTable : IReadOnlyList<Method>
     {
 
+        /// <summary>
+        /// Enumerates the methods in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<Method>
         {
 
@@ -98,6 +104,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly MethodTable Empty = new([]);
 
         readonly Method[] _methods;

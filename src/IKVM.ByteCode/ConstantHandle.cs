@@ -14,8 +14,14 @@
         /// </summary>
         public static readonly ConstantHandle Nil = new(ConstantKind.Unknown, 0);
 
+        /// <summary>
+        /// Explicitly converts a <see cref="ConstantHandle"/> to its <see cref="byte"/> slot index.
+        /// </summary>
         public static explicit operator byte(ConstantHandle handle) => checked((byte)handle.Slot);
 
+        /// <summary>
+        /// Explicitly converts a <see cref="ConstantHandle"/> to its <see cref="ushort"/> slot index.
+        /// </summary>
         public static explicit operator ushort(ConstantHandle handle) => handle.Slot;
 
         /// <summary>

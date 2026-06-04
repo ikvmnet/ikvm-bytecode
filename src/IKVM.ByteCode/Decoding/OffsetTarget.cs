@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>offset_target</c> type annotation target indicating a bytecode offset.
+    /// </summary>
+    /// <param name="Offset">The bytecode offset of the annotated instruction.</param>
     public readonly record struct OffsetTarget(ushort Offset)
     {
 
@@ -40,7 +44,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ushort Offset = Offset;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -52,6 +55,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the bytecode offset of the annotated instruction.
+        /// </summary>
+        public readonly ushort Offset = Offset;
 
     }
 

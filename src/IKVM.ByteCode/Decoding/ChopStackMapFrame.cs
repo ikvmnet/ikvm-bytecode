@@ -5,6 +5,11 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a <c>chop_frame</c> stack map frame decoded from a class file.
+    /// </summary>
+    /// <param name="FrameType">The frame type byte (248–250).</param>
+    /// <param name="OffsetDelta">The offset delta to apply to the current bytecode offset.</param>
     public readonly record struct ChopStackMapFrame(byte FrameType, ushort OffsetDelta)
     {
 
@@ -23,6 +28,13 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Attempts to read the frame from the given reader.
+        /// </summary>
+        /// <param name="reader">The class format reader to read from.</param>
+        /// <param name="frameType">The frame type byte that was already read.</param>
+        /// <param name="frame">The decoded frame on success.</param>
+        /// <returns><see langword="true"/> if the frame was read successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, byte frameType, out ChopStackMapFrame frame)
         {
             frame = default;
@@ -46,9 +58,17 @@ namespace IKVM.ByteCode.Decoding
             encoder.Chop(FrameType, OffsetDelta);
         }
 
-        public readonly byte FrameType = FrameType;
-        public readonly ushort OffsetDelta = OffsetDelta;
         readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets the frame type byte.
+        /// </summary>
+        public readonly byte FrameType = FrameType;
+
+        /// <summary>
+        /// Gets the offset delta to apply to the current bytecode offset.
+        /// </summary>
+        public readonly ushort OffsetDelta = OffsetDelta;
 
         /// <summary>
         /// Gets whether the instance is nil.

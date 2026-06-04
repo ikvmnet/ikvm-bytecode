@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a class element value decoded from a class file annotation.
+    /// </summary>
+    /// <param name="Class">The constant pool handle to the UTF-8 class info descriptor.</param>
     public readonly record struct ClassElementValue(Utf8ConstantHandle Class)
     {
 
@@ -40,6 +44,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets the constant pool handle to the UTF-8 class info descriptor.
+        /// </summary>
         public readonly Utf8ConstantHandle Class = Class;
         readonly bool _isNotNil = true;
 

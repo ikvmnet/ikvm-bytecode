@@ -3,11 +3,24 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>SourceFile</c> attribute identifying the source file from which this class was compiled.
+    /// </summary>
+    /// <param name="SourceFile">Handle to the source file name constant.</param>
     public readonly record struct SourceFileAttribute(Utf8ConstantHandle SourceFile)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static SourceFileAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out SourceFileAttribute attribute)
         {
             attribute = default;
@@ -19,7 +32,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly Utf8ConstantHandle SourceFile = SourceFile;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -31,6 +43,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the source file name.
+        /// </summary>
+        public readonly Utf8ConstantHandle SourceFile = SourceFile;
 
         /// <summary>
         /// Copies this attribute to the encoder.

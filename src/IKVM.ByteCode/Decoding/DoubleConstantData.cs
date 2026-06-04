@@ -6,6 +6,10 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_Double_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="Value">The double-precision floating-point value.</param>
     public readonly record struct DoubleConstantData(double Value)
     {
 
@@ -60,7 +64,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly double Value = Value;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -72,6 +75,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the double-precision floating-point value.
+        /// </summary>
+        public readonly double Value = Value;
 
     }
 

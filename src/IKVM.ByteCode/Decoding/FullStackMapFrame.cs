@@ -5,6 +5,13 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a <c>full_frame</c> stack map frame decoded from a class file.
+    /// </summary>
+    /// <param name="FrameType">The frame type byte (255).</param>
+    /// <param name="OffsetDelta">The offset delta to apply to the current bytecode offset.</param>
+    /// <param name="Locals">The complete set of local variable verification types.</param>
+    /// <param name="Stack">The complete set of operand stack verification types.</param>
     public readonly record struct FullStackMapFrame(byte FrameType, ushort OffsetDelta, VerificationTypeInfoTable Locals, VerificationTypeInfoTable Stack)
     {
 
@@ -65,10 +72,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly byte FrameType = FrameType;
-        public readonly ushort OffsetDelta = OffsetDelta;
-        public readonly VerificationTypeInfoTable Locals = Locals;
-        public readonly VerificationTypeInfoTable Stack = Stack;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -80,6 +83,26 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the frame type byte.
+        /// </summary>
+        public readonly byte FrameType = FrameType;
+
+        /// <summary>
+        /// Gets the offset delta to apply to the current bytecode offset.
+        /// </summary>
+        public readonly ushort OffsetDelta = OffsetDelta;
+
+        /// <summary>
+        /// Gets the complete set of local variable verification types.
+        /// </summary>
+        public readonly VerificationTypeInfoTable Locals = Locals;
+
+        /// <summary>
+        /// Gets the complete set of operand stack verification types.
+        /// </summary>
+        public readonly VerificationTypeInfoTable Stack = Stack;
 
         /// <summary>
         /// Copies this frame to the encoder.

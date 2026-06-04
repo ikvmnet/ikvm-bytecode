@@ -6,8 +6,8 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Describes a Java Class file format version number, consisting of a major and minor pair.
     /// </summary>
-    /// <param name="Major"></param>
-    /// <param name="Minor"></param>
+    /// <param name="Major">The major version number.</param>
+    /// <param name="Minor">The minor version number. For most class file versions this is <c>0</c>; a value of <c>65535</c> signals a preview feature class.</param>
     public record struct ClassFormatVersion(ushort Major, ushort Minor) : IComparable<ClassFormatVersion>
     {
 
@@ -86,36 +86,61 @@ namespace IKVM.ByteCode
         /// <summary>Java 25 (class file 69.0)</summary>
         public static readonly ClassFormatVersion Java25 = new(69, 0);
 
+        /// <summary>
+        /// Implicitly converts a major version number to a <see cref="ClassFormatVersion"/> with a minor version of <c>0</c>.
+        /// </summary>
+        /// <param name="major">The major version number.</param>
         public static implicit operator ClassFormatVersion(ushort major)
         {
             return new ClassFormatVersion(major, 0);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="ClassFormatVersion"/> to its string representation.
+        /// </summary>
+        /// <param name="version">The version to convert.</param>
         public static implicit operator string(ClassFormatVersion version)
         {
             return version.ToString();
         }
 
+        /// <summary>
+        /// Returns <c>true</c> if <paramref name="a"/> is greater than <paramref name="b"/>.
+        /// </summary>
         public static bool operator >(ClassFormatVersion a, ClassFormatVersion b)
         {
             return a.CompareTo(b) is 1;
         }
 
+        /// <summary>
+        /// Returns <c>true</c> if <paramref name="a"/> is less than <paramref name="b"/>.
+        /// </summary>
         public static bool operator <(ClassFormatVersion a, ClassFormatVersion b)
         {
             return a.CompareTo(b) is -1;
         }
 
+        /// <summary>
+        /// Returns <c>true</c> if <paramref name="a"/> is greater than or equal to <paramref name="b"/>.
+        /// </summary>
         public static bool operator >=(ClassFormatVersion a, ClassFormatVersion b)
         {
             return a.CompareTo(b) is 0 or 1;
         }
 
+        /// <summary>
+        /// Returns <c>true</c> if <paramref name="a"/> is less than or equal to <paramref name="b"/>.
+        /// </summary>
         public static bool operator <=(ClassFormatVersion a, ClassFormatVersion b)
         {
             return a.CompareTo(b) is 0 or -1;
         }
 
+        /// <summary>
+        /// Compares this instance with another <see cref="ClassFormatVersion"/> value.
+        /// </summary>
+        /// <param name="other">The value to compare to.</param>
+        /// <returns>A negative integer, zero, or a positive integer if this instance is less than, equal to, or greater than <paramref name="other"/>.</returns>
         public int CompareTo(ClassFormatVersion other)
         {
             if (Major < other.Major)
@@ -131,6 +156,9 @@ namespace IKVM.ByteCode
             return 0;
         }
 
+        /// <summary>
+        /// Returns the version number as a string in <c>major.minor</c> format.
+        /// </summary>
         public override string ToString()
         {
             return $"{Major}.{Minor}";

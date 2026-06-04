@@ -7,6 +7,9 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// A read-only table of <see cref="RecordComponent"/> entries decoded from the <c>Record</c> attribute.
+    /// </summary>
     public readonly struct RecordComponentTable : IReadOnlyList<RecordComponent>
     {
 

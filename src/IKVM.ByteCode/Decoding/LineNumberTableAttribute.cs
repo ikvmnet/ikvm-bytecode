@@ -5,6 +5,10 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the decoded <c>LineNumberTable</c> attribute of a <c>Code</c> attribute.
+    /// </summary>
+    /// <param name="LineNumbers">The line number table.</param>
     public readonly record struct LineNumberTableAttribute(LineNumberTable LineNumbers)
     {
 
@@ -32,7 +36,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly LineNumberTable LineNumbers = LineNumbers;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -44,6 +47,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the line number table.
+        /// </summary>
+        public readonly LineNumberTable LineNumbers = LineNumbers;
 
         /// <summary>
         /// Copies this attribute to the encoder.

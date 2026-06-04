@@ -5,11 +5,23 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the decoded <c>Deprecated</c> attribute of a class file element.
+    /// </summary>
     public readonly record struct DeprecatedAttribute()
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static DeprecatedAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute from the given reader.
+        /// </summary>
+        /// <param name="reader">The class format reader to read from.</param>
+        /// <param name="attribute">The decoded attribute on success.</param>
+        /// <returns><see langword="true"/> if the attribute was read successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out DeprecatedAttribute attribute)
         {
             attribute = new DeprecatedAttribute();

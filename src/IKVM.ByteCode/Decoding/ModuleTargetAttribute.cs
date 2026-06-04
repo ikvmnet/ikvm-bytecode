@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>ModuleTarget</c> attribute specifying the target platform of a module.
+    /// </summary>
+    /// <param name="Target">Handle to the target platform name constant.</param>
     public readonly record struct ModuleTargetAttribute(Utf8ConstantHandle Target)
     {
 
@@ -39,6 +43,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the target platform name.
+        /// </summary>
+        public readonly Utf8ConstantHandle Target = Target;
 
         /// <summary>
         /// Copies this attribute to the encoder.

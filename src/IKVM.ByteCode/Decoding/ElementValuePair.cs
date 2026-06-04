@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a name-value pair in an annotation decoded from a class file.
+    /// </summary>
+    /// <param name="Name">The constant pool handle to the UTF-8 element name.</param>
+    /// <param name="Value">The element value.</param>
     public readonly record struct ElementValuePair(Utf8ConstantHandle Name, ElementValue Value)
     {
 
@@ -43,8 +48,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly Utf8ConstantHandle Name = Name;
-        public readonly ElementValue Value = Value;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -56,6 +59,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the constant pool handle to the UTF-8 element name.
+        /// </summary>
+        public readonly Utf8ConstantHandle Name = Name;
+
+        /// <summary>
+        /// Gets the element value.
+        /// </summary>
+        public readonly ElementValue Value = Value;
 
         /// <summary>
         /// Copies this pair to the encoder.

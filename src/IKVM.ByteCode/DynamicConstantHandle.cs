@@ -6,10 +6,14 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents a handle to a Dynamic constant.
     /// </summary>
-    /// <param name="Slot"></param>
+    /// <param name="Slot">The constant pool slot index.</param>
     public readonly record struct DynamicConstantHandle(ushort Slot)
     {
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="ConstantHandle"/> to a <see cref="DynamicConstantHandle"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when the handle kind is not <see cref="ConstantKind.Dynamic"/>.</exception>
         public static explicit operator DynamicConstantHandle(ConstantHandle handle)
         {
             if (handle.Kind is not ConstantKind.Dynamic and not ConstantKind.Unknown)
@@ -18,6 +22,9 @@ namespace IKVM.ByteCode
             return new DynamicConstantHandle(handle.Slot);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="DynamicConstantHandle"/> to a generic <see cref="ConstantHandle"/>.
+        /// </summary>
         public static implicit operator ConstantHandle(DynamicConstantHandle handle)
         {
             return new ConstantHandle(ConstantKind.Dynamic, handle.Slot);

@@ -10,6 +10,10 @@ namespace IKVM.ByteCode
     public readonly record struct ClassConstantHandle(ushort Slot)
     {
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="ConstantHandle"/> to a <see cref="ClassConstantHandle"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when the handle kind is not <see cref="ConstantKind.Class"/>.</exception>
         public static explicit operator ClassConstantHandle(ConstantHandle handle)
         {
             if (handle.Kind is not ConstantKind.Class and not ConstantKind.Unknown)
@@ -18,6 +22,9 @@ namespace IKVM.ByteCode
             return new ClassConstantHandle(handle.Slot);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="ClassConstantHandle"/> to a generic <see cref="ConstantHandle"/>.
+        /// </summary>
         public static implicit operator ConstantHandle(ClassConstantHandle handle)
         {
             return new ConstantHandle(ConstantKind.Class, handle.Slot);

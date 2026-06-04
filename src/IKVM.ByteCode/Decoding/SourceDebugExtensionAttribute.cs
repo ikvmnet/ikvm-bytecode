@@ -23,7 +23,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ReadOnlySequence<byte> Data = Data;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -35,6 +34,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the raw debug extension data.
+        /// </summary>
+        public readonly ReadOnlySequence<byte> Data = Data;
 
         /// <summary>
         /// Copies this attribute to the encoder.

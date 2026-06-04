@@ -7,6 +7,9 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// A read-only table of <see cref="PackageConstantHandle"/> values.
+    /// </summary>
     public readonly struct PackageConstantHandleTable : IReadOnlyList<PackageConstantHandle>
     {
 

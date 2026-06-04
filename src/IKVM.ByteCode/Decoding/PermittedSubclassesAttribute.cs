@@ -5,11 +5,24 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>PermittedSubclasses</c> attribute listing the classes permitted to directly extend or implement this sealed class.
+    /// </summary>
+    /// <param name="PermittedSubclasses">Table of permitted subclass class handles.</param>
     public readonly record struct PermittedSubclassesAttribute(ClassConstantHandleTable PermittedSubclasses)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static PermittedSubclassesAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out PermittedSubclassesAttribute attribute)
         {
             attribute = default;
@@ -30,7 +43,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ClassConstantHandleTable PermittedSubclasses = PermittedSubclasses;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -42,6 +54,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the table of permitted subclasses.
+        /// </summary>
+        public readonly ClassConstantHandleTable PermittedSubclasses = PermittedSubclasses;
 
         /// <summary>
         /// Copies this attribute to the encoder.

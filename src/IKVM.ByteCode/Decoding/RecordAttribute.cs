@@ -5,11 +5,24 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>Record</c> attribute describing the components of a record class.
+    /// </summary>
+    /// <param name="Components">Table of record component entries.</param>
     public readonly record struct RecordAttribute(RecordComponentTable Components)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static RecordAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out RecordAttribute attribute)
         {
             attribute = default;
@@ -34,7 +47,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly RecordComponentTable Components = Components;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -46,6 +58,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the table of record components.
+        /// </summary>
+        public readonly RecordComponentTable Components = Components;
 
         /// <summary>
         /// Copies this attribute to the encoder.

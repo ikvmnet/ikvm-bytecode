@@ -8,9 +8,20 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>Code</c> attribute containing the bytecode and associated metadata for a method.
+    /// </summary>
+    /// <param name="MaxStack">Maximum operand stack depth.</param>
+    /// <param name="MaxLocals">Number of local variable slots.</param>
+    /// <param name="Code">The raw bytecode sequence.</param>
+    /// <param name="ExceptionTable">Table of exception handlers.</param>
+    /// <param name="Attributes">Nested attributes such as <c>LineNumberTable</c> and <c>LocalVariableTable</c>.</param>
     public readonly record struct CodeAttribute(ushort MaxStack, ushort MaxLocals, ReadOnlySequence<byte> Code, ExceptionHandlerTable ExceptionTable, AttributeTable Attributes)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static CodeAttribute Nil => default;
 
         /// <summary>
@@ -42,11 +53,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ushort MaxStack = MaxStack;
-        public readonly ushort MaxLocals = MaxLocals;
-        public readonly ReadOnlySequence<byte> Code = Code;
-        public readonly ExceptionHandlerTable ExceptionTable = ExceptionTable;
-        public readonly AttributeTable Attributes = Attributes;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -58,6 +64,31 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the maximum operand stack depth.
+        /// </summary>
+        public readonly ushort MaxStack = MaxStack;
+
+        /// <summary>
+        /// Gets the number of local variable slots.
+        /// </summary>
+        public readonly ushort MaxLocals = MaxLocals;
+
+        /// <summary>
+        /// Gets the raw bytecode sequence.
+        /// </summary>
+        public readonly ReadOnlySequence<byte> Code = Code;
+
+        /// <summary>
+        /// Gets the exception handler table.
+        /// </summary>
+        public readonly ExceptionHandlerTable ExceptionTable = ExceptionTable;
+
+        /// <summary>
+        /// Gets the nested attribute table.
+        /// </summary>
+        public readonly AttributeTable Attributes = Attributes;
 
         /// <summary>
         /// Copies this attribute to the specified attribute encoder.

@@ -6,10 +6,14 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents a handle to a String constant.
     /// </summary>
-    /// <param name="Slot"></param>
+    /// <param name="Slot">The constant pool slot index.</param>
     public readonly record struct StringConstantHandle(ushort Slot)
     {
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="ConstantHandle"/> to a <see cref="StringConstantHandle"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when the handle kind is not <see cref="ConstantKind.String"/>.</exception>
         public static explicit operator StringConstantHandle(ConstantHandle handle)
         {
             if (handle.Kind is not ConstantKind.String and not ConstantKind.Unknown)
@@ -18,6 +22,9 @@ namespace IKVM.ByteCode
             return new StringConstantHandle(handle.Slot);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="StringConstantHandle"/> to a generic <see cref="ConstantHandle"/>.
+        /// </summary>
         public static implicit operator ConstantHandle(StringConstantHandle handle)
         {
             return new ConstantHandle(ConstantKind.String, handle.Slot);

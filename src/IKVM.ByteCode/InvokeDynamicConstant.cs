@@ -6,13 +6,17 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents an InvokeDynamic constant value.
     /// </summary>
-    /// <param name="BootstrapMethodAttributeIndex"></param>
-    /// <param name="Name"></param>
-    /// <param name="Descriptor"></param>
+    /// <param name="BootstrapMethodAttributeIndex">The index into the <c>BootstrapMethods</c> attribute of the class file.</param>
+    /// <param name="Name">The unqualified name of the method.</param>
+    /// <param name="Descriptor">The method descriptor.</param>
     public readonly record struct InvokeDynamicConstant(ushort BootstrapMethodAttributeIndex, string? Name, string? Descriptor)
     {
 
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="Constant"/> to an <see cref="InvokeDynamicConstant"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when <paramref name="value"/> is not a <see cref="ConstantKind.InvokeDynamic"/> constant.</exception>
         public static explicit operator InvokeDynamicConstant(Constant value)
         {
             if (value.IsNil)
@@ -24,6 +28,9 @@ namespace IKVM.ByteCode
             return new InvokeDynamicConstant((ushort)value._ulong1, (string?)value._object1, (string?)value._object2);
         }
 
+        /// <summary>
+        /// Implicitly converts an <see cref="InvokeDynamicConstant"/> to its generic <see cref="Constant"/> representation.
+        /// </summary>
         public static implicit operator Constant(InvokeDynamicConstant value)
         {
             if (value.IsNil)

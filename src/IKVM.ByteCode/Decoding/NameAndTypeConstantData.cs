@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>CONSTANT_NameAndType_info</c> constant pool entry.
+    /// </summary>
+    /// <param name="Name">Handle to the member name constant.</param>
+    /// <param name="Descriptor">Handle to the member descriptor constant.</param>
     public readonly record struct NameAndTypeConstantData(Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor)
     {
 
@@ -57,8 +62,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly Utf8ConstantHandle Name = Name;
-        public readonly Utf8ConstantHandle Descriptor = Descriptor;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -70,6 +73,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the member name.
+        /// </summary>
+        public readonly Utf8ConstantHandle Name = Name;
+
+        /// <summary>
+        /// Gets the member descriptor.
+        /// </summary>
+        public readonly Utf8ConstantHandle Descriptor = Descriptor;
 
     }
 

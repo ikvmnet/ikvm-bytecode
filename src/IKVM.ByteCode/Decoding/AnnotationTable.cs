@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a table of annotations decoded from a class file.
+    /// </summary>
     public readonly struct AnnotationTable : IReadOnlyList<Annotation>
     {
 
+        /// <summary>
+        /// Enumerates the annotations in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<Annotation>
         {
 

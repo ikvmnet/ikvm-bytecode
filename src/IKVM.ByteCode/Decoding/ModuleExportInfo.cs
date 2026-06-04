@@ -5,12 +5,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded entry from the exports table of a <c>Module</c> attribute.
+    /// </summary>
+    /// <param name="Package">Handle to the exported package constant.</param>
+    /// <param name="Flags">Export access flags.</param>
+    /// <param name="Modules">Table of module handles to which this package is exported, or empty for unqualified export.</param>
     public readonly record struct ModuleExportInfo(PackageConstantHandle Package, ModuleExportsFlag Flags, ModuleConstantHandleTable Modules)
     {
 
-        public readonly PackageConstantHandle Package = Package;
-        public readonly ModuleExportsFlag Flags = Flags;
-        public readonly ModuleConstantHandleTable Modules = Modules;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -22,6 +25,21 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the exported package.
+        /// </summary>
+        public readonly PackageConstantHandle Package = Package;
+
+        /// <summary>
+        /// Gets the export flags.
+        /// </summary>
+        public readonly ModuleExportsFlag Flags = Flags;
+
+        /// <summary>
+        /// Gets the modules to which the package is exported.
+        /// </summary>
+        public readonly ModuleConstantHandleTable Modules = Modules;
 
         /// <summary>
         /// Copies this info to the encoder.

@@ -5,9 +5,15 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the interfaces table of a decoded class file.
+    /// </summary>
     public readonly struct InterfaceTable : IReadOnlyList<Interface>
     {
 
+        /// <summary>
+        /// Enumerates the interface entries in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<Interface>
         {
 
@@ -98,6 +104,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly InterfaceTable Empty = new([]);
 
         readonly Interface[] _interfaces;

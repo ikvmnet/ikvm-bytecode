@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_MethodHandle_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="Kind">The reference kind describing how the method handle is used.</param>
+    /// <param name="Reference">The constant pool handle to the underlying field or method reference.</param>
     public readonly record struct MethodHandleConstantData(MethodHandleKind Kind, RefConstantHandle Reference)
     {
 
@@ -57,8 +62,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly MethodHandleKind Kind = Kind;
-        public readonly RefConstantHandle Reference = Reference;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -70,6 +73,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the reference kind describing how the method handle is used.
+        /// </summary>
+        public readonly MethodHandleKind Kind = Kind;
+
+        /// <summary>
+        /// Gets the constant pool handle to the underlying field or method reference.
+        /// </summary>
+        public readonly RefConstantHandle Reference = Reference;
 
     }
 

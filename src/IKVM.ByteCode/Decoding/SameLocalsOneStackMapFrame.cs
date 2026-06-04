@@ -5,6 +5,11 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>same_locals_1_stack_item_frame</c> stack map frame indicating one stack item and unchanged locals.
+    /// </summary>
+    /// <param name="FrameType">The frame type byte (64–127).</param>
+    /// <param name="Stack">The single verification type on the operand stack.</param>
     public readonly record struct SameLocalsOneStackMapFrame(byte FrameType, VerificationTypeInfo Stack)
     {
 
@@ -33,8 +38,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly byte FrameType = FrameType;
-        public readonly VerificationTypeInfo Stack = Stack;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -46,6 +49,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the frame type byte.
+        /// </summary>
+        public readonly byte FrameType = FrameType;
+
+        /// <summary>
+        /// Gets the single stack verification type.
+        /// </summary>
+        public readonly VerificationTypeInfo Stack = Stack;
 
         /// <summary>
         /// Copies this frame to the encoder.

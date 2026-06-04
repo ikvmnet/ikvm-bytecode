@@ -3,9 +3,17 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_Fieldref_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="Class">The constant pool handle to the class that contains the field.</param>
+    /// <param name="NameAndType">The constant pool handle to the name and type descriptor of the field.</param>
     public readonly record struct FieldrefConstantData(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static FieldrefConstantData Nil => default;
 
         /// <summary>
@@ -58,8 +66,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ClassConstantHandle Class = Class;
-        public readonly NameAndTypeConstantHandle NameAndType = NameAndType;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -71,6 +77,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the constant pool handle to the class that contains the field.
+        /// </summary>
+        public readonly ClassConstantHandle Class = Class;
+
+        /// <summary>
+        /// Gets the constant pool handle to the name and type descriptor of the field.
+        /// </summary>
+        public readonly NameAndTypeConstantHandle NameAndType = NameAndType;
 
     }
 

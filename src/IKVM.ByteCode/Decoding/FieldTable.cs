@@ -5,9 +5,15 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the fields table of a decoded class file.
+    /// </summary>
     public readonly struct FieldTable : IReadOnlyList<Field>
     {
 
+        /// <summary>
+        /// Enumerates the fields in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<Field>
         {
 
@@ -98,6 +104,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly FieldTable Empty = new([]);
 
         readonly Field[] _fields;

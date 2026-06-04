@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the exception table of a <c>Code</c> attribute decoded from a class file.
+    /// </summary>
     public readonly struct ExceptionHandlerTable : IReadOnlyList<ExceptionHandler>
     {
 
+        /// <summary>
+        /// Enumerates the exception handlers in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<ExceptionHandler>
         {
 
@@ -96,6 +102,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly ExceptionHandlerTable Empty = new([]);
 
         readonly ExceptionHandler[] _items;

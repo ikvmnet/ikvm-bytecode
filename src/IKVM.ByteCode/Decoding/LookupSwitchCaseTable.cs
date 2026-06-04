@@ -11,6 +11,9 @@ namespace IKVM.ByteCode.Decoding
     public readonly struct LookupSwitchCaseTable : IReadOnlyList<LookupSwitchCase>
     {
 
+        /// <summary>
+        /// Enumerates the case entries in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<LookupSwitchCase>
         {
 
@@ -113,6 +116,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly LookupSwitchCaseTable Empty = new(ReadOnlySequence<byte>.Empty);
 
         readonly ReadOnlySequence<byte> _data;

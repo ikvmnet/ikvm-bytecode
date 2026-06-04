@@ -6,11 +6,15 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents a MethodType constant value.
     /// </summary>
-    /// <param name="Descriptor"></param>
+    /// <param name="Descriptor">The method descriptor.</param>
     public readonly record struct MethodTypeConstant(string? Descriptor)
     {
 
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="Constant"/> to a <see cref="MethodTypeConstant"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when <paramref name="value"/> is not a <see cref="ConstantKind.MethodType"/> constant.</exception>
         public static explicit operator MethodTypeConstant(Constant value)
         {
             if (value.IsNil)
@@ -22,6 +26,9 @@ namespace IKVM.ByteCode
             return new MethodTypeConstant((string?)value._object1);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="MethodTypeConstant"/> to its generic <see cref="Constant"/> representation.
+        /// </summary>
         public static implicit operator Constant(MethodTypeConstant value)
         {
             if (value.IsNil)

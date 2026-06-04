@@ -3,6 +3,12 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents an <c>append_frame</c> stack map frame decoded from a class file.
+    /// </summary>
+    /// <param name="FrameType">The frame type byte (252–254).</param>
+    /// <param name="OffsetDelta">The offset delta to apply to the current bytecode offset.</param>
+    /// <param name="Locals">The additional local variable verification types appended by this frame.</param>
     public readonly record struct AppendStackMapFrame(byte FrameType, ushort OffsetDelta, VerificationTypeInfoTable Locals)
     {
 
@@ -26,6 +32,13 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Attempts to read the frame from the given reader.
+        /// </summary>
+        /// <param name="reader">The class format reader to read from.</param>
+        /// <param name="frameType">The frame type byte that was already read.</param>
+        /// <param name="frame">The decoded frame on success.</param>
+        /// <returns><see langword="true"/> if the frame was read successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, byte frameType, out AppendStackMapFrame frame)
         {
             frame = default;
@@ -62,8 +75,19 @@ namespace IKVM.ByteCode.Decoding
             encoder.Append(FrameType, OffsetDelta, e => self.Locals.CopyTo(constantView, constantPool, ref e));
         }
 
+        /// <summary>
+        /// Gets the frame type byte.
+        /// </summary>
         public readonly byte FrameType = FrameType;
+
+        /// <summary>
+        /// Gets the offset delta to apply to the current bytecode offset.
+        /// </summary>
         public readonly ushort OffsetDelta = OffsetDelta;
+
+        /// <summary>
+        /// Gets the additional local variable verification types appended by this frame.
+        /// </summary>
         public readonly VerificationTypeInfoTable Locals = Locals;
         readonly bool _isNotNil = true;
 

@@ -3,11 +3,24 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>ModuleMainClass</c> attribute identifying the main class of a module.
+    /// </summary>
+    /// <param name="MainClass">Handle to the main class constant.</param>
     public readonly record struct ModuleMainClassAttribute(ClassConstantHandle MainClass)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static ModuleMainClassAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out ModuleMainClassAttribute attribute)
         {
             attribute = default;
@@ -19,7 +32,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ClassConstantHandle MainClass = MainClass;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -31,6 +43,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the main class of the module.
+        /// </summary>
+        public readonly ClassConstantHandle MainClass = MainClass;
 
         /// <summary>
         /// Copies this attribute to the encoder.

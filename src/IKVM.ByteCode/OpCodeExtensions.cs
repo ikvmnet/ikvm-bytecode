@@ -3,6 +3,9 @@
 namespace IKVM.ByteCode
 {
 
+    /// <summary>
+    /// Extension methods for the <see cref="OpCode"/> enumeration.
+    /// </summary>
     public static class OpCodeExtensions
     {
 

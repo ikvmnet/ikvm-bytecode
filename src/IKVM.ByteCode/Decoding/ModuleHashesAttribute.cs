@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>ModuleHashes</c> attribute containing cryptographic hashes of module dependencies.
+    /// </summary>
+    /// <param name="Algorithm">Handle to the hash algorithm name constant.</param>
+    /// <param name="Hashes">Table of module hash entries.</param>
     public readonly record struct ModuleHashesAttribute(Utf8ConstantHandle Algorithm, ModuleHashTable Hashes)
     {
 
@@ -42,6 +47,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the hash algorithm name.
+        /// </summary>
+        public readonly Utf8ConstantHandle Algorithm = Algorithm;
+
+        /// <summary>
+        /// Gets the table of module hashes.
+        /// </summary>
+        public readonly ModuleHashTable Hashes = Hashes;
 
         /// <summary>
         /// Copies this attribute to the encoder.

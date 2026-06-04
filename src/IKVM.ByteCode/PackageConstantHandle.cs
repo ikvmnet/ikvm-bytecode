@@ -6,10 +6,14 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents a handle to a Package constant.
     /// </summary>
-    /// <param name="Slot"></param>
+    /// <param name="Slot">The constant pool slot index.</param>
     public readonly record struct PackageConstantHandle(ushort Slot)
     {
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="ConstantHandle"/> to a <see cref="PackageConstantHandle"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when the handle kind is not <see cref="ConstantKind.Package"/>.</exception>
         public static explicit operator PackageConstantHandle(ConstantHandle handle)
         {
             if (handle.Kind is not ConstantKind.Package and not ConstantKind.Unknown)
@@ -18,6 +22,9 @@ namespace IKVM.ByteCode
             return new PackageConstantHandle(handle.Slot);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="PackageConstantHandle"/> to a generic <see cref="ConstantHandle"/>.
+        /// </summary>
         public static implicit operator ConstantHandle(PackageConstantHandle handle)
         {
             return new ConstantHandle(ConstantKind.Package, handle.Slot);

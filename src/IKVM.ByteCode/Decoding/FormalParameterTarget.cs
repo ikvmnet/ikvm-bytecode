@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a <c>formal_parameter_target</c> type annotation target decoded from a class file.
+    /// </summary>
+    /// <param name="ParameterIndex">The index of the formal parameter.</param>
     public readonly record struct FormalParameterTarget(byte ParameterIndex)
     {
 
@@ -40,6 +44,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets the index of the formal parameter.
+        /// </summary>
         public readonly byte ParameterIndex = ParameterIndex;
         readonly bool _isNotNil = true;
 

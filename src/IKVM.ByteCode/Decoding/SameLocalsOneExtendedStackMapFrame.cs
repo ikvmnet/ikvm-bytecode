@@ -5,6 +5,12 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>same_locals_1_stack_item_frame_extended</c> stack map frame indicating one stack item and unchanged locals with an explicit offset delta.
+    /// </summary>
+    /// <param name="FrameType">The frame type byte (always 247).</param>
+    /// <param name="OffsetDelta">The offset delta from the previous frame.</param>
+    /// <param name="Stack">The single verification type on the operand stack.</param>
     public readonly record struct SameLocalsOneExtendedStackMapFrame(byte FrameType, ushort OffsetDelta, VerificationTypeInfo Stack)
     {
 
@@ -12,6 +18,7 @@ namespace IKVM.ByteCode.Decoding
         /// Measures the size of the current element value constant value.
         /// </summary>
         /// <param name="reader"></param>
+        /// <param name="frameType"></param>
         /// <param name="size"></param>
         /// <returns></returns>
         public static bool TryMeasure(ref ClassFormatReader reader, byte frameType, ref int size)
@@ -39,9 +46,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly byte FrameType = FrameType;
-        public readonly ushort OffsetDelta = OffsetDelta;
-        public readonly VerificationTypeInfo Stack = Stack;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -53,6 +57,21 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the frame type byte.
+        /// </summary>
+        public readonly byte FrameType = FrameType;
+
+        /// <summary>
+        /// Gets the offset delta from the previous stack map frame.
+        /// </summary>
+        public readonly ushort OffsetDelta = OffsetDelta;
+
+        /// <summary>
+        /// Gets the single stack verification type.
+        /// </summary>
+        public readonly VerificationTypeInfo Stack = Stack;
 
         /// <summary>
         /// Copies this frame to the encoder.

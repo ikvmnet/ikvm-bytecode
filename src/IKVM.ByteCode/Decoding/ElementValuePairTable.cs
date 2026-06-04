@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a table of annotation element-value pairs decoded from a class file.
+    /// </summary>
     public readonly struct ElementValuePairTable : IReadOnlyList<ElementValuePair>
     {
 
+        /// <summary>
+        /// Enumerates the element-value pairs in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<ElementValuePair>
         {
 

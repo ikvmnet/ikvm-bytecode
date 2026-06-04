@@ -5,6 +5,11 @@ using IKVM.ByteCode.Buffers;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a single case entry in a <c>lookupswitch</c> instruction.
+    /// </summary>
+    /// <param name="Key">The integer match value for this case.</param>
+    /// <param name="Target">The signed branch offset for this case.</param>
     public readonly record struct LookupSwitchCase(int Key, int Target)
     {
 

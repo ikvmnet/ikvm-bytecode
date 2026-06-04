@@ -6,10 +6,14 @@ namespace IKVM.ByteCode
     /// <summary>
     /// The CONSTANT_Utf8_info structure is used to represent constant string values.
     /// </summary>
-    /// <param name="Value"></param>
+    /// <param name="Value">The string value of this constant.</param>
     public readonly record struct Utf8Constant(string Value)
     {
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="Constant"/> to a <see cref="Utf8Constant"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when <paramref name="value"/> is not a <see cref="ConstantKind.Utf8"/> constant.</exception>
         public static explicit operator Utf8Constant(Constant value)
         {
             if (value.IsNil)
@@ -24,6 +28,9 @@ namespace IKVM.ByteCode
             return new Utf8Constant((string)value._object1);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="Utf8Constant"/> to its generic <see cref="Constant"/> representation.
+        /// </summary>
         public static implicit operator Constant(Utf8Constant value)
         {
             if (value.IsNil)
@@ -32,11 +39,17 @@ namespace IKVM.ByteCode
             return new Constant(ConstantKind.Utf8, value.Value, null, null, 0);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="Utf8Constant"/> to its string value, or <c>null</c> if nil.
+        /// </summary>
         public static implicit operator string?(Utf8Constant value)
         {
             return value.IsNotNil ? value.Value : null;
         }
 
+        /// <summary>
+        /// Implicitly converts a string to a <see cref="Utf8Constant"/>.
+        /// </summary>
         public static implicit operator Utf8Constant(string value)
         {
             return Constant.Utf8(value);

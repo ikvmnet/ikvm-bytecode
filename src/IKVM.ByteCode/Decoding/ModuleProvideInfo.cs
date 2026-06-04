@@ -3,11 +3,14 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded entry from the provides table of a <c>Module</c> attribute.
+    /// </summary>
+    /// <param name="Class">Handle to the service interface or abstract class.</param>
+    /// <param name="With">Table of implementation class handles.</param>
     public readonly record struct ModuleProvideInfo(ClassConstantHandle Class, ClassConstantHandleTable With)
     {
 
-        public readonly ClassConstantHandle Class = Class;
-        public readonly ClassConstantHandleTable With = With;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -19,6 +22,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the service type.
+        /// </summary>
+        public readonly ClassConstantHandle Class = Class;
+
+        /// <summary>
+        /// Gets the service implementations.
+        /// </summary>
+        public readonly ClassConstantHandleTable With = With;
 
         /// <summary>
         /// Copies this info to the encoder.

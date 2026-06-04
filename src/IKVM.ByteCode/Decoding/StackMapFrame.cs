@@ -6,6 +6,11 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded stack map frame entry, represented as a raw frame type byte and associated data.
+    /// </summary>
+    /// <param name="FrameType">The frame type byte identifying the concrete frame kind.</param>
+    /// <param name="Data">The raw encoded data for this frame entry.</param>
     public readonly record struct StackMapFrame(byte FrameType, ReadOnlySequence<byte> Data)
     {
 
@@ -93,8 +98,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly byte FrameType = FrameType;
-        public readonly ReadOnlySequence<byte> Data = Data;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -106,6 +109,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the frame type byte.
+        /// </summary>
+        public readonly byte FrameType = FrameType;
+
+        /// <summary>
+        /// Gets the raw data of this frame entry.
+        /// </summary>
+        public readonly ReadOnlySequence<byte> Data = Data;
 
         public readonly SameStackMapFrame AsSameStackMap()
         {

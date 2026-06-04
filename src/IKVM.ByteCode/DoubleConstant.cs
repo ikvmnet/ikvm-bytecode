@@ -6,10 +6,14 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents a Double constant value.
     /// </summary>
-    /// <param name="Value"></param>
+    /// <param name="Value">The double value of this constant.</param>
     public readonly record struct DoubleConstant(double Value)
     {
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="Constant"/> to a <see cref="DoubleConstant"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when <paramref name="value"/> is not a <see cref="ConstantKind.Double"/> constant.</exception>
         public static explicit operator DoubleConstant(Constant value)
         {
             if (value.IsNil)
@@ -21,6 +25,9 @@ namespace IKVM.ByteCode
             return new DoubleConstant(BitConverter.Int64BitsToDouble((long)value._ulong1));
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="DoubleConstant"/> to its generic <see cref="Constant"/> representation.
+        /// </summary>
         public static implicit operator Constant(DoubleConstant value)
         {
             if (value.IsNil)
@@ -29,6 +36,10 @@ namespace IKVM.ByteCode
             return new Constant(ConstantKind.Double, null, null, null, (ulong)BitConverter.DoubleToInt64Bits(value.Value));
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="DoubleConstant"/> to its <see cref="double"/> value.
+        /// </summary>
+        /// <exception cref="NullReferenceException">Thrown when the instance is nil.</exception>
         public static implicit operator double(DoubleConstant value)
         {
             if (value.IsNil)
@@ -37,6 +48,9 @@ namespace IKVM.ByteCode
             return value.Value;
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="double"/> to a <see cref="DoubleConstant"/>.
+        /// </summary>
         public static implicit operator DoubleConstant(double value)
         {
             return Constant.Double(value);

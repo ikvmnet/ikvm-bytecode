@@ -5,6 +5,10 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>NestMembers</c> attribute listing all classes belonging to the same nest.
+    /// </summary>
+    /// <param name="NestMembers">Table of nest member class handles.</param>
     public readonly record struct NestMembersAttribute(ClassConstantHandleTable NestMembers)
     {
 
@@ -28,7 +32,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ClassConstantHandleTable NestMembers = NestMembers;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -40,6 +43,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the table of nest member classes.
+        /// </summary>
+        public readonly ClassConstantHandleTable NestMembers = NestMembers;
 
         /// <summary>
         /// Copies this attribute to the encoder.

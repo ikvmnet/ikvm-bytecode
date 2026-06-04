@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_MethodType_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="Descriptor">The constant pool handle to the UTF-8 method descriptor.</param>
     public readonly record struct MethodTypeConstantData(Utf8ConstantHandle Descriptor)
     {
 
@@ -55,7 +59,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly Utf8ConstantHandle Descriptor = Descriptor;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -67,6 +70,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the constant pool handle to the UTF-8 method descriptor.
+        /// </summary>
+        public readonly Utf8ConstantHandle Descriptor = Descriptor;
 
     }
 

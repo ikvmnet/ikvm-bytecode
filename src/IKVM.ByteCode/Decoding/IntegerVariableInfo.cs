@@ -3,6 +3,9 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents an <c>Integer_variable_info</c> verification type decoded from a stack map frame.
+    /// </summary>
     public readonly record struct IntegerVariableInfo()
     {
 

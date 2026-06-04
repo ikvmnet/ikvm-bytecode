@@ -5,9 +5,15 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the inner classes table decoded from the <c>InnerClasses</c> attribute.
+    /// </summary>
     public readonly struct InnerClassTable : IReadOnlyList<InnerClass>
     {
 
+        /// <summary>
+        /// Enumerates the inner class entries in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<InnerClass>
         {
 
@@ -53,6 +59,9 @@ namespace IKVM.ByteCode.Decoding
 
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly InnerClassTable Empty = new([]);
 
         readonly InnerClass[] _items;

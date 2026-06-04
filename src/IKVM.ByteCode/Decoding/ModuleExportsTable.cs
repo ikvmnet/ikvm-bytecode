@@ -7,6 +7,9 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// A read-only table of <see cref="ModuleExportInfo"/> entries from the <c>Module</c> attribute exports list.
+    /// </summary>
     public readonly struct ModuleExportsTable : IReadOnlyList<ModuleExportInfo>
     {
 

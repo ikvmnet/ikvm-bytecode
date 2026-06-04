@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_Long_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="Value">The 64-bit integer value.</param>
     public readonly record struct LongConstantData(long Value)
     {
 
@@ -57,7 +61,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly long Value = Value;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -69,6 +72,8 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        public readonly long Value = Value;
 
     }
 

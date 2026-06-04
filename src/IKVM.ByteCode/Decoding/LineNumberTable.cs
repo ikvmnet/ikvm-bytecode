@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the line number table decoded from the <c>LineNumberTable</c> attribute.
+    /// </summary>
     public readonly struct LineNumberTable : IReadOnlyList<LineNumberInfo>
     {
 
+        /// <summary>
+        /// Enumerates the line number entries in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<LineNumberInfo>
         {
 
@@ -55,6 +61,9 @@ namespace IKVM.ByteCode.Decoding
 
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly LineNumberTable Empty = new([]);
 
         readonly LineNumberInfo[] _items;

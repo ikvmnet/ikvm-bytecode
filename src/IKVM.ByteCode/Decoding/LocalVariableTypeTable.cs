@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the local variable type table decoded from the <c>LocalVariableTypeTable</c> attribute.
+    /// </summary>
     public readonly struct LocalVariableTypeTable : IReadOnlyList<LocalVariableType>
     {
 
+        /// <summary>
+        /// Enumerates the local variable type entries in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<LocalVariableType>
         {
 
@@ -55,6 +61,9 @@ namespace IKVM.ByteCode.Decoding
 
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly LocalVariableTypeTable Empty = new([]);
 
         readonly LocalVariableType[] _items;

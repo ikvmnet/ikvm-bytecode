@@ -3,6 +3,9 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>Null_variable_info</c> verification type indicating a <c>null</c> reference.
+    /// </summary>
     public readonly record struct NullVariableInfo()
     {
 

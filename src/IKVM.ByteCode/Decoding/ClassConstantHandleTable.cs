@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a table of class constant handles decoded from a class file.
+    /// </summary>
     public readonly struct ClassConstantHandleTable : IReadOnlyList<ClassConstantHandle>
     {
 
+        /// <summary>
+        /// Enumerates the class constant handles in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<ClassConstantHandle>
         {
 
@@ -55,6 +61,9 @@ namespace IKVM.ByteCode.Decoding
 
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly ClassConstantHandleTable Empty = new([]);
 
         readonly ClassConstantHandle[] _items;

@@ -5,9 +5,15 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the constant pool of a decoded class file.
+    /// </summary>
     public readonly struct ConstantTable : IConstantView, IConstantPool, IReadOnlyCollection<ConstantHandle>
     {
 
+        /// <summary>
+        /// Enumerates the constant pool handles in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<ConstantHandle>
         {
 

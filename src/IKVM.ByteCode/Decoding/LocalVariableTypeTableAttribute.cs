@@ -5,11 +5,24 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the decoded <c>LocalVariableTypeTable</c> attribute of a <c>Code</c> attribute.
+    /// </summary>
+    /// <param name="LocalVariableTypes">The local variable type table.</param>
     public readonly record struct LocalVariableTypeTableAttribute(LocalVariableTypeTable LocalVariableTypes)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static LocalVariableTypeTableAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute from the given reader.
+        /// </summary>
+        /// <param name="reader">The class format reader to read from.</param>
+        /// <param name="attribute">The decoded attribute on success.</param>
+        /// <returns><see langword="true"/> if the attribute was read successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out LocalVariableTypeTableAttribute attribute)
         {
             attribute = default;
@@ -38,7 +51,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly LocalVariableTypeTable LocalVariableTypes = LocalVariableTypes;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -50,6 +62,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the local variable type table.
+        /// </summary>
+        public readonly LocalVariableTypeTable LocalVariableTypes = LocalVariableTypes;
 
         /// <summary>
         /// Copies this attribute to the encoder.

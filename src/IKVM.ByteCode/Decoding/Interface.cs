@@ -1,6 +1,10 @@
 ﻿namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents an interface entry in the interfaces table of a decoded class file.
+    /// </summary>
+    /// <param name="Class">The constant pool handle to the interface class.</param>
     public readonly record struct Interface(ClassConstantHandle Class)
     {
 
@@ -34,7 +38,6 @@
             return true;
         }
 
-        public readonly ClassConstantHandle Class = Class;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -46,6 +49,11 @@
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the constant pool handle to the interface class.
+        /// </summary>
+        public readonly ClassConstantHandle Class = Class;
 
     }
 

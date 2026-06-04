@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>CONSTANT_Package_info</c> constant pool entry.
+    /// </summary>
+    /// <param name="Name">Handle to the package name constant.</param>
     public readonly record struct PackageConstantData(Utf8ConstantHandle Name)
     {
 
@@ -55,7 +59,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly Utf8ConstantHandle Name = Name;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -67,6 +70,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the package name.
+        /// </summary>
+        public readonly Utf8ConstantHandle Name = Name;
 
     }
 

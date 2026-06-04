@@ -3,11 +3,24 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>StackMapTable</c> attribute containing stack map frame entries used by the bytecode verifier.
+    /// </summary>
+    /// <param name="Frames">Table of decoded stack map frames.</param>
     public readonly record struct StackMapTableAttribute(StackMapFrameTable Frames)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static StackMapTableAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out StackMapTableAttribute attribute)
         {
             attribute = default;
@@ -24,7 +37,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly StackMapFrameTable Frames = Frames;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -36,6 +48,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the table of stack map frames.
+        /// </summary>
+        public readonly StackMapFrameTable Frames = Frames;
 
         /// <summary>
         /// Copies this attribute to the builder.

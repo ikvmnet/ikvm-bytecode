@@ -3,6 +3,13 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents an exception handler entry in the exception table of a <c>Code</c> attribute.
+    /// </summary>
+    /// <param name="StartOffset">The bytecode offset of the start of the protected region (inclusive).</param>
+    /// <param name="EndOffset">The bytecode offset of the end of the protected region (exclusive).</param>
+    /// <param name="HandlerOffset">The bytecode offset of the exception handler.</param>
+    /// <param name="CatchType">The constant pool handle to the caught exception type, or the nil handle to catch all exceptions.</param>
     public readonly record struct ExceptionHandler(ushort StartOffset, ushort EndOffset, ushort HandlerOffset, ClassConstantHandle CatchType)
     {
 
@@ -66,10 +73,6 @@ namespace IKVM.ByteCode.Decoding
                 constantPool.Get(constantView.Get(CatchType)));
         }
 
-        public readonly ushort StartOffset = StartOffset;
-        public readonly ushort EndOffset = EndOffset;
-        public readonly ushort HandlerOffset = HandlerOffset;
-        public readonly ClassConstantHandle CatchType = CatchType;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -81,6 +84,26 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the bytecode offset of the start of the protected region (inclusive).
+        /// </summary>
+        public readonly ushort StartOffset = StartOffset;
+
+        /// <summary>
+        /// Gets the bytecode offset of the end of the protected region (exclusive).
+        /// </summary>
+        public readonly ushort EndOffset = EndOffset;
+
+        /// <summary>
+        /// Gets the bytecode offset of the exception handler.
+        /// </summary>
+        public readonly ushort HandlerOffset = HandlerOffset;
+
+        /// <summary>
+        /// Gets the constant pool handle to the caught exception type, or the nil handle to catch all exceptions.
+        /// </summary>
+        public readonly ClassConstantHandle CatchType = CatchType;
 
     }
 

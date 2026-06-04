@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_Dynamic_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="BootstrapMethodAttributeIndex">The index into the bootstrap methods table of the class file.</param>
+    /// <param name="NameAndType">The constant pool handle to the name and type descriptor.</param>
     public readonly record struct DynamicConstantData(ushort BootstrapMethodAttributeIndex, NameAndTypeConstantHandle NameAndType)
     {
 
@@ -57,8 +62,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ushort BootstrapMethodAttributeIndex = BootstrapMethodAttributeIndex;
-        public readonly NameAndTypeConstantHandle NameAndType = NameAndType;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -70,6 +73,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the index into the bootstrap methods table.
+        /// </summary>
+        public readonly ushort BootstrapMethodAttributeIndex = BootstrapMethodAttributeIndex;
+
+        /// <summary>
+        /// Gets the constant pool handle to the name and type descriptor.
+        /// </summary>
+        public readonly NameAndTypeConstantHandle NameAndType = NameAndType;
 
     }
 

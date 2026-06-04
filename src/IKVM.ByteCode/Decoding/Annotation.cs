@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a Java annotation decoded from a class file.
+    /// </summary>
+    /// <param name="Type">The constant pool handle to the annotation type descriptor.</param>
+    /// <param name="Elements">The element value pairs of the annotation.</param>
     public readonly record struct Annotation(Utf8ConstantHandle Type, ElementValuePairTable Elements)
     {
 
@@ -71,7 +76,14 @@ namespace IKVM.ByteCode.Decoding
 
         readonly bool _isNotNil = true;
 
+        /// <summary>
+        /// Gets the constant pool handle to the annotation type descriptor.
+        /// </summary>
         public readonly Utf8ConstantHandle Type = Type;
+
+        /// <summary>
+        /// Gets the element value pairs of this annotation.
+        /// </summary>
         public readonly ElementValuePairTable Elements = Elements;
 
         /// <summary>

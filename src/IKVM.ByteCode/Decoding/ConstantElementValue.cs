@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a constant element value decoded from a class file annotation.
+    /// </summary>
+    /// <param name="Kind">The kind of the element value.</param>
+    /// <param name="Handle">The constant pool handle to the constant value.</param>
     public readonly record struct ConstantElementValue(ElementValueKind Kind, ConstantHandle Handle)
     {
 
@@ -66,7 +71,14 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets the kind of the element value.
+        /// </summary>
         public readonly ElementValueKind Kind = Kind;
+
+        /// <summary>
+        /// Gets the constant pool handle to the constant value.
+        /// </summary>
         public readonly ConstantHandle Handle = Handle;
         readonly bool _isNotNil = true;
 

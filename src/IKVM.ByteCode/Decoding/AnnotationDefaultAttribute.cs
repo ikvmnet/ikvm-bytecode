@@ -3,11 +3,24 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the decoded <c>AnnotationDefault</c> attribute of a class file method.
+    /// </summary>
+    /// <param name="DefaultValue">The default element value of the annotation type element.</param>
     public readonly record struct AnnotationDefaultAttribute(ElementValue DefaultValue)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static AnnotationDefaultAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute from the given reader.
+        /// </summary>
+        /// <param name="reader">The class format reader to read from.</param>
+        /// <param name="attribute">The decoded attribute on success.</param>
+        /// <returns><see langword="true"/> if the attribute was read successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out AnnotationDefaultAttribute attribute)
         {
             attribute = default;
@@ -19,6 +32,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets the default element value of the annotation type element.
+        /// </summary>
         public readonly ElementValue DefaultValue = DefaultValue;
         readonly bool _isNotNil = true;
 

@@ -3,9 +3,16 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>RuntimeVisibleAnnotations</c> attribute containing annotations retained at run time.
+    /// </summary>
+    /// <param name="Annotations">Table of decoded annotations.</param>
     public readonly record struct RuntimeVisibleAnnotationsAttribute(AnnotationTable Annotations)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static RuntimeVisibleAnnotationsAttribute Nil => default;
 
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
@@ -27,7 +34,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly AnnotationTable Annotations = Annotations;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -39,6 +45,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the table of annotations.
+        /// </summary>
+        public readonly AnnotationTable Annotations = Annotations;
 
         /// <summary>
         /// Copies this attribute to the encoder.

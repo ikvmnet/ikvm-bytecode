@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>Object_variable_info</c> verification type indicating a reference to an instance of the specified class.
+    /// </summary>
+    /// <param name="Class">Handle to the class constant identifying the reference type.</param>
     public readonly record struct ObjectVariableInfo(ClassConstantHandle Class)
     {
 
@@ -40,7 +44,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ClassConstantHandle Class = Class;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -52,6 +55,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the reference type class.
+        /// </summary>
+        public readonly ClassConstantHandle Class = Class;
 
     }
 

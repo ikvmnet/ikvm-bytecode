@@ -5,6 +5,9 @@ using System.Collections.Generic;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// A read-only table of <see cref="ModuleConstantHandle"/> values.
+    /// </summary>
     public readonly struct ModuleConstantHandleTable : IReadOnlyList<ModuleConstantHandle>
     {
 

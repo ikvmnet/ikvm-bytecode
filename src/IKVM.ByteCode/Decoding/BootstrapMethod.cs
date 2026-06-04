@@ -3,9 +3,20 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a bootstrap method entry decoded from the <c>BootstrapMethods</c> attribute.
+    /// </summary>
+    /// <param name="Method">The constant pool handle to the method handle used as the bootstrap method.</param>
+    /// <param name="Arguments">The constant pool handles to the static arguments passed to the bootstrap method.</param>
     public readonly record struct BootstrapMethod(MethodHandleConstantHandle Method, ConstantHandleTable Arguments)
     {
 
+        /// <summary>
+        /// Attempts to read the bootstrap method entry from the given reader.
+        /// </summary>
+        /// <param name="reader">The class format reader to read from.</param>
+        /// <param name="method">The decoded bootstrap method entry on success.</param>
+        /// <returns><see langword="true"/> if the entry was read successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out BootstrapMethod method)
         {
             method = default;
@@ -44,8 +55,6 @@ namespace IKVM.ByteCode.Decoding
             encoder.Method(constantPool.Get(constantView.Get(Method)), e => self.Arguments.CopyTo(constantView, constantPool, ref e));
         }
 
-        public readonly MethodHandleConstantHandle Method = Method;
-        public readonly ConstantHandleTable Arguments = Arguments;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -57,6 +66,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the constant pool handle to the method handle used as the bootstrap method.
+        /// </summary>
+        public readonly MethodHandleConstantHandle Method = Method;
+
+        /// <summary>
+        /// Gets the constant pool handles to the static arguments passed to the bootstrap method.
+        /// </summary>
+        public readonly ConstantHandleTable Arguments = Arguments;
 
     }
 

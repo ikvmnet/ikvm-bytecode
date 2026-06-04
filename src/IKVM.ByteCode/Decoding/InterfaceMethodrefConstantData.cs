@@ -3,6 +3,11 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_InterfaceMethodref_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="Class">The constant pool handle to the interface class that declares the method.</param>
+    /// <param name="NameAndType">The constant pool handle to the name and type descriptor of the method.</param>
     public readonly record struct InterfaceMethodrefConstantData(ClassConstantHandle Class, NameAndTypeConstantHandle NameAndType)
     {
 
@@ -56,8 +61,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ClassConstantHandle Class = Class;
-        public readonly NameAndTypeConstantHandle NameAndType = NameAndType;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -69,6 +72,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the constant pool handle to the interface class that declares the method.
+        /// </summary>
+        public readonly ClassConstantHandle Class = Class;
+
+        /// <summary>
+        /// Gets the constant pool handle to the name and type descriptor of the method.
+        /// </summary>
+        public readonly NameAndTypeConstantHandle NameAndType = NameAndType;
 
     }
 

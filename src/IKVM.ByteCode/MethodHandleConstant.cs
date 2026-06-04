@@ -6,14 +6,18 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents a MethodHandle constant value.
     /// </summary>
-    /// <param name="Kind"></param>
-    /// <param name="ReferenceKind"></param>
-    /// <param name="ClassName"></param>
-    /// <param name="Name"></param>
-    /// <param name="Descriptor"></param>
+    /// <param name="Kind">The method handle reference kind.</param>
+    /// <param name="ReferenceKind">The constant kind of the underlying reference entry.</param>
+    /// <param name="ClassName">The internal name of the declaring class.</param>
+    /// <param name="Name">The simple name of the field or method.</param>
+    /// <param name="Descriptor">The field or method descriptor.</param>
     public readonly record struct MethodHandleConstant(MethodHandleKind Kind, ConstantKind ReferenceKind, string? ClassName, string? Name, string? Descriptor)
     {
 
+        /// <summary>
+        /// Explicitly converts a generic <see cref="Constant"/> to a <see cref="MethodHandleConstant"/>.
+        /// </summary>
+        /// <exception cref="InvalidCastException">Thrown when <paramref name="value"/> is not a <see cref="ConstantKind.MethodHandle"/> constant.</exception>
         public static explicit operator MethodHandleConstant(Constant value)
         {
             if (value.IsNil)
@@ -25,6 +29,9 @@ namespace IKVM.ByteCode
             return new MethodHandleConstant((MethodHandleKind)(byte)(value._ulong1 >> 32), (ConstantKind)(byte)(value._ulong1 & 0x00000000FFFFFFFF), (string?)value._object1, (string?)value._object2, (string?)value._object3);
         }
 
+        /// <summary>
+        /// Implicitly converts a <see cref="MethodHandleConstant"/> to its generic <see cref="Constant"/> representation.
+        /// </summary>
         public static implicit operator Constant(MethodHandleConstant value)
         {
             if (value.IsNil)

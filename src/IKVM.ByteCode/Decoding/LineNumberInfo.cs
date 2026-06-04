@@ -3,11 +3,14 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a line number entry decoded from the <c>LineNumberTable</c> attribute.
+    /// </summary>
+    /// <param name="StartPc">The bytecode offset at which the line begins.</param>
+    /// <param name="LineNumber">The corresponding source line number.</param>
     public readonly record struct LineNumberInfo(ushort StartPc, ushort LineNumber)
     {
 
-        public readonly ushort StartPc = StartPc;
-        public readonly ushort LineNumber = LineNumber;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -19,6 +22,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the bytecode offset at which the line begins.
+        /// </summary>
+        public readonly ushort StartPc = StartPc;
+
+        /// <summary>
+        /// Gets the corresponding source line number.
+        /// </summary>
+        public readonly ushort LineNumber = LineNumber;
 
         /// <summary>
         /// Encodes this data class to the encoder.

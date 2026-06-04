@@ -7,6 +7,9 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// A read-only table of <see cref="ParameterAnnotation"/> entries, one per method parameter.
+    /// </summary>
     public readonly struct ParameterAnnotationTable : IReadOnlyList<ParameterAnnotation>
     {
 

@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a table of bootstrap methods decoded from the <c>BootstrapMethods</c> attribute.
+    /// </summary>
     public readonly struct BootstrapMethodTable : IReadOnlyList<BootstrapMethod>
     {
 
+        /// <summary>
+        /// Enumerates the bootstrap methods in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<BootstrapMethod>
         {
 
@@ -55,6 +61,9 @@ namespace IKVM.ByteCode.Decoding
 
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly BootstrapMethodTable Empty = new([]);
 
         readonly BootstrapMethod[] _items;

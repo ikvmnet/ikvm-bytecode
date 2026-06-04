@@ -6,10 +6,15 @@ namespace IKVM.ByteCode
     /// <summary>
     /// Represents a handle to a InterfaceMethodref constant.
     /// </summary>
-    /// <param name="Slot"></param>
+    /// <param name="Slot">The constant pool slot index.</param>
     public readonly record struct InterfaceMethodrefConstantHandle(ushort Slot)
     {
 
+        /// <summary>
+        /// Converts a <see cref="ConstantHandle" /> to a <see cref="InterfaceMethodrefConstantHandle" />.
+        /// </summary>
+        /// <param name="handle">The handle to convert.</param>
+        /// <exception cref="InvalidCastException">Thrown when the handle kind is not <see cref="ConstantKind.InterfaceMethodref"/>.</exception>
         public static explicit operator InterfaceMethodrefConstantHandle(ConstantHandle handle)
         {
             if (handle.Kind is not ConstantKind.InterfaceMethodref and not ConstantKind.Unknown)
@@ -18,11 +23,20 @@ namespace IKVM.ByteCode
             return new InterfaceMethodrefConstantHandle(handle.Slot);
         }
 
+        /// <summary>
+        /// Converts a <see cref="InterfaceMethodrefConstantHandle" /> to a <see cref="ConstantHandle" />.
+        /// </summary>
+        /// <param name="handle">The handle to convert.</param>
         public static implicit operator ConstantHandle(InterfaceMethodrefConstantHandle handle)
         {
             return new ConstantHandle(ConstantKind.InterfaceMethodref, handle.Slot);
         }
 
+        /// <summary>
+        /// Converts a <see cref="RefConstantHandle" /> to a <see cref="InterfaceMethodrefConstantHandle" />.
+        /// </summary>
+        /// <param name="handle">The handle to convert.</param>
+        /// <exception cref="InvalidCastException">Thrown when the handle kind is not <see cref="ConstantKind.InterfaceMethodref"/>.</exception>
         public static explicit operator InterfaceMethodrefConstantHandle(RefConstantHandle handle)
         {
             if (handle.Kind is not ConstantKind.InterfaceMethodref and not ConstantKind.Unknown)
@@ -31,6 +45,10 @@ namespace IKVM.ByteCode
             return new InterfaceMethodrefConstantHandle(handle.Index);
         }
 
+        /// <summary>
+        /// Converts a <see cref="InterfaceMethodrefConstantHandle" /> to a <see cref="RefConstantHandle" />.
+        /// </summary>
+        /// <param name="handle">The handle to convert.</param>
         public static implicit operator RefConstantHandle(InterfaceMethodrefConstantHandle handle)
         {
             return new RefConstantHandle(ConstantKind.InterfaceMethodref, handle.Slot);

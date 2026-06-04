@@ -5,9 +5,16 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>RuntimeVisibleTypeAnnotations</c> attribute containing type annotations retained at run time.
+    /// </summary>
+    /// <param name="TypeAnnotations">Table of decoded type annotations.</param>
     public readonly record struct RuntimeVisibleTypeAnnotationsAttribute(TypeAnnotationTable TypeAnnotations)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static RuntimeVisibleTypeAnnotationsAttribute Nil => default;
 
         public static bool TryRead(ref ClassFormatReader reader, out RuntimeVisibleTypeAnnotationsAttribute attribute)
@@ -30,7 +37,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly TypeAnnotationTable TypeAnnotations = TypeAnnotations;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -42,6 +48,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the table of type annotations.
+        /// </summary>
+        public readonly TypeAnnotationTable TypeAnnotations = TypeAnnotations;
 
         /// <summary>
         /// Copies this attribute to the encoder.

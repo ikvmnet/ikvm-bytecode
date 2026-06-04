@@ -3,11 +3,24 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>ModulePackages</c> attribute listing all packages in a module.
+    /// </summary>
+    /// <param name="Packages">Table of package constant handles.</param>
     public readonly record struct ModulePackagesAttribute(PackageConstantHandleTable Packages)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static ModulePackagesAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out ModulePackagesAttribute attribute)
         {
             attribute = default;
@@ -28,7 +41,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly PackageConstantHandleTable Packages = Packages;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -40,6 +52,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the table of packages in the module.
+        /// </summary>
+        public readonly PackageConstantHandleTable Packages = Packages;
 
         /// <summary>
         /// Copies this attribute to the encoder.

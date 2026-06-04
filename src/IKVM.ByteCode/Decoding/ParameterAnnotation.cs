@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded annotations for a single method parameter.
+    /// </summary>
+    /// <param name="Annotations">Table of annotations applied to this parameter.</param>
     public readonly record struct ParameterAnnotation(AnnotationTable Annotations)
     {
 
@@ -10,7 +14,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the structure.
         /// </summary>
         /// <param name="reader"></param>
-        /// <param name="parameterAnnotation"></param>
+        /// <param name="size"></param>
         /// <returns></returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
@@ -51,6 +55,9 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Gets the annotations for this parameter.
+        /// </summary>
         public readonly AnnotationTable Annotations = Annotations;
         readonly bool _isNotNil = true;
 

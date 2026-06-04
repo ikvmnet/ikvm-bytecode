@@ -6,19 +6,42 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a raw element value decoded from a class file annotation.
+    /// </summary>
+    /// <param name="Kind">The kind tag byte of the element value.</param>
+    /// <param name="Data">The raw bytes of the element value payload.</param>
     public readonly record struct ElementValue(ElementValueKind Kind, ReadOnlySequence<byte> Data)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static ElementValue Nil => default;
 
+        /// <summary>
+        /// Converts an <see cref="ElementValue" /> to a <see cref="ConstantElementValue" />.
+        /// </summary>
         public static explicit operator ConstantElementValue(ElementValue value) => value.AsConstant();
 
+        /// <summary>
+        /// Converts an <see cref="ElementValue" /> to an <see cref="EnumElementValue" />.
+        /// </summary>
         public static explicit operator EnumElementValue(ElementValue value) => value.AsEnum();
 
+        /// <summary>
+        /// Converts an <see cref="ElementValue" /> to a <see cref="ClassElementValue" />.
+        /// </summary>
         public static explicit operator ClassElementValue(ElementValue value) => value.AsClass();
 
+        /// <summary>
+        /// Converts an <see cref="ElementValue" /> to an <see cref="AnnotationElementValue" />.
+        /// </summary>
         public static explicit operator AnnotationElementValue(ElementValue value) => value.AsAnnotation();
 
+        /// <summary>
+        /// Converts an <see cref="ElementValue" /> to an <see cref="ArrayElementValue" />.
+        /// </summary>
         public static explicit operator ArrayElementValue(ElementValue value) => value.AsArray();
 
         /// <summary>

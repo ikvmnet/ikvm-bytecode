@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the data of a <c>CONSTANT_Class_info</c> entry decoded from the constant pool.
+    /// </summary>
+    /// <param name="Name">The constant pool handle to the UTF-8 name descriptor of the class.</param>
     public readonly record struct ClassConstantData(Utf8ConstantHandle Name)
     {
 
@@ -58,6 +62,9 @@ namespace IKVM.ByteCode.Decoding
 
         readonly bool _isNotNil = true;
 
+        /// <summary>
+        /// Gets the constant pool handle to the UTF-8 name descriptor of the class.
+        /// </summary>
         public readonly Utf8ConstantHandle Name = Name;
 
         /// <summary>

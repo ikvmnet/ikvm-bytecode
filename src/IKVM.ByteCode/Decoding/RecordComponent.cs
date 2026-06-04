@@ -5,14 +5,20 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded record component entry from the <c>Record</c> attribute.
+    /// </summary>
+    /// <param name="Name">Handle to the component name constant.</param>
+    /// <param name="Descriptor">Handle to the component descriptor constant.</param>
+    /// <param name="Attributes">Attribute table associated with this component.</param>
     public readonly record struct RecordComponent(Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, AttributeTable Attributes)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static RecordComponent Nil => default;
 
-        public readonly Utf8ConstantHandle Name = Name;
-        public readonly Utf8ConstantHandle Descriptor = Descriptor;
-        public readonly AttributeTable Attributes = Attributes;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -24,6 +30,21 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the component name.
+        /// </summary>
+        public readonly Utf8ConstantHandle Name = Name;
+
+        /// <summary>
+        /// Gets the component descriptor.
+        /// </summary>
+        public readonly Utf8ConstantHandle Descriptor = Descriptor;
+
+        /// <summary>
+        /// Gets the component attributes.
+        /// </summary>
+        public readonly AttributeTable Attributes = Attributes;
 
         /// <summary>
         /// Copies this component to the encoder.

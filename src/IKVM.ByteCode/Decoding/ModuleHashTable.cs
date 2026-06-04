@@ -7,6 +7,9 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// A read-only table of <see cref="ModuleHash"/> entries from the <c>ModuleHashes</c> attribute.
+    /// </summary>
     public readonly struct ModuleHashTable : IReadOnlyList<ModuleHash>
     {
 

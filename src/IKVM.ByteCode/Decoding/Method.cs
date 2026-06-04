@@ -1,6 +1,13 @@
 ﻿namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a method decoded from a class file.
+    /// </summary>
+    /// <param name="AccessFlags">The access flags of the method.</param>
+    /// <param name="Name">The constant pool handle to the method name.</param>
+    /// <param name="Descriptor">The constant pool handle to the method descriptor.</param>
+    /// <param name="Attributes">The attribute table of the method.</param>
     public readonly record struct Method(AccessFlag AccessFlags, Utf8ConstantHandle Name, Utf8ConstantHandle Descriptor, AttributeTable Attributes)
     {
 
@@ -51,10 +58,6 @@
             return true;
         }
 
-        public readonly AccessFlag AccessFlags = AccessFlags;
-        public readonly Utf8ConstantHandle Name = Name;
-        public readonly Utf8ConstantHandle Descriptor = Descriptor;
-        public readonly AttributeTable Attributes = Attributes;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -66,6 +69,26 @@
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the access flags of the method.
+        /// </summary>
+        public readonly AccessFlag AccessFlags = AccessFlags;
+
+        /// <summary>
+        /// Gets the constant pool handle to the method name.
+        /// </summary>
+        public readonly Utf8ConstantHandle Name = Name;
+
+        /// <summary>
+        /// Gets the constant pool handle to the method descriptor.
+        /// </summary>
+        public readonly Utf8ConstantHandle Descriptor = Descriptor;
+
+        /// <summary>
+        /// Gets the attribute table of the method.
+        /// </summary>
+        public readonly AttributeTable Attributes = Attributes;
 
     }
 

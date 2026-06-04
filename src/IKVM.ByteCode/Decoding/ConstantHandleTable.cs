@@ -7,9 +7,15 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a table of constant pool handles decoded from a class file.
+    /// </summary>
     public readonly struct ConstantHandleTable : IReadOnlyList<ConstantHandle>
     {
 
+        /// <summary>
+        /// Enumerates the constant pool handles in the table.
+        /// </summary>
         public struct Enumerator : IEnumerator<ConstantHandle>
         {
 
@@ -55,6 +61,9 @@ namespace IKVM.ByteCode.Decoding
 
         }
 
+        /// <summary>
+        /// Gets an empty table.
+        /// </summary>
         public static readonly ConstantHandleTable Empty = new([]);
 
         readonly ConstantHandle[] _items;

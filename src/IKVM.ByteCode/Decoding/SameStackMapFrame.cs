@@ -5,6 +5,10 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>same_frame</c> stack map frame indicating no local variable or stack changes.
+    /// </summary>
+    /// <param name="FrameType">The frame type byte (0–63), which also encodes the offset delta.</param>
     public readonly record struct SameStackMapFrame(byte FrameType)
     {
 
@@ -25,7 +29,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly byte FrameType = FrameType;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -37,6 +40,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the frame type byte, which encodes the implicit offset delta.
+        /// </summary>
+        public readonly byte FrameType = FrameType;
 
         /// <summary>
         /// Copies this frame to the encoder.

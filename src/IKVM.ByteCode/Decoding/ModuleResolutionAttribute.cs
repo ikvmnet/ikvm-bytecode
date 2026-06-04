@@ -3,6 +3,10 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>ModuleResolution</c> attribute specifying resolution hints for a module.
+    /// </summary>
+    /// <param name="Flag">Resolution flags for this module.</param>
     public readonly record struct ModuleResolutionAttribute(ModuleResolutionFlag Flag)
     {
 
@@ -28,11 +32,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        /// <summary>
-        /// Gets the resolution flags.
-        /// </summary>
-        public readonly ModuleResolutionFlag Flag = Flag;
-
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -44,6 +43,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the resolution flags.
+        /// </summary>
+        public readonly ModuleResolutionFlag Flag = Flag;
 
         /// <summary>
         /// Copies this attribute to the encoder.

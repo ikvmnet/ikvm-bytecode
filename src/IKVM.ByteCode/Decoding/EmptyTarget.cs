@@ -3,9 +3,18 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded empty type annotation target for targets that carry no additional data.
+    /// </summary>
     public readonly record struct EmptyTarget()
     {
 
+        /// <summary>
+        /// Measures the size of the target structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             return true;
@@ -23,6 +32,12 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Attempts to read the target structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="targetInfo"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out EmptyTarget targetInfo)
         {
             targetInfo = new EmptyTarget();

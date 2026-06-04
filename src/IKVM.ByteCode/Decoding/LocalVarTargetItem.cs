@@ -3,6 +3,12 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a single item in a <c>localvar_target</c> type annotation target.
+    /// </summary>
+    /// <param name="Start">The bytecode offset at which the local variable scope begins.</param>
+    /// <param name="Length">The length in bytes of the local variable's scope.</param>
+    /// <param name="Index">The local variable slot index in the frame.</param>
     public readonly record struct LocalVarTargetItem(ushort Start, ushort Length, ushort Index)
     {
 
@@ -30,9 +36,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ushort Start = Start;
-        public readonly ushort Length = Length;
-        public readonly ushort Index = Index;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -44,6 +47,21 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the bytecode offset at which the local variable scope begins.
+        /// </summary>
+        public readonly ushort Start = Start;
+
+        /// <summary>
+        /// Gets the length in bytes of the local variable's scope.
+        /// </summary>
+        public readonly ushort Length = Length;
+
+        /// <summary>
+        /// Gets the local variable slot index in the frame.
+        /// </summary>
+        public readonly ushort Index = Index;
 
         /// <summary>
         /// Copies this item to the encoder.

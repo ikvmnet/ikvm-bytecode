@@ -5,11 +5,31 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>Module</c> attribute describing a module's dependencies, exports, opens, uses, and provides.
+    /// </summary>
+    /// <param name="Name">Handle to the module name constant.</param>
+    /// <param name="Flags">Module access and property flags.</param>
+    /// <param name="Version">Handle to the module version string constant, or a nil handle if no version is present.</param>
+    /// <param name="Requires">Table of module dependency entries.</param>
+    /// <param name="Exports">Table of exported package entries.</param>
+    /// <param name="Opens">Table of opened package entries.</param>
+    /// <param name="Uses">Table of service-type class handles consumed by this module.</param>
+    /// <param name="Provides">Table of service-implementation entries provided by this module.</param>
     public readonly record struct ModuleAttribute(ModuleConstantHandle Name, ModuleFlag Flags, Utf8ConstantHandle Version, ModuleRequiresTable Requires, ModuleExportsTable Exports, ModuleOpensTable Opens, ClassConstantHandleTable Uses, ModuleProvidesTable Provides)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static ModuleAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out ModuleAttribute attribute)
         {
             attribute = default;
@@ -129,14 +149,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ModuleConstantHandle Name = Name;
-        public readonly ModuleFlag Flags = Flags;
-        public readonly Utf8ConstantHandle Version = Version;
-        public readonly ModuleRequiresTable Requires = Requires;
-        public readonly ModuleExportsTable Exports = Exports;
-        public readonly ModuleOpensTable Opens = Opens;
-        public readonly ClassConstantHandleTable Uses = Uses;
-        public readonly ModuleProvidesTable Provides = Provides;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -148,6 +160,46 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the module name.
+        /// </summary>
+        public readonly ModuleConstantHandle Name = Name;
+
+        /// <summary>
+        /// Gets the module flags.
+        /// </summary>
+        public readonly ModuleFlag Flags = Flags;
+
+        /// <summary>
+        /// Gets the module version, or a nil handle if not present.
+        /// </summary>
+        public readonly Utf8ConstantHandle Version = Version;
+
+        /// <summary>
+        /// Gets the table of required modules.
+        /// </summary>
+        public readonly ModuleRequiresTable Requires = Requires;
+
+        /// <summary>
+        /// Gets the table of exported packages.
+        /// </summary>
+        public readonly ModuleExportsTable Exports = Exports;
+
+        /// <summary>
+        /// Gets the table of opened packages.
+        /// </summary>
+        public readonly ModuleOpensTable Opens = Opens;
+
+        /// <summary>
+        /// Gets the table of used service types.
+        /// </summary>
+        public readonly ClassConstantHandleTable Uses = Uses;
+
+        /// <summary>
+        /// Gets the table of provided services.
+        /// </summary>
+        public readonly ModuleProvidesTable Provides = Provides;
 
         /// <summary>
         /// Copies this attribute to the encoder.

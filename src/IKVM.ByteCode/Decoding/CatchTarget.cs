@@ -3,9 +3,19 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a <c>catch_target</c> type annotation target decoded from a class file.
+    /// </summary>
+    /// <param name="ExceptionTableIndex">The index into the exception table of the exception catch clause that corresponds to this annotation.</param>
     public readonly record struct CatchTarget(ushort ExceptionTableIndex)
     {
 
+        /// <summary>
+        /// Attempts to measure the size of the structure.
+        /// </summary>
+        /// <param name="reader">The class format reader to advance.</param>
+        /// <param name="size">The measured size in bytes, updated on success.</param>
+        /// <returns><see langword="true"/> if the size was measured successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -29,6 +39,12 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
+        /// <summary>
+        /// Attempts to read the target from the given reader.
+        /// </summary>
+        /// <param name="reader">The class format reader to read from.</param>
+        /// <param name="target">The decoded target on success.</param>
+        /// <returns><see langword="true"/> if the target was read successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out CatchTarget target)
         {
             target = default;
@@ -40,8 +56,12 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ushort ExceptionTableIndex = ExceptionTableIndex;
         readonly bool _isNotNil = true;
+
+        /// <summary>
+        /// Gets the index into the exception table of the exception catch clause.
+        /// </summary>
+        public readonly ushort ExceptionTableIndex = ExceptionTableIndex;
 
         /// <summary>
         /// Gets whether the instance is nil.

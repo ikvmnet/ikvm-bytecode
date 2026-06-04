@@ -3,11 +3,24 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>Signature</c> attribute containing the generic signature of a class, field, or method.
+    /// </summary>
+    /// <param name="Signature">Handle to the signature string constant.</param>
     public readonly record struct SignatureAttribute(Utf8ConstantHandle Signature)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static SignatureAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute structure.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="attribute"></param>
+        /// <returns></returns>
         public static bool TryRead(ref ClassFormatReader reader, out SignatureAttribute attribute)
         {
             attribute = default;
@@ -19,7 +32,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly Utf8ConstantHandle Signature = Signature;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -31,6 +43,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the generic signature string.
+        /// </summary>
+        public readonly Utf8ConstantHandle Signature = Signature;
 
         /// <summary>
         /// Copies this attribute to the encoder.

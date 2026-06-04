@@ -5,9 +5,16 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Decoded <c>RuntimeInvisibleParameterAnnotations</c> attribute containing per-parameter annotations not retained at run time.
+    /// </summary>
+    /// <param name="ParameterAnnotations">Table of parameter annotation entries.</param>
     public readonly record struct RuntimeInvisibleParameterAnnotationsAttribute(ParameterAnnotationTable ParameterAnnotations)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static RuntimeInvisibleParameterAnnotationsAttribute Nil => default;
 
         public static bool TryRead(ref ClassFormatReader reader, out RuntimeInvisibleParameterAnnotationsAttribute attribute)
@@ -30,7 +37,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly ParameterAnnotationTable ParameterAnnotations = ParameterAnnotations;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -42,6 +48,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the per-parameter annotation entries.
+        /// </summary>
+        public readonly ParameterAnnotationTable ParameterAnnotations = ParameterAnnotations;
 
         /// <summary>
         /// Copies this attribute to the encoder.

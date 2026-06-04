@@ -5,11 +5,24 @@ using IKVM.ByteCode.Encoding;
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents the decoded <c>MethodParameters</c> attribute of a class file method.
+    /// </summary>
+    /// <param name="Parameters">The table of method parameters.</param>
     public readonly record struct MethodParametersAttribute(MethodParameterTable Parameters)
     {
 
+        /// <summary>
+        /// Gets the nil instance.
+        /// </summary>
         public static MethodParametersAttribute Nil => default;
 
+        /// <summary>
+        /// Attempts to read the attribute from the given reader.
+        /// </summary>
+        /// <param name="reader">The class format reader to read from.</param>
+        /// <param name="attribute">The decoded attribute on success.</param>
+        /// <returns><see langword="true"/> if the attribute was read successfully; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out MethodParametersAttribute attribute)
         {
             attribute = default;
@@ -32,7 +45,6 @@ namespace IKVM.ByteCode.Decoding
             return true;
         }
 
-        public readonly MethodParameterTable Parameters = Parameters;
         readonly bool _isNotNil = true;
 
         /// <summary>
@@ -44,6 +56,11 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the table of method parameters.
+        /// </summary>
+        public readonly MethodParameterTable Parameters = Parameters;
 
         /// <summary>
         /// Copies this attribute to the encoder.

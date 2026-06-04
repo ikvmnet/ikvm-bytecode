@@ -3,6 +3,9 @@
 namespace IKVM.ByteCode.Decoding
 {
 
+    /// <summary>
+    /// Represents a <c>Double_variable_info</c> verification type decoded from a stack map frame.
+    /// </summary>
     public readonly record struct DoubleVariableInfo()
     {
 
