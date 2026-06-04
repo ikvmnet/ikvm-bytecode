@@ -134,6 +134,11 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 10.x
+    - name: Install Mono
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update && \
+        sudo apt-get install -y mono-runtime mono-devel
     - name: Add NuGet Source (GitHub)
       shell: pwsh
       run: dotnet nuget add source --username USERNAME --password $env:GITHUB_TOKEN --store-password-in-clear-text --name ikvm $env:GITHUB_REPOS
