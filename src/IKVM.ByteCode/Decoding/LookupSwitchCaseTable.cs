@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="data"></param>
+            /// <param name="data">The raw data buffer.</param>
             internal Enumerator(ReadOnlySequence<byte> data)
             {
                 _data = data;
@@ -72,9 +72,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attepmpts to measure the structure.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryMeasure(ref SequenceReader<byte> reader, ref int size)
         {
             size += 4;
@@ -95,9 +95,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the structure.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="matches"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchCaseTable matches)
         {
             matches = default;
@@ -126,7 +126,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The raw data buffer.</param>
         internal LookupSwitchCaseTable(ReadOnlySequence<byte> data)
         {
             _data = data;
@@ -135,15 +135,15 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the match at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly LookupSwitchCase this[int index] => GetItem(index);
 
         /// <summary>
         /// Gets the match at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly LookupSwitchCase GetItem(int index)
         {
             if (index >= Count || index < 0)

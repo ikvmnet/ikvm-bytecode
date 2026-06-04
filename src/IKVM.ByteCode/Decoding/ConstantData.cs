@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 
 namespace IKVM.ByteCode.Decoding
 {
@@ -9,9 +9,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the constant at the current position. Returns the the number of index positions to skip.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryMeasure(ref ClassFormatReader reader, ref int size, out int skip)
         {
             skip = 0;
@@ -182,10 +182,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the constant at the current position. Returns the the number of index positions to skip.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="constant"></param>
         /// <param name="skip"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ConstantData constant, out int skip)
         {
             constant = default;

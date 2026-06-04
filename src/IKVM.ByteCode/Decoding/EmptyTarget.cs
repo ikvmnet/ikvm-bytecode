@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 
 namespace IKVM.ByteCode.Decoding
 {
@@ -12,9 +12,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Measures the size of the target structure.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             return true;
@@ -23,9 +23,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the data of this target.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="data">The raw data buffer.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data)
         {
             data = default;
@@ -35,9 +35,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the target structure.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="targetInfo"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out EmptyTarget targetInfo)
         {
             targetInfo = new EmptyTarget();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -25,7 +25,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="items"></param>
+            /// <param name="items">The backing array of items.</param>
             internal Enumerator(ElementValuePair[] items)
             {
                 _items = items ?? [];
@@ -66,9 +66,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Measures the size of the current annotation.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -85,9 +85,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read an annotation.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="annotation"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ElementValuePairTable annotation)
         {
             annotation = default;
@@ -113,7 +113,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="items"></param>
+        /// <param name="items">The backing array of items.</param>
         internal ElementValuePairTable(ElementValuePair[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
@@ -122,15 +122,15 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the element value pair at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly ElementValuePair this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets the element value pair at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly ElementValuePair GetItem(int index)
         {
             if (index >= Count || index < 0)
@@ -152,9 +152,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool,ref ElementValuePairTableEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
@@ -166,7 +166,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Writes this data class to the encoder.
         /// </summary>
-        /// <param name="encoder"></param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void WriteTo(ref ElementValuePairTableEncoder encoder)
         {
             foreach (var i in this)

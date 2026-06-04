@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 
 using IKVM.ByteCode.Buffers;
 
@@ -16,9 +16,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the structure.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="item"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref SequenceReader<byte> reader, out LookupSwitchCase item)
         {
             item = default;

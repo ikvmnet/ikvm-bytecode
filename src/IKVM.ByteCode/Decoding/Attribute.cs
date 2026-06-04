@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 
 using IKVM.ByteCode.Encoding;
 
@@ -8,8 +8,8 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Encapsulates an attribute before the contents have been decoded.
     /// </summary>
-    /// <param name="Name"></param>
-    /// <param name="Data"></param>
+    /// <param name="Name">The attribute name constant handle.</param>
+    /// <param name="Data">The raw attribute data buffer.</param>
     public readonly partial struct Attribute(Utf8ConstantHandle Name, ReadOnlySequence<byte> Data)
     {
 
@@ -21,8 +21,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Parses an attribute.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -43,8 +43,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Parses an attribute.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="attribute"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="attribute">The decoded attribute.</param>
         public static bool TryRead(ref ClassFormatReader reader, out Attribute attribute)
         {
             attribute = default;
@@ -87,9 +87,9 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
@@ -100,7 +100,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Writes this data class to the encoder.
         /// </summary>
-        /// <param name="encoder"></param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void WriteTo(ref AttributeTableEncoder encoder)
         {
             encoder.Attribute(Name, Data);

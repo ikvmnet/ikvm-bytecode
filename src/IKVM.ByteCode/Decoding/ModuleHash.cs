@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 
 using IKVM.ByteCode.Encoding;
 
@@ -8,7 +8,7 @@ namespace IKVM.ByteCode.Decoding
     /// <summary>
     /// Describes a hash of a named module.
     /// </summary>
-    /// <param name="Name"></param>
+    /// <param name="Name">The attribute name constant handle.</param>
     /// <param name="Hash"></param>
     public readonly record struct ModuleHash(Utf8ConstantHandle Name, ReadOnlySequence<byte> Hash)
     {
@@ -16,9 +16,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the structure.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -39,9 +39,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the structure.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="hash"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ModuleHash hash)
         {
             hash = default;
@@ -86,9 +86,9 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ModuleHashTableEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool

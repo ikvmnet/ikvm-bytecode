@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="items"></param>
+            /// <param name="items">The backing array of items.</param>
             internal Enumerator(ElementValue[] items)
             {
                 _items = items ?? [];
@@ -65,9 +65,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Measures the size of the current element value array.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -84,9 +84,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Reads the data of the current element value array.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="data">The raw data buffer.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data)
         {
             data = default;
@@ -106,9 +106,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the data of the array.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="value">The decoded value.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ArrayElementValue value)
         {
             value = default;
@@ -134,9 +134,9 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ElementValueTableEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
@@ -207,7 +207,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="values"></param>
+        /// <param name="values">The decoded values.</param>
         /// <exception cref="ArgumentNullException"></exception>
         internal ArrayElementValue(ElementValue[] values)
         {
@@ -227,15 +227,15 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the value for the given index.
         /// </summary>
-        /// <param name="index"></param> 
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param> 
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly ElementValue this[int index] => ref GetItem(index);
 
         /// <summary>r
         /// Gets a reference to the values for the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly ElementValue GetItem(int index)
         {
             if (index >= Count || index < 0)

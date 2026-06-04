@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -62,9 +62,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the set of fields starting from the current position.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -81,9 +81,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the set of fields starting from the current position.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="fields"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref ClassFormatReader reader, out FieldTable fields)
         {
             fields = default;
@@ -124,21 +124,21 @@ namespace IKVM.ByteCode.Decoding
         /// Gets a reference to the field for the given handle.
         /// </summary>
         /// <param name="handle"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly Field this[FieldHandle handle] => ref GetField(handle);
 
         /// <summary>
         /// Gets a reference to the field for the given handle.
         /// </summary>
         /// <param name="handle"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly Field GetField(FieldHandle handle) => ref _fields[handle.Index];
 
         /// <summary>
         /// Gets a reference to the field for the given handle.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly Field this[int index] => ref this[new FieldHandle((ushort)index)];
 
         /// <summary>

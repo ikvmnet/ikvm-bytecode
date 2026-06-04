@@ -1,4 +1,4 @@
-﻿using IKVM.ByteCode.Encoding;
+using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
 {
@@ -52,9 +52,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Copies this attribute to the specified encoder.
         /// </summary>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool

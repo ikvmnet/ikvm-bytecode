@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 using System.IO;
 using System.IO.MemoryMappedFiles;
@@ -22,9 +22,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure a class starting at the current position.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
@@ -72,7 +72,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="pointer"></param>
         /// <param name="length"></param>
         /// <param name="clazz"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static unsafe bool TryRead(byte* pointer, int length, out ClassFile? clazz)
         {
@@ -85,7 +85,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="pointer"></param>
         /// <param name="length"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static unsafe ClassFile Read(byte* pointer, int length)
         {
@@ -97,7 +97,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="path"></param>
         /// <param name="clazz"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(string path, out ClassFile? clazz)
         {
@@ -112,7 +112,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="clazz"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         static bool TryRead(FileStream stream, out ClassFile? clazz)
         {
@@ -128,7 +128,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a class from the given file.
         /// </summary>
         /// <param name="path"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(string path)
         {
@@ -140,7 +140,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="owner"></param>
         /// <param name="clazz"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(IMemoryOwner<byte> owner, out ClassFile? clazz)
         {
@@ -153,7 +153,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="buffer"></param>
         /// <param name="clazz"></param>
         /// <param name="disposable"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(ReadOnlyMemory<byte> buffer, out ClassFile? clazz, IDisposable? disposable = null)
         {
@@ -166,7 +166,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="buffer"></param>
         /// <param name="clazz"></param>
         /// <param name="disposable"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, IDisposable? disposable = null)
         {
@@ -177,10 +177,10 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to measure a class from the given buffer, returning information about the number of consumed and examined bytes.
         /// </summary>
         /// <param name="buffer"></param>
-        /// <param name="size"></param>
+        /// <param name="size">The number of bytes read.</param>
         /// <param name="consumed"></param>
         /// <param name="examined"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryMeasure(in ReadOnlySequence<byte> buffer, ref int size, out SequencePosition consumed, out SequencePosition examined)
         {
@@ -208,7 +208,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="clazz"></param>
         /// <param name="consumed"></param>
         /// <param name="examined"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(in ReadOnlySequence<byte> buffer, out ClassFile? clazz, out SequencePosition consumed, out SequencePosition examined, IDisposable? disposable = null)
         {
@@ -233,10 +233,10 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a class record starting at the current position. The memory underlying the <see
         /// cref="ClassFormatReader"/> must remain valid for the lifetime of the <see cref="ClassFile"/> instance.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="clazz"></param>
         /// <param name="disposable">Optional owner of the memory.</param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static bool TryRead(ref ClassFormatReader reader, out ClassFile? clazz, IDisposable? disposable = null)
         {
@@ -289,7 +289,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a class from the given buffer.
         /// </summary>
         /// <param name="buffer"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(ReadOnlyMemory<byte> buffer)
         {
@@ -300,7 +300,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a class from the given buffer.
         /// </summary>
         /// <param name="owner"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(IMemoryOwner<byte> owner)
         {
@@ -315,7 +315,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="disposable"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         public static ClassFile Read(in ReadOnlySequence<byte> buffer, IDisposable? disposable = null)
         {
@@ -328,7 +328,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="stream"></param>
         /// <param name="bufferSize"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ByteCodeException"></exception>
@@ -384,7 +384,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="bufferSize"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static ClassFile Read(Stream stream, int bufferSize = 4096)
         {
             if (stream is null)
@@ -490,7 +490,7 @@ namespace IKVM.ByteCode.Decoding
         /// <param name="interfaces"></param>
         /// <param name="fields"></param>
         /// <param name="methods"></param>
-        /// <param name="attributes"></param>
+        /// <param name="attributes">The decoded attribute table.</param>
         /// <param name="disposable"></param>
         internal ClassFile(ClassFormatVersion version, ConstantTable constants, AccessFlag accessFlags, ClassConstantHandle @this, ClassConstantHandle super, InterfaceTable interfaces, FieldTable fields, MethodTable methods, AttributeTable attributes, IDisposable? disposable)
         {

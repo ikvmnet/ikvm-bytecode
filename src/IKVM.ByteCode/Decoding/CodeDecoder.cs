@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 
 using IKVM.ByteCode.Buffers;
@@ -57,7 +57,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The raw data buffer.</param>
         public CodeDecoder(ReadOnlySequence<byte> data)
         {
             _reader = new SequenceReader<byte>(data);
@@ -77,7 +77,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read the next instruction in the code.
         /// </summary>
         /// <param name="instruction"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public bool TryReadNext(out Instruction instruction)
         {
             return Instruction.TryRead(ref _reader, out instruction);
@@ -86,7 +86,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the next instruction in the code. If there are no further instructions, a nil instance is returned.
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public Instruction ReadNext()
         {
             return Instruction.Read(ref _reader);
@@ -97,8 +97,8 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
         /// <param name="builder"></param>
         /// <exception cref="ArgumentNullException"></exception>
         public void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, CodeBuilder builder)

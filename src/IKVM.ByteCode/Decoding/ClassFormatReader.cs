@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 
 using IKVM.ByteCode.Buffers;
@@ -79,7 +79,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a value defined as a 'u1'.
         /// </summary>
         /// <param name="u1"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public bool TryReadU1(out byte u1)
         {
             return _reader.TryRead(out u1);
@@ -89,7 +89,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a value defined as a 'u2'.
         /// </summary>
         /// <param name="u2"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public bool TryReadU2(out ushort u2)
         {
             return _reader.TryReadBigEndian(out u2);
@@ -99,7 +99,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to read a value defined as a 'u4'.
         /// </summary>
         /// <param name="u4"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public bool TryReadU4(out uint u4)
         {
             return _reader.TryReadBigEndian(out u4);
@@ -110,7 +110,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="count"></param>
         /// <param name="sequence"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public bool TryReadMany(uint count, out ReadOnlySequence<byte> sequence)
         {
             return _reader.TryReadExact(count, out sequence);
@@ -121,7 +121,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="count"></param>
         /// <param name="sequence"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public bool TryReadMany(long count, out ReadOnlySequence<byte> sequence)
         {
             return _reader.TryReadExact(count, out sequence);
@@ -131,7 +131,7 @@ namespace IKVM.ByteCode.Decoding
         /// Attempts to copy available data at the current position to the destination.
         /// </summary>
         /// <param name="destination"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public bool TryCopyTo(Span<byte> destination)
         {
             return _reader.TryCopyTo(destination);

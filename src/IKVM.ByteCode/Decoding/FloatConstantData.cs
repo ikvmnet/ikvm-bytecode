@@ -1,4 +1,4 @@
-﻿using System.Buffers;
+using System.Buffers;
 
 using IKVM.ByteCode.Buffers;
 
@@ -15,8 +15,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Measures a constant in the constant pool.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
         /// <param name="skip"></param>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size, out int skip)
         {
@@ -32,8 +32,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Parses a Float constant in the constant pool.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="data"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="data">The raw data buffer.</param>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
         {
             skip = 0;
@@ -47,7 +47,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Parses a Float constant in the constant pool.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="constant"></param>
         public static bool TryRead( ref ClassFormatReader reader, out FloatConstantData constant)
         {

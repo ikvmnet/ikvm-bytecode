@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 
 using IKVM.ByteCode.Text;
@@ -12,8 +12,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Parses a UTF8 constant in the constant pool.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
         /// <param name="skip"></param>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size, out int skip)
         {
@@ -34,8 +34,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Parses a UTF8 constant in the constant pool.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="data"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="data">The raw data buffer.</param>
         public static bool TryReadData(ref ClassFormatReader reader, out ReadOnlySequence<byte> data, out int skip)
         {
             data = default;
@@ -56,7 +56,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Parses a UTF8 constant in the constant pool.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="constant"></param>
         /// <param name="majorVersion"></param>
         public static bool TryRead(ref ClassFormatReader reader, out Utf8ConstantData constant, int majorVersion)
@@ -75,9 +75,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Decodes the UTF8 constant into a string value according the major version.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The raw data buffer.</param>
         /// <param name="majorVersion"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="InvalidOperationException"></exception>
         static string Decode(ReadOnlySequence<byte> data, int majorVersion)
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 using System.Runtime.CompilerServices;
 
@@ -14,7 +14,7 @@ namespace IKVM.ByteCode.Decoding
     /// <param name="Offset"></param>
     /// <param name="OpCode"></param>
     /// <param name="IsWide"></param>
-    /// <param name="Data"></param>
+    /// <param name="Data">The raw attribute data buffer.</param>
     public readonly partial record struct Instruction(int Offset, OpCode OpCode, bool IsWide, ReadOnlySequence<byte> Data)
     {
 
@@ -241,10 +241,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to peek at the next opcode.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="opcode"></param>
         /// <param name="wide"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryPeekOpCode(ref SequenceReader<byte> reader, out OpCode opcode, out bool wide)
@@ -292,10 +292,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to peek at the next opcode.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="opcode"></param>
         /// <param name="wide"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryReadOpCode(ref SequenceReader<byte> reader, out OpCode opcode, out bool wide)
@@ -341,10 +341,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the instruction at the current position.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The raw data buffer.</param>
         /// <param name="offset"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -357,10 +357,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the instruction at the current position.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="offset"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -382,7 +382,7 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <param name="sequence"></param>
         /// <param name="instruction"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryRead(ref ReadOnlySequence<byte> sequence, out Instruction instruction)
@@ -394,9 +394,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the instruction at the current position.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="instruction"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool TryRead(ref SequenceReader<byte> reader, out Instruction instruction)
@@ -425,8 +425,8 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the instruction at the current position.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static Instruction Read(ref SequenceReader<byte> reader)
@@ -467,7 +467,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets whether the instruction has the 'wide' prefix applied.
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly bool IsWide = IsWide;
 
         /// <summary>

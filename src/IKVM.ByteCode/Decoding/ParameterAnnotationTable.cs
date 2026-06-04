@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -22,7 +22,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="items"></param>
+            /// <param name="items">The backing array of items.</param>
             internal Enumerator(ParameterAnnotation[] items)
             {
                 _items = items ?? [];
@@ -61,9 +61,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size taken by the structure.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -80,9 +80,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the structure.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="annotations"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ParameterAnnotationTable annotations)
         {
             annotations = default;
@@ -113,7 +113,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="items"></param>
+        /// <param name="items">The backing array of items.</param>
         internal ParameterAnnotationTable(ParameterAnnotation[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
@@ -122,15 +122,15 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the parameter at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly ParameterAnnotation this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets a reference to the item at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly ParameterAnnotation GetItem(int index)
         {
             if (index >= Count || index < 0)
@@ -154,9 +154,9 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ParameterAnnotationTableEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool

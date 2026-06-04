@@ -1,4 +1,4 @@
-﻿using IKVM.ByteCode.Encoding;
+using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
 {
@@ -18,9 +18,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the attribute structure.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="attribute"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="attribute">The decoded attribute.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ModuleTargetAttribute attribute)
         {
             attribute = default;
@@ -54,9 +54,9 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AttributeTableEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool

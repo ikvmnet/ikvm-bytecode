@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 
 using IKVM.ByteCode.Encoding;
@@ -47,9 +47,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size of the element value.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U1;
@@ -65,10 +65,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size of the element value with the given tag.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="kind"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         static bool TryMeasureValue(ref ClassFormatReader reader, ElementValueKind kind, ref int size) => kind switch
         {
@@ -91,9 +91,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the data for the element value.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="data">The raw data buffer.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out ElementValue data)
         {
             data = default;
@@ -252,9 +252,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Encodes this data class to the encoder.
         /// </summary>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref ElementValueEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
@@ -319,7 +319,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Wrirtes this data class to the encoder.
         /// </summary>
-        /// <param name="encoder"></param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void WriteTo(ref ElementValueEncoder encoder)
         {
             switch (Kind)

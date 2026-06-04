@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="data"></param>
+            /// <param name="data">The raw data buffer.</param>
             internal Enumerator(ReadOnlySequence<byte> data)
             {
                 _data = data;
@@ -71,9 +71,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attepmpts to measure the structure.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryMeasure(ref SequenceReader<byte> reader, int count, ref int size)
         {
             // each item between low/high inclusive is a 4 byte label
@@ -88,9 +88,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the structure.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="matches"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         internal static bool TryRead(ref SequenceReader<byte> reader, int count, out TableSwitchCaseTable matches)
         {
             matches = default;
@@ -111,7 +111,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The raw data buffer.</param>
         internal TableSwitchCaseTable(ReadOnlySequence<byte> data)
         {
             _data = data;
@@ -120,15 +120,15 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the match at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly int this[int index] => GetItem(index);
 
         /// <summary>
         /// Gets the match at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly int GetItem(int index)
         {
             if (index >= Count || index < 0)

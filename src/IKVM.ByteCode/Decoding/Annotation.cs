@@ -1,4 +1,4 @@
-﻿using IKVM.ByteCode.Encoding;
+using IKVM.ByteCode.Encoding;
 
 namespace IKVM.ByteCode.Decoding
 {
@@ -14,9 +14,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the structure.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -32,9 +32,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the structure.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="annotation"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out Annotation annotation)
         {
             annotation = default;
@@ -53,9 +53,9 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref AnnotationEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
@@ -67,7 +67,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Writes this data class to the encoder.
         /// </summary>
-        /// <param name="encoder"></param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void WriteTo(ref AnnotationEncoder encoder)
         {
             var self = this;
@@ -75,16 +75,6 @@ namespace IKVM.ByteCode.Decoding
         }
 
         readonly bool _isNotNil = true;
-
-        /// <summary>
-        /// Gets the constant pool handle to the annotation type descriptor.
-        /// </summary>
-        public readonly Utf8ConstantHandle Type = Type;
-
-        /// <summary>
-        /// Gets the element value pairs of this annotation.
-        /// </summary>
-        public readonly ElementValuePairTable Elements = Elements;
 
         /// <summary>
         /// Gets whether the instance is nil.
@@ -95,6 +85,16 @@ namespace IKVM.ByteCode.Decoding
         /// Gets whether the instance is not nil.
         /// </summary>
         public readonly bool IsNotNil => _isNotNil;
+
+        /// <summary>
+        /// Gets the constant pool handle to the annotation type descriptor.
+        /// </summary>
+        public readonly Utf8ConstantHandle Type = Type;
+
+        /// <summary>
+        /// Gets the element value pairs of this annotation.
+        /// </summary>
+        public readonly ElementValuePairTable Elements = Elements;
 
     }
 

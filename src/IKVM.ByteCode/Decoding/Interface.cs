@@ -1,4 +1,4 @@
-﻿namespace IKVM.ByteCode.Decoding
+namespace IKVM.ByteCode.Decoding
 {
 
     /// <summary>
@@ -11,8 +11,8 @@
         /// <summary>
         /// Parses an interface.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U2;
@@ -25,7 +25,7 @@
         /// <summary>
         /// Parses an interface.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="iface"></param>
         public static bool TryRead(ref ClassFormatReader reader, out Interface iface)
         {

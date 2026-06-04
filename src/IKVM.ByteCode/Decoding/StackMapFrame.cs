@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 
 using IKVM.ByteCode.Encoding;
@@ -31,9 +31,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size of the element value.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U1;
@@ -49,10 +49,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size of the stack map frame value with the given type.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="frameType"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="frameType">The stack map frame type tag byte.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         static bool TryMeasureData(ref ClassFormatReader reader, byte frameType, ref int size)
         {
@@ -72,9 +72,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the data for the element value.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="frame"></param>
-        /// <returns></returns>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryRead(ref ClassFormatReader reader, out StackMapFrame frame)
         {
             frame = default;
@@ -209,9 +209,9 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         /// <exception cref="ByteCodeException"></exception>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref StackMapTableEncoder encoder)
             where TConstantView : IConstantView

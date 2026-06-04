@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -20,7 +20,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="items"></param>
+            /// <param name="items">The backing array of items.</param>
             internal Enumerator(StackMapFrame[] items)
             {
                 _items = items ?? [];
@@ -63,7 +63,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="items"></param>
+        /// <param name="items">The backing array of items.</param>
         internal StackMapFrameTable(StackMapFrame[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
@@ -72,15 +72,15 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the frame at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly StackMapFrame this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets a reference to the item at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly StackMapFrame GetItem(int index)
         {
             if (index >= Count || index < 0)

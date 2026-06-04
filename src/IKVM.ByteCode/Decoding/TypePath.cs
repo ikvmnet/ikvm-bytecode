@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -19,7 +19,7 @@ namespace IKVM.ByteCode.Decoding
             /// <summary>
             /// Initializes a new instance.
             /// </summary>
-            /// <param name="items"></param>
+            /// <param name="items">The backing array of items.</param>
             internal Enumerator(TypePathComponent[] items)
             {
                 _items = items ?? [];
@@ -93,7 +93,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="items"></param>
+        /// <param name="items">The backing array of items.</param>
         internal TypePath(TypePathComponent[] items)
         {
             _items = items ?? throw new ArgumentNullException(nameof(items));
@@ -102,15 +102,15 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Gets a reference to the item at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public readonly ref readonly TypePathComponent this[int index] => ref GetItem(index);
 
         /// <summary>
         /// Gets a reference to the item at the given index.
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         readonly ref readonly TypePathComponent GetItem(int index)
         {
             if (index >= Count || index < 0)
@@ -134,9 +134,9 @@ namespace IKVM.ByteCode.Decoding
         /// </summary>
         /// <typeparam name="TConstantView"></typeparam>
         /// <typeparam name="TConstantPool"></typeparam>
-        /// <param name="constantView"></param>
-        /// <param name="constantPool"></param>
-        /// <param name="encoder"></param>
+        /// <param name="constantView">The <see cref="IConstantView"/> used to resolve constants.</param>
+        /// <param name="constantPool">The constant pool to copy constants into.</param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void CopyTo<TConstantView, TConstantPool>(TConstantView constantView, TConstantPool constantPool, ref TypePathEncoder encoder)
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
@@ -148,7 +148,7 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Writes this data class to the encoder.
         /// </summary>
-        /// <param name="encoder"></param>
+        /// <param name="encoder">The encoder to write to.</param>
         public readonly void WriteTo(ref TypePathEncoder encoder)
         {
             foreach (var i in this)

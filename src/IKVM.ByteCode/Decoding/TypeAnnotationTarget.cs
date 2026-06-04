@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Buffers;
 
 namespace IKVM.ByteCode.Decoding
@@ -30,9 +30,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size of the type annotation target.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryMeasure(ref ClassFormatReader reader, ref int size)
         {
             size += ClassFormatReader.U1;
@@ -48,10 +48,10 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to measure the size of the target with the given tag.
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
         /// <param name="kind"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
+        /// <param name="size">The number of bytes read.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         /// <exception cref="ByteCodeException"></exception>
         static bool TryMeasureValue(ref ClassFormatReader reader, TypeAnnotationTargetType kind, ref int size) => kind switch
         {
@@ -83,9 +83,9 @@ namespace IKVM.ByteCode.Decoding
         /// <summary>
         /// Attempts to read the data for the annotation target.
         /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="reader">The <see cref="ClassFormatReader"/> to read from.</param>
+        /// <param name="data">The raw data buffer.</param>
+        /// <returns><see langword="true"/> if the operation succeeded; otherwise <see langword="false"/>.</returns>
         public static bool TryReadData(ref ClassFormatReader reader, out TypeAnnotationTarget data)
         {
             data = default;
