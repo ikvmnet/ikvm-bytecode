@@ -40,7 +40,7 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadU2(out ushort majorVersion) == false)
                 return false;
 
-            if (majorVersion > 63)
+            if (majorVersion > ClassFormatVersion.Latest.Major)
                 throw new UnsupportedClassVersionException(new ClassFormatVersion(majorVersion, minorVersion));
 
             if (ConstantTable.TryMeasure(ref reader, ref size) == false)
@@ -252,7 +252,7 @@ namespace IKVM.ByteCode.Decoding
             if (reader.TryReadU2(out ushort majorVersion) == false)
                 return false;
 
-            if (majorVersion > 63)
+            if (majorVersion > ClassFormatVersion.Latest.Major)
                 throw new UnsupportedClassVersionException(new ClassFormatVersion(majorVersion, minorVersion));
 
             var version = new ClassFormatVersion(majorVersion, minorVersion);
