@@ -217,7 +217,7 @@ namespace IKVM.ByteCode.Decoding
             where TConstantView : IConstantView
             where TConstantPool : IConstantPool
         {
-            if (FrameType is <= 65)
+            if (FrameType is <= 63)
                 ((SameStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
             else if (FrameType is >= 64 and <= 127)
                 ((SameLocalsOneStackMapFrame)this).CopyTo(constantView, constantPool, ref encoder);
