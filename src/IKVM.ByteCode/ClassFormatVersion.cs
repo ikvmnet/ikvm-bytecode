@@ -86,8 +86,11 @@ namespace IKVM.ByteCode
         /// <summary>Java 25 (class file 69.0)</summary>
         public static readonly ClassFormatVersion Java25 = new(69, 0);
 
+        /// <summary>Java 26 (class file 70.0)</summary>
+        public static readonly ClassFormatVersion Java26 = new(70, 0);
+
         /// <summary>The latest class file format version supported by this library.</summary>
-        public static readonly ClassFormatVersion Latest = Java25;
+        public static readonly ClassFormatVersion Latest = Java26;
 
         /// <summary>
         /// Implicitly converts a major version number to a <see cref="ClassFormatVersion"/> with a minor version of <c>0</c>.
