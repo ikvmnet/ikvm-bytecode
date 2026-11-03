@@ -88,7 +88,7 @@ namespace IKVM.ByteCode.Encoding
         {
             ValidateFrameType(frameType, 248, 250, nameof(frameType), "CHOP");
             var w = new ClassFormatWriter(_builder.ReserveBytes(ClassFormatWriter.U1 + ClassFormatWriter.U2).GetBytes());
-            w.WriteU1(247);
+            w.WriteU1(frameType);
             w.WriteU2(offsetDelta);
             new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
             return this;
