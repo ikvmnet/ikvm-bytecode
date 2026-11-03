@@ -20,25 +20,30 @@ namespace IKVM.ByteCode.Encoding
         /// Initializes a new instance.
         /// </summary>
         /// <param name="builder"></param>
+        /// <param name="fixedCount">The number of records implied by the frame type, or 0 if the records are preceded by their count.</param>
         public VerificationTypeInfoEncoder(BlobBuilder builder, ushort fixedCount = 0)
         {
             _builder = builder ?? throw new ArgumentNullException(nameof(builder));
             _fixedCount = fixedCount;
 
-            if (_fixedCount > 0)
+            // only records whose number the frame type does not imply are preceded by a count
+            if (_fixedCount == 0)
             {
                 _countBlob = _builder.ReserveBytes(ClassFormatWriter.U2);
                 _count = 0;
+                new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(_count);
             }
         }
 
         /// <summary>
-        /// Increments the count if required.
+        /// Increments the count, and writes it if the records are preceded by it.
         /// </summary>
         void IncrementCount()
         {
-            if (_fixedCount > 0)
-                new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(++_count);
+            _count++;
+
+            if (_fixedCount == 0)
+                new ClassFormatWriter(_countBlob.GetBytes()).WriteU2(_count);
         }
 
         public VerificationTypeInfoEncoder Top()
