@@ -135,15 +135,23 @@ jobs:
       with:
         dotnet-version: 10.x
     - name: Install Mono (Linux)
-      if: runner.os == 'Linux'
+      if: runner.os == 'Linux' && matrix.tfm == 'net472'
       run: |
         sudo apt-get update && \
         sudo apt-get install -y mono-runtime mono-devel
-    - name: Install Mono (OSX)
-      if: runner.os == 'macOS'
+    - name: Install Mono (OSX arm64)
+      if: runner.os == 'macOS' && runner.arch == 'ARM64' && matrix.tfm == 'net472'
       run: |
         brew update && \
         brew install mono
+    # Homebrew no longer builds bottles for Intel macOS, so brew would compile Mono and LLVM from source
+    - name: Install Mono (OSX x64)
+      if: runner.os == 'macOS' && runner.arch == 'X64' && matrix.tfm == 'net472'
+      run: |
+        curl -fsSL -o "$RUNNER_TEMP/mono.pkg" https://download.mono-project.com/archive/6.12.0/macos-10-universal/MonoFramework-MDK-6.12.0.206.macos10.xamarin.universal.pkg && \
+        echo "80b0dbfa59ba9ed76dbf1393998e6a2ed2d1ccc8f5850c7a46fbe31a2aea88d8  $RUNNER_TEMP/mono.pkg" | shasum -a 256 -c - && \
+        sudo installer -pkg "$RUNNER_TEMP/mono.pkg" -target / && \
+        echo "/Library/Frameworks/Mono.framework/Versions/Current/Commands" >> "$GITHUB_PATH"
     - name: Add NuGet Source (GitHub)
       shell: pwsh
       run: dotnet nuget add source --username USERNAME --password $env:GITHUB_TOKEN --store-password-in-clear-text --name ikvm $env:GITHUB_REPOS
